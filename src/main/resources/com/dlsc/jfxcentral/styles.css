@@ -1,0 +1,190 @@
+@font-face {
+    font-family: "Open Sans";
+    font-face-name: "Open Sans Regular";
+    src: url("fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-face-name: "Open Sans Italic";
+    src: url("fonts/OpenSans-Italic.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-face-name: "Open Sans Bold";
+    src: url("fonts/OpenSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-face-name: "Open Sans SemiBold";
+    src: url("fonts/OpenSans-SemiBold.ttf");
+}
+
+.root {
+    -fx-font-family: "Open Sans";
+    -light-grey: rgba(244, 247, 250);
+    -light-blue: rgba(234, 239, 244);
+    -red: rgba(250, 0, 20, 1);
+    -fx-accent: rgb(67, 204, 223);
+}
+
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar:vertical .increment-arrow {
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+}
+
+.scroll-bar:horizontal .decrement-button,
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-arrow,
+.scroll-bar:horizontal .increment-arrow {
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+}
+
+.root-pane .top-spacer {
+    -fx-pref-height: 20px;
+    -fx-background-color: -light-blue;
+}
+
+.top-menu {
+    -fx-spacing: 20px;
+    -fx-padding: 10px 0px;
+    -fx-background-color: -light-blue;
+    -fx-border-color: rgba(0, 0, 0, .05);
+    -fx-border-width: 0px 1px 0px 0px;
+}
+
+.top-menu .toggle-button {
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-background-radius: 0px 12px 12px 0px;
+    -fx-background-padding: 0px;
+    -fx-background-insets: 0px 5px 0px 0px;
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(0, 0, 0, .6);
+    -fx-graphic-text-gap: 10px;
+}
+
+.top-menu:expanded .toggle-button {
+    -fx-padding: 10px 30px 10px 15px;
+}
+
+.top-menu .toggle-button:hover,
+.top-menu .toggle-button:hover:selected {
+    -fx-background-color: -red;
+    -fx-border-color: transparent transparent transparent derive(-red, -20%);
+    -fx-text-fill: white;
+}
+
+.top-menu .toggle-button:pressed,
+.top-menu .toggle-button:pressed:selected {
+    -fx-background-color: rgba(250, 0, 20, .5);
+}
+
+.top-menu .toggle-button:hover .ikonli-font-icon,
+.top-menu .toggle-button:hover:selected .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.top-menu .toggle-button:selected {
+    -fx-background-padding: 0px;
+    -fx-background-color: -fx-accent;
+    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-color: transparent transparent transparent derive(-fx-accent, -20%);
+    -fx-text-fill: white;
+}
+
+.top-menu .toggle-button .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: rgba(0, 0, 0, .4);
+}
+
+.top-menu .toggle-button:selected .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: white;
+}
+
+.top-menu .duke {
+    -fx-image: url("duke.png");
+}
+
+.category-pane {
+    -fx-pref-width: 250px;
+    -fx-background-color: -light-blue;
+}
+
+.main-panel {
+    -fx-background-image: url("background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
+}
+
+.right-pane {
+    -fx-padding: 20px;
+    -fx-background-color: -light-grey;
+}
+
+.category-pane .list-view {
+    -fx-background-color: -light-blue;
+    -fx-background-insets: 0px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+}
+
+.category-pane .list-view .list-cell {
+    -fx-padding: 10px 20px;
+    -fx-background-color: -light-blue;
+}
+
+.category-pane .list-view .list-cell:selected {
+    -fx-background-color: -light-grey;
+}
+
+.category-pane .list-view .person-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.category-pane .list-view .person-list-cell .grid-pane .photo-view {
+    -size: 50px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.category-pane .list-view .person-list-cell .grid-pane .photo-view .border-circle {
+    -fx-stroke-width: 1px;
+    -fx-effect: null;
+}
+
+.category-pane .list-view .person-list-cell .grid-pane .badges {
+    -fx-spacing: 10px;
+}
+
+.category-pane .list-view .person-list-cell .grid-pane .name-label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Open Sans Regular";
+}
+
+.category-pane .list-view .person-list-cell .grid-pane .champion-image {
+    -fx-image: url("champion-small.png");
+    -fx-fit-to-width: 24;
+}
+
+.category-pane .list-view .person-list-cell .grid-pane .rockstar-image {
+    -fx-image: url("rockstar-small.png");
+    -fx-fit-to-width: 24;
+}
