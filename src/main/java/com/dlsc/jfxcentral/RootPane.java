@@ -6,21 +6,13 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 
 public class RootPane extends ViewPane {
 
     public RootPane() {
         getStyleClass().add("root-pane");
-
-        Region topSpacer = new Region();
-        topSpacer.getStyleClass().add("top-spacer");
-        topSpacer.setEffect(new DropShadow());
 
         SideBar sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());
@@ -32,11 +24,7 @@ public class RootPane extends ViewPane {
         borderPane.setLeft(sideBar);
         borderPane.setCenter(rightPane);
 
-        VBox vBox = new VBox(topSpacer, borderPane);
-        topSpacer.setViewOrder(-1);
-        VBox.setVgrow(borderPane, Priority.ALWAYS);
-
-        getChildren().add(vBox);
+        getChildren().add(borderPane);
 
         Person dirk_lemmermann = new Person("Dirk Lemmermann");
         Person hendrik_ebbers = new Person("Hendrik Ebbers");

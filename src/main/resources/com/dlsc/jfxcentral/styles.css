@@ -61,7 +61,7 @@
 
 .top-menu .toggle-button {
     -fx-padding: 10px 10px 10px 10px;
-    -fx-background-radius: 0px 12px 12px 0px;
+    -fx-background-radius: 0px 1000px 1000px 0px;
     -fx-background-padding: 0px;
     -fx-background-insets: 0px 5px 0px 0px;
     -fx-background-color: transparent;
@@ -156,7 +156,7 @@
 }
 
 .category-pane .list-view .person-list-cell .grid-pane .photo-view {
-    -size: 50px;
+    -size: 30px;
     -fx-min-width: -size;
     -fx-min-height: -size;
     -fx-max-width: -size;
@@ -175,8 +175,8 @@
 }
 
 .category-pane .list-view .person-list-cell .grid-pane .name-label {
-    -fx-font-size: 16px;
-    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 12px;
+    -fx-font-family: "Open Sans Bold";
 }
 
 .category-pane .list-view .person-list-cell .grid-pane .champion-image {

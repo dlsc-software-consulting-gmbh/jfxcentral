@@ -41,6 +41,7 @@ public class PeopleView extends CategoryView {
             getStyleClass().add("person-list-cell");
 
             photoView.setEditable(false);
+            photoView.setPlaceholder(null);
 
             nameLabel.getStyleClass().add("name-label");
 
