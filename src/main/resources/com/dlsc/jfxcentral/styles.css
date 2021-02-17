@@ -28,6 +28,7 @@
     -light-blue: rgba(234, 239, 244);
     -red: rgba(250, 0, 20, 1);
     -fx-accent: rgb(67, 204, 223);
+    -grey: rgba(0, 0, 0, .4);
 }
 
 .scroll-bar:vertical .decrement-button,
@@ -104,7 +105,7 @@
 
 .top-menu .toggle-button .ikonli-font-icon {
     -fx-icon-size: 24px;
-    -fx-icon-color: rgba(0, 0, 0, .4);
+    -fx-icon-color: -grey;
 }
 
 .top-menu .toggle-button:selected .ikonli-font-icon {
@@ -176,7 +177,7 @@
 
 .category-pane .list-view .person-list-cell .grid-pane .name-label {
     -fx-font-size: 12px;
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Open Sans SemiBold";
 }
 
 .category-pane .list-view .person-list-cell .grid-pane .champion-image {
@@ -187,4 +188,22 @@
 .category-pane .list-view .person-list-cell .grid-pane .rockstar-image {
     -fx-image: url("rockstar-small.png");
     -fx-fit-to-width: 24;
+}
+
+.category-header {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+.category-header .back-button {
+    -fx-background-color: transparent;
+}
+
+.category-header .back-button .ikonli-font-icon {
+    -fx-icon-color: -grey;
+    -fx-icon-size: 24px;
+}
+
+.category-header .search-field {
+    -fx-background-radius: 1000px;
 }

@@ -27,7 +27,7 @@ public class PeopleView extends CategoryView {
         listView.setCellFactory(view -> new PersonCell());
         listView.itemsProperty().bind(rootPane.peopleProperty());
 
-        getChildren().add(listView);
+        setCenter(listView);
     }
 
     class PersonCell extends ListCell<Person> {
