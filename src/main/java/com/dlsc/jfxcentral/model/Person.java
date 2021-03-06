@@ -1,26 +1,29 @@
 package com.dlsc.jfxcentral.model;
 
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
-import javafx.scene.image.Image;
-
-public class Person {
+public class Person extends ModelObject {
 
     private String name;
     private String email;
+    private String companyId;
 
-    private URL website;
-    private URL blog;
-    private URL linkedIn;
-    private URL twitter;
-    private URL gitHub;
+    private String website;
+    private String blogId;
+    private String linkedIn;
+    private String twitter;
+    private String gitHub;
 
-    private Image photo;
+    private String photo;
 
     private String description;
 
     private boolean champion;
     private boolean rockstar;
+
+    private List<String> videos = new ArrayList<>();
+    private List<String> posts = new ArrayList<>();
 
     public Person(String name) {
         setName(name);
@@ -45,51 +48,51 @@ public class Person {
         this.email = email;
     }
 
-    public URL getWebsite() {
+    public String getWebsite() {
         return website;
     }
 
-    public void setWebsite(URL website) {
+    public void setWebsite(String website) {
         this.website = website;
     }
 
-    public URL getBlog() {
-        return blog;
+    public String getBlogId() {
+        return blogId;
     }
 
-    public void setBlog(URL blog) {
-        this.blog = blog;
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
     }
 
-    public URL getLinkedIn() {
+    public String getLinkedIn() {
         return linkedIn;
     }
 
-    public void setLinkedIn(URL linkedIn) {
+    public void setLinkedIn(String linkedIn) {
         this.linkedIn = linkedIn;
     }
 
-    public URL getTwitter() {
+    public String getTwitter() {
         return twitter;
     }
 
-    public void setTwitter(URL twitter) {
+    public void setTwitter(String twitter) {
         this.twitter = twitter;
     }
 
-    public URL getGitHub() {
+    public String getGitHub() {
         return gitHub;
     }
 
-    public void setGitHub(URL gitHub) {
+    public void setGitHub(String gitHub) {
         this.gitHub = gitHub;
     }
 
-    public Image getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Image photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -115,5 +118,29 @@ public class Person {
 
     public void setRockstar(boolean rockstar) {
         this.rockstar = rockstar;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public List<String> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<String> videos) {
+        this.videos = videos;
+    }
+
+    public List<String> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<String> posts) {
+        this.posts = posts;
     }
 }

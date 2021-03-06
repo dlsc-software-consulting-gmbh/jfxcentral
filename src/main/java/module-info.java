@@ -1,4 +1,5 @@
 module com.dlsc.jfxcentral {
+    requires com.google.gson;
     requires javafx.controls;
     requires javafx.web;
     requires com.dlsc.gemsfx;

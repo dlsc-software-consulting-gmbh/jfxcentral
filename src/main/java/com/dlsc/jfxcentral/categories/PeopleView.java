@@ -96,7 +96,7 @@ public class PeopleView extends CategoryView {
                 rockstarImageView.setVisible(person.isRockstar());
                 rockstarImageView.setManaged(person.isRockstar());
                 photoView.setVisible(true);
-                photoView.setPhoto(person.getPhoto());
+                //photoView.setPhoto(person.getPhoto());
             } else {
                 nameLabel.setText("");
                 championImageView.setVisible(false);

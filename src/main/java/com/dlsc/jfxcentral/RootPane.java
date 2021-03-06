@@ -1,12 +1,10 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.model.Person;
-
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class RootPane extends ViewPane {
@@ -37,30 +35,30 @@ public class RootPane extends ViewPane {
 
         dirk_lemmermann.setChampion(true);
         dirk_lemmermann.setRockstar(true);
-        dirk_lemmermann.setPhoto(new Image(RootPane.class.getResource("people/dirk.jpg").toExternalForm()));
+        dirk_lemmermann.setPhoto("dirk.jpg");
 
         hendrik_ebbers.setChampion(true);
         hendrik_ebbers.setRockstar(true);
-        hendrik_ebbers.setPhoto(new Image(RootPane.class.getResource("people/hendrik.png").toExternalForm()));
+        hendrik_ebbers.setPhoto("hendrik.png");
 
         gerrit_grunwald.setChampion(true);
         gerrit_grunwald.setRockstar(true);
-        gerrit_grunwald.setPhoto(new Image(RootPane.class.getResource("people/gerrit.jpeg").toExternalForm()));
+        gerrit_grunwald.setPhoto("gerrit.jpeg");
 
         michael_hoffer.setRockstar(true);
-        michael_hoffer.setPhoto(new Image(RootPane.class.getResource("people/mhoffer.jpg").toExternalForm()));
+        michael_hoffer.setPhoto("mhoffer.jpg");
 
         jose.setRockstar(true);
         jose.setChampion(true);
-        jose.setPhoto(new Image(RootPane.class.getResource("people/jose.png").toExternalForm()));
+        jose.setPhoto("jose.png");
 
         johan.setRockstar(true);
         johan.setChampion(true);
-        johan.setPhoto(new Image(RootPane.class.getResource("people/johan.jpg").toExternalForm()));
+        johan.setPhoto("johan.jpg");
 
         andres.setRockstar(true);
         andres.setChampion(true);
-        andres.setPhoto(new Image(RootPane.class.getResource("people/andres.jpg").toExternalForm()));
+        andres.setPhoto("andres.jpg");
 
         people.add(dirk_lemmermann);
         people.add(hendrik_ebbers);
