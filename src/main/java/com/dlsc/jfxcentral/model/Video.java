@@ -5,6 +5,7 @@ public class Video extends ModelObject {
     private String title;
     private String description;
     private String url;
+    private String personId;
 
     public Video() {
     }

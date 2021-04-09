@@ -2,6 +2,7 @@ module com.dlsc.jfxcentral {
     requires com.google.gson;
     requires javafx.controls;
     requires javafx.web;
+    requires javafx.media;
     requires com.dlsc.gemsfx;
     requires com.gluonhq.attach.statusbar;
     requires com.gluonhq.attach.display;

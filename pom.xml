@@ -30,6 +30,11 @@
             <version>${javafx.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>display</artifactId>
             <version>${attach.version}</version>

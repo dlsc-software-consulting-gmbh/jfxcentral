@@ -1,8 +1,5 @@
 package com.dlsc.jfxcentral.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Person extends ModelObject {
 
     private String name;
@@ -21,9 +18,6 @@ public class Person extends ModelObject {
 
     private boolean champion;
     private boolean rockstar;
-
-    private List<String> videos = new ArrayList<>();
-    private List<String> posts = new ArrayList<>();
 
     public Person(String name) {
         setName(name);
@@ -126,21 +120,5 @@ public class Person extends ModelObject {
 
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
-    }
-
-    public List<String> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<String> videos) {
-        this.videos = videos;
-    }
-
-    public List<String> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<String> posts) {
-        this.posts = posts;
     }
 }
