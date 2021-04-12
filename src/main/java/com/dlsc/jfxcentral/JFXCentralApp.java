@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral;
 
+import com.gluonhq.attach.audio.AudioService;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -13,18 +13,17 @@ public class JFXCentralApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke-animation.gif").toExternalForm());
+        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke_jfx.gif").toExternalForm());
         imageView.setFitWidth(600);
         imageView.setPreserveRatio(true);
 
-        AudioClip plonkSound = new AudioClip(JFXCentralApp.class.getResource("sound.wav").toExternalForm());
-        plonkSound.play();
+        AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
 
         StackPane stackPane = new StackPane(imageView);
 
         Scene scene = new Scene(stackPane);
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        scene.setFill(Color.rgb(25,110,145));
+        scene.setFill(Color.rgb(68, 131, 160));
 
         stackPane.setOnMouseClicked(evt -> scene.setRoot(new RootPane()));
 
