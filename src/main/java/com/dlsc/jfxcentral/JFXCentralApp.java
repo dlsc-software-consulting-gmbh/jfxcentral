@@ -13,7 +13,7 @@ public class JFXCentralApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke_jfx.gif").toExternalForm());
+        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke-jfx.gif").toExternalForm());
         imageView.setFitWidth(600);
         imageView.setPreserveRatio(true);
 
