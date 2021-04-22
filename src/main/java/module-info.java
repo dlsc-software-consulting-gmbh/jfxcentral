@@ -7,6 +7,7 @@ module com.dlsc.jfxcentral {
     requires com.gluonhq.attach.audio;
     requires com.gluonhq.attach.statusbar;
     requires com.gluonhq.attach.display;
+    requires com.gluonhq.attach.orientation;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.material;
     requires org.kordamp.ikonli.fontawesome;

@@ -1,9 +1,9 @@
 package com.dlsc.jfxcentral.categories;
 
 import com.dlsc.gemsfx.PhotoView;
+import com.dlsc.jfxcentral.PhotoCache;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
-
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
@@ -11,11 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 
 public class PeopleView extends CategoryView {
 
@@ -95,8 +91,14 @@ public class PeopleView extends CategoryView {
                 championImageView.setManaged(person.isChampion());
                 rockstarImageView.setVisible(person.isRockstar());
                 rockstarImageView.setManaged(person.isRockstar());
-                photoView.setVisible(true);
-                //photoView.setPhoto(person.getPhoto());
+                String photo = person.getPhoto();
+                if (photo != null && !photo.trim().isBlank()) {
+                    photoView.setVisible(true);
+                    photoView.photoProperty().bind(PhotoCache.getInstance().imageProperty(photo));
+                } else {
+                    photoView.setVisible(false);
+                    photoView.photoProperty().unbind();
+                }
             } else {
                 nameLabel.setText("");
                 championImageView.setVisible(false);

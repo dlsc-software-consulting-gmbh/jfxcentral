@@ -11,6 +11,7 @@
     {"name":"notifyDidHide","parameterTypes":[] }, 
     {"name":"notifyDidResignActive","parameterTypes":[] }, 
     {"name":"notifyDidUnhide","parameterTypes":[] }, 
+    {"name":"notifyOpenFiles","parameterTypes":["java.lang.String[]"] }, 
     {"name":"notifyWillBecomeActive","parameterTypes":[] }, 
     {"name":"notifyWillFinishLaunching","parameterTypes":[] }, 
     {"name":"notifyWillHide","parameterTypes":[] }, 
@@ -89,6 +90,19 @@
   ]
 },
 {
+  "name":"com.sun.glass.ui.mac.MacGestureSupport",
+  "methods":[
+    {"name":"gestureFinished","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int"] }, 
+    {"name":"magnifyGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","float"] }, 
+    {"name":"notifyBeginTouchEvent","parameterTypes":["com.sun.glass.ui.View","int","int"] }, 
+    {"name":"notifyEndTouchEvent","parameterTypes":["com.sun.glass.ui.View"] }, 
+    {"name":"notifyNextTouchEvent","parameterTypes":["com.sun.glass.ui.View","int","long","float","float"] }, 
+    {"name":"rotateGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","float"] }, 
+    {"name":"scrollGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","int","float","float"] }, 
+    {"name":"swipeGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","int"] }
+  ]
+},
+{
   "name":"com.sun.glass.ui.mac.MacMenuDelegate",
   "fields":[{"name":"menu"}]
 },
@@ -104,6 +118,61 @@
   "methods":[
     {"name":"notifyMove","parameterTypes":["int","int","boolean"] }, 
     {"name":"notifyResize","parameterTypes":["int","int","int"] }
+  ]
+},
+{
+  "name":"com.sun.javafx.font.coretext.CGAffineTransform",
+  "fields":[
+    {"name":"a"}, 
+    {"name":"b"}, 
+    {"name":"c"}, 
+    {"name":"d"}, 
+    {"name":"tx"}, 
+    {"name":"ty"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.coretext.CGPoint",
+  "fields":[
+    {"name":"x"}, 
+    {"name":"y"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.coretext.CGRect",
+  "fields":[
+    {"name":"origin"}, 
+    {"name":"size"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.coretext.CGSize",
+  "fields":[
+    {"name":"height"}, 
+    {"name":"width"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.iio.common.ImageLoaderImpl",
+  "methods":[{"name":"emitWarning","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.sun.javafx.iio.jpeg.JPEGImageLoader",
+  "methods":[
+    {"name":"setInputAttributes","parameterTypes":["int","int","int","int","int","byte[]"] }, 
+    {"name":"setOutputAttributes","parameterTypes":["int","int"] }, 
+    {"name":"updateImageProgress","parameterTypes":["int"] }
+  ]
+},
+{
+  "name":"java.io.InputStream",
+  "methods":[
+    {"name":"read","parameterTypes":["byte[]","int","int"] }, 
+    {"name":"skip","parameterTypes":["long"] }
   ]
 },
 {
@@ -139,6 +208,12 @@
 {
   "name":"java.lang.Runnable",
   "methods":[{"name":"run","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.String"
+},
+{
+  "name":"java.lang.String[]"
 },
 {
   "name":"java.util.List",

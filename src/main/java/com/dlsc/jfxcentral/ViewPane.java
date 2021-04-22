@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 public abstract class ViewPane extends StackPane {
 
     protected ViewPane() {
+        setView(View.PEOPLE);
     }
 
     private ObjectProperty<View> view = new SimpleObjectProperty<>(this, "view", View.HOME);

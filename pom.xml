@@ -13,7 +13,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>16</javafx.version>
         <attach.version>4.0.11</attach.version>
-        <client.plugin.version>0.1.38</client.plugin.version>
+        <client.plugin.version>0.1.39</client.plugin.version>
         <javafx.plugin.version>0.0.5</javafx.plugin.version>
         <mainClassName>com.dlsc.jfxcentral.JFXCentralApp</mainClassName>
         <ikonli.version>12.2.0</ikonli.version>
@@ -25,66 +25,85 @@
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>display</artifactId>
             <version>${attach.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>lifecycle</artifactId>
             <version>${attach.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>statusbar</artifactId>
             <version>${attach.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>storage</artifactId>
             <version>${attach.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>util</artifactId>
             <version>${attach.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>audio</artifactId>
             <version>${attach.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>orientation</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>fr.brouillard.oss</groupId>
             <artifactId>cssfx</artifactId>
             <version>11.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-core</artifactId>
             <version>${ikonli.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-javafx</artifactId>
             <version>${ikonli.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-material-pack</artifactId>
             <version>${ikonli.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-fontawesome-pack</artifactId>
@@ -165,6 +184,7 @@
                         <list>statusbar</list>
                         <list>storage</list>
                         <list>audio</list>
+                        <list>orientation</list>
                     </attachList>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>

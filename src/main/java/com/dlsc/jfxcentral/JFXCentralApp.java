@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral;
 
 import com.gluonhq.attach.audio.AudioService;
+import com.gluonhq.attach.orientation.OrientationService;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,19 +14,41 @@ public class JFXCentralApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke-jfx.gif").toExternalForm());
-        imageView.setFitWidth(600);
-        imageView.setPreserveRatio(true);
+        Scene scene;
 
-        AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
+        if (false) {
+            ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke-jfx.gif").toExternalForm());
+            imageView.setPreserveRatio(true);
+            imageView.fitWidthProperty().bind(primaryStage.widthProperty().multiply(.6));
 
-        StackPane stackPane = new StackPane(imageView);
+            OrientationService.create().ifPresent(service -> {
+                service.orientationProperty().addListener(it -> {
+                    System.out.println("orientation now: " + service.orientationProperty().get());
+                    service.getOrientation().ifPresent(orientation -> {
+                        switch (service.getOrientation().get()) {
+                            case HORIZONTAL:
+                                imageView.fitHeightProperty().bind(primaryStage.heightProperty().multiply(.6));
+                                break;
+                            case VERTICAL:
+                                imageView.fitWidthProperty().bind(primaryStage.widthProperty().multiply(.6));
+                                break;
+                        }
+                    });
+                });
+            });
 
-        Scene scene = new Scene(stackPane);
+            AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
+
+            StackPane stackPane = new StackPane(imageView);
+
+            scene = new Scene(stackPane);
+            scene.setFill(Color.rgb(68, 131, 160));
+            stackPane.setOnMouseClicked(evt -> scene.setRoot(new RootPane()));
+        } else {
+            scene = new Scene(new RootPane());
+        }
+
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        scene.setFill(Color.rgb(68, 131, 160));
-
-        stackPane.setOnMouseClicked(evt -> scene.setRoot(new RootPane()));
 
         CSSFX.start();
 
