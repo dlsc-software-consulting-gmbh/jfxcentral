@@ -6,9 +6,11 @@ import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCharacterCombination;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.scenicview.ScenicView;
 
 public class JFXCentralApp extends Application {
 
@@ -49,6 +51,11 @@ public class JFXCentralApp extends Application {
         }
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        scene.setOnKeyPressed(evt -> {
+            if (KeyCharacterCombination.valueOf("shortcut+i").match(evt)) {
+                ScenicView.show(scene);
+            }
+        });
 
         CSSFX.start();
 

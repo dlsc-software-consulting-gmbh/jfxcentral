@@ -11,22 +11,26 @@ class CategoryPane extends ViewPane {
 
         peopleView = new PeopleView(rootPane);
 
-        viewProperty().addListener(it -> {
-            switch (getView()) {
-                case HOME:
-                    break;
-                case OPENJFX:
-                    break;
-                case PEOPLE:
-                    getChildren().setAll(peopleView);
-                    break;
-                case LEARN:
-                    break;
-                case LIBS:
-                    break;
-                case BLOGS:
-                    break;
-            }
-        });
+        viewProperty().addListener(it -> updateView(rootPane));
+        updateView(rootPane);
+    }
+
+    private void updateView(RootPane rootPane) {
+        switch (getView()) {
+            case HOME:
+                break;
+            case OPENJFX:
+                break;
+            case PEOPLE:
+                getChildren().setAll(peopleView);
+                rootPane.getRightPane().getChildren().setAll(peopleView.getPanel());
+                break;
+            case LEARN:
+                break;
+            case LIBS:
+                break;
+            case BLOGS:
+                break;
+        }
     }
 }

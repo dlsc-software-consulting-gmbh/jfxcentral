@@ -4,8 +4,12 @@ import com.dlsc.gemsfx.PhotoView;
 import com.dlsc.jfxcentral.PhotoCache;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.views.PersonView;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -15,6 +19,8 @@ import javafx.scene.layout.*;
 
 public class PeopleView extends CategoryView {
 
+    private PersonView personView;
+
     public PeopleView(RootPane rootPane) {
         super(rootPane);
 
@@ -22,8 +28,33 @@ public class PeopleView extends CategoryView {
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new PersonCell());
         listView.itemsProperty().bind(rootPane.peopleProperty());
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setPerson(listView.getSelectionModel().getSelectedItem()));
 
         setCenter(listView);
+    }
+
+    @Override
+    public Node getPanel() {
+        if (personView == null) {
+            personView = new PersonView();
+            personView.personProperty().bind(personProperty());
+        }
+
+        return personView;
+    }
+
+    private final ObjectProperty<Person> person = new SimpleObjectProperty<>(this, "person");
+
+    public Person getPerson() {
+        return person.get();
+    }
+
+    public ObjectProperty<Person> personProperty() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person.set(person);
     }
 
     class PersonCell extends ListCell<Person> {

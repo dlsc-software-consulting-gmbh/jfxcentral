@@ -27,7 +27,7 @@
     -light-grey: rgba(244, 247, 250);
     -light-blue: rgba(234, 239, 244);
     -red: rgba(250, 0, 20, 1);
-    -fx-accent: rgb(67, 204, 223);
+    -fx-accent: rgb(68, 131, 160);
     -grey: rgba(0, 0, 0, .4);
 }
 
@@ -133,6 +133,14 @@
     -fx-background-color: -light-grey;
 }
 
+.champion-image {
+    -fx-image: url("champion-small.png");
+}
+
+.rockstar-image {
+    -fx-image: url("rockstar-small.png");
+}
+
 .category-pane .list-view {
     -fx-background-color: -light-blue;
     -fx-background-insets: 0px;
@@ -180,16 +188,6 @@
     -fx-font-family: "Open Sans SemiBold";
 }
 
-.category-pane .list-view .person-list-cell .grid-pane .champion-image {
-    -fx-image: url("champion-small.png");
-    -fx-fit-to-width: 24;
-}
-
-.category-pane .list-view .person-list-cell .grid-pane .rockstar-image {
-    -fx-image: url("rockstar-small.png");
-    -fx-fit-to-width: 24;
-}
-
 .category-header {
     -fx-padding: 10px;
     -fx-spacing: 10px;
@@ -206,4 +204,60 @@
 
 .category-header .search-field {
     -fx-background-radius: 1000px;
+}
+
+.person-view {
+}
+
+.person-view .title-box {
+    -fx-spacing: 10px;
+    -fx-padding: 20px 20px;
+    -fx-background-color: white;
+    -fx-background-radius: 4px;
+}
+
+.person-view .title-box .vbox {
+    -fx-spacing: 20px;
+}
+
+.person-view .title-box .vbox .name-label {
+    -fx-font-size: 24px;
+    -fx-graphic-text-gap: 10px;
+}
+
+.person-view .title-box .vbox .name-label .badges-box {
+    -fx-spacing: 10px;
+    -fx-translate-y: -5px;
+}
+
+.person-view .title-box .vbox .description-label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Open Sans Italic";
+}
+
+.person-view .title-box .photo-view {
+    -size: 100px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.person-view .title-box .social-box {
+    -fx-spacing: 10px;
+}
+
+.person-view .title-box .social-box .social-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: derive(-fx-accent, +80%);
+    -fx-font-family: "Open Sans Bold";
+}
+
+.person-view .title-box .social-box .social-button .ikonli-font-icon {
+    -fx-icon-color: derive(-fx-accent, +80%);
+}
+
+.person-view .title-box .social-box .social-button.twitter {
 }

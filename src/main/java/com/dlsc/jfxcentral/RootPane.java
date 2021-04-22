@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.BorderPane;
 
 public class RootPane extends ViewPane {
+    private RightPane rightPane;
 
     public RootPane() {
         getStyleClass().add("root-pane");
@@ -15,7 +16,7 @@ public class RootPane extends ViewPane {
         SideBar sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());
 
-        RightPane rightPane = new RightPane(this);
+        rightPane = new RightPane(this);
         rightPane.viewProperty().bind(viewProperty());
 
         BorderPane borderPane = new BorderPane();
@@ -25,6 +26,10 @@ public class RootPane extends ViewPane {
         getChildren().add(borderPane);
 
         peopleProperty().bind(DataRepository.getInstance().peopleProperty());
+    }
+
+    public RightPane getRightPane() {
+        return rightPane;
     }
 
     private final ListProperty<Person> people = new SimpleListProperty<>(this, "people", FXCollections.observableArrayList());

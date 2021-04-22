@@ -121,4 +121,8 @@ public class Person extends ModelObject {
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
+
+    public boolean hasPhoto() {
+        return getPhoto() != null && !getPhoto().trim().isEmpty();
+    }
 }

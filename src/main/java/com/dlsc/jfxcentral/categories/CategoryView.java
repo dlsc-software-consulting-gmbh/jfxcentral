@@ -1,12 +1,12 @@
 package com.dlsc.jfxcentral.categories;
 
 import com.dlsc.jfxcentral.RootPane;
+import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 
 import java.util.Objects;
 
-import javafx.scene.layout.BorderPane;
-
-public class CategoryView extends BorderPane {
+public abstract class CategoryView extends BorderPane {
 
     private final RootPane rootPane;
 
@@ -20,4 +20,6 @@ public class CategoryView extends BorderPane {
     public RootPane getRootPane() {
         return rootPane;
     }
+
+    public abstract Node getPanel();
 }
