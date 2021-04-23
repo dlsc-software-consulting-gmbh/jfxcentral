@@ -31,10 +31,12 @@ public class DataRepository {
         try {
             File peopleFile = loadFile("people.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json");
 
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>(){}.getType()));
+            Gson gson = new GsonBuilder().create();
 
-            System.out.println(gson.toJson(getPeople()));
+            List<Person> list = gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
+            }.getType());
+
+            setPeople(list);
 
         } catch (IOException e) {
             e.printStackTrace();

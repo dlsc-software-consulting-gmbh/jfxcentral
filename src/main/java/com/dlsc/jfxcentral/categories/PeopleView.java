@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral.categories;
 
-import com.dlsc.gemsfx.PhotoView;
 import com.dlsc.jfxcentral.PhotoCache;
+import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.views.PersonView;

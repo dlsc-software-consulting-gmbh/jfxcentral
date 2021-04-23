@@ -3,9 +3,11 @@ open module com.dlsc.jfxcentral {
     requires javafx.controls;
     requires javafx.web;
     requires javafx.media;
-    requires org.scenicview.scenicview;
-    requires com.dlsc.gemsfx;
+    requires javafx.swing;
+    requires java.desktop;
+//    requires org.scenicview.scenicview;
     requires com.gluonhq.attach.audio;
+    requires com.gluonhq.attach.browser;
     requires com.gluonhq.attach.statusbar;
     requires com.gluonhq.attach.display;
     requires com.gluonhq.attach.orientation;

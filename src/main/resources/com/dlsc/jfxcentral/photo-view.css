@@ -1,0 +1,52 @@
+.photo-view {
+    -fx-pref-width: 256px;
+    -fx-pref-height: 256px;
+}
+
+.photo-view > .box {
+    -fx-spacing: 20px;
+}
+
+.photo-view > .box > .image-box {
+    -fx-background-image: url("transparency.png");
+}
+
+.photo-view:empty > .box > .image-box {
+    -fx-background-image: null;
+    -fx-background-color: white;
+}
+
+.photo-view > .box > .image-box > .placeholder {
+    -fx-text-fill: gray;
+    -fx-font-size: 10px;
+}
+
+.photo-view > .box > .image-box > .placeholder > .upload-icon {
+    -fx-icon-size: 48px;
+    -fx-icon-color: gray;
+}
+
+.photo-view > .box > .image-box > .border-circle {
+    -fx-stroke: -fx-accent;
+    -fx-stroke-width: 4;
+    -fx-fill: transparent;
+}
+
+.photo-view.file-drag > .box > .image-box > .border-circle {
+    -fx-stroke: red;
+}
+
+.photo-view:focused > .box > .image-box > .border-circle {
+    -fx-stroke-width: 6;
+}
+
+
+.photo-view > .box > .image-box > .border-rectangle {
+    -fx-stroke: -fx-accent;
+    -fx-stroke-width: 4;
+    -fx-fill: transparent;
+}
+
+.photo-view:focused > .box > .image-box > .border-rectangle {
+    -fx-stroke-width: 6;
+}

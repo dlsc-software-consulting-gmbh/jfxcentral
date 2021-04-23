@@ -1,8 +1,9 @@
 package com.dlsc.jfxcentral.views;
 
-import com.dlsc.gemsfx.PhotoView;
 import com.dlsc.jfxcentral.PhotoCache;
+import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.material.Material;
 
 public class PersonView extends VBox {
 
@@ -64,7 +66,7 @@ public class PersonView extends VBox {
 
         titleBox.getStyleClass().add("title-box");
 
-        getChildren().add(titleBox);
+        getChildren().addAll(titleBox);
 
         personProperty().addListener(it -> updateView());
     }
@@ -90,35 +92,45 @@ public class PersonView extends VBox {
             if (StringUtils.isNotEmpty(person.getTwitter())) {
                 Button twitter = new Button("Twitter");
                 twitter.getStyleClass().addAll("social-button", "twitter");
-                twitter.setOnAction(evt -> System.out.println("twitter"));
+                twitter.setOnAction(evt -> Util.browse("https://twitter.com/" + person.getTwitter()));
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
                 socialBox.getChildren().add(twitter);
             }
 
             if (StringUtils.isNotEmpty(person.getLinkedIn())) {
-                Button twitter = new Button("LinkedIn");
-                twitter.getStyleClass().addAll("social-button", "linkedin");
-                twitter.setOnAction(evt -> System.out.println("linkedin"));
-                twitter.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
-                socialBox.getChildren().add(twitter);
+                Button linkedIn = new Button("LinkedIn");
+                linkedIn.getStyleClass().addAll("social-button", "linkedin");
+                linkedIn.setOnAction(evt -> {
+                    System.out.println("https://www.linkedin.com/in/" + person.getLinkedIn());
+                    Util.browse("https://www.linkedin.com/in/" + person.getLinkedIn());
+                });
+                linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
+                socialBox.getChildren().add(linkedIn);
             }
 
             if (StringUtils.isNotEmpty(person.getBlogId())) {
-                Button twitter = new Button("Blog");
-                twitter.getStyleClass().addAll("social-button", "blog");
-                twitter.setOnAction(evt -> System.out.println("blog"));
-                twitter.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
-                socialBox.getChildren().add(twitter);
+                Button blog = new Button("Blog");
+                blog.getStyleClass().addAll("social-button", "blog");
+                blog.setOnAction(evt ->Util.browse(""));
+                blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
+                socialBox.getChildren().add(blog);
             }
 
             if (StringUtils.isNotEmpty(person.getWebsite())) {
-                Button twitter = new Button("Website");
-                twitter.getStyleClass().addAll("social-button", "website");
-                twitter.setOnAction(evt -> System.out.println("website"));
-                twitter.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
-                socialBox.getChildren().add(twitter);
+                Button website = new Button("Website");
+                website.getStyleClass().addAll("social-button", "website");
+                website.setOnAction(evt -> Util.browse(person.getWebsite()));
+                website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
+                socialBox.getChildren().add(website);
             }
 
+            if (StringUtils.isNotEmpty(person.getEmail())) {
+                Button website = new Button("Mail");
+                website.getStyleClass().addAll("social-button", "mail");
+                website.setOnAction(evt -> Util.browse("mailto:"+ person.getEmail() + "?subject=JFXCentral%20Mail%20Contact"));
+                website.setGraphic(new FontIcon(Material.MAIL));
+                socialBox.getChildren().add(website);
+            }
         }
     }
 

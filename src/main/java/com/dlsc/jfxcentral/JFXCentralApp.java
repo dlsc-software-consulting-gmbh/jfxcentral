@@ -1,63 +1,53 @@
 package com.dlsc.jfxcentral;
 
 import com.gluonhq.attach.audio.AudioService;
-import com.gluonhq.attach.orientation.OrientationService;
+import com.gluonhq.attach.display.DisplayService;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCharacterCombination;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.scenicview.ScenicView;
 
 public class JFXCentralApp extends Application {
 
+    private RootPane rootPane = new RootPane();
+    private Scene scene;
+
     @Override
     public void start(Stage primaryStage) {
-        Scene scene;
-
-        if (false) {
-            ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke-jfx.gif").toExternalForm());
-            imageView.setPreserveRatio(true);
-            imageView.fitWidthProperty().bind(primaryStage.widthProperty().multiply(.6));
-
-            OrientationService.create().ifPresent(service -> {
-                service.orientationProperty().addListener(it -> {
-                    System.out.println("orientation now: " + service.orientationProperty().get());
-                    service.getOrientation().ifPresent(orientation -> {
-                        switch (service.getOrientation().get()) {
-                            case HORIZONTAL:
-                                imageView.fitHeightProperty().bind(primaryStage.heightProperty().multiply(.6));
-                                break;
-                            case VERTICAL:
-                                imageView.fitWidthProperty().bind(primaryStage.widthProperty().multiply(.6));
-                                break;
-                        }
-                    });
-                });
+        if (true) {
+            DukeAnimationView animationView = new DukeAnimationView(() -> showRootPane());
+            animationView.sceneProperty().addListener(it -> {
+                if (animationView.getScene() != null) {
+                    System.out.println("starting");
+                    animationView.play();
+                } else {
+                    System.out.println("stopping");
+                    animationView.stop();
+                }
             });
-
             AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
 
-            StackPane stackPane = new StackPane(imageView);
-
-            scene = new Scene(stackPane);
+            scene = new Scene(animationView);
             scene.setFill(Color.rgb(68, 131, 160));
-            stackPane.setOnMouseClicked(evt -> scene.setRoot(new RootPane()));
+            animationView.setOnMouseClicked(evt -> showRootPane());
         } else {
             scene = new Scene(new RootPane());
         }
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        scene.setOnKeyPressed(evt -> {
-            if (KeyCharacterCombination.valueOf("shortcut+i").match(evt)) {
-                ScenicView.show(scene);
-            }
-        });
+//        scene.setOnKeyPressed(evt -> {
+//            if (KeyCharacterCombination.valueOf("shortcut+i").match(evt)) {
+//                ScenicView.show(scene);
+//            }
+//        });
 
-        CSSFX.start();
+        DisplayService.create().ifPresentOrElse(service -> {
+            if (service.isDesktop()) {
+                System.out.println("starting CSSFX");
+                CSSFX.start();
+            }
+        }, () -> CSSFX.start());
 
         primaryStage.setScene(scene);
         primaryStage.setWidth(1200);
@@ -65,6 +55,10 @@ public class JFXCentralApp extends Application {
         primaryStage.centerOnScreen();
         primaryStage.setTitle("JFXCentral");
         primaryStage.show();
+    }
+
+    private void showRootPane() {
+        scene.setRoot(rootPane);
     }
 
     public static void main(String args[]) {
