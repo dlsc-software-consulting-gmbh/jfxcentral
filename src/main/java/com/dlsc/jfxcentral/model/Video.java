@@ -1,11 +1,10 @@
 package com.dlsc.jfxcentral.model;
 
-public class Video extends ModelObject {
+public class Video {
 
     private String title;
     private String description;
     private String url;
-    private String personId;
 
     public Video() {
     }

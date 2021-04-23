@@ -125,7 +125,7 @@ public class PeopleView extends CategoryView {
                 String photo = person.getPhoto();
                 if (photo != null && !photo.trim().isBlank()) {
                     photoView.setVisible(true);
-                    photoView.photoProperty().bind(PhotoCache.getInstance().imageProperty(photo));
+                    photoView.photoProperty().bind(PhotoCache.getInstance().personImageProperty(photo));
                 } else {
                     photoView.setVisible(false);
                     photoView.photoProperty().unbind();

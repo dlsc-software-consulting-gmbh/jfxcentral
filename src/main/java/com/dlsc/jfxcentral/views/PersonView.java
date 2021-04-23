@@ -1,14 +1,19 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.jfxcentral.AdvancedListView;
+import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.PhotoCache;
 import com.dlsc.jfxcentral.PhotoView;
+import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -19,7 +24,7 @@ import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
-public class PersonView extends VBox {
+public class PersonView extends PageView {
 
     private HBox socialBox;
     private PhotoView photoView = new PhotoView();
@@ -31,6 +36,38 @@ public class PersonView extends VBox {
     public PersonView() {
         getStyleClass().add("person-view");
 
+        createTitleBox();
+        createLibraryBox();
+
+        personProperty().addListener(it -> updateView());
+        updateView();
+    }
+
+    private void createLibraryBox() {
+        AdvancedListView<Library> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(5);
+        listView.setCellFactory(view -> new LibraryCell());
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Libraries");
+        sectionPane.getNodes().add(listView);
+
+        personProperty().addListener(it -> {
+            Person person = getPerson();
+            if (person != null) {
+                sectionPane.setSubtitle("Open source libraries developed by " + person.getName());
+                listView.itemsProperty().bind(DataRepository.getInstance().getLibrariesByPerson(getPerson()));
+            } else {
+                sectionPane.setSubtitle("");
+                listView.getItems().clear();
+            }
+        });
+
+        getChildren().add(sectionPane);
+    }
+
+    private void createTitleBox() {
         photoView.setEditable(false);
 
         nameLabel.getStyleClass().add("name-label");
@@ -62,13 +99,13 @@ public class PersonView extends VBox {
         vBox.getStyleClass().add("vbox");
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
+
         HBox titleBox = new HBox(vBox, photoView);
+        titleBox.getStyleClass().add("hbox");
 
-        titleBox.getStyleClass().add("title-box");
-
-        getChildren().addAll(titleBox);
-
-        personProperty().addListener(it -> updateView());
+        SectionPane sectionPane = new SectionPane(titleBox);
+        sectionPane.getStyleClass().add("title-section");
+        getChildren().addAll(sectionPane);
     }
 
     private void updateView() {
@@ -80,7 +117,7 @@ public class PersonView extends VBox {
             rockstarImageView.setVisible(person.isRockstar());
 
             if (person.hasPhoto()) {
-                photoView.photoProperty().bind(PhotoCache.getInstance().imageProperty(person.getPhoto()));
+                photoView.photoProperty().bind(PhotoCache.getInstance().personImageProperty(person.getPhoto()));
                 photoView.setVisible(true);
             } else {
                 photoView.photoProperty().unbind();
@@ -146,5 +183,58 @@ public class PersonView extends VBox {
 
     public void setPerson(Person person) {
         this.person.set(person);
+    }
+
+    class LibraryCell extends ListCell<Library> {
+
+        private Label titleLabel = new Label();
+        private Label descriptionLabel = new Label();
+
+        private ImageView logoImageView = new ImageView();
+
+        public LibraryCell() {
+            getStyleClass().add("library-cell");
+
+            titleLabel.getStyleClass().add("title-label");
+            titleLabel.setMaxWidth(Region.USE_PREF_SIZE);
+
+            descriptionLabel.getStyleClass().add("description-label");
+            descriptionLabel.setWrapText(true);
+            descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
+
+            VBox vBox = new VBox(titleLabel, descriptionLabel);
+            vBox.getStyleClass().add("vbox");
+            HBox.setHgrow(vBox, Priority.ALWAYS);
+
+            logoImageView.setFitHeight(64);
+            logoImageView.setPreserveRatio(true);
+
+            HBox hBox = new HBox(vBox, logoImageView);
+            hBox.getStyleClass().add("hbox");
+
+            setGraphic(hBox);
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        }
+
+        @Override
+        protected void updateItem(Library item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (!empty && item != null) {
+                String logoImageFile = item.getLogoImageFile();
+                if (StringUtils.isNotEmpty(logoImageFile)) {
+                    logoImageView.imageProperty().bind(PhotoCache.getInstance().libraryImageProperty(item.getLogoImageFile()));
+                } else {
+                    logoImageView.imageProperty().unbind();
+                }
+                logoImageView.setVisible(true);
+
+                titleLabel.setText(item.getTitle());
+                descriptionLabel.setText(item.getDescription());
+            } else {
+                logoImageView.imageProperty().unbind();
+                logoImageView.setVisible(false);
+            }
+        }
     }
 }

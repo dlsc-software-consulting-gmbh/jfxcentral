@@ -14,11 +14,41 @@
   ]
 },
 {
+  "name":"com.dlsc.jfxcentral.model.Image",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.model.Library",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.model.License",
+  "fields":[
+    {"name":"APACHE2"}, 
+    {"name":"BSD2"}, 
+    {"name":"BSD3"}, 
+    {"name":"COMMON"}, 
+    {"name":"ECLIPSE"}, 
+    {"name":"GPL"}, 
+    {"name":"LPGL"}, 
+    {"name":"MIT"}, 
+    {"name":"MOZILLA"}, 
+    {"name":"OTHER"}
+  ]
+},
+{
   "name":"com.dlsc.jfxcentral.model.ModelObject",
   "allDeclaredFields":true
 },
 {
   "name":"com.dlsc.jfxcentral.model.Person",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.model.Video",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -59,6 +89,9 @@
 },
 {
   "name":"com.sun.glass.ui.mac.MacApplication"
+},
+{
+  "name":"com.sun.glass.ui.mac.MacGestureSupport"
 },
 {
   "name":"com.sun.glass.ui.mac.MacMenuBarDelegate"
@@ -107,6 +140,10 @@
 },
 {
   "name":"com.sun.prism.shader.DrawCircle_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.DrawRoundRect_Color_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {

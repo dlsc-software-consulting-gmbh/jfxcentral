@@ -5,6 +5,8 @@ open module com.dlsc.jfxcentral {
     requires javafx.media;
     requires javafx.swing;
     requires java.desktop;
+    requires org.controlsfx.controls;
+    requires org.kordamp.ikonli.materialdesign;
 //    requires org.scenicview.scenicview;
     requires com.gluonhq.attach.audio;
     requires com.gluonhq.attach.browser;

@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,6 +9,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,20 +29,40 @@ public class DataRepository {
         return instance;
     }
 
-    public DataRepository() {
+    private DataRepository() {
         try {
-            File peopleFile = loadFile("people.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json");
-
             Gson gson = new GsonBuilder().create();
 
-            List<Person> list = gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
-            }.getType());
+            File peopleFile = loadFile("people.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json");
+            setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
+            }.getType()));
 
-            setPeople(list);
-
+            File librariesFile = loadFile("libraries.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries.json");
+            setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
+            }.getType()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ListProperty<Library> getLibrariesByPerson(Person person) {
+        FilteredList<Library> filteredList = new FilteredList<>(getLibraries());
+        filteredList.setPredicate(library -> library.getPersonId().equals(person.getId()));
+        return new SimpleListProperty<>(filteredList);
+    }
+
+    private final ListProperty<Library> libraries = new SimpleListProperty<>(this, "libraries", FXCollections.observableArrayList());
+
+    public ObservableList<Library> getLibraries() {
+        return libraries.get();
+    }
+
+    public ListProperty<Library> librariesProperty() {
+        return libraries;
+    }
+
+    public void setLibraries(List<Library> libraries) {
+        this.libraries.setAll(libraries);
     }
 
     private final ListProperty<Person> people = new SimpleListProperty<>(this, "people", FXCollections.observableArrayList());

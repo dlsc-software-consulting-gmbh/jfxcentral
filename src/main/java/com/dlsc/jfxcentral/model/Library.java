@@ -7,9 +7,14 @@ public class Library extends ModelObject {
 
     private String title;
     private String description;
+    private License license;
     private String homepage;
     private String repository;
-    private String license;
+    private String personId;
+    private String companyId;
+    private String logoImageFile;
+    private String issueTracker;
+    private String discussionBoard;
 
     private List<Image> images = new ArrayList<>();
     private List<Video> videos = new ArrayList<>();
@@ -49,14 +54,6 @@ public class Library extends ModelObject {
         this.repository = repository;
     }
 
-    public String getLicense() {
-        return license;
-    }
-
-    public void setLicense(String license) {
-        this.license = license;
-    }
-
     public List<Image> getImages() {
         return images;
     }
@@ -71,5 +68,53 @@ public class Library extends ModelObject {
 
     public void setVideos(List<Video> videos) {
         this.videos = videos;
+    }
+
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getLogoImageFile() {
+        return logoImageFile;
+    }
+
+    public void setLogoImageFile(String logoImageFile) {
+        this.logoImageFile = logoImageFile;
+    }
+
+    public License getLicense() {
+        return license;
+    }
+
+    public void setLicense(License license) {
+        this.license = license;
+    }
+
+    public String getIssueTracker() {
+        return issueTracker;
+    }
+
+    public void setIssueTracker(String issueTracker) {
+        this.issueTracker = issueTracker;
+    }
+
+    public String getDiscussionBoard() {
+        return discussionBoard;
+    }
+
+    public void setDiscussionBoard(String discussionBoard) {
+        this.discussionBoard = discussionBoard;
     }
 }

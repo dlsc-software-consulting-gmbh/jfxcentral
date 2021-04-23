@@ -97,6 +97,19 @@
   ]
 },
 {
+  "name":"com.sun.glass.ui.mac.MacGestureSupport",
+  "methods":[
+    {"name":"gestureFinished","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int"] }, 
+    {"name":"magnifyGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","float"] }, 
+    {"name":"notifyBeginTouchEvent","parameterTypes":["com.sun.glass.ui.View","int","int"] }, 
+    {"name":"notifyEndTouchEvent","parameterTypes":["com.sun.glass.ui.View"] }, 
+    {"name":"notifyNextTouchEvent","parameterTypes":["com.sun.glass.ui.View","int","long","float","float"] }, 
+    {"name":"rotateGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","float"] }, 
+    {"name":"scrollGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","int","float","float"] }, 
+    {"name":"swipeGesturePerformed","parameterTypes":["com.sun.glass.ui.View","int","int","int","int","int","int"] }
+  ]
+},
+{
   "name":"com.sun.glass.ui.mac.MacMenuDelegate",
   "fields":[{"name":"menu"}]
 },

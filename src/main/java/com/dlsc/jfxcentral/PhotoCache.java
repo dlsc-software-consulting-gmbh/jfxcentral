@@ -22,10 +22,18 @@ public class PhotoCache extends HashMap<String, ObjectProperty<Image>> {
         return instance;
     }
 
-    public ObjectProperty<Image> imageProperty(String photoFileName) {
+    public ObjectProperty<Image> personImageProperty(String photoFileName) {
+        return imageProperty("https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/people/", photoFileName);
+    }
+
+    public ObjectProperty<Image> libraryImageProperty(String photoFileName) {
+        return imageProperty("https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/libraries/", photoFileName);
+    }
+
+    private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName) {
         return computeIfAbsent(photoFileName, key -> {
             ObjectProperty<Image> property = new SimpleObjectProperty<>();
-            String url = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people/" + photoFileName;
+            String url = baseURL + photoFileName;
             System.out.println(url);
             service.submit(() -> {
                 Image image = new Image(url, false);

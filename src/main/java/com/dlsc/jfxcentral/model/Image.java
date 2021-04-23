@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral.model;
 
-public class Image extends ModelObject {
+public class Image {
 
     private String path;
     private String title;
