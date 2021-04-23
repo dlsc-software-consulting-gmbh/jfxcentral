@@ -462,7 +462,8 @@
 .library-cell:selected {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
-    -fx-background-insets: 2px -5px;
+    -fx-background-insets: 2px -8px 3px -8px;
+    -fx-background-radius: 2px;
 }
 
 .library-cell:selected .label {
