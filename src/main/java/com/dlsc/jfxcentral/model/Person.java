@@ -1,5 +1,8 @@
 package com.dlsc.jfxcentral.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person extends ModelObject {
 
     private String name;
@@ -18,6 +21,9 @@ public class Person extends ModelObject {
 
     private boolean champion;
     private boolean rockstar;
+
+    private List<String> libraryIds = new ArrayList<>();
+    private List<String> bookIds = new ArrayList<>();
 
     public Person(String name) {
         setName(name);
@@ -124,5 +130,18 @@ public class Person extends ModelObject {
 
     public boolean hasPhoto() {
         return getPhoto() != null && !getPhoto().trim().isEmpty();
+    }
+
+    public List<String> getLibraryIds() {
+        return libraryIds;
+    }
+
+
+    public List<String> getBookIds() {
+        return bookIds;
+    }
+
+    public void setBookIds(List<String> bookIds) {
+        this.bookIds = bookIds;
     }
 }

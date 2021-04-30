@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.AdvancedListView;
 import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.PhotoCache;
+import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class PersonView extends PageView {
 
@@ -46,7 +47,7 @@ public class PersonView extends PageView {
     private void createLibraryBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(5);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new LibraryCell());
 
         SectionPane sectionPane = new SectionPane();
@@ -117,7 +118,7 @@ public class PersonView extends PageView {
             rockstarImageView.setVisible(person.isRockstar());
 
             if (person.hasPhoto()) {
-                photoView.photoProperty().bind(PhotoCache.getInstance().personImageProperty(person.getPhoto()));
+                photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
                 photoView.setVisible(true);
             } else {
                 photoView.photoProperty().unbind();
@@ -148,7 +149,7 @@ public class PersonView extends PageView {
             if (StringUtils.isNotEmpty(person.getBlogId())) {
                 Button blog = new Button("Blog");
                 blog.getStyleClass().addAll("social-button", "blog");
-                blog.setOnAction(evt ->Util.browse(""));
+                blog.setOnAction(evt -> Util.browse(""));
                 blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
                 socialBox.getChildren().add(blog);
             }
@@ -164,7 +165,7 @@ public class PersonView extends PageView {
             if (StringUtils.isNotEmpty(person.getEmail())) {
                 Button website = new Button("Mail");
                 website.getStyleClass().addAll("social-button", "mail");
-                website.setOnAction(evt -> Util.browse("mailto:"+ person.getEmail() + "?subject=JFXCentral%20Mail%20Contact"));
+                website.setOnAction(evt -> Util.browse("mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact"));
                 website.setGraphic(new FontIcon(Material.MAIL));
                 socialBox.getChildren().add(website);
             }
@@ -187,10 +188,16 @@ public class PersonView extends PageView {
 
     class LibraryCell extends ListCell<Library> {
 
+        private final Button homepageButton;
+        private final Button repositoryButton;
+        private final Button issueTrackerButton;
+        private final Button discussionsButton;
+
         private Label titleLabel = new Label();
         private Label descriptionLabel = new Label();
 
         private ImageView logoImageView = new ImageView();
+        private HBox buttonBox = new HBox();
 
         public LibraryCell() {
             getStyleClass().add("library-cell");
@@ -198,11 +205,37 @@ public class PersonView extends PageView {
             titleLabel.getStyleClass().add("title-label");
             titleLabel.setMaxWidth(Region.USE_PREF_SIZE);
 
+            buttonBox.getStyleClass().add("button-box");
+
             descriptionLabel.getStyleClass().add("description-label");
             descriptionLabel.setWrapText(true);
             descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
 
-            VBox vBox = new VBox(titleLabel, descriptionLabel);
+            homepageButton = new Button();
+            homepageButton.getStyleClass().addAll("library-button", "homepage");
+            homepageButton.setOnAction(evt -> Util.browse(getItem().getHomepage()));
+            homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
+            buttonBox.getChildren().add(homepageButton);
+
+            repositoryButton = new Button();
+            repositoryButton.getStyleClass().addAll("library-button", "repository");
+            repositoryButton.setOnAction(evt -> Util.browse(getItem().getRepository()));
+            repositoryButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
+            buttonBox.getChildren().add(repositoryButton);
+
+            issueTrackerButton = new Button();
+            issueTrackerButton.getStyleClass().addAll("library-button", "issues");
+            issueTrackerButton.setOnAction(evt -> Util.browse(getItem().getIssueTracker()));
+            issueTrackerButton.setGraphic(new FontIcon(MaterialDesign.MDI_BUG));
+            buttonBox.getChildren().add(issueTrackerButton);
+
+            discussionsButton = new Button();
+            discussionsButton.getStyleClass().addAll("library-button", "discussion");
+            discussionsButton.setOnAction(evt -> Util.browse(getItem().getDiscussionBoard()));
+            discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
+            buttonBox.getChildren().add(discussionsButton);
+
+            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
             vBox.getStyleClass().add("vbox");
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
@@ -223,7 +256,7 @@ public class PersonView extends PageView {
             if (!empty && item != null) {
                 String logoImageFile = item.getLogoImageFile();
                 if (StringUtils.isNotEmpty(logoImageFile)) {
-                    logoImageView.imageProperty().bind(PhotoCache.getInstance().libraryImageProperty(item.getLogoImageFile()));
+                    logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
                 } else {
                     logoImageView.imageProperty().unbind();
                 }
@@ -231,9 +264,26 @@ public class PersonView extends PageView {
 
                 titleLabel.setText(item.getTitle());
                 descriptionLabel.setText(item.getDescription());
+
+                homepageButton.setVisible(StringUtils.isNotEmpty(item.getHomepage()));
+                homepageButton.setManaged(StringUtils.isNotEmpty(item.getHomepage()));
+
+                repositoryButton.setVisible(StringUtils.isNotEmpty(item.getRepository()));
+                repositoryButton.setManaged(StringUtils.isNotEmpty(item.getRepository()));
+
+                issueTrackerButton.setVisible(StringUtils.isNotEmpty(item.getIssueTracker()));
+                issueTrackerButton.setManaged(StringUtils.isNotEmpty(item.getIssueTracker()));
+
+                discussionsButton.setVisible(StringUtils.isNotEmpty(item.getDiscussionBoard()));
+                discussionsButton.setManaged(StringUtils.isNotEmpty(item.getDiscussionBoard()));
+
+                buttonBox.setVisible(homepageButton.isVisible() || repositoryButton.isVisible() || issueTrackerButton.isVisible() || discussionsButton.isVisible());
+                buttonBox.setManaged(buttonBox.isVisible());
             } else {
                 logoImageView.imageProperty().unbind();
                 logoImageView.setVisible(false);
+                buttonBox.setVisible(false);
+                buttonBox.setManaged(false);
             }
         }
     }

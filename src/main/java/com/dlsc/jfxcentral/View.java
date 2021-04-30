@@ -6,5 +6,6 @@ public enum View {
     PEOPLE,
     LEARN,
     LIBS,
-    BLOGS
+    BLOGS,
+    BOOKS
 }

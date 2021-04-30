@@ -1,16 +1,21 @@
 package com.dlsc.jfxcentral.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Book extends ModelObject {
 
     private String authors;
     private String title;
+    private String subtitle;
     private String description;
     private String url;
+    private String amazon;
     private String image;
     private String isbn;
     private LocalDate publishedDate;
+    private List<String> personIds = new ArrayList<>();
 
     public Book() {
     }
@@ -29,6 +34,14 @@ public class Book extends ModelObject {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public String getDescription() {
@@ -69,5 +82,21 @@ public class Book extends ModelObject {
 
     public void setPublishedDate(LocalDate publishedDate) {
         this.publishedDate = publishedDate;
+    }
+
+    public List<String> getPersonIds() {
+        return personIds;
+    }
+
+    public void setPersonIds(List<String> personIds) {
+        this.personIds = personIds;
+    }
+
+    public String getAmazon() {
+        return amazon;
+    }
+
+    public void setAmazon(String amazon) {
+        this.amazon = amazon;
     }
 }

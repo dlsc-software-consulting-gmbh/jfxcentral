@@ -5,7 +5,7 @@ import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -35,9 +35,9 @@ public class DukeAnimationView extends StackPane {
 
         imageView.setPreserveRatio(true);
 
-        Button button = new Button("START");
-        button.getStyleClass().add("start-button");
-        button.setOnAction(evt -> callback.run());
+        Label button = new Label("Press to continue");
+        button.getStyleClass().add("start-message");
+        button.setOnMousePressed(evt -> callback.run());
 
         VBox vBox = new VBox(40, imageView, button);
         vBox.setAlignment(Pos.CENTER);

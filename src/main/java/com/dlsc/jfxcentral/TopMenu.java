@@ -33,14 +33,15 @@ class TopMenu extends VBox {
         imageView.getStyleClass().add("duke");
 
         ToggleButton homeButton = createButton("Home", new FontIcon(Material.HOME));
-        ToggleButton openJfxButton = createButton("OpenJFX", new FontIcon(Material.STAR));
         ToggleButton peopleButton = createButton("People", new FontIcon(Material.PERSON));
-        ToggleButton learnButton = createButton("Learn", new FontIcon(Material.SCHOOL));
-        ToggleButton libsButton = createButton("Libraries", new FontIcon(Material.BOOK));
         ToggleButton blogsButton = createButton("Blogs", new FontIcon(Material.DESCRIPTION));
+        ToggleButton booksButton = createButton("Books", new FontIcon(Material.BOOK));
+        ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
+        ToggleButton libsButton = createButton("Libraries", new FontIcon(Material.BOOK));
+        ToggleButton openJfxButton = createButton("OpenJFX", new FontIcon(Material.STAR));
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, openJfxButton, peopleButton, learnButton, libsButton, blogsButton);
+        toggleGroup.getToggles().addAll(homeButton, peopleButton, blogsButton, booksButton, tutorialsButton, libsButton, openJfxButton);
         toggleGroup.selectToggle(homeButton);
 
         Region spacer = new Region();
@@ -48,7 +49,7 @@ class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(homeButton, openJfxButton, peopleButton, learnButton, libsButton, blogsButton, spacer, imageView);
+        getChildren().addAll(homeButton, peopleButton, blogsButton, booksButton, tutorialsButton, libsButton, openJfxButton);
 
         view.addListener(it -> {
             switch (getView()) {
@@ -62,13 +63,16 @@ class TopMenu extends VBox {
                     toggleGroup.selectToggle(peopleButton);
                     break;
                 case LEARN:
-                    toggleGroup.selectToggle(learnButton);
+                    toggleGroup.selectToggle(tutorialsButton);
                     break;
                 case LIBS:
                     toggleGroup.selectToggle(libsButton);
                     break;
                 case BLOGS:
                     toggleGroup.selectToggle(blogsButton);
+                    break;
+                case BOOKS:
+                    toggleGroup.selectToggle(booksButton);
                     break;
             }
         });
@@ -85,12 +89,14 @@ class TopMenu extends VBox {
                 setView(View.OPENJFX);
             } else if (newSelection == peopleButton) {
                 setView(View.PEOPLE);
-            } else if (newSelection == learnButton) {
+            } else if (newSelection == tutorialsButton) {
                 setView(View.LEARN);
             } else if (newSelection == libsButton) {
                 setView(View.LIBS);
             } else if (newSelection == blogsButton) {
                 setView(View.BLOGS);
+            } else if (newSelection == booksButton) {
+                setView(View.BOOKS);
             }
         });
 

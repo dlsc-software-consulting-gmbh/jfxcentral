@@ -1,15 +1,20 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
+import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
+import javafx.collections.ObservableMap;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,10 +25,18 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class DataRepository {
 
+    private ExecutorService executor = Executors.newCachedThreadPool();
+
     private static final DataRepository instance = new DataRepository();
+
+//    private final Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
+
+    private final Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
 
     public static synchronized DataRepository getInstance() {
         return instance;
@@ -31,14 +44,14 @@ public class DataRepository {
 
     private DataRepository() {
         try {
-            Gson gson = new GsonBuilder().create();
-
+            // load people
             File peopleFile = loadFile("people.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json");
             setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
             }.getType()));
 
-            File librariesFile = loadFile("libraries.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries.json");
-            setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
+            // load books
+            File booksFile = loadFile("books.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/books.json");
+            setBooks(gson.fromJson(new FileReader(booksFile), new TypeToken<List<Book>>() {
             }.getType()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,23 +59,58 @@ public class DataRepository {
     }
 
     public ListProperty<Library> getLibrariesByPerson(Person person) {
-        FilteredList<Library> filteredList = new FilteredList<>(getLibraries());
-        filteredList.setPredicate(library -> library.getPersonId().equals(person.getId()));
-        return new SimpleListProperty<>(filteredList);
+
+        ObservableList<Library> list = FXCollections.observableArrayList();
+
+        person.getLibraryIds().forEach(libraryId -> {
+            if (libraries.containsKey(libraryId)) {
+                list.add(libraries.get(libraryId));
+            } else {
+//                executor.submit(() -> {
+                    try {
+                        File file = loadFile(libraryId + ".json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + libraryId + "/_info.json");
+                        Library result = gson.fromJson(new FileReader(file), Library.class);
+
+                        Platform.runLater(() -> {
+                            getLibraries().put(libraryId, result);
+                            list.add(result);
+                        });
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+//                });
+            }
+        });
+
+        return new SimpleListProperty<>(list);
     }
 
-    private final ListProperty<Library> libraries = new SimpleListProperty<>(this, "libraries", FXCollections.observableArrayList());
+    private final MapProperty<String, Library> libraries = new SimpleMapProperty<>(this, "libraries", FXCollections.observableHashMap());
 
-    public ObservableList<Library> getLibraries() {
+    public ObservableMap<String, Library> getLibraries() {
         return libraries.get();
     }
 
-    public ListProperty<Library> librariesProperty() {
+    public MapProperty<String, Library> librariesProperty() {
         return libraries;
     }
 
-    public void setLibraries(List<Library> libraries) {
-        this.libraries.setAll(libraries);
+    public void setLibraries(ObservableMap<String, Library> libraries) {
+        this.libraries.set(libraries);
+    }
+
+    private final ListProperty<Book> books = new SimpleListProperty<>(this, "books", FXCollections.observableArrayList());
+
+    public ObservableList<Book> getBooks() {
+        return books.get();
+    }
+
+    public ListProperty<Book> booksProperty() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books.setAll(books);
     }
 
     private final ListProperty<Person> people = new SimpleListProperty<>(this, "people", FXCollections.observableArrayList());
@@ -80,6 +128,7 @@ public class DataRepository {
     }
 
     private File loadFile(String fileName, String url) throws IOException {
+        System.out.println("url: " + url);
         ReadableByteChannel readChannel = Channels.newChannel(new URL(url).openStream());
         File file = File.createTempFile(fileName, "json");
         FileOutputStream fileOS = new FileOutputStream(file);

@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral.categories;
 
-import com.dlsc.jfxcentral.PhotoCache;
+import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
@@ -125,7 +125,7 @@ public class PeopleView extends CategoryView {
                 String photo = person.getPhoto();
                 if (photo != null && !photo.trim().isBlank()) {
                     photoView.setVisible(true);
-                    photoView.photoProperty().bind(PhotoCache.getInstance().personImageProperty(photo));
+                    photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
                 } else {
                     photoView.setVisible(false);
                     photoView.photoProperty().unbind();

@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral;
 
-import com.dlsc.jfxcentral.views.PersonView;
-
 public class RightPane extends ViewPane {
 
     public RightPane(RootPane rootPane) {
@@ -17,8 +15,6 @@ public class RightPane extends ViewPane {
             case OPENJFX:
                 break;
             case PEOPLE:
-                PersonView personView = new PersonView();
-
                 break;
             case LEARN:
                 break;

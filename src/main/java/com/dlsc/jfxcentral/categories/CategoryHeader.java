@@ -15,7 +15,7 @@ public class CategoryHeader extends HBox {
     public CategoryHeader() {
         getStyleClass().add("category-header");
 
-        setAlignment(Pos.CENTER_LEFT);
+        setAlignment(Pos.CENTER);
 
         FontIcon backIcon = new FontIcon(Material.ARROW_BACK);
         Button backButton = new Button();
@@ -29,6 +29,6 @@ public class CategoryHeader extends HBox {
         searchField.setPromptText("Search ....");
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
-        getChildren().addAll(backButton, searchField);
+        getChildren().addAll(searchField);
     }
 }

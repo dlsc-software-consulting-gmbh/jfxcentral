@@ -4,8 +4,6 @@ import com.dlsc.jfxcentral.model.Image;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.License;
 import com.dlsc.jfxcentral.model.Video;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +37,7 @@ public class WriteLibrary {
         List<Library> list = new ArrayList<>();
         list.add(library);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        System.out.println(gson.toJson(list));
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        System.out.println(gson.toJson(list));
     }
 }

@@ -15,7 +15,7 @@ public class JFXCentralApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        if (false) {
+        if (true) {
             DukeAnimationView animationView = new DukeAnimationView(() -> showRootPane());
             animationView.sceneProperty().addListener(it -> {
                 if (animationView.getScene() != null) {
@@ -51,7 +51,7 @@ public class JFXCentralApp extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.setWidth(1200);
-        primaryStage.setHeight(900);
+        primaryStage.setHeight(1200);
         primaryStage.centerOnScreen();
         primaryStage.setTitle("JFXCentral");
         primaryStage.show();

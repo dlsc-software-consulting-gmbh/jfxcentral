@@ -23,12 +23,32 @@
 }
 
 .root {
-    -fx-font-family: "Open Sans";
+    /*-fx-font-family: "Open Sans Regular";*/
     -light-grey: rgba(239, 242, 245);
     -light-blue: rgba(224, 229, 234);
     -red: rgba(250, 80, 80, 1);
     -fx-accent: rgb(68, 131, 160);
     -grey: rgba(0, 0, 0, .4);
+}
+
+.button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: derive(-fx-accent, +90%);
+    /*-fx-font-family: "Open Sans Bold";*/
+}
+
+.button .ikonli-font-icon {
+    -fx-icon-color: derive(-fx-accent, +90%);
+}
+
+.list-cell:selected .button {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-accent;
+}
+
+.list-cell:selected .button .ikonli-font-icon {
+    -fx-icon-size: 16px;
+    -fx-icon-color: -fx-accent;
 }
 
 .scroll-bar:vertical .decrement-button,
@@ -68,7 +88,7 @@
     -fx-background-color: transparent;
     -fx-border-width: 0px 3px 0px 3px;
     -fx-border-color: transparent transparent transparent transparent;
-    -fx-font-family: "Open Sans";
+    /*-fx-font-family: "Open Sans Regular";*/
     -fx-font-size: 14px;
     -fx-text-fill: rgba(0, 0, 0, .6);
     -fx-graphic-text-gap: 10px;
@@ -118,7 +138,6 @@
 }
 
 .category-pane {
-    -fx-pref-width: 250px;
     -fx-background-color: -light-blue;
 }
 
@@ -185,7 +204,7 @@
 
 .category-pane .list-view .person-list-cell .grid-pane .name-label {
     -fx-font-size: 12px;
-    -fx-font-family: "Open Sans SemiBold";
+    /*-fx-font-family: "Open Sans SemiBold";*/
     -fx-text-fill: black;
 }
 
@@ -205,6 +224,8 @@
 
 .category-header .search-field {
     -fx-background-radius: 1000px;
+    -fx-pref-width: 150px;
+    -fx-max-width: 150px;
 }
 
 .person-view {
@@ -240,7 +261,7 @@
 
 .person-view .title-section .hbox .vbox .description-label {
     -fx-font-size: 16px;
-    -fx-font-family: "Open Sans Italic";
+    /*-fx-font-family: "Open Sans Italic";*/
 }
 
 .person-view .title-section .hbox .vbox .social-box {
@@ -248,16 +269,9 @@
 }
 
 .person-view .title-section .hbox .vbox .social-box .social-button {
-    -fx-background-color: -fx-accent;
-    -fx-text-fill: derive(-fx-accent, +80%);
-    -fx-font-family: "Open Sans Bold";
 }
 
 .person-view .title-section .hbox .vbox .social-box .social-button .ikonli-font-icon {
-    -fx-icon-color: derive(-fx-accent, +80%);
-}
-
-.person-view .title-section .hbox .vbox .social-box .social-button.twitter {
 }
 
 .duke-animation-view {
@@ -265,13 +279,10 @@
     -fx-padding: 50px 50px 100px 50px;
 }
 
-.duke-animation-view .start-button {
-    -fx-font-family: "Open Sans Bold";
-    -fx-background-color: white;
-    -fx-background-radius: 8px;
-    -fx-text-fill: -fx-accent;
-    -fx-font-size: 32px;
-    -fx-padding: 20px 50px;
+.duke-animation-view .start-message {
+    /*-fx-font-family: "Open Sans Bold";*/
+    -fx-text-fill: rgba(255, 255, 255, .8);
+    -fx-font-size: 24px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -292,7 +303,7 @@
 
 .advanced-list-view .pagination-box .page-button {
     -size: 30px;
-    -fx-font-family: "Rubik Regular";
+    /*-fx-font-family: "Open Sans Regular";*/
     -fx-text-fill: -fx-accent;
     -fx-padding: 5px;
     -fx-background-color: transparent;
@@ -421,7 +432,7 @@
 .section-pane > .section-pane-container .title-box > .title-label {
     -fx-text-fill: black;
     -fx-font-size: 18px;
-    -fx-font-family: "Rubik Medium";
+    /*-fx-font-family: "Open Sans Medium";*/
 }
 
 .section-pane > .section-pane-container .title-box > .subtitle-label {
@@ -485,10 +496,31 @@
 
 .library-cell .hbox .vbox .title-label {
     -fx-font-size: 16px;
-    -fx-font-family: "Open Sans SemiBold";
+    /*-fx-font-family: "Open Sans SemiBold";*/
 }
 
 .library-cell .hbox .vbox .description-label {
     -fx-font-size: 16px;
     -fx-opacity: .8;
+}
+
+.library-cell .button-box {
+    -fx-spacing: 10px;
+}
+
+.library-cell .button-box .button .ikonli-font-icon {
+    -fx-icon-size: 18px;
+}
+
+/* -----------------------------------------------------------------------------
+ * BooksView
+ */
+.books-view .list-view {
+    -fx-pref-width: 150px;
+}
+
+.books-view .list-view .book-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
 }
