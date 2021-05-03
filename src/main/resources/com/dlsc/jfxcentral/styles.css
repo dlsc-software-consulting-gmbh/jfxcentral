@@ -22,19 +22,28 @@
     src: url("fonts/OpenSans-SemiBold.ttf");
 }
 
+@font-face {
+    font-family: "Open Sans";
+    font-face-name: "Open Sans SemiBoldItalic";
+    src: url("fonts/OpenSans-SemiBoldItalic.ttf");
+}
+
 .root {
-    /*-fx-font-family: "Open Sans Regular";*/
+    -fx-font-family: "Open Sans Regular";
     -light-grey: rgba(239, 242, 245);
     -light-blue: rgba(224, 229, 234);
     -red: rgba(250, 80, 80, 1);
     -fx-accent: rgb(68, 131, 160);
     -grey: rgba(0, 0, 0, .4);
+    -drop-shadow-1: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
+    -drop-shadow-2: dropshadow(gaussian, rgba(0, 0, 0, .26), 15, 0.16, -1, 4);
+    -drop-shadow-3: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
 }
 
 .button {
     -fx-background-color: -fx-accent;
     -fx-text-fill: derive(-fx-accent, +90%);
-    /*-fx-font-family: "Open Sans Bold";*/
+    -fx-font-family: "Open Sans Bold";
 }
 
 .button .ikonli-font-icon {
@@ -88,7 +97,7 @@
     -fx-background-color: transparent;
     -fx-border-width: 0px 3px 0px 3px;
     -fx-border-color: transparent transparent transparent transparent;
-    /*-fx-font-family: "Open Sans Regular";*/
+    -fx-font-family: "Open Sans Regular";
     -fx-font-size: 14px;
     -fx-text-fill: rgba(0, 0, 0, .6);
     -fx-graphic-text-gap: 10px;
@@ -204,7 +213,7 @@
 
 .category-pane .list-view .person-list-cell .grid-pane .name-label {
     -fx-font-size: 12px;
-    /*-fx-font-family: "Open Sans SemiBold";*/
+    -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: black;
 }
 
@@ -228,11 +237,15 @@
     -fx-max-width: 150px;
 }
 
-.person-view {
+.page {
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
 }
 
-.page {
-    -fx-spacing: 20px;
+/* ----------------------------------------------------------------------------
+ * PersonView
+ */
+.person-view {
 }
 
 .person-view .title-section .hbox .photo-view {
@@ -261,26 +274,75 @@
 
 .person-view .title-section .hbox .vbox .description-label {
     -fx-font-size: 16px;
-    /*-fx-font-family: "Open Sans Italic";*/
+    -fx-font-family: "Open Sans Italic";
 }
 
 .person-view .title-section .hbox .vbox .social-box {
     -fx-spacing: 10px;
 }
 
-.person-view .title-section .hbox .vbox .social-box .social-button {
+/* ----------------------------------------------------------------------------
+ * BookView
+ */
+.book-view {
 }
 
-.person-view .title-section .hbox .vbox .social-box .social-button .ikonli-font-icon {
+.book-view .title-section {
 }
 
+.book-view .title-section .horizontal-box {
+    -fx-spacing: 20px;
+}
+
+.book-view .title-section .horizontal-box .vertical-box {
+    -fx-spacing: 10px;
+}
+
+.book-view .title-section .horizontal-box .vertical-box .title-label {
+    -fx-font-size: 24px;
+    -fx-graphic-text-gap: 10px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.book-view .title-section .horizontal-box .vertical-box .subtitle-label {
+    -fx-font-size: 18px;
+    -fx-font-family: "Open Sans SemiBoldItalic";
+}
+
+.book-view .title-section .horizontal-box .vertical-box .authors-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-accent;
+    -fx-font-family: "Open Sans";
+    -fx-font-style: italic;
+}
+
+.book-view .title-section .horizontal-box .vertical-box .description-label {
+    -fx-font-size: 16px;
+    -fx-padding: 30px 0px;
+}
+
+.book-view .title-section .horizontal-box .vertical-box .publish-date-label,
+.book-view .title-section .horizontal-box .vertical-box .isbn-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-accent;
+    -fx-font-family: "Open Sans";
+    -fx-font-style: italic;
+}
+
+.book-view .title-section .horizontal-box .vertical-box .social-box {
+    -fx-spacing: 10px;
+}
+
+/* ----------------------------------------------------------------------------
+ * DukeAnimationView
+ */
 .duke-animation-view {
     -fx-background-color: rgb(68, 131, 160);
     -fx-padding: 50px 50px 100px 50px;
 }
 
 .duke-animation-view .start-message {
-    /*-fx-font-family: "Open Sans Bold";*/
+    -fx-font-family: "Open Sans Bold";
     -fx-text-fill: rgba(255, 255, 255, .8);
     -fx-font-size: 24px;
 }
@@ -303,7 +365,7 @@
 
 .advanced-list-view .pagination-box .page-button {
     -size: 30px;
-    /*-fx-font-family: "Open Sans Regular";*/
+    -fx-font-family: "Open Sans Regular";
     -fx-text-fill: -fx-accent;
     -fx-padding: 5px;
     -fx-background-color: transparent;
@@ -432,7 +494,7 @@
 .section-pane > .section-pane-container .title-box > .title-label {
     -fx-text-fill: black;
     -fx-font-size: 18px;
-    /*-fx-font-family: "Open Sans Medium";*/
+    -fx-font-family: "Open Sans Medium";
 }
 
 .section-pane > .section-pane-container .title-box > .subtitle-label {
@@ -496,7 +558,7 @@
 
 .library-cell .hbox .vbox .title-label {
     -fx-font-size: 16px;
-    /*-fx-font-family: "Open Sans SemiBold";*/
+    -fx-font-family: "Open Sans SemiBold";
 }
 
 .library-cell .hbox .vbox .description-label {
@@ -523,4 +585,85 @@
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
+}
+
+/* ----------------------------------------------------------------------------
+ * Pretty ScrollPane
+ */
+
+.pretty-scroll-pane {
+    -fx-padding: 0;
+    -fx-background-insets: 0; /* no focus border */
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.pretty-scroll-pane .scroll-to-top-button {
+    -size: 64px;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-background-radius: 1000px;
+    -fx-effect: -drop-shadow-2;
+}
+
+.pretty-scroll-pane .scroll-to-top-button .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 32px;
+    -fx-icon-code: mdi-format-vertical-align-top;
+}
+
+.pretty-scroll-pane .scroll-to-top-button:hover .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.pretty-scroll-pane .scroll-to-top-button:hover .ikonli-font-icon {
+    -fx-icon-color: -slate-green;
+}
+
+.pretty-scroll-pane .viewport {
+}
+
+.pretty-scroll-pane .viewport .clipped-container {
+}
+
+.pretty-scroll-pane .shadow {
+    -fx-pref-height: 10;
+    -fx-background-color: black;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .75), 20, 0.19, 0, 6);
+}
+
+.pretty-scroll-pane .scroll-bar {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 1000;
+    -fx-pref-width: 6;
+    -fx-pref-height: 6;
+}
+
+.pretty-scroll-pane .scroll-bar .thumb {
+    -fx-background-color: -charcoal-grey-two;
+    -fx-background-radius: 1000;
+    -fx-pref-width: 6;
+    -fx-pref-height: 6;
+}
+
+.pretty-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-insets: 0;
+}
+
+.pretty-scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-insets: 0;
+}
+
+.pretty-scroll-pane .scroll-bar .increment-button,
+.pretty-scroll-pane .scroll-bar .increment-arrow,
+.pretty-scroll-pane .scroll-bar .decrement-button,
+.pretty-scroll-pane .scroll-bar .decrement-arrow {
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
 }

@@ -4,6 +4,7 @@ import com.gluonhq.attach.audio.AudioService;
 import com.gluonhq.attach.display.DisplayService;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -55,6 +56,10 @@ public class JFXCentralApp extends Application {
         primaryStage.centerOnScreen();
         primaryStage.setTitle("JFXCentral");
         primaryStage.show();
+
+        Platform.runLater(() -> {
+            rootPane.setView(View.BOOKS);
+        });
     }
 
     private void showRootPane() {

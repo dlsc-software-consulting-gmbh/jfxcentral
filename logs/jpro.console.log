@@ -347,3 +347,589 @@
 2021-04-28 18:07:43,776 [INFO] in scala-execution-context-global-153 - [[33mwarn[0m] c.jpro - resource not available: java.io.FileNotFoundException: /var/folders/27/sg00pfrx6xlcr7t1l9zdzsgc0000gn/T/+JXF3936991823708858594.tmp (No such file or directory)
 2021-04-28 18:07:43,778 [INFO] in scala-execution-context-global-153 - [[33mwarn[0m] c.jpro - resource not available: java.io.FileNotFoundException: /var/folders/27/sg00pfrx6xlcr7t1l9zdzsgc0000gn/T/+JXF3297662759030855633.tmp (No such file or directory)
 2021-04-28 18:07:43,781 [INFO] in scala-execution-context-global-153 - [[33mwarn[0m] c.jpro - resource not available: java.io.FileNotFoundException: /var/folders/27/sg00pfrx6xlcr7t1l9zdzsgc0000gn/T/+JXF6837669036584995448.tmp (No such file or directory)
+2021-04-30 18:05:04,672 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.Initializer$ - redirected OUT / ERR
+2021-04-30 18:05:04,673 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.Initializer$ - installed SLF4JBridge
+2021-04-30 18:05:04,673 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.MonocleInitializer$ - screen: null
+2021-04-30 18:05:04,673 [INFO] in scala-execution-context-global-58 - [[37minfo[0m] c.j.i.s.Initializer$ - finished init!
+2021-04-30 18:05:04,673 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.Initializer$ - JavaFX version: 15.0.1.1-jpro+0-2021-01-03-134129
+2021-04-30 18:05:04,862 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.c.m.ChartJSONImExporter - Imported chart data Fri Apr 30 18:05:04 CEST 2021
+2021-04-30 18:05:04,863 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.c.m.DynamicDataModel - Started Monitoring chart data...
+2021-04-30 18:05:06,569 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - application requested: 0!default
+2021-04-30 18:05:06,578 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - Creating Application: 0!default
+2021-04-30 18:05:06,580 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - remoteAddress 0:0:0:0:0:0:0:1
+2021-04-30 18:05:06,580 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - host          localhost:8080
+2021-04-30 18:05:06,580 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - uri           /app/0!default
+2021-04-30 18:05:07,110 [INFO] in scala-execution-context-global-46 - url: https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json
+2021-04-30 18:05:07,493 [INFO] in scala-execution-context-global-46 - url: https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/books.json
+2021-04-30 18:05:07,748 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewSerializerActor - appdef: AppByMain(default,com.dlsc.jfxcentral.JFXCentralApp,None,NamedClassLoader(system),false) clientinfo: ClientInfo(http://localhost:8080/,http://localhost:8080/app/default,1377.0,1116.0,false,de-de,List(de-de),,Map(Idea-45b73e1 -> 7f53a3ab-254a-4164-98ca-dc8d449d2313, Idea-45b73e0 -> f247e7af-ba2c-4c71-ab6a-a19baa06fc0b, Idea-d7aa44b5 -> 0304c245-e088-4881-b2b3-61ca9ae42b01, Idea-45b73df -> 7adfedc7-bb08-4548-82f6-da962eaf6565, Idea-d7aa44b6 -> 61b79cfb-775c-435f-b9f2-c30a257c8d0a, Idea-d7aa4877 -> df0a3985-8856-467c-aed2-9855f66d2a91, Idea-d7aa40f6 -> e11bfbe8-8c7d-4438-aeef-6c9fd65fca7a, Idea-d7aa4878 -> 79e8227e-d40e-428e-a769-81ea8b7e45b3),Map(Host -> List(localhost:8080), Cookie -> List(Idea-45b73e1=7f53a3ab-254a-4164-98ca-dc8d449d2313; Idea-45b73e0=f247e7af-ba2c-4c71-ab6a-a19baa06fc0b; Idea-45b73df=7adfedc7-bb08-4548-82f6-da962eaf6565; Idea-d7aa4878=79e8227e-d40e-428e-a769-81ea8b7e45b3; Idea-d7aa4877=df0a3985-8856-467c-aed2-9855f66d2a91; Idea-d7aa44b6=61b79cfb-775c-435f-b9f2-c30a257c8d0a; Idea-d7aa44b5=0304c245-e088-4881-b2b3-61ca9ae42b01; Idea-d7aa40f6=e11bfbe8-8c7d-4438-aeef-6c9fd65fca7a), Origin -> List(http://localhost:8080), Pragma -> List(no-cache), Upgrade -> List(websocket), Connection -> List(Upgrade), User-Agent -> List(Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Safari/605.1.15), Cache-Control -> List(no-cache), Remote-Address -> List(0:0:0:0:0:0:0:1:60853), Timeout-Access -> List(<function1>), Raw-Request-URI -> List(/app/0!default), Tls-Session-Info -> List(Session(1619798704125|SSL_NULL_WITH_NULL_NULL)), Sec-WebSocket-Key -> List(ebkI1he8spunc5OTEQMeyA==), UpgradeToWebSocket -> List(), Sec-WebSocket-Version -> List(13), Sec-WebSocket-Extensions -> List(x-webkit-deflate-frame)))out: Actor[akka://application/system/Materializers/StreamSupervisor-0/$$j-actorRefSource#-1842286444]
+2021-04-30 18:05:09,186 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.g.a.u.Platform - javafx.platform is not defined. Desktop will be assumed by default.
+2021-04-30 18:05:09,187 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.orientation.OrientationService and class com.gluonhq.attach.orientation.impl.DesktopOrientationService
+2021-04-30 18:05:09,187 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.audio.AudioService and class com.gluonhq.attach.audio.impl.DesktopAudioService
+2021-04-30 18:05:09,206 [INFO] in scala-execution-context-global-46 - starting
+2021-04-30 18:05:09,211 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.display.DisplayService and class com.gluonhq.attach.display.impl.DesktopDisplayService
+2021-04-30 18:05:09,551 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] com.jpro.JS - received msg: new MainID: 163 userid: 1801292927
+2021-04-30 18:19:59,216 [INFO] in scala-execution-context-global-46 - stopping
+2021-04-30 18:19:59,435 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:19:59,468 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:19:59,482 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/raspberrypiecover.jpeg
+2021-04-30 18:19:59,490 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/introducingjfx8cover.jpg
+2021-04-30 18:19:59,493 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/jfx9byexample.jpg
+2021-04-30 18:19:59,496 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/jfxessentials.jpeg
+2021-04-30 18:19:59,498 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/learnjfx8.jpg
+2021-04-30 18:19:59,501 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/masteringjfx8controls.jpg
+2021-04-30 18:19:59,504 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/projava9games.jpg
+2021-04-30 18:19:59,507 [INFO] in scala-execution-context-global-46 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/projfx9.jpg
+2021-04-30 18:20:49,247 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:20:59,242 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:21:03,151 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
+2021-04-30 18:21:03,151 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - Application closed:
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - startTime      : Fri Apr 30 18:21:03 CEST 2021      
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - averageLatency : 00:00:00.001 
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - averageJitter  : 00:00:00.001  
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - framerateServer: 00:00:00.000
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - framerateClient: 00:00:00.000
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - raw            : 10871228
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - zipped         : 5471183
+2021-04-30 18:21:03,152 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
+2021-04-30 18:21:03,235 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - application requested: 0!default
+2021-04-30 18:21:03,235 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - Creating Application: 0!default
+2021-04-30 18:21:03,235 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - remoteAddress 0:0:0:0:0:0:0:1
+2021-04-30 18:21:03,235 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - host          localhost:8080
+2021-04-30 18:21:03,235 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.jpro - uri           /app/0!default
+2021-04-30 18:21:03,261 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] c.j.i.s.ViewSerializerActor - appdef: AppByMain(default,com.dlsc.jfxcentral.JFXCentralApp,None,NamedClassLoader(system),false) clientinfo: ClientInfo(http://localhost:8080/,http://localhost:8080/app/default,1331.0,1153.0,false,de-de,List(de-de),,Map(Idea-45b73e1 -> 7f53a3ab-254a-4164-98ca-dc8d449d2313, Idea-45b73e0 -> f247e7af-ba2c-4c71-ab6a-a19baa06fc0b, Idea-d7aa44b5 -> 0304c245-e088-4881-b2b3-61ca9ae42b01, Idea-45b73df -> 7adfedc7-bb08-4548-82f6-da962eaf6565, Idea-d7aa44b6 -> 61b79cfb-775c-435f-b9f2-c30a257c8d0a, Idea-d7aa4877 -> df0a3985-8856-467c-aed2-9855f66d2a91, Idea-d7aa40f6 -> e11bfbe8-8c7d-4438-aeef-6c9fd65fca7a, Idea-d7aa4878 -> 79e8227e-d40e-428e-a769-81ea8b7e45b3),Map(Host -> List(localhost:8080), Cookie -> List(Idea-45b73e1=7f53a3ab-254a-4164-98ca-dc8d449d2313; Idea-45b73e0=f247e7af-ba2c-4c71-ab6a-a19baa06fc0b; Idea-45b73df=7adfedc7-bb08-4548-82f6-da962eaf6565; Idea-d7aa4878=79e8227e-d40e-428e-a769-81ea8b7e45b3; Idea-d7aa4877=df0a3985-8856-467c-aed2-9855f66d2a91; Idea-d7aa44b6=61b79cfb-775c-435f-b9f2-c30a257c8d0a; Idea-d7aa44b5=0304c245-e088-4881-b2b3-61ca9ae42b01; Idea-d7aa40f6=e11bfbe8-8c7d-4438-aeef-6c9fd65fca7a), Origin -> List(http://localhost:8080), Pragma -> List(no-cache), Upgrade -> List(websocket), Connection -> List(Upgrade), User-Agent -> List(Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Safari/605.1.15), Cache-Control -> List(no-cache), Remote-Address -> List(0:0:0:0:0:0:0:1:61075), Timeout-Access -> List(<function1>), Raw-Request-URI -> List(/app/0!default), Tls-Session-Info -> List(Session(1619798704125|SSL_NULL_WITH_NULL_NULL)), Sec-WebSocket-Key -> List(UAQUh7Y+Itsw3E6FvQ5dUg==), UpgradeToWebSocket -> List(), Sec-WebSocket-Version -> List(13), Sec-WebSocket-Extensions -> List(x-webkit-deflate-frame)))out: Actor[akka://application/system/Materializers/StreamSupervisor-0/$$o-actorRefSource#-471090394]
+2021-04-30 18:21:03,264 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.orientation.OrientationService and class com.gluonhq.attach.orientation.impl.DesktopOrientationService
+2021-04-30 18:21:03,264 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.audio.AudioService and class com.gluonhq.attach.audio.impl.DesktopAudioService
+2021-04-30 18:21:03,264 [INFO] in scala-execution-context-global-46 - starting
+2021-04-30 18:21:03,264 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.display.DisplayService and class com.gluonhq.attach.display.impl.DesktopDisplayService
+2021-04-30 18:21:03,274 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] javafx.css - Could not load @font-face font [file:/Users/lemmi/git/JFXCentral/target/classes/com/dlsc/jfxcentral/fonts/OpenSans-Regular.ttf]
+2021-04-30 18:21:03,274 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] javafx.css - Could not load @font-face font [file:/Users/lemmi/git/JFXCentral/target/classes/com/dlsc/jfxcentral/fonts/OpenSans-Italic.ttf]
+2021-04-30 18:21:03,274 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] javafx.css - Could not load @font-face font [file:/Users/lemmi/git/JFXCentral/target/classes/com/dlsc/jfxcentral/fonts/OpenSans-Bold.ttf]
+2021-04-30 18:21:03,274 [INFO] in scala-execution-context-global-46 - [[37minfo[0m] javafx.css - Could not load @font-face font [file:/Users/lemmi/git/JFXCentral/target/classes/com/dlsc/jfxcentral/fonts/OpenSans-SemiBold.ttf]
+2021-04-30 18:21:03,306 [INFO] in scala-execution-context-global-58 - [[37minfo[0m] com.jpro.JS - received msg: new MainID: 163 userid: 935583189
+2021-04-30 18:21:04,190 [INFO] in scala-execution-context-global-46 - stopping
+2021-04-30 18:21:04,232 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:21:04,238 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:21:56,685 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,273 [INFO] in scala-execution-context-global-46 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseReleased,512.0,159.0,MouseButtonToken(3),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:129)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-58 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-46 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-58 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-58 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,279 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseExited,512.0,159.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseEntered,512.0,159.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,280 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,281 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,653 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,512.0,159.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,654 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,512.0,159.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,673 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,674 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,688 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,688 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,512.0,159.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,689 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,944 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,512.0,160.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,945 [INFO] in scala-execution-context-global-58 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,960 [INFO] in scala-execution-context-global-58 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,513.0,161.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-58 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-58 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-58 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-58 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-58 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,961 [INFO] in scala-execution-context-global-58 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,973 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,516.0,164.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,974 [INFO] in scala-execution-context-global-105 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:00,993 [INFO] in scala-execution-context-global-105 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:00,993 [INFO] in scala-execution-context-global-105 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,522.0,165.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:00,994 [INFO] in scala-execution-context-global-108 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:01,005 [INFO] in scala-execution-context-global-58 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.browser.BrowserService and class com.gluonhq.attach.browser.impl.DesktopBrowserService
+2021-04-30 18:22:01,005 [INFO] in scala-execution-context-global-58 - [[31merror[0m] c.j.m.t.SceneInputListener - Error while processing the input: MouseEventToken(MouseMoved,533.0,161.0,MouseButtonToken(2),false,false,false,false,false,false,false,false) app: stage title: JFXCentral
+2021-04-30 18:22:01,005 [INFO] in scala-execution-context-global-58 - java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:01,005 [INFO] in scala-execution-context-global-58 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.processInputInScene(SceneInputListener.scala:213)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.processInput(SceneInputListener.scala:145)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.processInputs(SceneInputListener.scala:108)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at com.jpro.meta.tk.SceneInputListener.$anonfun$new$4(SceneInputListener.scala:42)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at simplefx.cores.standard.parts.CoreTimeEvent.$anonfun$runAsAnimation$1(CoreTimeEvent.scala:64)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at simplefx.cores.standard.parts.CoreTimeEvent$$anon$2.handle(CoreTimeEvent.scala:46)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.reflect.InvocationTargetException: null
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at simplefx.util.ReflectionUtil$UseReflection.applyDynamic(ReflectionUtil.scala:21)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.notifyMouse(NativeMouseInput.scala:330)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.postMouseEvent(NativeMouseInput.scala:226)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at com.sun.glass.ui.monocle.input.fork.NativeMouseInput.setState(NativeMouseInput.scala:186)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at jdk.internal.reflect.GeneratedMethodAccessor13.invoke(Unknown Source)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - Caused by: java.lang.RuntimeException: Non-Java exception raised, not handled! (Original problem: *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0])
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer._lsOpenURI(Native Method)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-105 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.lsOpen(CDesktopPeer.java:166)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-107 - 	at java.desktop/sun.lwawt.macosx.CDesktopPeer.browse(CDesktopPeer.java:74)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-107 - 	at java.desktop/java.awt.Desktop.browse(Desktop.java:526)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-107 - 	at com.dlsc.jfxcentral.util.Util.lambda$browse$1(Util.java:26)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-107 - 	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-107 - 	at com.dlsc.jfxcentral.util.Util.browse(Util.java:13)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-107 - 	at com.dlsc.jfxcentral.views.BookView.lambda$updateView$2(BookView.java:93)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+2021-04-30 18:22:01,006 [INFO] in scala-execution-context-global-58 - 	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - Application closed:
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - startTime      : Fri Apr 30 18:22:43 CEST 2021      
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - averageLatency : 00:00:00.000 
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - averageJitter  : 00:00:00.000  
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - framerateServer: 00:00:00.000
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - framerateClient: 00:00:00.000
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - raw            : 871400
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - zipped         : 228053
+2021-04-30 18:22:43,929 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
+2021-04-30 18:23:01,258 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:23:01,265 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:23:01,306 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:23:22,133 [INFO] in scala-execution-context-global-108 - [[37minfo[0m] c.j.i.c.InstanceImpl - closing window!
+2021-04-30 18:24:07,256 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:24:43,256 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:24:51,256 [INFO] in scala-execution-context-global-108 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:25:10,460 [INFO] in scala-execution-context-global-108 - Launching agent server on:7560:7558:52006:true
+2021-04-30 18:25:10,515 [INFO] in scala-execution-context-global-108 - 2021-04-30T16:25:10.514343Z [ INFO] CSS Monitoring is about to start
+2021-04-30 18:25:10,516 [INFO] in scala-execution-context-global-108 - 2021-04-30T16:25:10.516542Z [ INFO] CSS Monitoring started
+2021-04-30 18:25:10,516 [INFO] in scala-execution-context-global-108 - 2021-04-30T16:25:10.516629Z [ INFO] starting to monitor physical files
+2021-04-30 18:25:10,651 [INFO] in scala-execution-context-global-108 - 2021-04-30T16:25:10.651064Z [ INFO] css[file:///Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css] will be mapped to source[/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css] for [javafx.scene.Scene@17b837d5]
+2021-04-30 18:25:10,651 [INFO] in scala-execution-context-global-108 - 2021-04-30T16:25:10.651717Z [ INFO] registering action 1973104624 for monitoring /Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css in /Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-108 - java.rmi.ConnectIOException: error during JRMP connection establishment; nested exception is: 
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-108 - 	java.net.SocketException: Connection reset
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-108 - 	at java.rmi/sun.rmi.transport.tcp.TCPChannel.createConnection(TCPChannel.java:300)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-108 - 	at java.rmi/sun.rmi.transport.tcp.TCPChannel.newConnection(TCPChannel.java:196)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at java.rmi/sun.rmi.server.UnicastRef.invoke(UnicastRef.java:132)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at java.rmi/java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:217)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at java.rmi/java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:162)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at org.fxconnector.remote.$Proxy14.dispatchEvent(Unknown Source)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at org.fxconnector.remote.RemoteApplicationImpl$RemoteDispatcher.run(RemoteApplicationImpl.java:164)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - Caused by: java.net.SocketException: Connection reset
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:323)
+2021-04-30 18:25:59,517 [ERROR] in scala-execution-context-global-107 - 	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:350)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:803)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:981)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:244)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:263)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	at java.base/java.io.DataInputStream.readByte(DataInputStream.java:269)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	at java.rmi/sun.rmi.transport.tcp.TCPChannel.createConnection(TCPChannel.java:239)
+2021-04-30 18:25:59,518 [ERROR] in scala-execution-context-global-107 - 	... 6 more
+2021-04-30 18:26:17,255 [INFO] in scala-execution-context-global-107 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:26:20,664 [INFO] in scala-execution-context-global-107 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:26:21,254 [INFO] in scala-execution-context-global-107 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-04-30 18:26:23,744 [INFO] in scala-execution-context-global-107 - [[37minfo[0m] c.j.i.c.InstanceImpl - closing window!
+2021-05-01 16:21:17,801 [INFO] in scala-execution-context-global-106 - Launching agent server on:7559:7558:52006:true
+2021-05-01 16:21:17,804 [INFO] in scala-execution-context-global-106 - 2021-05-01T14:21:17.802871Z [ INFO] CSS Monitoring is about to start
+2021-05-01 16:21:17,804 [INFO] in scala-execution-context-global-106 - 2021-05-01T14:21:17.803289Z [ INFO] CSS Monitoring started
+2021-05-01 16:21:17,804 [INFO] in scala-execution-context-global-106 - 2021-05-01T14:21:17.803351Z [ INFO] starting to monitor physical files
+2021-05-01 16:24:19,765 [INFO] in scala-execution-context-global-235 - Launching agent server on:7560:7558:52006:true
+2021-05-01 16:24:19,766 [INFO] in scala-execution-context-global-235 - 2021-05-01T14:24:19.765935Z [ INFO] CSS Monitoring is about to start
+2021-05-01 16:24:19,766 [INFO] in scala-execution-context-global-235 - 2021-05-01T14:24:19.766332Z [ INFO] CSS Monitoring started
+2021-05-01 16:24:19,766 [INFO] in scala-execution-context-global-235 - 2021-05-01T14:24:19.766390Z [ INFO] starting to monitor physical files
+2021-05-01 17:43:56,708 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.Initializer$ - redirected OUT / ERR
+2021-05-01 17:43:56,708 [INFO] in scala-execution-context-global-59 - [[37minfo[0m] c.j.i.s.Initializer$ - installed SLF4JBridge
+2021-05-01 17:43:56,708 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.MonocleInitializer$ - screen: null
+2021-05-01 17:43:56,709 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.Initializer$ - finished init!
+2021-05-01 17:43:56,709 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.Initializer$ - JavaFX version: 15.0.1.1-jpro+0-2021-01-03-134129
+2021-05-01 17:43:56,856 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.c.m.ChartJSONImExporter - Imported chart data Sat May 01 17:43:56 CEST 2021
+2021-05-01 17:43:56,857 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.c.m.DynamicDataModel - Started Monitoring chart data...
+2021-05-01 17:43:57,564 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.jpro - application requested: 0!default
+2021-05-01 17:43:57,571 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.jpro - Creating Application: 0!default
+2021-05-01 17:43:57,572 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.jpro - remoteAddress 0:0:0:0:0:0:0:1
+2021-05-01 17:43:57,572 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.jpro - host          localhost:8080
+2021-05-01 17:43:57,572 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.jpro - uri           /app/0!default
+2021-05-01 17:43:58,047 [INFO] in scala-execution-context-global-47 - url: https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json
+2021-05-01 17:43:58,361 [INFO] in scala-execution-context-global-47 - url: https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/books.json
+2021-05-01 17:43:58,600 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewSerializerActor - appdef: AppByMain(default,com.dlsc.jfxcentral.JFXCentralApp,None,NamedClassLoader(system),false) clientinfo: ClientInfo(http://localhost:8080/,http://localhost:8080/app/default,1331.0,1153.0,false,de-de,List(de-de),,Map(Idea-45b73e1 -> 7f53a3ab-254a-4164-98ca-dc8d449d2313, Idea-45b73e0 -> f247e7af-ba2c-4c71-ab6a-a19baa06fc0b, Idea-d7aa44b5 -> 0304c245-e088-4881-b2b3-61ca9ae42b01, Idea-45b73df -> 7adfedc7-bb08-4548-82f6-da962eaf6565, Idea-d7aa44b6 -> 61b79cfb-775c-435f-b9f2-c30a257c8d0a, Idea-d7aa4877 -> df0a3985-8856-467c-aed2-9855f66d2a91, Idea-d7aa40f6 -> e11bfbe8-8c7d-4438-aeef-6c9fd65fca7a, Idea-d7aa4878 -> 79e8227e-d40e-428e-a769-81ea8b7e45b3),Map(Host -> List(localhost:8080), Cookie -> List(Idea-45b73e1=7f53a3ab-254a-4164-98ca-dc8d449d2313; Idea-45b73e0=f247e7af-ba2c-4c71-ab6a-a19baa06fc0b; Idea-45b73df=7adfedc7-bb08-4548-82f6-da962eaf6565; Idea-d7aa4878=79e8227e-d40e-428e-a769-81ea8b7e45b3; Idea-d7aa4877=df0a3985-8856-467c-aed2-9855f66d2a91; Idea-d7aa44b6=61b79cfb-775c-435f-b9f2-c30a257c8d0a; Idea-d7aa44b5=0304c245-e088-4881-b2b3-61ca9ae42b01; Idea-d7aa40f6=e11bfbe8-8c7d-4438-aeef-6c9fd65fca7a), Origin -> List(http://localhost:8080), Pragma -> List(no-cache), Upgrade -> List(websocket), Connection -> List(Upgrade), User-Agent -> List(Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Safari/605.1.15), Cache-Control -> List(no-cache), Remote-Address -> List(0:0:0:0:0:0:0:1:56864), Timeout-Access -> List(<function1>), Raw-Request-URI -> List(/app/0!default), Tls-Session-Info -> List(Session(1619883836270|SSL_NULL_WITH_NULL_NULL)), Sec-WebSocket-Key -> List(MQ4hKKQ4F8t4pCDOKLIY1Q==), UpgradeToWebSocket -> List(), Sec-WebSocket-Version -> List(13), Sec-WebSocket-Extensions -> List(x-webkit-deflate-frame)))out: Actor[akka://application/system/Materializers/StreamSupervisor-0/$$f-actorRefSource#3635907]
+2021-05-01 17:44:00,068 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.g.a.u.Platform - javafx.platform is not defined. Desktop will be assumed by default.
+2021-05-01 17:44:00,068 [INFO] in scala-execution-context-global-47 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.orientation.OrientationService and class com.gluonhq.attach.orientation.impl.DesktopOrientationService
+2021-05-01 17:44:00,069 [INFO] in scala-execution-context-global-47 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.audio.AudioService and class com.gluonhq.attach.audio.impl.DesktopAudioService
+2021-05-01 17:44:00,085 [INFO] in scala-execution-context-global-47 - starting
+2021-05-01 17:44:00,089 [INFO] in scala-execution-context-global-47 - [[33mwarn[0m] c.g.a.u.i.DefaultServiceFactory - No new instance for interface com.gluonhq.attach.display.DisplayService and class com.gluonhq.attach.display.impl.DesktopDisplayService
+2021-05-01 17:44:00,426 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] com.jpro.JS - received msg: new MainID: 163 userid: 1995984594
+2021-05-01 17:44:03,888 [INFO] in scala-execution-context-global-47 - stopping
+2021-05-01 17:44:04,099 [INFO] in scala-execution-context-global-47 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-05-01 17:44:04,135 [INFO] in scala-execution-context-global-47 - [[33mwarn[0m] javafx.css - Caught java.lang.IllegalArgumentException: Parsed value is not an Effect' while calculating value for '-fx-effect' from rule '*.section-pane' in stylesheet file:/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css
+2021-05-01 17:44:04,155 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/raspberrypiecover.jpeg
+2021-05-01 17:44:04,165 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/introducingjfx8cover.jpg
+2021-05-01 17:44:04,168 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/jfx9byexample.jpg
+2021-05-01 17:44:04,172 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/jfxessentials.jpeg
+2021-05-01 17:44:04,175 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/learnjfx8.jpg
+2021-05-01 17:44:04,179 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/masteringjfx8controls.jpg
+2021-05-01 17:44:04,182 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/projava9games.jpg
+2021-05-01 17:44:04,185 [INFO] in scala-execution-context-global-47 - https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/images/books/projfx9.jpg
+2021-05-01 17:45:51,156 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
+2021-05-01 17:45:51,156 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - Application closed:
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - startTime      : Sat May 01 17:45:51 CEST 2021      
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - averageLatency : 00:00:00.000 
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - averageJitter  : 00:00:00.000  
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - framerateServer: 00:00:00.000
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - framerateClient: 00:00:00.000
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - raw            : 546541
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - zipped         : 138970
+2021-05-01 17:45:51,157 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
+2021-05-01 17:45:56,132 [INFO] in scala-execution-context-global-47 - Launching agent server on:7560:7558:53799:true
+2021-05-01 17:45:56,134 [INFO] in scala-execution-context-global-47 - 2021-05-01T15:45:56.133770Z [ INFO] CSS Monitoring is about to start
+2021-05-01 17:45:56,134 [INFO] in scala-execution-context-global-47 - 2021-05-01T15:45:56.134545Z [ INFO] CSS Monitoring started
+2021-05-01 17:45:56,134 [INFO] in scala-execution-context-global-47 - 2021-05-01T15:45:56.134630Z [ INFO] starting to monitor physical files
+2021-05-01 17:45:56,245 [INFO] in scala-execution-context-global-47 - 2021-05-01T15:45:56.245145Z [ INFO] css[file:///Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css] will be mapped to source[/Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css] for [javafx.scene.Scene@349c0ed0]
+2021-05-01 17:45:56,245 [INFO] in scala-execution-context-global-47 - 2021-05-01T15:45:56.245495Z [ INFO] registering action 1176204087 for monitoring /Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral/styles.css in /Users/lemmi/git/JFXCentral/src/main/resources/com/dlsc/jfxcentral
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - java.rmi.ConnectException: Connection refused to host: 127.0.0.1; nested exception is: 
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	java.net.ConnectException: Connection refused
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:623)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/sun.rmi.transport.tcp.TCPChannel.createConnection(TCPChannel.java:209)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/sun.rmi.transport.tcp.TCPChannel.newConnection(TCPChannel.java:196)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/sun.rmi.server.UnicastRef.invoke(UnicastRef.java:132)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:217)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:162)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at org.fxconnector.remote.$Proxy14.dispatchEvent(Unknown Source)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at org.fxconnector.remote.RemoteApplicationImpl$RemoteDispatcher.run(RemoteApplicationImpl.java:164)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - Caused by: java.net.ConnectException: Connection refused
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/sun.nio.ch.Net.connect0(Native Method)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/sun.nio.ch.Net.connect(Net.java:574)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/sun.nio.ch.Net.connect(Net.java:563)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:588)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/java.net.Socket.connect(Socket.java:648)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/java.net.Socket.connect(Socket.java:597)
+2021-05-01 17:45:56,367 [ERROR] in scala-execution-context-global-47 - 	at java.base/java.net.Socket.<init>(Socket.java:520)
+2021-05-01 17:45:56,368 [ERROR] in scala-execution-context-global-47 - 	at java.base/java.net.Socket.<init>(Socket.java:294)
+2021-05-01 17:45:56,368 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/sun.rmi.transport.tcp.TCPDirectSocketFactory.createSocket(TCPDirectSocketFactory.java:40)
+2021-05-01 17:45:56,368 [ERROR] in scala-execution-context-global-47 - 	at java.rmi/sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:617)
+2021-05-01 17:45:56,368 [ERROR] in scala-execution-context-global-47 - 	... 7 more
+2021-05-01 17:46:33,567 [INFO] in scala-execution-context-global-47 - [[37minfo[0m] c.j.i.c.InstanceImpl - closing window!
+2021-05-02 13:24:08,279 [INFO] in scala-execution-context-global-59 - Launching agent server on:7559:7558:53799:true
+2021-05-02 13:24:08,281 [INFO] in scala-execution-context-global-59 - 2021-05-02T11:24:08.280162Z [ INFO] CSS Monitoring is about to start
+2021-05-02 13:24:08,281 [INFO] in scala-execution-context-global-59 - 2021-05-02T11:24:08.280657Z [ INFO] CSS Monitoring started
+2021-05-02 13:24:08,281 [INFO] in scala-execution-context-global-59 - 2021-05-02T11:24:08.280736Z [ INFO] starting to monitor physical files
+2021-05-02 13:27:35,462 [INFO] in scala-execution-context-global-118 - Launching agent server on:7560:7558:53799:true
+2021-05-02 13:27:35,463 [INFO] in scala-execution-context-global-118 - 2021-05-02T11:27:35.463438Z [ INFO] CSS Monitoring is about to start
+2021-05-02 13:27:35,464 [INFO] in scala-execution-context-global-118 - 2021-05-02T11:27:35.463846Z [ INFO] CSS Monitoring started
+2021-05-02 13:27:35,464 [INFO] in scala-execution-context-global-118 - 2021-05-02T11:27:35.463943Z [ INFO] starting to monitor physical files
+2021-05-02 15:30:34,771 [INFO] in scala-execution-context-global-127 - Launching agent server on:7563:7558:53799:true
+2021-05-02 15:30:34,772 [INFO] in scala-execution-context-global-127 - 2021-05-02T13:30:34.771899Z [ INFO] CSS Monitoring is about to start
+2021-05-02 15:30:34,772 [INFO] in scala-execution-context-global-127 - 2021-05-02T13:30:34.772428Z [ INFO] CSS Monitoring started
+2021-05-02 15:30:34,772 [INFO] in scala-execution-context-global-127 - 2021-05-02T13:30:34.772503Z [ INFO] starting to monitor physical files

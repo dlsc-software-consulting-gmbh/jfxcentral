@@ -26,11 +26,11 @@ class CategoryPane extends ViewPane {
                 break;
             case PEOPLE:
                 getChildren().setAll(peopleView);
-                rootPane.getRightPane().getChildren().setAll(peopleView.getPanel());
+                rootPane.getRightPane().setContent(peopleView.getPanel());
                 break;
             case BOOKS:
                 getChildren().setAll(booksView);
-                rootPane.getRightPane().getChildren().setAll(booksView.getPanel());
+                rootPane.getRightPane().setContent(booksView.getPanel());
                 break;
             case LEARN:
                 break;

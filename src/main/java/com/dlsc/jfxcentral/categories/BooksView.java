@@ -19,12 +19,13 @@ public class BooksView extends CategoryView {
 
     private BookView bookView;
 
+    private ListView<Book> listView = new ListView<>();
+
     public BooksView(RootPane rootPane) {
         super(rootPane);
 
         getStyleClass().add("books-view");
 
-        ListView<Book> listView = new ListView<>();
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BookCell());
         listView.itemsProperty().bind(DataRepository.getInstance().booksProperty());
@@ -37,7 +38,8 @@ public class BooksView extends CategoryView {
     @Override
     public Node getPanel() {
         if (bookView == null) {
-            bookView = new BookView();
+            bookView = new BookView(getRootPane());
+            bookView.bookProperty().bind(listView.getSelectionModel().selectedItemProperty());
         }
 
         return bookView;

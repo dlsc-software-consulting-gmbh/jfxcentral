@@ -16,8 +16,7 @@ public class RootPane extends ViewPane {
         SideBar sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());
 
-        rightPane = new RightPane(this);
-        rightPane.viewProperty().bind(viewProperty());
+        rightPane = new RightPane();
 
         BorderPane borderPane = new BorderPane();
         borderPane.setLeft(sideBar);

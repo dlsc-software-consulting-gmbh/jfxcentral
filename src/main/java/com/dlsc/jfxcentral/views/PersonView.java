@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral.views;
 
-import com.dlsc.jfxcentral.AdvancedListView;
-import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.ImageManager;
-import com.dlsc.jfxcentral.PhotoView;
+import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -34,7 +31,9 @@ public class PersonView extends PageView {
     private ImageView championImageView = new ImageView();
     private ImageView rockstarImageView = new ImageView();
 
-    public PersonView() {
+    public PersonView(RootPane rootPane) {
+        super(rootPane);
+
         getStyleClass().add("person-view");
 
         createTitleBox();

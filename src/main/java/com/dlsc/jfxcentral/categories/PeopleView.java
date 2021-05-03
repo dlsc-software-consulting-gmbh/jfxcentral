@@ -36,7 +36,7 @@ public class PeopleView extends CategoryView {
     @Override
     public Node getPanel() {
         if (personView == null) {
-            personView = new PersonView();
+            personView = new PersonView(getRootPane());
             personView.personProperty().bind(personProperty());
         }
 

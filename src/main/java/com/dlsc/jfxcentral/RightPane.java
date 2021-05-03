@@ -1,27 +1,15 @@
 package com.dlsc.jfxcentral;
 
-public class RightPane extends ViewPane {
+import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 
-    public RightPane(RootPane rootPane) {
+public class RightPane extends PrettyScrollPane {
+
+    public RightPane() {
         getStyleClass().add("right-pane");
-        viewProperty().addListener(it -> updateView());
-        updateView();
-    }
-
-    private void updateView() {
-        switch (getView()) {
-            case HOME:
-                break;
-            case OPENJFX:
-                break;
-            case PEOPLE:
-                break;
-            case LEARN:
-                break;
-            case LIBS:
-                break;
-            case BLOGS:
-                break;
-        }
+        setShowScrollToTopButton(true);
+        setShowShadow(false);
+        setFitToHeight(true);
+        setFitToWidth(true);
     }
 }
+

@@ -5,10 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
-import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 
-public class SectionPaneBase extends Control {
+public class SectionPaneBase extends VBox {
 
     public SectionPaneBase() {
         getStyleClass().add("section-pane");
