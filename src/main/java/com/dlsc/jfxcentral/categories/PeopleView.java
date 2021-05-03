@@ -68,7 +68,7 @@ public class PeopleView extends CategoryView {
             getStyleClass().add("person-list-cell");
 
             photoView.setEditable(false);
-            photoView.setPlaceholder(null);
+        photoView.setPlaceholder(new Label("test"));
 
             nameLabel.getStyleClass().add("name-label");
 
@@ -123,12 +123,12 @@ public class PeopleView extends CategoryView {
                 rockstarImageView.setVisible(person.isRockstar());
                 rockstarImageView.setManaged(person.isRockstar());
                 String photo = person.getPhoto();
+                photoView.setVisible(true);
                 if (photo != null && !photo.trim().isBlank()) {
-                    photoView.setVisible(true);
                     photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
                 } else {
-                    photoView.setVisible(false);
                     photoView.photoProperty().unbind();
+                    photoView.setPhoto(null);
                 }
             } else {
                 nameLabel.setText("");

@@ -50,14 +50,29 @@
     -fx-icon-color: derive(-fx-accent, +90%);
 }
 
-.list-cell:selected .button {
+.section-pane .list-cell {
     -fx-background-color: white;
-    -fx-text-fill: -fx-accent;
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: rgba(0, 0, 0, .2);
 }
 
-.list-cell:selected .button .ikonli-font-icon {
-    -fx-icon-size: 16px;
-    -fx-icon-color: -fx-accent;
+.section-pane .list-cell:selected {
+    -fx-background-color: rgba(240, 240, 240);
+    -fx-background-insets: 2px -8px 3px -8px;
+    -fx-background-radius: 2px;
+}
+
+.section-pane .list-cell.last {
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0px;
+}
+
+.section-pane .list-cell:selected .button {
+}
+
+.section-pane .list-cell:selected .button .ikonli-font-icon {
 }
 
 .scroll-bar:vertical .decrement-button,
@@ -238,7 +253,6 @@
 }
 
 .page {
-    -fx-padding: 20px;
     -fx-spacing: 20px;
 }
 
@@ -279,6 +293,67 @@
 
 .person-view .title-section .hbox .vbox .social-box {
     -fx-spacing: 10px;
+}
+
+.person-view .book-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: rgba(0, 0, 0, .2);
+}
+
+.person-view .book-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-background-insets: 2px -8px 3px -8px;
+    -fx-background-radius: 2px;
+}
+
+.person-view .book-cell:selected .label {
+    -fx-text-fill: white;
+}
+
+.person-view .book-cell.last {
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0px;
+}
+
+.person-view .book-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.person-view .book-cell .hbox .vbox {
+    -fx-spacing: 10px;
+}
+
+.person-view .book-cell .hbox .vbox .title-label {
+    -fx-font-size: 18px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.person-view .book-cell .hbox .vbox .subtitle-label {
+    -fx-font-size: 14px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.person-view .book-cell .hbox .vbox .description-label {
+    -fx-font-size: 14px;
+    -fx-font-family: "Open Sans";
+    -fx-font-style: italic;
+}
+
+.person-view .book-cell .hbox .vbox .authors-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-accent;
+}
+
+.person-view .book-cell .button-box {
+    -fx-spacing: 10px;
+}
+
+.person-view .book-cell .button-box .button .ikonli-font-icon {
+    -fx-icon-size: 18px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -329,8 +404,50 @@
     -fx-font-style: italic;
 }
 
+.book-view .title-section .horizontal-box .vertical-box .author-title-label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Open Sans Bold";
+    -fx-padding: 20px 0px;
+}
+
 .book-view .title-section .horizontal-box .vertical-box .social-box {
     -fx-spacing: 10px;
+}
+
+.book-view .author-list-cell {
+    -fx-background-color: white;
+    -fx-padding: 0px 0px 5px 0px;
+}
+
+.book-view .author-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.book-view .author-list-cell .grid-pane .photo-view {
+    -size: 30px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.book-view .author-list-cell .grid-pane .photo-view .border-circle {
+    -fx-stroke-width: 1px;
+    -fx-effect: null;
+}
+
+.book-view .author-list-cell .grid-pane .badges {
+    -fx-spacing: 10px;
+}
+
+.book-view .author-list-cell .grid-pane .name-label {
+    -fx-font-size: 12px;
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: black;
 }
 
 /* ----------------------------------------------------------------------------
@@ -524,30 +641,6 @@
     -fx-padding: 0;
 }
 
-.library-cell {
-    -fx-background-color: white;
-    -fx-padding: 10px 0px;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-style: dashed;
-    -fx-border-color: rgba(0, 0, 0, .2);
-}
-
-.library-cell:selected {
-    -fx-text-fill: white;
-    -fx-background-color: -fx-accent;
-    -fx-background-insets: 2px -8px 3px -8px;
-    -fx-background-radius: 2px;
-}
-
-.library-cell:selected .label {
-    -fx-text-fill: white;
-}
-
-.library-cell.last {
-    -fx-padding: 10px 0px;
-    -fx-border-width: 0px;
-}
-
 .library-cell .hbox {
     -fx-spacing: 20px;
 }
@@ -590,7 +683,6 @@
 /* ----------------------------------------------------------------------------
  * Pretty ScrollPane
  */
-
 .pretty-scroll-pane {
     -fx-padding: 0;
     -fx-background-insets: 0; /* no focus border */
@@ -666,4 +758,12 @@
 .pretty-scroll-pane .scroll-bar .decrement-arrow {
     -fx-pref-width: 0 !important;
     -fx-pref-height: 0 !important;
+}
+
+/* ----------------------------------------------------------------------------
+ * Footer
+ */
+.footer {
+    -fx-pref-height: 250px;
+    -fx-background-color: #2E353E;
 }

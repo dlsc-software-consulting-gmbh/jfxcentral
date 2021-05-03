@@ -27,6 +27,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class DataRepository {
 
@@ -82,6 +83,12 @@ public class DataRepository {
             }
         });
 
+        return new SimpleListProperty<>(list);
+    }
+
+    public ListProperty<Book> getBooksByPerson(Person person) {
+        ObservableList<Book> list = FXCollections.observableArrayList();
+        list.setAll(getBooks().stream().filter(book -> book.getPersonIds().contains(person.getId())).collect(Collectors.toList()));
         return new SimpleListProperty<>(list);
     }
 

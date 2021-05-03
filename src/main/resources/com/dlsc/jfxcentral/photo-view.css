@@ -8,7 +8,6 @@
 }
 
 .photo-view > .box > .image-box {
-    -fx-background-image: url("transparency.png");
 }
 
 .photo-view:empty > .box > .image-box {

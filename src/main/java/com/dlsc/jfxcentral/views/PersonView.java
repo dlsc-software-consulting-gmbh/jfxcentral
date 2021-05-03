@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.*;
+import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -31,22 +32,54 @@ public class PersonView extends PageView {
     private ImageView championImageView = new ImageView();
     private ImageView rockstarImageView = new ImageView();
 
+    private VBox content = new VBox();
+
     public PersonView(RootPane rootPane) {
         super(rootPane);
 
         getStyleClass().add("person-view");
 
         createTitleBox();
+        createBooksBox();
         createLibraryBox();
+
+        setContent(content);
 
         personProperty().addListener(it -> updateView());
         updateView();
     }
 
+    private void createBooksBox() {
+        AdvancedListView<Book> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(1000);
+        listView.setCellFactory(view -> new BookCell());
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Books");
+        sectionPane.getNodes().add(listView);
+
+        personProperty().addListener(it -> {
+            Person person = getPerson();
+            if (person != null) {
+                sectionPane.setSubtitle("Books written by " + person.getName());
+                listView.itemsProperty().bind(DataRepository.getInstance().getBooksByPerson(getPerson()));
+            } else {
+                sectionPane.setSubtitle("");
+                listView.getItems().clear();
+            }
+        });
+
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
+    }
+
     private void createLibraryBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(3);
+        listView.setVisibleRowCount(1000);
         listView.setCellFactory(view -> new LibraryCell());
 
         SectionPane sectionPane = new SectionPane();
@@ -64,7 +97,10 @@ public class PersonView extends PageView {
             }
         });
 
-        getChildren().add(sectionPane);
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
     }
 
     private void createTitleBox() {
@@ -105,7 +141,7 @@ public class PersonView extends PageView {
 
         SectionPane sectionPane = new SectionPane(titleBox);
         sectionPane.getStyleClass().add("title-section");
-        getChildren().addAll(sectionPane);
+        content.getChildren().addAll(sectionPane);
     }
 
     private void updateView() {
@@ -208,27 +244,28 @@ public class PersonView extends PageView {
 
             descriptionLabel.getStyleClass().add("description-label");
             descriptionLabel.setWrapText(true);
+            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
             descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
 
-            homepageButton = new Button();
+            homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
             homepageButton.setOnAction(evt -> Util.browse(getItem().getHomepage()));
             homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(homepageButton);
 
-            repositoryButton = new Button();
+            repositoryButton = new Button("Repository");
             repositoryButton.getStyleClass().addAll("library-button", "repository");
             repositoryButton.setOnAction(evt -> Util.browse(getItem().getRepository()));
             repositoryButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
             buttonBox.getChildren().add(repositoryButton);
 
-            issueTrackerButton = new Button();
+            issueTrackerButton = new Button("Issues");
             issueTrackerButton.getStyleClass().addAll("library-button", "issues");
             issueTrackerButton.setOnAction(evt -> Util.browse(getItem().getIssueTracker()));
             issueTrackerButton.setGraphic(new FontIcon(MaterialDesign.MDI_BUG));
             buttonBox.getChildren().add(issueTrackerButton);
 
-            discussionsButton = new Button();
+            discussionsButton = new Button("Discussion");
             discussionsButton.getStyleClass().addAll("library-button", "discussion");
             discussionsButton.setOnAction(evt -> Util.browse(getItem().getDiscussionBoard()));
             discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
@@ -238,14 +275,20 @@ public class PersonView extends PageView {
             vBox.getStyleClass().add("vbox");
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
-            logoImageView.setFitHeight(64);
+            logoImageView.setFitHeight(48);
             logoImageView.setPreserveRatio(true);
 
-            HBox hBox = new HBox(vBox, logoImageView);
+            HBox hBox = new HBox(logoImageView, vBox);
+            hBox.setMinHeight(Region.USE_PREF_SIZE);
             hBox.getStyleClass().add("hbox");
 
             setGraphic(hBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        }
+
+        @Override
+        protected double computeMinHeight(double width) {
+            return getGraphic().minHeight(-1) + getInsets().getTop() + getInsets().getBottom();
         }
 
         @Override
@@ -281,6 +324,106 @@ public class PersonView extends PageView {
             } else {
                 logoImageView.imageProperty().unbind();
                 logoImageView.setVisible(false);
+                buttonBox.setVisible(false);
+                buttonBox.setManaged(false);
+            }
+        }
+    }
+
+    class BookCell extends ListCell<Book> {
+
+        private final Button homepageButton;
+        private final Button amazonButton;
+
+        private Label titleLabel = new Label();
+        private Label subtitleLabel = new Label();
+        private Label authorsLabel = new Label();
+        private Label descriptionLabel = new Label();
+
+        private ImageView coverImageView = new ImageView();
+        private HBox buttonBox = new HBox();
+
+        public BookCell() {
+            getStyleClass().add("book-cell");
+
+            titleLabel.getStyleClass().add("title-label");
+            titleLabel.setMaxWidth(Region.USE_PREF_SIZE);
+
+            subtitleLabel.getStyleClass().add("subtitle-label");
+            subtitleLabel.setMaxWidth(Region.USE_PREF_SIZE);
+
+            authorsLabel.getStyleClass().add("authors-label");
+            authorsLabel.setMaxWidth(Region.USE_PREF_SIZE);
+
+            buttonBox.getStyleClass().add("button-box");
+
+            descriptionLabel.getStyleClass().add("description-label");
+            descriptionLabel.setWrapText(true);
+            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
+            descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
+
+            homepageButton = new Button();
+            homepageButton.getStyleClass().addAll("library-button", "homepage");
+            homepageButton.setOnAction(evt -> Util.browse(getItem().getUrl()));
+            homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
+            buttonBox.getChildren().add(homepageButton);
+
+            amazonButton = new Button();
+            amazonButton.getStyleClass().addAll("library-button", "amazon");
+            amazonButton.setOnAction(evt -> Util.browse(getItem().getAmazon()));
+            amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
+            buttonBox.getChildren().add(amazonButton);
+
+            titleLabel.setGraphic(buttonBox);
+            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
+            titleLabel.setGraphicTextGap(20);
+
+            VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, descriptionLabel);
+            vBox.getStyleClass().add("vbox");
+            HBox.setHgrow(vBox, Priority.ALWAYS);
+
+            coverImageView.setFitWidth(100);
+            coverImageView.setPreserveRatio(true);
+
+            HBox hBox = new HBox(vBox, coverImageView);
+            hBox.getStyleClass().add("hbox");
+
+            setGraphic(hBox);
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+            setMinHeight(Region.USE_PREF_SIZE);
+        }
+
+        @Override
+        protected void updateItem(Book item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (!empty && item != null) {
+                String coverImage = item.getImage();
+                if (StringUtils.isNotEmpty(coverImage)) {
+                    coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(item));
+                } else {
+                    coverImageView.imageProperty().unbind();
+                }
+                coverImageView.setVisible(true);
+
+                titleLabel.setText(item.getTitle());
+                subtitleLabel.setText(item.getSubtitle());
+                authorsLabel.setText("Authors: " + item.getAuthors());
+
+                descriptionLabel.setText(StringUtils.abbreviate(item.getDescription(), 250));
+
+                homepageButton.setVisible(StringUtils.isNotEmpty(item.getUrl()));
+                homepageButton.setManaged(StringUtils.isNotEmpty(item.getUrl()));
+
+                amazonButton.setVisible(StringUtils.isNotEmpty(item.getAmazon()));
+                amazonButton.setManaged(StringUtils.isNotEmpty(item.getAmazon()));
+
+                buttonBox.setVisible(homepageButton.isVisible() || amazonButton.isVisible());
+                buttonBox.setManaged(buttonBox.isVisible());
+            } else {
+                coverImageView.imageProperty().unbind();
+                coverImageView.setVisible(false);
                 buttonBox.setVisible(false);
                 buttonBox.setManaged(false);
             }

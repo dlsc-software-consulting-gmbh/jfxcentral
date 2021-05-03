@@ -1,10 +1,11 @@
 package com.dlsc.jfxcentral.json;
 
 import com.dlsc.jfxcentral.model.Book;
+import com.fatboyindustrial.gsonjavatime.Converters;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WriteBook {
 
@@ -21,13 +22,11 @@ public class WriteBook {
         book.setAmazon("https://www.amazon.com/-/de/dp/B00L3TF02K/ref=sr_1_1?__mk_de_DE=ÅMÅŽÕÑ&dchild=1&keywords=Mastering+JavaFX+8+Controls&qid=1619703516&sr=8-1");
         book.getPersonIds().add("person1");
         book.getPersonIds().add("person2");
-        List<Book> list = new ArrayList<>();
-        list.add(book);
 
-//        Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
-//        String json = gson.toJson(list);
-//        System.out.println(json);
-//
-//        gson.fromJson(json, Book.class);
+        Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
+        String json = gson.toJson(book);
+        System.out.println(json);
+
+        gson.fromJson(json, Book.class);
     }
 }
