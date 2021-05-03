@@ -62,10 +62,8 @@ public class PersonView extends PageView {
         personProperty().addListener(it -> {
             Person person = getPerson();
             if (person != null) {
-                sectionPane.setSubtitle("Books written by " + person.getName());
                 listView.itemsProperty().bind(DataRepository.getInstance().getBooksByPerson(getPerson()));
             } else {
-                sectionPane.setSubtitle("");
                 listView.getItems().clear();
             }
         });
@@ -362,30 +360,29 @@ public class PersonView extends PageView {
             descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
             descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
 
-            homepageButton = new Button();
+            homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
             homepageButton.setOnAction(evt -> Util.browse(getItem().getUrl()));
             homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(homepageButton);
 
-            amazonButton = new Button();
+            amazonButton = new Button("Amazon");
             amazonButton.getStyleClass().addAll("library-button", "amazon");
             amazonButton.setOnAction(evt -> Util.browse(getItem().getAmazon()));
             amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
             buttonBox.getChildren().add(amazonButton);
 
-            titleLabel.setGraphic(buttonBox);
             titleLabel.setContentDisplay(ContentDisplay.RIGHT);
             titleLabel.setGraphicTextGap(20);
 
-            VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, descriptionLabel);
+            VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, descriptionLabel, buttonBox);
             vBox.getStyleClass().add("vbox");
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
             coverImageView.setFitWidth(100);
             coverImageView.setPreserveRatio(true);
 
-            HBox hBox = new HBox(vBox, coverImageView);
+            HBox hBox = new HBox(coverImageView, vBox);
             hBox.getStyleClass().add("hbox");
 
             setGraphic(hBox);
