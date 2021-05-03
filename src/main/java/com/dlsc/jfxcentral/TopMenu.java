@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral;
 
+import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
@@ -38,10 +39,11 @@ class TopMenu extends VBox {
         ToggleButton booksButton = createButton("Books", new FontIcon(Material.BOOK));
         ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
         ToggleButton libsButton = createButton("Libraries", new FontIcon(Material.BOOK));
+        ToggleButton videosButton = createButton("Videos", new FontIcon(FontAwesomeBrands.YOUTUBE));
         ToggleButton openJfxButton = createButton("OpenJFX", new FontIcon(Material.STAR));
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, peopleButton, blogsButton, booksButton, tutorialsButton, libsButton, openJfxButton);
+        toggleGroup.getToggles().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, tutorialsButton, libsButton, openJfxButton);
         toggleGroup.selectToggle(homeButton);
 
         Region spacer = new Region();
@@ -49,7 +51,7 @@ class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(homeButton, peopleButton, blogsButton, booksButton, tutorialsButton, libsButton, openJfxButton);
+        getChildren().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, tutorialsButton, libsButton, openJfxButton);
 
         view.addListener(it -> {
             switch (getView()) {
@@ -74,6 +76,9 @@ class TopMenu extends VBox {
                 case BOOKS:
                     toggleGroup.selectToggle(booksButton);
                     break;
+                case VIDEOS:
+                    toggleGroup.selectToggle(videosButton);
+                    break;
             }
         });
 
@@ -97,6 +102,8 @@ class TopMenu extends VBox {
                 setView(View.BLOGS);
             } else if (newSelection == booksButton) {
                 setView(View.BOOKS);
+            } else if (newSelection == videosButton) {
+                setView(View.VIDEOS);
             }
         });
 

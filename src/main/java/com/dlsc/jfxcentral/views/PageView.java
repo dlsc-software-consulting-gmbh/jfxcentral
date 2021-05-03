@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.RootPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -48,5 +49,9 @@ public class PageView extends BorderPane {
 
     public RootPane getRootPane() {
         return rootPane;
+    }
+
+    public DialogPane getDialogPane() {
+        return rootPane.getDialogPane();
     }
 }

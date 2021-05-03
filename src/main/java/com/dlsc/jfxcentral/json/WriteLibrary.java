@@ -31,7 +31,7 @@ public class WriteLibrary {
 
         Video video = new Video();
         video.setDescription("video description");
-        video.setUrl("https://www.youtube.com/watch?v=OflZ745MYT0");
+        video.setId("OflZ745MYT0");
         library.getVideos().add(video);
 
         List<Library> list = new ArrayList<>();

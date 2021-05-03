@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.model.Video;
 import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,8 +36,6 @@ public class DataRepository {
 
     private static final DataRepository instance = new DataRepository();
 
-//    private final Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
-
     private final Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
 
     public static synchronized DataRepository getInstance() {
@@ -53,6 +52,11 @@ public class DataRepository {
             // load books
             File booksFile = loadFile("books.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/books.json");
             setBooks(gson.fromJson(new FileReader(booksFile), new TypeToken<List<Book>>() {
+            }.getType()));
+
+            // load videos
+            File videosFile = loadFile("videos.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/videos.json");
+            setVideos(gson.fromJson(new FileReader(videosFile), new TypeToken<List<Video>>() {
             }.getType()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,6 +122,20 @@ public class DataRepository {
 
     public void setBooks(List<Book> books) {
         this.books.setAll(books);
+    }
+
+    private final ListProperty<Video> videos = new SimpleListProperty<>(this, "videos", FXCollections.observableArrayList());
+
+    public ObservableList<Video> getVideos() {
+        return videos.get();
+    }
+
+    public ListProperty<Video> videosProperty() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos.setAll(videos);
     }
 
     private final ListProperty<Person> people = new SimpleListProperty<>(this, "people", FXCollections.observableArrayList());

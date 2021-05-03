@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral.model;
 
 import java.util.List;
 
-public class Video {
+public class Video extends ModelObject {
 
     public enum Type {
         YOUTUBE
@@ -11,7 +11,6 @@ public class Video {
     private Type type;
     private String title;
     private String description;
-    private String id;
     private List<String> personIds;
     private String image;
 
@@ -40,14 +39,6 @@ public class Video {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public List<String> getPersonIds() {

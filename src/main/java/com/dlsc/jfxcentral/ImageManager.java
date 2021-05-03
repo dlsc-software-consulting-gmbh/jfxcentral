@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.model.Video;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -37,8 +38,16 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
         return imageProperty("https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + library.getId() + "/", library.getLogoImageFile());
     }
 
+    public ObjectProperty<Image> youTubeImageProperty(Video video) {
+        return imageProperty("https://img.youtube.com/vi/" + video.getId(), "/0.jpg", video.getId());
+    }
+
     private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName) {
-        return computeIfAbsent(photoFileName, key -> {
+        return imageProperty(baseURL, photoFileName, photoFileName);
+    }
+
+    private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName, String photoKey) {
+        return computeIfAbsent(photoKey, key -> {
             ObjectProperty<Image> property = new SimpleObjectProperty<>();
             String url = baseURL + photoFileName;
             System.out.println(url);

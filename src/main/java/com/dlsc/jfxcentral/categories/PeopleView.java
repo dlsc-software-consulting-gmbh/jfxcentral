@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.categories;
 
+import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.RootPane;
@@ -27,7 +28,7 @@ public class PeopleView extends CategoryView {
         ListView<Person> listView = new ListView<>();
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new PersonCell());
-        listView.itemsProperty().bind(rootPane.peopleProperty());
+        listView.itemsProperty().bind(DataRepository.getInstance().peopleProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setPerson(listView.getSelectionModel().getSelectedItem()));
 
         setCenter(listView);
