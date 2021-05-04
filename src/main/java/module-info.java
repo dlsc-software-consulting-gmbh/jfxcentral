@@ -1,6 +1,7 @@
 open module com.dlsc.jfxcentral {
     requires com.google.gson;
     requires com.dlsc.gemsfx;
+    requires jpro.webapi;
     requires java.logging;
     requires javafx.controls;
     requires javafx.web;

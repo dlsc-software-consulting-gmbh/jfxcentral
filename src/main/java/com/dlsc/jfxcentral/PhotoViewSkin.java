@@ -282,8 +282,10 @@ public class PhotoViewSkin extends SkinBase<PhotoView> {
             int iw = (int) Math.min(image.getWidth() - ix, w);
             int ih = (int) Math.min(image.getHeight() - iy, h);
 
-            WritableImage croppedImage = new WritableImage(reader, ix, iy, iw, ih);
-            getSkinnable().getProperties().put("cropped.image", croppedImage);
+            if (iw > 0 && ih > 0) {
+                WritableImage croppedImage = new WritableImage(reader, ix, iy, iw, ih);
+                getSkinnable().getProperties().put("cropped.image", croppedImage);
+            }
         }
 
         @Override

@@ -8,3 +8,7 @@
 2021-05-04 13:53:43,061 [INFO] in Thread-19 - Closing the server -> used memory: 1136 MB  -  free system memory: 97 MB
 2021-05-04 13:53:46,417 [INFO] in application-akka.actor.default-dispatcher-4 - Starting the server
 2021-05-04 15:18:42,301 [INFO] in application-akka.actor.default-dispatcher-7 - Starting the server
+2021-05-04 15:51:12,477 [INFO] in Thread-19 - Closing the server -> used memory: 948 MB  -  free system memory: 318 MB
+2021-05-04 15:51:15,285 [INFO] in application-akka.actor.default-dispatcher-8 - Starting the server
+2021-05-04 17:29:22,801 [INFO] in Thread-19 - Closing the server -> used memory: 789 MB  -  free system memory: 286 MB
+2021-05-04 17:29:25,925 [INFO] in application-akka.actor.default-dispatcher-7 - Starting the server

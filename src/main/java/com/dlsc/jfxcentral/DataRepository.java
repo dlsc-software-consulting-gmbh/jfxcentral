@@ -25,7 +25,9 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -61,6 +63,10 @@ public class DataRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Optional<Person> getPersonById(String id) {
+        return people.stream().filter(person -> person.getId().equals(id)).findFirst();
     }
 
     public ListProperty<Library> getLibrariesByPerson(Person person) {
@@ -153,7 +159,8 @@ public class DataRepository {
     }
 
     private File loadFile(String fileName, String url) throws IOException {
-        System.out.println("url: " + url);
+        // adding caching buster via timestamp
+        System.out.println("url: " + url + "?time=" + ZonedDateTime.now().toInstant());
         ReadableByteChannel readChannel = Channels.newChannel(new URL(url).openStream());
         File file = File.createTempFile(fileName, "json");
         FileOutputStream fileOS = new FileOutputStream(file);

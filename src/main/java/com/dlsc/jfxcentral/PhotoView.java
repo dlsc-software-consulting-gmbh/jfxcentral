@@ -189,7 +189,7 @@ public class PhotoView extends Control {
 
     // cropped image support
 
-    public final BooleanProperty createCroppedImage = new SimpleBooleanProperty(this, "createCroppedImage", true);
+    public final BooleanProperty createCroppedImage = new SimpleBooleanProperty(this, "createCroppedImage", false);
 
     public final boolean isCreateCroppedImage() {
         return createCroppedImage.get();

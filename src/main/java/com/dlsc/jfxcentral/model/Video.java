@@ -4,28 +4,16 @@ import java.util.List;
 
 public class Video extends ModelObject {
 
-    public enum Type {
-        YOUTUBE
-    }
-
-    private Type type;
     private String title;
     private String description;
     private List<String> personIds;
     private String image;
     private String type;
+    private String domain;
     private String event;
     private String platform;
 
     public Video() {
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 
     public String getTitle() {
@@ -78,5 +66,17 @@ public class Video extends ModelObject {
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 }

@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral;
 
 import com.gluonhq.attach.audio.AudioService;
 import com.gluonhq.attach.display.DisplayService;
+import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -45,10 +46,23 @@ public class JFXCentralApp extends Application {
 
         DisplayService.create().ifPresentOrElse(service -> {
             if (service.isDesktop()) {
+                rootPane.setDisplay(Display.DESKTOP);
                 System.out.println("starting CSSFX");
                 CSSFX.start();
+            } else if (service.isPhone()) {
+                rootPane.setDisplay(Display.PHONE);
+            } else if (service.isTablet()) {
+                rootPane.setDisplay(Display.TABLET);
             }
-        }, () -> CSSFX.start());
+        }, () -> {
+            CSSFX.start();
+
+            if (WebAPI.isBrowser()) {
+                rootPane.setDisplay(Display.WEB);
+            } else {
+                rootPane.setDisplay(Display.DESKTOP);
+            }
+        });
 
         primaryStage.setScene(scene);
         primaryStage.setWidth(1200);

@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.model.Video;
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -48,7 +47,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName) {
-        return imageProperty(baseURL, photoFileName, photoFileName,null);
+        return imageProperty(baseURL, photoFileName, photoFileName, null);
     }
 
     private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName, String photoKey, Image placeholderImage) {
@@ -60,12 +59,13 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
             ObjectProperty<Image> property = new SimpleObjectProperty<>(placeholderImage);
             String url = baseURL + photoFileName;
             System.out.println(url);
-            service.submit(() -> {
-                Image image = new Image(url, false);
-                Platform.runLater(() -> {
+            Image image = new Image(url, true);
+            image.progressProperty().addListener(it -> {
+                if (image.getProgress() == 1) {
                     property.set(image);
-                });
+                }
             });
+
             return property;
         });
     }

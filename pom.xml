@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dlsc.jfxcentral</groupId>
@@ -166,6 +167,12 @@
             <version>1.1.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sandec.jpro</groupId>
+            <artifactId>jpro-webapi</artifactId>
+            <version>${jpro.version}</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
@@ -214,9 +221,9 @@
                 <configuration>
                     <target>${client.target}</target>
                     <nativeImageArgs>
-<!--                        <nativeImageArg>-->
-<!--                            -H:IncludeResourceBundles=com.flexganttfx.view.util.messages,com.flexganttfx.extras.util.messages-->
-<!--                        </nativeImageArg>-->
+                        <!--                        <nativeImageArg>-->
+                        <!--                            -H:IncludeResourceBundles=com.flexganttfx.view.util.messages,com.flexganttfx.extras.util.messages-->
+                        <!--                        </nativeImageArg>-->
                         <nativeImageArg>--allow-incomplete-classpath</nativeImageArg>
                         <nativeImageArg>
                             --trace-class-initialization=sun.instrument.InstrumentationImpl
@@ -253,14 +260,6 @@
 
         <profile>
             <id>jpro</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sandec.jpro</groupId>
-                    <artifactId>jpro-webapi</artifactId>
-                    <version>${jpro.version}</version>
-                </dependency>
-            </dependencies>
-
             <build>
                 <plugins>
                     <plugin>

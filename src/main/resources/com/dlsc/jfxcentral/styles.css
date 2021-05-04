@@ -50,6 +50,28 @@
     -fx-icon-color: derive(-fx-accent, +90%);
 }
 
+.menu-button {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 4px;
+}
+
+.menu-button > .label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: white;
+}
+
+.menu-button .menu-item {
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.menu-button .arrow {
+    -fx-background-color: white;
+}
+
+.chip-view {
+    -fx-font-family: "Open Sans SemiBold";
+}
+
 .section-pane .list-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
@@ -77,6 +99,20 @@
 }
 
 .section-pane .list-cell:selected .button .ikonli-font-icon {
+}
+
+.section-pane .search-field {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 4px;
+    -fx-padding: 0px 5px;
+    -fx-prompt-text-fill: white;
+    -fx-pref-height: 20px;
+}
+
+.section-pane .search-field .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 18px;
 }
 
 .scroll-bar:vertical .decrement-button,

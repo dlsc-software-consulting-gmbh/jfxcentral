@@ -1,9 +1,5 @@
 package com.dlsc.jfxcentral;
 
-import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -18,10 +14,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.material.Material;
 
 class TopMenu extends VBox {
 
+    private final RootPane rootPane;
+
     public TopMenu(RootPane rootPane) {
+        this.rootPane = rootPane;
+
         getStyleClass().add("top-menu");
 
         setAlignment(Pos.TOP_CENTER);
@@ -117,7 +120,24 @@ class TopMenu extends VBox {
 
     private ToggleButton createButton(String name, FontIcon icon) {
         ToggleButton button = new ToggleButton(name);
-        button.contentDisplayProperty().bind(Bindings.createObjectBinding(() -> isExpanded() ? ContentDisplay.LEFT : ContentDisplay.GRAPHIC_ONLY, expandedProperty()));
+        button.contentDisplayProperty().bind(Bindings.createObjectBinding(() -> {
+            Display display = rootPane.getDisplay();
+            if (display == null) {
+                return ContentDisplay.LEFT;
+            }
+
+            switch (display) {
+                case TABLET:
+                case PHONE:
+                    // TODO: currently treated equal (tablet, phone).
+                    return isExpanded() ? ContentDisplay.LEFT : ContentDisplay.GRAPHIC_ONLY;
+                case DESKTOP:
+                    return ContentDisplay.LEFT;
+                case WEB:
+                default:
+                    return ContentDisplay.LEFT;
+            }
+        }, expandedProperty(), rootPane.displayProperty()));
         button.setMaxWidth(Double.MAX_VALUE);
         button.setAlignment(Pos.CENTER_LEFT);
         button.setGraphic(icon);

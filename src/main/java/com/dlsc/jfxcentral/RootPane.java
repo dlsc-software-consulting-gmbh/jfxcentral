@@ -20,6 +20,8 @@ public class RootPane extends ViewPane {
         borderPane.setCenter(rightPane);
 
         getChildren().addAll(borderPane, dialogPane);
+
+        displayProperty().addListener(it -> System.out.println("display: " + getDisplay()));
     }
 
     public RightPane getRightPane() {

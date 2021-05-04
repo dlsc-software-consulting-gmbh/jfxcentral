@@ -23,7 +23,7 @@ public abstract class ViewPane extends StackPane {
         this.view.set(view);
     }
 
-    private ObjectProperty<Display> display = new SimpleObjectProperty<>(this, "display", Display.DESKTOP);
+    private ObjectProperty<Display> display = new SimpleObjectProperty<>(this, "display");
 
     public Display getDisplay() {
         return display.get();
