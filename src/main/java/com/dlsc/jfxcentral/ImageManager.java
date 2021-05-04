@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,7 +60,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
             ObjectProperty<Image> property = new SimpleObjectProperty<>(placeholderImage);
             String url = baseURL + photoFileName;
             System.out.println(url);
-            Image image = new Image(url, true);
+            Image image = new Image(url + "?" + ZonedDateTime.now().toInstant(), true);
             image.progressProperty().addListener(it -> {
                 if (image.getProgress() == 1) {
                     property.set(image);

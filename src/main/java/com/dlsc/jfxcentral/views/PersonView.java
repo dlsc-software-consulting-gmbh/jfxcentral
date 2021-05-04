@@ -75,7 +75,7 @@ public class PersonView extends PageView {
     private void createLibraryBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(1000);
+        listView.setVisibleRowCount(5);
         listView.setCellFactory(view -> new LibraryCell());
 
         SectionPane sectionPane = new SectionPane();
