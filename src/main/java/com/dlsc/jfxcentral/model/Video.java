@@ -13,6 +13,9 @@ public class Video extends ModelObject {
     private String description;
     private List<String> personIds;
     private String image;
+    private String type;
+    private String event;
+    private String platform;
 
     public Video() {
     }
@@ -55,5 +58,25 @@ public class Video extends ModelObject {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 }

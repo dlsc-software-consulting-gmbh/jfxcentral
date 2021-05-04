@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.panels.PrettyListView;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -17,7 +18,7 @@ import org.kordamp.ikonli.material.Material;
 public class AdvancedListView<T> extends StackPane {
 
     public static final String PAGE_BUTTON = "page-button";
-    private final ListView<T> listView = new ListView<>();
+    private final PrettyListView<T> listView = new PrettyListView<>();
 
     private final VBox box = new VBox();
 

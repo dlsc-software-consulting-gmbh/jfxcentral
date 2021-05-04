@@ -8,15 +8,13 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -149,15 +147,7 @@ public class PersonView extends PageView {
             descriptionLabel.setText(person.getDescription());
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());
-
-            if (person.hasPhoto()) {
-                photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-                photoView.setVisible(true);
-            } else {
-                photoView.photoProperty().unbind();
-                photoView.setVisible(false);
-            }
-
+            photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
             socialBox.getChildren().clear();
 
             if (StringUtils.isNotEmpty(person.getTwitter())) {
@@ -273,10 +263,16 @@ public class PersonView extends PageView {
             vBox.getStyleClass().add("vbox");
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
-            logoImageView.setFitHeight(48);
+            logoImageView.setFitWidth(48);
             logoImageView.setPreserveRatio(true);
 
-            HBox hBox = new HBox(logoImageView, vBox);
+            StackPane logoWrapper = new StackPane(logoImageView);
+            logoWrapper.setMinWidth(48);
+            logoWrapper.setMaxWidth(48);
+            StackPane.setAlignment(logoImageView, Pos.TOP_LEFT);
+
+            HBox hBox = new HBox(logoWrapper, vBox);
+            hBox.setAlignment(Pos.TOP_LEFT);
             hBox.setMinHeight(Region.USE_PREF_SIZE);
             hBox.getStyleClass().add("hbox");
 
@@ -294,12 +290,7 @@ public class PersonView extends PageView {
             super.updateItem(item, empty);
 
             if (!empty && item != null) {
-                String logoImageFile = item.getLogoImageFile();
-                if (StringUtils.isNotEmpty(logoImageFile)) {
-                    logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
-                } else {
-                    logoImageView.imageProperty().unbind();
-                }
+                logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
                 logoImageView.setVisible(true);
 
                 titleLabel.setText(item.getTitle());

@@ -69,6 +69,10 @@
     -fx-border-width: 0px;
 }
 
+.section-pane .pretty-list-view .scroll-bar:vertical {
+    -fx-translate-x: 15px;
+}
+
 .section-pane .list-cell:selected .button {
 }
 
@@ -681,6 +685,55 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * Pretty List View
+ */
+
+.pretty-list-view {
+    -fx-background-insets: 0;
+    -fx-background-color: -white-four;
+    -fx-border-width: 0;
+    -fx-effect: null !important;
+}
+
+.pretty-list-view > .virtual-flow > .scroll-bar,
+.pretty-list-view > .virtual-flow > .scroll-bar .decrement-arrow,
+.pretty-list-view > .virtual-flow > .scroll-bar .increment-arrow,
+.pretty-list-view > .virtual-flow > .scroll-bar .decrement-button,
+.pretty-list-view > .virtual-flow > .scroll-bar .increment-button {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.pretty-list-view .pretty-scroll-bar:vertical .thumb {
+    -fx-background-insets: 0;
+}
+
+.pretty-list-view .pretty-scroll-bar:horizontal .thumb {
+    -fx-background-insets: 0;
+}
+
+.pretty-list-view .pretty-scroll-bar .decrement-arrow,
+.pretty-list-view .pretty-scroll-bar .increment-arrow {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.pretty-list-view .pretty-scroll-bar {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 1000;
+    -fx-pref-width: 6;
+    -fx-pref-height: 6;
+    -fx-padding: 0;
+}
+
+.pretty-list-view .pretty-scroll-bar .thumb {
+    -fx-background-color: -charcoal-grey-two;
+    -fx-background-radius: 1000;
+    -fx-pref-width: 6;
+    -fx-pref-height: 6;
+}
+
+/* ----------------------------------------------------------------------------
  * Pretty ScrollPane
  */
 .pretty-scroll-pane {
@@ -738,7 +791,7 @@
 }
 
 .pretty-scroll-pane .scroll-bar .thumb {
-    -fx-background-color: -charcoal-grey-two;
+    -fx-background-color: -fx-accent;
     -fx-background-radius: 1000;
     -fx-pref-width: 6;
     -fx-pref-height: 6;
@@ -766,4 +819,25 @@
 .footer {
     -fx-pref-height: 250px;
     -fx-background-color: #2E353E;
+}
+
+/* ----------------------------------------------------------------------------
+ * VideoCell
+ */
+.video-cell {
+    -fx-padding: 10px;
+}
+
+.video-cell .grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 20px;
+}
+
+.video-cell .title-label {
+    -fx-font-size: 18px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.video-cell .description-label {
+    -fx-font-size: 14px;
 }
