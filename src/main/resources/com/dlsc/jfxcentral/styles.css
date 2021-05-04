@@ -726,9 +726,8 @@
 
 .pretty-list-view {
     -fx-background-insets: 0;
-    -fx-background-color: -white-four;
+    -fx-background-color: white;
     -fx-border-width: 0;
-    -fx-effect: null !important;
 }
 
 .pretty-list-view > .virtual-flow > .scroll-bar,
@@ -763,7 +762,7 @@
 }
 
 .pretty-list-view .pretty-scroll-bar .thumb {
-    -fx-background-color: -charcoal-grey-two;
+    -fx-background-color: -fx-accent;
     -fx-background-radius: 1000;
     -fx-pref-width: 6;
     -fx-pref-height: 6;

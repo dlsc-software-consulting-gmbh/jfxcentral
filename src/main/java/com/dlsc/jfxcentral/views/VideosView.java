@@ -2,10 +2,7 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.gemsfx.FilterView;
-import com.dlsc.jfxcentral.AdvancedListView;
-import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.ImageManager;
-import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.model.Video;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
@@ -26,10 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class VideosView extends PageView {
 
@@ -101,10 +95,12 @@ public class VideosView extends PageView {
             }
         });
 
+        List<FilterView.Filter<Video>> filters = new ArrayList<>();
+
         speakersList.forEach(item -> {
             Optional<Person> personById = DataRepository.getInstance().getPersonById(item);
             if (personById.isPresent()) {
-                speakerGroup.getFilters().add(new FilterView.Filter<>(personById.get().getName()) {
+                filters.add(new FilterView.Filter<>(personById.get().getName()) {
                     @Override
                     public boolean test(Video video) {
                         return video.getPersonIds().contains(item);
@@ -112,6 +108,9 @@ public class VideosView extends PageView {
                 });
             }
         });
+
+        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        speakerGroup.getFilters().setAll(filters);
     }
 
     private void updateEventGroup() {
@@ -129,6 +128,7 @@ public class VideosView extends PageView {
             }
         });
 
+        Collections.sort(itemList);
         itemList.forEach(item -> eventGroup.getFilters().add(new FilterView.Filter<>(item) {
             @Override
             public boolean test(Video video) {
@@ -152,6 +152,7 @@ public class VideosView extends PageView {
             }
         });
 
+        Collections.sort(itemList);
         itemList.forEach(item -> domainGroup.getFilters().add(new FilterView.Filter<>(item) {
             @Override
             public boolean test(Video video) {
@@ -175,6 +176,7 @@ public class VideosView extends PageView {
             }
         });
 
+        Collections.sort(itemList);
         itemList.forEach(item -> platformGroup.getFilters().add(new FilterView.Filter<>(item) {
             @Override
             public boolean test(Video video) {
@@ -198,6 +200,7 @@ public class VideosView extends PageView {
             }
         });
 
+        Collections.sort(itemList);
         itemList.forEach(item -> typeGroup.getFilters().add(new FilterView.Filter<>(item) {
             @Override
             public boolean test(Video video) {
@@ -245,6 +248,8 @@ public class VideosView extends PageView {
 
             playButton.setGraphic(new FontIcon(MaterialDesign.MDI_PLAY));
             playButton.setOnAction(evt -> showVideo(getItem()));
+            playButton.visibleProperty().bind(getRootPane().displayProperty().isNotEqualTo(Display.WEB));
+            playButton.managedProperty().bind(getRootPane().displayProperty().isNotEqualTo(Display.WEB));
 
             playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
             playOnYouTubeButton.setOnAction(evt -> Util.browse("https://youtu.be/" + getItem().getId()));
