@@ -1,1 +1,4 @@
-/logs/
+/logs
+RUNNING_PID
+/target
+scenicView.properties
