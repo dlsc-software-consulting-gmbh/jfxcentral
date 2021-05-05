@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -360,12 +361,23 @@ public class PersonView extends PageView {
 
                 List<Image> images = item.getImages();
                 for (int i = 0; i < Math.min(4, images.size()); i++) {
-                    Image imageId = images.get(i);
+                    Image image = images.get(i);
                     ImageView imageView = new ImageView();
                     imageView.setFitWidth(100);
                     imageView.setFitHeight(100);
                     imageView.setPreserveRatio(true);
-                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, imageId.getPath()));
+                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, image.getPath()));
+                    imageView.setOnMouseClicked(evt -> {
+                        ImageView bigImageView = new ImageView();
+                        bigImageView.setPreserveRatio(true);
+                        bigImageView.imageProperty().bind(imageView.imageProperty());
+
+                        StackPane stackPane = new StackPane(bigImageView);
+                        bigImageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
+                        bigImageView.fitHeightProperty().bind(stackPane.heightProperty().multiply(.8));
+
+                        getRootPane().getDialogPane().showNode(DialogPane.Type.INFORMATION, image.getTitle(), stackPane, true);
+                    });
                     thumbnailBox.getChildren().add(imageView);
                 }
             }
