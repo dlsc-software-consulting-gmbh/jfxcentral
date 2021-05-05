@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.model;
 // according to https://opensource.org/licenses
 public enum License {
     OTHER("Other"),
+    COMMERCIAL("Commercial"),
     APACHE2("Apache License 2.0"),
     BSD3("BSD 3-Clause 'New' or 'Revised' license"),
     BSD2("BSD 2-Clause 'Simplified' or 'FreeBSD' license"),

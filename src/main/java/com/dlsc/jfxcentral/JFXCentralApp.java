@@ -1,12 +1,12 @@
 package com.dlsc.jfxcentral;
 
-import com.gluonhq.attach.audio.AudioService;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -28,11 +28,31 @@ public class JFXCentralApp extends Application {
                     animationView.stop();
                 }
             });
-            AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
+
+//            AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
+
+            final AudioClip plonkSound = new AudioClip(JFXCentralApp.class.getResource("sound.wav").toExternalForm());
+            plonkSound.setVolume(.5);
 
             scene = new Scene(animationView);
             scene.setFill(Color.rgb(68, 131, 160));
-            animationView.setOnMouseClicked(evt -> showRootPane());
+            animationView.setOnMouseClicked(evt -> {
+                plonkSound.setVolume(0);
+                plonkSound.stop();
+                showRootPane();
+            });
+
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                plonkSound.play();
+            });
+            thread.setName("Audio Thread");
+            thread.setDaemon(true);
+            thread.start();
         } else {
             scene = new Scene(new RootPane());
         }
