@@ -728,6 +728,11 @@
     -fx-spacing: 10px;
 }
 
+.library-cell .hbox .vbox .thumbnail-box {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
 .library-cell .hbox .vbox .title-label {
 }
 

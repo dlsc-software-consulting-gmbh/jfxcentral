@@ -1,10 +1,7 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.*;
-import com.dlsc.jfxcentral.model.Book;
-import com.dlsc.jfxcentral.model.Library;
-import com.dlsc.jfxcentral.model.Person;
-import com.dlsc.jfxcentral.model.Video;
+import com.dlsc.jfxcentral.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
@@ -21,6 +18,8 @@ import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
+
+import java.util.List;
 
 public class PersonView extends PageView {
 
@@ -257,6 +256,7 @@ public class PersonView extends PageView {
         private final Button repositoryButton;
         private final Button issueTrackerButton;
         private final Button discussionsButton;
+        private final FlowPane thumbnailBox;
 
         private Label titleLabel = new Label();
         private Label descriptionLabel = new Label();
@@ -303,7 +303,10 @@ public class PersonView extends PageView {
             discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
             buttonBox.getChildren().add(discussionsButton);
 
-            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
+            thumbnailBox = new FlowPane();
+            thumbnailBox.getStyleClass().add("thumbnail-box");
+
+            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox, thumbnailBox);
             vBox.getStyleClass().add("vbox");
             vBox.setAlignment(Pos.TOP_LEFT);
 
@@ -331,6 +334,8 @@ public class PersonView extends PageView {
         protected void updateItem(Library item, boolean empty) {
             super.updateItem(item, empty);
 
+            thumbnailBox.getChildren().clear();
+
             if (!empty && item != null) {
                 logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
                 logoImageView.setVisible(true);
@@ -352,6 +357,17 @@ public class PersonView extends PageView {
 
                 buttonBox.setVisible(homepageButton.isVisible() || repositoryButton.isVisible() || issueTrackerButton.isVisible() || discussionsButton.isVisible());
                 buttonBox.setManaged(buttonBox.isVisible());
+
+                List<Image> images = item.getImages();
+                for (int i = 0; i < Math.min(4, images.size()); i++) {
+                    Image imageId = images.get(i);
+                    ImageView imageView = new ImageView();
+                    imageView.setFitWidth(100);
+                    imageView.setFitHeight(100);
+                    imageView.setPreserveRatio(true);
+                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, imageId.getPath()));
+                    thumbnailBox.getChildren().add(imageView);
+                }
             }
         }
     }

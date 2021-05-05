@@ -18,6 +18,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
 
     private static final Image USER_IMAGE = new Image(JFXCentralApp.class.getResource("user.png").toExternalForm());
     private static final Image LIBRARY_IMAGE = new Image(JFXCentralApp.class.getResource("document_cup.png").toExternalForm());
+    private static final Image MISSING_IMAGE = new Image(JFXCentralApp.class.getResource("missing-image.jpg").toExternalForm());
     private static final Image MISSING_VIDEO_IMAGE = new Image(JFXCentralApp.class.getResource("missing-video-image.png").toExternalForm());
 
     private final ExecutorService service = Executors.newFixedThreadPool(8);
@@ -41,6 +42,10 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
 
     public ObjectProperty<Image> libraryImageProperty(Library library) {
         return imageProperty("https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + library.getId() + "/", library.getLogoImageFile(), library.getLogoImageFile(), LIBRARY_IMAGE);
+    }
+
+    public ObjectProperty<Image> libraryImageProperty(Library library, String imagePath) {
+        return imageProperty("https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + library.getId() + "/", imagePath, imagePath, MISSING_IMAGE);
     }
 
     public ObjectProperty<Image> youTubeImageProperty(Video video) {
