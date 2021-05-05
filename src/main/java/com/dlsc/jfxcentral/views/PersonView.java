@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
@@ -368,15 +369,21 @@ public class PersonView extends PageView {
                     imageView.setPreserveRatio(true);
                     imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, image.getPath()));
                     imageView.setOnMouseClicked(evt -> {
-                        ImageView bigImageView = new ImageView();
-                        bigImageView.setPreserveRatio(true);
-                        bigImageView.imageProperty().bind(imageView.imageProperty());
+                        Pagination pagination = new Pagination();
+                        pagination.setPageCount(images.size());
+                        pagination.setPageFactory(page -> {
+                            ImageView bigImageView = new ImageView();
+                            bigImageView.setPreserveRatio(true);
+                            bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, images.get(page).getPath()));
 
-                        StackPane stackPane = new StackPane(bigImageView);
-                        bigImageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
-                        bigImageView.fitHeightProperty().bind(stackPane.heightProperty().multiply(.8));
+                            StackPane stackPane = new StackPane(bigImageView);
+                            bigImageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
+                            bigImageView.fitHeightProperty().bind(stackPane.heightProperty().multiply(.8));
 
-                        getRootPane().getDialogPane().showNode(DialogPane.Type.INFORMATION, image.getTitle(), stackPane, true);
+                            return stackPane;
+                        });
+
+                        getRootPane().getDialogPane().showNode(DialogPane.Type.INFORMATION, image.getTitle(), pagination, true);
                     });
                     thumbnailBox.getChildren().add(imageView);
                 }
