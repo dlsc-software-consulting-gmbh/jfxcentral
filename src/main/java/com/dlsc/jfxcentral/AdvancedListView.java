@@ -32,11 +32,9 @@ public class AdvancedListView<T> extends StackPane {
         paginationBox.managedProperty().bind(pagingProperty().and(pageCountProperty().greaterThan(1)));
 
         listView.itemsProperty().bind(itemsProperty());
-        listView.setPrefHeight(400);
         listView.cellFactoryProperty().bindBidirectional(cellFactoryProperty());
 
         box.getStyleClass().add("list-view-replacement");
-        box.setMinHeight(Region.USE_PREF_SIZE);
 
         placeholder.addListener(it -> updateView());
 
@@ -287,6 +285,7 @@ public class AdvancedListView<T> extends StackPane {
 
     private void updateItems() {
         box.getChildren().clear();
+
         Callback<ListView<T>, ListCell<T>> cellFactory = listView.getCellFactory();
         if (cellFactory != null) {
 
@@ -301,8 +300,8 @@ public class AdvancedListView<T> extends StackPane {
 
                 ListCell<T> cell = cellFactory.call(listView);
                 cell.getStyleClass().add("advanced-list-cell");
-                cell.setMaxWidth(Double.MAX_VALUE);
                 cell.updateListView(listView);
+
                 if (index < getItems().size()) {
                     cell.updateIndex(index);
                 } else {

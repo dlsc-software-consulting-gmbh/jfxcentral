@@ -13,13 +13,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -63,12 +64,8 @@ public class BookView extends PageView {
         HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
 
         authorsLabel.getStyleClass().add("authors-label");
-
         isbnLabel.getStyleClass().add("isbn-label");
-
         linksBox.getStyleClass().add("social-box");
-
-        publishDateLabel = new Label();
         publishDateLabel.getStyleClass().add("publish-date-label");
 
         HBox miscBox = new HBox(10, publishDateLabel, isbnLabel);
@@ -95,7 +92,7 @@ public class BookView extends PageView {
 
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox titleBox = new HBox(coverImageView, vBox);
+        HBox titleBox = new HBox(vBox, coverImageView);
         titleBox.setMinHeight(Region.USE_PREF_SIZE);
         titleBox.getStyleClass().add("horizontal-box");
 
@@ -169,76 +166,10 @@ public class BookView extends PageView {
         this.book.set(book);
     }
 
-    class BookCell extends ListCell<Book> {
-
-        private final ImageView coverImageView = new ImageView();
-        private final Label titleLabel = new Label();
-        private final Label subtitleLabel = new Label();
-
-        public BookCell() {
-            getStyleClass().add("book-list-cell");
-
-            coverImageView.setFitWidth(100);
-            coverImageView.setPreserveRatio(true);
-
-            titleLabel.getStyleClass().add("title-label");
-            subtitleLabel.getStyleClass().add("subtitle-label");
-
-            GridPane gridPane = new GridPane();
-            gridPane.getStyleClass().add("grid-pane");
-            gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-            gridPane.add(coverImageView, 0, 0);
-            gridPane.add(titleLabel, 1, 0);
-            gridPane.add(subtitleLabel, 1, 1);
-
-            GridPane.setRowSpan(coverImageView, 2);
-
-            GridPane.setHgrow(coverImageView, Priority.NEVER);
-            GridPane.setHgrow(titleLabel, Priority.ALWAYS);
-            GridPane.setHgrow(subtitleLabel, Priority.ALWAYS);
-
-            RowConstraints row1 = new RowConstraints();
-            RowConstraints row2 = new RowConstraints();
-
-            row1.setPercentHeight(50);
-            row2.setPercentHeight(50);
-
-            gridPane.getRowConstraints().setAll(row1, row2);
-
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            setGraphic(gridPane);
-        }
-
-        @Override
-        protected void updateItem(Book book, boolean empty) {
-            super.updateItem(book, empty);
-
-            if (!empty && book != null) {
-                titleLabel.setText(book.getTitle());
-                subtitleLabel.setText(book.getSubtitle());
-                String coverImage = book.getImage();
-                if (coverImage != null && !coverImage.trim().isBlank()) {
-                    coverImageView.setVisible(true);
-                    coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-                } else {
-                    coverImageView.setVisible(false);
-                    coverImageView.imageProperty().unbind();
-                }
-            } else {
-                titleLabel.setText("");
-                subtitleLabel.setText("");
-                coverImageView.setVisible(false);
-            }
-        }
-    }
-
-    class AuthorCell extends ListCell<Person> {
+    class AuthorCell extends AdvancedListCell<Person> {
 
         private final PhotoView photoView = new PhotoView();
         private final Label nameLabel = new Label();
-        private final ImageView championImageView = new ImageView();
-        private final ImageView rockstarImageView = new ImageView();
 
         public AuthorCell() {
             getStyleClass().add("author-list-cell");
@@ -247,44 +178,12 @@ public class BookView extends PageView {
 
             nameLabel.getStyleClass().add("name-label");
 
-            championImageView.getStyleClass().add("champion-image");
-            championImageView.setPreserveRatio(true);
-            championImageView.setFitHeight(16);
-
-            rockstarImageView.getStyleClass().add("rockstar-image");
-            rockstarImageView.setPreserveRatio(true);
-            rockstarImageView.setFitHeight(16);
-
-            HBox badgesBox = new HBox(championImageView, rockstarImageView);
-            badgesBox.getStyleClass().add("badges");
-            badgesBox.setAlignment(Pos.TOP_LEFT);
-
-            GridPane gridPane = new GridPane();
-            gridPane.getStyleClass().add("grid-pane");
-            gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-            gridPane.add(photoView, 0, 0);
-            gridPane.add(nameLabel, 1, 0);
-            gridPane.add(badgesBox, 1, 1);
-
-            GridPane.setRowSpan(photoView, 2);
-            GridPane.setHgrow(nameLabel, Priority.ALWAYS);
-            GridPane.setHgrow(badgesBox, Priority.ALWAYS);
-            GridPane.setVgrow(nameLabel, Priority.ALWAYS);
-            GridPane.setVgrow(badgesBox, Priority.ALWAYS);
-            GridPane.setValignment(nameLabel, VPos.BOTTOM);
-            GridPane.setValignment(badgesBox, VPos.TOP);
-
-            RowConstraints row1 = new RowConstraints();
-            RowConstraints row2 = new RowConstraints();
-
-            row1.setPercentHeight(50);
-            row2.setPercentHeight(50);
-
-            gridPane.getRowConstraints().setAll(row1, row2);
+            HBox hBox = new HBox(photoView, nameLabel);
+            hBox.setAlignment(Pos.CENTER_LEFT);
+            hBox.getStyleClass().add("hbox");
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            setGraphic(gridPane);
+            setGraphic(hBox);
         }
 
         @Override
@@ -293,23 +192,10 @@ public class BookView extends PageView {
 
             if (!empty && person != null) {
                 nameLabel.setText(person.getName());
-                championImageView.setVisible(person.isChampion());
-                championImageView.setManaged(person.isChampion());
-                rockstarImageView.setVisible(person.isRockstar());
-                rockstarImageView.setManaged(person.isRockstar());
-                String photo = person.getPhoto();
-                if (photo != null && !photo.trim().isBlank()) {
-                    photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-                } else {
-                    photoView.photoProperty().unbind();
-                }
+                photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
                 photoView.setVisible(true);
             } else {
                 nameLabel.setText("");
-                championImageView.setVisible(false);
-                championImageView.setManaged(false);
-                rockstarImageView.setVisible(false);
-                rockstarImageView.setManaged(false);
                 photoView.setVisible(false);
             }
         }

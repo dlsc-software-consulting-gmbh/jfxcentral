@@ -5,7 +5,9 @@ import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.PersonView;
+import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
@@ -13,7 +15,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -21,17 +22,28 @@ import javafx.scene.layout.*;
 public class PeopleView extends CategoryView {
 
     private PersonView personView;
+    private ListView<Person> listView = new ListView<>();
 
     public PeopleView(RootPane rootPane) {
         super(rootPane);
 
-        ListView<Person> listView = new ListView<>();
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new PersonCell());
         listView.itemsProperty().bind(DataRepository.getInstance().peopleProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setPerson(listView.getSelectionModel().getSelectedItem()));
+        listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         setCenter(listView);
+
+        performDefaultSelection();
+    }
+
+    private void performDefaultSelection() {
+        if (!listView.getItems().isEmpty()) {
+            listView.getSelectionModel().select(0);
+        } else {
+            listView.getSelectionModel().clearSelection();
+        }
     }
 
     @Override
@@ -58,7 +70,7 @@ public class PeopleView extends CategoryView {
         this.person.set(person);
     }
 
-    class PersonCell extends ListCell<Person> {
+    class PersonCell extends AdvancedListCell<Person> {
 
         private final PhotoView photoView = new PhotoView();
         private final Label nameLabel = new Label();

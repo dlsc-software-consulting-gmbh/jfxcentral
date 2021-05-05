@@ -2,6 +2,8 @@ package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.categories.BooksView;
 import com.dlsc.jfxcentral.categories.PeopleView;
+import com.dlsc.jfxcentral.model.Book;
+import com.dlsc.jfxcentral.views.BookView;
 import com.dlsc.jfxcentral.views.VideosView;
 
 class CategoryPane extends ViewPane {
@@ -19,6 +21,11 @@ class CategoryPane extends ViewPane {
 
         viewProperty().addListener(it -> updateView(rootPane));
         updateView(rootPane);
+
+        rootPane.registerOpenHandler(Book.class, book -> {
+            rootPane.setView(View.BOOKS);
+            ((BookView) (booksView.getPanel())).setBook(book);
+        });
     }
 
     private void updateView(RootPane rootPane) {

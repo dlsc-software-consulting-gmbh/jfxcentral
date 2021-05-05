@@ -69,6 +69,12 @@ public class DataRepository {
         return people.stream().filter(person -> person.getId().equals(id)).findFirst();
     }
 
+    public ListProperty<Video> getVideosByPerson(Person person) {
+        ListProperty<Video> listProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
+        listProperty.setAll(videos.stream().filter(video -> video.getPersonIds().contains(person.getId())).collect(Collectors.toList()));
+        return listProperty;
+    }
+
     public ListProperty<Library> getLibrariesByPerson(Person person) {
 
         ObservableList<Library> list = FXCollections.observableArrayList();
@@ -77,9 +83,9 @@ public class DataRepository {
             if (libraries.containsKey(libraryId)) {
                 list.add(libraries.get(libraryId));
             } else {
-//                executor.submit(() -> {
+                executor.submit(() -> {
                     try {
-                        File file = loadFile(libraryId + ".json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + libraryId + "/_info.json");
+                        File file = loadFile(libraryId + ".json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + libraryId + "/_info.json?time=" + ZonedDateTime.now().toInstant());
                         Library result = gson.fromJson(new FileReader(file), Library.class);
 
                         Platform.runLater(() -> {
@@ -89,7 +95,7 @@ public class DataRepository {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-//                });
+                });
             }
         });
 

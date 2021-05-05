@@ -136,7 +136,6 @@ public class Person extends ModelObject {
         return libraryIds;
     }
 
-
     public List<String> getBookIds() {
         return bookIds;
     }

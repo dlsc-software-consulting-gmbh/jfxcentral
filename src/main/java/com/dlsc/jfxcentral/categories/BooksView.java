@@ -4,11 +4,12 @@ import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Book;
+import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.BookView;
+import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
@@ -29,10 +30,20 @@ public class BooksView extends CategoryView {
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BookCell());
         listView.itemsProperty().bind(DataRepository.getInstance().booksProperty());
-
+        listView.getItems().addListener((Observable it) -> performDefaultSelection());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         setCenter(listView);
+
+        performDefaultSelection();
+    }
+
+    private void performDefaultSelection() {
+        if (!listView.getItems().isEmpty()) {
+            listView.getSelectionModel().select(0);
+        } else {
+            listView.getSelectionModel().clearSelection();
+        }
     }
 
     @Override
@@ -45,7 +56,7 @@ public class BooksView extends CategoryView {
         return bookView;
     }
 
-    class BookCell extends ListCell<Book> {
+    class BookCell extends AdvancedListCell<Book> {
 
         private final ImageView coverImageView = new ImageView();
 

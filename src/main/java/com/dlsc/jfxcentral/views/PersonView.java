@@ -4,15 +4,16 @@ import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.model.Video;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +41,7 @@ public class PersonView extends PageView {
         createTitleBox();
         createBooksBox();
         createLibraryBox();
+        createVideoBox();
 
         setContent(content);
 
@@ -51,10 +53,11 @@ public class PersonView extends PageView {
         AdvancedListView<Book> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(1000);
-        listView.setCellFactory(view -> new BookCell());
+        listView.setCellFactory(view -> new PersonBookCell());
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Books");
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> "Written or co-authored by " + getPerson().getName(), person));
         sectionPane.getNodes().add(listView);
 
         personProperty().addListener(it -> {
@@ -72,10 +75,41 @@ public class PersonView extends PageView {
         content.getChildren().add(sectionPane);
     }
 
+    private void createVideoBox() {
+        AdvancedListView<Video> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(3);
+        listView.setCellFactory(view -> {
+            VideosView.VideoCell videoCell = new VideosView.VideoCell(getRootPane(), false);
+            videoCell.setCoverImageWidth(160);
+            return videoCell;
+        });
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Videos");
+        sectionPane.getNodes().add(listView);
+
+        personProperty().addListener(it -> {
+            Person person = getPerson();
+            if (person != null) {
+                sectionPane.setSubtitle("Sessions presented by " + person.getName());
+                listView.itemsProperty().bind(DataRepository.getInstance().getVideosByPerson(getPerson()));
+            } else {
+                sectionPane.setSubtitle("");
+                listView.getItems().clear();
+            }
+        });
+
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
+    }
+
     private void createLibraryBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(5);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new LibraryCell());
 
         SectionPane sectionPane = new SectionPane();
@@ -85,7 +119,7 @@ public class PersonView extends PageView {
         personProperty().addListener(it -> {
             Person person = getPerson();
             if (person != null) {
-                sectionPane.setSubtitle("Open source libraries developed by " + person.getName());
+                sectionPane.setSubtitle("Libraries developed by " + person.getName());
                 listView.itemsProperty().bind(DataRepository.getInstance().getLibrariesByPerson(getPerson()));
             } else {
                 sectionPane.setSubtitle("");
@@ -102,7 +136,7 @@ public class PersonView extends PageView {
     private void createTitleBox() {
         photoView.setEditable(false);
 
-        nameLabel.getStyleClass().add("name-label");
+        nameLabel.getStyleClass().addAll("header1", "name-label");
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
@@ -192,6 +226,14 @@ public class PersonView extends PageView {
                 website.setGraphic(new FontIcon(Material.MAIL));
                 socialBox.getChildren().add(website);
             }
+
+            if (StringUtils.isNotEmpty(person.getGitHub())) {
+                Button github = new Button("GitHub");
+                github.getStyleClass().addAll("social-button", "github");
+                github.setOnAction(evt -> Util.browse("https://github.com/" + person.getGitHub()));
+                github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
+                socialBox.getChildren().add(github);
+            }
         }
     }
 
@@ -209,7 +251,7 @@ public class PersonView extends PageView {
         this.person.set(person);
     }
 
-    class LibraryCell extends ListCell<Library> {
+    class LibraryCell extends AdvancedListCell<Library> {
 
         private final Button homepageButton;
         private final Button repositoryButton;
@@ -225,15 +267,17 @@ public class PersonView extends PageView {
         public LibraryCell() {
             getStyleClass().add("library-cell");
 
-            titleLabel.getStyleClass().add("title-label");
-            titleLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            titleLabel.getStyleClass().addAll("header3", "title-label");
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+            titleLabel.setAlignment(Pos.TOP_LEFT);
 
             buttonBox.getStyleClass().add("button-box");
 
             descriptionLabel.getStyleClass().add("description-label");
             descriptionLabel.setWrapText(true);
             descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-            descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            descriptionLabel.setAlignment(Pos.TOP_LEFT);
 
             homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
@@ -261,6 +305,8 @@ public class PersonView extends PageView {
 
             VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
             vBox.getStyleClass().add("vbox");
+            vBox.setAlignment(Pos.TOP_LEFT);
+
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
             logoImageView.setFitWidth(48);
@@ -271,18 +317,14 @@ public class PersonView extends PageView {
             logoWrapper.setMaxWidth(48);
             StackPane.setAlignment(logoImageView, Pos.TOP_LEFT);
 
-            HBox hBox = new HBox(logoWrapper, vBox);
+            HBox hBox = new HBox(vBox, logoWrapper);
             hBox.setAlignment(Pos.TOP_LEFT);
-            hBox.setMinHeight(Region.USE_PREF_SIZE);
             hBox.getStyleClass().add("hbox");
+
+            hBox.visibleProperty().bind(itemProperty().isNotNull());
 
             setGraphic(hBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        }
-
-        @Override
-        protected double computeMinHeight(double width) {
-            return getGraphic().minHeight(-1) + getInsets().getTop() + getInsets().getBottom();
         }
 
         @Override
@@ -310,17 +352,13 @@ public class PersonView extends PageView {
 
                 buttonBox.setVisible(homepageButton.isVisible() || repositoryButton.isVisible() || issueTrackerButton.isVisible() || discussionsButton.isVisible());
                 buttonBox.setManaged(buttonBox.isVisible());
-            } else {
-                logoImageView.imageProperty().unbind();
-                logoImageView.setVisible(false);
-                buttonBox.setVisible(false);
-                buttonBox.setManaged(false);
             }
         }
     }
 
-    class BookCell extends ListCell<Book> {
+    class PersonBookCell extends AdvancedListCell<Book> {
 
+        private final Button detailsButton;
         private final Button homepageButton;
         private final Button amazonButton;
 
@@ -332,24 +370,36 @@ public class PersonView extends PageView {
         private ImageView coverImageView = new ImageView();
         private HBox buttonBox = new HBox();
 
-        public BookCell() {
+        public PersonBookCell() {
             getStyleClass().add("book-cell");
 
-            titleLabel.getStyleClass().add("title-label");
-            titleLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            titleLabel.getStyleClass().addAll("header3", "title-label");
+            titleLabel.setMaxWidth(Double.MAX_VALUE);
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
             subtitleLabel.getStyleClass().add("subtitle-label");
-            subtitleLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            subtitleLabel.setMaxWidth(Double.MAX_VALUE);
+            subtitleLabel.setWrapText(true);
+            subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
             authorsLabel.getStyleClass().add("authors-label");
-            authorsLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            authorsLabel.setMaxWidth(Double.MAX_VALUE);
+            authorsLabel.setWrapText(true);
+            authorsLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+            descriptionLabel.getStyleClass().add("description-label");
+            descriptionLabel.setMaxWidth(Double.MAX_VALUE);
+            descriptionLabel.setWrapText(true);
+            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
             buttonBox.getStyleClass().add("button-box");
 
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setWrapText(true);
-            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-            descriptionLabel.setMaxWidth(Region.USE_PREF_SIZE);
+            detailsButton = new Button("Details");
+            detailsButton.getStyleClass().addAll("library-button", "details");
+            detailsButton.setGraphic(new FontIcon(MaterialDesign.MDI_MORE));
+            detailsButton.setOnAction(evt -> getRootPane().open(getItem()));
+            buttonBox.getChildren().add(detailsButton);
 
             homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
@@ -373,13 +423,11 @@ public class PersonView extends PageView {
             coverImageView.setFitWidth(100);
             coverImageView.setPreserveRatio(true);
 
-            HBox hBox = new HBox(coverImageView, vBox);
+            HBox hBox = new HBox(vBox, coverImageView);
             hBox.getStyleClass().add("hbox");
 
             setGraphic(hBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-            setMinHeight(Region.USE_PREF_SIZE);
         }
 
         @Override
@@ -397,7 +445,7 @@ public class PersonView extends PageView {
 
                 titleLabel.setText(item.getTitle());
                 subtitleLabel.setText(item.getSubtitle());
-                authorsLabel.setText("Authors: " + item.getAuthors());
+                authorsLabel.setText(item.getAuthors());
 
                 descriptionLabel.setText(StringUtils.abbreviate(item.getDescription(), 250));
 

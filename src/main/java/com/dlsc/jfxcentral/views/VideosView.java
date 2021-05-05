@@ -2,20 +2,24 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.gemsfx.FilterView;
-import com.dlsc.jfxcentral.*;
+import com.dlsc.jfxcentral.DataRepository;
+import com.dlsc.jfxcentral.Display;
+import com.dlsc.jfxcentral.ImageManager;
+import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.model.Video;
+import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.Observable;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebView;
@@ -53,10 +57,8 @@ public class VideosView extends PageView {
             return false;
         });
 
-        AdvancedListView<Video> listView = new AdvancedListView<>();
-        listView.setMaxHeight(Double.MAX_VALUE);
-        listView.setMinWidth(Region.USE_PREF_SIZE);
-        listView.setCellFactory(view -> new VideoCell());
+        PrettyListView<Video> listView = new PrettyListView<>();
+        listView.setCellFactory(view -> new VideoCell(rootPane, true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setVideo(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);
@@ -223,38 +225,33 @@ public class VideosView extends PageView {
         this.video.set(video);
     }
 
-    private void showVideo(Video video) {
-        WebView webView = new WebView();
-        webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
-        getRootPane().getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), webView, true);
-        webView.sceneProperty().addListener(it -> {
-            if (webView.getScene() == null) {
-                System.out.println("Unloading");
-                webView.getEngine().loadContent("empty");
-            }
-        });
-    }
-
-    class VideoCell extends ListCell<Video> {
+    static class VideoCell extends AdvancedListCell<Video> {
 
         private final Label titleLabel = new Label();
         private final Label descriptionLabel = new Label();
         private final ImageView thumbnailView = new ImageView();
         private final Button playButton = new Button("Play");
         private final Button playOnYouTubeButton = new Button("YouTube");
+        private final RootPane rootPane;
 
-        public VideoCell() {
+        public VideoCell(RootPane rootPane, boolean insideListView) {
+            this.rootPane = rootPane;
+
             getStyleClass().add("video-cell");
+
+            if (insideListView) {
+                setPrefWidth(0);
+            }
 
             playButton.setGraphic(new FontIcon(MaterialDesign.MDI_PLAY));
             playButton.setOnAction(evt -> showVideo(getItem()));
-            playButton.visibleProperty().bind(getRootPane().displayProperty().isNotEqualTo(Display.WEB));
-            playButton.managedProperty().bind(getRootPane().displayProperty().isNotEqualTo(Display.WEB));
+            playButton.visibleProperty().bind(rootPane.displayProperty().isNotEqualTo(Display.WEB));
+            playButton.managedProperty().bind(rootPane.displayProperty().isNotEqualTo(Display.WEB));
 
             playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
             playOnYouTubeButton.setOnAction(evt -> Util.browse("https://youtu.be/" + getItem().getId()));
 
-            titleLabel.getStyleClass().add("title-label");
+            titleLabel.getStyleClass().addAll("header3", "title-label");
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
@@ -263,43 +260,62 @@ public class VideosView extends PageView {
             descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
             thumbnailView.setPreserveRatio(true);
-            thumbnailView.setFitWidth(320);
+            thumbnailView.fitWidthProperty().bind(coverImageWidthProperty());
 
             StackPane coverImageWrapper = new StackPane(thumbnailView);
             StackPane.setAlignment(thumbnailView, Pos.TOP_LEFT);
 
             HBox buttonBox = new HBox(10, playButton, playOnYouTubeButton);
+            buttonBox.setMinHeight(Region.USE_PREF_SIZE);
+            buttonBox.setAlignment(Pos.BOTTOM_LEFT);
 
-            GridPane.setRowSpan(coverImageWrapper, 3);
+            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
+            vBox.setAlignment(Pos.TOP_LEFT);
+            vBox.setFillWidth(true);
+            vBox.getStyleClass().add("vbox");
 
-            GridPane gridPane = new GridPane();
-            gridPane.getStyleClass().add("grid-pane");
-            gridPane.setPrefWidth(0);
-            gridPane.setMinHeight(Region.USE_PREF_SIZE);
-            gridPane.setMinSize(0, 0);
-            gridPane.add(coverImageWrapper, 0, 0);
-            gridPane.add(titleLabel, 1, 0);
-            gridPane.add(descriptionLabel, 1, 1);
-            gridPane.add(buttonBox, 1, 2);
+            HBox.setHgrow(vBox, Priority.ALWAYS);
 
-            RowConstraints row1 = new RowConstraints();
-            RowConstraints row2 = new RowConstraints();
-            RowConstraints row3 = new RowConstraints();
+            HBox hBox = new HBox(vBox, coverImageWrapper);
+            hBox.getStyleClass().add("hbox");
+            hBox.setAlignment(Pos.TOP_LEFT);
 
-            row1.setValignment(VPos.TOP);
-            row2.setValignment(VPos.TOP);
-            row3.setValignment(VPos.BOTTOM);
-
-            gridPane.getRowConstraints().setAll(row1, row2);
-
+            setGraphic(hBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            setGraphic(gridPane);
+
+            hBox.visibleProperty().bind(itemProperty().isNotNull());
 
             setOnMouseClicked(evt -> {
                 if (evt.getClickCount() == 2) {
                     showVideo(getItem());
                 }
             });
+        }
+
+        private void showVideo(Video video) {
+            WebView webView = new WebView();
+            webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
+            rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), webView, true);
+            webView.sceneProperty().addListener(it -> {
+                if (webView.getScene() == null) {
+                    System.out.println("Unloading");
+                    webView.getEngine().loadContent("empty");
+                }
+            });
+        }
+
+        private final DoubleProperty coverImageWidth = new SimpleDoubleProperty(this, "coverImageWidth", 320);
+
+        public double getCoverImageWidth() {
+            return coverImageWidth.get();
+        }
+
+        public DoubleProperty coverImageWidthProperty() {
+            return coverImageWidth;
+        }
+
+        public void setCoverImageWidth(double coverImageWidth) {
+            this.coverImageWidth.set(coverImageWidth);
         }
 
         @Override
@@ -312,12 +328,6 @@ public class VideosView extends PageView {
                 thumbnailView.setVisible(true);
                 thumbnailView.setManaged(true);
                 thumbnailView.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
-            } else {
-                titleLabel.setText("");
-                descriptionLabel.setText("");
-                thumbnailView.imageProperty().unbind();
-                thumbnailView.setVisible(false);
-                thumbnailView.setManaged(false);
             }
         }
     }
