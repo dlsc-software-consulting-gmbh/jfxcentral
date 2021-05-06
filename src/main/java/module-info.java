@@ -1,4 +1,5 @@
 open module com.dlsc.jfxcentral {
+    requires com.sandec.mdfx;
     requires com.google.gson;
     requires com.dlsc.gemsfx;
     requires jpro.webapi;

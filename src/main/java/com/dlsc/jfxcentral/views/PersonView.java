@@ -3,16 +3,14 @@ package com.dlsc.jfxcentral.views;
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.*;
+import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
@@ -258,13 +256,15 @@ public class PersonView extends PageView {
         private final Button repositoryButton;
         private final Button issueTrackerButton;
         private final Button discussionsButton;
-        private final FlowPane thumbnailBox;
+        private final HBox thumbnailBox;
 
         private Label titleLabel = new Label();
         private Label descriptionLabel = new Label();
 
         private ImageView logoImageView = new ImageView();
         private HBox buttonBox = new HBox();
+
+        private LicenseLabel licenseLabel = new LicenseLabel();
 
         public LibraryCell() {
             getStyleClass().add("library-cell");
@@ -273,6 +273,8 @@ public class PersonView extends PageView {
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
             titleLabel.setAlignment(Pos.TOP_LEFT);
+            titleLabel.setGraphic(licenseLabel);
+            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
 
             buttonBox.getStyleClass().add("button-box");
 
@@ -305,10 +307,18 @@ public class PersonView extends PageView {
             discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
             buttonBox.getChildren().add(discussionsButton);
 
-            thumbnailBox = new FlowPane();
+            thumbnailBox = new HBox();
             thumbnailBox.getStyleClass().add("thumbnail-box");
 
-            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox, thumbnailBox);
+            ScrollPane scrollPane = new ScrollPane(thumbnailBox);
+            scrollPane.getStyleClass().add("thumbnail-scroll-pane");
+            scrollPane.setFitToWidth(true);
+            scrollPane.setFitToHeight(true);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.visibleProperty().bind(Bindings.isNotEmpty(thumbnailBox.getChildren()));
+            scrollPane.managedProperty().bind(Bindings.isNotEmpty(thumbnailBox.getChildren()));
+
+            VBox vBox = new VBox(titleLabel, descriptionLabel);
             vBox.getStyleClass().add("vbox");
             vBox.setAlignment(Pos.TOP_LEFT);
 
@@ -326,9 +336,11 @@ public class PersonView extends PageView {
             hBox.setAlignment(Pos.TOP_LEFT);
             hBox.getStyleClass().add("hbox");
 
-            hBox.visibleProperty().bind(itemProperty().isNotNull());
+            VBox outerBox = new VBox(hBox, scrollPane);
+            outerBox.visibleProperty().bind(itemProperty().isNotNull());
+            outerBox.getStyleClass().add("outer-box");
 
-            setGraphic(hBox);
+            setGraphic(outerBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         }
 
@@ -339,6 +351,9 @@ public class PersonView extends PageView {
             thumbnailBox.getChildren().clear();
 
             if (!empty && item != null) {
+                licenseLabel.setLicense(item.getLicense());
+                licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
+
                 logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
                 logoImageView.setVisible(true);
 
@@ -361,17 +376,22 @@ public class PersonView extends PageView {
                 buttonBox.setManaged(buttonBox.isVisible());
 
                 List<Image> images = item.getImages();
-                for (int i = 0; i < Math.min(4, images.size()); i++) {
+                for (int i = 0; i < images.size(); i++) {
+
                     Image image = images.get(i);
                     ImageView imageView = new ImageView();
                     imageView.setFitWidth(100);
                     imageView.setFitHeight(100);
                     imageView.setPreserveRatio(true);
                     imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, image.getPath()));
+
+                    final int imageIndex = i;
+
                     imageView.setOnMouseClicked(evt -> {
                         Pagination pagination = new Pagination();
                         pagination.setPageCount(images.size());
                         pagination.setPageFactory(page -> {
+
                             ImageView bigImageView = new ImageView();
                             bigImageView.setPreserveRatio(true);
                             bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, images.get(page).getPath()));
@@ -383,9 +403,18 @@ public class PersonView extends PageView {
                             return stackPane;
                         });
 
+                        pagination.setCurrentPageIndex(imageIndex);
+
                         getRootPane().getDialogPane().showNode(DialogPane.Type.INFORMATION, image.getTitle(), pagination, true);
                     });
-                    thumbnailBox.getChildren().add(imageView);
+
+                    StackPane imageWrapper = new StackPane(imageView);
+                    imageWrapper.getStyleClass().add("image-wrapper");
+                    if (i == images.size() - 1) {
+                        imageWrapper.getStyleClass().add("last");
+                    }
+
+                    thumbnailBox.getChildren().add(imageWrapper);
                 }
             }
         }

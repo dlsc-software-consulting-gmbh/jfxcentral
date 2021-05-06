@@ -34,7 +34,7 @@ public class BookView extends PageView {
     private ImageView coverImageView = new ImageView();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
-    private Label descriptionLabel = new Label();
+    private MarkdownView descriptionLabel = new MarkdownView();
     private Label authorsLabel = new Label();
     private Label isbnLabel = new Label();
     private Label publishDateLabel = new Label();
@@ -46,10 +46,11 @@ public class BookView extends PageView {
 
         getStyleClass().add("book-view");
 
+        // book section
         coverImageView.setFitWidth(150);
         coverImageView.setPreserveRatio(true);
 
-        titleLabel.getStyleClass().add("title-label");
+        titleLabel.getStyleClass().addAll("header1", "title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(titleLabel, Priority.ALWAYS);
 
@@ -57,10 +58,8 @@ public class BookView extends PageView {
         subtitleLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(subtitleLabel, Priority.ALWAYS);
 
-        descriptionLabel.setWrapText(true);
-        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-        descriptionLabel.setMaxHeight(Double.MAX_VALUE);
         descriptionLabel.getStyleClass().add("description-label");
+        descriptionLabel.setHyperlinkCallback(url -> Util.browse(url));
         HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
 
         authorsLabel.getStyleClass().add("authors-label");
@@ -70,21 +69,7 @@ public class BookView extends PageView {
 
         HBox miscBox = new HBox(10, publishDateLabel, isbnLabel);
 
-        AdvancedListView<Person> authorListView = new AdvancedListView<>();
-        authorListView.setCellFactory(view -> new AuthorCell());
-        authorListView.setPaging(true);
-        authorListView.setVisibleRowCount(1000);
-        authorListView.setItems(authorsProperty());
-        authorListView.visibleProperty().bind(Bindings.isNotEmpty(authors));
-        authorListView.managedProperty().bind(Bindings.isNotEmpty(authors));
-
-        Label authorsTitleLabel = new Label();
-        authorsTitleLabel.getStyleClass().add("author-title-label");
-        authorsTitleLabel.textProperty().bind(Bindings.createStringBinding(() -> authors.size() > 1 ? "Authors" : "Author", authors));
-        authorsTitleLabel.visibleProperty().bind(Bindings.isNotEmpty(authors));
-        authorsTitleLabel.managedProperty().bind(Bindings.isNotEmpty(authors));
-
-        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, linksBox, descriptionLabel, miscBox, authorsTitleLabel, authorListView);
+        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, linksBox, descriptionLabel, miscBox);
 
         vBox.getStyleClass().add("vertical-box");
         vBox.setFillWidth(true);
@@ -96,11 +81,27 @@ public class BookView extends PageView {
         titleBox.setMinHeight(Region.USE_PREF_SIZE);
         titleBox.getStyleClass().add("horizontal-box");
 
-        SectionPane sectionPane = new SectionPane(titleBox);
-        sectionPane.getStyleClass().add("title-section");
-        sectionPane.setMinHeight(Region.USE_PREF_SIZE);
+        SectionPane bookSectionPane = new SectionPane(titleBox);
+        bookSectionPane.getStyleClass().add("title-section");
+        bookSectionPane.setMinHeight(Region.USE_PREF_SIZE);
 
-        setContent(new VBox(sectionPane));
+        // authors section
+        AdvancedListView<Person> authorListView = new AdvancedListView<>();
+        authorListView.setCellFactory(view -> new DetailedPersonCell());
+        authorListView.setPaging(true);
+        authorListView.setVisibleRowCount(1000);
+        authorListView.setItems(authorsProperty());
+        authorListView.visibleProperty().bind(Bindings.isNotEmpty(authors));
+        authorListView.managedProperty().bind(Bindings.isNotEmpty(authors));
+
+        SectionPane authorSectionPane = new SectionPane(authorListView);
+        authorSectionPane.setMinHeight(Region.USE_PREF_SIZE);
+        authorSectionPane.visibleProperty().bind(authorListView.itemsProperty().emptyProperty().not());
+        authorSectionPane.managedProperty().bind(authorListView.itemsProperty().emptyProperty().not());
+
+        VBox content = new VBox(bookSectionPane, authorSectionPane);
+
+        setContent(content);
 
         bookProperty().addListener(it -> updateView());
     }
@@ -110,7 +111,7 @@ public class BookView extends PageView {
         if (book != null) {
             titleLabel.setText(book.getTitle());
             subtitleLabel.setText(book.getSubtitle());
-            descriptionLabel.setText(book.getDescription());
+            descriptionLabel.setMdString(book.getDescription());
             coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
             authorsLabel.setText(book.getAuthors());
             isbnLabel.setText("ISBN: " + book.getIsbn());

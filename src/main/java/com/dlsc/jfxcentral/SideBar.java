@@ -8,6 +8,8 @@ import javafx.scene.layout.VBox;
 public class SideBar extends ViewPane {
 
     public SideBar(RootPane rootPane) {
+        getStyleClass().add("side-bar");
+
         HBox hBox = new HBox();
         hBox.setFillHeight(true);
 

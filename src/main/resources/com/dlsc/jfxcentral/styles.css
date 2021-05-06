@@ -30,14 +30,23 @@
 
 .root {
     -fx-font-family: "Open Sans Regular";
+    -fx-accent: rgb(68, 131, 160);
+
     -light-grey: rgba(239, 242, 245);
     -light-blue: rgba(224, 229, 234);
     -red: rgba(250, 80, 80, 1);
-    -fx-accent: rgb(68, 131, 160);
+    -green: forestgreen;
     -grey: rgba(0, 0, 0, .4);
     -drop-shadow-1: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
     -drop-shadow-2: dropshadow(gaussian, rgba(0, 0, 0, .26), 15, 0.16, -1, 4);
     -drop-shadow-3: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
+
+    -mdfx-link-color: -fx-accent;
+    -mdfx-border-color-1: #888;
+
+    -mdfx-bg-color-1: #ccc;
+    -mdfx-bg-color-2: #ddd;
+    -mdfx-bg-color-3: #eee;
 }
 
 .pagination .page {
@@ -301,6 +310,10 @@
     -fx-spacing: 20px;
 }
 
+.side-bar {
+    -fx-effect: -drop-shadow-3;
+}
+
 /* ----------------------------------------------------------------------------
  * PersonView
  */
@@ -310,6 +323,7 @@
 .person-view .list-cell:selected {
     -fx-background-color: white !important;
 }
+
 .person-view .title-section .hbox {
     -fx-spacing: 20px;
 }
@@ -421,6 +435,8 @@
 }
 
 .book-view .title-section .horizontal-box .vertical-box .subtitle-label {
+    -fx-font-family: "Open Sans Italic";
+    -fx-font-size: 16px;
 }
 
 .book-view .title-section .horizontal-box .vertical-box .authors-label {
@@ -583,7 +599,7 @@
     -fx-border-color: #e0e0e0;
     -fx-border-width: 1;
     -fx-border-radius: 4px;
-    -fx-effect: -shadow;
+    -fx-effect: -drop-shadow-1;
     -fx-padding: 20;
 }
 
@@ -724,30 +740,71 @@
     -fx-padding: 0;
 }
 
-.library-cell .hbox {
+.library-cell .outer-box {
+    -fx-spacing: 10px;
+}
+
+.library-cell .outer-box .hbox {
     -fx-spacing: 20px;
 }
 
-.library-cell .hbox .vbox {
+.library-cell .outer-box .hbox .vbox {
     -fx-spacing: 10px;
 }
 
-.library-cell .hbox .vbox .thumbnail-box {
-    -fx-hgap: 5px;
-    -fx-vgap: 5px;
+.library-cell .outer-box .thumbnail-scroll-pane {
+    -fx-effect: innershadow(gaussian, grey, 10, 0, 0, 0);
 }
 
-.library-cell .hbox .vbox .title-label {
+.library-cell .outer-box .thumbnail-scroll-pane .scroll-bar {
+    -fx-translate-y: -5px;
+    -fx-scale-x: .98;
 }
 
-.library-cell .hbox .vbox .description-label {
+.library-cell .outer-box .thumbnail-scroll-pane .thumbnail-box {
+    -fx-spacing: 5px;
+    -fx-background-color: rgb(245, 245, 245);
+    -fx-background-radius: 4px;
+    -fx-padding: 10px;
+    -fx-alignment: center-left;
 }
 
-.library-cell .button-box {
+.library-cell .outer-box .thumbnail-scroll-pane .thumbnail-box .image-wrapper {
+    -fx-padding: 10px 10px 10px 0px;
+    -fx-border-width: 0px 1px 0px 0px;
+    -fx-border-style: dashed;
+    -fx-border-color: lightgrey;
+    -fx-border-insets: 0px 0px 10px 0px;
+}
+
+.library-cell .outer-box .thumbnail-scroll-pane .thumbnail-box .image-wrapper.last {
+    -fx-border-width: 0px;
+}
+
+.library-cell .outer-box .hbox .vbox .title-label {
+    -fx-graphic-text-gap: 20px;
+}
+
+.library-cell .outer-box .hbox .vbox .title-label .license-label {
+    -fx-font-size: 10;
+    -fx-padding: 2px 5px;
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 2px;
+}
+
+.library-cell .outer-box .hbox .vbox .title-label .license-label.commercial {
+    -fx-background-color: -red;
+    -fx-text-fill: white;
+}
+
+.library-cell .outer-box .hbox .vbox .description-label {
+}
+
+.library-cell .outer-box .button-box {
     -fx-spacing: 10px;
 }
 
-.library-cell .button-box .button .ikonli-font-icon {
+.library-cell .outer-box .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
 }
 
@@ -845,7 +902,6 @@
 }
 
 .pretty-scroll-pane .scroll-to-top-button:hover .ikonli-font-icon {
-    -fx-icon-color: -slate-green;
 }
 
 .pretty-scroll-pane .viewport {
@@ -923,4 +979,176 @@
 
 .video-cell .description-label {
     -fx-font-size: 14px;
+}
+
+
+/* ----------------------------------------------------------------------------
+ * Markdown
+ */
+.markdown-text {
+    -fx-font-family: "Open Sans Regular";
+}
+
+.markdown-normal-flow {
+}
+
+.markdown-heading .markdown-text {
+    -fx-fill: -mdfx-font-color;
+}
+
+.markdown-heading-1 { -fx-padding: 0px 0px 14px 0px;}
+.markdown-heading-2 { -fx-padding: 10px 0px 0px 0px;}
+.markdown-heading-3 { -fx-padding: 0px 0px 8px 0px; }
+.markdown-heading-4 { -fx-padding: 0px 0px 6px 0px; }
+.markdown-heading-5 { -fx-padding: 0px 0px 4px 0px; }
+
+.markdown-heading-1 .markdown-text {
+    -fx-font-size: 24;
+    -fx-font-family: "Open Sans Semibold";
+}
+
+.markdown-heading-2 .markdown-text {
+    -fx-font-size: 18;
+    -fx-font-family: "Open Sans Semibold";
+}
+
+.markdown-heading-3 .markdown-text {
+    -fx-font-size: 14;
+    -fx-font-family: "Open Sans Semibold";
+}
+
+.markdown-heading-4 .markdown-text {
+    -fx-font-size: 12;
+}
+
+.markdown-heading-5 .markdown-text {
+    -fx-font-size: 12;
+}
+
+.markdown-link {
+    -fx-fill: -mdfx-link-color;
+}
+.markdown-link-hover {
+    -fx-underline: true;
+}
+
+.markdown-paragraph-list {
+    -fx-spacing: 15;
+}
+
+.markdown-listitem-dot {
+    -fx-font-size: 16;
+    -fx-text-fill: -mdfx-font-color;
+}
+
+.markdown-codeblock-box,
+.markdown-code {
+    -fx-padding: 0 8 0 8;
+}
+
+.markdown-code {
+    /*-fx-max-width: 300*/
+}
+
+.markdown-code,
+.markdown-codeblock {
+    -fx-wrap-text: true;
+    -fx-font-size: 16;
+}
+
+.markdown-codeblock-box,
+.markdown-code-background {
+    -fx-padding: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-border-width: 0.5;
+    -fx-background-radius: 8;
+    -fx-background-color: #00000009; /*  -mdfx-bg-color-3*/
+}
+
+.markdown-code-background {
+    -fx-border-width: 0;
+    -fx-background-color: #0000AA10;  /*  -mdfx-bg-color-3*/
+}
+
+.markdown-code-anti-padding {
+    /*-fx-padding: -8;*/
+    -fx-border-color: red;
+    -fx-border-width: 1;
+}
+
+.markdown-table-table {
+    -fx-vgap: -1;
+    -fx-hgap: -1;
+}
+
+.markdown-table-cell {
+    -fx-padding: 8;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-border-width: 0;
+}
+
+.markdown-table-even {
+    -fx-background-color: -mdfx-bg-color-1;
+}
+.markdown-table-odd {
+    -fx-background-color: -mdfx-bg-color-2;
+}
+.markdown-table-cell-top {
+    -fx-background-color: -mdfx-bg-color-3;
+}
+.markdown-table-cell-top .markdown-normal-flow {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.markdown-hbox1 {
+    -fx-spacing: 0;
+    -fx-padding: 8;
+}
+
+/*
+.markdown-hbox1 {
+  -fx-background-color: red;
+}
+.markdown-vbox1 {
+  -fx-background-color: orange;
+}
+*/
+
+/* ----------------------------------------------------------------------------
+ * DetailedPersonCell
+ */
+.detailed-person-cell .hbox .photo-view {
+    -size: 100px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.detailed-person-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.detailed-person-cell .hbox .vbox {
+    -fx-spacing: 20px;
+}
+
+.detailed-person-cell .hbox .vbox .name-label {
+    -fx-graphic-text-gap: 10px;
+}
+
+.detailed-person-cell .hbox .vbox .name-label .badges-box {
+    -fx-spacing: 10px;
+    -fx-translate-y: -5px;
+}
+
+.detailed-person-cell .hbox .vbox .description-label {
+}
+
+.detailed-person-cell .hbox .vbox .social-box {
+    -fx-spacing: 10px;
 }

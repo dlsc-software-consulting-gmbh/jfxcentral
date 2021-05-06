@@ -22,7 +22,7 @@ public class DukeAnimationView extends StackPane {
             if (i < 10) {
                 counter = "0" + counter;
             }
-            images[i] = new Image(DukeAnimationView.class.getResource("duke/duke_jfx" + counter + ".png").toExternalForm());
+            images[i] = new Image(DukeAnimationView.class.getResource("dukesmall/duke_jfx" + counter + ".png").toExternalForm());
         }
     }
 
