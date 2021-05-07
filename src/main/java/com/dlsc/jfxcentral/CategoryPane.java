@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.categories.BooksView;
+import com.dlsc.jfxcentral.categories.LibrariesView;
 import com.dlsc.jfxcentral.categories.PeopleView;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.views.BookView;
@@ -11,6 +12,7 @@ class CategoryPane extends ViewPane {
     private PeopleView peopleView;
     private BooksView booksView;
     private VideosView videosView;
+    private LibrariesView librariesView;
 
     public CategoryPane(RootPane rootPane) {
         getStyleClass().add("category-pane");
@@ -18,13 +20,14 @@ class CategoryPane extends ViewPane {
         peopleView = new PeopleView(rootPane);
         booksView = new BooksView(rootPane);
         videosView = new VideosView(rootPane);
+        librariesView = new LibrariesView(rootPane);
 
         viewProperty().addListener(it -> updateView(rootPane));
         updateView(rootPane);
 
         rootPane.registerOpenHandler(Book.class, book -> {
             rootPane.setView(View.BOOKS);
-            ((BookView) (booksView.getPanel())).setBook(book);
+            ((BookView) (booksView.getDetailPane())).setBook(book);
         });
     }
 
@@ -36,18 +39,21 @@ class CategoryPane extends ViewPane {
                 break;
             case PEOPLE:
                 getChildren().setAll(peopleView);
-                rootPane.getRightPane().setContent(peopleView.getPanel());
+                rootPane.getRightPane().setContent(peopleView.getDetailPane());
                 break;
             case BOOKS:
                 getChildren().setAll(booksView);
-                rootPane.getRightPane().setContent(booksView.getPanel());
+                rootPane.getRightPane().setContent(booksView.getDetailPane());
                 break;
             case VIDEOS:
                 getChildren().clear();
                 rootPane.getRightPane().setContent(videosView);
+                break;
             case LEARN:
                 break;
-            case LIBS:
+            case LIBRARIES:
+                getChildren().setAll(librariesView);
+                rootPane.getRightPane().setContent(librariesView.getDetailPane());
                 break;
             case BLOGS:
                 break;

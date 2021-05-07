@@ -5,7 +5,7 @@ public enum View {
     OPENJFX,
     PEOPLE,
     LEARN,
-    LIBS,
+    LIBRARIES,
     BLOGS,
     BOOKS,
     VIDEOS

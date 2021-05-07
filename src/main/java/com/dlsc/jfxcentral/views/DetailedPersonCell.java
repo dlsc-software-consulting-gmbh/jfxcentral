@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral.util.Util;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -23,8 +22,8 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
     private Label descriptionLabel = new Label();
-    private ImageView championImageView = new ImageView();
-    private ImageView rockstarImageView = new ImageView();
+    private javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
+    private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
     public DetailedPersonCell() {
         getStyleClass().add("detailed-person-cell");

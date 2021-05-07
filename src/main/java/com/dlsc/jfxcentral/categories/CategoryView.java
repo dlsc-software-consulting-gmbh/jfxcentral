@@ -21,5 +21,5 @@ public abstract class CategoryView extends BorderPane {
         return rootPane;
     }
 
-    public abstract Node getPanel();
+    public abstract Node getDetailPane();
 }

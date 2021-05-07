@@ -70,7 +70,7 @@ class TopMenu extends VBox {
                 case LEARN:
                     toggleGroup.selectToggle(tutorialsButton);
                     break;
-                case LIBS:
+                case LIBRARIES:
                     toggleGroup.selectToggle(libsButton);
                     break;
                 case BLOGS:
@@ -100,7 +100,7 @@ class TopMenu extends VBox {
             } else if (newSelection == tutorialsButton) {
                 setView(View.LEARN);
             } else if (newSelection == libsButton) {
-                setView(View.LIBS);
+                setView(View.LIBRARIES);
             } else if (newSelection == blogsButton) {
                 setView(View.BLOGS);
             } else if (newSelection == booksButton) {

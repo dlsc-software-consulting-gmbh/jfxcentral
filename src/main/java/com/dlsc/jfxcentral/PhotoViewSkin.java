@@ -14,7 +14,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Priority;
@@ -81,7 +80,7 @@ public class PhotoViewSkin extends SkinBase<PhotoView> {
 
         private final CropService cropService;
 
-        private final ImageView imageView;
+        private final javafx.scene.image.ImageView imageView;
         private final Circle circle;
         private final Rectangle rectangle;
 
@@ -91,7 +90,7 @@ public class PhotoViewSkin extends SkinBase<PhotoView> {
         public ImageBox(PhotoView view) {
             cropService = new CropService();
 
-            imageView = new ImageView();
+            imageView = new javafx.scene.image.ImageView();
             imageView.setPreserveRatio(true);
             imageView.imageProperty().bind(view.photoProperty());
             imageView.scaleXProperty().bind(view.photoZoomProperty());

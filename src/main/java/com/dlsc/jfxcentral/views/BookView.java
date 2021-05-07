@@ -16,7 +16,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class BookView extends PageView {
 
-    private ImageView coverImageView = new ImageView();
+    private javafx.scene.image.ImageView coverImageView = new javafx.scene.image.ImageView();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
     private MarkdownView descriptionLabel = new MarkdownView();

@@ -1,25 +1,27 @@
 package com.dlsc.jfxcentral.views;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.*;
-import com.dlsc.jfxcentral.model.*;
-import com.dlsc.jfxcentral.panels.LicenseLabel;
+import com.dlsc.jfxcentral.model.Book;
+import com.dlsc.jfxcentral.model.Library;
+import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.model.Video;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
-
-import java.util.List;
 
 public class PersonView extends PageView {
 
@@ -27,8 +29,8 @@ public class PersonView extends PageView {
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
     private Label descriptionLabel = new Label();
-    private ImageView championImageView = new ImageView();
-    private ImageView rockstarImageView = new ImageView();
+    private javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
+    private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
     private VBox content = new VBox();
 
@@ -109,7 +111,7 @@ public class PersonView extends PageView {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new LibraryCell());
+        listView.setCellFactory(view -> new LibraryCell(getRootPane()));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Libraries");
@@ -250,176 +252,6 @@ public class PersonView extends PageView {
         this.person.set(person);
     }
 
-    class LibraryCell extends AdvancedListCell<Library> {
-
-        private final Button homepageButton;
-        private final Button repositoryButton;
-        private final Button issueTrackerButton;
-        private final Button discussionsButton;
-        private final HBox thumbnailBox;
-
-        private Label titleLabel = new Label();
-        private Label descriptionLabel = new Label();
-
-        private ImageView logoImageView = new ImageView();
-        private HBox buttonBox = new HBox();
-
-        private LicenseLabel licenseLabel = new LicenseLabel();
-
-        public LibraryCell() {
-            getStyleClass().add("library-cell");
-
-            titleLabel.getStyleClass().addAll("header3", "title-label");
-            titleLabel.setWrapText(true);
-            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
-            titleLabel.setAlignment(Pos.TOP_LEFT);
-            titleLabel.setGraphic(licenseLabel);
-            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
-
-            buttonBox.getStyleClass().add("button-box");
-
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setWrapText(true);
-            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-            descriptionLabel.setAlignment(Pos.TOP_LEFT);
-
-            homepageButton = new Button("Homepage");
-            homepageButton.getStyleClass().addAll("library-button", "homepage");
-            homepageButton.setOnAction(evt -> Util.browse(getItem().getHomepage()));
-            homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
-            buttonBox.getChildren().add(homepageButton);
-
-            repositoryButton = new Button("Repository");
-            repositoryButton.getStyleClass().addAll("library-button", "repository");
-            repositoryButton.setOnAction(evt -> Util.browse(getItem().getRepository()));
-            repositoryButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
-            buttonBox.getChildren().add(repositoryButton);
-
-            issueTrackerButton = new Button("Issues");
-            issueTrackerButton.getStyleClass().addAll("library-button", "issues");
-            issueTrackerButton.setOnAction(evt -> Util.browse(getItem().getIssueTracker()));
-            issueTrackerButton.setGraphic(new FontIcon(MaterialDesign.MDI_BUG));
-            buttonBox.getChildren().add(issueTrackerButton);
-
-            discussionsButton = new Button("Discussion");
-            discussionsButton.getStyleClass().addAll("library-button", "discussion");
-            discussionsButton.setOnAction(evt -> Util.browse(getItem().getDiscussionBoard()));
-            discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
-            buttonBox.getChildren().add(discussionsButton);
-
-            thumbnailBox = new HBox();
-            thumbnailBox.getStyleClass().add("thumbnail-box");
-
-            ScrollPane scrollPane = new ScrollPane(thumbnailBox);
-            scrollPane.getStyleClass().add("thumbnail-scroll-pane");
-            scrollPane.setFitToWidth(true);
-            scrollPane.setFitToHeight(true);
-            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            scrollPane.visibleProperty().bind(Bindings.isNotEmpty(thumbnailBox.getChildren()));
-            scrollPane.managedProperty().bind(Bindings.isNotEmpty(thumbnailBox.getChildren()));
-
-            VBox vBox = new VBox(titleLabel, descriptionLabel);
-            vBox.getStyleClass().add("vbox");
-            vBox.setAlignment(Pos.TOP_LEFT);
-
-            HBox.setHgrow(vBox, Priority.ALWAYS);
-
-            logoImageView.setFitWidth(48);
-            logoImageView.setPreserveRatio(true);
-
-            StackPane logoWrapper = new StackPane(logoImageView);
-            logoWrapper.setMinWidth(48);
-            logoWrapper.setMaxWidth(48);
-            StackPane.setAlignment(logoImageView, Pos.TOP_LEFT);
-
-            HBox hBox = new HBox(vBox, logoWrapper);
-            hBox.setAlignment(Pos.TOP_LEFT);
-            hBox.getStyleClass().add("hbox");
-
-            VBox outerBox = new VBox(hBox, scrollPane);
-            outerBox.visibleProperty().bind(itemProperty().isNotNull());
-            outerBox.getStyleClass().add("outer-box");
-
-            setGraphic(outerBox);
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        }
-
-        @Override
-        protected void updateItem(Library item, boolean empty) {
-            super.updateItem(item, empty);
-
-            thumbnailBox.getChildren().clear();
-
-            if (!empty && item != null) {
-                licenseLabel.setLicense(item.getLicense());
-                licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
-
-                logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
-                logoImageView.setVisible(true);
-
-                titleLabel.setText(item.getTitle());
-                descriptionLabel.setText(item.getDescription());
-
-                homepageButton.setVisible(StringUtils.isNotEmpty(item.getHomepage()));
-                homepageButton.setManaged(StringUtils.isNotEmpty(item.getHomepage()));
-
-                repositoryButton.setVisible(StringUtils.isNotEmpty(item.getRepository()));
-                repositoryButton.setManaged(StringUtils.isNotEmpty(item.getRepository()));
-
-                issueTrackerButton.setVisible(StringUtils.isNotEmpty(item.getIssueTracker()));
-                issueTrackerButton.setManaged(StringUtils.isNotEmpty(item.getIssueTracker()));
-
-                discussionsButton.setVisible(StringUtils.isNotEmpty(item.getDiscussionBoard()));
-                discussionsButton.setManaged(StringUtils.isNotEmpty(item.getDiscussionBoard()));
-
-                buttonBox.setVisible(homepageButton.isVisible() || repositoryButton.isVisible() || issueTrackerButton.isVisible() || discussionsButton.isVisible());
-                buttonBox.setManaged(buttonBox.isVisible());
-
-                List<Image> images = item.getImages();
-                for (int i = 0; i < images.size(); i++) {
-
-                    Image image = images.get(i);
-                    ImageView imageView = new ImageView();
-                    imageView.setFitWidth(100);
-                    imageView.setFitHeight(100);
-                    imageView.setPreserveRatio(true);
-                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, image.getPath()));
-
-                    final int imageIndex = i;
-
-                    imageView.setOnMouseClicked(evt -> {
-                        Pagination pagination = new Pagination();
-                        pagination.setPageCount(images.size());
-                        pagination.setPageFactory(page -> {
-
-                            ImageView bigImageView = new ImageView();
-                            bigImageView.setPreserveRatio(true);
-                            bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item, images.get(page).getPath()));
-
-                            StackPane stackPane = new StackPane(bigImageView);
-                            bigImageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
-                            bigImageView.fitHeightProperty().bind(stackPane.heightProperty().multiply(.8));
-
-                            return stackPane;
-                        });
-
-                        pagination.setCurrentPageIndex(imageIndex);
-
-                        getRootPane().getDialogPane().showNode(DialogPane.Type.INFORMATION, image.getTitle(), pagination, true);
-                    });
-
-                    StackPane imageWrapper = new StackPane(imageView);
-                    imageWrapper.getStyleClass().add("image-wrapper");
-                    if (i == images.size() - 1) {
-                        imageWrapper.getStyleClass().add("last");
-                    }
-
-                    thumbnailBox.getChildren().add(imageWrapper);
-                }
-            }
-        }
-    }
-
     class PersonBookCell extends AdvancedListCell<Book> {
 
         private final Button detailsButton;
@@ -431,7 +263,7 @@ public class PersonView extends PageView {
         private Label authorsLabel = new Label();
         private Label descriptionLabel = new Label();
 
-        private ImageView coverImageView = new ImageView();
+        private javafx.scene.image.ImageView coverImageView = new javafx.scene.image.ImageView();
         private HBox buttonBox = new HBox();
 
         public PersonBookCell() {

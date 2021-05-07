@@ -16,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class PeopleView extends CategoryView {
@@ -47,7 +46,7 @@ public class PeopleView extends CategoryView {
     }
 
     @Override
-    public Node getPanel() {
+    public Node getDetailPane() {
         if (personView == null) {
             personView = new PersonView(getRootPane());
             personView.personProperty().bind(personProperty());
@@ -74,8 +73,8 @@ public class PeopleView extends CategoryView {
 
         private final PhotoView photoView = new PhotoView();
         private final Label nameLabel = new Label();
-        private final ImageView championImageView = new ImageView();
-        private final ImageView rockstarImageView = new ImageView();
+        private final javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
+        private final javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
         public PersonCell() {
             getStyleClass().add("person-list-cell");

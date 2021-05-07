@@ -47,7 +47,7 @@ public class BooksView extends CategoryView {
     }
 
     @Override
-    public Node getPanel() {
+    public Node getDetailPane() {
         if (bookView == null) {
             bookView = new BookView(getRootPane());
             bookView.bookProperty().bind(listView.getSelectionModel().selectedItemProperty());
