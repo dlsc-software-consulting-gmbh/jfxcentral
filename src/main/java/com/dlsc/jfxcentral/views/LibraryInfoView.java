@@ -80,49 +80,51 @@ class LibraryInfoView extends ScrollPane {
         LibraryInfo info = getLibraryInfo();
 
         if (info != null) {
-                List<Image> images = info.getImages();
-                for (int i = 0; i < images.size(); i++) {
+            List<Image> images = info.getImages();
+            for (int i = 0; i < images.size(); i++) {
 
-                    Image image = images.get(i);
-                    ImageView imageView = new ImageView();
-                    imageView.setFitWidth(100);
-                    imageView.setFitHeight(100);
-                    imageView.setPreserveRatio(true);
-                    imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), image.getPath()));
+                Image image = images.get(i);
+                ImageView imageView = new ImageView();
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
+                imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), image.getPath()));
 
-                    final int imageIndex = i;
+                final int imageIndex = i;
 
-                    imageView.setOnMouseClicked(evt -> {
-                        Pagination pagination = new Pagination();
-                        pagination.setPageCount(images.size());
-                        pagination.setPageFactory(page -> {
+                imageView.setOnMouseClicked(evt -> {
+                    Pagination pagination = new Pagination();
+                    pagination.setPageCount(images.size());
+                    pagination.setPageFactory(page -> {
 
-                            ImageView bigImageView = new ImageView();
-                            bigImageView.setPreserveRatio(true);
-                            bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), images.get(page).getPath()));
+                        ImageView bigImageView = new ImageView();
+                        bigImageView.setPreserveRatio(true);
+                        bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), images.get(page).getPath()));
 
-                            StackPane stackPane = new StackPane(bigImageView);
-                            bigImageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
-                            bigImageView.fitHeightProperty().bind(stackPane.heightProperty().multiply(.8));
+                        StackPane stackPane = new StackPane(bigImageView);
+                        stackPane.setPrefSize(0, 0); // important
+                        stackPane.setMinSize(0, 0); // important
+                        bigImageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
+                        bigImageView.fitHeightProperty().bind(stackPane.heightProperty().multiply(.8));
 
-                            return stackPane;
-                        });
-
-                        pagination.setCurrentPageIndex(imageIndex);
-
-                        rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, image.getTitle(), pagination, true, Collections.emptyList());
-
-                        Platform.runLater(() -> pagination.requestFocus());
+                        return stackPane;
                     });
 
-                    StackPane imageWrapper = new StackPane(imageView);
-                    imageWrapper.getStyleClass().add("image-wrapper");
-                    if (i == images.size() - 1) {
-                        imageWrapper.getStyleClass().add("last");
-                    }
+                    pagination.setCurrentPageIndex(imageIndex);
 
-                    thumbnailBox.getChildren().add(imageWrapper);
+                    rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, image.getTitle(), pagination, true, Collections.emptyList());
+
+                    Platform.runLater(() -> pagination.requestFocus());
+                });
+
+                StackPane imageWrapper = new StackPane(imageView);
+                imageWrapper.getStyleClass().add("image-wrapper");
+                if (i == images.size() - 1) {
+                    imageWrapper.getStyleClass().add("last");
                 }
+
+                thumbnailBox.getChildren().add(imageWrapper);
+            }
         }
     }
 }

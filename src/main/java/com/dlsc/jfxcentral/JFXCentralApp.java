@@ -33,6 +33,7 @@ public class JFXCentralApp extends Application {
 
             final AudioClip plonkSound = new AudioClip(JFXCentralApp.class.getResource("sound.wav").toExternalForm());
             plonkSound.setVolume(.5);
+            plonkSound.setCycleCount(1);
 
             scene = new Scene(animationView);
             scene.setFill(Color.rgb(68, 131, 160));
@@ -40,6 +41,7 @@ public class JFXCentralApp extends Application {
                 plonkSound.setVolume(0);
                 plonkSound.stop();
                 showRootPane();
+                scene.setFill(Color.rgb(224, 229, 234));
             });
 
             Thread thread = new Thread(() -> {
