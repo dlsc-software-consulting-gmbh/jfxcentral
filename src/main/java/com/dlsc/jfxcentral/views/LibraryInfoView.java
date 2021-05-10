@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Image;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.model.LibraryInfo;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.util.Collections;
 import java.util.List;
 
 class LibraryInfoView extends ScrollPane {
@@ -108,7 +110,9 @@ class LibraryInfoView extends ScrollPane {
 
                         pagination.setCurrentPageIndex(imageIndex);
 
-                        rootPane.getDialogPane().showNode(DialogPane.Type.INFORMATION, image.getTitle(), pagination, true);
+                        rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, image.getTitle(), pagination, true, Collections.emptyList());
+
+                        Platform.runLater(() -> pagination.requestFocus());
                     });
 
                     StackPane imageWrapper = new StackPane(imageView);

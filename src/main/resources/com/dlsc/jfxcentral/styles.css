@@ -1200,3 +1200,55 @@
 .detailed-person-cell .hbox .vbox .social-box {
     -fx-spacing: 10px;
 }
+
+/* ----------------------------------------------------------------------------
+ * DialogPane
+ */
+.root-pane > .dialog-pane > .content-pane {
+    -fx-border-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 3px;
+    -fx-background-color: rgba(0, 0, 0, .5) !important;
+    -fx-effect: -drop-shadow-3;
+    -fx-min-width: 350px;
+    -fx-min-height: 250px;
+}
+
+.root-pane > .dialog-pane > .content-pane > .close-button {
+    -fx-background-radius: 3px;
+    -fx-background-color: rgba(255, 255, 255, 1) !important;
+    -fx-background-insets: 0px;
+    -fx-padding: 2px;
+    -size: 50px !important;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-translate-x: -10px;
+    -fx-translate-y: 10px;
+}
+
+.root-pane > .dialog-pane > .content-pane > .close-button:hover {
+    -fx-background-color: rgba(100, 112, 122, 1) !important;
+    -fx-opacity: 1 !important;
+}
+
+.root-pane .dialog-pane > .content-pane > .close-button:hover .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.root-pane > .dialog-pane > .content-pane > .close-button:pressed {
+    -fx-background-color: rgba(100, 112, 122, 0.1);
+}
+
+.root-pane .dialog-pane > .content-pane > .close-button .ikonli-font-icon {
+    -fx-icon-color: -fx-text-background-color;
+    -fx-icon-size: 48px !important;
+}
+
+.root-pane > .dialog-pane .pagination .pagination-control {
+    -fx-pref-height: 0px;
+    -fx-opacity: 0;
+}

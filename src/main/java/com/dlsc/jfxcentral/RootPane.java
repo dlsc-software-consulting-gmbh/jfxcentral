@@ -18,6 +18,8 @@ public class RootPane extends ViewPane {
     public RootPane() {
         getStyleClass().add("root-pane");
 
+        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+
         SideBar sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());
 
