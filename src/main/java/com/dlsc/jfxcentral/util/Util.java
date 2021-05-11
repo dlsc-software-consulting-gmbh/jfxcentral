@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.util;
 
 import com.gluonhq.attach.browser.BrowserService;
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.io.IOException;
@@ -9,7 +10,8 @@ import java.net.URISyntaxException;
 
 public class Util {
 
-    public static void browse(String url) {
+    public static void browse(String link) {
+        String url = StringUtils.deleteWhitespace(link);
         BrowserService.create().ifPresentOrElse(service -> {
             try {
                 service.launchExternalBrowser(url);

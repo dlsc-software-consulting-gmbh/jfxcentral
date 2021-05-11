@@ -6,7 +6,6 @@ import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -31,15 +30,15 @@ public class JFXCentralApp extends Application {
 
 //            AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
 
-            final AudioClip plonkSound = new AudioClip(JFXCentralApp.class.getResource("sound.wav").toExternalForm());
-            plonkSound.setVolume(.5);
-            plonkSound.setCycleCount(1);
+//            final AudioClip plonkSound = new AudioClip(JFXCentralApp.class.getResource("sound.wav").toExternalForm());
+//            plonkSound.setVolume(.5);
+//            plonkSound.setCycleCount(1);
 
             scene = new Scene(animationView);
             scene.setFill(Color.rgb(68, 131, 160));
             animationView.setOnMouseClicked(evt -> {
-                plonkSound.setVolume(0);
-                plonkSound.stop();
+//                plonkSound.setVolume(0);
+//                plonkSound.stop();
                 showRootPane();
                 scene.setFill(Color.rgb(224, 229, 234));
             });
@@ -50,7 +49,7 @@ public class JFXCentralApp extends Application {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                plonkSound.play();
+//                plonkSound.play();
             });
             thread.setName("Audio Thread");
             thread.setDaemon(true);

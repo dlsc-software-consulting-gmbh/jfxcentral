@@ -524,6 +524,105 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * LibraryView
+ */
+.library-view {
+}
+
+.library-view .list-cell:selected {
+    -fx-background-color: white !important;
+}
+
+.library-view .title-section .hbox {
+    -fx-spacing: 20px;
+}
+
+.library-view .title-section .hbox .photo-view {
+    -size: 100px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.library-view .title-section .hbox .vbox {
+    -fx-spacing: 20px;
+}
+
+.library-view .title-section .hbox .vbox .name-label {
+    -fx-graphic-text-gap: 10px;
+}
+
+.library-view .title-section .hbox .vbox .name-label .badges-box {
+    -fx-spacing: 10px;
+    -fx-translate-y: -5px;
+}
+
+.library-view .title-section .hbox .vbox .description-label {
+}
+
+.library-view .title-section .hbox .vbox .social-box {
+    -fx-spacing: 10px;
+}
+
+.library-view .book-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: rgba(0, 0, 0, .2);
+}
+
+.library-view .book-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-background-insets: 2px -8px 3px -8px;
+    -fx-background-radius: 2px;
+}
+
+.library-view .book-cell:selected .label {
+    -fx-text-fill: white;
+}
+
+.library-view .book-cell.last {
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0px;
+}
+
+.library-view .book-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.library-view .book-cell .hbox .vbox {
+    -fx-spacing: 10px;
+}
+
+.library-view .book-cell .hbox .vbox .title-label {
+}
+
+.library-view .book-cell .hbox .vbox .subtitle-label {
+    -fx-font-family: "Open Sans Italic";
+}
+
+.library-view .book-cell .hbox .vbox .description-label {
+}
+
+.library-view-view .book-cell .hbox .vbox .authors-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-accent;
+}
+
+.library-view .book-cell .button-box {
+    -fx-spacing: 10px;
+}
+
+.library-view .book-cell .button-box .button .ikonli-font-icon {
+    -fx-icon-size: 18px;
+}
+
+/* ----------------------------------------------------------------------------
  * DukeAnimationView
  */
 .duke-animation-view {
@@ -808,7 +907,7 @@
     -fx-graphic-text-gap: 20px;
 }
 
-.library-cell .outer-box .hbox .vbox .description-label {
+.library-cell .outer-box .hbox .vbox .summary-label {
 }
 
 .library-cell .outer-box .button-box {

@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -25,13 +26,12 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class PersonView extends PageView {
 
-    private HBox socialBox;
+    private HBox linksBox;
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
     private Label descriptionLabel = new Label();
-    private javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
-    private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
-
+    private ImageView championImageView = new ImageView();
+    private ImageView rockstarImageView = new ImageView();
     private VBox content = new VBox();
 
     public PersonView(RootPane rootPane) {
@@ -159,10 +159,10 @@ public class PersonView extends PageView {
         nameLabel.setGraphic(badgesBox);
         nameLabel.setContentDisplay(ContentDisplay.RIGHT);
 
-        socialBox = new HBox();
-        socialBox.getStyleClass().add("social-box");
+        linksBox = new HBox();
+        linksBox.getStyleClass().add("social-box");
 
-        VBox vBox = new VBox(nameLabel, descriptionLabel, badgesBox, socialBox);
+        VBox vBox = new VBox(nameLabel, descriptionLabel, badgesBox, linksBox);
         vBox.getStyleClass().add("vbox");
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
@@ -183,14 +183,14 @@ public class PersonView extends PageView {
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());
             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-            socialBox.getChildren().clear();
+            linksBox.getChildren().clear();
 
             if (StringUtils.isNotEmpty(person.getTwitter())) {
                 Button twitter = new Button("Twitter");
                 twitter.getStyleClass().addAll("social-button", "twitter");
                 twitter.setOnAction(evt -> Util.browse("https://twitter.com/" + person.getTwitter()));
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
-                socialBox.getChildren().add(twitter);
+                linksBox.getChildren().add(twitter);
             }
 
             if (StringUtils.isNotEmpty(person.getLinkedIn())) {
@@ -201,7 +201,7 @@ public class PersonView extends PageView {
                     Util.browse("https://www.linkedin.com/in/" + person.getLinkedIn());
                 });
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
-                socialBox.getChildren().add(linkedIn);
+                linksBox.getChildren().add(linkedIn);
             }
 
             if (StringUtils.isNotEmpty(person.getBlogId())) {
@@ -209,7 +209,7 @@ public class PersonView extends PageView {
                 blog.getStyleClass().addAll("social-button", "blog");
                 blog.setOnAction(evt -> Util.browse(""));
                 blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
-                socialBox.getChildren().add(blog);
+                linksBox.getChildren().add(blog);
             }
 
             if (StringUtils.isNotEmpty(person.getWebsite())) {
@@ -217,7 +217,7 @@ public class PersonView extends PageView {
                 website.getStyleClass().addAll("social-button", "website");
                 website.setOnAction(evt -> Util.browse(person.getWebsite()));
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
-                socialBox.getChildren().add(website);
+                linksBox.getChildren().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getEmail())) {
@@ -225,7 +225,7 @@ public class PersonView extends PageView {
                 website.getStyleClass().addAll("social-button", "mail");
                 website.setOnAction(evt -> Util.browse("mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact"));
                 website.setGraphic(new FontIcon(Material.MAIL));
-                socialBox.getChildren().add(website);
+                linksBox.getChildren().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getGitHub())) {
@@ -233,7 +233,7 @@ public class PersonView extends PageView {
                 github.getStyleClass().addAll("social-button", "github");
                 github.setOnAction(evt -> Util.browse("https://github.com/" + person.getGitHub()));
                 github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
-                socialBox.getChildren().add(github);
+                linksBox.getChildren().add(github);
             }
         }
     }

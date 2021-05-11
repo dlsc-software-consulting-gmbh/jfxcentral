@@ -25,7 +25,7 @@ public class LibraryCell extends AdvancedListCell<Library> {
         private final LibraryInfoView infoView;
 
         private Label titleLabel = new Label();
-        private Label descriptionLabel = new Label();
+        private Label summaryLabel = new Label();
 
         private ImageView logoImageView = new ImageView();
         private HBox buttonBox = new HBox();
@@ -44,10 +44,10 @@ public class LibraryCell extends AdvancedListCell<Library> {
 
             buttonBox.getStyleClass().add("button-box");
 
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setWrapText(true);
-            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-            descriptionLabel.setAlignment(Pos.TOP_LEFT);
+            summaryLabel.getStyleClass().add("summary-label");
+            summaryLabel.setWrapText(true);
+            summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
+            summaryLabel.setAlignment(Pos.TOP_LEFT);
 
             homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
@@ -73,7 +73,7 @@ public class LibraryCell extends AdvancedListCell<Library> {
             discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
             buttonBox.getChildren().add(discussionsButton);
 
-            VBox vBox = new VBox(titleLabel, descriptionLabel);
+            VBox vBox = new VBox(titleLabel, summaryLabel);
             vBox.getStyleClass().add("vbox");
             vBox.setAlignment(Pos.TOP_LEFT);
 
@@ -121,7 +121,7 @@ public class LibraryCell extends AdvancedListCell<Library> {
                 logoImageView.setVisible(true);
 
                 titleLabel.setText(item.getTitle());
-                descriptionLabel.setText(item.getDescription());
+                summaryLabel.setText(item.getSummary());
 
                 homepageButton.setVisible(StringUtils.isNotEmpty(item.getHomepage()));
                 homepageButton.setManaged(StringUtils.isNotEmpty(item.getHomepage()));

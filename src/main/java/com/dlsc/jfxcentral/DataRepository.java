@@ -12,11 +12,10 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
@@ -104,6 +103,24 @@ public class DataRepository {
         });
     }
 
+    private Map<Library, ObjectProperty<String>> libraryReadMeMap = new HashMap<>();
+
+    public ObjectProperty<String> libraryReadMeProperty(Library library) {
+        return libraryReadMeMap.computeIfAbsent(library, key -> {
+            ObjectProperty<String> readmeProperty = new SimpleObjectProperty<>();
+
+            String readmeFileURL = library.getReadmeFileURL();
+            if (StringUtils.isNotBlank(readmeFileURL)) {
+                executor.submit(() -> {
+                    String readmeText = loadString(library.getReadmeFileURL());
+                    Platform.runLater(() -> readmeProperty.set(readmeText));
+                });
+            }
+
+            return readmeProperty;
+        });
+    }
+
     public ListProperty<Book> getBooksByPerson(Person person) {
         ObservableList<Book> list = FXCollections.observableArrayList();
         list.setAll(getBooks().stream().filter(book -> book.getPersonIds().contains(person.getId())).collect(Collectors.toList()));
@@ -175,6 +192,31 @@ public class DataRepository {
         FileChannel writeChannel = fileOS.getChannel();
         writeChannel.transferFrom(readChannel, 0, Long.MAX_VALUE);
         return file;
+    }
+
+    private String loadString(String address) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL url = new URL(address);
+
+            // read text returned by server
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+                sb.append(line);
+                sb.append("\n");
+            }
+            in.close();
+
+        } catch (MalformedURLException e) {
+            System.out.println("Malformed URL: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("I/O Error: " + e.getMessage());
+        }
+
+        return sb.toString();
     }
 
     public static void main(String[] args) {
