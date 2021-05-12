@@ -28,7 +28,15 @@
     src: url("fonts/OpenSans-SemiBoldItalic.ttf");
 }
 
+@font-face {
+    font-family: "JetBrains Mono";
+    font-face-name: "JetBrains Mono Regular";
+    src: url("fonts/JetBrainsMono-Regular.ttf");
+}
+
 .root {
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
     -fx-font-family: "Open Sans Regular";
     -fx-accent: rgb(68, 131, 160);
 
@@ -44,6 +52,7 @@
     -mdfx-link-color: -fx-accent;
     -mdfx-border-color-1: #888;
 
+    -mdfx-font-color: black;
     -mdfx-bg-color-1: #ccc;
     -mdfx-bg-color-2: #ddd;
     -mdfx-bg-color-3: #eee;
@@ -165,9 +174,10 @@
     -fx-background-color: transparent;
     -fx-border-width: 0px 3px 0px 3px;
     -fx-border-color: transparent transparent transparent transparent;
-    -fx-font-family: "Open Sans Regular";
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-opacity: .6;
     -fx-font-size: 14px;
-    -fx-text-fill: rgba(0, 0, 0, .6);
+    -fx-text-fill: black;
     -fx-graphic-text-gap: 10px;
 }
 
@@ -177,6 +187,7 @@
 
 .top-menu .toggle-button:hover,
 .top-menu .toggle-button:hover:selected {
+    -fx-opacity: 1;
     -fx-background-color: -red;
     -fx-border-color: transparent transparent transparent derive(-red, -20%);
     -fx-text-fill: white;
@@ -184,6 +195,7 @@
 
 .top-menu .toggle-button:pressed,
 .top-menu .toggle-button:pressed:selected {
+    -fx-opacity: 1;
     -fx-background-color: rgba(250, 0, 20, .5);
 }
 
@@ -193,6 +205,7 @@
 }
 
 .top-menu .toggle-button:selected {
+    -fx-opacity: 1;
     -fx-background-padding: 0px;
     -fx-background-color: -fx-accent;
     -fx-border-width: 0px 3px 0px 3px;
@@ -202,7 +215,7 @@
 
 .top-menu .toggle-button .ikonli-font-icon {
     -fx-icon-size: 24px;
-    -fx-icon-color: -grey;
+    -fx-icon-color: black;
 }
 
 .top-menu .toggle-button:selected .ikonli-font-icon {
@@ -260,6 +273,16 @@
     -fx-grid-lines-visible: false;
 }
 
+.category-pane .list-view .person-list-cell .rockstar-label,
+.category-pane .list-view .person-list-cell .champion-label {
+    -fx-font-size: 8;
+    -fx-padding: 0px 3px;
+    -fx-border-color: -fx-accent;
+    -fx-border-radius: 2px;
+    -fx-text-fill: -fx-accent;
+    -fx-opacity: .5;
+}
+
 .category-pane .list-view .person-list-cell .grid-pane .photo-view {
     -size: 30px;
     -fx-min-width: -size;
@@ -280,9 +303,8 @@
 }
 
 .category-pane .list-view .person-list-cell .grid-pane .name-label {
-    -fx-font-size: 12px;
     -fx-font-family: "Open Sans SemiBold";
-    -fx-text-fill: black;
+    -fx-text-fill: -fx-accent;
 }
 
 /* ----------------------------------------------------------------------------
@@ -299,9 +321,8 @@
 }
 
 .category-pane .list-view .library-list-cell .grid-pane .name-label {
-    -fx-font-size: 12px;
     -fx-font-family: "Open Sans SemiBold";
-    -fx-text-fill: black;
+    -fx-text-fill: -fx-accent;
 }
 
 /* ----------------------------------------------------------------------------
@@ -309,7 +330,7 @@
  */
 
 .category-header {
-    -fx-padding: 10px;
+    -fx-padding: 10px 10px;
     -fx-spacing: 10px;
 }
 
@@ -323,9 +344,8 @@
 }
 
 .category-header .search-field {
-    -fx-background-radius: 1000px;
+    -fx-background-radius: 4px;
     -fx-pref-width: 150px;
-    -fx-max-width: 150px;
 }
 
 .page {
@@ -424,7 +444,6 @@
 }
 
 .person-view .book-cell .hbox .vbox .authors-label {
-    -fx-font-size: 14px;
     -fx-text-fill: -fx-accent;
 }
 
@@ -445,50 +464,49 @@
 .book-view .title-section {
 }
 
-.book-view .title-section .horizontal-box {
+.book-view .title-section .content {
     -fx-spacing: 20px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box {
+.book-view .title-section .content .horizontal-box {
+    -fx-spacing: 20px;
+}
+
+.book-view .title-section .content .horizontal-box .vertical-box {
     -fx-spacing: 10px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .title-label {
+.book-view .title-section .content .horizontal-box .vertical-box .title-label {
     -fx-graphic-text-gap: 10px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .subtitle-label {
-    -fx-font-family: "Open Sans Italic";
+.book-view .title-section .content .horizontal-box .vertical-box .subtitle-label {
     -fx-font-size: 16px;
+    -fx-opacity: .8;
+    -fx-translate-y: -10px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .authors-label {
-    -fx-font-size: 16px;
+.book-view .title-section .content .horizontal-box .vertical-box .authors-label {
     -fx-text-fill: -fx-accent;
-    -fx-font-family: "Open Sans";
-    -fx-font-style: italic;
+    -fx-translate-y: -10px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .description-label {
-    -fx-font-size: 16px;
+.book-view .title-section .content .horizontal-box .vertical-box .description-markdown-view {
     -fx-padding: 30px 0px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .publish-date-label,
-.book-view .title-section .horizontal-box .vertical-box .isbn-label {
-    -fx-font-size: 14px;
+.book-view .title-section .content .publish-date-label,
+.book-view .title-section .content .isbn-label {
     -fx-text-fill: -fx-accent;
-    -fx-font-family: "Open Sans";
-    -fx-font-style: italic;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .author-title-label {
+.book-view .title-section .content .horizontal-box .vertical-box .author-title-label {
     -fx-font-size: 16px;
     -fx-font-family: "Open Sans Bold";
     -fx-padding: 20px 0px;
 }
 
-.book-view .title-section .horizontal-box .vertical-box .social-box {
+.book-view .title-section .content .horizontal-box .vertical-box .social-box {
     -fx-spacing: 10px;
 }
 
@@ -609,7 +627,7 @@
 .library-view .book-cell .hbox .vbox .description-label {
 }
 
-.library-view-view .book-cell .hbox .vbox .authors-label {
+.library-view .book-cell .hbox .vbox .authors-label {
     -fx-font-size: 14px;
     -fx-text-fill: -fx-accent;
 }
@@ -721,7 +739,7 @@
     -fx-border-color: #e0e0e0;
     -fx-border-width: 1;
     -fx-border-radius: 4px;
-    -fx-effect: -drop-shadow-1;
+    -fx-effect: -drop-shadow-2;
     -fx-padding: 20;
 }
 
@@ -923,10 +941,11 @@
  */
 .license-label {
     -fx-font-size: 8;
-    -fx-padding: 2px 5px;
-    -fx-background-color: rgba(0, 0, 0, .3);
-    -fx-background-radius: 2px;
-    -fx-text-fill: white;
+    -fx-padding: 0px 3px;
+    -fx-border-color: -fx-accent;
+    -fx-border-radius: 2px;
+    -fx-text-fill: -fx-accent;
+    -fx-opacity: .5;
 }
 
 .license-label .ikonli-font-icon {
@@ -1104,10 +1123,10 @@
 }
 
 .video-cell .title-label {
+    -fx-font-size: 16px;
 }
 
 .video-cell .description-label {
-    -fx-font-size: 14px;
 }
 
 
@@ -1115,57 +1134,57 @@
  * Markdown
  */
 .markdown-text {
-    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 14px;
 }
 
 .markdown-normal-flow {
 }
 
 .markdown-heading .markdown-text {
-    -fx-fill: -mdfx-font-color;
+    -fx-font-size: 14px !important;
 }
 
 .markdown-heading-1 {
-    -fx-padding: 0px 0px 14px 0px;
+    -fx-padding: 0px 0px 14px 0px !important;
 }
 
 .markdown-heading-2 {
-    -fx-padding: 10px 0px 0px 0px;
+    -fx-padding: 20px 0px 10px 0px !important;
 }
 
 .markdown-heading-3 {
-    -fx-padding: 0px 0px 8px 0px;
+    -fx-padding: 0px 0px 8px 0px !important;
 }
 
 .markdown-heading-4 {
-    -fx-padding: 0px 0px 6px 0px;
+    -fx-padding: 0px 0px 6px 0px !important;
 }
 
 .markdown-heading-5 {
-    -fx-padding: 0px 0px 4px 0px;
+    -fx-padding: 0px 0px 4px 0px !important;
 }
 
 .markdown-heading-1 .markdown-text {
-    -fx-font-size: 24;
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 24 !important;
+    -fx-font-family: "Open Sans Semibold" !important;
 }
 
 .markdown-heading-2 .markdown-text {
-    -fx-font-size: 18;
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 18 !important;
+    -fx-font-family: "Open Sans Semibold" !important;
 }
 
 .markdown-heading-3 .markdown-text {
-    -fx-font-size: 14;
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 14 !important;
+    -fx-font-family: "Open Sans Semibold" !important;
 }
 
 .markdown-heading-4 .markdown-text {
-    -fx-font-size: 12;
+    -fx-font-size: 12 !important;
 }
 
 .markdown-heading-5 .markdown-text {
-    -fx-font-size: 12;
+    -fx-font-size: 12 !important;
 }
 
 .markdown-link {
@@ -1177,11 +1196,10 @@
 }
 
 .markdown-paragraph-list {
-    -fx-spacing: 15;
+    -fx-spacing: 10;
 }
 
 .markdown-listitem-dot {
-    -fx-font-size: 16;
     -fx-text-fill: -mdfx-font-color;
 }
 
@@ -1197,22 +1215,30 @@
 .markdown-code,
 .markdown-codeblock {
     -fx-wrap-text: true;
-    -fx-font-size: 16;
+    -fx-font-size: 14px;
 }
 
-.markdown-codeblock-box,
-.markdown-code-background {
+.markdown-code {
+
+}
+
+.markdown-codeblock-box {
     -fx-padding: 8;
-    -fx-border-radius: 8;
+    -fx-border-radius: 2px;
     -fx-border-color: -mdfx-border-color-1;
     -fx-border-width: 0.5;
-    -fx-background-radius: 8;
-    -fx-background-color: #00000009; /*  -mdfx-bg-color-3*/
+    -fx-background-radius: 2px;
+    -fx-background-color: oldlace;
+    -fx-font-family: "JetBrains Mono Regular";
 }
 
 .markdown-code-background {
-    -fx-border-width: 0;
-    -fx-background-color: #0000AA10; /*  -mdfx-bg-color-3*/
+    -fx-padding: 8;
+    -fx-border-radius: 2px;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-border-width: 0.5;
+    -fx-background-radius: 2px;
+    -fx-background-color: oldlace;
 }
 
 .markdown-code-anti-padding {
@@ -1222,8 +1248,8 @@
 }
 
 .markdown-table-table {
-    -fx-vgap: -1;
-    -fx-hgap: -1;
+    -fx-vgap: 0;
+    -fx-hgap: 0;
 }
 
 .markdown-table-cell {
@@ -1233,15 +1259,19 @@
 }
 
 .markdown-table-even {
-    -fx-background-color: -mdfx-bg-color-1;
+    -fx-background-color: white;
 }
 
 .markdown-table-odd {
-    -fx-background-color: -mdfx-bg-color-2;
+    -fx-background-color: rgba(0, 0, 0, .05);
 }
 
 .markdown-table-cell-top {
-    -fx-background-color: -mdfx-bg-color-3;
+    -fx-background-color: -light-blue;
+}
+
+.markdown-table-cell-top .text {
+    -fx-text-fill: white !important;
 }
 
 .markdown-table-cell-top .markdown-normal-flow {
@@ -1251,17 +1281,8 @@
 
 .markdown-hbox1 {
     -fx-spacing: 0;
-    -fx-padding: 8;
+    -fx-padding: 2;
 }
-
-/*
-.markdown-hbox1 {
-  -fx-background-color: red;
-}
-.markdown-vbox1 {
-  -fx-background-color: orange;
-}
-*/
 
 /* ----------------------------------------------------------------------------
  * DetailedPersonCell

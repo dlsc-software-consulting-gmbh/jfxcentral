@@ -14,6 +14,7 @@ public class Library extends ModelObject {
     private String githubAccount;
     private String githubProject;
     private String githubBranch;
+    private String readme;
 
     private String personId;
     private String companyId;
@@ -142,6 +143,17 @@ public class Library extends ModelObject {
         this.javadocs = javadocs;
     }
 
+    public String getReadme() {
+        if (StringUtils.isNotBlank(readme)) {
+            return readme;
+        }
+        return "README.md";
+    }
+
+    public void setReadme(String readme) {
+        this.readme = readme;
+    }
+
     public String getGithubBranch() {
         return githubBranch;
     }
@@ -176,7 +188,7 @@ public class Library extends ModelObject {
 
     public String getReadmeFileURL() {
         if (isGithub()) {
-            return getGithubRawUrl() + "/README.md?time=" + ZonedDateTime.now().toInstant();
+            return getGithubRawUrl() + "/" + getReadme() + "?time=" + ZonedDateTime.now().toInstant();
         }
 
         return null;

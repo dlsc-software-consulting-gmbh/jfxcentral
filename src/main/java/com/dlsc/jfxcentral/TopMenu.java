@@ -41,12 +41,12 @@ class TopMenu extends VBox {
         ToggleButton blogsButton = createButton("Blogs", new FontIcon(Material.DESCRIPTION));
         ToggleButton booksButton = createButton("Books", new FontIcon(Material.BOOK));
         ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
-        ToggleButton libsButton = createButton("Libraries", new FontIcon(Material.BOOK));
+        ToggleButton libsButton = createButton("Libraries", new FontIcon(FontAwesomeBrands.GITHUB));
         ToggleButton videosButton = createButton("Videos", new FontIcon(FontAwesomeBrands.YOUTUBE));
         ToggleButton openJfxButton = createButton("OpenJFX", new FontIcon(Material.STAR));
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, tutorialsButton, libsButton, openJfxButton);
+        toggleGroup.getToggles().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
         toggleGroup.selectToggle(homeButton);
 
         Region spacer = new Region();
@@ -54,7 +54,7 @@ class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, tutorialsButton, libsButton, openJfxButton);
+        getChildren().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
 
         view.addListener(it -> {
             switch (getView()) {

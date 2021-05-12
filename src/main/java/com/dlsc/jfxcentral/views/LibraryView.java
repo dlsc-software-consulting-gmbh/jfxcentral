@@ -71,8 +71,8 @@ public class LibraryView extends PageView {
 
     private void createReadmeBox() {
         SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Read Me");
         sectionPane.getNodes().add(readmeMarkdownView);
+        readmeMarkdownView.setHyperlinkCallback(url -> Util.browse(url));
         content.getChildren().add(sectionPane);
     }
 
@@ -85,8 +85,8 @@ public class LibraryView extends PageView {
             readmeMarkdownView.mdStringProperty().bind(DataRepository.getInstance().libraryReadMeProperty(library));
 
             iconView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
-            iconView.setFitWidth(64);
-            iconView.setFitHeight(64);
+            iconView.setFitWidth(128);
+            iconView.setFitHeight(128);
             iconView.setPreserveRatio(true);
 
             linksBox.getChildren().clear();

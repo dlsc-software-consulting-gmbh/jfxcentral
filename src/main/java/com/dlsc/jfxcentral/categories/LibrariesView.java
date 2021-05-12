@@ -91,9 +91,9 @@ public class LibrariesView extends CategoryView {
             gridPane.getStyleClass().add("grid-pane");
             gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-            gridPane.add(imageView, 0, 0);
-            gridPane.add(nameLabel, 1, 0);
-            gridPane.add(licenseLabel, 1, 1);
+            gridPane.add(imageView, 1, 0);
+            gridPane.add(nameLabel, 0, 0);
+            gridPane.add(licenseLabel, 0, 1);
 
             GridPane.setRowSpan(imageView, 2);
             GridPane.setHgrow(nameLabel, Priority.ALWAYS);

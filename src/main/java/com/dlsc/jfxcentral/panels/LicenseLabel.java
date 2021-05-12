@@ -5,15 +5,11 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Label;
-import org.kordamp.ikonli.fontawesome.FontAwesome;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 public class LicenseLabel extends Label {
 
     public LicenseLabel() {
         getStyleClass().add("license-label");
-
-        setGraphic(new FontIcon(FontAwesome.LEGAL));
 
         textProperty().bind(Bindings.createStringBinding(() -> {
             if (getLicense() == null) {

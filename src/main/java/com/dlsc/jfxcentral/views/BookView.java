@@ -34,7 +34,7 @@ public class BookView extends PageView {
     private ImageView coverImageView = new ImageView();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
-    private MarkdownView descriptionLabel = new MarkdownView();
+    private MarkdownView descriptionMarkdownView = new MarkdownView();
     private Label authorsLabel = new Label();
     private Label isbnLabel = new Label();
     private Label publishDateLabel = new Label();
@@ -47,7 +47,7 @@ public class BookView extends PageView {
         getStyleClass().add("book-view");
 
         // book section
-        coverImageView.setFitWidth(150);
+        coverImageView.setFitWidth(128);
         coverImageView.setPreserveRatio(true);
 
         titleLabel.getStyleClass().addAll("header1", "title-label");
@@ -58,9 +58,9 @@ public class BookView extends PageView {
         subtitleLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(subtitleLabel, Priority.ALWAYS);
 
-        descriptionLabel.getStyleClass().add("description-label");
-        descriptionLabel.setHyperlinkCallback(url -> Util.browse(url));
-        HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
+        descriptionMarkdownView.getStyleClass().add("description-markdown-view");
+        descriptionMarkdownView.setHyperlinkCallback(url -> Util.browse(url));
+        HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
 
         authorsLabel.getStyleClass().add("authors-label");
         isbnLabel.getStyleClass().add("isbn-label");
@@ -69,7 +69,7 @@ public class BookView extends PageView {
 
         HBox miscBox = new HBox(10, publishDateLabel, isbnLabel);
 
-        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, linksBox, descriptionLabel, miscBox);
+        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, linksBox);
 
         vBox.getStyleClass().add("vertical-box");
         vBox.setFillWidth(true);
@@ -81,7 +81,10 @@ public class BookView extends PageView {
         titleBox.setMinHeight(Region.USE_PREF_SIZE);
         titleBox.getStyleClass().add("horizontal-box");
 
-        SectionPane bookSectionPane = new SectionPane(titleBox);
+        VBox content = new VBox(titleBox, descriptionMarkdownView, miscBox);
+        content.getStyleClass().add("content");
+
+        SectionPane bookSectionPane = new SectionPane(content);
         bookSectionPane.getStyleClass().add("title-section");
         bookSectionPane.setMinHeight(Region.USE_PREF_SIZE);
 
@@ -99,9 +102,9 @@ public class BookView extends PageView {
         authorSectionPane.visibleProperty().bind(authorListView.itemsProperty().emptyProperty().not());
         authorSectionPane.managedProperty().bind(authorListView.itemsProperty().emptyProperty().not());
 
-        VBox content = new VBox(bookSectionPane, authorSectionPane);
+        VBox content2 = new VBox(bookSectionPane, authorSectionPane);
 
-        setContent(content);
+        setContent(content2);
 
         bookProperty().addListener(it -> updateView());
     }
@@ -111,7 +114,7 @@ public class BookView extends PageView {
         if (book != null) {
             titleLabel.setText(book.getTitle());
             subtitleLabel.setText(book.getSubtitle());
-            descriptionLabel.setMdString(book.getDescription());
+            descriptionMarkdownView.setMdString(book.getDescription());
             coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
             authorsLabel.setText(book.getAuthors());
             isbnLabel.setText("ISBN: " + book.getIsbn());

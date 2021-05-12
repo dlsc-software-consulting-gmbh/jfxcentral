@@ -204,7 +204,6 @@ public class DataRepository {
 
             String line;
             while ((line = in.readLine()) != null) {
-                System.out.println(line);
                 sb.append(line);
                 sb.append("\n");
             }

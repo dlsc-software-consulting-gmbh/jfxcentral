@@ -1,19 +1,21 @@
 package com.dlsc.jfxcentral;
 
-import com.sandec.mdfx.MDFXNode;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.Consumer;
 
-public class MarkdownView extends MDFXNode {
+public class MarkdownView extends com.sandec.mdfx.MarkdownView {
 
     private String baseURL = "";
 
     public MarkdownView() {
+        getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
     }
 
     public String getBaseURL() {
@@ -48,16 +50,30 @@ public class MarkdownView extends MDFXNode {
     @Override
     public Node generateImage(String url) {
         if (url.startsWith("http")) {
-            return super.generateImage(url);
-        }
-        System.out.println(baseURL + "/" + url);
-        Node node = super.generateImage(baseURL + "/" + url);
-        if (node instanceof ImageView) {
-            ImageView imageView = (ImageView) node;
-            imageView.fitWidthProperty().bind(widthProperty().multiply(.9));
-            imageView.setPreserveRatio(true);
+            Node node = super.generateImage(url);
+            configureImage(node);
+            return node;
         }
 
+        Node node = super.generateImage(baseURL + "/" + url);
+        configureImage(node);
         return node;
+    }
+
+    private void configureImage(Node node) {
+        if (node instanceof ImageView) {
+            ImageView imageView = (ImageView) node;
+            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> computeFitWidth(imageView), widthProperty(), imageView.getImage().progressProperty()));
+            imageView.setPreserveRatio(true);
+        }
+    }
+
+    private double computeFitWidth(ImageView imageView) {
+        Image image = imageView.getImage();
+        if (image.getWidth() < getWidth()) {
+            return image.getWidth();
+        }
+
+        return getWidth();
     }
 }

@@ -73,6 +73,8 @@ public class PeopleView extends CategoryView {
 
         private final PhotoView photoView = new PhotoView();
         private final Label nameLabel = new Label();
+        private final Label championLabel = new Label("CHAMPION");
+        private final Label rockstarLabel = new Label("ROCKSTAR");
         private final javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
         private final javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
@@ -81,18 +83,28 @@ public class PeopleView extends CategoryView {
 
             photoView.setEditable(false);
             photoView.setPlaceholder(new Label("test"));
+            photoView.visibleProperty().bind(photoView.photoProperty().isNotNull());
+            photoView.managedProperty().bind(photoView.photoProperty().isNotNull());
 
             nameLabel.getStyleClass().add("name-label");
 
+            championLabel.getStyleClass().add("champion-label");
+            championLabel.setGraphic(championImageView);
+            championLabel.setContentDisplay(ContentDisplay.RIGHT);
+
+            rockstarLabel.getStyleClass().add("rockstar-label");
+            rockstarLabel.setGraphic(rockstarImageView);
+            rockstarLabel.setContentDisplay(ContentDisplay.RIGHT);
+
             championImageView.getStyleClass().add("champion-image");
             championImageView.setPreserveRatio(true);
-            championImageView.setFitHeight(16);
+            championImageView.setFitHeight(12);
 
             rockstarImageView.getStyleClass().add("rockstar-image");
             rockstarImageView.setPreserveRatio(true);
-            rockstarImageView.setFitHeight(16);
+            rockstarImageView.setFitHeight(12);
 
-            HBox badgesBox = new HBox(championImageView, rockstarImageView);
+            HBox badgesBox = new HBox(championLabel, rockstarLabel);
             badgesBox.getStyleClass().add("badges");
             badgesBox.setAlignment(Pos.TOP_LEFT);
 
@@ -100,9 +112,9 @@ public class PeopleView extends CategoryView {
             gridPane.getStyleClass().add("grid-pane");
             gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-            gridPane.add(photoView, 0, 0);
-            gridPane.add(nameLabel, 1, 0);
-            gridPane.add(badgesBox, 1, 1);
+            gridPane.add(photoView, 1, 0);
+            gridPane.add(nameLabel, 0, 0);
+            gridPane.add(badgesBox, 0, 1);
 
             GridPane.setRowSpan(photoView, 2);
             GridPane.setHgrow(nameLabel, Priority.ALWAYS);
@@ -130,19 +142,18 @@ public class PeopleView extends CategoryView {
 
             if (!empty && person != null) {
                 nameLabel.setText(person.getName());
-                championImageView.setVisible(person.isChampion());
-                championImageView.setManaged(person.isChampion());
-                rockstarImageView.setVisible(person.isRockstar());
-                rockstarImageView.setManaged(person.isRockstar());
-                photoView.setVisible(true);
+                championLabel.setVisible(person.isChampion());
+                championLabel.setManaged(person.isChampion());
+                rockstarLabel.setVisible(person.isRockstar());
+                rockstarLabel.setManaged(person.isRockstar());
                 photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
             } else {
                 nameLabel.setText("");
-                championImageView.setVisible(false);
-                championImageView.setManaged(false);
-                rockstarImageView.setVisible(false);
-                rockstarImageView.setManaged(false);
-                photoView.setVisible(false);
+                championLabel.setVisible(false);
+                championLabel.setManaged(false);
+                rockstarLabel.setVisible(false);
+                rockstarLabel.setManaged(false);
+                photoView.photoProperty().unbind();
             }
         }
     }
