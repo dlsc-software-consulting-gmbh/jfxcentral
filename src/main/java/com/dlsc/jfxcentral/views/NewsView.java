@@ -61,7 +61,7 @@ public class NewsView extends PageView {
 
         PrettyListView<News> listView = new PrettyListView<>();
         listView.setCellFactory(view -> new NewsCell(rootPane));
-        listView.itemsProperty().bind(DataRepository.getInstance().newsProperty());
+        listView.itemsProperty().bind(filterView.filteredItemsProperty());
 //        listView.getSelectionModel().selectedItemProperty().addListener(it -> setVideo(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);
@@ -188,10 +188,12 @@ public class NewsView extends PageView {
 
         private final Label titleLabel = new Label();
         private final Label subtitleLabel = new Label();
+        private final Label authorLabel = new Label();
         private final MarkdownView markdownView = new MarkdownView();
         private final ImageView bannerView = new ImageView();
         private final RootPane rootPane;
         private final Hyperlink readMoreLink = new Hyperlink("Read more ...");
+        private final Map<News, BooleanProperty> readMoreMap = new HashMap<>();
 
         public NewsCell(RootPane rootPane) {
             this.rootPane = rootPane;
@@ -200,7 +202,7 @@ public class NewsView extends PageView {
 
             getStyleClass().add("news-cell");
 
-            titleLabel.getStyleClass().addAll("header2", "title-label");
+            titleLabel.getStyleClass().addAll("title-label");
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
@@ -208,13 +210,48 @@ public class NewsView extends PageView {
             subtitleLabel.setWrapText(true);
             subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
+            authorLabel.getStyleClass().add("author-label");
+            authorLabel.setWrapText(true);
+            authorLabel.setMinHeight(Region.USE_PREF_SIZE);
+
             bannerView.setPreserveRatio(true);
             bannerView.fitWidthProperty().bind(coverImageWidthProperty());
 
-            markdownView.showImagesProperty().bind(readMoreProperty());
+            itemProperty().addListener(it -> {
+                News item = getItem();
+                if (item != null) {
+                    BooleanProperty readMoreProperty = readMoreMap.computeIfAbsent(item, key -> new SimpleBooleanProperty());
+                    markdownView.showImagesProperty().bind(readMoreProperty);
+                    readMoreLink.textProperty().bind(Bindings.createStringBinding(() -> readMoreProperty.get() ? "Show less ..." : "Read more ...", readMoreProperty));
+                    readMoreLink.setOnAction(evt -> readMoreProperty.set(!readMoreProperty.get()));
 
-            readMoreLink.textProperty().bind(Bindings.createStringBinding(() -> isReadMore() ? "Show less ..." : "Read more ...", readMoreProperty()));
-            readMoreLink.setOnAction(evt -> setReadMore(!isReadMore()));
+                    markdownView.setBaseURL(DataRepository.getInstance().getNewsBaseUrl(item));
+                    markdownView.mdStringProperty().bind(Bindings.createStringBinding(() -> {
+                        String text = DataRepository.getInstance().newsTextProperty(item).get();
+                        if (text == null) {
+                            text = "";
+                        }
+                        if (readMoreProperty.get()) {
+                            return text;
+                        } else {
+                            String clipText = text.substring(0, Math.min(600, text.length()));
+                            if (clipText.length() < text.length()) {
+                                setShowReadMoreLink(true);
+                                return clipText + " ...";
+                            }
+                            setShowReadMoreLink(false);
+                            return clipText;
+                        }
+
+                    }, readMoreProperty, DataRepository.getInstance().newsTextProperty(item)));
+
+                } else {
+                    markdownView.showImagesProperty().unbind();
+                    readMoreLink.textProperty().unbind();
+                    markdownView.mdStringProperty().unbind();
+                }
+            });
+
             readMoreLink.visibleProperty().bind(showReadMoreLinkProperty());
             readMoreLink.managedProperty().bind(showReadMoreLinkProperty());
 
@@ -223,7 +260,7 @@ public class NewsView extends PageView {
             imageWrapper.getStyleClass().add("banner-image-wrapper");
             StackPane.setAlignment(bannerView, Pos.TOP_LEFT);
 
-            VBox vBox = new VBox(titleLabel, subtitleLabel, markdownView, readMoreLink);
+            VBox vBox = new VBox(titleLabel, subtitleLabel, authorLabel, markdownView, readMoreLink);
             vBox.setAlignment(Pos.TOP_LEFT);
             vBox.setFillWidth(true);
             vBox.getStyleClass().add("vbox");
@@ -254,20 +291,6 @@ public class NewsView extends PageView {
             this.showReadMoreLink.set(showReadMoreLink);
         }
 
-        private final BooleanProperty readMore = new SimpleBooleanProperty(this, "readMore", false);
-
-        public boolean isReadMore() {
-            return readMore.get();
-        }
-
-        public BooleanProperty readMoreProperty() {
-            return readMore;
-        }
-
-        public void setReadMore(boolean readMore) {
-            this.readMore.set(readMore);
-        }
-
         private final DoubleProperty coverImageWidth = new SimpleDoubleProperty(this, "coverImageWidth", 300);
 
         public double getCoverImageWidth() {
@@ -289,26 +312,7 @@ public class NewsView extends PageView {
             if (!empty && news != null) {
                 titleLabel.setText(news.getTitle());
                 subtitleLabel.setText(news.getSubtitle());
-
-                markdownView.setBaseURL(DataRepository.getInstance().getNewsBaseUrl(news));
-                markdownView.mdStringProperty().bind(Bindings.createStringBinding(() -> {
-                    String text = DataRepository.getInstance().newsTextProperty(news).get();
-                    if (text == null) {
-                        text = "";
-                    }
-                    if (isReadMore()) {
-                        return text;
-                    } else {
-                        String clipText = text.substring(0, Math.min(600, text.length()));
-                        if (clipText.length() < text.length()) {
-                            setShowReadMoreLink(true);
-                            return clipText + " ...";
-                        }
-                        setShowReadMoreLink(false);
-                        return clipText;
-                    }
-
-                }, readMoreProperty(), DataRepository.getInstance().newsTextProperty(news)));
+                authorLabel.setText(news.getAuthor());
 
                 bannerView.setVisible(true);
                 bannerView.setManaged(true);
