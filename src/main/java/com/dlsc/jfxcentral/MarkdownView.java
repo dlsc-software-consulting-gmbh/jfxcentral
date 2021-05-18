@@ -1,7 +1,9 @@
 package com.dlsc.jfxcentral;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -65,6 +67,8 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
             ImageView imageView = (ImageView) node;
             imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> computeFitWidth(imageView), widthProperty(), imageView.getImage().progressProperty()));
             imageView.setPreserveRatio(true);
+            imageView.visibleProperty().bind(showImagesProperty());
+            imageView.managedProperty().bind(showImagesProperty());
         }
     }
 
@@ -75,5 +79,19 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
         }
 
         return getWidth();
+    }
+
+    private final BooleanProperty showImages = new SimpleBooleanProperty(this, "showImages", true);
+
+    public boolean isShowImages() {
+        return showImages.get();
+    }
+
+    public BooleanProperty showImagesProperty() {
+        return showImages;
+    }
+
+    public void setShowImages(boolean showImages) {
+        this.showImages.set(showImages);
     }
 }

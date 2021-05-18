@@ -262,7 +262,9 @@ public class VideosView extends PageView {
             thumbnailView.setPreserveRatio(true);
             thumbnailView.fitWidthProperty().bind(coverImageWidthProperty());
 
-            StackPane coverImageWrapper = new StackPane(thumbnailView);
+            StackPane thumbnailWrapper = new StackPane(thumbnailView);
+            thumbnailWrapper.getStyleClass().add("thumbnail-wrapper");
+            thumbnailWrapper.setMaxHeight(Region.USE_PREF_SIZE);
             StackPane.setAlignment(thumbnailView, Pos.TOP_LEFT);
 
             HBox buttonBox = new HBox(10, playButton, playOnYouTubeButton);
@@ -276,7 +278,7 @@ public class VideosView extends PageView {
 
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
-            HBox hBox = new HBox(vBox, coverImageWrapper);
+            HBox hBox = new HBox(vBox, thumbnailWrapper);
             hBox.getStyleClass().add("hbox");
             hBox.setAlignment(Pos.TOP_LEFT);
 

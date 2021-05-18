@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral;
 
-import com.dlsc.jfxcentral.model.Book;
-import com.dlsc.jfxcentral.model.Library;
-import com.dlsc.jfxcentral.model.Person;
-import com.dlsc.jfxcentral.model.Video;
+import com.dlsc.jfxcentral.model.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -33,6 +30,10 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
         return instance;
     }
 
+    public ObjectProperty<Image> newsBannerImageProperty(News news) {
+        return imageProperty(DataRepository.getInstance().getNewsBaseUrl(news) + "/", news.getBanner(), "banner-" + news.getId(), MISSING_IMAGE);
+    }
+
     public ObjectProperty<Image> personImageProperty(Person person) {
         return imageProperty(JFX_CENTRAL_BASE_URL + "/images/people/", person.getPhoto());
     }
@@ -58,7 +59,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName, String photoKey, Image placeholderImage) {
-        if (StringUtils.isBlank(photoKey)) {
+        if (StringUtils.isBlank(photoFileName) || StringUtils.isBlank(photoKey)) {
             return new SimpleObjectProperty<>(placeholderImage);
         }
 

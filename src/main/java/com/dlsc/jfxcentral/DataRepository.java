@@ -6,10 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +18,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class DataRepository {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private ExecutorService executor = Executors.newCachedThreadPool();
 
@@ -62,6 +61,11 @@ public class DataRepository {
             File librariesFile = loadFile("libraries.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries.json");
             setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
             }.getType()));
+
+            // load libraries
+            File newsFile = loadFile("news.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/news.json");
+            setNews(gson.fromJson(new FileReader(newsFile), new TypeToken<List<News>>() {
+            }.getType()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,6 +73,10 @@ public class DataRepository {
 
     public Optional<Person> getPersonById(String id) {
         return people.stream().filter(person -> person.getId().equals(id)).findFirst();
+    }
+
+    public Optional<Library> getLibraryById(String id) {
+        return libraries.stream().filter(library -> library.getId().equals(id)).findFirst();
     }
 
     public ListProperty<Video> getVideosByPerson(Person person) {
@@ -103,11 +111,32 @@ public class DataRepository {
         });
     }
 
-    private Map<Library, ObjectProperty<String>> libraryReadMeMap = new HashMap<>();
+    private Map<News, StringProperty> newsTextMap = new HashMap<>();
 
-    public ObjectProperty<String> libraryReadMeProperty(Library library) {
+    public StringProperty newsTextProperty(News news) {
+        return newsTextMap.computeIfAbsent(news, key -> {
+            StringProperty textProperty = new SimpleStringProperty();
+
+            executor.submit(() -> {
+                String url = getNewsBaseUrl(news) + "/text.md?time=" + ZonedDateTime.now().toInstant();
+                System.out.println("loading news from: " + url);
+                String text = loadString(url);
+                Platform.runLater(() -> textProperty.set(text));
+            });
+
+            return textProperty;
+        });
+    }
+
+    public String getNewsBaseUrl(News news) {
+        return "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/news/" + DATE_FORMATTER.format(news.getDate()) + "-" + news.getId();
+    }
+
+    private Map<Library, StringProperty> libraryReadMeMap = new HashMap<>();
+
+    public StringProperty libraryReadMeProperty(Library library) {
         return libraryReadMeMap.computeIfAbsent(library, key -> {
-            ObjectProperty<String> readmeProperty = new SimpleObjectProperty<>();
+            StringProperty readmeProperty = new SimpleStringProperty();
 
             String readmeFileURL = library.getReadmeFileURL();
             if (StringUtils.isNotBlank(readmeFileURL)) {
@@ -139,6 +168,20 @@ public class DataRepository {
 
     public void setLibraries(List<Library> libraries) {
         this.libraries.setAll(libraries);
+    }
+
+    private final ListProperty<News> news = new SimpleListProperty<>(this, "news", FXCollections.observableArrayList());
+
+    public ObservableList<News> getNews() {
+        return news.get();
+    }
+
+    public ListProperty<News> newsProperty() {
+        return news;
+    }
+
+    public void setNews(List<News> news) {
+        this.news.setAll(news);
     }
 
     private final ListProperty<Book> books = new SimpleListProperty<>(this, "books", FXCollections.observableArrayList());
@@ -185,7 +228,8 @@ public class DataRepository {
 
     private File loadFile(String fileName, String url) throws IOException {
         // adding caching buster via timestamp
-        System.out.println("url: " + url + "?time=" + ZonedDateTime.now().toInstant());
+        url = url + "?time=" + ZonedDateTime.now().toInstant();
+        System.out.println("url: " + url);
         ReadableByteChannel readChannel = Channels.newChannel(new URL(url).openStream());
         File file = File.createTempFile(fileName, "json");
         FileOutputStream fileOS = new FileOutputStream(file);
