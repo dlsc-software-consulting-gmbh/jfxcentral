@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.dlsc.gemsfx</groupId>
             <artifactId>gemsfx</artifactId>
-            <version>1.29.2</version>
+            <version>1.29.1</version>
         </dependency>
 
         <dependency>
