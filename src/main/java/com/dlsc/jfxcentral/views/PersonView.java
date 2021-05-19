@@ -58,7 +58,14 @@ public class PersonView extends PageView {
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Books");
-        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> "Written or co-authored by " + getPerson().getName(), person));
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> {
+            Person person = getPerson();
+            if (person != null) {
+                return "Written or co-authored by " + person.getName();
+            }
+            return "";
+        }, person));
+
         sectionPane.getNodes().add(listView);
 
         personProperty().addListener(it -> {

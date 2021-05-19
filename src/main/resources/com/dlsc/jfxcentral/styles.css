@@ -169,7 +169,7 @@
 
 .top-menu .toggle-button {
     -fx-padding: 10px 10px 10px 10px;
-    -fx-background-radius: 0px 1000px 1000px 0px;
+    -fx-background-radius: 0px 4px 4px 0px;
     -fx-background-padding: 0px;
     -fx-background-insets: 0px 5px 0px 0px;
     -fx-background-color: transparent;
@@ -200,8 +200,8 @@
     -fx-background-color: rgba(250, 0, 20, .5);
 }
 
-.top-menu .toggle-button:hover .ikonli-font-icon,
-.top-menu .toggle-button:hover:selected .ikonli-font-icon {
+.top-menu .toggle-button:hover .icon-wrapper .ikonli-font-icon,
+.top-menu .toggle-button:hover:selected .icon-wrapper .ikonli-font-icon {
     -fx-icon-color: white;
 }
 
@@ -214,12 +214,16 @@
     -fx-text-fill: white;
 }
 
-.top-menu .toggle-button .ikonli-font-icon {
+.top-menu .toggle-button .icon-wrapper {
+    -fx-pref-width: 32px;
+}
+
+.top-menu .toggle-button .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: black;
 }
 
-.top-menu .toggle-button:selected .ikonli-font-icon {
+.top-menu .toggle-button:selected .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: white;
 }
@@ -740,7 +744,7 @@
     -fx-border-color: #e0e0e0;
     -fx-border-width: 1;
     -fx-border-radius: 4px;
-    -fx-effect: -drop-shadow-2;
+    -fx-effect: -drop-shadow-3;
     -fx-padding: 20;
 }
 
@@ -1156,7 +1160,7 @@
 }
 
 .news-cell .hbox .vbox {
-    -fx-spacing: 10px;
+    -fx-spacing: 0px;
 }
 
 .news-cell .title-label {
@@ -1165,14 +1169,14 @@
 }
 
 .news-cell .subtitle-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-text-fill: -fx-accent;
-    -fx-font-size: 16px;
 }
 
 .news-cell .author-label {
-    -fx-opacity: 0.8;
     -fx-font-style: italic;
-    -fx-padding: 0px 0px 20px 0px;
+    -fx-opacity: .8;
 }
 
 .news-cell .text-label {

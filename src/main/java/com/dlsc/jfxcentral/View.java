@@ -1,7 +1,8 @@
 package com.dlsc.jfxcentral;
 
 public enum View {
-    HOME, // also includes new
+    HOME,
+    NEWS,
     OPENJFX,
     PEOPLE,
     LEARN,

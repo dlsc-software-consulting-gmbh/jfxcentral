@@ -18,6 +18,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Hyperlink;
@@ -27,6 +28,8 @@ import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 
 public class NewsView extends PageView {
@@ -205,14 +208,21 @@ public class NewsView extends PageView {
             titleLabel.getStyleClass().addAll("title-label");
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+            titleLabel.setMaxWidth(Double.MAX_VALUE);
 
             subtitleLabel.getStyleClass().addAll("subtitle-label");
             subtitleLabel.setWrapText(true);
             subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
+            subtitleLabel.setMaxWidth(Double.MAX_VALUE);
 
             authorLabel.getStyleClass().add("author-label");
             authorLabel.setWrapText(true);
             authorLabel.setMinHeight(Region.USE_PREF_SIZE);
+            authorLabel.setMaxWidth(Double.MAX_VALUE);
+
+            VBox.setMargin(authorLabel, new Insets(10, 0, 0, 0));
+            VBox.setMargin(markdownView, new Insets(20, 0, 0, 0));
+            VBox.setMargin(readMoreLink, new Insets(10, 0, 0, 0));
 
             bannerView.setPreserveRatio(true);
             bannerView.fitWidthProperty().bind(coverImageWidthProperty());
@@ -312,7 +322,7 @@ public class NewsView extends PageView {
             if (!empty && news != null) {
                 titleLabel.setText(news.getTitle());
                 subtitleLabel.setText(news.getSubtitle());
-                authorLabel.setText(news.getAuthor());
+                authorLabel.setText(news.getAuthor() + " - Published on: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(news.getDate()));
 
                 bannerView.setVisible(true);
                 bannerView.setManaged(true);

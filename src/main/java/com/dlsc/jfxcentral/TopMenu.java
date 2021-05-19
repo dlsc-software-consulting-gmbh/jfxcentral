@@ -7,12 +7,14 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -37,16 +39,17 @@ class TopMenu extends VBox {
         imageView.getStyleClass().add("duke");
 
         ToggleButton homeButton = createButton("Home", new FontIcon(Material.HOME));
+        ToggleButton newsButton = createButton("News", new FontIcon(Material.NOTES));
         ToggleButton peopleButton = createButton("People", new FontIcon(Material.PERSON));
-        ToggleButton blogsButton = createButton("Blogs", new FontIcon(Material.DESCRIPTION));
-        ToggleButton booksButton = createButton("Books", new FontIcon(Material.BOOK));
+        ToggleButton blogsButton = createButton("Blogs", new FontIcon(FontAwesomeBrands.BLOGGER));
+        ToggleButton booksButton = createButton("Books", new FontIcon(FontAwesomeBrands.AMAZON));
         ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
         ToggleButton libsButton = createButton("Libraries", new FontIcon(FontAwesomeBrands.GITHUB));
         ToggleButton videosButton = createButton("Videos", new FontIcon(FontAwesomeBrands.YOUTUBE));
         ToggleButton openJfxButton = createButton("OpenJFX", new FontIcon(Material.STAR));
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
+        toggleGroup.getToggles().addAll(homeButton, newsButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
         toggleGroup.selectToggle(homeButton);
 
         Region spacer = new Region();
@@ -54,12 +57,15 @@ class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(homeButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
+        getChildren().addAll(homeButton, newsButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
 
         view.addListener(it -> {
             switch (getView()) {
                 case HOME:
                     toggleGroup.selectToggle(homeButton);
+                    break;
+                case NEWS:
+                    toggleGroup.selectToggle(newsButton);
                     break;
                 case OPENJFX:
                     toggleGroup.selectToggle(openJfxButton);
@@ -93,6 +99,8 @@ class TopMenu extends VBox {
 
             if (newSelection == homeButton) {
                 setView(View.HOME);
+            } else if (newSelection == newsButton) {
+                setView(View.NEWS);
             } else if (newSelection == openJfxButton) {
                 setView(View.OPENJFX);
             } else if (newSelection == peopleButton) {
@@ -140,9 +148,15 @@ class TopMenu extends VBox {
         }, expandedProperty(), rootPane.displayProperty()));
         button.setMaxWidth(Double.MAX_VALUE);
         button.setAlignment(Pos.CENTER_LEFT);
-        button.setGraphic(icon);
+        button.setGraphic(wrap(icon));
         button.setOnAction(evt -> setExpanded(false));
         return button;
+    }
+
+    private Node wrap(FontIcon icon) {
+        StackPane stackPane = new StackPane(icon);
+        stackPane.getStyleClass().add("icon-wrapper");
+        return stackPane;
     }
 
     private final BooleanProperty expanded = new SimpleBooleanProperty(this, "expanded", true);

@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -33,34 +34,34 @@ public class DukeAnimationView extends StackPane {
     public DukeAnimationView(Runnable callback) {
         getStyleClass().add("duke-animation-view");
 
-        imageView.setPreserveRatio(true);
-
         Label button = new Label("Press to continue");
         button.getStyleClass().add("start-message");
         button.setOnMousePressed(evt -> callback.run());
+        button.setVisible(callback != null);
+        button.setManaged(callback != null);
 
         VBox vBox = new VBox(40, imageView, button);
         vBox.setAlignment(Pos.CENTER);
+        VBox.setVgrow(vBox, Priority.ALWAYS);
+
         getChildren().add(vBox);
 
+        imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(vBox.widthProperty().multiply(.6));
 
-        OrientationService.create().ifPresent(service -> {
-            service.orientationProperty().addListener(it -> {
-                System.out.println("orientation now: " + service.orientationProperty().get());
-                service.getOrientation().ifPresent(orientation -> {
-                    switch (service.getOrientation().get()) {
-                        case HORIZONTAL:
-                            imageView.fitHeightProperty().bind(heightProperty().multiply(.6));
-                            break;
-                        case VERTICAL:
-                            imageView.fitWidthProperty().bind(widthProperty().multiply(.6));
-                            break;
-                    }
-                });
+        OrientationService.create().ifPresent(service -> service.orientationProperty().addListener(it -> {
+            System.out.println("orientation now: " + service.orientationProperty().get());
+            service.getOrientation().ifPresent(orientation -> {
+                switch (service.getOrientation().get()) {
+                    case HORIZONTAL:
+                        imageView.fitHeightProperty().bind(heightProperty().multiply(.6));
+                        break;
+                    case VERTICAL:
+                        imageView.fitWidthProperty().bind(widthProperty().multiply(.6));
+                        break;
+                }
             });
-        });
-
+        }));
     }
 
     public void play() {
