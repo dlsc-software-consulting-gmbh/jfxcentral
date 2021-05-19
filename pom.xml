@@ -21,17 +21,6 @@
         <jpro.version>2021.1.1-SNAPSHOT</jpro.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>bintray</name>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
-
     <dependencies>
 
         <dependency>
@@ -200,6 +189,10 @@
         <repository>
             <id>jpro - sandec repository</id>
             <url>https://sandec.jfrog.io/artifactory/repo</url>
+        </repository>
+        <repository>
+            <id>bintray</id>
+            <url>https://jcenter.bintray.com</url>
         </repository>
     </repositories>
 
