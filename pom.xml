@@ -57,6 +57,12 @@
             <groupId>com.dlsc.gemsfx</groupId>
             <artifactId>gemsfx</artifactId>
             <version>1.29.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.dlsc.unitfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
