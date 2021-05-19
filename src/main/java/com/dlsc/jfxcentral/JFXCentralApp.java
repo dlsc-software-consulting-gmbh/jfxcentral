@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral;
 
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
+import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -67,14 +68,14 @@ public class JFXCentralApp extends Application {
             if (service.isDesktop()) {
                 rootPane.setDisplay(Display.DESKTOP);
                 System.out.println("starting CSSFX");
-//                CSSFX.start();
+                CSSFX.start();
             } else if (service.isPhone()) {
                 rootPane.setDisplay(Display.PHONE);
             } else if (service.isTablet()) {
                 rootPane.setDisplay(Display.TABLET);
             }
         }, () -> {
-//            CSSFX.start();
+            CSSFX.start();
 
             if (WebAPI.isBrowser()) {
                 rootPane.setDisplay(Display.WEB);

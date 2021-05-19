@@ -11,6 +11,7 @@ public class RootPane extends ViewPane {
 
     private final Map<Class<?>, Consumer<?>> openHandler = new HashMap<>();
 
+    private final HeaderPane headerPane = new HeaderPane();
     private final RightPane rightPane = new RightPane();
 
     private final DialogPane dialogPane = new DialogPane();
@@ -24,6 +25,7 @@ public class RootPane extends ViewPane {
         sideBar.viewProperty().bindBidirectional(viewProperty());
 
         BorderPane borderPane = new BorderPane();
+        borderPane.setTop(headerPane);
         borderPane.setLeft(sideBar);
         borderPane.setCenter(rightPane);
 
