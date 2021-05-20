@@ -8,8 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
 
@@ -17,9 +15,6 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     private static final Image LIBRARY_IMAGE = new Image(JFXCentralApp.class.getResource("document_cup.png").toExternalForm());
     private static final Image MISSING_IMAGE = new Image(JFXCentralApp.class.getResource("missing-image.jpg").toExternalForm());
     private static final Image MISSING_VIDEO_IMAGE = new Image(JFXCentralApp.class.getResource("missing-video-image.png").toExternalForm());
-    public static final String JFX_CENTRAL_BASE_URL = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main";
-
-    private final ExecutorService service = Executors.newFixedThreadPool(8);
 
     private static final ImageManager instance = new ImageManager();
 
@@ -35,19 +30,19 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     public ObjectProperty<Image> personImageProperty(Person person) {
-        return imageProperty(JFX_CENTRAL_BASE_URL + "/images/people/", person.getPhoto());
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "images/people/", person.getPhoto());
     }
 
     public ObjectProperty<Image> bookCoverImageProperty(Book book) {
-        return imageProperty(JFX_CENTRAL_BASE_URL + "/images/books/", book.getImage());
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "images/books/", book.getImage());
     }
 
     public ObjectProperty<Image> libraryImageProperty(Library library) {
-        return imageProperty(JFX_CENTRAL_BASE_URL + "/libraries/" + library.getId() + "/", library.getLogoImageFile());
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "libraries/" + library.getId() + "/", library.getLogoImageFile());
     }
 
     public ObjectProperty<Image> libraryImageProperty(Library library, String imagePath) {
-        return imageProperty(JFX_CENTRAL_BASE_URL + "/libraries/" + library.getId() + "/", imagePath, imagePath, MISSING_IMAGE);
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "libraries/" + library.getId() + "/", imagePath, imagePath, MISSING_IMAGE);
     }
 
     public ObjectProperty<Image> youTubeImageProperty(Video video) {

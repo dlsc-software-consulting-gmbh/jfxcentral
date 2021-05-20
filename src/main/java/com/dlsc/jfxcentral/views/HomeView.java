@@ -1,8 +1,11 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.MarkdownView;
 import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.model.ModelObject;
+import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.geometry.Insets;
@@ -22,23 +25,47 @@ public class HomeView extends PageView {
         super(rootPane);
         getStyleClass().add("home-view");
 
-        createNewSection();
+        createWelcomeSection();
+        createRecentItemsSection();
         createContactInfo();
 
         setContent(content);
     }
 
-    private void createNewSection() {
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Latest Additions");
-        sectionPane.setSubtitle("");
+    private void createWelcomeSection() {
+        MarkdownView markdownView = new MarkdownView();
+        markdownView.mdStringProperty().bind(DataRepository.getInstance().homeTextProperty());
+        HBox.setHgrow(markdownView, Priority.ALWAYS);
+
+        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
+        imageView.setFitHeight(100);
+        imageView.setPreserveRatio(true);
+
+        HBox hBox = new HBox(markdownView, imageView);
+
+        SectionPane sectionPane = new SectionPane(hBox);
+        sectionPane.setTitle("Welcome");
+
+        VBox.setVgrow(sectionPane, Priority.NEVER);
+        content.getChildren().add(sectionPane);
+    }
+
+    private void createRecentItemsSection() {
+        PrettyListView<ModelObject> listView = new PrettyListView<>();
+        listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
+        VBox.setVgrow(listView, Priority.ALWAYS);
+
+        SectionPane sectionPane = new SectionPane(listView);
+        sectionPane.setTitle("Recently Updated");
+        sectionPane.setSubtitle("Libraries, news, books, people, etc... that have recently been added or updated");
         VBox.setVgrow(sectionPane, Priority.ALWAYS);
+
         content.getChildren().add(sectionPane);
     }
 
     private void createContactInfo() {
         MarkdownView markdownView = new MarkdownView();
-        markdownView.setMdString("**DLSC Software & Consulting GmbH**\n\n\nAsylweg 28, 8134 Adliswil, Switzerland\n\nMobile: +41-79-800-23-20");
+        markdownView.setMdString("Asylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
         markdownView.getStyleClass().add("contact-markdown-view");
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
@@ -89,7 +116,7 @@ public class HomeView extends PageView {
         linkedIn.setOnMouseClicked(evt -> Util.browse("https://www.linkedin.com/in/dlemmermann/"));
         github.setOnMouseClicked(evt -> Util.browse("https://github.com/dlemmermann"));
         youtube.setOnMouseClicked(evt -> Util.browse("https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q"));
-        mail.setOnMouseClicked(evt -> Util.browse("mail:dlemmermann@gmail.com?subject=JFXCentral"));
+        mail.setOnMouseClicked(evt -> Util.browse("mailto:dlemmermann@gmail.com?subject=JFXCentral"));
 
         GridPane.setMargin(twitterLabel, new Insets(0, 10, 0, 0));
         GridPane.setMargin(linkedInLabel, new Insets(0, 10, 0, 0));
@@ -98,14 +125,14 @@ public class HomeView extends PageView {
         linkedInLabel.setOnMouseClicked(evt -> Util.browse("https://www.linkedin.com/in/dlemmermann/"));
         gitHubLabel.setOnMouseClicked(evt -> Util.browse("https://github.com/dlemmermann"));
         youTubeLabel.setOnMouseClicked(evt -> Util.browse("https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q"));
-        mailLabel.setOnMouseClicked(evt -> Util.browse("mail:dlemmermann@gmail.com?subject=JFXCentral"));
+        mailLabel.setOnMouseClicked(evt -> Util.browse("mailto:dlemmermann@gmail.com?subject=JFXCentral"));
 
         HBox hBox = new HBox(markdownView, socialPane);
         hBox.getStyleClass().add("footer");
 
         SectionPane sectionPane = new SectionPane(hBox);
-        sectionPane.setTitle(null);
-        sectionPane.setSubtitle(null);
+        sectionPane.setTitle("Contact Us");
+        sectionPane.setSubtitle("DLSC Software & Consulting GmbH");
         content.getChildren().add(sectionPane);
     }
 

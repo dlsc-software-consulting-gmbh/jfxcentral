@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,17 +18,17 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class DataRepository {
+    private static final String BASE_URL = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/";
+
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private ExecutorService executor = Executors.newCachedThreadPool();
@@ -47,10 +48,13 @@ public class DataRepository {
     }
 
     private DataRepository() {
+        recentItems.addListener((Observable it) -> System.out.println("recent items count: " + getRecentItems().size()));
         loadData();
     }
 
     public void refresh() {
+        setHomeText("");
+
         libraryInfoMap.clear();
         newsTextMap.clear();
         libraryReadMeMap.clear();
@@ -78,33 +82,83 @@ public class DataRepository {
 
     private void loadData() {
         try {
+            setHomeText(loadString(BASE_URL + "intro.md"));
+
             // load people
-            File peopleFile = loadFile("people.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json");
+            File peopleFile = loadFile("people.json", BASE_URL + "people.json");
             setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
             }.getType()));
 
             // load books
-            File booksFile = loadFile("books.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/books.json");
+            File booksFile = loadFile("books.json", BASE_URL + "books.json");
             setBooks(gson.fromJson(new FileReader(booksFile), new TypeToken<List<Book>>() {
             }.getType()));
 
             // load videos
-            File videosFile = loadFile("videos.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/videos.json");
+            File videosFile = loadFile("videos.json", BASE_URL + "videos.json");
             setVideos(gson.fromJson(new FileReader(videosFile), new TypeToken<List<Video>>() {
             }.getType()));
 
             // load libraries
-            File librariesFile = loadFile("libraries.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries.json");
+            File librariesFile = loadFile("libraries.json", BASE_URL + "libraries.json");
             setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
             }.getType()));
 
             // load libraries
-            File newsFile = loadFile("news.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/news.json");
+            File newsFile = loadFile("news.json", BASE_URL + "news.json");
             setNews(gson.fromJson(new FileReader(newsFile), new TypeToken<List<News>>() {
             }.getType()));
+
+            updateRecentItems();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateRecentItems() {
+        getRecentItems().addAll(findRecentItems(getNews()));
+        getRecentItems().addAll(findRecentItems(getPeople()));
+        getRecentItems().addAll(findRecentItems(getBooks()));
+        getRecentItems().addAll(findRecentItems(getLibraries()));
+        getRecentItems().addAll(findRecentItems(getVideos()));
+    }
+
+    private List<ModelObject> findRecentItems(List<? extends ModelObject> items) {
+        items.sort((Comparator<ModelObject>) (m1, m2) -> {
+            LocalDate date1 = m1.getModifiedDate();
+            LocalDate date2 = m2.getModifiedDate();
+
+            if (date1 != null && date2 != null) {
+                return date1.compareTo(date2);
+            } else if (date1 != null) {
+                return -1;
+            }
+
+            return +1;
+        });
+
+        List<ModelObject> result = new ArrayList<>();
+
+        for (int i = 0; i < Math.min(3, items.size()); i++) {
+            result.add(items.get(i));
+        }
+
+        return result;
+    }
+
+    private final ListProperty<ModelObject> recentItems = new SimpleListProperty<>(this, "recentItems", FXCollections.observableArrayList());
+
+    public ObservableList<ModelObject> getRecentItems() {
+        return recentItems.get();
+    }
+
+    public ListProperty<ModelObject> recentItemsProperty() {
+        return recentItems;
+    }
+
+    public void setRecentItems(ObservableList<ModelObject> recentItems) {
+        this.recentItems.set(recentItems);
     }
 
     public Optional<Person> getPersonById(String id) {
@@ -133,7 +187,7 @@ public class DataRepository {
             executor.submit(() -> {
                 try {
                     String libraryId = library.getId();
-                    File file = loadFile(libraryId + ".json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/libraries/" + libraryId + "/_info.json?time=" + ZonedDateTime.now().toInstant());
+                    File file = loadFile(libraryId + ".json", BASE_URL + "libraries/" + libraryId + "/_info.json?time=" + ZonedDateTime.now().toInstant());
                     LibraryInfo result = gson.fromJson(new FileReader(file), LibraryInfo.class);
                     Platform.runLater(() -> infoProperty.set(result));
                 } catch (IOException ex) {
@@ -160,8 +214,12 @@ public class DataRepository {
         });
     }
 
+    public String getBaseUrl() {
+        return BASE_URL;
+    }
+
     public String getNewsBaseUrl(News news) {
-        return "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/news/" + DATE_FORMATTER.format(news.getDate()) + "-" + news.getId();
+        return BASE_URL + "news/" + DATE_FORMATTER.format(news.getDate()) + "-" + news.getId();
     }
 
     public StringProperty libraryReadMeProperty(Library library) {
@@ -178,6 +236,20 @@ public class DataRepository {
 
             return readmeProperty;
         });
+    }
+
+    private final StringProperty homeText = new SimpleStringProperty(this, "homeText");
+
+    public String getHomeText() {
+        return homeText.get();
+    }
+
+    public StringProperty homeTextProperty() {
+        return homeText;
+    }
+
+    public void setHomeText(String homeText) {
+        this.homeText.set(homeText);
     }
 
     public ListProperty<Book> getBooksByPerson(Person person) {

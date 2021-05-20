@@ -64,6 +64,14 @@
     -mdfx-bg-color-3: #eee;
 
     -fx-font-smoothing-type: lcd;
+
+    -white-button-text-color: rgb(110, 110, 110);
+    -white-button-text-color-hover: rgb(255, 255, 255);
+    -white-button-text-color-pressed: white;
+
+    -white-button-background-color: rgb(230, 230, 230);
+    -white-button-background-color-hover: rgb(150, 150, 150);
+    -white-button-background-color-pressed: -fx-accent;
 }
 
 .pagination .page {
@@ -121,6 +129,36 @@
 
 .button:pressed .ikonli-font-icon {
     -fx-icon-color: derive(-fx-accent, +40%);
+}
+
+.white-button {
+    -fx-border-color: -white-button-text-color;
+    -fx-border-radius: 2px;
+    -fx-background-color: -white-button-background-color;
+    -fx-text-fill: -white-button-text-color;
+    -fx-font-family: "Open Sans Bold";
+}
+
+.white-button:hover {
+    -fx-background-color: -white-button-background-color-hover;
+    -fx-text-fill: -white-button-text-color-hover;
+}
+
+.white-button:pressed {
+    -fx-background-color: -white-button-background-color-pressed;
+    -fx-text-fill: -white-button-text-color-pressed;
+}
+
+.white-button .ikonli-font-icon {
+    -fx-icon-color: -white-button-text-color;
+}
+
+.white-button:hover .ikonli-font-icon {
+    -fx-icon-color: -white-button-text-color-hover;
+}
+
+.white-button:pressed .ikonli-font-icon {
+    -fx-icon-color: -white-button-text-color-pressed;
 }
 
 .menu-button {
@@ -973,10 +1011,6 @@
     -fx-icon-color: white;
 }
 
-.license-label.commercial {
-    -fx-background-color: -red;
-}
-
 /* -----------------------------------------------------------------------------
  * BooksView
  */
@@ -1411,7 +1445,7 @@
 
 .root-pane > .dialog-pane > .content-pane > .close-button {
     -fx-background-radius: 3px;
-    -fx-background-color: rgba(255, 255, 255, 1) !important;
+    -fx-background-color: transparent !important;
     -fx-background-insets: 0px;
     -fx-padding: 2px;
     -size: 50px !important;
@@ -1423,23 +1457,24 @@
     -fx-max-height: -size;
     -fx-translate-x: -10px;
     -fx-translate-y: 10px;
+    -fx-cursor: hand;
 }
 
 .root-pane > .dialog-pane > .content-pane > .close-button:hover {
-    -fx-background-color: rgba(100, 112, 122, 1) !important;
+    -fx-background-color: transparent !important;
     -fx-opacity: 1 !important;
 }
 
 .root-pane .dialog-pane > .content-pane > .close-button:hover .ikonli-font-icon {
-    -fx-icon-color: white;
+    -fx-icon-color: -fx-accent;
 }
 
 .root-pane > .dialog-pane > .content-pane > .close-button:pressed {
-    -fx-background-color: rgba(100, 112, 122, 0.1);
+    -fx-background-color: transparent;
 }
 
 .root-pane .dialog-pane > .content-pane > .close-button .ikonli-font-icon {
-    -fx-icon-color: -fx-text-background-color;
+    -fx-icon-color: white;
     -fx-icon-size: 48px !important;
 }
 
@@ -1464,7 +1499,6 @@
 }
 
 .home-view .contact-markdown-view .markdown-text {
-    -fx-fill: -fx-accent;
 }
 
 .home-view .contact-markdown-view * {
@@ -1504,7 +1538,7 @@
 .home-view .social-pane .icon-wrapper .ikonli-font-icon {
     -fx-cursor: hand;
     -fx-icon-color: white;
-    -fx-icon-size: 16px;
+    -fx-icon-size: 18px;
 }
 
 
@@ -1515,7 +1549,7 @@
     -fx-padding: 0px 20px;
     -fx-pref-height: 75px;
     -fx-background-color: derive(-fx-accent, +20%);
-/*linear-gradient(rgba(38, 40, 41, 1) 0%, rgba(59, 63, 65, 1) 100%);*/
+    /*linear-gradient(rgba(38, 40, 41, 1) 0%, rgba(59, 63, 65, 1) 100%);*/
     -fx-border-color: rgba(0, 0, 0, .05);
     -fx-border-width: 0px 0px 1px 0px;
 }

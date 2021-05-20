@@ -20,8 +20,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -195,7 +195,7 @@ public class NewsView extends PageView {
         private final MarkdownView markdownView = new MarkdownView();
         private final ImageView bannerView = new ImageView();
         private final RootPane rootPane;
-        private final Hyperlink readMoreLink = new Hyperlink("Read more ...");
+        private final Button readMoreButton = new Button("Read more ...");
         private final Map<News, BooleanProperty> readMoreMap = new HashMap<>();
 
         public NewsCell(RootPane rootPane) {
@@ -204,6 +204,8 @@ public class NewsView extends PageView {
             setPrefWidth(0);
 
             getStyleClass().add("news-cell");
+
+            readMoreButton.getStyleClass().add("read-more-button");
 
             titleLabel.getStyleClass().addAll("title-label");
             titleLabel.setWrapText(true);
@@ -222,7 +224,7 @@ public class NewsView extends PageView {
 
             VBox.setMargin(authorLabel, new Insets(10, 0, 0, 0));
             VBox.setMargin(markdownView, new Insets(20, 0, 0, 0));
-            VBox.setMargin(readMoreLink, new Insets(10, 0, 0, 0));
+            VBox.setMargin(readMoreButton, new Insets(10, 0, 0, 0));
 
             bannerView.setPreserveRatio(true);
             bannerView.fitWidthProperty().bind(coverImageWidthProperty());
@@ -232,8 +234,8 @@ public class NewsView extends PageView {
                 if (item != null) {
                     BooleanProperty readMoreProperty = readMoreMap.computeIfAbsent(item, key -> new SimpleBooleanProperty());
                     markdownView.showImagesProperty().bind(readMoreProperty);
-                    readMoreLink.textProperty().bind(Bindings.createStringBinding(() -> readMoreProperty.get() ? "Show less ..." : "Read more ...", readMoreProperty));
-                    readMoreLink.setOnAction(evt -> readMoreProperty.set(!readMoreProperty.get()));
+                    readMoreButton.textProperty().bind(Bindings.createStringBinding(() -> readMoreProperty.get() ? "Show less ..." : "Read more ...", readMoreProperty));
+                    readMoreButton.setOnAction(evt -> readMoreProperty.set(!readMoreProperty.get()));
 
                     markdownView.setBaseURL(DataRepository.getInstance().getNewsBaseUrl(item));
                     markdownView.mdStringProperty().bind(Bindings.createStringBinding(() -> {
@@ -257,20 +259,20 @@ public class NewsView extends PageView {
 
                 } else {
                     markdownView.showImagesProperty().unbind();
-                    readMoreLink.textProperty().unbind();
+                    readMoreButton.textProperty().unbind();
                     markdownView.mdStringProperty().unbind();
                 }
             });
 
-            readMoreLink.visibleProperty().bind(showReadMoreLinkProperty());
-            readMoreLink.managedProperty().bind(showReadMoreLinkProperty());
+            readMoreButton.visibleProperty().bind(showReadMoreLinkProperty());
+            readMoreButton.managedProperty().bind(showReadMoreLinkProperty());
 
             StackPane imageWrapper = new StackPane(bannerView);
             imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
             imageWrapper.getStyleClass().add("banner-image-wrapper");
             StackPane.setAlignment(bannerView, Pos.TOP_LEFT);
 
-            VBox vBox = new VBox(titleLabel, subtitleLabel, authorLabel, markdownView, readMoreLink);
+            VBox vBox = new VBox(titleLabel, subtitleLabel, authorLabel, markdownView, readMoreButton);
             vBox.setAlignment(Pos.TOP_LEFT);
             vBox.setFillWidth(true);
             vBox.getStyleClass().add("vbox");
