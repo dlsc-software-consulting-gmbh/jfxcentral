@@ -95,6 +95,9 @@ class LibraryInfoView extends ScrollPane {
                 imageView.setOnMouseClicked(evt -> {
                     Pagination pagination = new Pagination();
                     pagination.setPageCount(images.size());
+                    pagination.setPrefSize(960, 540);
+                    pagination.setMaxSize(960, 540);
+
                     pagination.setPageFactory(page -> {
 
                         ImageView bigImageView = new ImageView();
@@ -112,7 +115,7 @@ class LibraryInfoView extends ScrollPane {
 
                     pagination.setCurrentPageIndex(imageIndex);
 
-                    rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, image.getTitle(), pagination, true, Collections.emptyList());
+                    rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, image.getTitle(), pagination, false, Collections.emptyList());
 
                     Platform.runLater(() -> pagination.requestFocus());
                 });

@@ -1,10 +1,10 @@
 .dialog-pane {
-    -fx-background-color: transparent;
+    -fx-background-color: black !important;
 }
 
 .dialog-pane > .content-pane {
     -fx-background-radius: 3px;
-    -fx-background-color: transparent !important;
+    -fx-background-color: black !important;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
     -fx-min-width: 350px;
     -fx-min-height: 250px;
@@ -35,7 +35,7 @@
 
 .dialog-pane > .content-pane > .vbox > .header {
     -fx-padding: 25px 50px 0px 50px;
-    -fx-background-color: transparent;
+    -fx-background-color: black;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-spacing: 15px;
 }
@@ -102,12 +102,12 @@
  */
 .root-pane .dialog-pane > .content-pane > .glass-pane {
     -fx-background-color: black !important;
-    -fx-opacity: .8 !important;
+    -fx-opacity: 1 !important;
 }
 
 .root-pane .dialog-pane .glass-pane {
     -fx-background-color: black !important;
-    -fx-opacity: .80 !important;
+    -fx-opacity: 1 !important;
 }
 
 .root-pane .dialog-pane > .content-pane > .close-button {

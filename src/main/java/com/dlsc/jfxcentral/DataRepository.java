@@ -36,11 +36,47 @@ public class DataRepository {
 
     private final Gson gson = Converters.registerLocalDate(new GsonBuilder()).setPrettyPrinting().create();
 
+    private Map<Library, ObjectProperty<LibraryInfo>> libraryInfoMap = new HashMap<>();
+
+    private Map<News, StringProperty> newsTextMap = new HashMap<>();
+
+    private Map<Library, StringProperty> libraryReadMeMap = new HashMap<>();
+
     public static synchronized DataRepository getInstance() {
         return instance;
     }
 
     private DataRepository() {
+        loadData();
+    }
+
+    public void refresh() {
+        libraryInfoMap.clear();
+        newsTextMap.clear();
+        libraryReadMeMap.clear();
+        getPeople().clear();
+        getLibraries().clear();
+        getBooks().clear();
+        getNews().clear();
+        getVideos().clear();
+
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(() -> {
+                loadData();
+            });
+        });
+
+        thread.setDaemon(true);
+        thread.setName("Refresh Data Thread");
+        thread.start();
+    }
+
+    private void loadData() {
         try {
             // load people
             File peopleFile = loadFile("people.json", "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/people.json");
@@ -90,8 +126,6 @@ public class DataRepository {
         return new SimpleListProperty<>(FXCollections.observableArrayList(result));
     }
 
-    private Map<Library, ObjectProperty<LibraryInfo>> libraryInfoMap = new HashMap<>();
-
     public ObjectProperty<LibraryInfo> libraryInfoProperty(Library library) {
         return libraryInfoMap.computeIfAbsent(library, key -> {
             ObjectProperty<LibraryInfo> infoProperty = new SimpleObjectProperty<>();
@@ -111,8 +145,6 @@ public class DataRepository {
         });
     }
 
-    private Map<News, StringProperty> newsTextMap = new HashMap<>();
-
     public StringProperty newsTextProperty(News news) {
         return newsTextMap.computeIfAbsent(news, key -> {
             StringProperty textProperty = new SimpleStringProperty();
@@ -131,8 +163,6 @@ public class DataRepository {
     public String getNewsBaseUrl(News news) {
         return "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/news/" + DATE_FORMATTER.format(news.getDate()) + "-" + news.getId();
     }
-
-    private Map<Library, StringProperty> libraryReadMeMap = new HashMap<>();
 
     public StringProperty libraryReadMeProperty(Library library) {
         return libraryReadMeMap.computeIfAbsent(library, key -> {

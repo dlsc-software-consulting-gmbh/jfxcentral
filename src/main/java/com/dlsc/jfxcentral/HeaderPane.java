@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -27,11 +28,14 @@ public class HeaderPane extends HBox {
         StackPane stackPane = new StackPane(title2, title);
         HBox.setHgrow(stackPane, Priority.ALWAYS);
 
+        Button refreshButton = new Button("Refresh");
+        refreshButton.setOnAction(evt -> DataRepository.getInstance().refresh());
+
         ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
         imageView.setFitHeight(48);
         imageView.setPreserveRatio(true);
         StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
-        getChildren().addAll(stackPane, imageView);
+        getChildren().addAll(refreshButton, stackPane);
     }
 }

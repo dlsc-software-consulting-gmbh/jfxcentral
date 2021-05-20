@@ -838,6 +838,14 @@
     -fx-min-height: -size;
 }
 
+.section-pane .filter-view .title {
+    -fx-font-weight: bold;
+}
+
+.section-pane .filter-view .subtitle {
+    -fx-opacity: .8;
+}
+
 .section-pane .list-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
@@ -1107,14 +1115,6 @@
 .pretty-scroll-pane .scroll-bar .decrement-arrow {
     -fx-pref-width: 0 !important;
     -fx-pref-height: 0 !important;
-}
-
-/* ----------------------------------------------------------------------------
- * Footer
- */
-.footer {
-    -fx-pref-height: 250px;
-    -fx-background-color: #2E353E;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1403,7 +1403,7 @@
     -fx-border-color: white;
     -fx-border-radius: 4px;
     -fx-background-radius: 3px;
-    -fx-background-color: rgba(0, 0, 0, .5) !important;
+    -fx-background-color: rgba(0, 0, 0, 1) !important;
     -fx-effect: -drop-shadow-3;
     -fx-min-width: 350px;
     -fx-min-height: 250px;
@@ -1464,16 +1464,49 @@
 }
 
 .home-view .contact-markdown-view .markdown-text {
+    -fx-fill: -fx-accent;
 }
 
 .home-view .contact-markdown-view * {
-    -fx-alignment: center;
-    -fx-text-alignment: center;
+    -fx-alignment: top-left;
+    -fx-text-alignment: left;
+}
+
+.home-view .footer {
+    -fx-spacing: 20px;
 }
 
 .home-view .contact-markdown-view .markdown-paragraph-list {
+    -fx-alignment: top-center;
     -fx-spacing: 0px;
 }
+
+.home-view .social-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
+
+.home-view .social-pane .social-label {
+    -fx-cursor: hand;
+    -fx-text-fill: -fx-accent;
+}
+
+.home-view .social-pane .social-label:hover {
+    -fx-underline: true;
+}
+
+.home-view .social-pane .icon-wrapper {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 1000px;
+    -fx-padding: 10px;
+}
+
+.home-view .social-pane .icon-wrapper .ikonli-font-icon {
+    -fx-cursor: hand;
+    -fx-icon-color: white;
+    -fx-icon-size: 16px;
+}
+
 
 /* ----------------------------------------------------------------------------
  * HeaderPane
@@ -1481,7 +1514,8 @@
 .header-pane {
     -fx-padding: 0px 20px;
     -fx-pref-height: 75px;
-    -fx-background-color: linear-gradient(rgba(59, 63, 65, 1) 0%, rgba(38, 40, 41, 1) 100%);
+    -fx-background-color: derive(-fx-accent, +20%);
+/*linear-gradient(rgba(38, 40, 41, 1) 0%, rgba(59, 63, 65, 1) 100%);*/
     -fx-border-color: rgba(0, 0, 0, .05);
     -fx-border-width: 0px 0px 1px 0px;
 }
@@ -1490,12 +1524,13 @@
     -fx-font-family: "Pattaya";
     -fx-font-size: 48px;
     -fx-text-fill: white;
+    -fx-alignment: center-right;
 }
 
 .header-pane .title-shadow {
     -fx-font-family: "Pattaya";
     -fx-font-size: 48px;
-    -fx-text-fill: -fx-accent;
-    -fx-translate-x: 1px;
-    -fx-translate-y: 1px;
+    -fx-text-fill: derive(-fx-accent, -50%);
+    -fx-translate-x: 2px;
+    -fx-translate-y: 2px;
 }
