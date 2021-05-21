@@ -7,8 +7,17 @@ public class Blog extends ModelObject {
     private String description;
     private String image;
     private String url;
+    private String summary;
 
     public Blog() {
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getTitle() {

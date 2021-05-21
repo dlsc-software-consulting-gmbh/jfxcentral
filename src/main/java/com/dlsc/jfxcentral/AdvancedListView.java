@@ -61,6 +61,7 @@ public class AdvancedListView<T> extends StackPane {
         visibleRowCount.addListener(updateListener);
         paging.addListener(updateListener);
         page.addListener(updateListener);
+        cellFactory.addListener(updateListener);
 
         updateView();
 
@@ -293,7 +294,7 @@ public class AdvancedListView<T> extends StackPane {
             int endIndex = Math.min(startIndex + getVisibleRowCount(), getItems().size());
 
             if (isPaging() && getPageCount() > 1) {
-                endIndex = startIndex + getVisibleRowCount();
+                // endIndex = startIndex + getVisibleRowCount();
             }
 
             for (int index = startIndex; index < endIndex; index++) {

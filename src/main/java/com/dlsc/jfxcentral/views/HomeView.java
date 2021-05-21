@@ -1,11 +1,7 @@
 package com.dlsc.jfxcentral.views;
 
-import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.JFXCentralApp;
-import com.dlsc.jfxcentral.MarkdownView;
-import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.ModelObject;
-import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.geometry.Insets;
@@ -51,12 +47,15 @@ public class HomeView extends PageView {
     }
 
     private void createRecentItemsSection() {
-        PrettyListView<ModelObject> listView = new PrettyListView<>();
+        AdvancedListView<ModelObject> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(10);
+        listView.setCellFactory(view -> new RecentItemCell());
         listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         SectionPane sectionPane = new SectionPane(listView);
-        sectionPane.setTitle("Recently Updated");
+        sectionPane.setTitle("Latest Additions & Updates");
         sectionPane.setSubtitle("Libraries, news, books, people, etc... that have recently been added or updated");
         VBox.setVgrow(sectionPane, Priority.ALWAYS);
 

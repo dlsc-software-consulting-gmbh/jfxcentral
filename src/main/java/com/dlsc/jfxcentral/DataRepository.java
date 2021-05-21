@@ -27,7 +27,13 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class DataRepository {
-    private static final String BASE_URL = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/main/";
+
+    public enum Stages {
+        LIVE,
+        STAGING
+    }
+
+    private static final String BASE_URL = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/master/";
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -66,13 +72,11 @@ public class DataRepository {
 
         Thread thread = new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Platform.runLater(() -> {
-                loadData();
-            });
+            Platform.runLater(() -> loadData());
         });
 
         thread.setDaemon(true);
@@ -82,7 +86,7 @@ public class DataRepository {
 
     private void loadData() {
         try {
-            setHomeText(loadString(BASE_URL + "intro.md"));
+            setHomeText(loadString(BASE_URL + "intro.md?time=" + ZonedDateTime.now().toInstant()));
 
             // load people
             File peopleFile = loadFile("people.json", BASE_URL + "people.json");
@@ -126,8 +130,8 @@ public class DataRepository {
 
     private List<ModelObject> findRecentItems(List<? extends ModelObject> items) {
         items.sort((Comparator<ModelObject>) (m1, m2) -> {
-            LocalDate date1 = m1.getModifiedDate();
-            LocalDate date2 = m2.getModifiedDate();
+            LocalDate date1 = m1.getModifiedOn();
+            LocalDate date2 = m2.getModifiedOn();
 
             if (date1 != null && date2 != null) {
                 return date1.compareTo(date2);
@@ -362,6 +366,20 @@ public class DataRepository {
         }
 
         return sb.toString();
+    }
+
+    private final ObjectProperty<Stages> stage = new SimpleObjectProperty<>(this, "stage", Stages.MASTER);
+
+    public Stages getStage() {
+        return stage.get();
+    }
+
+    public ObjectProperty<Stages> stageProperty() {
+        return stage;
+    }
+
+    public void setStage(Stages stage) {
+        this.stage.set(stage);
     }
 
     public static void main(String[] args) {

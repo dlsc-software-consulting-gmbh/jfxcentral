@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.gemsfx.DialogPane;
+import com.jpro.webapi.WebAPI;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 import java.util.HashMap;
@@ -18,6 +20,17 @@ public class RootPane extends ViewPane {
 
     public RootPane() {
         getStyleClass().add("root-pane");
+
+        sceneProperty().addListener(it -> {
+            Scene scene = getScene();
+            if (scene != null) {
+                if (WebAPI.isBrowser()) {
+                    WebAPI webAPI = WebAPI.getWebAPI(scene);
+                    String language = webAPI.getLanguage();
+                    System.out.println("language: " + language);
+                }
+            }
+        });
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 

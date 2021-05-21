@@ -27,4 +27,5 @@ open module com.dlsc.jfxcentral {
     exports com.dlsc.jfxcentral.json;
 
     requires fr.brouillard.oss.cssfx;
+    requires org.kordamp.ikonli.core;
 }

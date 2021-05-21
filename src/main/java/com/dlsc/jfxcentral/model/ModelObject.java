@@ -8,8 +8,8 @@ import java.time.LocalDate;
 public abstract class ModelObject {
 
     private String id;
-    private LocalDate createdDate;
-    private LocalDate modifiedDate;
+    private LocalDate createdOn;
+    private LocalDate modifiedOn;
 
     protected ModelObject() {
     }
@@ -22,20 +22,20 @@ public abstract class ModelObject {
         this.id = id;
     }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
+    public LocalDate getCreatedOn() {
+        return createdOn;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setCreatedOn(LocalDate createdOn) {
+        this.createdOn = createdOn;
     }
 
-    public LocalDate getModifiedDate() {
-        return modifiedDate;
+    public LocalDate getModifiedOn() {
+        return modifiedOn;
     }
 
-    public void setModifiedDate(LocalDate modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setModifiedOn(LocalDate modifiedOn) {
+        this.modifiedOn = modifiedOn;
     }
 
     @Override

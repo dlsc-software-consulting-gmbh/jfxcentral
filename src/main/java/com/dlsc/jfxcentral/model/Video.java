@@ -6,6 +6,7 @@ public class Video extends ModelObject {
 
     private String title;
     private String description;
+    private String summary;
     private List<String> personIds;
     private String image;
     private String type;
@@ -14,6 +15,14 @@ public class Video extends ModelObject {
     private String platform;
 
     public Video() {
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getTitle() {

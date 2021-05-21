@@ -1541,6 +1541,41 @@
     -fx-icon-size: 18px;
 }
 
+.home-view .recent-item-cell {
+    -fx-padding: 5px 10px 5px 5px;
+}
+
+.home-view .recent-item-cell .hbox {
+    -fx-alignment: center-left;
+    -fx-spacing: 20px;
+}
+
+.home-view .recent-item-cell .hbox .icon-wrapper {
+    -fx-pref-width: 32px;
+    -fx-pref-height: 32px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 2px;
+}
+
+.home-view .recent-item-cell .hbox .icon-wrapper .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: white;
+}
+
+.home-view .recent-item-cell .hbox .title-label {
+    -fx-font-family: "Open Sans Bold";
+}
+
+.home-view .recent-item-cell .hbox .subtitle-label {
+    -fx-opacity: .8;
+}
+
+.home-view .recent-item-cell .hbox .date-label {
+}
+
+.home-view .recent-item-cell .hbox .vbox {}
 
 /* ----------------------------------------------------------------------------
  * HeaderPane
