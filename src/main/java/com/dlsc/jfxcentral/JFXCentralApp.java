@@ -5,6 +5,7 @@ import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -93,7 +94,10 @@ public class JFXCentralApp extends Application {
     }
 
     private void showRootPane() {
-        scene.setRoot(rootPane);
+        rootPane.setMaxWidth(1200);
+        StackPane wrapper = new StackPane(rootPane);
+        wrapper.getStyleClass().add("root-wrapper");
+        scene.setRoot(wrapper);
     }
 
     public static void main(String args[]) {

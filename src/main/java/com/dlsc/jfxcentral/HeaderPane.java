@@ -1,12 +1,15 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.DataRepository.Source;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.util.StringConverter;
 
 public class HeaderPane extends HBox {
 
@@ -31,11 +34,37 @@ public class HeaderPane extends HBox {
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(evt -> DataRepository.getInstance().refresh());
 
+        ComboBox<Source> sourceComboBox = new ComboBox<>();
+        sourceComboBox.getItems().addAll(Source.values());
+        sourceComboBox.valueProperty().bindBidirectional(DataRepository.getInstance().sourceProperty());
+        sourceComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Source source) {
+                if (source == null) {
+                    return "";
+                }
+
+                switch (source) {
+                    case LIVE:
+                        return "Live Data";
+                    case STAGING:
+                        return "Staging Data";
+                }
+
+                return "";
+            }
+
+            @Override
+            public Source fromString(String string) {
+                return null;
+            }
+        });
+
         ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
         imageView.setFitHeight(48);
         imageView.setPreserveRatio(true);
         StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
-        getChildren().addAll(refreshButton, stackPane);
+        getChildren().addAll(refreshButton, sourceComboBox, stackPane);
     }
 }

@@ -28,13 +28,14 @@ import java.util.stream.Collectors;
 
 public class DataRepository {
 
-    public enum Stages {
+    public enum Source {
+
         LIVE("live"),
         STAGING("staging");
 
         private String branchName;
 
-        Stages(String branchName) {
+        Source(String branchName) {
             this.branchName = branchName;
         }
 
@@ -66,6 +67,7 @@ public class DataRepository {
     private DataRepository() {
         recentItems.addListener((Observable it) -> System.out.println("recent items count: " + getRecentItems().size()));
         loadData();
+        sourceProperty().addListener(it -> refresh());
     }
 
     public void refresh() {
@@ -229,7 +231,7 @@ public class DataRepository {
     }
 
     public String getBaseUrl() {
-        return BASE_URL + getStage().getBranchName() + "/";
+        return BASE_URL + getSource().getBranchName() + "/";
     }
 
     public String getNewsBaseUrl(News news) {
@@ -380,18 +382,18 @@ public class DataRepository {
         return sb.toString();
     }
 
-    private final ObjectProperty<Stages> stage = new SimpleObjectProperty<>(this, "stage", Stages.LIVE);
+    private final ObjectProperty<Source> source = new SimpleObjectProperty<>(this, "source", Source.LIVE);
 
-    public Stages getStage() {
-        return stage.get();
+    public Source getSource() {
+        return source.get();
     }
 
-    public ObjectProperty<Stages> stageProperty() {
-        return stage;
+    public ObjectProperty<Source> sourceProperty() {
+        return source;
     }
 
-    public void setStage(Stages stage) {
-        this.stage.set(stage);
+    public void setSource(Source source) {
+        this.source.set(source);
     }
 
     public static void main(String[] args) {

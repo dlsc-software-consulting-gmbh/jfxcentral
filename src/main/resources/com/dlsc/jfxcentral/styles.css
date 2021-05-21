@@ -161,6 +161,19 @@
     -fx-icon-color: -white-button-text-color-pressed;
 }
 
+.combo-box-base {
+    -fx-background-color: -fx-accent;
+}
+
+.combo-box-base > * > .text {
+    -fx-font-family: "Open Sans Bold";
+    -fx-fill: white;
+}
+
+.combo-box-base .arrow {
+    -fx-background-color: white;
+}
+
 .menu-button {
     -fx-background-color: -fx-accent;
     -fx-background-radius: 4px;
@@ -197,6 +210,15 @@
 .scroll-bar:horizontal .increment-arrow {
     -fx-pref-height: 0;
     -fx-pref-width: 0;
+}
+
+.root-wrapper {
+    /*-fx-background-color: derive(-fx-accent, +80%);*/
+    -fx-background-color: grey;
+}
+
+.root-pane {
+    -fx-effect: -drop-shadow-3;
 }
 
 .root-pane .top-spacer {
@@ -1583,6 +1605,7 @@
  * HeaderPane
  */
 .header-pane {
+    -fx-spacing: 10px;
     -fx-padding: 0px 20px;
     -fx-pref-height: 75px;
     -fx-background-color: derive(-fx-accent, +20%);
