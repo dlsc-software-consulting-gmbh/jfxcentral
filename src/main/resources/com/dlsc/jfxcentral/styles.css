@@ -1555,6 +1555,8 @@
     -fx-pref-height: 32px;
     -fx-max-width: 32px;
     -fx-max-height: 32px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
     -fx-background-color: -fx-accent;
     -fx-background-radius: 2px;
 }

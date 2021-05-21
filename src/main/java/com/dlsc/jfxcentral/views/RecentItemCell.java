@@ -3,10 +3,7 @@ package com.dlsc.jfxcentral.views;
 import com.dlsc.jfxcentral.model.*;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -41,6 +38,7 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
         titleLabel.getStyleClass().add("title-label");
         subtitleLabel.getStyleClass().add("subtitle-label");
         dateLabel.getStyleClass().add("date-label");
+        dateLabel.setMinWidth(Region.USE_PREF_SIZE);
 
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

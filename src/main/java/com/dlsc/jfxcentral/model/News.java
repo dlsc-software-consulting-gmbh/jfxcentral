@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ public class News extends ModelObject {
     private String title;
     private String subtitle;
     private String text;
-    private LocalDate date;
     private String author;
     private String banner;
 
@@ -76,14 +74,6 @@ public class News extends ModelObject {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public String getAuthor() {

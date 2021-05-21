@@ -92,19 +92,22 @@ public class NewsView extends PageView {
         timeGroup.getFilters().add(new Filter<>("Last Week") {
             @Override
             public boolean test(News news) {
-                return news.getDate().isAfter(LocalDate.now().minusWeeks(1)) && news.getDate().isBefore(LocalDate.now());
+                return news.getCreatedOn().isAfter(LocalDate.now().minusWeeks(1)) && news.getCreatedOn().isBefore(LocalDate.now())
+                        || news.getModifiedOn().isAfter(LocalDate.now().minusWeeks(1)) && news.getModifiedOn().isBefore(LocalDate.now());
             }
         });
         timeGroup.getFilters().add(new Filter<>("Last Month") {
             @Override
             public boolean test(News news) {
-                return news.getDate().isAfter(LocalDate.now().minusMonths(1)) && news.getDate().isBefore(LocalDate.now());
+                return news.getCreatedOn().isAfter(LocalDate.now().minusMonths(1)) && news.getCreatedOn().isBefore(LocalDate.now())
+                        || news.getModifiedOn().isAfter(LocalDate.now().minusMonths(1)) && news.getModifiedOn().isBefore(LocalDate.now());
             }
         });
         timeGroup.getFilters().add(new Filter<>("Last Year") {
             @Override
             public boolean test(News news) {
-                return news.getDate().isAfter(LocalDate.now().minusYears(1)) && news.getDate().isBefore(LocalDate.now());
+                return news.getCreatedOn().isAfter(LocalDate.now().minusYears(1)) && news.getCreatedOn().isBefore(LocalDate.now())
+                        || news.getModifiedOn().isAfter(LocalDate.now().minusYears(1)) && news.getModifiedOn().isBefore(LocalDate.now());
             }
         });
     }
@@ -324,12 +327,19 @@ public class NewsView extends PageView {
             if (!empty && news != null) {
                 titleLabel.setText(news.getTitle());
                 subtitleLabel.setText(news.getSubtitle());
-                authorLabel.setText(news.getAuthor() + " - Published on: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(news.getDate()));
+                authorLabel.setText(news.getAuthor() + createSuffix(news));
 
                 bannerView.setVisible(true);
                 bannerView.setManaged(true);
                 bannerView.imageProperty().bind(ImageManager.getInstance().newsBannerImageProperty(news));
             }
+        }
+
+        private String createSuffix(News news) {
+            if (news.getModifiedOn().isAfter(news.getCreatedOn())) {
+                return " - Updated on: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(news.getModifiedOn());
+            }
+            return " - Published on: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(news.getCreatedOn());
         }
     }
 }

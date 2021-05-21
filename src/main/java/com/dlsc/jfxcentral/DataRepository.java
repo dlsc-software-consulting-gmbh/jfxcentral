@@ -29,11 +29,21 @@ import java.util.stream.Collectors;
 public class DataRepository {
 
     public enum Stages {
-        LIVE,
-        STAGING
+        LIVE("live"),
+        STAGING("staging");
+
+        private String branchName;
+
+        Stages(String branchName) {
+            this.branchName = branchName;
+        }
+
+        public String getBranchName() {
+            return branchName;
+        }
     }
 
-    private static final String BASE_URL = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/master/";
+    private static final String BASE_URL = "https://raw.githubusercontent.com/dlemmermann/jfxcentral-data/";
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -86,30 +96,30 @@ public class DataRepository {
 
     private void loadData() {
         try {
-            setHomeText(loadString(BASE_URL + "intro.md?time=" + ZonedDateTime.now().toInstant()));
+            setHomeText(loadString(getBaseUrl() + "intro.md?time=" + ZonedDateTime.now().toInstant()));
 
             // load people
-            File peopleFile = loadFile("people.json", BASE_URL + "people.json");
+            File peopleFile = loadFile("people.json", getBaseUrl() + "people.json");
             setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
             }.getType()));
 
             // load books
-            File booksFile = loadFile("books.json", BASE_URL + "books.json");
+            File booksFile = loadFile("books.json", getBaseUrl() + "books.json");
             setBooks(gson.fromJson(new FileReader(booksFile), new TypeToken<List<Book>>() {
             }.getType()));
 
             // load videos
-            File videosFile = loadFile("videos.json", BASE_URL + "videos.json");
+            File videosFile = loadFile("videos.json", getBaseUrl() + "videos.json");
             setVideos(gson.fromJson(new FileReader(videosFile), new TypeToken<List<Video>>() {
             }.getType()));
 
             // load libraries
-            File librariesFile = loadFile("libraries.json", BASE_URL + "libraries.json");
+            File librariesFile = loadFile("libraries.json", getBaseUrl() + "libraries.json");
             setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
             }.getType()));
 
             // load libraries
-            File newsFile = loadFile("news.json", BASE_URL + "news.json");
+            File newsFile = loadFile("news.json", getBaseUrl() + "news.json");
             setNews(gson.fromJson(new FileReader(newsFile), new TypeToken<List<News>>() {
             }.getType()));
 
@@ -191,7 +201,7 @@ public class DataRepository {
             executor.submit(() -> {
                 try {
                     String libraryId = library.getId();
-                    File file = loadFile(libraryId + ".json", BASE_URL + "libraries/" + libraryId + "/_info.json?time=" + ZonedDateTime.now().toInstant());
+                    File file = loadFile(libraryId + ".json", getBaseUrl() + "libraries/" + libraryId + "/_info.json?time=" + ZonedDateTime.now().toInstant());
                     LibraryInfo result = gson.fromJson(new FileReader(file), LibraryInfo.class);
                     Platform.runLater(() -> infoProperty.set(result));
                 } catch (IOException ex) {
@@ -219,11 +229,11 @@ public class DataRepository {
     }
 
     public String getBaseUrl() {
-        return BASE_URL;
+        return BASE_URL + getStage().getBranchName() + "/";
     }
 
     public String getNewsBaseUrl(News news) {
-        return BASE_URL + "news/" + DATE_FORMATTER.format(news.getDate()) + "-" + news.getId();
+        return getBaseUrl() + "news/" + DATE_FORMATTER.format(news.getCreatedOn()) + "-" + news.getId();
     }
 
     public StringProperty libraryReadMeProperty(Library library) {
@@ -345,6 +355,8 @@ public class DataRepository {
     }
 
     private String loadString(String address) {
+        System.out.println("loading string from: " + address);
+
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(address);
@@ -368,7 +380,7 @@ public class DataRepository {
         return sb.toString();
     }
 
-    private final ObjectProperty<Stages> stage = new SimpleObjectProperty<>(this, "stage", Stages.MASTER);
+    private final ObjectProperty<Stages> stage = new SimpleObjectProperty<>(this, "stage", Stages.LIVE);
 
     public Stages getStage() {
         return stage.get();

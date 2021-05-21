@@ -49,7 +49,7 @@ public class HomeView extends PageView {
     private void createRecentItemsSection() {
         AdvancedListView<ModelObject> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(10);
+        listView.visibleRowCountProperty().bind(DataRepository.getInstance().recentItemsProperty().sizeProperty());
         listView.setCellFactory(view -> new RecentItemCell());
         listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);
