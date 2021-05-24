@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral.views;
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.gemsfx.FilterView;
 import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.Display;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Person;
@@ -11,6 +10,8 @@ import com.dlsc.jfxcentral.model.Video;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.Util;
+import com.jpro.webapi.HTMLView;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
@@ -245,8 +246,6 @@ public class VideosView extends PageView {
 
             playButton.setGraphic(new FontIcon(MaterialDesign.MDI_PLAY));
             playButton.setOnAction(evt -> showVideo(getItem()));
-            playButton.visibleProperty().bind(rootPane.displayProperty().isNotEqualTo(Display.WEB));
-            playButton.managedProperty().bind(rootPane.displayProperty().isNotEqualTo(Display.WEB));
 
             playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
             playOnYouTubeButton.setOnAction(evt -> Util.browse("https://youtu.be/" + getItem().getId()));
@@ -295,16 +294,25 @@ public class VideosView extends PageView {
         }
 
         private void showVideo(Video video) {
-            WebView webView = new WebView();
-            webView.setMaxSize(960, 540);
-            webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
-            rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), webView, false);
-            webView.sceneProperty().addListener(it -> {
-                if (webView.getScene() == null) {
-                    System.out.println("Unloading");
-                    webView.getEngine().loadContent("empty");
-                }
-            });
+            if (WebAPI.isBrowser()) {
+                HTMLView htmlView = new HTMLView();
+                htmlView.setContent("<iframe width=\"960\" height=\"540\" src=\"https://www.youtube.com/embed/" + video.getId() + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+                htmlView.setPrefSize(960, 540);
+                htmlView.setMaxSize(960, 540);
+                htmlView.setMinSize(960, 540);
+                rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), htmlView, false);
+            } else {
+                WebView webView = new WebView();
+                webView.setMaxSize(960, 540);
+                webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
+                rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), webView, false);
+                webView.sceneProperty().addListener(it -> {
+                    if (webView.getScene() == null) {
+                        System.out.println("Unloading");
+                        webView.getEngine().loadContent("empty");
+                    }
+                });
+            }
         }
 
         private final DoubleProperty coverImageWidth = new SimpleDoubleProperty(this, "coverImageWidth", 320);

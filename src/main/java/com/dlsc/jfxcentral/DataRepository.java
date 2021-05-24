@@ -76,11 +76,13 @@ public class DataRepository {
         libraryInfoMap.clear();
         newsTextMap.clear();
         libraryReadMeMap.clear();
+
         getPeople().clear();
         getLibraries().clear();
         getBooks().clear();
         getNews().clear();
         getVideos().clear();
+        getBlogs().clear();
 
         Thread thread = new Thread(() -> {
             try {
@@ -125,6 +127,11 @@ public class DataRepository {
             setNews(gson.fromJson(new FileReader(newsFile), new TypeToken<List<News>>() {
             }.getType()));
 
+            // load libraries
+            File blogsFile = loadFile("blogs.json", getBaseUrl() + "blogs.json");
+            setBlogs(gson.fromJson(new FileReader(blogsFile), new TypeToken<List<Blog>>() {
+            }.getType()));
+
             updateRecentItems();
 
         } catch (IOException e) {
@@ -133,11 +140,13 @@ public class DataRepository {
     }
 
     private void updateRecentItems() {
+        getRecentItems().clear();
         getRecentItems().addAll(findRecentItems(getNews()));
         getRecentItems().addAll(findRecentItems(getPeople()));
         getRecentItems().addAll(findRecentItems(getBooks()));
         getRecentItems().addAll(findRecentItems(getLibraries()));
         getRecentItems().addAll(findRecentItems(getVideos()));
+        getRecentItems().addAll(findRecentItems(getBlogs()));
     }
 
     private List<ModelObject> findRecentItems(List<? extends ModelObject> items) {
@@ -286,6 +295,20 @@ public class DataRepository {
 
     public void setLibraries(List<Library> libraries) {
         this.libraries.setAll(libraries);
+    }
+
+    private final ListProperty<Blog> blogs = new SimpleListProperty<>(this, "blogs", FXCollections.observableArrayList());
+
+    public ObservableList<Blog> getBlogs() {
+        return blogs.get();
+    }
+
+    public ListProperty<Blog> blogsProperty() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs.setAll(blogs);
     }
 
     private final ListProperty<News> news = new SimpleListProperty<>(this, "news", FXCollections.observableArrayList());
