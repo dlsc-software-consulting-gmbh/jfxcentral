@@ -1,11 +1,14 @@
 package com.dlsc.jfxcentral.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Blog extends ModelObject {
 
     private String title;
-    private String personId;
     private String url;
     private String summary;
+    private List<String> personId = new ArrayList<>();
 
     public Blog() {
     }
@@ -26,19 +29,19 @@ public class Blog extends ModelObject {
         this.title = title;
     }
 
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
-    }
-
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<String> getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(List<String> personId) {
+        this.personId = personId;
     }
 }
