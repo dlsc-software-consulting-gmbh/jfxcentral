@@ -8,7 +8,7 @@ public class Blog extends ModelObject {
     private String title;
     private String url;
     private String summary;
-    private List<String> personId = new ArrayList<>();
+    private List<String> personIds = new ArrayList<>();
 
     public Blog() {
     }
@@ -37,11 +37,11 @@ public class Blog extends ModelObject {
         this.url = url;
     }
 
-    public List<String> getPersonId() {
-        return personId;
+    public List<String> getPersonIds() {
+        return personIds;
     }
 
-    public void setPersonId(List<String> personId) {
-        this.personId = personId;
+    public void setPersonIds(List<String> personIds) {
+        this.personIds = personIds;
     }
 }

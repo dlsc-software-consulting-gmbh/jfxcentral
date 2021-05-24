@@ -474,6 +474,8 @@
     -fx-spacing: 10px;
 }
 
+/* Book Cell */
+
 .person-view .book-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
@@ -525,6 +527,55 @@
 }
 
 .person-view .book-cell .button-box .button .ikonli-font-icon {
+    -fx-icon-size: 18px;
+}
+
+
+/* Blog Cell */
+
+.person-view .blog-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: rgba(0, 0, 0, .2);
+}
+
+.person-view .blog-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-background-insets: 2px -8px 3px -8px;
+    -fx-background-radius: 2px;
+}
+
+.person-view .blog-cell:selected .label {
+    -fx-text-fill: white;
+}
+
+.person-view .blog-cell.last {
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0px;
+}
+
+.person-view .blog-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.person-view .blog-cell .hbox .vbox {
+    -fx-spacing: 10px;
+}
+
+.person-view .blog-cell .hbox .vbox .title-label {
+}
+
+.person-view .blog-cell .hbox .vbox .description-label {
+}
+
+.person-view .blog-cell .button-box {
+    -fx-spacing: 10px;
+}
+
+.person-view .blog-cell .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
 }
 

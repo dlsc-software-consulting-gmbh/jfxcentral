@@ -1,10 +1,7 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.*;
-import com.dlsc.jfxcentral.model.Book;
-import com.dlsc.jfxcentral.model.Library;
-import com.dlsc.jfxcentral.model.Person;
-import com.dlsc.jfxcentral.model.Video;
+import com.dlsc.jfxcentral.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
@@ -40,6 +37,7 @@ public class PersonView extends PageView {
         getStyleClass().add("person-view");
 
         createTitleBox();
+        createBlogsBox();
         createBooksBox();
         createLibraryBox();
         createVideoBox();
@@ -48,6 +46,39 @@ public class PersonView extends PageView {
 
         personProperty().addListener(it -> updateView());
         updateView();
+    }
+
+    private void createBlogsBox() {
+        AdvancedListView<Blog> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(1000);
+        listView.setCellFactory(view -> new PersonBlogCell());
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Blogs");
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> {
+            Person person = getPerson();
+            if (person != null) {
+                return "Published or co-authored by " + person.getName();
+            }
+            return "";
+        }, person));
+
+        sectionPane.getNodes().add(listView);
+
+        personProperty().addListener(it -> {
+            Person person = getPerson();
+            if (person != null) {
+                listView.itemsProperty().bind(DataRepository.getInstance().getBlogsByPerson(getPerson()));
+            } else {
+                listView.getItems().clear();
+            }
+        });
+
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
     }
 
     private void createBooksBox() {
@@ -257,6 +288,86 @@ public class PersonView extends PageView {
 
     public void setPerson(Person person) {
         this.person.set(person);
+    }
+
+    class PersonBlogCell extends AdvancedListCell<Blog> {
+
+        private final Button detailsButton;
+        private final Button visitButton;
+
+        private Label titleLabel = new Label();
+        private Label descriptionLabel = new Label();
+
+        private javafx.scene.image.ImageView pageImageView = new javafx.scene.image.ImageView();
+        private HBox buttonBox = new HBox();
+
+        public PersonBlogCell() {
+            getStyleClass().add("blog-cell");
+
+            titleLabel.getStyleClass().addAll("header3", "title-label");
+            titleLabel.setMaxWidth(Double.MAX_VALUE);
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+            descriptionLabel.getStyleClass().add("description-label");
+            descriptionLabel.setMaxWidth(Double.MAX_VALUE);
+            descriptionLabel.setWrapText(true);
+            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+            buttonBox.getStyleClass().add("button-box");
+
+            detailsButton = new Button("Details");
+            detailsButton.getStyleClass().addAll("library-button", "details");
+            detailsButton.setGraphic(new FontIcon(MaterialDesign.MDI_MORE));
+            detailsButton.setOnAction(evt -> getRootPane().open(getItem()));
+            buttonBox.getChildren().add(detailsButton);
+
+            visitButton = new Button("Visit");
+            visitButton.getStyleClass().addAll("library-button", "visit");
+            visitButton.setOnAction(evt -> Util.browse(getItem().getUrl()));
+            visitButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
+            buttonBox.getChildren().add(visitButton);
+
+            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
+            titleLabel.setGraphicTextGap(20);
+
+            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
+            vBox.getStyleClass().add("vbox");
+            HBox.setHgrow(vBox, Priority.ALWAYS);
+
+            pageImageView.setFitWidth(100);
+            pageImageView.setPreserveRatio(true);
+
+            HBox hBox = new HBox(vBox, pageImageView);
+            hBox.getStyleClass().add("hbox");
+
+            setGraphic(hBox);
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        }
+
+        @Override
+        protected void updateItem(Blog item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (!empty && item != null) {
+                pageImageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(item));
+                pageImageView.setVisible(true);
+
+                titleLabel.setText(item.getTitle());
+                descriptionLabel.setText(StringUtils.abbreviate(item.getSummary(), 250));
+
+                visitButton.setVisible(StringUtils.isNotEmpty(item.getUrl()));
+                visitButton.setManaged(StringUtils.isNotEmpty(item.getUrl()));
+
+                buttonBox.setVisible(visitButton.isVisible() || detailsButton.isVisible());
+                buttonBox.setManaged(buttonBox.isVisible());
+            } else {
+                pageImageView.imageProperty().unbind();
+                pageImageView.setVisible(false);
+                buttonBox.setVisible(false);
+                buttonBox.setManaged(false);
+            }
+        }
     }
 
     class PersonBookCell extends AdvancedListCell<Book> {
