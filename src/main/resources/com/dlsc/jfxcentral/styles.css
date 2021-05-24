@@ -1628,3 +1628,35 @@
     -fx-translate-x: 2px;
     -fx-translate-y: 2px;
 }
+
+/* ----------------------------------------------------------------------------
+ * BlogsView
+ */
+.blogs-view {
+}
+
+.blogs-view .grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 40px;
+}
+
+.blogs-view .grid-pane .blog-cell {
+    -fx-padding: 10px;
+    -fx-alignment: top-center;
+    -fx-cursor: hand;
+}
+
+.blogs-view .grid-pane .blog-cell:hover {
+    -fx-background-radius: 3px;
+    -fx-background-color: -fx-accent;
+}
+
+.blogs-view .grid-pane .blog-cell:hover .summary-label {
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.blogs-view .grid-pane .blog-cell .summary-label {
+    -fx-font-family: "Open Sans Italic";
+    -fx-opacity: .7;
+}

@@ -4,42 +4,58 @@ import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Blog;
+import com.dlsc.jfxcentral.util.Util;
+import javafx.beans.Observable;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import org.controlsfx.control.GridCell;
-import org.controlsfx.control.GridView;
 
 public class BlogsView extends PageView {
+
+    private final GridPane gridPane = new GridPane();
 
     public BlogsView(RootPane rootPane) {
         super(rootPane);
 
-        GridView<Blog> gridView = new GridView<>();
-        gridView.setItems(DataRepository.getInstance().blogsProperty());
-        gridView.setCellFactory(view -> new BlogCell());
-        gridView.setCellHeight(400);
-        gridView.setCellWidth(300);
-        gridView.setHorizontalCellSpacing(0);
-        gridView.setVerticalCellSpacing(20);
+        getStyleClass().add("blogs-view");
 
-        VBox vBox = new VBox(gridView);
-        vBox.setFillWidth(true);
-        vBox.setAlignment(Pos.TOP_CENTER);
+        gridPane.getStyleClass().add("grid-pane");
 
-        setContent(vBox);
+        setContent(gridPane);
+
+        DataRepository.getInstance().getBlogs().addListener((Observable it) -> updateView());
+        updateView();
     }
 
-    private class BlogCell extends GridCell<Blog> {
+    private void updateView() {
+        gridPane.getChildren().clear();
+
+        int column = 0;
+        int row = 0;
+
+        for (Blog blog : DataRepository.getInstance().getBlogs()) {
+
+            BlogCell blogCell = new BlogCell(blog);
+            gridPane.add(blogCell, column, row);
+
+            column++;
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+
+    private class BlogCell extends VBox {
 
         private ImageView imageView = new ImageView();
         private Label label = new Label();
 
-        public BlogCell() {
+        public BlogCell(Blog blog) {
             getStyleClass().add("blog-cell");
 
             imageView.setFitWidth(300);
@@ -52,23 +68,12 @@ public class BlogsView extends PageView {
             label.setAlignment(Pos.CENTER);
             label.setTextAlignment(TextAlignment.CENTER);
 
-            VBox vBox = new VBox(imageView, label);
+            getChildren().setAll(imageView, label);
 
-            setGraphic(vBox);
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        }
+            label.setText(blog.getSummary());
+            imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
 
-        @Override
-        protected void updateItem(Blog blog, boolean empty) {
-            super.updateItem(blog, empty);
-
-            if (!empty && blog != null) {
-                label.setText(blog.getSummary());
-                imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
-            } else {
-                label.setText("");
-                imageView.imageProperty().unbind();
-            }
+            setOnMouseClicked(evt -> Util.browse(blog.getUrl()));
         }
     }
 }

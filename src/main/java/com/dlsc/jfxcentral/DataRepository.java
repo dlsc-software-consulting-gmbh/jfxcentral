@@ -73,6 +73,8 @@ public class DataRepository {
     public void refresh() {
         setHomeText("");
 
+        ImageManager.getInstance().clear();
+
         libraryInfoMap.clear();
         newsTextMap.clear();
         libraryReadMeMap.clear();
