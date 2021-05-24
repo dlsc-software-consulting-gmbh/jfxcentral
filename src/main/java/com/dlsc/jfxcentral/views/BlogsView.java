@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
@@ -7,16 +8,18 @@ import com.dlsc.jfxcentral.model.Blog;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 public class BlogsView extends PageView {
 
-    private final GridPane gridPane = new GridPane();
+    private final TilePane gridPane = new TilePane();
 
     public BlogsView(RootPane rootPane) {
         super(rootPane);
@@ -24,6 +27,9 @@ public class BlogsView extends PageView {
         getStyleClass().add("blogs-view");
 
         gridPane.getStyleClass().add("grid-pane");
+        gridPane.setPrefColumns(3);
+        gridPane.setTileAlignment(Pos.CENTER);
+        gridPane.setAlignment(Pos.TOP_CENTER);
 
         setContent(gridPane);
 
@@ -34,19 +40,9 @@ public class BlogsView extends PageView {
     private void updateView() {
         gridPane.getChildren().clear();
 
-        int column = 0;
-        int row = 0;
-
         for (Blog blog : DataRepository.getInstance().getBlogs()) {
-
             BlogCell blogCell = new BlogCell(blog);
-            gridPane.add(blogCell, column, row);
-
-            column++;
-            if (column == 3) {
-                column = 0;
-                row++;
-            }
+            gridPane.getChildren().add(blogCell);
         }
     }
 
@@ -67,13 +63,29 @@ public class BlogsView extends PageView {
             label.setMinHeight(Region.USE_PREF_SIZE);
             label.setAlignment(Pos.CENTER);
             label.setTextAlignment(TextAlignment.CENTER);
+            label.setPrefWidth(300);
 
-            getChildren().setAll(imageView, label);
+            Region spacer = new Region();
+            VBox.setVgrow(spacer, Priority.ALWAYS);
 
             label.setText(blog.getSummary());
             imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
 
-            setOnMouseClicked(evt -> Util.browse(blog.getUrl()));
+            Button visitButton = new Button("Visit Blog");
+            visitButton.setOnAction(evt -> Util.browse(blog.getUrl()));
+
+            getChildren().setAll(imageView, label, spacer, visitButton);
+
+            imageView.setOnMouseClicked(evt -> showBlogDetails(blog));
+            label.setOnMouseClicked(evt -> showBlogDetails(blog));
+        }
+
+        private void showBlogDetails(Blog blog) {
+            ImageView largeImageView = new ImageView();
+            largeImageView.setFitWidth(800);
+            largeImageView.setPreserveRatio(true);
+            largeImageView.imageProperty().bind(ImageManager.getInstance().blogPageLargeImageProperty(blog));
+            getRootPane().getDialogPane().showNode(DialogPane.Type.BLANK, "Title", largeImageView);
         }
     }
 }

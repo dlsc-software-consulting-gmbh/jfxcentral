@@ -1641,9 +1641,9 @@
 }
 
 .blogs-view .grid-pane .blog-cell {
+    -fx-spacing: 5px;
     -fx-padding: 10px;
     -fx-alignment: top-center;
-    -fx-cursor: hand;
 }
 
 .blogs-view .grid-pane .blog-cell:hover {
@@ -1651,7 +1651,17 @@
     -fx-background-color: -fx-accent;
 }
 
+.blogs-view .grid-pane .blog-cell:hover .button {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-accent;
+}
+
+.blogs-view .grid-pane .blog-cell:hover .image-view {
+    -fx-cursor: hand;
+}
+
 .blogs-view .grid-pane .blog-cell:hover .summary-label {
+    -fx-cursor: hand;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
