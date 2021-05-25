@@ -6,6 +6,8 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 @DefaultProperty("tabs")
 public class SectionPaneWithTabs extends SectionPaneBase {
@@ -14,6 +16,7 @@ public class SectionPaneWithTabs extends SectionPaneBase {
         getStyleClass().add("section-pane-with-tabs");
 
         TabPane tabPane = new TabPane();
+        VBox.setVgrow(tabPane, Priority.ALWAYS);
         tabPane.setFillHeader(true);
         Bindings.bindContent(tabPane.getTabs(), getTabs());
         getChildren().setAll(tabPane);

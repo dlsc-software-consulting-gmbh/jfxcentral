@@ -161,6 +161,17 @@
     -fx-icon-color: -white-button-text-color-pressed;
 }
 
+.radio-button > .radio {
+    -fx-background-insets: 0px;
+    -fx-background-color: -fx-accent;
+    -fx-border-width: 0px;
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-insets: 0px;
+    -fx-background-color: white;
+}
+
 .combo-box-base {
     -fx-background-color: -fx-accent;
 }
@@ -764,6 +775,26 @@
     -fx-icon-size: 18px;
 }
 
+.library-view .coordinates-pane .vbox {
+    -fx-spacing: 10px;
+}
+
+.library-view .coordinates-pane .vbox .header {
+    -fx-spacing: 20px;
+}
+
+.library-view .coordinates-pane .vbox .coordinates-label {
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-background-color: oldlace;
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
+    -fx-border-width: 0.5;
+    -fx-max-width: infinity;
+    -fx-font-family: "JetBrains Mono Regular";
+}
+
 /* ----------------------------------------------------------------------------
  * DukeAnimationView
  */
@@ -1003,6 +1034,42 @@
 .section-pane .search-field .ikonli-font-icon {
     -fx-icon-color: white;
     -fx-icon-size: 18px;
+}
+
+/* ---------------------------------------------------------------
+ * TabPane
+ */
+
+.jfxcentral-tab-pane {
+    -fx-padding: 0;
+}
+
+.jfxcentral-tab-pane .tab-header {
+    -fx-background-color: lightgrey;
+}
+
+.jfxcentral-tab-pane .tab-content {
+    -fx-padding: 20;
+}
+
+.jfxcentral-tab-pane .tab {
+    -fx-alignment: center-left;
+    -fx-pref-height: 60;
+    -fx-padding: 20;
+    -fx-font-size: 18;
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-background-color: lightgrey;
+    -fx-text-fill: grey;
+    -fx-graphic-text-gap: 10px;
+}
+
+.jfxcentral-tab-pane .tab:selected {
+    -fx-background-color: white;
+    -fx-text-fill: grey;
+}
+
+.jfxcentral-tab-pane .tab:hover {
+    -fx-background-color: rgba(255, 255, 255, .64);
 }
 
 /* -----------------------------------------------------------------------------

@@ -4,6 +4,7 @@ import com.dlsc.gemsfx.DialogPane;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class RootPane extends ViewPane {
         });
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        dialogPane.setAnimationDuration(Duration.seconds(5));
 
         SideBar sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());

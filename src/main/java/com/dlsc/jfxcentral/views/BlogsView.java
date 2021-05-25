@@ -1,10 +1,14 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
+import com.dlsc.jfxcentral.AdvancedListView;
 import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Blog;
+import com.dlsc.jfxcentral.model.Post;
+import com.dlsc.jfxcentral.panels.SectionPaneWithTabs;
+import com.dlsc.jfxcentral.panels.Tab;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
@@ -26,12 +30,27 @@ public class BlogsView extends PageView {
 
         getStyleClass().add("blogs-view");
 
+        SectionPaneWithTabs sectionPaneWithTabs = new SectionPaneWithTabs();
+
         gridPane.getStyleClass().add("grid-pane");
         gridPane.setPrefColumns(3);
         gridPane.setTileAlignment(Pos.CENTER);
         gridPane.setAlignment(Pos.TOP_CENTER);
 
-        setContent(gridPane);
+        AdvancedListView<Post> postsListView = new AdvancedListView<>();
+        postsListView.itemsProperty().bind(DataRepository.getInstance().postsProperty());
+        postsListView.setCellFactory(view -> new PostCell());
+        VBox.setVgrow(postsListView, Priority.ALWAYS);
+
+        Tab blogsTab = new Tab("Blogs");
+        //tab1.setContent(gridPane);
+
+        Tab postsTab = new Tab("Posts");
+        postsTab.setContent(postsListView);
+
+        sectionPaneWithTabs.getTabs().setAll(postsTab, blogsTab);
+
+        setContent(sectionPaneWithTabs);
 
         DataRepository.getInstance().getBlogs().addListener((Observable it) -> updateView());
         updateView();

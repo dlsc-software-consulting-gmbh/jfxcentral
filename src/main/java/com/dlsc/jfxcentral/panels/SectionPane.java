@@ -93,6 +93,7 @@ public class SectionPane extends SectionPaneBase {
         expandedProperty().addListener(updateViewListener);
         footerProperty().addListener(updateViewListener);
         menuItemsProperty().addListener(updateViewListener);
+        extrasProperty().addListener(updateViewListener);
 
         updateView();
     }

@@ -9,6 +9,7 @@ public class Blog extends ModelObject {
     private String url;
     private String summary;
     private List<String> personIds = new ArrayList<>();
+    private String feed;
 
     public Blog() {
     }
@@ -43,5 +44,13 @@ public class Blog extends ModelObject {
 
     public void setPersonIds(List<String> personIds) {
         this.personIds = personIds;
+    }
+
+    public String getFeed() {
+        return feed;
+    }
+
+    public void setFeed(String feed) {
+        this.feed = feed;
     }
 }

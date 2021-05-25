@@ -1,10 +1,16 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.model.*;
+import com.dlsc.jfxcentral.util.QueryResult;
 import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedInput;
+import com.rometools.rome.io.XmlReader;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
@@ -13,11 +19,14 @@ import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -76,6 +85,7 @@ public class DataRepository {
         ImageManager.getInstance().clear();
 
         libraryInfoMap.clear();
+        libraryReadMeMap.clear();
         newsTextMap.clear();
         libraryReadMeMap.clear();
 
@@ -135,8 +145,9 @@ public class DataRepository {
             }.getType()));
 
             updateRecentItems();
+            readFeeds();
 
-        } catch (IOException e) {
+        } catch (IOException | FeedException e) {
             e.printStackTrace();
         }
     }
@@ -262,7 +273,7 @@ public class DataRepository {
             String readmeFileURL = library.getReadmeFileURL();
             if (StringUtils.isNotBlank(readmeFileURL)) {
                 executor.submit(() -> {
-                    String readmeText = loadString(library.getReadmeFileURL());
+                    String readmeText = loadString(getBaseUrl() + "libraries/" + library.getId() + "/_readme.md");
                     Platform.runLater(() -> readmeProperty.set(readmeText));
                 });
             }
@@ -425,6 +436,86 @@ public class DataRepository {
 
     public void setSource(Source source) {
         this.source.set(source);
+    }
+
+    public StringProperty getArtefactVersion(Library library) {
+
+        String groupId = library.getGroupId();
+        String artifactId = library.getArtifactId();
+
+        StringProperty result = new SimpleStringProperty("");
+
+        if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
+            executor.execute(() -> {
+                HttpURLConnection con = null;
+
+                try {
+                    URL url = new URL(MessageFormat.format("http://search.maven.org/solrsearch/select?q=g:{0}+AND+a:{1}", groupId, artifactId));
+                    con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("GET");
+                    int status = con.getResponseCode();
+                    if (status == 200) {
+                        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                        String inputLine;
+                        StringBuffer content = new StringBuffer();
+                        while ((inputLine = in.readLine()) != null) {
+                            content.append(inputLine);
+                        }
+                        in.close();
+
+                        QueryResult queryResult = gson.fromJson(content.toString(), QueryResult.class);
+                        System.out.println("latest version: " + queryResult.getResponse().getDocs().get(0).getLatestVersion());
+                        Platform.runLater(() -> result.set(queryResult.getResponse().getDocs().get(0).getLatestVersion()));
+                    } else {
+                        result.set("unknown");
+                    }
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        con.disconnect();
+                    }
+                }
+            });
+        }
+
+        return result;
+    }
+
+    private final ListProperty<Post> posts = new SimpleListProperty<>(this, "posts", FXCollections.observableArrayList());
+
+    public ObservableList<Post> getPosts() {
+        return posts.get();
+    }
+
+    public ListProperty<Post> postsProperty() {
+        return posts;
+    }
+
+    public void setPosts(ObservableList<Post> posts) {
+        this.posts.set(posts);
+    }
+
+    public void readFeeds() throws IOException, FeedException {
+        for (Blog blog : getBlogs()) {
+            String url = blog.getFeed();
+            if (StringUtils.isNotBlank(url)) {
+
+//        String url = "https://stackoverflow.com/feeds/tag?tagnames=rome";
+                SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(url)));
+                System.out.println(feed.getTitle());
+
+                List<SyndEntry> entries = feed.getEntries();
+                entries.forEach(entry -> {
+                    getPosts().add(new Post(feed, entry));
+                    System.out.println(feed.getTitle() + ":" + entry.getTitle());
+                });
+            }
+        }
     }
 
     public static void main(String[] args) {

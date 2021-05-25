@@ -1,4 +1,6 @@
 open module com.dlsc.jfxcentral {
+    requires com.rometools.rome;
+    requires com.rometools.rome.utils;
     requires com.sandec.mdfx;
     requires com.google.gson;
     requires com.dlsc.gemsfx;

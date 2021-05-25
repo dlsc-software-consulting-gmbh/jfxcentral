@@ -23,6 +23,9 @@ public class Library extends ModelObject {
     private String discussionBoard;
     private String javadocs;
 
+    private String groupId;
+    private String artifactId;
+
     private License license;
 
     public Library() {
@@ -106,6 +109,22 @@ public class Library extends ModelObject {
 
     public void setLicense(License license) {
         this.license = license;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getArtifactId() {
+        return artifactId;
+    }
+
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
     }
 
     public String getIssueTracker() {

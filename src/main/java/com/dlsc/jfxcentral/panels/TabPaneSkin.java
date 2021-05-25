@@ -34,6 +34,7 @@ public class TabPaneSkin extends SkinBase<TabPane> {
 
         content = new VBox();
         content.getStyleClass().add("tab-content");
+        VBox.setVgrow(content, Priority.ALWAYS);
 
         control.getTabs().addListener((Observable obs) -> buildTabs());
         control.fillHeaderProperty().addListener(obs -> buildTabs());
@@ -41,6 +42,7 @@ public class TabPaneSkin extends SkinBase<TabPane> {
         buildTabs();
 
         VBox vBox = new VBox(header, content);
+        VBox.setVgrow(vBox, Priority.ALWAYS);
         getChildren().setAll(vBox);
     }
 

@@ -55,7 +55,7 @@ public class PersonView extends PageView {
         listView.setCellFactory(view -> new PersonBlogCell());
 
         SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Blogs");
+        sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> listView.getItems().size() > 1 ? "Blogs" : "Blog", listView.itemsProperty()));
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> {
             Person person = getPerson();
             if (person != null) {

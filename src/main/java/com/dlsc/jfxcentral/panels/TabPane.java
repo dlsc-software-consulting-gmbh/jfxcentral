@@ -14,19 +14,19 @@ import javafx.scene.control.Skin;
 @DefaultProperty("tabs")
 public class TabPane extends Control {
 
-    public TabPane () {
-        getStyleClass().add("crm-tab-pane");
+    public TabPane() {
+        getStyleClass().add("jfxcentral-tab-pane");
     }
 
-    public void addIconTab (Node icon, Node content) {
+    public void addIconTab(Node icon, Node content) {
         addTab(icon, null, content);
     }
 
-    public void addNameTab (String name, Node content) {
+    public void addNameTab(String name, Node content) {
         addTab(null, name, content);
     }
 
-    public void addTab (Node icon, String name, Node content) {
+    public void addTab(Node icon, String name, Node content) {
         Tab tab = new Tab();
         tab.setGraphic(icon);
         tab.setName(name);
@@ -61,15 +61,15 @@ public class TabPane extends Control {
 
     private final BooleanProperty fillHeader = new SimpleBooleanProperty(this, "fillHeader");
 
-    public final BooleanProperty fillHeaderProperty () {
+    public final BooleanProperty fillHeaderProperty() {
         return fillHeader;
     }
 
-    public final boolean isFillHeader () {
+    public final boolean isFillHeader() {
         return fillHeaderProperty().get();
     }
 
-    public final void setFillHeader (boolean fillHeader) {
+    public final void setFillHeader(boolean fillHeader) {
         fillHeaderProperty().set(fillHeader);
     }
 

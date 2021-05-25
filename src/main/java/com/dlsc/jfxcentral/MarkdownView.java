@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -18,6 +19,7 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
 
     public MarkdownView() {
         getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        setHyperlinkCallback(link -> Util.browse(link));
     }
 
     public String getBaseURL() {
