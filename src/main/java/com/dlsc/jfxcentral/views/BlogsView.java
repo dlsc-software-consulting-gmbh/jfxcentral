@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Blog;
 import com.dlsc.jfxcentral.model.Post;
+import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithTabs;
 import com.dlsc.jfxcentral.panels.Tab;
 import com.dlsc.jfxcentral.util.Util;
@@ -42,8 +43,12 @@ public class BlogsView extends PageView {
         postsListView.setCellFactory(view -> new PostCell());
         VBox.setVgrow(postsListView, Priority.ALWAYS);
 
+        PrettyScrollPane prettyScrollPane = new PrettyScrollPane(gridPane);
+        prettyScrollPane.setShowScrollToTopButton(false);
+        prettyScrollPane.setShowScrollToTopButton(true);
+
         Tab blogsTab = new Tab("Blogs");
-        //tab1.setContent(gridPane);
+        blogsTab.setContent(prettyScrollPane);
 
         Tab postsTab = new Tab("Posts");
         postsTab.setContent(postsListView);
