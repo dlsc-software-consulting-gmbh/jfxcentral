@@ -9,11 +9,12 @@ import com.dlsc.jfxcentral.views.BlogView;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -35,7 +36,18 @@ public class BlogsView extends CategoryView {
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
-        setCenter(listView);
+        Button button = new Button("Show all posts");
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setOnAction(evt -> listView.getSelectionModel().clearSelection());
+        HBox.setHgrow(button, Priority.ALWAYS);
+
+        HBox buttonWrapper = new HBox(button);
+        buttonWrapper.getStyleClass().add("button-wrapper");
+
+        VBox vBox = new VBox(10, buttonWrapper, listView);
+        vBox.getStyleClass().add("vbox");
+
+        setCenter(vBox);
 
         performDefaultSelection();
     }
@@ -84,11 +96,9 @@ public class BlogsView extends CategoryView {
             super.updateItem(blog, empty);
 
             if (!empty && blog != null) {
-                setTooltip(new Tooltip(blog.getSummary()));
                 label.setText(blog.getTitle());
                 imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
             } else {
-                setTooltip(null);
                 label.setText("");
                 imageView.imageProperty().unbind();
             }

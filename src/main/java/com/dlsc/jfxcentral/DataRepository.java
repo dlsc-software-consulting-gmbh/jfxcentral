@@ -96,6 +96,7 @@ public class DataRepository {
         getNews().clear();
         getVideos().clear();
         getBlogs().clear();
+        getCompanies().clear();
 
         Thread thread = new Thread(() -> {
             try {
@@ -143,6 +144,11 @@ public class DataRepository {
             // load libraries
             File blogsFile = loadFile("blogs.json", getBaseUrl() + "blogs.json");
             setBlogs(gson.fromJson(new FileReader(blogsFile), new TypeToken<List<Blog>>() {
+            }.getType()));
+
+            // load libraries
+            File companiesFile = loadFile("companies.json", getBaseUrl() + "companies.json");
+            setCompanies(gson.fromJson(new FileReader(companiesFile), new TypeToken<List<Company>>() {
             }.getType()));
 
             updateRecentItems();
@@ -202,6 +208,10 @@ public class DataRepository {
 
     public Optional<Person> getPersonById(String id) {
         return people.stream().filter(person -> person.getId().equals(id)).findFirst();
+    }
+
+    public Optional<Company> getCompanyById(String id) {
+        return companies.stream().filter(company -> company.getId().equals(id)).findFirst();
     }
 
     public Optional<Library> getLibraryById(String id) {
@@ -371,6 +381,20 @@ public class DataRepository {
 
     public void setVideos(List<Video> videos) {
         this.videos.setAll(videos);
+    }
+
+    private final ListProperty<Company> companies = new SimpleListProperty<>(this, "companies", FXCollections.observableArrayList());
+
+    public ObservableList<Company> getCompanies() {
+        return companies.get();
+    }
+
+    public ListProperty<Company> companiesProperty() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies.setAll(companies);
     }
 
     private final ListProperty<Person> people = new SimpleListProperty<>(this, "people", FXCollections.observableArrayList());

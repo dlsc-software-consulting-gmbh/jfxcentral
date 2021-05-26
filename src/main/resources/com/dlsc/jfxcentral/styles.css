@@ -105,6 +105,22 @@
     -fx-background-radius: 2px;
 }
 
+.check-box > .box {
+    -fx-background-color: -fx-accent;
+}
+
+.check-box > .box > .mark {
+    -fx-background-color: white;
+}
+
+.check-box > .box > .mark {
+    -fx-background-color: transparent;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: white;
+}
+
 .button {
     -fx-background-color: -fx-accent;
     -fx-text-fill: white;
@@ -456,7 +472,7 @@
 }
 
 .person-view .title-section .hbox .photo-view {
-    -size: 100px;
+    -size: 120px;
     -fx-min-width: -size;
     -fx-min-height: -size;
     -fx-max-width: -size;
@@ -643,37 +659,6 @@
 
 .book-view .title-section .content .horizontal-box .vertical-box .social-box {
     -fx-spacing: 10px;
-}
-
-.book-view .author-list-cell {
-    -fx-background-color: white;
-    -fx-padding: 0px 0px 5px 0px;
-}
-
-.book-view .author-list-cell .hbox {
-    -fx-padding: 0px 5px;
-    -fx-spacing: 30px;
-}
-
-.book-view .author-list-cell .hbox .photo-view {
-    -size: 30px;
-    -fx-min-width: -size;
-    -fx-min-height: -size;
-    -fx-max-width: -size;
-    -fx-max-height: -size;
-    -fx-pref-width: -size;
-    -fx-pref-height: -size;
-}
-
-.book-view .author-list-cell .hbox .photo-view .border-circle {
-    -fx-stroke-width: 1px;
-    -fx-effect: null;
-}
-
-.book-view .author-list-cell .hbox .name-label {
-    -fx-font-size: 14px;
-    -fx-font-family: "Open Sans SemiBold";
-    -fx-text-fill: black;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1537,7 +1522,7 @@
  * DetailedPersonCell
  */
 .detailed-person-cell .hbox .photo-view {
-    -size: 100px;
+    -size: 64px;
     -fx-min-width: -size;
     -fx-min-height: -size;
     -fx-max-width: -size;
@@ -1717,7 +1702,8 @@
 .home-view .recent-item-cell .hbox .date-label {
 }
 
-.home-view .recent-item-cell .hbox .vbox {}
+.home-view .recent-item-cell .hbox .vbox {
+}
 
 /* ----------------------------------------------------------------------------
  * HeaderPane
@@ -1753,6 +1739,10 @@
 .blogs-view {
 }
 
+.blogs-view .button-wrapper {
+    -fx-padding: 0px 10px;
+}
+
 .blogs-view .blog-cell .label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
@@ -1762,6 +1752,41 @@
 /* ----------------------------------------------------------------------------
  * BlogView
  */
+
+.blog-view .title-section .hbox {
+    -fx-spacing: 20px;
+}
+
+.blog-view .title-section .hbox .photo-view {
+    -size: 100px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.blog-view .title-section .hbox .vbox {
+    -fx-spacing: 20px;
+}
+
+.blog-view .title-section .hbox .vbox .name-label {
+    -fx-graphic-text-gap: 10px;
+}
+
+.blog-view .title-section .hbox .vbox .name-label .badges-box {
+    -fx-spacing: 10px;
+    -fx-translate-y: -5px;
+}
+
+.blog-view .title-section .hbox .vbox .description-label {
+}
+
+.blog-view .title-section .hbox .vbox .social-box {
+    -fx-spacing: 10px;
+}
+
 
 .blog-view .post-cell {
     -fx-padding: 10px 10px 10px 0px;

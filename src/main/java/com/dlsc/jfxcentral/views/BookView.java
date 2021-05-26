@@ -12,9 +12,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -168,40 +166,5 @@ public class BookView extends PageView {
 
     public void setBook(Book book) {
         this.book.set(book);
-    }
-
-    class AuthorCell extends AdvancedListCell<Person> {
-
-        private final PhotoView photoView = new PhotoView();
-        private final Label nameLabel = new Label();
-
-        public AuthorCell() {
-            getStyleClass().add("author-list-cell");
-
-            photoView.setEditable(false);
-
-            nameLabel.getStyleClass().add("name-label");
-
-            HBox hBox = new HBox(photoView, nameLabel);
-            hBox.setAlignment(Pos.CENTER_LEFT);
-            hBox.getStyleClass().add("hbox");
-
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            setGraphic(hBox);
-        }
-
-        @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
-
-            if (!empty && person != null) {
-                nameLabel.setText(person.getName());
-                photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-                photoView.setVisible(true);
-            } else {
-                nameLabel.setText("");
-                photoView.setVisible(false);
-            }
-        }
     }
 }

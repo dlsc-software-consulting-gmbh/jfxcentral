@@ -30,7 +30,7 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
 
         photoView.setEditable(false);
 
-        nameLabel.getStyleClass().addAll("header1", "name-label");
+        nameLabel.getStyleClass().addAll("header2", "name-label");
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
 

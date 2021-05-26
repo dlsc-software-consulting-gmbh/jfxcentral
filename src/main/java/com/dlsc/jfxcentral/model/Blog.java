@@ -8,10 +8,19 @@ public class Blog extends ModelObject {
     private String title;
     private String url;
     private String summary;
+    private String companyId;
     private List<String> personIds = new ArrayList<>();
     private String feed;
 
     public Blog() {
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
     }
 
     public String getSummary() {
