@@ -3,6 +3,10 @@ package com.dlsc.jfxcentral.model;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 public class Post extends ModelObject {
 
     private SyndFeed syndFeed;
@@ -28,5 +32,9 @@ public class Post extends ModelObject {
 
     public void setSyndEntry(SyndEntry syndEntry) {
         this.syndEntry = syndEntry;
+    }
+
+    public LocalDate getDate() {
+        return ZonedDateTime.ofInstant(syndEntry.getPublishedDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
     }
 }

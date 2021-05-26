@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral.panels.SectionPaneWithTabs;
 import com.dlsc.jfxcentral.panels.Tab;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.Observable;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +22,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+
+import java.util.Comparator;
 
 public class BlogsView extends PageView {
 
@@ -38,9 +41,12 @@ public class BlogsView extends PageView {
         gridPane.setTileAlignment(Pos.CENTER);
         gridPane.setAlignment(Pos.TOP_CENTER);
 
+        SortedList<Post> sortedPosts = new SortedList<>(DataRepository.getInstance().postsProperty());
+        sortedPosts.setComparator(Comparator.comparing(Post::getDate));
         AdvancedListView<Post> postsListView = new AdvancedListView<>();
-        postsListView.itemsProperty().bind(DataRepository.getInstance().postsProperty());
-        postsListView.setCellFactory(view -> new PostCell());
+        postsListView.setItems(sortedPosts);
+
+        postsListView.setCellFactory(view -> new PostCell(rootPane));
         VBox.setVgrow(postsListView, Priority.ALWAYS);
 
         PrettyScrollPane prettyScrollPane = new PrettyScrollPane(gridPane);

@@ -34,7 +34,6 @@ public class RootPane extends ViewPane {
         });
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        dialogPane.setAnimationDuration(Duration.seconds(5));
 
         SideBar sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());

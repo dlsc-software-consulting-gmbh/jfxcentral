@@ -1788,3 +1788,15 @@
     -fx-font-family: "Open Sans Italic";
     -fx-opacity: .7;
 }
+
+.blogs-view .post-cell {
+    -fx-padding: 10px 10px 10px 0px;
+}
+
+.blogs-view .post-cell .title-label {
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.blogs-view .post-cell .subtitle-label {
+    -fx-opacity: .7;
+}

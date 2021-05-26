@@ -505,7 +505,7 @@ public class DataRepository {
             String url = blog.getFeed();
             if (StringUtils.isNotBlank(url)) {
 
-//        String url = "https://stackoverflow.com/feeds/tag?tagnames=rome";
+                System.out.println("url: " + url);
                 SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(url)));
                 System.out.println(feed.getTitle());
 
