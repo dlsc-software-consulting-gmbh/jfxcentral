@@ -98,18 +98,7 @@ public class DataRepository {
         getBlogs().clear();
         getCompanies().clear();
 
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(() -> loadData());
-        });
-
-        thread.setDaemon(true);
-        thread.setName("Refresh Data Thread");
-        thread.start();
+        loadData();
     }
 
     private void loadData() {
@@ -281,13 +270,10 @@ public class DataRepository {
         return libraryReadMeMap.computeIfAbsent(library, key -> {
             StringProperty readmeProperty = new SimpleStringProperty();
 
-            String readmeFileURL = library.getReadmeFileURL();
-            if (StringUtils.isNotBlank(readmeFileURL)) {
-                executor.submit(() -> {
-                    String readmeText = loadString(getBaseUrl() + "libraries/" + library.getId() + "/_readme.md");
-                    Platform.runLater(() -> readmeProperty.set(readmeText));
-                });
-            }
+            executor.submit(() -> {
+                String readmeText = loadString(getBaseUrl() + "libraries/" + library.getId() + "/_readme.md");
+                Platform.runLater(() -> readmeProperty.set(readmeText));
+            });
 
             return readmeProperty;
         });

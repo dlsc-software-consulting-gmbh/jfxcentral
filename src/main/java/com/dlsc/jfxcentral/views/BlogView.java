@@ -61,13 +61,14 @@ public class BlogView extends PageView {
         sectionPane.setTitle("Posts");
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getBlog() != null ? "List of current posts on " + getBlog().getTitle() : "", blogProperty()));
 
-        FilteredList<Post> filteredList = new FilteredList(DataRepository.getInstance().postsProperty());
-        filteredList.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getBlog() == null || post.getBlog().equals(getBlog()), blogProperty()));
+        FilteredList<Post> filteredPosts = new FilteredList(DataRepository.getInstance().postsProperty());
+        filteredPosts.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getBlog() == null || post.getBlog().equals(getBlog()), blogProperty()));
 
-        SortedList<Post> sortedPosts = new SortedList<>(filteredList);
+        SortedList<Post> sortedPosts = new SortedList<>(filteredPosts);
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
+
         AdvancedListView<Post> listView = new AdvancedListView<>();
-        listView.setItems(filteredList);
+        listView.setItems(sortedPosts);
 
         listView.setCellFactory(view -> new PostCell(getRootPane()));
         VBox.setVgrow(listView, Priority.ALWAYS);

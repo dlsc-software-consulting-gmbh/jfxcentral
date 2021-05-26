@@ -117,6 +117,14 @@ public class LibraryView extends PageView {
 
         sectionPane.getNodes().add(vBox);
 
+        libraryProperty().addListener(it -> {
+            Library library = getLibrary();
+            if (library != null) {
+                sectionPane.setVisible(StringUtils.isNotBlank(library.getGroupId()) && StringUtils.isNotBlank(library.getArtifactId()));
+                sectionPane.setManaged(StringUtils.isNotBlank(library.getGroupId()) && StringUtils.isNotBlank(library.getArtifactId()));
+            }
+        });
+
         content.getChildren().add(sectionPane);
     }
 
@@ -148,7 +156,6 @@ public class LibraryView extends PageView {
     private void createReadmeBox() {
         SectionPane sectionPane = new SectionPane();
         sectionPane.getNodes().add(readmeMarkdownView);
-        sectionPane.setTitle("Overview");
         readmeMarkdownView.setHyperlinkCallback(url -> Util.browse(url));
         content.getChildren().add(sectionPane);
     }
