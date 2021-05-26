@@ -42,7 +42,7 @@ public class BlogsView extends PageView {
         gridPane.setAlignment(Pos.TOP_CENTER);
 
         SortedList<Post> sortedPosts = new SortedList<>(DataRepository.getInstance().postsProperty());
-        sortedPosts.setComparator(Comparator.comparing(Post::getDate));
+        sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
         AdvancedListView<Post> postsListView = new AdvancedListView<>();
         postsListView.setItems(sortedPosts);
 

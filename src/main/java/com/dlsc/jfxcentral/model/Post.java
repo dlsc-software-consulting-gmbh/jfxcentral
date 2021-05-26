@@ -6,6 +6,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 public class Post extends ModelObject {
 
@@ -35,6 +36,15 @@ public class Post extends ModelObject {
     }
 
     public LocalDate getDate() {
-        return ZonedDateTime.ofInstant(syndEntry.getPublishedDate().toInstant(), ZoneId.systemDefault()).toLocalDate();
+        Date date = syndEntry.getUpdatedDate();
+        if (date == null) {
+            date = syndEntry.getPublishedDate();
+        }
+
+        if (date != null) {
+            return ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalDate();
+        }
+
+        return LocalDate.now();
     }
 }

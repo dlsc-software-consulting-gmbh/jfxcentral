@@ -1797,6 +1797,10 @@
     -fx-font-family: "Open Sans SemiBold";
 }
 
-.blogs-view .post-cell .subtitle-label {
+.blogs-view .post-cell .blog-label {
+    -size: 150px;
+    -fx-min-width: -size;
+    -fx-pref-width: -size;
+    -fx-max-width: -size;
     -fx-opacity: .7;
 }

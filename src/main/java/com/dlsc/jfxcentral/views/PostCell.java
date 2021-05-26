@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views;
 import com.dlsc.jfxcentral.RootPane;
 import com.dlsc.jfxcentral.model.Post;
 import com.dlsc.jfxcentral.util.Util;
+import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndImage;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -12,17 +13,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
 
 public class PostCell extends ListCell<Post> {
 
     private final RootPane rootPane;
     private Label titleLabel = new Label();
-    private Label subtitleLabel = new Label();
+    private Label blogLabel = new Label();
+    private Label ageLabel = new Label();
 
     private ImageView imageView = new ImageView();
 
@@ -31,16 +38,22 @@ public class PostCell extends ListCell<Post> {
         getStyleClass().add("post-cell");
 
         titleLabel.getStyleClass().add("title-label");
-        subtitleLabel.getStyleClass().add("subtitle-label");
+        titleLabel.setMaxWidth(Double.MAX_VALUE);
+
+        blogLabel.getStyleClass().add("blog-label");
 
         imageView.setFitHeight(24);
         imageView.setPreserveRatio(true);
 
-        VBox vBox = new VBox(titleLabel, subtitleLabel);
-        vBox.getStyleClass().add("vbox");
-        HBox.setHgrow(vBox, Priority.ALWAYS);
+        ageLabel.getStyleClass().add("age-label");
 
-        HBox hbox = new HBox(vBox, imageView);
+//        VBox vBox = new VBox(titleLabel, subtitleLabel);
+//        vBox.getStyleClass().add("vbox");
+//        HBox.setHgrow(vBox, Priority.ALWAYS);
+
+
+        HBox hbox = new HBox(imageView, blogLabel, titleLabel, ageLabel);
+        HBox.setHgrow(titleLabel, Priority.ALWAYS);
         hbox.getStyleClass().add("hbox");
         hbox.setMinWidth(0);
         hbox.setPrefWidth(0);
@@ -70,7 +83,8 @@ public class PostCell extends ListCell<Post> {
         if (!empty && item != null) {
             imageView.setImage(null);
             titleLabel.setText(item.getSyndEntry().getTitle());
-            subtitleLabel.setText(item.getSyndFeed().getTitle());
+            blogLabel.setText(item.getSyndFeed().getTitle());
+            ageLabel.setText(getAge(item));
 
             SyndImage image = item.getSyndFeed().getImage();
             if (image != null) {
@@ -86,5 +100,25 @@ public class PostCell extends ListCell<Post> {
             setText("");
             imageView.setImage(null);
         }
+    }
+
+    private String getAge(Post item) {
+        SyndEntry syndEntry = item.getSyndEntry();
+        Date date = syndEntry.getUpdatedDate();
+        if (date == null) {
+            date = syndEntry.getPublishedDate();
+        }
+
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        Duration between = Duration.between(zonedDateTime, ZonedDateTime.now());
+
+        long days = between.toDays();
+        if (days <= 0) {
+            return between.toHours() + " hours";
+        } else if (days > 0 && days < 100) {
+            return days + (days > 1 ? " days" : "day");
+        }
+
+        return DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(zonedDateTime);
     }
 }
