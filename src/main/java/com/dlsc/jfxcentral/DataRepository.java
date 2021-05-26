@@ -141,7 +141,7 @@ public class DataRepository {
             }.getType()));
 
             updateRecentItems();
-           // readFeeds();
+            readFeeds();
 
         } catch (Exception e) {
             e.printStackTrace();
