@@ -94,9 +94,7 @@ public class JFXCentralApp extends Application {
     }
 
     private void showRootPane() {
-        if (WebAPI.isBrowser()) {
-            rootPane.setMaxWidth(1200);
-        }
+        rootPane.setMaxWidth(1200);
         StackPane wrapper = new StackPane(rootPane);
         wrapper.getStyleClass().add("root-wrapper");
         scene.setRoot(wrapper);

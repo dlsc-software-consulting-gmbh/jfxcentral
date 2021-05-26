@@ -39,17 +39,19 @@ class TopMenu extends VBox {
         imageView.getStyleClass().add("duke");
 
         ToggleButton homeButton = createButton("Home", new FontIcon(Material.HOME));
-        ToggleButton newsButton = createButton("News", new FontIcon(Material.NOTES));
+        ToggleButton newsButton = createButton("Latest News", new FontIcon(Material.NOTES));
         ToggleButton peopleButton = createButton("People", new FontIcon(Material.PERSON));
         ToggleButton blogsButton = createButton("Blogs", new FontIcon(FontAwesomeBrands.BLOGGER));
         ToggleButton booksButton = createButton("Books", new FontIcon(FontAwesomeBrands.AMAZON));
         ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
         ToggleButton libsButton = createButton("Libraries", new FontIcon(FontAwesomeBrands.GITHUB));
         ToggleButton videosButton = createButton("Videos", new FontIcon(FontAwesomeBrands.YOUTUBE));
-        ToggleButton openJfxButton = createButton("OpenJFX", new FontIcon(Material.STAR));
+        ToggleButton openJfxButton = createButton("Open JFX", new FontIcon(FontAwesomeBrands.JAVA));
+        ToggleButton realWorldApps = createButton("Real World Apps", new FontIcon(Material.APPS));
+
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, newsButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
+        toggleGroup.getToggles().addAll(homeButton, newsButton, openJfxButton, peopleButton, blogsButton, videosButton, booksButton, libsButton, tutorialsButton, realWorldApps);
         toggleGroup.selectToggle(homeButton);
 
         Region spacer = new Region();
@@ -57,7 +59,7 @@ class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(homeButton, newsButton, peopleButton, blogsButton, videosButton, booksButton, libsButton);
+        getChildren().addAll(homeButton, newsButton, openJfxButton, realWorldApps, peopleButton, blogsButton, videosButton, booksButton, libsButton, tutorialsButton);
 
         view.addListener(it -> {
             switch (getView()) {
@@ -73,7 +75,7 @@ class TopMenu extends VBox {
                 case PEOPLE:
                     toggleGroup.selectToggle(peopleButton);
                     break;
-                case LEARN:
+                case TUTORIALS:
                     toggleGroup.selectToggle(tutorialsButton);
                     break;
                 case LIBRARIES:
@@ -106,7 +108,7 @@ class TopMenu extends VBox {
             } else if (newSelection == peopleButton) {
                 setView(View.PEOPLE);
             } else if (newSelection == tutorialsButton) {
-                setView(View.LEARN);
+                setView(View.TUTORIALS);
             } else if (newSelection == libsButton) {
                 setView(View.LIBRARIES);
             } else if (newSelection == blogsButton) {

@@ -263,7 +263,7 @@
 }
 
 .top-menu .toggle-button {
-    -fx-padding: 10px 10px 10px 10px;
+    -fx-padding: 10px 30px 10px 15px;
     -fx-background-radius: 0px 4px 4px 0px;
     -fx-background-padding: 0px;
     -fx-background-insets: 0px 5px 0px 0px;
@@ -278,7 +278,6 @@
 }
 
 .top-menu:expanded .toggle-button {
-    -fx-padding: 10px 30px 10px 15px;
 }
 
 .top-menu .toggle-button:hover,

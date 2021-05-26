@@ -61,7 +61,9 @@ class CategoryPane extends ViewPane {
                 getChildren().clear();
                 rootPane.getRightPane().setContent(videosView);
                 break;
-            case LEARN:
+            case TUTORIALS:
+                break;
+            case REALWORLD:
                 break;
             case LIBRARIES:
                 getChildren().setAll(librariesView);

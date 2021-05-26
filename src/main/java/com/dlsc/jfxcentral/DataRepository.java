@@ -141,9 +141,9 @@ public class DataRepository {
             }.getType()));
 
             updateRecentItems();
-            readFeeds();
+           // readFeeds();
 
-        } catch (IOException | FeedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
