@@ -10,29 +10,26 @@ import java.util.Date;
 
 public class Post extends ModelObject {
 
-    private SyndFeed syndFeed;
+    private final Blog blog;
+    private final SyndFeed syndFeed;
+    private final SyndEntry syndEntry;
 
-    private SyndEntry syndEntry;
-
-    public Post(SyndFeed syndFeed, SyndEntry syndEntry) {
+    public Post(Blog blog, SyndFeed syndFeed, SyndEntry syndEntry) {
+        this.blog = blog;
         this.syndFeed = syndFeed;
         this.syndEntry = syndEntry;
+    }
+
+    public Blog getBlog() {
+        return blog;
     }
 
     public SyndFeed getSyndFeed() {
         return syndFeed;
     }
 
-    public void setSyndFeed(SyndFeed syndFeed) {
-        this.syndFeed = syndFeed;
-    }
-
     public SyndEntry getSyndEntry() {
         return syndEntry;
-    }
-
-    public void setSyndEntry(SyndEntry syndEntry) {
-        this.syndEntry = syndEntry;
     }
 
     public LocalDate getDate() {

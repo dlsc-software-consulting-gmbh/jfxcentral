@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.MalformedURLException;
@@ -46,13 +47,14 @@ public class PostCell extends ListCell<Post> {
         imageView.setPreserveRatio(true);
 
         ageLabel.getStyleClass().add("age-label");
+        ageLabel.setMinWidth(Region.USE_PREF_SIZE);
 
 //        VBox vBox = new VBox(titleLabel, subtitleLabel);
 //        vBox.getStyleClass().add("vbox");
 //        HBox.setHgrow(vBox, Priority.ALWAYS);
 
 
-        HBox hbox = new HBox(imageView, blogLabel, titleLabel, ageLabel);
+        HBox hbox = new HBox(blogLabel, titleLabel, ageLabel);
         HBox.setHgrow(titleLabel, Priority.ALWAYS);
         hbox.getStyleClass().add("hbox");
         hbox.setMinWidth(0);
@@ -97,8 +99,10 @@ public class PostCell extends ListCell<Post> {
                 }
             }
         } else {
-            setText("");
             imageView.setImage(null);
+            titleLabel.setText("");
+            blogLabel.setText("");
+            ageLabel.setText("");
         }
     }
 

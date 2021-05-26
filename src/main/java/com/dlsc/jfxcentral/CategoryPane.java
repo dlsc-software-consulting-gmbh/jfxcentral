@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.categories.BlogsView;
 import com.dlsc.jfxcentral.categories.BooksView;
 import com.dlsc.jfxcentral.categories.LibrariesView;
 import com.dlsc.jfxcentral.categories.PeopleView;
@@ -10,22 +11,22 @@ class CategoryPane extends ViewPane {
 
     private HomeView homeView;
     private NewsView newsView;
+    private BlogsView blogsView;
     private PeopleView peopleView;
     private BooksView booksView;
     private VideosView videosView;
     private LibrariesView librariesView;
-    private BlogsView blogsView;
 
     public CategoryPane(RootPane rootPane) {
         getStyleClass().add("category-pane");
 
         homeView = new HomeView(rootPane);
         newsView = new NewsView(rootPane);
+        blogsView = new BlogsView(rootPane);
         peopleView = new PeopleView(rootPane);
         booksView = new BooksView(rootPane);
         videosView = new VideosView(rootPane);
         librariesView = new LibrariesView(rootPane);
-        blogsView = new BlogsView(rootPane);
 
         viewProperty().addListener(it -> updateView(rootPane));
         updateView(rootPane);
@@ -67,8 +68,8 @@ class CategoryPane extends ViewPane {
                 rootPane.getRightPane().setContent(librariesView.getDetailPane());
                 break;
             case BLOGS:
-                getChildren().clear();
-                rootPane.getRightPane().setContent(blogsView);
+                getChildren().setAll(blogsView);
+                rootPane.getRightPane().setContent(blogsView.getDetailPane());
                 break;
         }
     }

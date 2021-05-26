@@ -1753,51 +1753,25 @@
 .blogs-view {
 }
 
-.blogs-view .grid-pane {
-    -fx-hgap: 20px;
-    -fx-vgap: 40px;
-}
-
-.blogs-view .grid-pane .blog-cell {
-    -fx-spacing: 5px;
-    -fx-padding: 10px;
-    -fx-alignment: top-center;
-}
-
-.blogs-view .grid-pane .blog-cell:hover {
-    -fx-background-radius: 3px;
-    -fx-background-color: -fx-accent;
-}
-
-.blogs-view .grid-pane .blog-cell:hover .button {
-    -fx-background-color: white;
+.blogs-view .blog-cell .label {
+    -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
 
-.blogs-view .grid-pane .blog-cell:hover .image-view {
-    -fx-cursor: hand;
-}
 
-.blogs-view .grid-pane .blog-cell:hover .summary-label {
-    -fx-cursor: hand;
-    -fx-text-fill: white;
-    -fx-opacity: 1;
-}
+/* ----------------------------------------------------------------------------
+ * BlogView
+ */
 
-.blogs-view .grid-pane .blog-cell .summary-label {
-    -fx-font-family: "Open Sans Italic";
-    -fx-opacity: .7;
-}
-
-.blogs-view .post-cell {
+.blog-view .post-cell {
     -fx-padding: 10px 10px 10px 0px;
 }
 
-.blogs-view .post-cell .title-label {
+.blog-view .post-cell .title-label {
     -fx-font-family: "Open Sans SemiBold";
 }
 
-.blogs-view .post-cell .blog-label {
+.blog-view .post-cell .blog-label {
     -size: 150px;
     -fx-min-width: -size;
     -fx-pref-width: -size;

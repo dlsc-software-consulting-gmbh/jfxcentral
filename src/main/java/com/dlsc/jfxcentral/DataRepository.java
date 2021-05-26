@@ -89,6 +89,7 @@ public class DataRepository {
         newsTextMap.clear();
         libraryReadMeMap.clear();
 
+        getPosts().clear();
         getPeople().clear();
         getLibraries().clear();
         getBooks().clear();
@@ -511,7 +512,7 @@ public class DataRepository {
 
                 List<SyndEntry> entries = feed.getEntries();
                 entries.forEach(entry -> {
-                    getPosts().add(new Post(feed, entry));
+                    getPosts().add(new Post(blog, feed, entry));
                     System.out.println(feed.getTitle() + ":" + entry.getTitle());
                 });
             }
