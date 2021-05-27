@@ -15,8 +15,6 @@ public class Person extends ModelObject {
     private String twitter;
     private String gitHub;
 
-    private String photo;
-
     private String description;
 
     private boolean champion;
@@ -88,14 +86,6 @@ public class Person extends ModelObject {
         this.gitHub = gitHub;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -126,10 +116,6 @@ public class Person extends ModelObject {
 
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
-    }
-
-    public boolean hasPhoto() {
-        return getPhoto() != null && !getPhoto().trim().isEmpty();
     }
 
     public List<String> getLibraryIds() {

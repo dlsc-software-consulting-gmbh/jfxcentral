@@ -106,37 +106,37 @@ public class DataRepository {
             setHomeText(loadString(getBaseUrl() + "intro.md?time=" + ZonedDateTime.now().toInstant()));
 
             // load people
-            File peopleFile = loadFile("people.json", getBaseUrl() + "people.json");
+            File peopleFile = loadFile("people.json", getBaseUrl() + "people/people.json");
             setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
             }.getType()));
 
             // load books
-            File booksFile = loadFile("books.json", getBaseUrl() + "books.json");
+            File booksFile = loadFile("books.json", getBaseUrl() + "books/books.json");
             setBooks(gson.fromJson(new FileReader(booksFile), new TypeToken<List<Book>>() {
             }.getType()));
 
             // load videos
-            File videosFile = loadFile("videos.json", getBaseUrl() + "videos.json");
+            File videosFile = loadFile("videos.json", getBaseUrl() + "videos/videos.json");
             setVideos(gson.fromJson(new FileReader(videosFile), new TypeToken<List<Video>>() {
             }.getType()));
 
             // load libraries
-            File librariesFile = loadFile("libraries.json", getBaseUrl() + "libraries.json");
+            File librariesFile = loadFile("libraries.json", getBaseUrl() + "libraries/libraries.json");
             setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
             }.getType()));
 
             // load libraries
-            File newsFile = loadFile("news.json", getBaseUrl() + "news.json");
+            File newsFile = loadFile("news.json", getBaseUrl() + "news/news.json");
             setNews(gson.fromJson(new FileReader(newsFile), new TypeToken<List<News>>() {
             }.getType()));
 
             // load libraries
-            File blogsFile = loadFile("blogs.json", getBaseUrl() + "blogs.json");
+            File blogsFile = loadFile("blogs.json", getBaseUrl() + "blogs/blogs.json");
             setBlogs(gson.fromJson(new FileReader(blogsFile), new TypeToken<List<Blog>>() {
             }.getType()));
 
             // load libraries
-            File companiesFile = loadFile("companies.json", getBaseUrl() + "companies.json");
+            File companiesFile = loadFile("companies.json", getBaseUrl() + "companies/companies.json");
             setCompanies(gson.fromJson(new FileReader(companiesFile), new TypeToken<List<Company>>() {
             }.getType()));
 

@@ -38,7 +38,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     public ObjectProperty<Image> personImageProperty(Person person) {
-        return imageProperty(DataRepository.getInstance().getBaseUrl() + "images/people/", person.getPhoto());
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "people/" + person.getId() + "/", "photo.jpeg", "person-" + person.getId());
     }
 
     public ObjectProperty<Image> companyImageProperty(Company company) {
@@ -65,6 +65,10 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
         return imageProperty(baseURL, photoFileName, photoFileName, null);
     }
 
+    private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName, String photoKey) {
+        return imageProperty(baseURL, photoFileName, photoKey, null);
+    }
+
     private ObjectProperty<Image> imageProperty(String baseURL, String photoFileName, String photoKey, Image placeholderImage) {
         if (StringUtils.isBlank(photoFileName) || StringUtils.isBlank(photoKey)) {
             return new SimpleObjectProperty<>(placeholderImage);
@@ -74,9 +78,12 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
             ObjectProperty<Image> property = new SimpleObjectProperty<>(placeholderImage);
             String url = baseURL + photoFileName;
             System.out.println(url);
+
             Image image = new Image(url + "?" + ZonedDateTime.now().toInstant(), true);
             image.progressProperty().addListener(it -> {
-                if (image.getProgress() == 1) {
+                // exception = 404 -> no image found for given URL
+                if (image.getProgress() == 1 && image.getException() == null) {
+                    System.out.println("Image found for " + url);
                     property.set(image);
                 }
             });

@@ -11,7 +11,6 @@ public class WritePerson {
         Person person = new Person("Dirk Lemmermann");
         person.setChampion(true);
         person.setRockstar(true);
-        person.setPhoto("dlemmermann.jpg");
         person.setEmail("dlemmermann@gmail.com");
         person.setBlogId("pixel-perfect");
         person.setCompanyId("dlsc");
