@@ -4,7 +4,6 @@ import com.dlsc.gemsfx.DialogPane;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +17,7 @@ public class RootPane extends ViewPane {
     private final RightPane rightPane = new RightPane();
 
     private final DialogPane dialogPane = new DialogPane();
+    private final SideBar sideBar;
 
     public RootPane() {
         getStyleClass().add("root-pane");
@@ -35,7 +35,7 @@ public class RootPane extends ViewPane {
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
-        SideBar sideBar = new SideBar(this);
+        sideBar = new SideBar(this);
         sideBar.viewProperty().bindBidirectional(viewProperty());
 
         BorderPane borderPane = new BorderPane();
@@ -46,6 +46,10 @@ public class RootPane extends ViewPane {
         getChildren().addAll(borderPane, dialogPane);
 
         displayProperty().addListener(it -> System.out.println("display: " + getDisplay()));
+    }
+
+    public SideBar getSideBar() {
+        return sideBar;
     }
 
     public RightPane getRightPane() {

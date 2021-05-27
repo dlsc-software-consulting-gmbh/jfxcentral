@@ -7,19 +7,22 @@ import javafx.scene.layout.VBox;
 
 public class SideBar extends ViewPane {
 
+    private final TopMenu topMenu;
+    private final CategoryPane categoryPane;
+
     public SideBar(RootPane rootPane) {
         getStyleClass().add("side-bar");
 
         HBox hBox = new HBox();
         hBox.setFillHeight(true);
 
-        TopMenu topMenu = new TopMenu(rootPane);
+        topMenu = new TopMenu(rootPane);
         viewProperty().bindBidirectional(topMenu.viewProperty());
 
-        CategoryPane categoryMenu = new CategoryPane(rootPane);
-        categoryMenu.viewProperty().bind(viewProperty());
+        categoryPane = new CategoryPane(rootPane);
+        categoryPane.viewProperty().bind(viewProperty());
 
-        hBox.getChildren().addAll(topMenu, categoryMenu);
+        hBox.getChildren().addAll(topMenu, categoryPane);
 
         Region topSpacer = new Region();
         topSpacer.getStyleClass().add("top-spacer");
@@ -28,5 +31,13 @@ public class SideBar extends ViewPane {
         VBox.setVgrow(hBox, Priority.ALWAYS);
 
         getChildren().add(vBox);
+    }
+
+    public TopMenu getTopMenu() {
+        return topMenu;
+    }
+
+    public CategoryPane getCategoryPane() {
+        return categoryPane;
     }
 }

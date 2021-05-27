@@ -32,6 +32,8 @@ public class PeopleView extends CategoryView {
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setPerson(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
+        personProperty().addListener(it -> listView.getSelectionModel().select(getPerson()));
+
         setCenter(listView);
 
         performDefaultSelection();

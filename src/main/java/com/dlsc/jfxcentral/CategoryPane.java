@@ -37,6 +37,34 @@ class CategoryPane extends ViewPane {
         });
     }
 
+    public HomeView getHomeView() {
+        return homeView;
+    }
+
+    public NewsView getNewsView() {
+        return newsView;
+    }
+
+    public BlogsView getBlogsView() {
+        return blogsView;
+    }
+
+    public PeopleView getPeopleView() {
+        return peopleView;
+    }
+
+    public BooksView getBooksView() {
+        return booksView;
+    }
+
+    public VideosView getVideosView() {
+        return videosView;
+    }
+
+    public LibrariesView getLibrariesView() {
+        return librariesView;
+    }
+
     private void updateView(RootPane rootPane) {
         switch (getView()) {
             case HOME:
