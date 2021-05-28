@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 class TopMenu extends VBox {
 
@@ -41,17 +42,32 @@ class TopMenu extends VBox {
         ToggleButton homeButton = createButton("Home", new FontIcon(Material.HOME));
         ToggleButton newsButton = createButton("Latest News", new FontIcon(Material.NOTES));
         ToggleButton peopleButton = createButton("People", new FontIcon(Material.PERSON));
+        ToggleButton companyButton = createButton("Companies", new FontIcon(MaterialDesign.MDI_FACTORY));
         ToggleButton blogsButton = createButton("Blogs", new FontIcon(FontAwesomeBrands.BLOGGER));
         ToggleButton booksButton = createButton("Books", new FontIcon(FontAwesomeBrands.AMAZON));
         ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
         ToggleButton libsButton = createButton("Libraries", new FontIcon(FontAwesomeBrands.GITHUB));
+        ToggleButton toolsButton = createButton("Tools", new FontIcon(FontAwesomeBrands.APP_STORE));
         ToggleButton videosButton = createButton("Videos", new FontIcon(FontAwesomeBrands.YOUTUBE));
         ToggleButton openJfxButton = createButton("Open JFX", new FontIcon(FontAwesomeBrands.JAVA));
         ToggleButton realWorldApps = createButton("Real World Apps", new FontIcon(Material.APPS));
 
 
         ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(homeButton, newsButton, openJfxButton, peopleButton, blogsButton, videosButton, booksButton, libsButton, tutorialsButton, realWorldApps);
+        toggleGroup.getToggles().addAll(
+                homeButton,
+                newsButton,
+                openJfxButton,
+                peopleButton,
+                companyButton,
+                blogsButton,
+                videosButton,
+                booksButton,
+                toolsButton,
+                libsButton,
+                tutorialsButton,
+                realWorldApps);
+
         toggleGroup.selectToggle(homeButton);
 
         Region spacer = new Region();
@@ -59,7 +75,19 @@ class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(homeButton, newsButton, openJfxButton, realWorldApps, peopleButton, blogsButton, videosButton, booksButton, libsButton, tutorialsButton);
+        getChildren().addAll(
+                homeButton,
+                newsButton,
+                openJfxButton,
+                realWorldApps,
+                peopleButton,
+                companyButton,
+                blogsButton,
+                videosButton,
+                booksButton,
+                toolsButton,
+                libsButton,
+                tutorialsButton);
 
         view.addListener(it -> {
             switch (getView()) {
@@ -69,14 +97,23 @@ class TopMenu extends VBox {
                 case NEWS:
                     toggleGroup.selectToggle(newsButton);
                     break;
+                case REALWORLD:
+                    toggleGroup.selectToggle(realWorldApps);
+                    break;
                 case OPENJFX:
                     toggleGroup.selectToggle(openJfxButton);
                     break;
                 case PEOPLE:
                     toggleGroup.selectToggle(peopleButton);
                     break;
+                case COMPANIES:
+                    toggleGroup.selectToggle(companyButton);
+                    break;
                 case TUTORIALS:
                     toggleGroup.selectToggle(tutorialsButton);
+                    break;
+                case TOOLS:
+                    toggleGroup.selectToggle(toolsButton);
                     break;
                 case LIBRARIES:
                     toggleGroup.selectToggle(libsButton);
@@ -105,12 +142,18 @@ class TopMenu extends VBox {
                 setView(View.NEWS);
             } else if (newSelection == openJfxButton) {
                 setView(View.OPENJFX);
+            } else if (newSelection == realWorldApps) {
+                setView(View.REALWORLD);
             } else if (newSelection == peopleButton) {
                 setView(View.PEOPLE);
+            } else if (newSelection == companyButton) {
+                setView(View.COMPANIES);
             } else if (newSelection == tutorialsButton) {
                 setView(View.TUTORIALS);
             } else if (newSelection == libsButton) {
                 setView(View.LIBRARIES);
+            } else if (newSelection == toolsButton) {
+                setView(View.TOOLS);
             } else if (newSelection == blogsButton) {
                 setView(View.BLOGS);
             } else if (newSelection == booksButton) {

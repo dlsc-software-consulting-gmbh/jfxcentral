@@ -67,6 +67,14 @@ public class DataRepository {
 
     private Map<News, StringProperty> newsTextMap = new HashMap<>();
 
+    private Map<Person, StringProperty> personDescriptionMap = new HashMap<>();
+
+    private Map<Tool, StringProperty> toolDescriptionMap = new HashMap<>();
+
+    private Map<RealWorldApp, StringProperty> realWorldAppDescriptionMap = new HashMap<>();
+
+    private Map<Company, StringProperty> companyDescriptionMap = new HashMap<>();
+
     private Map<Library, StringProperty> libraryReadMeMap = new HashMap<>();
 
     public static synchronized DataRepository getInstance() {
@@ -87,7 +95,10 @@ public class DataRepository {
         libraryInfoMap.clear();
         libraryReadMeMap.clear();
         newsTextMap.clear();
-        libraryReadMeMap.clear();
+        personDescriptionMap.clear();
+        companyDescriptionMap.clear();
+        toolDescriptionMap.clear();
+        realWorldAppDescriptionMap.clear();
 
         getPosts().clear();
         getPeople().clear();
@@ -97,6 +108,8 @@ public class DataRepository {
         getVideos().clear();
         getBlogs().clear();
         getCompanies().clear();
+        getTools().clear();
+        getRealWorldApps().clear();
 
         loadData();
     }
@@ -140,8 +153,19 @@ public class DataRepository {
             setCompanies(gson.fromJson(new FileReader(companiesFile), new TypeToken<List<Company>>() {
             }.getType()));
 
+            // load tools
+            File toolsFile = loadFile("tools.json", getBaseUrl() + "tools/tools.json");
+            setTools(gson.fromJson(new FileReader(toolsFile), new TypeToken<List<Tool>>() {
+            }.getType()));
+
+            // load real world apps
+            File realWorldFile = loadFile("realworld.json", getBaseUrl() + "realworld/realworld.json");
+            setRealWorldApps(gson.fromJson(new FileReader(realWorldFile), new TypeToken<List<RealWorldApp>>() {
+            }.getType()));
+
+//            readFeeds();
+
             updateRecentItems();
-            readFeeds();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,6 +180,7 @@ public class DataRepository {
         getRecentItems().addAll(findRecentItems(getLibraries()));
         getRecentItems().addAll(findRecentItems(getVideos()));
         getRecentItems().addAll(findRecentItems(getBlogs()));
+        getRecentItems().addAll(findRecentItems(getCompanies()));
     }
 
     private List<ModelObject> findRecentItems(List<? extends ModelObject> items) {
@@ -255,6 +280,58 @@ public class DataRepository {
             });
 
             return textProperty;
+        });
+    }
+
+    public StringProperty personDescriptionProperty(Person person) {
+        return personDescriptionMap.computeIfAbsent(person, key -> {
+            StringProperty readmeProperty = new SimpleStringProperty();
+
+            executor.submit(() -> {
+                String readmeText = loadString(getBaseUrl() + "people/" + person.getId() + "/readme.md");
+                Platform.runLater(() -> readmeProperty.set(readmeText));
+            });
+
+            return readmeProperty;
+        });
+    }
+
+    public StringProperty toolDescriptionProperty(Tool tool) {
+        return toolDescriptionMap.computeIfAbsent(tool, key -> {
+            StringProperty readmeProperty = new SimpleStringProperty();
+
+            executor.submit(() -> {
+                String readmeText = loadString(getBaseUrl() + "tools/" + tool.getId() + "/readme.md");
+                Platform.runLater(() -> readmeProperty.set(readmeText));
+            });
+
+            return readmeProperty;
+        });
+    }
+
+    public StringProperty realWorldAppDescriptionProperty(RealWorldApp app) {
+        return realWorldAppDescriptionMap.computeIfAbsent(app, key -> {
+            StringProperty readmeProperty = new SimpleStringProperty();
+
+            executor.submit(() -> {
+                String readmeText = loadString(getBaseUrl() + "realworld/" + app.getId() + "/readme.md");
+                Platform.runLater(() -> readmeProperty.set(readmeText));
+            });
+
+            return readmeProperty;
+        });
+    }
+
+    public StringProperty companyDescriptionProperty(Company company) {
+        return companyDescriptionMap.computeIfAbsent(company, key -> {
+            StringProperty readmeProperty = new SimpleStringProperty();
+
+            executor.submit(() -> {
+                String readmeText = loadString(getBaseUrl() + "companies/" + company.getId() + "/readme.md");
+                Platform.runLater(() -> readmeProperty.set(readmeText));
+            });
+
+            return readmeProperty;
         });
     }
 
@@ -367,6 +444,34 @@ public class DataRepository {
 
     public void setVideos(List<Video> videos) {
         this.videos.setAll(videos);
+    }
+
+    private final ListProperty<RealWorldApp> realWorldApps = new SimpleListProperty<>(this, "realWorldApps", FXCollections.observableArrayList());
+
+    public ObservableList<RealWorldApp> getRealWorldApps() {
+        return realWorldApps.get();
+    }
+
+    public ListProperty<RealWorldApp> realWorldAppsProperty() {
+        return realWorldApps;
+    }
+
+    public void setRealWorldApps(List<RealWorldApp> realWorldApps) {
+        this.realWorldApps.setAll(realWorldApps);
+    }
+
+    private final ListProperty<Tool> tools = new SimpleListProperty<>(this, "tools", FXCollections.observableArrayList());
+
+    public ObservableList<Tool> getTools() {
+        return tools.get();
+    }
+
+    public ListProperty<Tool> toolsProperty() {
+        return tools;
+    }
+
+    public void setTools(List<Tool> tools) {
+        this.tools.setAll(tools);
     }
 
     private final ListProperty<Company> companies = new SimpleListProperty<>(this, "companies", FXCollections.observableArrayList());

@@ -7,6 +7,8 @@ public enum View {
     PEOPLE,
     TUTORIALS,
     REALWORLD,
+    COMPANIES,
+    TOOLS,
     LIBRARIES,
     BLOGS,
     BOOKS,

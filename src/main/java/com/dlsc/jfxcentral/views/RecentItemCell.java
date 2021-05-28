@@ -8,6 +8,7 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -86,6 +87,8 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
             return FontAwesomeBrands.BLOGGER;
         } else if (item instanceof Library) {
             return FontAwesomeBrands.GITHUB;
+        } else if (item instanceof Company) {
+            return MaterialDesign.MDI_FACTORY;
         }
 
         return null;

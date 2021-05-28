@@ -28,7 +28,7 @@ public class BooksView extends CategoryView {
         getStyleClass().add("books-view");
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
-        listView.setCellFactory(view -> new BookCell());
+        listView.setCellFactory(view -> new BookListCell());
         listView.itemsProperty().bind(DataRepository.getInstance().booksProperty());
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
         VBox.setVgrow(listView, Priority.ALWAYS);
@@ -56,11 +56,11 @@ public class BooksView extends CategoryView {
         return bookView;
     }
 
-    class BookCell extends AdvancedListCell<Book> {
+    class BookListCell extends AdvancedListCell<Book> {
 
         private final ImageView coverImageView = new ImageView();
 
-        public BookCell() {
+        public BookListCell() {
             getStyleClass().add("book-list-cell");
 
             coverImageView.setFitWidth(100);

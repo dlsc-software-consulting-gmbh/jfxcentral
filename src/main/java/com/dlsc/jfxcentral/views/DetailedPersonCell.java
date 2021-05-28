@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
+import com.dlsc.jfxcentral.MarkdownView;
 import com.dlsc.jfxcentral.PhotoView;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.util.Util;
@@ -9,7 +11,6 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
@@ -21,7 +22,7 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
     private HBox socialBox;
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
-    private Label descriptionLabel = new Label();
+    private MarkdownView descriptionLabel = new MarkdownView();
     private javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
     private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
@@ -34,8 +35,6 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
-        descriptionLabel.setWrapText(true);
-        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
         descriptionLabel.getStyleClass().add("description-label");
         HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
 
@@ -74,7 +73,7 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
 
         if (!empty && person != null) {
             nameLabel.setText(person.getName());
-            descriptionLabel.setText(person.getDescription());
+            descriptionLabel.mdStringProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());
             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));

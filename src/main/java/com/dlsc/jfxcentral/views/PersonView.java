@@ -26,7 +26,7 @@ public class PersonView extends PageView {
     private HBox linksBox;
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
-    private Label descriptionLabel = new Label();
+    private MarkdownView descriptionMarkdownView = new MarkdownView();
     private ImageView championImageView = new ImageView();
     private ImageView rockstarImageView = new ImageView();
     private VBox content = new VBox();
@@ -179,10 +179,9 @@ public class PersonView extends PageView {
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
-        descriptionLabel.setWrapText(true);
-        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-        descriptionLabel.getStyleClass().add("description-label");
-        HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
+        descriptionMarkdownView.setMinHeight(Region.USE_PREF_SIZE);
+        descriptionMarkdownView.getStyleClass().add("description-label");
+        HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
 
         championImageView.getStyleClass().add("champion-image");
         championImageView.setPreserveRatio(true);
@@ -200,7 +199,7 @@ public class PersonView extends PageView {
         linksBox = new HBox();
         linksBox.getStyleClass().add("social-box");
 
-        VBox vBox = new VBox(nameLabel, descriptionLabel, badgesBox, linksBox);
+        VBox vBox = new VBox(nameLabel, descriptionMarkdownView, badgesBox, linksBox);
         vBox.getStyleClass().add("vbox");
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
@@ -216,8 +215,9 @@ public class PersonView extends PageView {
     private void updateView() {
         Person person = getPerson();
         if (person != null) {
+
             nameLabel.setText(person.getName());
-            descriptionLabel.setText(person.getDescription());
+            descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());
             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));

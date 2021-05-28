@@ -33,12 +33,24 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
         return imageProperty(DataRepository.getInstance().getBaseUrl() + "blogs/" + blog.getId() + "/", "page-small.png", "blog-" + blog.getId(), MISSING_IMAGE);
     }
 
+    public ObjectProperty<Image> realWorldAppImageProperty(RealWorldApp app) {
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "realworld/" + app.getId() + "/", "small.jpg", "real-" + app.getId(), MISSING_IMAGE);
+    }
+
+    public ObjectProperty<Image> realWorldAppLargeImageProperty(RealWorldApp app) {
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "realworld/" + app.getId() + "/", "large.jpg", "real-large-" + app.getId(), MISSING_IMAGE);
+    }
+
     public ObjectProperty<Image> blogPageLargeImageProperty(Blog blog) {
         return imageProperty(DataRepository.getInstance().getBaseUrl() + "blogs/" + blog.getId() + "/", "page.png", "blog-large-" + blog.getId(), MISSING_IMAGE);
     }
 
     public ObjectProperty<Image> personImageProperty(Person person) {
         return imageProperty(DataRepository.getInstance().getBaseUrl() + "people/" + person.getId() + "/", "photo.jpeg", "person-" + person.getId());
+    }
+
+    public ObjectProperty<Image> toolImageProperty(Tool tool) {
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "tools/" + tool.getId() + "/", "logo.png", "tool-" + tool.getId());
     }
 
     public ObjectProperty<Image> companyImageProperty(Company company) {

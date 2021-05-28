@@ -91,9 +91,11 @@ public class VideosView extends PageView {
 
         DataRepository.getInstance().getVideos().forEach(video -> {
             List<String> personIds = video.getPersonIds();
-            for (String id : personIds) {
-                if (!speakersList.contains(id.trim())) {
-                    speakersList.add(id.trim());
+            if (personIds != null) {
+                for (String id : personIds) {
+                    if (!speakersList.contains(id.trim())) {
+                        speakersList.add(id.trim());
+                    }
                 }
             }
         });

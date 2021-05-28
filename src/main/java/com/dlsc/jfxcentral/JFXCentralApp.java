@@ -59,7 +59,8 @@ public class JFXCentralApp extends Application {
         }
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-//        scene.setOnKeyPressed(evt -> {
+
+        //        scene.setOnKeyPressed(evt -> {
 //            if (KeyCharacterCombination.valueOf("shortcut+i").match(evt)) {
 //                ScenicView.show(scene);
 //            }

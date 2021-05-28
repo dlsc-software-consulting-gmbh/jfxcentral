@@ -255,7 +255,7 @@
 }
 
 .top-menu {
-    -fx-spacing: 20px;
+    -fx-spacing: 5px;
     -fx-padding: 10px 10px 10px 0px;
     -fx-background-color: -light-blue;
     -fx-border-color: rgba(0, 0, 0, .05);
@@ -366,14 +366,18 @@
     -fx-background-color: -light-grey;
 }
 
-.category-pane .list-view .person-list-cell .grid-pane {
+/* ----------------------------------------------------------------------------
+ * PeopleView
+ */
+.people-view .person-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.category-pane .list-view .person-list-cell .rockstar-label,
-.category-pane .list-view .person-list-cell .champion-label {
+
+.people-view .person-list-cell .rockstar-label,
+.people-view .person-list-cell .champion-label {
     -fx-font-size: 8;
     -fx-padding: 0px 3px;
     -fx-border-color: -fx-accent;
@@ -382,7 +386,8 @@
     -fx-opacity: .5;
 }
 
-.category-pane .list-view .person-list-cell .grid-pane .photo-view {
+
+.people-view .person-list-cell .grid-pane .photo-view {
     -size: 30px;
     -fx-min-width: -size;
     -fx-min-height: -size;
@@ -392,18 +397,52 @@
     -fx-pref-height: -size;
 }
 
-.category-pane .list-view .person-list-cell .grid-pane .photo-view .border-circle {
+
+.people-view .person-list-cell .grid-pane .photo-view .border-circle {
     -fx-stroke-width: 1px;
     -fx-effect: null;
 }
 
-.category-pane .list-view .person-list-cell .grid-pane .badges {
+
+.people-view .person-list-cell .grid-pane .badges {
     -fx-spacing: 10px;
 }
 
-.category-pane .list-view .person-list-cell .grid-pane .name-label {
+
+.people-view .person-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * ToolsView
+ */
+.tools-view .tool-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.tools-view .tool-list-cell .grid-pane .name-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * RealWorldAppsView
+ */
+.real-world-view .app-list-cell .grid-pane {
+    -fx-vgap: 5px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.real-world-view .app-list-cell .grid-pane .name-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+}
+
+.real-world-view .app-list-cell .grid-pane .summary-markdown-view {
 }
 
 /* ----------------------------------------------------------------------------
@@ -1801,4 +1840,63 @@
     -fx-pref-width: -size;
     -fx-max-width: -size;
     -fx-opacity: .7;
+}
+
+/* ----------------------------------------------------------------------------
+ * CompanyView
+ */
+
+/* Company Cell */
+
+.company-view .company-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: rgba(0, 0, 0, .2);
+}
+
+.company-view .company-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-background-insets: 2px -8px 3px -8px;
+    -fx-background-radius: 2px;
+}
+
+.company-view .company-cell:selected .label {
+    -fx-text-fill: white;
+}
+
+.company-view .company-cell.last {
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0px;
+}
+
+.company-view .company-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.company-view .company-cell .hbox .vbox {
+    -fx-spacing: 10px;
+}
+
+.company-view .company-cell .hbox .vbox .name-label {
+}
+
+.company-view .company-cell .hbox .vbox .description-markdown {
+}
+
+.company-view .company-cell .button-box {
+    -fx-spacing: 10px;
+}
+
+.company-view .company-cell .button-box .button .ikonli-font-icon {
+    -fx-icon-size: 18px;
+}
+
+/* ----------------------------------------------------------------------------
+ * ToolsView
+ */
+.tool-view .vbox {
+    -fx-spacing: 20px;
 }

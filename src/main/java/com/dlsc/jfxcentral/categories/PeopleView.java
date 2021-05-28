@@ -26,6 +26,8 @@ public class PeopleView extends CategoryView {
     public PeopleView(RootPane rootPane) {
         super(rootPane);
 
+        getStyleClass().add("people-view");
+
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new PersonCell());
         listView.itemsProperty().bind(DataRepository.getInstance().peopleProperty());

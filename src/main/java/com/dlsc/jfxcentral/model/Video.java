@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Video extends ModelObject {
@@ -7,7 +8,7 @@ public class Video extends ModelObject {
     private String title;
     private String description;
     private String summary;
-    private List<String> personIds;
+    private List<String> personIds = new ArrayList<>();
     private String image;
     private String type;
     private String domain;
