@@ -6,6 +6,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,20 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
     public MarkdownView() {
         getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
         setHyperlinkCallback(link -> Util.browse(link));
+    }
+
+    private final ObjectProperty<Consumer<Image>> onImageClick = new SimpleObjectProperty<>(this, "onImageClick");
+
+    public Consumer<Image> getOnImageClick() {
+        return onImageClick.get();
+    }
+
+    public ObjectProperty<Consumer<Image>> onImageClickProperty() {
+        return onImageClick;
+    }
+
+    public void setOnImageClick(Consumer<Image> onImageClick) {
+        this.onImageClick.set(onImageClick);
     }
 
     public String getBaseURL() {
@@ -48,7 +63,11 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
     public void setLink(Node node, String link, String description) {
         super.setLink(node, link, description);
 
-        node.setOnMouseClicked(evt -> getHyperlinkCallback().accept(StringUtils.deleteWhitespace(link)));
+        if (!(node instanceof ImageView)) {
+            node.setOnMouseClicked(evt -> getHyperlinkCallback().accept(StringUtils.deleteWhitespace(link)));
+        } else {
+            node.cursorProperty().bind(Bindings.createObjectBinding(() -> getOnImageClick() != null ? Cursor.HAND : Cursor.DEFAULT));
+        }
     }
 
     @Override
@@ -71,6 +90,12 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
             imageView.setPreserveRatio(true);
             imageView.visibleProperty().bind(showImagesProperty());
             imageView.managedProperty().bind(showImagesProperty());
+            imageView.setOnMouseClicked(evt -> {
+                Consumer<Image> onImageClick = getOnImageClick();
+                if (onImageClick != null) {
+                    onImageClick.accept(imageView.getImage());
+                }
+            });
         }
     }
 

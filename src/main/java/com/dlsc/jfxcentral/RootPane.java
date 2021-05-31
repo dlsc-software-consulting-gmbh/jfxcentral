@@ -3,8 +3,12 @@ package com.dlsc.jfxcentral;
 import com.dlsc.gemsfx.DialogPane;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -83,5 +87,19 @@ public class RootPane extends ViewPane {
         }
 
         return false;
+    }
+
+    public void showImage(String title, Image image) {
+        ImageView imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
+
+        StackPane stackPane = new StackPane(imageView);
+        stackPane.setPrefSize(image.getWidth(), image.getHeight()); // important
+        stackPane.setMinSize(0, 0); // important
+
+        imageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
+
+        getDialogPane().showNode(DialogPane.Type.BLANK, title, stackPane, false, Collections.emptyList());
+
     }
 }

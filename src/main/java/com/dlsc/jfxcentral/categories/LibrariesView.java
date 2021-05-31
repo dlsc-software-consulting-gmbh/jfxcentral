@@ -20,6 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
 
 public class LibrariesView extends CategoryView {
 
@@ -31,7 +34,9 @@ public class LibrariesView extends CategoryView {
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new SimpleLibraryCell());
-        listView.itemsProperty().bind(DataRepository.getInstance().librariesProperty());
+        listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().librariesProperty(),
+                Comparator.comparing(Library::getTitle),
+                library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getTitle(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setLibrary(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 

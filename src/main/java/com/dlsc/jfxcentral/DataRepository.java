@@ -163,7 +163,7 @@ public class DataRepository {
             setRealWorldApps(gson.fromJson(new FileReader(realWorldFile), new TypeToken<List<RealWorldApp>>() {
             }.getType()));
 
-//            readFeeds();
+           // readFeeds();
 
             updateRecentItems();
 

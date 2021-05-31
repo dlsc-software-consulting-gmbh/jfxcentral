@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral.categories;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
@@ -24,11 +26,26 @@ public class CategoryHeader extends HBox {
         backButton.getStyleClass().add("back-button");
 
         TextField searchField = new TextField();
+        searchField.textProperty().bindBidirectional(filterText);
         searchField.getStyleClass().add("search-field");
         searchField.setMaxWidth(Double.MAX_VALUE);
         searchField.setPromptText("Search ....");
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
         getChildren().addAll(searchField);
+    }
+
+    private StringProperty filterText = new SimpleStringProperty(this, "filterText");
+
+    public String getFilterText() {
+        return filterText.get();
+    }
+
+    public StringProperty filterTextProperty() {
+        return filterText;
+    }
+
+    public void setFilterText(String filterText) {
+        this.filterText.set(filterText);
     }
 }

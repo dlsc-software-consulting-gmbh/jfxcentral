@@ -17,6 +17,9 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
 
 public class PeopleView extends CategoryView {
 
@@ -30,7 +33,9 @@ public class PeopleView extends CategoryView {
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new PersonCell());
-        listView.itemsProperty().bind(DataRepository.getInstance().peopleProperty());
+        listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
+                Comparator.comparing(Person::getName),
+                person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setPerson(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 

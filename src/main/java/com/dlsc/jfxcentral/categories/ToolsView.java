@@ -19,6 +19,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
 
 public class ToolsView extends CategoryView {
 
@@ -32,7 +35,9 @@ public class ToolsView extends CategoryView {
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new ToolListCell());
-        listView.itemsProperty().bind(DataRepository.getInstance().toolsProperty());
+        listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().toolsProperty(),
+                Comparator.comparing(Tool::getName),
+                tool -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tool.getName(), getFilterText()) || StringUtils.containsIgnoreCase(tool.getSummary(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setTool(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
@@ -114,6 +119,8 @@ public class ToolsView extends CategoryView {
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             setGraphic(gridPane);
+
+            gridPane.visibleProperty().bind(emptyProperty().not());
         }
 
         @Override
@@ -124,10 +131,6 @@ public class ToolsView extends CategoryView {
                 nameLabel.setText(tool.getName());
                 imageView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
                 markdownView.setMdString(tool.getSummary());
-            } else {
-                nameLabel.setText("");
-                imageView.imageProperty().unbind();
-                markdownView.setMdString("");
             }
         }
     }

@@ -34,14 +34,15 @@ public class RealWorldAppView extends PageView {
         imageView.setPreserveRatio(true);
 
         MarkdownView markdownView = new MarkdownView();
+        markdownView.setOnImageClick(image -> rootPane.showImage(getApp().getName(), image));
         sectionPane.getNodes().addAll(imageView, markdownView);
 
         appProperty().addListener(it -> {
             RealWorldApp app = getApp();
             if (app != null) {
                 imageView.imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
-                markdownView.mdStringProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(getApp()));
                 markdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "realworld/" + app.getId());
+                markdownView.mdStringProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(getApp()));
             } else {
                 imageView.imageProperty().unbind();
                 markdownView.mdStringProperty().unbind();

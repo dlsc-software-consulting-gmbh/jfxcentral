@@ -18,6 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
 
 public class BlogsView extends CategoryView {
 
@@ -32,8 +35,11 @@ public class BlogsView extends CategoryView {
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BlogCell());
-        listView.itemsProperty().bind(DataRepository.getInstance().blogsProperty());
+        listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
+                Comparator.comparing(Blog::getTitle),
+                blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getTitle(), getFilterText())));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
+
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         Button button = new Button("Show all posts");
@@ -89,6 +95,8 @@ public class BlogsView extends CategoryView {
 
             setGraphic(vbox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+            vbox.visibleProperty().bind(emptyProperty().not());
         }
 
         @Override

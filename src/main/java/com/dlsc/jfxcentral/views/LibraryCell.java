@@ -107,6 +107,8 @@ public class LibraryCell extends AdvancedListCell<Library> {
 
             setGraphic(outerBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+            outerBox.visibleProperty().bind(emptyProperty().not());
         }
 
         @Override

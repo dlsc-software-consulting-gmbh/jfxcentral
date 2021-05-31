@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
 
 public class BooksView extends CategoryView {
 
@@ -27,9 +30,16 @@ public class BooksView extends CategoryView {
 
         getStyleClass().add("books-view");
 
+
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BookListCell());
-        listView.itemsProperty().bind(DataRepository.getInstance().booksProperty());
+
+        listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().booksProperty(),
+                Comparator.comparing(Book::getTitle),
+                book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getTitle(), getFilterText())));
+
+        filterTextProperty().addListener(it -> System.out.println("filer: " + getFilterText()));
+
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
@@ -69,6 +79,8 @@ public class BooksView extends CategoryView {
             setAlignment(Pos.CENTER);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             setGraphic(coverImageView);
+
+            coverImageView.visibleProperty().bind(emptyProperty().not());
         }
 
         @Override

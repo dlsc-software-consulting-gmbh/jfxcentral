@@ -17,6 +17,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
 
 public class RealWorldAppsView extends CategoryView {
 
@@ -30,7 +33,12 @@ public class RealWorldAppsView extends CategoryView {
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new RealWorldAppListCell());
-        listView.itemsProperty().bind(DataRepository.getInstance().realWorldAppsProperty());
+        listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().realWorldAppsProperty(),
+                Comparator.comparing(RealWorldApp::getName),
+                app -> StringUtils.isBlank(getFilterText()) ||
+                        StringUtils.containsIgnoreCase(app.getName(), getFilterText()) ||
+                        StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||
+                        StringUtils.containsIgnoreCase(app.getCompany(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setApp(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
@@ -102,6 +110,8 @@ public class RealWorldAppsView extends CategoryView {
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             setGraphic(gridPane);
+
+            gridPane.visibleProperty().bind(emptyProperty().not());
         }
 
         @Override
