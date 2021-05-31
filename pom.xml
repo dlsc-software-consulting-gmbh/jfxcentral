@@ -16,8 +16,8 @@
         <attach.version>4.0.11</attach.version>
         <client.plugin.version>0.1.39</client.plugin.version>
         <javafx.plugin.version>0.0.5</javafx.plugin.version>
-        <main.class>com.dlsc.jfxcentral.WebStarter</main.class>
-        <main.class.web>com.dlsc.jfxcentral.JFXCentralApp</main.class.web>
+        <main.class>com.dlsc.jfxcentral.JFXCentralApp</main.class>
+        <main.class.web>com.dlsc.jfxcentral.WebStarter</main.class.web>
         <ikonli.version>12.2.0</ikonli.version>
         <jpro.version>2021.1.1-SNAPSHOT</jpro.version>
     </properties>
