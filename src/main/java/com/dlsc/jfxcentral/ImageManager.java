@@ -26,7 +26,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     public ObjectProperty<Image> newsBannerImageProperty(News news) {
-        return imageProperty(DataRepository.getInstance().getNewsBaseUrl(news) + "/", news.getBanner(), "banner-" + news.getId(), MISSING_IMAGE);
+        return imageProperty(DataRepository.getInstance().getNewsBaseUrl(news) + "/", "banner.jpg", "banner-" + news.getId(), MISSING_IMAGE);
     }
 
     public ObjectProperty<Image> blogPageImageProperty(Blog blog) {

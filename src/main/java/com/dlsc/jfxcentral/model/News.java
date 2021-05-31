@@ -9,7 +9,6 @@ public class News extends ModelObject {
     private String subtitle;
     private String text;
     private String author;
-    private String banner;
 
     private Type type = Type.MISC;
 
@@ -17,8 +16,8 @@ public class News extends ModelObject {
     private List<String> libraryIds = new ArrayList<>();
 
     public enum Type {
+        RELEASE,
         LINKS,
-        ANNOUNCEMENT,
         EVENT,
         TIPS,
         NOTEWORTHY,
@@ -82,13 +81,5 @@ public class News extends ModelObject {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setBanner(String banner) {
-        this.banner = banner;
     }
 }
