@@ -89,6 +89,7 @@ public class DataRepository {
 
     public void refresh() {
         setHomeText("");
+        setOpenJFXText("");
 
         ImageManager.getInstance().clear();
 
@@ -117,6 +118,7 @@ public class DataRepository {
     private void loadData() {
         try {
             setHomeText(loadString(getBaseUrl() + "intro.md?time=" + ZonedDateTime.now().toInstant()));
+            setOpenJFXText(loadString(getBaseUrl() + "openjfx/intro.md?time=" + ZonedDateTime.now().toInstant()));
 
             // load people
             File peopleFile = loadFile("people.json", getBaseUrl() + "people/people.json");
@@ -368,6 +370,20 @@ public class DataRepository {
 
     public void setHomeText(String homeText) {
         this.homeText.set(homeText);
+    }
+
+    private final StringProperty openJFXText = new SimpleStringProperty(this, "openJFXText");
+
+    public String getOpenJFXText() {
+        return openJFXText.get();
+    }
+
+    public StringProperty openJFXTextProperty() {
+        return openJFXText;
+    }
+
+    public void setOpenJFXText(String openJFXText) {
+        this.openJFXText.set(openJFXText);
     }
 
     public ListProperty<Book> getBooksByPerson(Person person) {

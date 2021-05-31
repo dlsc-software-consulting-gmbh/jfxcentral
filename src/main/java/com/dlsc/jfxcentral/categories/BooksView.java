@@ -87,17 +87,13 @@ public class BooksView extends CategoryView {
         protected void updateItem(Book book, boolean empty) {
             super.updateItem(book, empty);
 
+            coverImageView.imageProperty().unbind();
+
             if (!empty && book != null) {
                 String coverImage = book.getImage();
                 if (coverImage != null && !coverImage.trim().isBlank()) {
-                    coverImageView.setVisible(true);
                     coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-                } else {
-                    coverImageView.setVisible(false);
-                    coverImageView.imageProperty().unbind();
                 }
-            } else {
-                coverImageView.setVisible(false);
             }
         }
     }

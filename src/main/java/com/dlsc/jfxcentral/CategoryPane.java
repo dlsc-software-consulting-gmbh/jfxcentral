@@ -12,6 +12,7 @@ class CategoryPane extends ViewPane {
     private PeopleView peopleView;
     private BooksView booksView;
     private VideosView videosView;
+    private OpenJFXView openJFXView;
     private LibrariesView librariesView;
     private CompaniesView companiesView;
     private ToolsView toolsView;
@@ -30,6 +31,7 @@ class CategoryPane extends ViewPane {
         librariesView = new LibrariesView(rootPane);
         companiesView = new CompaniesView(rootPane);
         appsView = new RealWorldAppsView(rootPane);
+        openJFXView = new OpenJFXView(rootPane);
 
         viewProperty().addListener(it -> updateView(rootPane));
         updateView(rootPane);
@@ -83,6 +85,8 @@ class CategoryPane extends ViewPane {
                 rootPane.getRightPane().setContent(newsView);
                 break;
             case OPENJFX:
+                getChildren().clear();
+                rootPane.getRightPane().setContent(openJFXView);
                 break;
             case PEOPLE:
                 getChildren().setAll(peopleView);
