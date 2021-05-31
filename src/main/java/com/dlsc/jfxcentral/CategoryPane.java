@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.categories.*;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.views.*;
 
-class CategoryPane extends ViewPane {
+public class CategoryPane extends ViewPane {
 
     private HomeView homeView;
     private NewsView newsView;
@@ -57,6 +57,11 @@ class CategoryPane extends ViewPane {
     public PeopleView getPeopleView() {
         return peopleView;
     }
+
+    public RealWorldAppsView getRealWorldAppsView() {
+        return appsView;
+    }
+
 
     public BooksView getBooksView() {
         return booksView;

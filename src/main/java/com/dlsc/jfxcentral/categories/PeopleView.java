@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral.categories;
 
-import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.ImageManager;
-import com.dlsc.jfxcentral.PhotoView;
-import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.Person;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.PersonView;
@@ -21,10 +18,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class PeopleView extends CategoryView {
+public class PeopleView extends CategoryView<Person> {
 
     private PersonView personView;
     private ListView<Person> listView = new ListView<>();
+
+    @Override
+    public View getView() {
+        return View.PEOPLE;
+    }
 
     public PeopleView(RootPane rootPane) {
         super(rootPane);
@@ -36,10 +38,10 @@ public class PeopleView extends CategoryView {
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
                 Comparator.comparing(Person::getName),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
-        listView.getSelectionModel().selectedItemProperty().addListener(it -> setPerson(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
-        personProperty().addListener(it -> listView.getSelectionModel().select(getPerson()));
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setItem(listView.getSelectionModel().getSelectedItem()));
+        itemProperty().addListener(it -> listView.getSelectionModel().select(getItem()));
 
         setCenter(listView);
 
@@ -58,25 +60,12 @@ public class PeopleView extends CategoryView {
     public Node getDetailPane() {
         if (personView == null) {
             personView = new PersonView(getRootPane());
-            personView.personProperty().bind(personProperty());
+            personView.personProperty().bind(itemProperty());
         }
 
         return personView;
     }
 
-    private final ObjectProperty<Person> person = new SimpleObjectProperty<>(this, "person");
-
-    public Person getPerson() {
-        return person.get();
-    }
-
-    public ObjectProperty<Person> personProperty() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person.set(person);
-    }
 
     class PersonCell extends AdvancedListCell<Person> {
 
@@ -86,6 +75,7 @@ public class PeopleView extends CategoryView {
         private final Label rockstarLabel = new Label("ROCKSTAR");
         private final javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
         private final javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
+        private final GridPane gridPane;
 
         public PersonCell() {
             getStyleClass().add("person-list-cell");
@@ -117,7 +107,7 @@ public class PeopleView extends CategoryView {
             badgesBox.getStyleClass().add("badges");
             badgesBox.setAlignment(Pos.TOP_LEFT);
 
-            GridPane gridPane = new GridPane();
+            gridPane = new GridPane();
             gridPane.getStyleClass().add("grid-pane");
             gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
@@ -148,6 +138,9 @@ public class PeopleView extends CategoryView {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
+            if(person != null) {
+                System.out.println("updateItem: " + person.getId());
+            }
 
             if (!empty && person != null) {
                 nameLabel.setText(person.getName());
@@ -156,6 +149,9 @@ public class PeopleView extends CategoryView {
                 rockstarLabel.setVisible(person.isRockstar());
                 rockstarLabel.setManaged(person.isRockstar());
                 photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
+
+                this.setMouseTransparent(true);
+                setCellLink(gridPane, person, this.getChildren());
             } else {
                 nameLabel.setText("");
                 championLabel.setVisible(false);

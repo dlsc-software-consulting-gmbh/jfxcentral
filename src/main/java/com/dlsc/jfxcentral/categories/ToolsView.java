@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral.categories;
 
-import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.ImageManager;
-import com.dlsc.jfxcentral.MarkdownView;
-import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.Tool;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.ToolView;
@@ -23,10 +20,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class ToolsView extends CategoryView {
+public class ToolsView extends CategoryView<Tool> {
 
     private ToolView toolView;
     private ListView<Tool> listView = new ListView<>();
+
+    @Override
+    public View getView() {
+        return View.TOOLS;
+    }
 
     public ToolsView(RootPane rootPane) {
         super(rootPane);
@@ -38,10 +40,10 @@ public class ToolsView extends CategoryView {
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().toolsProperty(),
                 Comparator.comparing(Tool::getName),
                 tool -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tool.getName(), getFilterText()) || StringUtils.containsIgnoreCase(tool.getSummary(), getFilterText())));
-        listView.getSelectionModel().selectedItemProperty().addListener(it -> setTool(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
-        toolProperty().addListener(it -> listView.getSelectionModel().select(getTool()));
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setItem(listView.getSelectionModel().getSelectedItem()));
+        itemProperty().addListener(it -> listView.getSelectionModel().select(getItem()));
 
         setCenter(listView);
 
@@ -60,24 +62,10 @@ public class ToolsView extends CategoryView {
     public Node getDetailPane() {
         if (toolView == null) {
             toolView = new ToolView(getRootPane());
-            toolView.toolProperty().bind(toolProperty());
+            toolView.toolProperty().bind(itemProperty());
         }
 
         return toolView;
-    }
-
-    private final ObjectProperty<Tool> tool = new SimpleObjectProperty<>(this, "tool");
-
-    public Tool getTool() {
-        return tool.get();
-    }
-
-    public ObjectProperty<Tool> toolProperty() {
-        return tool;
-    }
-
-    public void setTool(Tool tool) {
-        this.tool.set(tool);
     }
 
     class ToolListCell extends AdvancedListCell<Tool> {
@@ -85,6 +73,7 @@ public class ToolsView extends CategoryView {
         private final Label nameLabel = new Label();
         private final ImageView imageView = new ImageView();
         private final MarkdownView markdownView = new MarkdownView();
+        private final GridPane gridPane;
 
         public ToolListCell() {
             getStyleClass().add("tool-list-cell");
@@ -100,7 +89,7 @@ public class ToolsView extends CategoryView {
             nameLabel.getStyleClass().add("name-label");
             nameLabel.setMinWidth(0);
 
-            GridPane gridPane = new GridPane();
+            gridPane = new GridPane();
             gridPane.getStyleClass().add("grid-pane");
             gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
@@ -131,6 +120,9 @@ public class ToolsView extends CategoryView {
                 nameLabel.setText(tool.getName());
                 imageView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
                 markdownView.setMdString(tool.getSummary());
+
+                this.setMouseTransparent(true);
+                setCellLink(gridPane, tool, this.getChildren());
             }
         }
     }

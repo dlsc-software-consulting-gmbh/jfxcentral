@@ -1,20 +1,23 @@
 package com.dlsc.jfxcentral.categories;
 
 import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.View;
+import com.dlsc.jfxcentral.model.ModelObject;
+import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.BorderPane;
 
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public abstract class CategoryView extends BorderPane {
+public abstract class CategoryView<T extends ModelObject> extends BorderPane {
 
     private final RootPane rootPane;
 
@@ -54,5 +57,17 @@ public abstract class CategoryView extends BorderPane {
         return rootPane;
     }
 
+    private Property<T> item = new SimpleObjectProperty<T>(null, "item");
+
+    public T getItem() { return item.getValue(); }
+    public void setItem(T x) { item.setValue(x); }
+    public Property<T> itemProperty() { return item; }
+
     public abstract Node getDetailPane();
+
+    abstract public View getView();
+
+    public void setCellLink(Node cell, T item, ObservableList<Node> children) {
+        Util.setLink(cell, "/?page=/" + getView().toString() + "/" + item.getId(), item.getId(), children);
+    }
 }

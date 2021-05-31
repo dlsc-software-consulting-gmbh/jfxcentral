@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.categories;
 import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.View;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
@@ -24,10 +25,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class LibrariesView extends CategoryView {
+public class LibrariesView extends CategoryView<Library> {
 
     private LibraryView libraryView;
     private ListView<Library> listView = new ListView<>();
+
+    @Override
+    public View getView() {
+        return View.LIBRARIES;
+    }
 
     public LibrariesView(RootPane rootPane) {
         super(rootPane);
@@ -39,6 +45,9 @@ public class LibrariesView extends CategoryView {
                 library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getTitle(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setLibrary(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
+
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setItem(listView.getSelectionModel().getSelectedItem()));
+        itemProperty().addListener(it -> listView.getSelectionModel().select(getItem()));
 
         setCenter(listView);
 
@@ -82,6 +91,7 @@ public class LibrariesView extends CategoryView {
         private final ImageView imageView = new ImageView();
         private final Label nameLabel = new Label();
         private final LicenseLabel licenseLabel = new LicenseLabel();
+        private final GridPane gridPane;
 
         public SimpleLibraryCell() {
             getStyleClass().add("library-list-cell");
@@ -92,7 +102,7 @@ public class LibrariesView extends CategoryView {
 
             nameLabel.getStyleClass().add("name-label");
 
-            GridPane gridPane = new GridPane();
+            gridPane = new GridPane();
             gridPane.getStyleClass().add("grid-pane");
             gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
@@ -128,6 +138,9 @@ public class LibrariesView extends CategoryView {
                 imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
                 licenseLabel.setLicense(library.getLicense());
                 licenseLabel.setVisible(true);
+
+                this.setMouseTransparent(true);
+                com.jpro.web.Util.setLink(gridPane, "/?page=/LIBRARIES/"+library.getId(), library.getTitle(), this.getChildren());
             } else {
                 nameLabel.setText("");
                 imageView.setVisible(false);

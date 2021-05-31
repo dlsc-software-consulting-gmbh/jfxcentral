@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.categories;
 import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.View;
 import com.dlsc.jfxcentral.model.Blog;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.BlogView;
@@ -22,11 +23,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class BlogsView extends CategoryView {
+public class BlogsView extends CategoryView<Blog> {
 
     private BlogView blogView;
 
     private ListView<Blog> listView = new ListView<>();
+
+    @Override
+    public View getView() {
+        return View.BLOGS;
+    }
 
     public BlogsView(RootPane rootPane) {
         super(rootPane);
@@ -41,6 +47,9 @@ public class BlogsView extends CategoryView {
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         VBox.setVgrow(listView, Priority.ALWAYS);
+
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setItem(listView.getSelectionModel().getSelectedItem()));
+        itemProperty().addListener(it -> listView.getSelectionModel().select(getItem()));
 
         Button button = new Button("Show all posts");
         button.setMaxWidth(Double.MAX_VALUE);
@@ -106,6 +115,9 @@ public class BlogsView extends CategoryView {
             if (!empty && blog != null) {
                 label.setText(blog.getTitle());
                 imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
+
+                this.setMouseTransparent(true);
+                setCellLink(getGraphic(), blog, this.getChildren());
             } else {
                 label.setText("");
                 imageView.imageProperty().unbind();
