@@ -20,9 +20,6 @@ public class DefaultPage extends com.jpro.web.View {
 
     public DefaultPage(String initialURL) {
         this.initialURL = initialURL;
-
-        System.out.println("NEW DEFAULT PAGE!");
-        new Exception().printStackTrace();
     }
 
     @Override
