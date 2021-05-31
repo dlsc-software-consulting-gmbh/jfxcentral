@@ -1,5 +1,7 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.page.PageUtil;
+import com.jpro.web.Util;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -39,18 +41,18 @@ class TopMenu extends VBox {
         imageView.setPreserveRatio(true);
         imageView.getStyleClass().add("duke");
 
-        ToggleButton homeButton = createButton("Home", new FontIcon(Material.HOME));
-        ToggleButton newsButton = createButton("Latest News", new FontIcon(Material.NOTES));
-        ToggleButton peopleButton = createButton("People", new FontIcon(Material.PERSON));
-        ToggleButton companyButton = createButton("Companies", new FontIcon(MaterialDesign.MDI_FACTORY));
-        ToggleButton blogsButton = createButton("Blogs", new FontIcon(FontAwesomeBrands.BLOGGER));
-        ToggleButton booksButton = createButton("Books", new FontIcon(FontAwesomeBrands.AMAZON));
-        ToggleButton tutorialsButton = createButton("Tutorials", new FontIcon(Material.SCHOOL));
-        ToggleButton libsButton = createButton("Libraries", new FontIcon(FontAwesomeBrands.GITHUB));
-        ToggleButton toolsButton = createButton("Tools", new FontIcon(FontAwesomeBrands.APP_STORE));
-        ToggleButton videosButton = createButton("Videos", new FontIcon(FontAwesomeBrands.YOUTUBE));
-        ToggleButton openJfxButton = createButton("Open JFX", new FontIcon(FontAwesomeBrands.JAVA));
-        ToggleButton realWorldApps = createButton("Real World Apps", new FontIcon(Material.APPS));
+        ToggleButton homeButton = createButton("Home", View.HOME, new FontIcon(Material.HOME));
+        ToggleButton newsButton = createButton("Latest News", View.NEWS, new FontIcon(Material.NOTES));
+        ToggleButton peopleButton = createButton("People", View.PEOPLE, new FontIcon(Material.PERSON));
+        ToggleButton companyButton = createButton("Companies", View.COMPANIES, new FontIcon(MaterialDesign.MDI_FACTORY));
+        ToggleButton blogsButton = createButton("Blogs", View.BLOGS, new FontIcon(FontAwesomeBrands.BLOGGER));
+        ToggleButton booksButton = createButton("Books", View.BOOKS, new FontIcon(FontAwesomeBrands.AMAZON));
+        ToggleButton tutorialsButton = createButton("Tutorials", View.TUTORIALS, new FontIcon(Material.SCHOOL));
+        ToggleButton libsButton = createButton("Libraries", View.LIBRARIES, new FontIcon(FontAwesomeBrands.GITHUB));
+        ToggleButton toolsButton = createButton("Tools", View.TOOLS, new FontIcon(FontAwesomeBrands.APP_STORE));
+        ToggleButton videosButton = createButton("Videos", View.VIDEOS, new FontIcon(FontAwesomeBrands.YOUTUBE));
+        ToggleButton openJfxButton = createButton("Open JFX", View.OPENJFX, new FontIcon(FontAwesomeBrands.JAVA));
+        ToggleButton realWorldApps = createButton("Real World Apps", View.REALWORLD, new FontIcon(Material.APPS));
 
 
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -171,7 +173,7 @@ class TopMenu extends VBox {
         pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
     }
 
-    private ToggleButton createButton(String name, FontIcon icon) {
+    private ToggleButton createButton(String name, View view, FontIcon icon) {
         ToggleButton button = new ToggleButton(name);
         button.contentDisplayProperty().bind(Bindings.createObjectBinding(() -> {
             Display display = rootPane.getDisplay();
@@ -195,6 +197,7 @@ class TopMenu extends VBox {
         button.setAlignment(Pos.CENTER_LEFT);
         button.setGraphic(wrap(icon));
         button.setOnAction(evt -> setExpanded(false));
+        Util.setLink(button, PageUtil.viewURL(view), name);
         return button;
     }
 

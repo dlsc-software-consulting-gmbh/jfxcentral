@@ -234,6 +234,23 @@ public class DataRepository {
         return libraries.stream().filter(library -> library.getId().equals(id)).findFirst();
     }
 
+    public Optional<Book> getBookById(String id) {
+        return books.stream().filter(library -> library.getId().equals(id)).findFirst();
+    }
+
+    public Optional<Blog> getBlogById(String id) {
+        return blogs.stream().filter(library -> library.getId().equals(id)).findFirst();
+    }
+
+    public Optional<RealWorldApp> getRealWorldAppById(String id) {
+        return realWorldApps.stream().filter(library -> library.getId().equals(id)).findFirst();
+    }
+
+    public Optional<Tool> getToolById(String id) {
+        return tools.stream().filter(library -> library.getId().equals(id)).findFirst();
+    }
+
+
     public ListProperty<Video> getVideosByPerson(Person person) {
         ListProperty<Video> listProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
         listProperty.setAll(videos.stream().filter(video -> video.getPersonIds().contains(person.getId())).collect(Collectors.toList()));

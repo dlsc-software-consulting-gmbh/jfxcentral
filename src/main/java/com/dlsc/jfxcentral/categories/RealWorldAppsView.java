@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral.categories;
 
-import com.dlsc.jfxcentral.DataRepository;
-import com.dlsc.jfxcentral.ImageManager;
-import com.dlsc.jfxcentral.MarkdownView;
-import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.model.RealWorldApp;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RealWorldAppView;
@@ -21,10 +18,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class RealWorldAppsView extends CategoryView {
+public class RealWorldAppsView extends CategoryView<RealWorldApp> {
 
     private RealWorldAppView appView;
     private ListView<RealWorldApp> listView = new ListView<>();
+
+    @Override
+    public View getView() {
+        return View.REALWORLD;
+    }
 
     public RealWorldAppsView(RootPane rootPane) {
         super(rootPane);
@@ -39,10 +41,10 @@ public class RealWorldAppsView extends CategoryView {
                         StringUtils.containsIgnoreCase(app.getName(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getCompany(), getFilterText())));
-        listView.getSelectionModel().selectedItemProperty().addListener(it -> setApp(listView.getSelectionModel().getSelectedItem()));
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
-        appProperty().addListener(it -> listView.getSelectionModel().select(getApp()));
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setItem(listView.getSelectionModel().getSelectedItem()));
+        itemProperty().addListener(it -> listView.getSelectionModel().select(getItem()));
 
         setCenter(listView);
 
@@ -61,31 +63,19 @@ public class RealWorldAppsView extends CategoryView {
     public Node getDetailPane() {
         if (appView == null) {
             appView = new RealWorldAppView(getRootPane());
-            appView.appProperty().bind(appProperty());
+            appView.appProperty().bind(itemProperty());
         }
 
         return appView;
     }
 
-    private final ObjectProperty<RealWorldApp> app = new SimpleObjectProperty<>(this, "app");
-
-    public RealWorldApp getApp() {
-        return app.get();
-    }
-
-    public ObjectProperty<RealWorldApp> appProperty() {
-        return app;
-    }
-
-    public void setApp(RealWorldApp app) {
-        this.app.set(app);
-    }
 
     class RealWorldAppListCell extends AdvancedListCell<RealWorldApp> {
 
         private final Label nameLabel = new Label();
         private final ImageView imageView = new ImageView();
         private final MarkdownView summaryMarkdownView = new MarkdownView();
+        private final GridPane gridPane;
 
         public RealWorldAppListCell() {
             getStyleClass().add("app-list-cell");
@@ -100,7 +90,7 @@ public class RealWorldAppsView extends CategoryView {
             nameLabel.getStyleClass().add("name-label");
             nameLabel.setMinWidth(0);
 
-            GridPane gridPane = new GridPane();
+            gridPane = new GridPane();
             gridPane.getStyleClass().add("grid-pane");
             gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
@@ -122,6 +112,9 @@ public class RealWorldAppsView extends CategoryView {
                 nameLabel.setText(app.getName());
                 imageView.imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
                 summaryMarkdownView.setMdString(app.getSummary());
+
+                this.setMouseTransparent(true);
+                setCellLink(gridPane, app, this.getChildren());
             } else {
                 nameLabel.setText("");
                 imageView.imageProperty().unbind();

@@ -24,6 +24,7 @@ open module com.dlsc.jfxcentral {
     requires org.kordamp.ikonli.fontawesome;
     requires org.kordamp.ikonli.fontawesome5;
     requires org.apache.commons.lang3;
+    requires jpro.web.core;
 
     exports com.dlsc.jfxcentral;
     exports com.dlsc.jfxcentral.json;

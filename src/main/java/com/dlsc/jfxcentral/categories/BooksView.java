@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.categories;
 import com.dlsc.jfxcentral.DataRepository;
 import com.dlsc.jfxcentral.ImageManager;
 import com.dlsc.jfxcentral.RootPane;
+import com.dlsc.jfxcentral.View;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.BookView;
@@ -19,11 +20,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class BooksView extends CategoryView {
+public class BooksView extends CategoryView<Book> {
 
     private BookView bookView;
 
     private ListView<Book> listView = new ListView<>();
+
+    @Override
+    public View getView() {
+        return View.BOOKS;
+    }
 
     public BooksView(RootPane rootPane) {
         super(rootPane);
@@ -42,6 +48,9 @@ public class BooksView extends CategoryView {
 
         listView.getItems().addListener((Observable it) -> performDefaultSelection());
         VBox.setVgrow(listView, Priority.ALWAYS);
+
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setItem(listView.getSelectionModel().getSelectedItem()));
+        itemProperty().addListener(it -> listView.getSelectionModel().select(getItem()));
 
         setCenter(listView);
 
@@ -94,6 +103,8 @@ public class BooksView extends CategoryView {
                 if (coverImage != null && !coverImage.trim().isBlank()) {
                     coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
                 }
+                this.setMouseTransparent(true);
+                setCellLink(getGraphic(), book, this.getChildren());
             }
         }
     }
