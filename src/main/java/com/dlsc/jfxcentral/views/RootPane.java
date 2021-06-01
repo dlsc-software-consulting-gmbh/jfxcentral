@@ -49,6 +49,9 @@ public class RootPane extends StackPane {
                 case REALWORLD:
                     page = new RealWorldAppsPage(this);
                     break;
+                case DOWNLOADS:
+                    page = new DownloadsPage(this);
+                    break;
                 case COMPANIES:
                     page = new CompaniesPage(this);
                     break;

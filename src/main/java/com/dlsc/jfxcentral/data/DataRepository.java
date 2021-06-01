@@ -108,6 +108,7 @@ public class DataRepository {
         getCompanies().clear();
         getTools().clear();
         getRealWorldApps().clear();
+        getDownloads().clear();
 
         loadData();
     }
@@ -160,6 +161,11 @@ public class DataRepository {
             // load real world apps
             File realWorldFile = loadFile("realworld", getBaseUrl() + "realworld/realworld.json");
             setRealWorldApps(gson.fromJson(new FileReader(realWorldFile), new TypeToken<List<RealWorldApp>>() {
+            }.getType()));
+
+            // load dowloads
+            File downloadsFile = loadFile("downloads", getBaseUrl() + "downloads/downloads.json");
+            setDownloads(gson.fromJson(new FileReader(downloadsFile), new TypeToken<List<Download>>() {
             }.getType()));
 
 //            readFeeds();
@@ -474,6 +480,21 @@ public class DataRepository {
 
     public void setVideos(List<Video> videos) {
         this.videos.setAll(videos);
+    }
+
+    private final ListProperty<Download> downloads = new SimpleListProperty<>(this, "downloads", FXCollections.observableArrayList());
+
+
+    public ObservableList<Download> getDownloads() {
+        return downloads.get();
+    }
+
+    public ListProperty<Download> downloadsProperty() {
+        return downloads;
+    }
+
+    public void setDownloads(List<Download> downloads) {
+        this.downloads.setAll(downloads);
     }
 
     private final ListProperty<RealWorldApp> realWorldApps = new SimpleListProperty<>(this, "realWorldApps", FXCollections.observableArrayList());

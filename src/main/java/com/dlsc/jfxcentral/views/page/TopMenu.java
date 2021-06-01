@@ -52,7 +52,8 @@ public class TopMenu extends VBox {
         ToggleButton toolsButton = createButton("Tools", View.TOOLS, new FontIcon(FontAwesomeBrands.APP_STORE));
         ToggleButton videosButton = createButton("Videos", View.VIDEOS, new FontIcon(FontAwesomeBrands.YOUTUBE));
         ToggleButton openJfxButton = createButton("Open JFX", View.OPENJFX, new FontIcon(FontAwesomeBrands.JAVA));
-        ToggleButton realWorldApps = createButton("Real World Apps", View.REALWORLD, new FontIcon(Material.APPS));
+        ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REALWORLD, new FontIcon(Material.APPS));
+        ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(Material.FILE_DOWNLOAD));
 
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
@@ -67,7 +68,8 @@ public class TopMenu extends VBox {
                 toolsButton,
                 libsButton,
                 tutorialsButton,
-                realWorldApps);
+                realWorldAppsButton,
+                downloadsButton);
 
         toggleGroup.selectToggle(homeButton);
 
@@ -80,7 +82,7 @@ public class TopMenu extends VBox {
                 homeButton,
                 newsButton,
                 openJfxButton,
-                realWorldApps,
+                realWorldAppsButton,
                 peopleButton,
                 companyButton,
                 blogsButton,
@@ -88,7 +90,8 @@ public class TopMenu extends VBox {
                 booksButton,
                 toolsButton,
                 libsButton,
-                tutorialsButton);
+                tutorialsButton,
+                downloadsButton);
 
         switch (page.getView()) {
             case HOME:
@@ -98,7 +101,7 @@ public class TopMenu extends VBox {
                 toggleGroup.selectToggle(newsButton);
                 break;
             case REALWORLD:
-                toggleGroup.selectToggle(realWorldApps);
+                toggleGroup.selectToggle(realWorldAppsButton);
                 break;
             case OPENJFX:
                 toggleGroup.selectToggle(openJfxButton);
@@ -127,6 +130,9 @@ public class TopMenu extends VBox {
             case VIDEOS:
                 toggleGroup.selectToggle(videosButton);
                 break;
+            case DOWNLOADS:
+                toggleGroup.selectToggle(downloadsButton);
+                break;
         }
 
         toggleGroup.selectedToggleProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -141,7 +147,7 @@ public class TopMenu extends VBox {
                 changeView(View.NEWS);
             } else if (newSelection == openJfxButton) {
                 changeView(View.OPENJFX);
-            } else if (newSelection == realWorldApps) {
+            } else if (newSelection == realWorldAppsButton) {
                 changeView(View.REALWORLD);
             } else if (newSelection == peopleButton) {
                 changeView(View.PEOPLE);
@@ -159,6 +165,8 @@ public class TopMenu extends VBox {
                 changeView(View.BOOKS);
             } else if (newSelection == videosButton) {
                 changeView(View.VIDEOS);
+            } else if (newSelection == downloadsButton) {
+                changeView(View.DOWNLOADS);
             }
         });
 
