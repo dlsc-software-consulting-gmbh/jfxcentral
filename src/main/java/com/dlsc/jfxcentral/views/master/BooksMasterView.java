@@ -2,10 +2,11 @@ package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.model.Book;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
@@ -37,22 +38,14 @@ public class BooksMasterView extends MasterView<Book> {
 
         filterTextProperty().addListener(it -> System.out.println("filer: " + getFilterText()));
 
-        listView.getItems().addListener((Observable it) -> performDefaultSelection());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         bindListViewToSelectedItem(listView);
 
         setCenter(listView);
 
-        performDefaultSelection();
-    }
-
-    private void performDefaultSelection() {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
+        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
+        performDefaultSelection(listView);
     }
 
     class BookListCell extends AdvancedListCell<Book> {
@@ -83,8 +76,10 @@ public class BooksMasterView extends MasterView<Book> {
                 if (coverImage != null && !coverImage.trim().isBlank()) {
                     coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
                 }
-                this.setMouseTransparent(true);
-                setCellLink(getGraphic(), book, this.getChildren());
+                if (WebAPI.isBrowser()) {
+                    setMouseTransparent(true);
+                }
+                setCellLink(getGraphic(), book, getChildren());
             }
         }
     }

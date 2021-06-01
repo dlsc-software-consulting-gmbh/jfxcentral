@@ -2,10 +2,10 @@ package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 
-public class DetailPane extends PrettyScrollPane {
+public class DetailScrollPane extends PrettyScrollPane {
 
-    public DetailPane() {
-        getStyleClass().add("right-pane");
+    public DetailScrollPane() {
+        getStyleClass().add("detail-scroll-pane");
         setShowScrollToTopButton(true);
         setShowShadow(false);
         setFitToHeight(true);

@@ -1,30 +1,39 @@
 package com.dlsc.jfxcentral.views.page;
 
+import com.dlsc.jfxcentral.model.Blog;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.master.BlogsMasterView;
-import com.dlsc.jfxcentral.views.master.MasterView;
-import com.dlsc.jfxcentral.model.Blog;
 import com.dlsc.jfxcentral.views.detail.BlogsDetailView;
 import com.dlsc.jfxcentral.views.detail.DetailView;
+import com.dlsc.jfxcentral.views.master.BlogsMasterView;
+import com.dlsc.jfxcentral.views.master.MasterView;
+import javafx.beans.binding.Bindings;
 
 public class BlogsPage extends Page<Blog> {
 
     public BlogsPage(RootPane rootPane) {
         super(rootPane, View.BLOGS);
+
+        titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
+                "Blog - " + getSelectedItem().getTitle() :
+                "Blogs", selectedItemProperty()));
+
+        descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
+                "Latest JavaFX posts from the blog '" + getSelectedItem().getTitle() + "'" :
+                "Collection of blogs covering JavaFX technology."));
     }
 
     @Override
     protected MasterView createMasterView() {
         BlogsMasterView view = new BlogsMasterView(getRootPane());
-        view.selectedItemProperty().bindBidirectional(selectedItemProperty());
+        selectedItemProperty().bindBidirectional(view.selectedItemProperty());
         return view;
     }
 
     @Override
     protected DetailView createDetailView() {
         BlogsDetailView view = new BlogsDetailView(getRootPane());
-        view.selectedItemProperty().bindBidirectional(selectedItemProperty());
+        selectedItemProperty().bindBidirectional(view.selectedItemProperty());
         return view;
     }
 }

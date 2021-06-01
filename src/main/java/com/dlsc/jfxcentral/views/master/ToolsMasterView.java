@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
@@ -34,21 +35,13 @@ public class ToolsMasterView extends MasterView<Tool> {
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().toolsProperty(),
                 Comparator.comparing(Tool::getName),
                 tool -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tool.getName(), getFilterText()) || StringUtils.containsIgnoreCase(tool.getSummary(), getFilterText())));
-        listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         bindListViewToSelectedItem(listView);
 
         setCenter(listView);
 
-        performDefaultSelection();
-    }
-
-    private void performDefaultSelection() {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
+        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
+        performDefaultSelection(listView);
     }
 
     class ToolListCell extends AdvancedListCell<Tool> {
@@ -104,8 +97,11 @@ public class ToolsMasterView extends MasterView<Tool> {
                 imageView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
                 markdownView.setMdString(tool.getSummary());
 
-                this.setMouseTransparent(true);
-                setCellLink(gridPane, tool, this.getChildren());
+                if (WebAPI.isBrowser()) {
+                    setMouseTransparent(true);
+                }
+
+                setCellLink(gridPane, tool, getChildren());
             }
         }
     }

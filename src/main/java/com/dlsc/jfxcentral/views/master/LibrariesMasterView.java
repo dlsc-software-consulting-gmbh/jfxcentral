@@ -2,11 +2,12 @@ package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.model.Library;
 import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,21 +37,13 @@ public class LibrariesMasterView extends MasterView<Library> {
                 Comparator.comparing(Library::getTitle),
                 library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getTitle(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setLibrary(listView.getSelectionModel().getSelectedItem()));
-        listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         bindListViewToSelectedItem(listView);
 
         setCenter(listView);
 
-        performDefaultSelection();
-    }
-
-    private void performDefaultSelection() {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
+        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
+        performDefaultSelection(listView);
     }
 
     private final ObjectProperty<Library> library = new SimpleObjectProperty<>(this, "library");
@@ -120,8 +113,13 @@ public class LibrariesMasterView extends MasterView<Library> {
                 licenseLabel.setLicense(library.getLicense());
                 licenseLabel.setVisible(true);
 
-                this.setMouseTransparent(true);
-                com.jpro.web.Util.setLink(gridPane, "/?page=/LIBRARIES/"+library.getId(), library.getTitle(), this.getChildren());
+                if (WebAPI.isBrowser()) {
+                    setMouseTransparent(true);
+                }
+
+                //TODO:fk why not same method like the other cells?
+                com.jpro.web.Util.setLink(gridPane, "/?page=/LIBRARIES/" + library.getId(), library.getTitle(), getChildren());
+
             } else {
                 nameLabel.setText("");
                 imageView.setVisible(false);

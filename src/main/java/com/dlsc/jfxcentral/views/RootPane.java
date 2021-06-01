@@ -20,13 +20,15 @@ public class RootPane extends StackPane {
 
     private final DialogPane dialogPane = new DialogPane();
 
+    private Page<?> page;
+
     public RootPane() {
         getStyleClass().add("root-pane");
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
         viewProperty().addListener(it -> {
-            Page page = null;
+            page = null;
             switch (getView()) {
                 case HOME:
                     page = new HomePage(this);
@@ -71,6 +73,10 @@ public class RootPane extends StackPane {
         });
 
         getChildren().setAll(new IntroView(this));
+    }
+
+    public Page<?> getCurrentPage() {
+        return page;
     }
 
     public DialogPane getDialogPane() {

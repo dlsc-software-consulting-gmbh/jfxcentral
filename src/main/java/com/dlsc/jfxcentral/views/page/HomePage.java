@@ -9,6 +9,9 @@ public class HomePage extends Page {
 
     public HomePage(RootPane rootPane) {
         super(rootPane, View.HOME);
+
+        setTitle("JFX-Central Home");
+        setDescription("Homepage of JFX-Central, the one-stop destination for all things related to JavaFX.");
     }
 
     @Override

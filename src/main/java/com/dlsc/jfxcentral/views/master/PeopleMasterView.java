@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -32,21 +33,13 @@ public class PeopleMasterView extends MasterView<Person> {
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
                 Comparator.comparing(Person::getName),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
-        listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         bindListViewToSelectedItem(listView);
 
         setCenter(listView);
 
-        performDefaultSelection();
-    }
-
-    private void performDefaultSelection() {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
+        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
+        performDefaultSelection(listView);
     }
 
     class PersonCell extends AdvancedListCell<Person> {
@@ -132,7 +125,10 @@ public class PeopleMasterView extends MasterView<Person> {
                 rockstarLabel.setManaged(person.isRockstar());
                 photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
-                this.setMouseTransparent(true);
+                if (WebAPI.isBrowser()) {
+                    setMouseTransparent(true);
+                }
+
                 setCellLink(gridPane, person, this.getChildren());
             } else {
                 nameLabel.setText("");

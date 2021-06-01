@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.model.Blog;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -35,7 +36,6 @@ public class BlogsMasterView extends MasterView<Blog> {
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
                 Comparator.comparing(Blog::getTitle),
                 blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getTitle(), getFilterText())));
-        listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         VBox.setVgrow(listView, Priority.ALWAYS);
 
@@ -54,15 +54,8 @@ public class BlogsMasterView extends MasterView<Blog> {
 
         setCenter(vBox);
 
-        performDefaultSelection();
-    }
-
-    private void performDefaultSelection() {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
+        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
+        performDefaultSelection(listView);
     }
 
     class BlogCell extends AdvancedListCell<Blog> {
@@ -96,8 +89,10 @@ public class BlogsMasterView extends MasterView<Blog> {
                 label.setText(blog.getTitle());
                 imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
 
-                this.setMouseTransparent(true);
-                setCellLink(getGraphic(), blog, this.getChildren());
+                if (WebAPI.isBrowser()) {
+                    setMouseTransparent(true);
+                }
+                setCellLink(getGraphic(), blog, getChildren());
             } else {
                 label.setText("");
                 imageView.imageProperty().unbind();

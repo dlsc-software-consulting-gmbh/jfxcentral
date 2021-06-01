@@ -326,13 +326,7 @@
     -fx-image: url("duke.png");
 }
 
-.main-panel {
-    -fx-background-image: url("background.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: stretch;
-}
-
-.right-pane {
+.detail-scroll-pane {
     -fx-padding: 20px;
     -fx-background-color: -light-grey;
 }

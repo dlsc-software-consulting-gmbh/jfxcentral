@@ -34,6 +34,14 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
         setTop(header);
     }
 
+    protected void performDefaultSelection(ListView listView) {
+        if (!listView.getItems().isEmpty()) {
+            listView.getSelectionModel().select(0);
+        } else {
+            listView.getSelectionModel().clearSelection();
+        }
+    }
+
     protected void bindListViewToSelectedItem(ListView<T> listView) {
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         selectedItemProperty().addListener(it -> listView.getSelectionModel().select(getSelectedItem()));

@@ -13,7 +13,6 @@ import java.util.HashMap;
 public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
 
     private static final Image USER_IMAGE = new Image(JFXCentralApp.class.getResource("user.png").toExternalForm());
-    private static final Image LIBRARY_IMAGE = new Image(JFXCentralApp.class.getResource("document_cup.png").toExternalForm());
     private static final Image MISSING_IMAGE = new Image(JFXCentralApp.class.getResource("missing-image.jpg").toExternalForm());
     private static final Image MISSING_VIDEO_IMAGE = new Image(JFXCentralApp.class.getResource("missing-video-image.png").toExternalForm());
 

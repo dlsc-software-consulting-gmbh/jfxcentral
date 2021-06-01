@@ -1,10 +1,11 @@
 package com.dlsc.jfxcentral;
 
-import com.dlsc.jfxcentral.views.page.DefaultPage;
+import com.dlsc.jfxcentral.views.page.JPROWebView;
 import javafx.stage.Stage;
 
 
 public class WebApp extends com.jpro.web.WebApp {
+
     WebApp(Stage stage) {
         super(stage);
 
@@ -15,9 +16,10 @@ public class WebApp extends com.jpro.web.WebApp {
                 return null;
             }
         });
+
         addRouteJava((s) -> {
             if(s.startsWith("/?page=")) {
-                return new DefaultPage(s);
+                return new JPROWebView(s);
             } else {
                 return null;
             }

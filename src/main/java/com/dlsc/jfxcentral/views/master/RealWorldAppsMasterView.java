@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -36,21 +37,13 @@ public class RealWorldAppsMasterView extends MasterView<RealWorldApp> {
                         StringUtils.containsIgnoreCase(app.getName(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getCompany(), getFilterText())));
-        listView.getItems().addListener((Observable it) -> performDefaultSelection());
 
         bindListViewToSelectedItem(listView);
 
         setCenter(listView);
 
-        performDefaultSelection();
-    }
-
-    private void performDefaultSelection() {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
+        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
+        performDefaultSelection(listView);
     }
 
     class RealWorldAppListCell extends AdvancedListCell<RealWorldApp> {
@@ -96,7 +89,10 @@ public class RealWorldAppsMasterView extends MasterView<RealWorldApp> {
                 imageView.imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
                 summaryMarkdownView.setMdString(app.getSummary());
 
-                this.setMouseTransparent(true);
+                if (WebAPI.isBrowser()) {
+                    setMouseTransparent(true);
+                }
+
                 setCellLink(gridPane, app, this.getChildren());
             } else {
                 nameLabel.setText("");

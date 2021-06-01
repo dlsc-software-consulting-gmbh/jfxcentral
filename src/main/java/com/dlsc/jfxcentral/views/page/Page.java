@@ -3,10 +3,12 @@ package com.dlsc.jfxcentral.views.page;
 import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.master.MasterView;
 import com.dlsc.jfxcentral.views.detail.DetailView;
+import com.dlsc.jfxcentral.views.master.MasterView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,7 +16,7 @@ import javafx.scene.layout.HBox;
 public class Page<T> extends BorderPane {
 
     private final HeaderPane headerPane;
-    private final DetailPane detailPane;
+    private final DetailScrollPane detailPane;
     private final TopMenu topMenu;
     private final RootPane rootPane;
     private final View view;
@@ -26,7 +28,7 @@ public class Page<T> extends BorderPane {
         getStyleClass().add(view.name().toLowerCase());
 
         headerPane = new HeaderPane();
-        detailPane = new DetailPane();
+        detailPane = new DetailScrollPane();
         detailPane.setContent(createDetailView());
 
         topMenu = new TopMenu(this);
@@ -42,13 +44,39 @@ public class Page<T> extends BorderPane {
         }
 
         setLeft(leftSide);
+    }
 
-        selectedItem.addListener(it -> System.out.println("selected item: " + getSelectedItem()));
+    private final StringProperty title = new SimpleStringProperty(this, "title");
+
+    public String getTitle() {
+        return title.get();
+    }
+
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    private final StringProperty description = new SimpleStringProperty(this, "description");
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
     }
 
     private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>(this, "item");
 
-    public Object getSelectedItem() {
+    public T getSelectedItem() {
         return selectedItem.get();
     }
 
