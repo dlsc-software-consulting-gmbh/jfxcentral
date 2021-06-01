@@ -19,10 +19,7 @@ import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+import java.net.*;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -535,11 +532,17 @@ public class DataRepository {
         this.people.setAll(people);
     }
 
-    private File loadFile(String fileName, String url) throws IOException {
+    private File loadFile(String fileName, String urlString) throws IOException {
         // adding caching buster via timestamp
-        url = url + "?time=" + ZonedDateTime.now().toInstant();
-        System.out.println("url: " + url);
-        ReadableByteChannel readChannel = Channels.newChannel(new URL(url).openStream());
+        urlString = urlString + "?time=" + ZonedDateTime.now().toInstant();
+        System.out.println("url: " + urlString);
+
+        URL url = new URL(urlString);
+
+        URLConnection connection = url.openConnection();
+        connection.setUseCaches(false);
+
+        ReadableByteChannel readChannel = Channels.newChannel(connection.getInputStream());
         File file = File.createTempFile(fileName, ".json");
         System.out.println("file: " + file.getAbsolutePath());
         FileOutputStream fileOS = new FileOutputStream(file);
@@ -555,8 +558,11 @@ public class DataRepository {
         try {
             URL url = new URL(address);
 
+            URLConnection connection = url.openConnection();
+            connection.setUseCaches(false);
+
             // read text returned by server
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             String line;
             while ((line = in.readLine()) != null) {
@@ -601,8 +607,11 @@ public class DataRepository {
 
                 try {
                     URL url = new URL(MessageFormat.format("http://search.maven.org/solrsearch/select?q=g:{0}+AND+a:{1}", groupId, artifactId));
+
                     con = (HttpURLConnection) url.openConnection();
                     con.setRequestMethod("GET");
+                    con.setUseCaches(false);
+
                     int status = con.getResponseCode();
                     if (status == 200) {
                         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

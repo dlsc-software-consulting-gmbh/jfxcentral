@@ -35,8 +35,6 @@ public class DukeAnimationView extends StackPane {
     public DukeAnimationView(Runnable callback) {
         getStyleClass().add("duke-animation-view");
 
-        setOnMouseClicked(evt -> callback.run());
-
         Label button = new Label("Press to continue");
         button.getStyleClass().add("start-message");
         button.setOnMousePressed(evt -> callback.run());
