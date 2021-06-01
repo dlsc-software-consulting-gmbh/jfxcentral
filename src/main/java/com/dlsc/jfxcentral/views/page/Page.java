@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views.page;
 
+import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
@@ -10,6 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -36,7 +38,7 @@ public class Page<T> extends BorderPane {
         setTop(headerPane);
         setCenter(detailPane);
 
-        HBox leftSide = new HBox(topMenu);
+        HBox leftSide = new HBox(wrap(topMenu));
         Node masterNode = createMasterView();
 
         if (masterNode != null) {
@@ -44,6 +46,17 @@ public class Page<T> extends BorderPane {
         }
 
         setLeft(leftSide);
+    }
+
+    private PrettyScrollPane wrap(TopMenu topMenu) {
+        PrettyScrollPane scrollPane = new PrettyScrollPane(topMenu);
+        scrollPane.setShowScrollToTopButton(false);
+        scrollPane.setShowShadow(false);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        return scrollPane;
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");
