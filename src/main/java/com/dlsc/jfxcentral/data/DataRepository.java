@@ -64,6 +64,8 @@ public class DataRepository {
 
     private Map<News, StringProperty> newsTextMap = new HashMap<>();
 
+    private Map<Download, StringProperty> downloadTextMap = new HashMap<>();
+
     private Map<Person, StringProperty> personDescriptionMap = new HashMap<>();
 
     private Map<Tool, StringProperty> toolDescriptionMap = new HashMap<>();
@@ -97,6 +99,7 @@ public class DataRepository {
         companyDescriptionMap.clear();
         toolDescriptionMap.clear();
         realWorldAppDescriptionMap.clear();
+        downloadTextMap.clear();
 
         getPosts().clear();
         getPeople().clear();
@@ -297,6 +300,21 @@ public class DataRepository {
             executor.submit(() -> {
                 String url = getNewsBaseUrl(news) + "/text.md?time=" + ZonedDateTime.now().toInstant();
                 System.out.println("loading news from: " + url);
+                String text = loadString(url);
+                Platform.runLater(() -> textProperty.set(text));
+            });
+
+            return textProperty;
+        });
+    }
+
+    public StringProperty downloadTextProperty(Download download) {
+        return downloadTextMap.computeIfAbsent(download, key -> {
+            StringProperty textProperty = new SimpleStringProperty();
+
+            executor.submit(() -> {
+                String url = getBaseUrl() + "downloads/" + download.getId() + "/readme.md?time=" + ZonedDateTime.now().toInstant();
+                System.out.println("loading download text from: " + url);
                 String text = loadString(url);
                 Platform.runLater(() -> textProperty.set(text));
             });

@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral;
 
-import com.dlsc.jfxcentral.views.page.JPROWebView;
 import javafx.stage.Stage;
 
 

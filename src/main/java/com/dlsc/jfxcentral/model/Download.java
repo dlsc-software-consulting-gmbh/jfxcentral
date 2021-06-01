@@ -6,11 +6,12 @@ import java.util.List;
 public class Download extends ModelObject {
 
     private String title;
-    private String description;
-    private Type  type;
+    private DownloadType downloadType;
+    private List<String> personIds = new ArrayList<>();
+    private List<String> companyIds = new ArrayList<>();
     private List<DownloadFile> files = new ArrayList<>();
 
-    public enum Type {
+    public enum DownloadType {
         APPLICATION,
         PRESENTATION,
         DOCUMENTATION
@@ -19,15 +20,26 @@ public class Download extends ModelObject {
     public enum FileType {
         DMG,
         PKG,
-        MSI
+        MSI,
+        ZIP,
+        TXT
     }
 
     public static class DownloadFile {
+        private String name;
         private String url;
         private String fileName;
         private FileType fileType;
 
         public DownloadFile() {
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public FileType getFileType() {
@@ -58,12 +70,12 @@ public class Download extends ModelObject {
     public Download() {
     }
 
-    public Type getType() {
-        return type;
+    public DownloadType getDownloadType() {
+        return downloadType;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setDownloadType(DownloadType downloadType) {
+        this.downloadType = downloadType;
     }
 
     public String getTitle() {
@@ -74,19 +86,27 @@ public class Download extends ModelObject {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public List<DownloadFile> getFiles() {
         return files;
     }
 
     public void setFiles(List<DownloadFile> files) {
         this.files = files;
+    }
+
+    public List<String> getPersonIds() {
+        return personIds;
+    }
+
+    public void setPersonIds(List<String> personIds) {
+        this.personIds = personIds;
+    }
+
+    public List<String> getCompanyIds() {
+        return companyIds;
+    }
+
+    public void setCompanyIds(List<String> companyIds) {
+        this.companyIds = companyIds;
     }
 }

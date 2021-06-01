@@ -26,7 +26,11 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     public ObjectProperty<Image> newsBannerImageProperty(News news) {
-        return imageProperty(DataRepository.getInstance().getNewsBaseUrl(news) + "/", "banner.jpg", "banner-" + news.getId(), MISSING_IMAGE);
+        return imageProperty(DataRepository.getInstance().getNewsBaseUrl(news) + "/", "banner.jpg", "news-banner-" + news.getId(), MISSING_IMAGE);
+    }
+
+    public ObjectProperty<Image> downloadBannerImageProperty(Download download) {
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "downloads/" + download.getId() + "/", "banner.jpg", "download-banner-" + download.getId(), MISSING_IMAGE);
     }
 
     public ObjectProperty<Image> blogPageImageProperty(Blog blog) {
@@ -54,7 +58,7 @@ public class ImageManager extends HashMap<String, ObjectProperty<Image>> {
     }
 
     public ObjectProperty<Image> companyImageProperty(Company company) {
-        return imageProperty(DataRepository.getInstance().getBaseUrl() + "companies/" + company.getId() + "/", "logo.png", "company." + company.getId(), MISSING_IMAGE);
+        return imageProperty(DataRepository.getInstance().getBaseUrl() + "companies/" + company.getId() + "/", "logo.png", "company-" + company.getId(), MISSING_IMAGE);
     }
 
     public ObjectProperty<Image> bookCoverImageProperty(Book book) {

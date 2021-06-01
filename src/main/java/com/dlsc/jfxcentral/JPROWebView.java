@@ -1,10 +1,12 @@
-package com.dlsc.jfxcentral.views.page;
+package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.dlsc.jfxcentral.views.page.Page;
 import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
 
 
 public class JPROWebView extends com.jpro.web.View {
@@ -38,7 +40,12 @@ public class JPROWebView extends com.jpro.web.View {
     public Node content() {
         handleURL(initialURL);
 
-        return rootPane;
+        rootPane.setMaxWidth(1200);
+
+        StackPane wrapper = new StackPane(rootPane);
+        wrapper.getStyleClass().add("root-wrapper");
+
+        return wrapper;
     }
 
     // IF this returns true, we don't query for a new page

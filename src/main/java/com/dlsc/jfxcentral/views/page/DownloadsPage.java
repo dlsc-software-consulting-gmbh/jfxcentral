@@ -1,10 +1,12 @@
 package com.dlsc.jfxcentral.views.page;
 
-import com.dlsc.jfxcentral.model.RealWorldApp;
+import com.dlsc.jfxcentral.model.Download;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.dlsc.jfxcentral.views.detail.DetailView;
+import com.dlsc.jfxcentral.views.detail.DownloadsDetailView;
 
-public class DownloadsPage extends Page<RealWorldApp> {
+public class DownloadsPage extends Page<Download> {
 
     public DownloadsPage(RootPane rootPane) {
         super(rootPane, View.DOWNLOADS);
@@ -13,17 +15,10 @@ public class DownloadsPage extends Page<RealWorldApp> {
         setDescription("Various downloads related to JavaFX. Presentations, applications, documentation.");
     }
 
-//    @Override
-//    protected MasterView createMasterView() {
-//        RealWorldAppsMasterView view = new RealWorldAppsMasterView(getRootPane());
-//        selectedItemProperty().bindBidirectional(view.selectedItemProperty());
-//        return view;
-//    }
-//
-//    @Override
-//    protected DetailView createDetailView() {
-//        RealWorldAppsDetailView view = new RealWorldAppsDetailView(getRootPane());
-//        selectedItemProperty().bindBidirectional(view.selectedItemProperty());
-//        return view;
-//    }
+    @Override
+    protected DetailView createDetailView() {
+        DownloadsDetailView view = new DownloadsDetailView(getRootPane());
+        selectedItemProperty().bindBidirectional(view.selectedItemProperty());
+        return view;
+    }
 }

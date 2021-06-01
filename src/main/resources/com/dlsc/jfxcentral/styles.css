@@ -1338,6 +1338,36 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * DownloadCell
+ */
+.download-cell {
+}
+
+.download-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.download-cell .thumbnail-wrapper {
+    -fx-border-color: -fx-accent;
+    -fx-border-width: 2px;
+}
+
+.download-cell .video-cell .hbox {
+    -fx-padding: 10px;
+}
+
+.download-cell .hbox .vbox {
+    -fx-spacing: 20px;
+}
+
+.download-cell .title-label {
+    -fx-font-size: 16px;
+}
+
+.download-cell .description-label {
+}
+
+/* ----------------------------------------------------------------------------
  * NewsCell
  */
 .news-cell {
