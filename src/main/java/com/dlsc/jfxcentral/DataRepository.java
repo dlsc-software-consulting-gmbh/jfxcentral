@@ -121,51 +121,51 @@ public class DataRepository {
             setOpenJFXText(loadString(getBaseUrl() + "openjfx/intro.md?time=" + ZonedDateTime.now().toInstant()));
 
             // load people
-            File peopleFile = loadFile("people.json", getBaseUrl() + "people/people.json");
+            File peopleFile = loadFile("people", getBaseUrl() + "people/people.json");
             setPeople(gson.fromJson(new FileReader(peopleFile), new TypeToken<List<Person>>() {
             }.getType()));
 
             // load books
-            File booksFile = loadFile("books.json", getBaseUrl() + "books/books.json");
+            File booksFile = loadFile("books", getBaseUrl() + "books/books.json");
             setBooks(gson.fromJson(new FileReader(booksFile), new TypeToken<List<Book>>() {
             }.getType()));
 
             // load videos
-            File videosFile = loadFile("videos.json", getBaseUrl() + "videos/videos.json");
+            File videosFile = loadFile("videos", getBaseUrl() + "videos/videos.json");
             setVideos(gson.fromJson(new FileReader(videosFile), new TypeToken<List<Video>>() {
             }.getType()));
 
             // load libraries
-            File librariesFile = loadFile("libraries.json", getBaseUrl() + "libraries/libraries.json");
+            File librariesFile = loadFile("libraries", getBaseUrl() + "libraries/libraries.json");
             setLibraries(gson.fromJson(new FileReader(librariesFile), new TypeToken<List<Library>>() {
             }.getType()));
 
             // load libraries
-            File newsFile = loadFile("news.json", getBaseUrl() + "news/news.json");
+            File newsFile = loadFile("news", getBaseUrl() + "news/news.json");
             setNews(gson.fromJson(new FileReader(newsFile), new TypeToken<List<News>>() {
             }.getType()));
 
             // load libraries
-            File blogsFile = loadFile("blogs.json", getBaseUrl() + "blogs/blogs.json");
+            File blogsFile = loadFile("blogs", getBaseUrl() + "blogs/blogs.json");
             setBlogs(gson.fromJson(new FileReader(blogsFile), new TypeToken<List<Blog>>() {
             }.getType()));
 
             // load libraries
-            File companiesFile = loadFile("companies.json", getBaseUrl() + "companies/companies.json");
+            File companiesFile = loadFile("companies", getBaseUrl() + "companies/companies.json");
             setCompanies(gson.fromJson(new FileReader(companiesFile), new TypeToken<List<Company>>() {
             }.getType()));
 
             // load tools
-            File toolsFile = loadFile("tools.json", getBaseUrl() + "tools/tools.json");
+            File toolsFile = loadFile("tools", getBaseUrl() + "tools/tools.json");
             setTools(gson.fromJson(new FileReader(toolsFile), new TypeToken<List<Tool>>() {
             }.getType()));
 
             // load real world apps
-            File realWorldFile = loadFile("realworld.json", getBaseUrl() + "realworld/realworld.json");
+            File realWorldFile = loadFile("realworld", getBaseUrl() + "realworld/realworld.json");
             setRealWorldApps(gson.fromJson(new FileReader(realWorldFile), new TypeToken<List<RealWorldApp>>() {
             }.getType()));
 
-           // readFeeds();
+            readFeeds();
 
             updateRecentItems();
 
@@ -540,7 +540,8 @@ public class DataRepository {
         url = url + "?time=" + ZonedDateTime.now().toInstant();
         System.out.println("url: " + url);
         ReadableByteChannel readChannel = Channels.newChannel(new URL(url).openStream());
-        File file = File.createTempFile(fileName, "json");
+        File file = File.createTempFile(fileName, ".json");
+        System.out.println("file: " + file.getAbsolutePath());
         FileOutputStream fileOS = new FileOutputStream(file);
         FileChannel writeChannel = fileOS.getChannel();
         writeChannel.transferFrom(readChannel, 0, Long.MAX_VALUE);
