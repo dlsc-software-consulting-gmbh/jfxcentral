@@ -48,6 +48,6 @@ public class IntroView extends StackPane {
 
         thread.setName("Audio Thread");
         thread.setDaemon(true);
-        // thread.start();
+        thread.start();
     }
 }

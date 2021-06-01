@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views;
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.views.page.*;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -72,7 +73,11 @@ public class RootPane extends StackPane {
             getChildren().setAll(page, dialogPane);
         });
 
-        getChildren().setAll(new IntroView(this));
+        if (WebAPI.isBrowser()) {
+            setView(View.HOME);
+        } else {
+            getChildren().setAll(new IntroView(this));
+        }
     }
 
     public Page<?> getCurrentPage() {
