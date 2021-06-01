@@ -1,66 +1,32 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.views.Display;
+import com.dlsc.jfxcentral.views.RootPane;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class JFXCentralApp extends Application {
 
     private RootPane rootPane = new RootPane();
-    private Scene scene;
 
     @Override
     public void start(Stage primaryStage) {
-        if (true) {
-            DukeAnimationView animationView = new DukeAnimationView(() -> showRootPane());
-            animationView.sceneProperty().addListener(it -> {
-                if (animationView.getScene() != null) {
-                    System.out.println("starting");
-                    animationView.play();
-                } else {
-                    System.out.println("stopping");
-                    animationView.stop();
-                }
-            });
 
-//            AudioService.create().ifPresent(service -> service.loadSound(JFXCentralApp.class.getResource("sound.wav")).ifPresent(audio -> audio.play()));
+        rootPane = new RootPane();
+        rootPane.setMaxWidth(1200);
 
-//            final AudioClip plonkSound = new AudioClip(JFXCentralApp.class.getResource("sound.wav").toExternalForm());
-//            plonkSound.setVolume(.5);
-//            plonkSound.setCycleCount(1);
+        StackPane wrapper = new StackPane(rootPane);
+        wrapper.getStyleClass().add("root-wrapper");
 
-            scene = new Scene(animationView);
-            scene.setFill(Color.rgb(68, 131, 160));
-            animationView.setOnMouseClicked(evt -> {
-//                plonkSound.setVolume(0);
-//                plonkSound.stop();
-                showRootPane();
-                scene.setFill(Color.rgb(224, 229, 234));
-            });
-
-            Thread thread = new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-//                plonkSound.play();
-            });
-            thread.setName("Audio Thread");
-            thread.setDaemon(true);
-            thread.start();
-        } else {
-            scene = new Scene(new RootPane());
-        }
-
+        Scene scene = new Scene(wrapper);
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
-        //        scene.setOnKeyPressed(evt -> {
+//        scene.setOnKeyPressed(evt -> {
 //            if (KeyCharacterCombination.valueOf("shortcut+i").match(evt)) {
 //                ScenicView.show(scene);
 //            }
@@ -90,15 +56,8 @@ public class JFXCentralApp extends Application {
         primaryStage.setWidth(1200);
         primaryStage.setHeight(1200);
         primaryStage.centerOnScreen();
-        primaryStage.setTitle("JFXCentral");
+        primaryStage.setTitle("JFX-Central");
         primaryStage.show();
-    }
-
-    private void showRootPane() {
-        rootPane.setMaxWidth(1200);
-        StackPane wrapper = new StackPane(rootPane);
-        wrapper.getStyleClass().add("root-wrapper");
-        scene.setRoot(wrapper);
     }
 
     public static void main(String args[]) {

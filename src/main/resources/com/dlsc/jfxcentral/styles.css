@@ -326,10 +326,6 @@
     -fx-image: url("duke.png");
 }
 
-.category-pane {
-    -fx-background-color: -light-blue;
-}
-
 .main-panel {
     -fx-background-image: url("background.jpg");
     -fx-background-repeat: stretch;
@@ -349,7 +345,14 @@
     -fx-image: url("rockstar-small.png");
 }
 
-.category-pane .list-view {
+/* ----------------------------------------------------------------------------
+ * MasterView
+ */
+.master-view {
+    -fx-background-color: -light-blue;
+}
+
+.master-view .list-view {
     -fx-background-color: -light-blue;
     -fx-background-insets: 0px;
     -fx-border-color: transparent;
@@ -357,13 +360,21 @@
     -fx-padding: 0px;
 }
 
-.category-pane .list-view .list-cell {
+.master-view .list-view .list-cell {
     -fx-padding: 10px 20px;
     -fx-background-color: -light-blue;
 }
 
-.category-pane .list-view .list-cell:selected {
+.master-view .list-view .list-cell:selected {
     -fx-background-color: -light-grey;
+}
+
+/* ----------------------------------------------------------------------------
+ * DetailView
+ */
+.detail-view {
+    -fx-background-color: -light-grey;
+    -fx-spacing: 20px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -375,7 +386,6 @@
     -fx-grid-lines-visible: false;
 }
 
-
 .people-view .person-list-cell .rockstar-label,
 .people-view .person-list-cell .champion-label {
     -fx-font-size: 8;
@@ -385,7 +395,6 @@
     -fx-text-fill: -fx-accent;
     -fx-opacity: .5;
 }
-
 
 .people-view .person-list-cell .grid-pane .photo-view {
     -size: 30px;
@@ -449,50 +458,40 @@
  * LibrariesView
  */
 
-.category-pane .list-view .library-list-cell .grid-pane {
+.master-view .list-view .library-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.category-pane .list-view .library-list-cell .grid-pane .image-view {
+.master-view .list-view .library-list-cell .grid-pane .image-view {
 }
 
-.category-pane .list-view .library-list-cell .grid-pane .name-label {
+.master-view .list-view .library-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
 
 /* ----------------------------------------------------------------------------
- * CategoryHeader
+ * MasterViewHeader
  */
-
-.category-header {
+.master-view-header {
     -fx-padding: 10px 10px;
     -fx-spacing: 10px;
 }
 
-.category-header .back-button {
+.master-view-header .back-button {
     -fx-background-color: transparent;
 }
 
-.category-header .back-button .ikonli-font-icon {
+.master-view-header .back-button .ikonli-font-icon {
     -fx-icon-color: -grey;
     -fx-icon-size: 24px;
 }
 
-.category-header .search-field {
+.master-view-header .search-field {
     -fx-background-radius: 4px;
     -fx-pref-width: 150px;
-}
-
-.page {
-    -fx-background-color: -light-grey;
-    -fx-spacing: 20px;
-}
-
-.side-bar {
-    /*-fx-effect: -drop-shadow-3;*/
 }
 
 /* ----------------------------------------------------------------------------

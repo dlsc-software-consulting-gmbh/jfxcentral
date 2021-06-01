@@ -1,9 +1,6 @@
 package com.dlsc.jfxcentral;
 
-import com.dlsc.jfxcentral.page.DefaultPage;
-import com.dlsc.jfxcentral.page.PageUtil;
-import com.jpro.webapi.JProApplication;
-import com.jpro.webapi.WebAPI;
+import com.dlsc.jfxcentral.views.page.DefaultPage;
 import javafx.stage.Stage;
 
 
