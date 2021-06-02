@@ -3,15 +3,16 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.gemsfx.FilterView;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.model.Company;
-import com.dlsc.jfxcentral.model.Download;
-import com.dlsc.jfxcentral.model.Download.DownloadType;
-import com.dlsc.jfxcentral.model.Download.FileType;
-import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.data.model.Download.DownloadType;
+import com.dlsc.jfxcentral.data.model.Download.FileType;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
@@ -170,7 +171,7 @@ public class DownloadsDetailView extends DetailView<Download> {
     static class DownloadCell extends AdvancedListCell<Download> {
 
         private final Label titleLabel = new Label();
-        private final Label descriptionLabel = new Label();
+        private final MarkdownView descriptionMarkdownView = new MarkdownView();
         private final ImageView imageView = new ImageView();
         private final RootPane rootPane;
         private final HBox buttonBox;
@@ -188,10 +189,8 @@ public class DownloadsDetailView extends DetailView<Download> {
             titleLabel.setWrapText(true);
             titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setWrapText(true);
-            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-            VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
+            descriptionMarkdownView.getStyleClass().add("description-label");
+            VBox.setVgrow(descriptionMarkdownView, Priority.ALWAYS);
 
             imageView.setFitWidth(300);
             imageView.setFitHeight(200);
@@ -209,7 +208,7 @@ public class DownloadsDetailView extends DetailView<Download> {
             Region spacer = new Region();
             VBox.setVgrow(spacer, Priority.ALWAYS);
 
-            VBox vBox = new VBox(titleLabel, descriptionLabel, spacer, buttonBox);
+            VBox vBox = new VBox(titleLabel, descriptionMarkdownView, spacer, buttonBox);
             vBox.setAlignment(Pos.TOP_LEFT);
             vBox.setFillWidth(true);
             vBox.getStyleClass().add("vbox");
@@ -243,7 +242,7 @@ public class DownloadsDetailView extends DetailView<Download> {
 
             if (!empty && download != null) {
                 titleLabel.setText(download.getTitle());
-                descriptionLabel.textProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
+                descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
                 imageView.setVisible(true);
                 imageView.setManaged(true);
                 imageView.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
@@ -257,7 +256,7 @@ public class DownloadsDetailView extends DetailView<Download> {
 
             } else {
                 titleLabel.setText("");
-                descriptionLabel.textProperty().unbind();
+                descriptionMarkdownView.mdStringProperty().unbind();
                 imageView.setVisible(false);
                 imageView.setManaged(false);
                 imageView.imageProperty().unbind();

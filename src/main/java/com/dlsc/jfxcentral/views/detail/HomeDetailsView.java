@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.*;
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;

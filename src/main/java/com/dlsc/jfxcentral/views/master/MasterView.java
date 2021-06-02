@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral.views.master;
 
-import com.dlsc.jfxcentral.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;

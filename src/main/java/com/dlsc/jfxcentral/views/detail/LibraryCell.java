@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.model.Library;
+import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;

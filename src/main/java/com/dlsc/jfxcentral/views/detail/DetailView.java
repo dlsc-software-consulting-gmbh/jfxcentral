@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.gemsfx.DialogPane;
-import com.dlsc.jfxcentral.model.ModelObject;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

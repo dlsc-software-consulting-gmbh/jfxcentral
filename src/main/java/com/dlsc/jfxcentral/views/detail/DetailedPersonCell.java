@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.PhotoView;
-import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import javafx.scene.control.Button;

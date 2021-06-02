@@ -4,11 +4,12 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.model.Company;
+import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -17,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
+
+import java.util.Comparator;
 
 public class CompaniesDetailView extends DetailView<Company> {
 
@@ -28,9 +31,12 @@ public class CompaniesDetailView extends DetailView<Company> {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Companies");
 
+        SortedList<Company> sortedList = new SortedList<>(DataRepository.getInstance().companiesProperty());
+        sortedList.setComparator(Comparator.comparing(Company::getName));
+
         PrettyListView<Company> listView = new PrettyListView<>();
         listView.setCellFactory(view -> new CompanyCell(rootPane));
-        listView.itemsProperty().bind(DataRepository.getInstance().companiesProperty());
+        listView.setItems(sortedList);
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);

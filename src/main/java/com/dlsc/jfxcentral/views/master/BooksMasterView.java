@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.model.Book;
+import com.dlsc.jfxcentral.data.model.Book;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;

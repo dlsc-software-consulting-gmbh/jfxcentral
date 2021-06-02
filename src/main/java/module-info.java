@@ -1,4 +1,5 @@
-open module com.dlsc.jfxcentral {
+open module jfxcentral {
+    requires jfxcentral.data;
     requires com.rometools.rome;
     requires com.rometools.rome.utils;
     requires com.sandec.mdfx;
@@ -27,7 +28,6 @@ open module com.dlsc.jfxcentral {
     requires jpro.web.core;
 
     exports com.dlsc.jfxcentral;
-    exports com.dlsc.jfxcentral.json;
 
     requires fr.brouillard.oss.cssfx;
     requires org.kordamp.ikonli.core;

@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.master.MasterView;
 import com.dlsc.jfxcentral.views.master.PeopleMasterView;
-import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.views.detail.DetailView;
 import com.dlsc.jfxcentral.views.detail.PeopleDetailView;
 import javafx.beans.binding.Bindings;

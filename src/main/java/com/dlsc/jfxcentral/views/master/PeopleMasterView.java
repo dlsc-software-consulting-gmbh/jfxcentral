@@ -2,7 +2,7 @@ package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;

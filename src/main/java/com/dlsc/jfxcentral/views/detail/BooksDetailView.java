@@ -2,8 +2,8 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.model.Book;
-import com.dlsc.jfxcentral.model.Person;
+import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;

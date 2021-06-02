@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.model.Library;
+import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import javafx.beans.binding.Bindings;
@@ -168,7 +168,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             readmeMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "libraries/" + library.getId());
             readmeMarkdownView.mdStringProperty().bind(DataRepository.getInstance().libraryReadMeProperty(library));
 
-            StringProperty versionProperty = DataRepository.getInstance().getArtefactVersion(library);
+            StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(library);
 
             repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
                 if (getBuildTool().equals(BuildTool.MAVEN)) {

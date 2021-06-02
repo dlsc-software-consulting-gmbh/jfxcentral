@@ -36,7 +36,7 @@ public class HeaderPane extends HBox {
 
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(evt -> {
-            DataRepository.getInstance().refresh();
+            DataRepository.getInstance().refreshData();
             ImageManager.getInstance().clear();
         });
 

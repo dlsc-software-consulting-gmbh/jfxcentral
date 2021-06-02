@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.model.Blog;
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;

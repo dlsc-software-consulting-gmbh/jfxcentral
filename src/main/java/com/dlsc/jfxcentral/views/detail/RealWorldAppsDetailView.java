@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.model.RealWorldApp;
+import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;

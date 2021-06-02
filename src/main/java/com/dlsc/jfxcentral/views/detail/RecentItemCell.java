@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral.views.detail;
 
-import com.dlsc.jfxcentral.model.*;
+import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;

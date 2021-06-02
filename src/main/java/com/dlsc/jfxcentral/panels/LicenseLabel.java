@@ -1,6 +1,6 @@
 package com.dlsc.jfxcentral.panels;
 
-import com.dlsc.jfxcentral.model.License;
+import com.dlsc.jfxcentral.data.model.License;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

@@ -3,7 +3,7 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.model.Tool;
+import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import javafx.beans.binding.Bindings;
 import javafx.scene.layout.VBox;
