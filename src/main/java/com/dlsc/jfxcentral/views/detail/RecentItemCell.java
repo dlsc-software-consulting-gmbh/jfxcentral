@@ -90,6 +90,10 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
             return FontAwesomeBrands.GITHUB;
         } else if (item instanceof Company) {
             return MaterialDesign.MDI_FACTORY;
+        } else if (item instanceof Download) {
+            return MaterialDesign.MDI_DOWNLOAD;
+        } else if (item instanceof Post) {
+            return MaterialDesign.MDI_BLOGGER; // TODO:dl find post specific icon
         }
 
         return null;

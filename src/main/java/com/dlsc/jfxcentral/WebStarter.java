@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.util.Util;
 import com.jpro.web.sessionmanager.SessionManager;
+import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,6 +18,8 @@ public class WebStarter extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        Util.WEB_API = WebAPI.getWebAPI(scene);
 
         app.start(SessionManager.getDefault(app, stage));
     }

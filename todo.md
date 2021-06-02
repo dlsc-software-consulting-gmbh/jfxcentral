@@ -3,7 +3,6 @@
 ### Views
 
 - add "tutorials" view
-- add "downloads" link
 
 ### Data
 - add more tools (?)
@@ -12,8 +11,10 @@
 - clean up readme.md files of libs
 - change order of companies
 - finish openjfx page
+- add TestFX to tools page
 
 ### New Features
+- auto-refresh the blog posts list (update recent items list)
 - add jfx ensemble demo links to libs
 - add Google analytics
 - add URL for refreshing the data

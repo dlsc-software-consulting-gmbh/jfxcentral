@@ -191,6 +191,7 @@ public class DownloadsDetailView extends DetailView<Download> {
             descriptionLabel.getStyleClass().add("description-label");
             descriptionLabel.setWrapText(true);
             descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
+            VBox.setVgrow(descriptionLabel, Priority.ALWAYS);
 
             imageView.setFitWidth(300);
             imageView.setFitHeight(200);
@@ -205,7 +206,10 @@ public class DownloadsDetailView extends DetailView<Download> {
             buttonBox.setMinHeight(Region.USE_PREF_SIZE);
             buttonBox.setAlignment(Pos.BOTTOM_LEFT);
 
-            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
+            Region spacer = new Region();
+            VBox.setVgrow(spacer, Priority.ALWAYS);
+
+            VBox vBox = new VBox(titleLabel, descriptionLabel, spacer, buttonBox);
             vBox.setAlignment(Pos.TOP_LEFT);
             vBox.setFillWidth(true);
             vBox.getStyleClass().add("vbox");
@@ -213,6 +217,7 @@ public class DownloadsDetailView extends DetailView<Download> {
             HBox.setHgrow(vBox, Priority.ALWAYS);
 
             HBox hBox = new HBox(vBox, thumbnailWrapper);
+            hBox.setFillHeight(true);
             hBox.getStyleClass().add("hbox");
             hBox.setAlignment(Pos.TOP_LEFT);
 
@@ -224,9 +229,9 @@ public class DownloadsDetailView extends DetailView<Download> {
 
         private void downloadFile(Download.DownloadFile downloadFile) {
             if (StringUtils.isNotBlank(downloadFile.getUrl())) {
-                Util.browse(downloadFile.getUrl());
+                Util.browse(downloadFile.getUrl(), false);
             } else {
-                Util.browse(DataRepository.getInstance().getBaseUrl() + "downloads/" + getItem().getId() + "/" + downloadFile.getFileName());
+                Util.browse(DataRepository.getInstance().getBaseUrl() + "downloads/" + getItem().getId() + "/" + downloadFile.getFileName(), false);
             }
         }
 

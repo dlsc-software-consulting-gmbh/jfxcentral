@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.page;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.DataRepository.Source;
 import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.data.ImageManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -34,7 +35,10 @@ public class HeaderPane extends HBox {
         HBox.setHgrow(stackPane, Priority.ALWAYS);
 
         Button refreshButton = new Button("Refresh");
-        refreshButton.setOnAction(evt -> DataRepository.getInstance().refresh());
+        refreshButton.setOnAction(evt -> {
+            DataRepository.getInstance().refresh();
+            ImageManager.getInstance().clear();
+        });
 
         ComboBox<Source> sourceComboBox = new ComboBox<>();
         sourceComboBox.getItems().addAll(Source.values());
