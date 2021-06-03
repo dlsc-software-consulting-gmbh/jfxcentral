@@ -17,7 +17,7 @@ public class DetailView<T extends ModelObject> extends BorderPane {
 
     protected DetailView(RootPane rootPane) {
         this.rootPane = rootPane;
-        getStyleClass().add("page");
+        getStyleClass().add("detail-view");
         setMinHeight(Region.USE_PREF_SIZE);
 
         contentProperty().addListener(it -> {

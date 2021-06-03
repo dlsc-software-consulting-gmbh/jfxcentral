@@ -37,6 +37,7 @@ public class BooksDetailView extends DetailView<Book> {
     private MarkdownView descriptionMarkdownView = new MarkdownView();
     private Label authorsLabel = new Label();
     private Label isbnLabel = new Label();
+    private Label publisherLabel = new Label();
     private Label publishDateLabel = new Label();
 
     private HBox linksBox = new HBox();
@@ -65,11 +66,15 @@ public class BooksDetailView extends DetailView<Book> {
         authorsLabel.getStyleClass().add("authors-label");
         isbnLabel.getStyleClass().add("isbn-label");
         linksBox.getStyleClass().add("social-box");
+        publisherLabel.getStyleClass().add("publisher-label");
         publishDateLabel.getStyleClass().add("publish-date-label");
 
-        HBox miscBox = new HBox(10, publishDateLabel, isbnLabel);
+        HBox miscBox = new HBox(10, publisherLabel, publishDateLabel, isbnLabel);
 
-        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, linksBox);
+        Region spacer = new Region();
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+
+        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, spacer, miscBox, linksBox);
 
         vBox.getStyleClass().add("vertical-box");
         vBox.setFillWidth(true);
@@ -81,7 +86,7 @@ public class BooksDetailView extends DetailView<Book> {
         titleBox.setMinHeight(Region.USE_PREF_SIZE);
         titleBox.getStyleClass().add("horizontal-box");
 
-        VBox content = new VBox(titleBox, descriptionMarkdownView, miscBox);
+        VBox content = new VBox(titleBox, descriptionMarkdownView);
         content.getStyleClass().add("content");
 
         SectionPane bookSectionPane = new SectionPane(content);
@@ -114,10 +119,11 @@ public class BooksDetailView extends DetailView<Book> {
         if (book != null) {
             titleLabel.setText(book.getTitle());
             subtitleLabel.setText(book.getSubtitle());
-            descriptionMarkdownView.setMdString(book.getDescription());
+            descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().bookTextProperty(book));
             coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
             authorsLabel.setText(book.getAuthors());
             isbnLabel.setText("ISBN: " + book.getIsbn());
+            publisherLabel.setText("Publisher: " + book.getPublisher());
             publishDateLabel.setText("Publish Date: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(book.getPublishedDate()));
 
             linksBox.getChildren().clear();
@@ -130,10 +136,10 @@ public class BooksDetailView extends DetailView<Book> {
                 linksBox.getChildren().add(website);
             }
 
-            if (StringUtils.isNotEmpty(book.getAmazon())) {
+            if (StringUtils.isNotEmpty(book.getAmazonASIN())) {
                 Button amazon = new Button("Amazon");
                 amazon.getStyleClass().addAll("social-button", "amazon");
-                amazon.setOnAction(evt -> Util.browse(book.getAmazon()));
+                amazon.setOnAction(evt -> Util.browse("http://www.amazon.com/dp/" + book.getAmazonASIN()));
                 amazon.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
                 linksBox.getChildren().add(amazon);
             }

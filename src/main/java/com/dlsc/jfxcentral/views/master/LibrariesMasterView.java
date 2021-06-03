@@ -31,6 +31,8 @@ public class LibrariesMasterView extends MasterView<Library> {
     public LibrariesMasterView(RootPane rootPane) {
         super(rootPane, View.LIBRARIES);
 
+        getStyleClass().add("libraries-master-view");
+
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new SimpleLibraryCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().librariesProperty(),

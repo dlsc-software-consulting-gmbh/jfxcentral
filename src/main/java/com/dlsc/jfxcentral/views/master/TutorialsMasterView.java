@@ -9,6 +9,8 @@ public class TutorialsMasterView extends MasterView<Tutorial> {
     public TutorialsMasterView(RootPane rootPane) {
         super(rootPane, View.TUTORIALS);
 
+        getStyleClass().add("tutorials-master-view");
+
 //        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
 //        performDefaultSelection(listView);
 

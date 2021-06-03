@@ -49,9 +49,10 @@ public class IntroView extends StackPane {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (getScene() != null) {
-                // don't bother if user already clicked
-                plonkSound.setVolume(.66);
+
+            // don't bother if user already clicked
+            if (getScene() != null && !Boolean.getBoolean("mute")) {
+                plonkSound.setVolume(.2);
                 plonkSound.play();
             }
         });

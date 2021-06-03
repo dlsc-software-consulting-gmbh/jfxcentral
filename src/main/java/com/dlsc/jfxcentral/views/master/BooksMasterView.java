@@ -26,14 +26,14 @@ public class BooksMasterView extends MasterView<Book> {
     public BooksMasterView(RootPane rootPane) {
         super(rootPane, View.BOOKS);
 
-        getStyleClass().add("books-view");
+        getStyleClass().add("books-master-view");
 
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BookListCell());
 
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().booksProperty(),
-                Comparator.comparing(Book::getTitle),
+                Comparator.comparing(Book::getPublisher),
                 book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getTitle(), getFilterText())));
 
         filterTextProperty().addListener(it -> System.out.println("filer: " + getFilterText()));
@@ -72,10 +72,7 @@ public class BooksMasterView extends MasterView<Book> {
             coverImageView.imageProperty().unbind();
 
             if (!empty && book != null) {
-                String coverImage = book.getImage();
-                if (coverImage != null && !coverImage.trim().isBlank()) {
-                    coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-                }
+                coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
                 if (WebAPI.isBrowser()) {
                     setMouseTransparent(true);
                 }

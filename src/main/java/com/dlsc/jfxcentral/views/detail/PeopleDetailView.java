@@ -35,13 +35,15 @@ public class PeopleDetailView extends DetailView<Person> {
     public PeopleDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("person-view");
+        getStyleClass().add("people-detail-view");
 
         createTitleBox();
         createBlogsBox();
         createBooksBox();
         createLibraryBox();
         createVideoBox();
+
+        content.getChildren().forEach(node -> VBox.setVgrow(node, Priority.NEVER));
 
         setContent(content);
 
@@ -366,7 +368,7 @@ public class PeopleDetailView extends DetailView<Person> {
         private Label titleLabel = new Label();
         private Label subtitleLabel = new Label();
         private Label authorsLabel = new Label();
-        private Label descriptionLabel = new Label();
+        private MarkdownView descriptionLabel = new MarkdownView();
 
         private javafx.scene.image.ImageView coverImageView = new javafx.scene.image.ImageView();
         private HBox buttonBox = new HBox();
@@ -391,8 +393,6 @@ public class PeopleDetailView extends DetailView<Person> {
 
             descriptionLabel.getStyleClass().add("description-label");
             descriptionLabel.setMaxWidth(Double.MAX_VALUE);
-            descriptionLabel.setWrapText(true);
-            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
             buttonBox.getStyleClass().add("button-box");
 
@@ -410,7 +410,7 @@ public class PeopleDetailView extends DetailView<Person> {
 
             amazonButton = new Button("Amazon");
             amazonButton.getStyleClass().addAll("library-button", "amazon");
-            amazonButton.setOnAction(evt -> Util.browse(getItem().getAmazon()));
+            amazonButton.setOnAction(evt -> Util.browse("http://www.amazon.com/dp/" + getItem().getAmazonASIN()));
             amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
             buttonBox.getChildren().add(amazonButton);
 
@@ -436,25 +436,20 @@ public class PeopleDetailView extends DetailView<Person> {
             super.updateItem(item, empty);
 
             if (!empty && item != null) {
-                String coverImage = item.getImage();
-                if (StringUtils.isNotEmpty(coverImage)) {
-                    coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(item));
-                } else {
-                    coverImageView.imageProperty().unbind();
-                }
+                coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(item));
                 coverImageView.setVisible(true);
 
                 titleLabel.setText(item.getTitle());
                 subtitleLabel.setText(item.getSubtitle());
                 authorsLabel.setText(item.getAuthors());
 
-                descriptionLabel.setText(StringUtils.abbreviate(item.getDescription(), 250));
+                descriptionLabel.mdStringProperty().bind(DataRepository.getInstance().bookTextProperty(item));
 
                 homepageButton.setVisible(StringUtils.isNotEmpty(item.getUrl()));
                 homepageButton.setManaged(StringUtils.isNotEmpty(item.getUrl()));
 
-                amazonButton.setVisible(StringUtils.isNotEmpty(item.getAmazon()));
-                amazonButton.setManaged(StringUtils.isNotEmpty(item.getAmazon()));
+                amazonButton.setVisible(StringUtils.isNotEmpty(item.getAmazonASIN()));
+                amazonButton.setManaged(StringUtils.isNotEmpty(item.getAmazonASIN()));
 
                 buttonBox.setVisible(homepageButton.isVisible() || amazonButton.isVisible());
                 buttonBox.setManaged(buttonBox.isVisible());

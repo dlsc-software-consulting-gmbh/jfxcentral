@@ -28,7 +28,7 @@ public class ToolsMasterView extends MasterView<Tool> {
     public ToolsMasterView(RootPane rootPane) {
         super(rootPane, View.TOOLS);
 
-        getStyleClass().add("tools-view");
+        getStyleClass().add("tools-master-view");
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new ToolListCell());

@@ -27,7 +27,7 @@ public class RealWorldAppsMasterView extends MasterView<RealWorldApp> {
     public RealWorldAppsMasterView(RootPane rootPane) {
         super(rootPane, View.REALWORLD);
 
-        getStyleClass().add("real-world-view");
+        getStyleClass().add("real-world-master-view");
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new RealWorldAppListCell());

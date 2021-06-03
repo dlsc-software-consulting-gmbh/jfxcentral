@@ -372,16 +372,16 @@
 }
 
 /* ----------------------------------------------------------------------------
- * PeopleView
+ * PeopleMasterView
  */
-.people-view .person-list-cell .grid-pane {
+.people-master-view .person-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.people-view .person-list-cell .rockstar-label,
-.people-view .person-list-cell .champion-label {
+.people-master-view .person-list-cell .rockstar-label,
+.people-master-view .person-list-cell .champion-label {
     -fx-font-size: 8;
     -fx-padding: 0px 3px;
     -fx-border-color: -fx-accent;
@@ -390,7 +390,7 @@
     -fx-opacity: .5;
 }
 
-.people-view .person-list-cell .grid-pane .photo-view {
+.people-master-view .person-list-cell .grid-pane .photo-view {
     -size: 30px;
     -fx-min-width: -size;
     -fx-min-height: -size;
@@ -400,68 +400,66 @@
     -fx-pref-height: -size;
 }
 
-
-.people-view .person-list-cell .grid-pane .photo-view .border-circle {
+.people-master-view .person-list-cell .grid-pane .photo-view .border-circle {
     -fx-stroke-width: 1px;
     -fx-effect: null;
 }
 
-
-.people-view .person-list-cell .grid-pane .badges {
+.people-master-view .person-list-cell .grid-pane .badges {
     -fx-spacing: 10px;
 }
 
 
-.people-view .person-list-cell .grid-pane .name-label {
+.people-master-view .person-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
 
 /* ----------------------------------------------------------------------------
- * ToolsView
+ * ToolsMasterView
  */
-.tools-view .tool-list-cell .grid-pane {
+.tools-master-view .tool-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.tools-view .tool-list-cell .grid-pane .name-label {
+.tools-master-view .tool-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
 
 /* ----------------------------------------------------------------------------
- * RealWorldAppsView
+ * RealWorldAppsMasterView
  */
-.real-world-view .app-list-cell .grid-pane {
+.real-world-master-view .app-list-cell .grid-pane {
     -fx-vgap: 5px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.real-world-view .app-list-cell .grid-pane .name-label {
+.real-world-master-view .app-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
 
-.real-world-view .app-list-cell .grid-pane .summary-markdown-view {
+.real-world-master-view .app-list-cell .grid-pane .summary-markdown-view {
 }
 
 /* ----------------------------------------------------------------------------
- * LibrariesView
+ * LibrariesMasterView
  */
 
-.master-view .list-view .library-list-cell .grid-pane {
+.library-master-view .list-view .library-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.master-view .list-view .library-list-cell .grid-pane .image-view {
+.library-master-view .list-view .library-list-cell .grid-pane .image-view {
 }
 
-.master-view .list-view .library-list-cell .grid-pane .name-label {
+.library-master-view .list-view .library-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
@@ -489,20 +487,20 @@
 }
 
 /* ----------------------------------------------------------------------------
- * PersonView
+ * PeopleDetailView
  */
-.person-view {
+.people-detail-view {
 }
 
-.person-view .list-cell:selected {
+.people-detail-view .list-cell:selected {
     -fx-background-color: white !important;
 }
 
-.person-view .title-section .hbox {
+.people-detail-view .title-section .hbox {
     -fx-spacing: 20px;
 }
 
-.person-view .title-section .hbox .photo-view {
+.people-detail-view .title-section .hbox .photo-view {
     -size: 120px;
     -fx-min-width: -size;
     -fx-min-height: -size;
@@ -512,29 +510,29 @@
     -fx-pref-height: -size;
 }
 
-.person-view .title-section .hbox .vbox {
+.people-detail-view .title-section .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.person-view .title-section .hbox .vbox .name-label {
+.people-detail-view .title-section .hbox .vbox .name-label {
     -fx-graphic-text-gap: 10px;
 }
 
-.person-view .title-section .hbox .vbox .name-label .badges-box {
+.people-detail-view .title-section .hbox .vbox .name-label .badges-box {
     -fx-spacing: 10px;
     -fx-translate-y: -5px;
 }
 
-.person-view .title-section .hbox .vbox .description-label {
+.people-detail-view .title-section .hbox .vbox .description-label {
 }
 
-.person-view .title-section .hbox .vbox .social-box {
+.people-detail-view .title-section .hbox .vbox .social-box {
     -fx-spacing: 10px;
 }
 
 /* Book Cell */
 
-.person-view .book-cell {
+.people-detail-view .book-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
     -fx-border-width: 0 0 1 0;
@@ -542,56 +540,55 @@
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
-.person-view .book-cell:selected {
+.people-detail-view .book-cell:selected {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
     -fx-background-insets: 2px -8px 3px -8px;
     -fx-background-radius: 2px;
 }
 
-.person-view .book-cell:selected .label {
+.people-detail-view .book-cell:selected .label {
     -fx-text-fill: white;
 }
 
-.person-view .book-cell.last {
+.people-detail-view .book-cell.last {
     -fx-padding: 10px 0px;
     -fx-border-width: 0px;
 }
 
-.person-view .book-cell .hbox {
+.people-detail-view .book-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.person-view .book-cell .hbox .vbox {
+.people-detail-view .book-cell .hbox .vbox {
     -fx-spacing: 10px;
 }
 
-.person-view .book-cell .hbox .vbox .title-label {
+.people-detail-view .book-cell .hbox .vbox .title-label {
 }
 
-.person-view .book-cell .hbox .vbox .subtitle-label {
+.people-detail-view .book-cell .hbox .vbox .subtitle-label {
     -fx-font-family: "Open Sans Italic";
 }
 
-.person-view .book-cell .hbox .vbox .description-label {
+.people-detail-view .book-cell .hbox .vbox .description-label {
 }
 
-.person-view .book-cell .hbox .vbox .authors-label {
+.people-detail-view .book-cell .hbox .vbox .authors-label {
     -fx-text-fill: -fx-accent;
 }
 
-.person-view .book-cell .button-box {
+.people-detail-view .book-cell .button-box {
     -fx-spacing: 10px;
 }
 
-.person-view .book-cell .button-box .button .ikonli-font-icon {
+.people-detail-view .book-cell .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
 }
 
-
 /* Blog Cell */
 
-.person-view .blog-cell {
+.people-detail-view .blog-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
     -fx-border-width: 0 0 1 0;
@@ -599,41 +596,41 @@
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
-.person-view .blog-cell:selected {
+.people-detail-view .blog-cell:selected {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
     -fx-background-insets: 2px -8px 3px -8px;
     -fx-background-radius: 2px;
 }
 
-.person-view .blog-cell:selected .label {
+.people-detail-view .blog-cell:selected .label {
     -fx-text-fill: white;
 }
 
-.person-view .blog-cell.last {
+.people-detail-view .blog-cell.last {
     -fx-padding: 10px 0px;
     -fx-border-width: 0px;
 }
 
-.person-view .blog-cell .hbox {
+.people-detail-view .blog-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.person-view .blog-cell .hbox .vbox {
+.people-detail-view .blog-cell .hbox .vbox {
     -fx-spacing: 10px;
 }
 
-.person-view .blog-cell .hbox .vbox .title-label {
+.people-detail-view .blog-cell .hbox .vbox .title-label {
 }
 
-.person-view .blog-cell .hbox .vbox .description-label {
+.people-detail-view .blog-cell .hbox .vbox .description-label {
 }
 
-.person-view .blog-cell .button-box {
+.people-detail-view .blog-cell .button-box {
     -fx-spacing: 10px;
 }
 
-.person-view .blog-cell .button-box .button .ikonli-font-icon {
+.people-detail-view .blog-cell .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
 }
 
@@ -677,6 +674,7 @@
     -fx-padding: 30px 0px;
 }
 
+.book-view .title-section .content .publisher-label,
 .book-view .title-section .content .publish-date-label,
 .book-view .title-section .content .isbn-label {
     -fx-text-fill: -fx-accent;
@@ -1168,13 +1166,13 @@
 }
 
 /* -----------------------------------------------------------------------------
- * BooksView
+ * BooksMasterView
  */
-.books-view .list-view {
+.books-master-view .list-view {
     -fx-pref-width: 150px;
 }
 
-.books-view .list-view .book-list-cell .grid-pane {
+.books-master-view .list-view .book-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
@@ -1795,16 +1793,16 @@
 }
 
 /* ----------------------------------------------------------------------------
- * BlogsView
+ * BlogsMasterView
  */
-.blogs-view {
+.blogs-master-view {
 }
 
-.blogs-view .button-wrapper {
+.blogs-master-view .button-wrapper {
     -fx-padding: 0px 10px;
 }
 
-.blogs-view .blog-cell .label {
+.blogs-master-view .blog-cell .label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }

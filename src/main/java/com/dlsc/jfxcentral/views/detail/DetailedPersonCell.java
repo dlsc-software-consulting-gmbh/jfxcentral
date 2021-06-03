@@ -60,7 +60,7 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox hbox = new HBox(photoView, vBox);
+        HBox hbox = new HBox(vBox, photoView);
         hbox.getStyleClass().add("hbox");
         hbox.visibleProperty().bind(itemProperty().isNotNull());
 

@@ -29,7 +29,7 @@ public class BlogsMasterView extends MasterView<Blog> {
     public BlogsMasterView(RootPane rootPane) {
         super(rootPane, View.BLOGS);
 
-        getStyleClass().add("blogs-view");
+        getStyleClass().add("blogs-master-view");
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BlogCell());

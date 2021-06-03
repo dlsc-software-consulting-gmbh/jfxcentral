@@ -26,7 +26,7 @@ public class PeopleMasterView extends MasterView<Person> {
     public PeopleMasterView(RootPane rootPane) {
         super(rootPane, View.PEOPLE);
 
-        getStyleClass().add("people-view");
+        getStyleClass().add("people-master-view");
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new PersonCell());
@@ -108,6 +108,9 @@ public class PeopleMasterView extends MasterView<Person> {
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             setGraphic(gridPane);
+
+            gridPane.visibleProperty().bind(emptyProperty().not());
+            gridPane.managedProperty().bind(emptyProperty().not());
         }
 
         @Override
@@ -129,7 +132,7 @@ public class PeopleMasterView extends MasterView<Person> {
                     setMouseTransparent(true);
                 }
 
-                setCellLink(gridPane, person, this.getChildren());
+                setCellLink(gridPane, person, getChildren());
             } else {
                 nameLabel.setText("");
                 championLabel.setVisible(false);
