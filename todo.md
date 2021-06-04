@@ -5,6 +5,7 @@
 - add "tutorials" view
 
 ### Data
+- make Michael Paus's images smaller
 - add more tools (?)
 - add more companies
 - add more libs (TilesFX, Medusa, JMetro, ControlsFX)
@@ -21,6 +22,8 @@
 - add built-in memory check from Florian
 
 ### Enhancements
+- refine dialogs / lightbox
+- add "clear" icon to filter text fields
 - change "recent status" visualization **NEW** or **UPDATED**
 - fine-tune filter for "recent items"
 

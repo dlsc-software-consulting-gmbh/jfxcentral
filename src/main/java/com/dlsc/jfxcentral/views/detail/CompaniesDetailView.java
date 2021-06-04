@@ -26,7 +26,7 @@ public class CompaniesDetailView extends DetailView<Company> {
     public CompaniesDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("company-view");
+        getStyleClass().add("companies-detail-view");
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Companies");

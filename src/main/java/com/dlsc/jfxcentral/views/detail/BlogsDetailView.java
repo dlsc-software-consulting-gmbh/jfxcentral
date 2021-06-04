@@ -48,7 +48,7 @@ public class BlogsDetailView extends DetailView<Blog> {
     public BlogsDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("blog-view");
+        getStyleClass().add("blogs-detail-view");
 
         VBox.setVgrow(content, Priority.ALWAYS);
 

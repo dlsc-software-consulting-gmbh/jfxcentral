@@ -5,6 +5,7 @@ import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class WebStarter extends Application {
@@ -14,6 +15,7 @@ public class WebStarter extends Application {
         WebApp app = new WebApp(stage);
 
         Scene scene = new Scene(app);
+        scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
         stage.setScene(scene);

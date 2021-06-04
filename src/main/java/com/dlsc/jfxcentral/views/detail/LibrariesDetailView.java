@@ -2,11 +2,11 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
+import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -38,11 +38,12 @@ public class LibrariesDetailView extends DetailView<Library> {
     private MarkdownView readmeMarkdownView = new MarkdownView();
     private VBox content = new VBox();
     private Label repositoryCoordinatesLabel = new Label();
+    private ThumbnailScrollPane thumbnailScrollPane;
 
     public LibrariesDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("library-view");
+        getStyleClass().add("libraries-detail-view");
 
         repositoryCoordinatesLabel.getStyleClass().add("coordinates-label");
 
@@ -50,6 +51,7 @@ public class LibrariesDetailView extends DetailView<Library> {
         iconView.managedProperty().bind(iconView.imageProperty().isNotNull());
 
         createTitleBox();
+        createScreenshotsBox();
         createCoordinatesBox();
         createReadmeBox();
 
@@ -76,6 +78,19 @@ public class LibrariesDetailView extends DetailView<Library> {
 
     public void setBuildTool(BuildTool buildTool) {
         this.buildTool.set(buildTool);
+    }
+
+    private void createScreenshotsBox() {
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Screenshots");
+        sectionPane.setSubtitle("Impressions of the controls inside this library");
+        sectionPane.getStyleClass().add("screenshots-pane");
+
+        thumbnailScrollPane = new ThumbnailScrollPane(getRootPane());
+
+        sectionPane.getNodes().add(thumbnailScrollPane);
+
+        content.getChildren().add(sectionPane);
     }
 
     private void createCoordinatesBox() {
@@ -167,6 +182,9 @@ public class LibrariesDetailView extends DetailView<Library> {
             descriptionMarkdownView.setMdString(library.getDescription());
             readmeMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "libraries/" + library.getId());
             readmeMarkdownView.mdStringProperty().bind(DataRepository.getInstance().libraryReadMeProperty(library));
+
+            thumbnailScrollPane.setLibrary(library);
+            thumbnailScrollPane.libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(library));
 
             StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(library);
 

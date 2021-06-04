@@ -19,12 +19,12 @@ import javafx.scene.layout.StackPane;
 import java.util.Collections;
 import java.util.List;
 
-class LibraryInfoView extends ScrollPane {
+class ThumbnailScrollPane extends ScrollPane {
 
     private final HBox thumbnailBox;
     private final RootPane rootPane;
 
-    public LibraryInfoView(RootPane rootPane) {
+    public ThumbnailScrollPane(RootPane rootPane) {
         this.rootPane = rootPane;
 
         getStyleClass().add("thumbnail-scroll-pane");

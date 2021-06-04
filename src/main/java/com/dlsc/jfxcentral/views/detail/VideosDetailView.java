@@ -40,6 +40,8 @@ public class VideosDetailView extends DetailView<Video> {
     public VideosDetailView(RootPane rootPane) {
         super(rootPane);
 
+        getStyleClass().add("videos-detail-view");
+
         SectionPaneWithFilterView sectionPane = new SectionPaneWithFilterView();
         sectionPane.setTitle("Videos");
         sectionPane.setEnableAutoSubtitle(true);

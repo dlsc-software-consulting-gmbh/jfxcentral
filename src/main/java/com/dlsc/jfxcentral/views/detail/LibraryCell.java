@@ -23,7 +23,7 @@ public class LibraryCell extends AdvancedListCell<Library> {
         private final Button repositoryButton;
         private final Button issueTrackerButton;
         private final Button discussionsButton;
-        private final LibraryInfoView infoView;
+        private final ThumbnailScrollPane infoView;
 
         private Label titleLabel = new Label();
         private Label summaryLabel = new Label();
@@ -92,7 +92,7 @@ public class LibraryCell extends AdvancedListCell<Library> {
             hBox.setAlignment(Pos.TOP_LEFT);
             hBox.getStyleClass().add("hbox");
 
-            infoView = new LibraryInfoView(rootPane);
+            infoView = new ThumbnailScrollPane(rootPane);
             infoView.libraryProperty().bind(itemProperty());
 
             itemProperty().addListener(it -> {

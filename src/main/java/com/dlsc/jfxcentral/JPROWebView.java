@@ -43,8 +43,6 @@ public class JPROWebView extends com.jpro.web.View {
         rootPane.setMaxWidth(1200);
 
         StackPane wrapper = new StackPane(rootPane);
-        wrapper.getStyleClass().add("root-wrapper");
-
         return wrapper;
     }
 

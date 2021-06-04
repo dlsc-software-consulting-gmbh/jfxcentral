@@ -45,7 +45,7 @@ public class BooksDetailView extends DetailView<Book> {
     public BooksDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("book-view");
+        getStyleClass().add("books-detail-view");
 
         // book section
         coverImageView.setFitWidth(128);

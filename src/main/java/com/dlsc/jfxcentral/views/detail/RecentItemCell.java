@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -112,6 +113,8 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
             return ((Blog) item).getTitle();
         } else if (item instanceof Library) {
             return ((Library) item).getTitle();
+        } else if (item instanceof Company) {
+            return ((Company) item).getName();
         }
 
         return "";
@@ -125,11 +128,17 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
         } else if (item instanceof News) {
             return ((News) item).getSubtitle();
         } else if (item instanceof Video) {
-            return ((Video) item).getSummary();
+            String description = ((Video) item).getDescription();
+            if (StringUtils.isNotBlank(description)) {
+                return description.substring(0, Math.min(100, description.length())).replace("\n", " ");
+            }
+            return "";
         } else if (item instanceof Blog) {
             return ((Blog) item).getSummary();
         } else if (item instanceof Library) {
             return ((Library) item).getSummary();
+        } else if (item instanceof Company) {
+            return ((Company) item).getHomepage();
         }
 
         return "";

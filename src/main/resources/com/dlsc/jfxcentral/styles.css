@@ -409,7 +409,6 @@
     -fx-spacing: 10px;
 }
 
-
 .people-master-view .person-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
@@ -635,76 +634,76 @@
 }
 
 /* ----------------------------------------------------------------------------
- * BookView
+ * BooksDetailView
  */
-.book-view {
+.books-detail-view {
 }
 
-.book-view .title-section {
+.books-detail-view .title-section {
 }
 
-.book-view .title-section .content {
+.books-detail-view .title-section .content {
     -fx-spacing: 20px;
 }
 
-.book-view .title-section .content .horizontal-box {
+.books-detail-view .title-section .content .horizontal-box {
     -fx-spacing: 20px;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box {
+.books-detail-view .title-section .content .horizontal-box .vertical-box {
     -fx-spacing: 10px;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box .title-label {
+.books-detail-view .title-section .content .horizontal-box .vertical-box .title-label {
     -fx-graphic-text-gap: 10px;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box .subtitle-label {
+.books-detail-view .title-section .content .horizontal-box .vertical-box .subtitle-label {
     -fx-font-size: 16px;
     -fx-opacity: .8;
     -fx-translate-y: -10px;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box .authors-label {
+.books-detail-view .title-section .content .horizontal-box .vertical-box .authors-label {
     -fx-text-fill: -fx-accent;
     -fx-translate-y: -10px;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box .description-markdown-view {
+.books-detail-view .title-section .content .horizontal-box .vertical-box .description-markdown-view {
     -fx-padding: 30px 0px;
 }
 
-.book-view .title-section .content .publisher-label,
-.book-view .title-section .content .publish-date-label,
-.book-view .title-section .content .isbn-label {
+.books-detail-view .title-section .content .publisher-label,
+.books-detail-view .title-section .content .publish-date-label,
+.books-detail-view .title-section .content .isbn-label {
     -fx-text-fill: -fx-accent;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box .author-title-label {
+.books-detail-view .title-section .content .horizontal-box .vertical-box .author-title-label {
     -fx-font-size: 16px;
     -fx-font-family: "Open Sans Bold";
     -fx-padding: 20px 0px;
 }
 
-.book-view .title-section .content .horizontal-box .vertical-box .social-box {
+.books-detail-view .title-section .content .horizontal-box .vertical-box .social-box {
     -fx-spacing: 10px;
 }
 
 /* ----------------------------------------------------------------------------
- * LibraryView
+ * LibrariesDetailView
  */
-.library-view {
+.libraries-detail-view {
 }
 
-.library-view .list-cell:selected {
+.libraries-detail-view .list-cell:selected {
     -fx-background-color: white !important;
 }
 
-.library-view .title-section .hbox {
+.libraries-detail-view .title-section .hbox {
     -fx-spacing: 20px;
 }
 
-.library-view .title-section .hbox .photo-view {
+.libraries-detail-view .title-section .hbox .photo-view {
     -size: 100px;
     -fx-min-width: -size;
     -fx-min-height: -size;
@@ -714,27 +713,27 @@
     -fx-pref-height: -size;
 }
 
-.library-view .title-section .hbox .vbox {
+.libraries-detail-view .title-section .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.library-view .title-section .hbox .vbox .name-label {
+.libraries-detail-view .title-section .hbox .vbox .name-label {
     -fx-graphic-text-gap: 10px;
 }
 
-.library-view .title-section .hbox .vbox .name-label .badges-box {
+.libraries-detail-view .title-section .hbox .vbox .name-label .badges-box {
     -fx-spacing: 10px;
     -fx-translate-y: -5px;
 }
 
-.library-view .title-section .hbox .vbox .description-label {
+.libraries-detail-view .title-section .hbox .vbox .description-label {
 }
 
-.library-view .title-section .hbox .vbox .social-box {
+.libraries-detail-view .title-section .hbox .vbox .social-box {
     -fx-spacing: 10px;
 }
 
-.library-view .book-cell {
+.libraries-detail-view .book-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
     -fx-border-width: 0 0 1 0;
@@ -742,62 +741,62 @@
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
-.library-view .book-cell:selected {
+.libraries-detail-view .book-cell:selected {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
     -fx-background-insets: 2px -8px 3px -8px;
     -fx-background-radius: 2px;
 }
 
-.library-view .book-cell:selected .label {
+.libraries-detail-view .book-cell:selected .label {
     -fx-text-fill: white;
 }
 
-.library-view .book-cell.last {
+.libraries-detail-view .book-cell.last {
     -fx-padding: 10px 0px;
     -fx-border-width: 0px;
 }
 
-.library-view .book-cell .hbox {
+.libraries-detail-view .book-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.library-view .book-cell .hbox .vbox {
+.libraries-detail-view .book-cell .hbox .vbox {
     -fx-spacing: 10px;
 }
 
-.library-view .book-cell .hbox .vbox .title-label {
+.libraries-detail-view .book-cell .hbox .vbox .title-label {
 }
 
-.library-view .book-cell .hbox .vbox .subtitle-label {
+.libraries-detail-view .book-cell .hbox .vbox .subtitle-label {
     -fx-font-family: "Open Sans Italic";
 }
 
-.library-view .book-cell .hbox .vbox .description-label {
+.libraries-detail-view .book-cell .hbox .vbox .description-label {
 }
 
-.library-view .book-cell .hbox .vbox .authors-label {
+.libraries-detail-view .book-cell .hbox .vbox .authors-label {
     -fx-font-size: 14px;
     -fx-text-fill: -fx-accent;
 }
 
-.library-view .book-cell .button-box {
+.libraries-detail-view .book-cell .button-box {
     -fx-spacing: 10px;
 }
 
-.library-view .book-cell .button-box .button .ikonli-font-icon {
+.libraries-detail-view .book-cell .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
 }
 
-.library-view .coordinates-pane .vbox {
+.libraries-detail-view .coordinates-pane .vbox {
     -fx-spacing: 10px;
 }
 
-.library-view .coordinates-pane .vbox .header {
+.libraries-detail-view .coordinates-pane .vbox .header {
     -fx-spacing: 20px;
 }
 
-.library-view .coordinates-pane .vbox .coordinates-label {
+.libraries-detail-view .coordinates-pane .vbox .coordinates-label {
     -fx-spacing: 10px;
     -fx-padding: 10px;
     -fx-border-color: -mdfx-border-color-1;
@@ -1105,35 +1104,6 @@
     -fx-spacing: 10px;
 }
 
-.library-cell .outer-box .thumbnail-scroll-pane {
-    -fx-effect: innershadow(gaussian, grey, 10, 0, 0, 0);
-}
-
-.library-cell .outer-box .thumbnail-scroll-pane .scroll-bar {
-    -fx-translate-y: -5px;
-    -fx-scale-x: .98;
-}
-
-.library-cell .outer-box .thumbnail-scroll-pane .thumbnail-box {
-    -fx-spacing: 5px;
-    -fx-background-color: rgb(245, 245, 245);
-    -fx-background-radius: 4px;
-    -fx-padding: 10px;
-    -fx-alignment: center-left;
-}
-
-.library-cell .outer-box .thumbnail-scroll-pane .thumbnail-box .image-wrapper {
-    -fx-padding: 10px 10px 10px 0px;
-    -fx-border-width: 0px 1px 0px 0px;
-    -fx-border-style: dashed;
-    -fx-border-color: lightgrey;
-    -fx-border-insets: 0px 0px 10px 0px;
-}
-
-.library-cell .outer-box .thumbnail-scroll-pane .thumbnail-box .image-wrapper.last {
-    -fx-border-width: 0px;
-}
-
 .library-cell .outer-box .hbox .vbox .title-label {
     -fx-graphic-text-gap: 20px;
 }
@@ -1147,6 +1117,38 @@
 
 .library-cell .outer-box .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
+}
+
+/* -----------------------------------------------------------------------------
+ * ThumbnailScrollPane
+ */
+.thumbnail-scroll-pane {
+    -fx-effect: innershadow(gaussian, grey, 10, 0, 0, 0);
+}
+
+.thumbnail-scroll-pane .scroll-bar {
+    -fx-translate-y: -5px;
+    -fx-scale-x: .98;
+}
+
+.thumbnail-scroll-pane .thumbnail-box {
+    -fx-spacing: 5px;
+    -fx-background-color: rgb(245, 245, 245);
+    -fx-background-radius: 4px;
+    -fx-padding: 10px;
+    -fx-alignment: center-left;
+}
+
+.thumbnail-scroll-pane .thumbnail-box .image-wrapper {
+    -fx-padding: 10px 10px 10px 0px;
+    -fx-border-width: 0px 1px 0px 0px;
+    -fx-border-style: dashed;
+    -fx-border-color: lightgrey;
+    -fx-border-insets: 0px 0px 10px 0px;
+}
+
+.thumbnail-scroll-pane .thumbnail-box .image-wrapper.last {
+    -fx-border-width: 0px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -1176,6 +1178,81 @@
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
+}
+
+/* ----------------------------------------------------------------------------
+ * OpenJFXDetailView
+ */
+.openjfx-detail-view .pull-request-list-cell {
+    -fx-padding: 10px 0px;
+}
+
+.openjfx-detail-view .pull-request-list-cell .hbox {
+    -fx-spacing: 20px;
+    -fx-alignment: center-left;
+}
+
+.openjfx-detail-view .pull-request-list-cell .hbox .vbox {
+    -fx-alignment: center-left;
+}
+
+.openjfx-detail-view .pull-request-list-cell .hbox .photo-view {
+    -size: 32px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+}
+
+.openjfx-detail-view .pull-request-list-cell .hbox .photo-view .border-circle {
+    -fx-stroke-width: 1px;
+    -fx-effect: null;
+}
+
+
+.openjfx-detail-view .pull-request-list-cell .label-box {
+    -fx-spacing: 5px;
+}
+
+.openjfx-detail-view .pull-request-list-cell .pull-request-label {
+    -fx-text-fill: rgba(0, 0, 0, .6);
+    -fx-padding: 2px 10px;
+    -fx-background-radius: 1000px;
+    -fx-border-radius: 1000px;
+    -fx-font-family: "Open Sans Bold";
+    -fx-font-size: 12px;
+}
+
+.openjfx-detail-view .pull-request-list-cell .title-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-graphic-text-gap: 10px;
+}
+
+.openjfx-detail-view .pull-request-list-cell .summary-label {
+    -fx-opacity: .8;
+    -fx-font-size: 14px;
+}
+
+.openjfx-detail-view .pull-request-list-cell .status-label {
+    -size: 70px;
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-background-radius: 3px;
+    -fx-text-fill: white;
+    -fx-padding: 2px 10px;
+    -fx-min-width: -size;
+    -fx-pref-width: -size;
+    -fx-max-width: -size;
+    -fx-alignment: center;
+}
+
+.openjfx-detail-view .pull-request-list-cell .status-label.open {
+    -fx-background-color: -fx-accent;
+}
+
+.openjfx-detail-view .pull-request-list-cell .status-label.closed {
+    -fx-background-color: -green;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1336,76 +1413,76 @@
 }
 
 /* ----------------------------------------------------------------------------
- * DownloadCell
+ * DownloadDetailView
  */
-.download-cell {
+.download-detail-view .download-cell {
 }
 
-.download-cell .hbox {
+.download-detail-view .hbox {
     -fx-spacing: 20px;
 }
 
-.download-cell .thumbnail-wrapper {
+.download-detail-view .thumbnail-wrapper {
     -fx-border-color: -fx-accent;
     -fx-border-width: 2px;
 }
 
-.download-cell .video-cell .hbox {
+.download-detail-view .video-cell .hbox {
     -fx-padding: 10px;
 }
 
-.download-cell .hbox .vbox {
+.download-detail-view .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.download-cell .title-label {
+.download-detail-view .title-label {
     -fx-font-size: 16px;
 }
 
-.download-cell .description-label {
+.download-detail-view .description-label {
 }
 
 /* ----------------------------------------------------------------------------
- * NewsCell
+ * NewsDetailView
  */
-.news-cell {
+.news-detail-view .news-cell {
 }
 
-.news-cell .hbox {
+.news-detail-view .news-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.list-view .news-cell .hbox {
+.news-detail-view .list-view .news-cell .hbox {
     -fx-padding: 10px;
 }
 
-.news-cell .banner-image-wrapper {
+.news-detail-view .news-cell .banner-image-wrapper {
     -fx-border-color: -fx-accent;
     -fx-border-width: 2px;
     -fx-effect: -drop-shadow-2;
 }
 
-.news-cell .hbox .vbox {
+.news-detail-view .news-cell .hbox .vbox {
     -fx-spacing: 0px;
 }
 
-.news-cell .title-label {
+.news-detail-view .news-cell .title-label {
     -fx-font-size: 20px;
     -fx-font-family: "Open Sans SemiBold";
 }
 
-.news-cell .subtitle-label {
+.news-detail-view .news-cell .subtitle-label {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: -fx-accent;
 }
 
-.news-cell .author-label {
+.news-detail-view .news-cell .author-label {
     -fx-font-style: italic;
     -fx-opacity: .8;
 }
 
-.news-cell .text-label {
+.news-detail-view .news-cell .text-label {
 }
 
 /* ----------------------------------------------------------------------------
@@ -1617,7 +1694,7 @@
 /* ----------------------------------------------------------------------------
  * DialogPane
  */
-.root-pane > .dialog-pane > .content-pane {
+.root-pane > .dialog-panex > .content-pane {
     -fx-border-color: white;
     -fx-border-radius: 4px;
     -fx-background-radius: 3px;
@@ -1627,7 +1704,7 @@
     -fx-min-height: 250px;
 }
 
-.root-pane > .dialog-pane > .content-pane > .close-button {
+.root-pane > .dialog-panex > .content-pane > .close-button {
     -fx-background-radius: 3px;
     -fx-background-color: transparent !important;
     -fx-background-insets: 0px;
@@ -1644,97 +1721,98 @@
     -fx-cursor: hand;
 }
 
-.root-pane > .dialog-pane > .content-pane > .close-button:hover {
+.root-pane > .dialog-panex > .content-pane > .close-button:hover {
     -fx-background-color: transparent !important;
     -fx-opacity: 1 !important;
 }
 
-.root-pane .dialog-pane > .content-pane > .close-button:hover .ikonli-font-icon {
+.root-pane .dialog-panex > .content-pane > .close-button:hover .ikonli-font-icon {
     -fx-icon-color: -fx-accent;
 }
 
-.root-pane > .dialog-pane > .content-pane > .close-button:pressed {
+.root-pane > .dialog-panex > .content-pane > .close-button:pressed {
     -fx-background-color: transparent;
 }
 
-.root-pane .dialog-pane > .content-pane > .close-button .ikonli-font-icon {
+.root-pane .dialog-panex > .content-pane > .close-button .ikonli-font-icon {
     -fx-icon-color: white;
     -fx-icon-size: 48px !important;
 }
 
-.root-pane > .dialog-pane .pagination .pagination-control {
+.root-pane > .dialog-panex .pagination .pagination-control {
     -fx-pref-height: 0px;
     -fx-opacity: 0;
 }
 
 /* ----------------------------------------------------------------------------
- * HomeView
+ * HomeDetailView
  */
-.home-view .duke-wrapper {
+.home-detail-view .duke-wrapper {
     -fx-padding: 50px 0px 0px 0px;
 }
 
-.home-view .title {
+.home-detail-view .title {
 }
 
-.home-view .contact-markdown-view {
+.home-detail-view .contact-markdown-view {
     -fx-line-spacing: 2px;
     -fx-padding: 0px 0px 20px 0px;
 }
 
-.home-view .contact-markdown-view .markdown-text {
+.home-detail-view .contact-markdown-view .markdown-text {
 }
 
-.home-view .contact-markdown-view * {
+.home-detail-view .contact-markdown-view * {
     -fx-alignment: top-left;
     -fx-text-alignment: left;
 }
 
-.home-view .footer {
+.home-detail-view .footer {
     -fx-spacing: 20px;
 }
 
-.home-view .contact-markdown-view .markdown-paragraph-list {
+.home-detail-view .contact-markdown-view .markdown-paragraph-list {
     -fx-alignment: top-center;
     -fx-spacing: 0px;
 }
 
-.home-view .social-pane {
+.home-detail-view .social-pane {
     -fx-hgap: 10px;
     -fx-vgap: 10px;
 }
 
-.home-view .social-pane .social-label {
+.home-detail-view .social-pane .social-label {
     -fx-cursor: hand;
     -fx-text-fill: -fx-accent;
 }
 
-.home-view .social-pane .social-label:hover {
+.home-detail-view .social-pane .social-label:hover {
     -fx-underline: true;
 }
 
-.home-view .social-pane .icon-wrapper {
+.home-detail-view .social-pane .icon-wrapper {
     -fx-background-color: -fx-accent;
     -fx-background-radius: 1000px;
     -fx-padding: 10px;
 }
 
-.home-view .social-pane .icon-wrapper .ikonli-font-icon {
+.home-detail-view .social-pane .icon-wrapper .ikonli-font-icon {
     -fx-cursor: hand;
     -fx-icon-color: white;
     -fx-icon-size: 18px;
 }
 
-.home-view .recent-item-cell {
+.home-detail-view .recent-item-cell,
+.home-detail-view .recent-item-cell.last {
     -fx-padding: 5px 10px 5px 5px;
 }
 
-.home-view .recent-item-cell .hbox {
+.home-detail-view .recent-item-cell .hbox {
     -fx-alignment: center-left;
     -fx-spacing: 20px;
 }
 
-.home-view .recent-item-cell .hbox .icon-wrapper {
+.home-detail-view .recent-item-cell .hbox .icon-wrapper {
     -fx-pref-width: 32px;
     -fx-pref-height: 32px;
     -fx-max-width: 32px;
@@ -1745,23 +1823,23 @@
     -fx-background-radius: 2px;
 }
 
-.home-view .recent-item-cell .hbox .icon-wrapper .ikonli-font-icon {
+.home-detail-view .recent-item-cell .hbox .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: white;
 }
 
-.home-view .recent-item-cell .hbox .title-label {
+.home-detail-view .recent-item-cell .hbox .title-label {
     -fx-font-family: "Open Sans Bold";
 }
 
-.home-view .recent-item-cell .hbox .subtitle-label {
+.home-detail-view-view .recent-item-cell .hbox .subtitle-label {
     -fx-opacity: .8;
 }
 
-.home-view .recent-item-cell .hbox .date-label {
+.home-detail-view .recent-item-cell .hbox .date-label {
 }
 
-.home-view .recent-item-cell .hbox .vbox {
+.home-detail-view-view .recent-item-cell .hbox .vbox {
 }
 
 /* ----------------------------------------------------------------------------
@@ -1809,14 +1887,14 @@
 
 
 /* ----------------------------------------------------------------------------
- * BlogView
+ * BlogsDetailView
  */
 
-.blog-view .title-section .hbox {
+.blogs-detail-view .title-section .hbox {
     -fx-spacing: 20px;
 }
 
-.blog-view .title-section .hbox .photo-view {
+.blogs-detail-view .title-section .hbox .photo-view {
     -size: 100px;
     -fx-min-width: -size;
     -fx-min-height: -size;
@@ -1826,28 +1904,27 @@
     -fx-pref-height: -size;
 }
 
-.blog-view .title-section .hbox .vbox {
+.blogs-detail-view .title-section .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.blog-view .title-section .hbox .vbox .name-label {
+.blogs-detail-view .title-section .hbox .vbox .name-label {
     -fx-graphic-text-gap: 10px;
 }
 
-.blog-view .title-section .hbox .vbox .name-label .badges-box {
+.blogs-detail-view .title-section .hbox .vbox .name-label .badges-box {
     -fx-spacing: 10px;
     -fx-translate-y: -5px;
 }
 
-.blog-view .title-section .hbox .vbox .description-label {
+.blogs-detail-view .title-section .hbox .vbox .description-label {
 }
 
-.blog-view .title-section .hbox .vbox .social-box {
+.blogs-detail-view .title-section .hbox .vbox .social-box {
     -fx-spacing: 10px;
 }
 
-
-.blog-view .post-cell {
+.blogs-detail-view .post-cell {
     -fx-padding: 10px 10px 10px 0px;
 }
 
@@ -1855,7 +1932,7 @@
     -fx-font-family: "Open Sans SemiBold";
 }
 
-.blog-view .post-cell .blog-label {
+.blogs-detail-view .post-cell .blog-label {
     -size: 150px;
     -fx-min-width: -size;
     -fx-pref-width: -size;
@@ -1864,12 +1941,12 @@
 }
 
 /* ----------------------------------------------------------------------------
- * CompanyView
+ * CompanyDetailView
  */
 
 /* Company Cell */
 
-.company-view .company-cell {
+.companies-detail-view .company-cell {
     -fx-background-color: white;
     -fx-padding: 10px 0px;
     -fx-border-width: 0 0 1 0;
@@ -1877,47 +1954,47 @@
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
-.company-view .company-cell:selected {
+.companies-detail-view .company-cell:selected {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
     -fx-background-insets: 2px -8px 3px -8px;
     -fx-background-radius: 2px;
 }
 
-.company-view .company-cell:selected .label {
+.companies-detail-view .company-cell:selected .label {
     -fx-text-fill: white;
 }
 
-.company-view .company-cell.last {
+.companies-detail-view .company-cell.last {
     -fx-padding: 10px 0px;
     -fx-border-width: 0px;
 }
 
-.company-view .company-cell .hbox {
+.companies-detail-view .company-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.company-view .company-cell .hbox .vbox {
+.companies-detail-view .company-cell .hbox .vbox {
     -fx-spacing: 10px;
 }
 
-.company-view .company-cell .hbox .vbox .name-label {
+.companies-detail-view .company-cell .hbox .vbox .name-label {
 }
 
-.company-view .company-cell .hbox .vbox .description-markdown {
+.companies-detail-view .company-cell .hbox .vbox .description-markdown {
 }
 
-.company-view .company-cell .button-box {
+.companies-detail-view .company-cell .button-box {
     -fx-spacing: 10px;
 }
 
-.company-view .company-cell .button-box .button .ikonli-font-icon {
+.companies-detail-view .company-cell .button-box .button .ikonli-font-icon {
     -fx-icon-size: 18px;
 }
 
 /* ----------------------------------------------------------------------------
- * ToolsView
+ * ToolsDetailView
  */
-.tool-view .vbox {
+.tools-detail-view .vbox {
     -fx-spacing: 20px;
 }

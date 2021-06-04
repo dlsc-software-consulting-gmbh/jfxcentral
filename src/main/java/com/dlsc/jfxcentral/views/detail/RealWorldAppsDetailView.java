@@ -17,7 +17,7 @@ public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
     public RealWorldAppsDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("real-world-app-view");
+        getStyleClass().add("real-world-detail-view");
 
         vBox.getStyleClass().add("vbox");
 

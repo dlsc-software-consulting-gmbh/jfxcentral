@@ -40,6 +40,8 @@ public class DownloadsDetailView extends DetailView<Download> {
     public DownloadsDetailView(RootPane rootPane) {
         super(rootPane);
 
+        getStyleClass().add("downloads-detail-view");
+
         SectionPaneWithFilterView sectionPane = new SectionPaneWithFilterView();
         sectionPane.setTitle("Downloads");
         sectionPane.setEnableAutoSubtitle(true);

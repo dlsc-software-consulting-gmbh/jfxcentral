@@ -15,7 +15,7 @@ public class ToolsDetailView extends DetailView<Tool> {
     public ToolsDetailView(RootPane rootPane) {
         super(rootPane);
 
-        getStyleClass().add("tool-view");
+        getStyleClass().add("tools-detail-view");
 
         vBox.getStyleClass().add("vbox");
 

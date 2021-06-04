@@ -7,5 +7,7 @@ public class TutorialsDetailView extends DetailView<Tutorial> {
 
     public TutorialsDetailView(RootPane rootPane) {
         super(rootPane);
+
+        getStyleClass().add("tutorials-detail-view");
     }
 }

@@ -43,6 +43,8 @@ public class NewsDetailView extends DetailView<News> {
     public NewsDetailView(RootPane rootPane) {
         super(rootPane);
 
+        getStyleClass().add("news-detail-view");
+
         SectionPaneWithFilterView sectionPane = new SectionPaneWithFilterView();
         sectionPane.setTitle("News");
 

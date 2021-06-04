@@ -17,13 +17,13 @@ import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
-public class HomeDetailsView extends DetailView {
+public class HomeDetailView extends DetailView {
 
     private final VBox content = new VBox();
 
-    public HomeDetailsView(RootPane rootPane) {
+    public HomeDetailView(RootPane rootPane) {
         super(rootPane);
-        getStyleClass().add("home-view");
+        getStyleClass().add("home-detail-view");
 
         createWelcomeSection();
         createRecentItemsSection();
