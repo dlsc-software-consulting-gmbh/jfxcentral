@@ -449,16 +449,16 @@
  * LibrariesMasterView
  */
 
-.library-master-view .list-view .library-list-cell .grid-pane {
+.libraries-master-view .list-view .library-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
-.library-master-view .list-view .library-list-cell .grid-pane .image-view {
+.libraries-master-view .list-view .library-list-cell .grid-pane .image-view {
 }
 
-.library-master-view .list-view .library-list-cell .grid-pane .name-label {
+.libraries-master-view .list-view .library-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }

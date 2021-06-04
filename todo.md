@@ -1,5 +1,10 @@
 ## TODOs
 
+### Florian
+
+- Finish links
+- Remove static WEB_API in Util Klasse
+
 ### Views
 
 - add "tutorials" view

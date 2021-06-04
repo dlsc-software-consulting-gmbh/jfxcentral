@@ -7,7 +7,9 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.util.FilterUtil;
 import com.dlsc.jfxcentral.views.*;
+import javafx.beans.Observable;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -21,6 +23,9 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class OpenJFXDetailView extends DetailView {
 
@@ -41,6 +46,88 @@ public class OpenJFXDetailView extends DetailView {
 
         VBox.setVgrow(content, Priority.ALWAYS);
         setContent(content);
+        DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
+
+        updateFilters();
+    }
+
+    private void updateFilters() {
+        stateGroup.getFilters().clear();
+        labelGroup.getFilters().clear();
+        userGroup.getFilters().clear();
+        timeGroup.getFilters().clear();
+
+        updateStateGroup();
+        updateLabelGroup();
+        updateUserGroup();
+
+        timeGroup.getFilters().clear();
+
+        FilterUtil.createFilters(timeGroup, "Date", pr -> DateTimeFormatter.ISO_DATE_TIME.parse(pr.getUpdatedAt() != null ? pr.getUpdatedAt() : pr.getCreatedAt(), ZonedDateTime::from));
+    }
+
+    private void updateUserGroup() {
+        List<String> userList = new ArrayList<>();
+
+        DataRepository.getInstance().getPullRequests().forEach(pr -> {
+            String id = pr.getUser().getLogin();
+            if (!userList.contains(id.trim())) {
+                userList.add(id.trim());
+            }
+        });
+
+        List<FilterView.Filter<PullRequest>> filters = new ArrayList<>();
+
+        userList.forEach(item -> filters.add(new FilterView.Filter<>(item) {
+            @Override
+            public boolean test(PullRequest pr) {
+                return pr.getUser().getLogin().equals(item);
+            }
+        }));
+
+        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        userGroup.getFilters().setAll(filters);
+    }
+
+    private void updateStateGroup() {
+        List<String> stateList = new ArrayList<>();
+        stateList.add("open");
+        stateList.add("closed");
+
+        List<FilterView.Filter<PullRequest>> filters = new ArrayList<>();
+
+        stateList.forEach(item -> filters.add(new FilterView.Filter<>(item) {
+            @Override
+            public boolean test(PullRequest pr) {
+                return pr.getState().equals(item);
+            }
+        }));
+
+        stateGroup.getFilters().setAll(filters);
+    }
+
+    private void updateLabelGroup() {
+        List<String> labels = new ArrayList<>();
+
+        DataRepository.getInstance().getPullRequests().forEach(pr -> {
+            pr.getLabels().forEach(label -> {
+                if (!labels.contains(label.getName())) {
+                    labels.add(label.getName());
+                }
+            });
+        });
+
+        List<FilterView.Filter<PullRequest>> filters = new ArrayList<>();
+
+        labels.forEach(item -> filters.add(new FilterView.Filter<>(item) {
+            @Override
+            public boolean test(PullRequest pr) {
+                return pr.getLabels().stream().anyMatch(label -> label.getName().equals(item));
+            }
+        }));
+
+        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        labelGroup.getFilters().setAll(filters);
     }
 
     private void createHeader() {
@@ -166,7 +253,8 @@ public class OpenJFXDetailView extends DetailView {
                 setText(pr.getTitle());
                 titleLabel.setText(pr.getTitle());
                 statusLabel.getStyleClass().removeAll("open", "closed");
-                photoView.photoProperty().bind(ImageManager.getInstance().githubAvatarImageProperty(pr));
+                photoView.photoProperty().bind(ImageManager.getInstance().githubAvatarImageProperty(pr.getUser().getLogin()));
+
                 switch (pr.getState()) {
                     case "open":
                         statusLabel.setText("Open");

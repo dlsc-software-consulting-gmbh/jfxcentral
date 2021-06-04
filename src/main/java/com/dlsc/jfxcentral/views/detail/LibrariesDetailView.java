@@ -28,6 +28,8 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
+import java.text.MessageFormat;
+
 
 public class LibrariesDetailView extends DetailView<Library> {
 
@@ -39,6 +41,7 @@ public class LibrariesDetailView extends DetailView<Library> {
     private VBox content = new VBox();
     private Label repositoryCoordinatesLabel = new Label();
     private ThumbnailScrollPane thumbnailScrollPane;
+    private MarkdownView versionBadgeMarkdownView;
 
     public LibrariesDetailView(RootPane rootPane) {
         super(rootPane);
@@ -89,6 +92,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         thumbnailScrollPane = new ThumbnailScrollPane(getRootPane());
 
         sectionPane.getNodes().add(thumbnailScrollPane);
+        sectionPane.visibleProperty().bind(thumbnailScrollPane.visibleProperty());
+        sectionPane.managedProperty().bind(thumbnailScrollPane.managedProperty());
 
         content.getChildren().add(sectionPane);
     }
@@ -99,9 +104,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         sectionPane.setSubtitle("Repository group and artifact IDs");
         sectionPane.getStyleClass().add("coordinates-pane");
 
-        MarkdownView markdownView = new MarkdownView();
-        markdownView.setMdString("[![Maven Central](https://img.shields.io/maven-central/v/com.dlsc.gemsfx/gemsfx.png?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.dlsc.gemsfx%22%20AND%20a:%22gemsfx%22)");
-        sectionPane.setExtras(markdownView);
+        versionBadgeMarkdownView = new MarkdownView();
+        sectionPane.setExtras(versionBadgeMarkdownView);
 
         RadioButton mavenButton = new RadioButton("Maven");
         RadioButton gradleButton = new RadioButton("Gradle");
@@ -186,14 +190,27 @@ public class LibrariesDetailView extends DetailView<Library> {
             thumbnailScrollPane.setLibrary(library);
             thumbnailScrollPane.libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(library));
 
-            StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(library);
+            String groupId = library.getGroupId();
+            String artifactId = library.getArtifactId();
 
-            repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-                if (getBuildTool().equals(BuildTool.MAVEN)) {
-                    return "<dependency>\n    <groupId>" + library.getGroupId() + "</groupId>\n    <artifactId>" + library.getArtifactId() + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";
-                }
-                return "dependencies {\n    implementation '" + library.getGroupId() + ":" + library.getArtifactId() + ":" + versionProperty.get() + "'\n}";
-            }, versionProperty, buildTool));
+            if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
+                versionBadgeMarkdownView.setMdString(MessageFormat.format("[![Maven Central](https://img.shields.io/maven-central/v/{0}/{1}.png?label=Maven%20Central)](https://search.maven.org/search?q=g:%22{0}%22%20AND%20a:%22{1}%22)", groupId, artifactId));
+
+                StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(library);
+
+                repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
+                    if (getBuildTool().equals(BuildTool.MAVEN)) {
+                        return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";
+                    }
+                    return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + versionProperty.get() + "'\n}";
+                }, versionProperty, buildTool));
+
+            } else {
+                versionBadgeMarkdownView.setMdString("");
+
+                repositoryCoordinatesLabel.textProperty().unbind();
+            }
+
 
             iconView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
             iconView.setFitWidth(128);
