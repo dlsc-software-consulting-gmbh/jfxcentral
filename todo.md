@@ -20,6 +20,7 @@
 - add TestFX to tools page
 
 ### New Features
+- add "downloads" to PeopleDetailView
 - auto-refresh the blog posts list (update recent items list)
 - add jfx ensemble demo links to libs
 - add Google analytics

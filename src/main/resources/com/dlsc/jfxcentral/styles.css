@@ -1413,33 +1413,37 @@
 }
 
 /* ----------------------------------------------------------------------------
- * DownloadDetailView
+ * DownloadsDetailView
  */
-.download-detail-view .download-cell {
+.downloads-detail-view .download-cell {
 }
 
-.download-detail-view .hbox {
+.downloads-detail-view .download-cell .image-wrapper {
+    -fx-border-color: -fx-accent;
+}
+
+.downloads-detail-view .hbox {
     -fx-spacing: 20px;
 }
 
-.download-detail-view .thumbnail-wrapper {
+.downloads-detail-view .thumbnail-wrapper {
     -fx-border-color: -fx-accent;
     -fx-border-width: 2px;
 }
 
-.download-detail-view .video-cell .hbox {
+.downloads-detail-view .video-cell .hbox {
     -fx-padding: 10px;
 }
 
-.download-detail-view .hbox .vbox {
+.downloads-detail-view .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.download-detail-view .title-label {
+.downloads-detail-view .title-label {
     -fx-font-size: 16px;
 }
 
-.download-detail-view .description-label {
+.downloads-detail-view .description-label {
 }
 
 /* ----------------------------------------------------------------------------
@@ -1928,7 +1932,7 @@
     -fx-padding: 10px 10px 10px 0px;
 }
 
-.blog-view .post-cell .title-label {
+.blogs-detail-view .post-cell .title-label {
     -fx-font-family: "Open Sans SemiBold";
 }
 
