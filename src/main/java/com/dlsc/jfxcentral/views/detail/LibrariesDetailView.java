@@ -174,6 +174,8 @@ public class LibrariesDetailView extends DetailView<Library> {
 
     private void createReadmeBox() {
         SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Readme");
+        sectionPane.setSubtitle("Basic information on this library to get you started");
         sectionPane.getNodes().add(readmeMarkdownView);
         readmeMarkdownView.setHyperlinkCallback(url -> Util.browse(url));
         content.getChildren().add(sectionPane);

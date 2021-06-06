@@ -994,7 +994,8 @@
 }
 
 .section-pane .filter-view .title {
-    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-font-family: "Open Sans SemiBold";
 }
 
 .section-pane .filter-view .subtitle {

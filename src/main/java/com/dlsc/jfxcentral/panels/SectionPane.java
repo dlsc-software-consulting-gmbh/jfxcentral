@@ -41,7 +41,7 @@ public class SectionPane extends SectionPaneBase {
         Bindings.bindContent(menuButton.getItems(), getMenuItems());
 
         Label titleLabel = getTitleLabel();
-        titleLabel.getStyleClass().addAll("title-label", "header2");
+        titleLabel.getStyleClass().addAll("title-label", "header1");
         titleLabel.textProperty().bind(titleProperty());
         titleLabel.managedProperty().bind(titleProperty().isNotEmpty());
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);

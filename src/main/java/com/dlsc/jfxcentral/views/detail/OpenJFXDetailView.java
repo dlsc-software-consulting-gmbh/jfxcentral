@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.gemsfx.FilterView;
+import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
@@ -13,9 +14,11 @@ import javafx.beans.Observable;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,7 +47,8 @@ public class OpenJFXDetailView extends DetailView {
         createHeader();
         createPullRequests();
 
-        VBox.setVgrow(content, Priority.ALWAYS);
+        content.getChildren().add(new Region());
+
         setContent(content);
         DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
 
@@ -131,7 +135,15 @@ public class OpenJFXDetailView extends DetailView {
     }
 
     private void createHeader() {
+        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo.png").toExternalForm());
+        logo.setFitWidth(300);
+        logo.setFitHeight(60);
+        logo.setPreserveRatio(true);
+
         SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("OpenJFX");
+        sectionPane.setSubtitle("The open source project behind JavaFX");
+        sectionPane.setExtras(logo);
 
         MarkdownView markdownView = new MarkdownView();
         markdownView.mdStringProperty().bind(DataRepository.getInstance().openJFXTextProperty());
@@ -172,7 +184,6 @@ public class OpenJFXDetailView extends DetailView {
         sectionPane.getNodes().add(listView);
 
         VBox.setVgrow(listView, Priority.ALWAYS);
-        VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
         content.getChildren().add(sectionPane);
     }
