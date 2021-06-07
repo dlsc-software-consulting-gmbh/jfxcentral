@@ -21,7 +21,6 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
 
     public MarkdownView() {
         getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        setHyperlinkCallback(link -> Util.browse(link));
     }
 
     private final ObjectProperty<Consumer<Image>> onImageClick = new SimpleObjectProperty<>(this, "onImageClick");
@@ -48,27 +47,10 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
 
     private final ObjectProperty<Consumer<String>> hyperlinkCallback = new SimpleObjectProperty<>(this, "urlCallback");
 
-    public Consumer<String> getHyperlinkCallback() {
-        return hyperlinkCallback.get();
-    }
-
-    public ObjectProperty<Consumer<String>> hyperlinkCallbackProperty() {
-        return hyperlinkCallback;
-    }
-
-    public void setHyperlinkCallback(Consumer<String> hyperlinkCallback) {
-        this.hyperlinkCallback.set(hyperlinkCallback);
-    }
-
     @Override
     public void setLink(Node node, String link, String description) {
         super.setLink(node, link, description);
-
-        if (!(node instanceof ImageView)) {
-            node.setOnMouseClicked(evt -> getHyperlinkCallback().accept(StringUtils.deleteWhitespace(link)));
-        } else {
-            node.cursorProperty().bind(Bindings.createObjectBinding(() -> getOnImageClick() != null ? Cursor.HAND : Cursor.DEFAULT));
-        }
+        Util.setLink(node, link, description);
     }
 
     @Override

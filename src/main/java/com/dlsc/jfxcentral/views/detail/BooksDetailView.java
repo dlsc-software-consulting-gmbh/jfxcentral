@@ -60,7 +60,6 @@ public class BooksDetailView extends DetailView<Book> {
         HBox.setHgrow(subtitleLabel, Priority.ALWAYS);
 
         descriptionMarkdownView.getStyleClass().add("description-markdown-view");
-        descriptionMarkdownView.setHyperlinkCallback(url -> Util.browse(url));
         HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
 
         authorsLabel.getStyleClass().add("authors-label");
@@ -131,7 +130,7 @@ public class BooksDetailView extends DetailView<Book> {
             if (StringUtils.isNotEmpty(book.getUrl())) {
                 Button website = new Button("Website");
                 website.getStyleClass().addAll("social-button", "website");
-                website.setOnAction(evt -> Util.browse(book.getUrl()));
+                Util.setLink(website, book.getUrl(), book.getTitle());
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
                 linksBox.getChildren().add(website);
             }
@@ -139,7 +138,7 @@ public class BooksDetailView extends DetailView<Book> {
             if (StringUtils.isNotEmpty(book.getAmazonASIN())) {
                 Button amazon = new Button("Amazon");
                 amazon.getStyleClass().addAll("social-button", "amazon");
-                amazon.setOnAction(evt -> Util.browse("http://www.amazon.com/dp/" + book.getAmazonASIN()));
+                Util.setLink(amazon, "http://www.amazon.com/dp/" + book.getAmazonASIN(), book.getTitle());
                 amazon.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
                 linksBox.getChildren().add(amazon);
             }

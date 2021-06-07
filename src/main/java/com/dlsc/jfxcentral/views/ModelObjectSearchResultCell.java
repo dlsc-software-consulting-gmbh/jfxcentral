@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.autocomplete.OmniBoxSearchField;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
@@ -42,7 +44,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
             searchField.hideOmniBox();
             SearchResult<?> item = getItem();
             if (item != null) {
-                rootPane.open(item.getValue());
+                Util.browse(rootPane, PageUtil.getLink((ModelObject) item.getValue()));
             }
         });
 

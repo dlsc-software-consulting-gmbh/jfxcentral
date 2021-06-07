@@ -152,7 +152,6 @@ public class LibrariesDetailView extends DetailView<Library> {
         iconView.setPreserveRatio(true);
 
         descriptionMarkdownView.getStyleClass().add("description-label");
-        descriptionMarkdownView.setHyperlinkCallback(link -> Util.browse(link));
         HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
 
         linksBox = new HBox();
@@ -182,7 +181,6 @@ public class LibrariesDetailView extends DetailView<Library> {
         sectionPane.setTitle("Readme");
         sectionPane.setSubtitle("Basic information on this library to get you started");
         sectionPane.getNodes().add(readmeMarkdownView);
-        readmeMarkdownView.setHyperlinkCallback(url -> Util.browse(url));
         content.getChildren().add(sectionPane);
     }
 
@@ -225,7 +223,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getHomepage())) {
                 Button twitter = new Button("Homepage");
                 twitter.getStyleClass().addAll("social-button", "homepage");
-                twitter.setOnAction(evt -> Util.browse(library.getHomepage()));
+                Util.setLink(twitter, library.getHomepage(), library.getTitle());
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
                 linksBox.getChildren().add(twitter);
             }
@@ -233,7 +231,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getRepository())) {
                 Button linkedIn = new Button("Repository");
                 linkedIn.getStyleClass().addAll("social-button", "repository");
-                linkedIn.setOnAction(evt -> Util.browse(library.getRepository()));
+                Util.setLink(linkedIn, library.getRepository(), library.getTitle());
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
                 linksBox.getChildren().add(linkedIn);
             }
@@ -241,7 +239,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getIssueTracker())) {
                 Button blog = new Button("Issues Tracker");
                 blog.getStyleClass().addAll("social-button", "issues");
-                blog.setOnAction(evt -> Util.browse(library.getIssueTracker()));
+                Util.setLink(blog, library.getIssueTracker(), library.getTitle());
                 blog.setGraphic(new FontIcon(Material.BUG_REPORT));
                 linksBox.getChildren().add(blog);
             }
@@ -249,7 +247,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getDiscussionBoard())) {
                 Button website = new Button("Discussions");
                 website.getStyleClass().addAll("social-button", "discussion");
-                website.setOnAction(evt -> Util.browse(library.getDiscussionBoard()));
+                Util.setLink(website, library.getDiscussionBoard(), library.getTitle());
                 website.setGraphic(new FontIcon(Material.COMMENT));
                 linksBox.getChildren().add(website);
             }
@@ -257,7 +255,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getJavadocs())) {
                 Button website = new Button("API");
                 website.getStyleClass().addAll("social-button", "api");
-                website.setOnAction(evt -> Util.browse(library.getJavadocs()));
+                Util.setLink(website, library.getJavadocs(), library.getTitle());
                 website.setGraphic(new FontIcon(Material.CODE));
                 linksBox.getChildren().add(website);
             }
@@ -265,7 +263,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getDocumentation())) {
                 Button website = new Button("Docs");
                 website.getStyleClass().addAll("social-button", "docs");
-                website.setOnAction(evt -> Util.browse(library.getDocumentation()));
+                Util.setLink(website, library.getDocumentation(), library.getTitle());
                 website.setGraphic(new FontIcon(Material.BOOK));
                 linksBox.getChildren().add(website);
             }

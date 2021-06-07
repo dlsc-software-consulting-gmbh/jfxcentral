@@ -115,20 +115,20 @@ public class HomeDetailView extends DetailView {
         socialPane.add(mail, 4, 0);
         socialPane.add(mailLabel, 5, 0);
 
-        twitter.setOnMouseClicked(evt -> Util.browse("https://twitter.com/dlemmermann"));
-        linkedIn.setOnMouseClicked(evt -> Util.browse("https://www.linkedin.com/in/dlemmermann/"));
-        github.setOnMouseClicked(evt -> Util.browse("https://github.com/dlemmermann"));
-        youtube.setOnMouseClicked(evt -> Util.browse("https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q"));
-        mail.setOnMouseClicked(evt -> Util.browse("mailto:dlemmermann@gmail.com?subject=JFXCentral"));
+        Util.setLink(twitter, "https://twitter.com/dlemmermann", "");
+        Util.setLink(linkedIn, "https://www.linkedin.com/in/dlemmermann/", "");
+        Util.setLink(github, "https://github.com/dlemmermann", "");
+        Util.setLink(youtube, "https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q", "");
+        Util.setLink(mail, "mailto:dlemmermann@gmail.com?subject=JFXCentral", "");
 
         GridPane.setMargin(twitterLabel, new Insets(0, 10, 0, 0));
         GridPane.setMargin(linkedInLabel, new Insets(0, 10, 0, 0));
 
-        twitterLabel.setOnMouseClicked(evt -> Util.browse("https://twitter.com/dlemmermann"));
-        linkedInLabel.setOnMouseClicked(evt -> Util.browse("https://www.linkedin.com/in/dlemmermann/"));
-        gitHubLabel.setOnMouseClicked(evt -> Util.browse("https://github.com/dlemmermann"));
-        youTubeLabel.setOnMouseClicked(evt -> Util.browse("https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q"));
-        mailLabel.setOnMouseClicked(evt -> Util.browse("mailto:dlemmermann@gmail.com?subject=JFXCentral"));
+        Util.setLink(twitterLabel, "https://twitter.com/dlemmermann", "");
+        Util.setLink(linkedInLabel, "https://www.linkedin.com/in/dlemmermann/", "");
+        Util.setLink(gitHubLabel, "https://github.com/dlemmermann", "");
+        Util.setLink(youTubeLabel, "https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q", "");
+        Util.setLink(mailLabel, "mailto:dlemmermann@gmail.com?subject=JFXCentral", "");
 
         HBox hBox = new HBox(markdownView, socialPane);
         hBox.getStyleClass().add("footer");

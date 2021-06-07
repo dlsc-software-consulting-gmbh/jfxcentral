@@ -4,17 +4,18 @@ import com.dlsc.jfxcentral.JFXCentralApp;
 import com.gluonhq.attach.audio.AudioService;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 public class IntroView extends StackPane {
 
-    private final RootPane rootPane;
+    private final Pane pane;
     private final AudioClip plonkSound;
 
-    public IntroView(RootPane rootPane) {
-        this.rootPane = rootPane;
+    public IntroView(Pane pane) {
+        this.pane = pane;
 
         sceneProperty().addListener(it -> {
             Scene scene = getScene();
@@ -68,7 +69,7 @@ public class IntroView extends StackPane {
     private void showHome(Scene scene) {
         plonkSound.setVolume(0);
         plonkSound.stop();
-        rootPane.setView(View.HOME);
+        this.getScene().setRoot(pane);
         scene.setFill(Color.rgb(224, 229, 234)); // reduce flickering
     }
 }

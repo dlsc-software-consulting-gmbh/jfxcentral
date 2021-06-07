@@ -85,8 +85,9 @@ public class JPROWebView extends com.jpro.web.View {
                 item = DataRepository.getInstance().getToolById(id).get();
                 break;
         }
-
-        currentPage.setSelectedItem(item);
+        if(item != null) {
+            currentPage.setSelectedItem(item);
+        }
 
         return true;
     }

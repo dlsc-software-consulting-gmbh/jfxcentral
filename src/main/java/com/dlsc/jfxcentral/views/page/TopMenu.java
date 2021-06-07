@@ -203,7 +203,7 @@ public class TopMenu extends VBox {
         button.setAlignment(Pos.CENTER_LEFT);
         button.setGraphic(wrap(icon));
         button.setOnAction(evt -> setExpanded(false));
-        Util.setLink(button, PageUtil.viewURL(view), name);
+        Util.setLink(button, PageUtil.getLink(view), name);
         return button;
     }
 

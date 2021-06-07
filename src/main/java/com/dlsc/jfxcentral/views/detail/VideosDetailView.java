@@ -237,7 +237,6 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
             playButton.setOnAction(evt -> showVideo(getItem()));
 
             playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
-            playOnYouTubeButton.setOnAction(evt -> Util.browse("https://youtu.be/" + getItem().getId()));
 
             titleLabel.getStyleClass().addAll("header3", "title-label");
             titleLabel.setWrapText(true);
@@ -323,6 +322,8 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
             super.updateItem(video, empty);
 
             if (!empty && video != null) {
+                Util.setLink(playOnYouTubeButton, "https://youtu.be/" + getItem().getId(), "https://youtu.be/" + getItem().getId());
+
                 titleLabel.setText(video.getTitle());
                 descriptionLabel.setText(video.getDescription());
                 thumbnailView.setVisible(true);
