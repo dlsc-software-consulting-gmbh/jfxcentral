@@ -35,7 +35,6 @@ public class LibrariesDetailView extends DetailView<Library> {
 
     private HBox linksBox;
     private ImageView iconView = new ImageView();
-    private Label nameLabel = new Label();
     private MarkdownView descriptionMarkdownView = new MarkdownView();
     private MarkdownView readmeMarkdownView = new MarkdownView();
     private VBox content = new VBox();
@@ -148,9 +147,9 @@ public class LibrariesDetailView extends DetailView<Library> {
     }
 
     private void createTitleBox() {
-        nameLabel.getStyleClass().addAll("header1", "name-label");
-        nameLabel.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(nameLabel, Priority.ALWAYS);
+        iconView.setFitWidth(128);
+        iconView.setFitHeight(64);
+        iconView.setPreserveRatio(true);
 
         descriptionMarkdownView.getStyleClass().add("description-label");
         descriptionMarkdownView.setHyperlinkCallback(link -> Util.browse(link));
@@ -159,16 +158,22 @@ public class LibrariesDetailView extends DetailView<Library> {
         linksBox = new HBox();
         linksBox.getStyleClass().add("social-box");
 
-        VBox vBox = new VBox(nameLabel, descriptionMarkdownView, linksBox);
+        VBox vBox = new VBox(descriptionMarkdownView, linksBox);
         vBox.getStyleClass().add("vbox");
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox titleBox = new HBox(vBox, iconView);
-        titleBox.getStyleClass().add("hbox");
+        HBox hBox = new HBox(vBox);
+        hBox.getStyleClass().add("hbox");
 
-        SectionPane sectionPane = new SectionPane(titleBox);
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getTitle() : "", selectedItemProperty()));
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
         sectionPane.getStyleClass().add("title-section");
+        sectionPane.setExtras(iconView);
+
+        sectionPane.getNodes().add(hBox);
+
         content.getChildren().addAll(sectionPane);
     }
 
@@ -184,7 +189,6 @@ public class LibrariesDetailView extends DetailView<Library> {
     private void updateView() {
         Library library = getSelectedItem();
         if (library != null) {
-            nameLabel.setText(library.getTitle());
             descriptionMarkdownView.setMdString(library.getDescription());
             readmeMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "libraries/" + library.getId());
             readmeMarkdownView.mdStringProperty().bind(DataRepository.getInstance().libraryReadMeProperty(library));
@@ -215,9 +219,6 @@ public class LibrariesDetailView extends DetailView<Library> {
 
 
             iconView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
-            iconView.setFitWidth(128);
-            iconView.setFitHeight(128);
-            iconView.setPreserveRatio(true);
 
             linksBox.getChildren().clear();
 

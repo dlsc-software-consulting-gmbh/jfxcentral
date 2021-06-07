@@ -2,10 +2,12 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.views.page.*;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -46,7 +48,7 @@ public class RootPane extends StackPane {
                 case TUTORIALS:
                     page = new TutorialsPage(this);
                     break;
-                case REALWORLD:
+                case REAL_WORLD:
                     page = new RealWorldAppsPage(this);
                     break;
                 case DOWNLOADS:
@@ -81,6 +83,71 @@ public class RootPane extends StackPane {
         } else {
             getChildren().setAll(new IntroView(this));
         }
+
+        sceneProperty().addListener(it -> {
+            Scene scene = getScene();
+            if (scene != null && WebAPI.isBrowser()) {
+                WebAPI webAPI = WebAPI.getWebAPI(scene);
+                String language = webAPI.getLanguage();
+                System.out.println("language: " + language);
+                // determine user locale
+            }
+        });
+
+        registerOpenHandler(Book.class, item -> {
+            setView(View.BOOKS);
+            ((BooksPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Download.class, item -> {
+            setView(View.DOWNLOADS);
+            ((DownloadsPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Company.class, item -> {
+            setView(View.COMPANIES);
+            ((CompaniesPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Blog.class, item -> {
+            setView(View.BLOGS);
+            ((BlogsPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(News.class, item -> {
+            setView(View.NEWS);
+            ((NewsPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Video.class, item -> {
+            setView(View.VIDEOS);
+            ((VideosPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Person.class, item -> {
+            setView(View.PEOPLE);
+            ((PeoplePage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Library.class, item -> {
+            setView(View.LIBRARIES);
+            ((LibrariesPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(RealWorldApp.class, item -> {
+            setView(View.REAL_WORLD);
+            ((RealWorldAppsPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Tutorial.class, item -> {
+            setView(View.TUTORIALS);
+            ((TutorialsPage) getCurrentPage()).showItem(item);
+        });
+
+        registerOpenHandler(Tool.class, item -> {
+            setView(View.TOOLS);
+            ((ToolsPage) getCurrentPage()).showItem(item);
+        });
     }
 
     public Page<?> getCurrentPage() {

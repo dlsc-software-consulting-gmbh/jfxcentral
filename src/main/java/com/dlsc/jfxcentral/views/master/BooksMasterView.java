@@ -7,10 +7,8 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
-import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -19,9 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class BooksMasterView extends MasterView<Book> {
-
-    private ListView<Book> listView = new ListView<>();
+public class BooksMasterView extends MasterViewWithListView<Book> {
 
     public BooksMasterView(RootPane rootPane) {
         super(rootPane, View.BOOKS);
@@ -31,7 +27,6 @@ public class BooksMasterView extends MasterView<Book> {
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new BookListCell());
-
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().booksProperty(),
                 Comparator.comparing(Book::getPublisher),
                 book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getTitle(), getFilterText())));
@@ -40,12 +35,7 @@ public class BooksMasterView extends MasterView<Book> {
 
         VBox.setVgrow(listView, Priority.ALWAYS);
 
-        bindListViewToSelectedItem(listView);
-
         setCenter(listView);
-
-        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
-        performDefaultSelection(listView);
     }
 
     class BookListCell extends AdvancedListCell<Book> {

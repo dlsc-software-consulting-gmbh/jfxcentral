@@ -8,11 +8,9 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
-import javafx.beans.Observable;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -21,9 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class ToolsMasterView extends MasterView<Tool> {
-
-    private ListView<Tool> listView = new ListView<>();
+public class ToolsMasterView extends MasterViewWithListView<Tool> {
 
     public ToolsMasterView(RootPane rootPane) {
         super(rootPane, View.TOOLS);
@@ -36,12 +32,7 @@ public class ToolsMasterView extends MasterView<Tool> {
                 Comparator.comparing(Tool::getName),
                 tool -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tool.getName(), getFilterText()) || StringUtils.containsIgnoreCase(tool.getSummary(), getFilterText())));
 
-        bindListViewToSelectedItem(listView);
-
         setCenter(listView);
-
-        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
-        performDefaultSelection(listView);
     }
 
     class ToolListCell extends AdvancedListCell<Tool> {

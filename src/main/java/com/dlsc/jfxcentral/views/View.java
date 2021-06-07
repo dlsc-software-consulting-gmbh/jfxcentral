@@ -6,7 +6,7 @@ public enum View {
     OPENJFX,
     PEOPLE,
     TUTORIALS,
-    REALWORLD,
+    REAL_WORLD,
     COMPANIES,
     TOOLS,
     LIBRARIES,

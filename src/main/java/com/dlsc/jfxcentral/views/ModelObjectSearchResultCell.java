@@ -1,7 +1,7 @@
-package com.dlsc.jfxcentral.views.detail;
+package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.data.model.*;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -10,21 +10,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-
-public class RecentItemCell extends AdvancedListCell<ModelObject> {
-    // TODO: web api locale lookup?
-    private DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?>> {
 
     private FontIcon fontIcon = new FontIcon();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
-    private Label dateLabel = new Label();
 
-    public RecentItemCell() {
-        getStyleClass().add("recent-item-cell");
+    public ModelObjectSearchResultCell(RootPane rootPane) {
+        getStyleClass().add("search-result-list-cell");
 
         VBox vBox = new VBox(titleLabel, subtitleLabel);
         vBox.getStyleClass().add("vbox");
@@ -33,43 +26,35 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
         StackPane iconWrapper = new StackPane(fontIcon);
         iconWrapper.getStyleClass().add("icon-wrapper");
 
-        HBox hBox = new HBox(iconWrapper, vBox, dateLabel);
+        HBox hBox = new HBox(iconWrapper, vBox);
         hBox.getStyleClass().add("hbox");
 
         titleLabel.getStyleClass().add("title-label");
         subtitleLabel.getStyleClass().add("subtitle-label");
-        dateLabel.getStyleClass().add("date-label");
-        dateLabel.setMinWidth(Region.USE_PREF_SIZE);
+
+        setPrefWidth(0);
+
+        setOnMouseClicked(evt -> {
+            SearchResult<?> item = getItem();
+            if (item != null) {
+                rootPane.open(item.getValue());
+            }
+        });
 
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
 
     @Override
-    protected void updateItem(ModelObject item, boolean empty) {
-        super.updateItem(item, empty);
+    protected void updateItem(SearchResult<?> searchResult, boolean empty) {
+        super.updateItem(searchResult, empty);
 
-        if (!empty && item != null) {
+        if (!empty && searchResult != null) {
+            ModelObject item = (ModelObject) searchResult.getValue();
+
             titleLabel.setText(createTitle(item));
             subtitleLabel.setText(createSubTitle(item));
             fontIcon.setIconCode(createIkonCode(item));
-
-            LocalDate updatedDate = item.getModifiedOn();
-            LocalDate createdDate = item.getCreatedOn();
-
-            if (updatedDate != null && createdDate != null) {
-                if (updatedDate.isAfter(createdDate)) {
-                    dateLabel.setText("Updated on: " + formatter.format(updatedDate));
-                } else {
-                    dateLabel.setText("Created on: " + formatter.format(createdDate));
-                }
-            } else if (updatedDate != null) {
-                dateLabel.setText("Updated on: " + formatter.format(updatedDate));
-            } else if (createdDate != null) {
-                dateLabel.setText("Created on: " + formatter.format(createdDate));
-            } else {
-                dateLabel.setText("");
-            }
         }
     }
 
@@ -95,13 +80,14 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
         } else if (item instanceof RealWorldApp) {
             return ((RealWorldApp) item).getName();
         } else if (item instanceof Tool) {
-            return ((RealWorldApp) item).getName();
+            return ((Tool) item).getName();
         } else if (item instanceof Tutorial) {
             return ((Tutorial) item).getName();
         } else if (item instanceof Download) {
             return ((Download) item).getTitle();
         }
 
+        System.out.println(">>>>>>>> missing title support for " + item.getClass().getSimpleName());
         return "";
     }
 
@@ -127,13 +113,14 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
         } else if (item instanceof RealWorldApp) {
             return ((RealWorldApp) item).getSummary();
         } else if (item instanceof Tool) {
-            return ((RealWorldApp) item).getSummary();
+            return ((Tool) item).getSummary();
         } else if (item instanceof Tutorial) {
             return ((Tutorial) item).getSummary();
         } else if (item instanceof Download) {
             return "Download";
         }
 
+        System.out.println(">>>>>>>> missing subtitle support for " + item.getClass().getSimpleName());
         return "";
     }
 }

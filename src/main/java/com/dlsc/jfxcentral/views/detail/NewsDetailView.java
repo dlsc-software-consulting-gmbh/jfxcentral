@@ -4,8 +4,6 @@ import com.dlsc.gemsfx.FilterView;
 import com.dlsc.gemsfx.FilterView.Filter;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.News;
 import com.dlsc.jfxcentral.data.model.News.Type;
@@ -13,12 +11,11 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -33,7 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
 
-public class NewsDetailView extends DetailView<News> {
+public class NewsDetailView extends DetailViewWithListView<News> {
 
     private final FilterView.FilterGroup<News> typeGroup = new FilterView.FilterGroup<>("Type");
     private final FilterView.FilterGroup<News> personGroup = new FilterView.FilterGroup<>("Person");
@@ -52,20 +49,25 @@ public class NewsDetailView extends DetailView<News> {
         filterView.setItems(DataRepository.getInstance().newsProperty());
         filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);
         filterView.setTextFilterProvider(text -> news -> {
-            if (news.getTitle().toLowerCase().contains(text)) {
+
+            if (StringUtils.containsAnyIgnoreCase(news.getTitle(), text)) {
                 return true;
             }
-            if (news.getSubtitle().toLowerCase().contains(text)) {
+
+            if (StringUtils.containsAnyIgnoreCase(news.getSubtitle(), text)) {
                 return true;
             }
-            if (news.getText().toLowerCase().contains(text)) {
+
+            StringProperty stringProperty = DataRepository.getInstance().newsTextProperty(news);
+            if (stringProperty != null && StringUtils.containsAnyIgnoreCase(stringProperty.get(), text)) {
                 return true;
             }
+
             return false;
         });
 
 
-        PrettyListView<News> listView = new PrettyListView<>();
+        listView = new PrettyListView<>();
         listView.setCellFactory(view -> new NewsCell(rootPane));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
@@ -74,8 +76,6 @@ public class NewsDetailView extends DetailView<News> {
 
         setContent(sectionPane);
         DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
-
-        selectedItemProperty().addListener(it -> listView.getSelectionModel().select(getSelectedItem()));
 
         updateFilters();
 

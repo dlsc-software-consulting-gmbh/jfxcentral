@@ -53,7 +53,7 @@ public class HomeDetailView extends DetailView {
     private void createRecentItemsSection() {
         AdvancedListView<ModelObject> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.visibleRowCountProperty().bind(DataRepository.getInstance().recentItemsProperty().sizeProperty());
+        listView.setVisibleRowCount(10);
         listView.setCellFactory(view -> new RecentItemCell());
         listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);

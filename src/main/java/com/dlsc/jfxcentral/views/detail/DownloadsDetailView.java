@@ -30,7 +30,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class DownloadsDetailView extends DetailView<Download> {
+public class DownloadsDetailView extends DetailViewWithListView<Download> {
 
     private final FilterView.FilterGroup<Download> downloadTypeGroup = new FilterView.FilterGroup<>("Type");
     private final FilterView.FilterGroup<Download> fileTypeGroup = new FilterView.FilterGroup<>("File Type");
@@ -56,7 +56,7 @@ public class DownloadsDetailView extends DetailView<Download> {
             return false;
         });
 
-        PrettyListView<Download> listView = new PrettyListView<>();
+        listView = new PrettyListView<>();
         listView.setCellFactory(view -> new DownloadCell(rootPane, true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
@@ -64,8 +64,6 @@ public class DownloadsDetailView extends DetailView<Download> {
         sectionPane.getNodes().add(listView);
 
         setContent(sectionPane);
-
-        selectedItemProperty().addListener(it -> listView.getSelectionModel().select(getSelectedItem()));
 
         DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
 

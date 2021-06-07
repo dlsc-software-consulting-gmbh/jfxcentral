@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral.views.page;
 
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.util.PageUtil;
 import com.jpro.web.Util;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -18,10 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class TopMenu extends VBox {
 
@@ -41,19 +38,19 @@ public class TopMenu extends VBox {
         imageView.setPreserveRatio(true);
         imageView.getStyleClass().add("duke");
 
-        ToggleButton homeButton = createButton("Home", View.HOME, new FontIcon(Material.HOME));
-        ToggleButton newsButton = createButton("Latest News", View.NEWS, new FontIcon(Material.NOTES));
-        ToggleButton peopleButton = createButton("People", View.PEOPLE, new FontIcon(Material.PERSON));
-        ToggleButton companyButton = createButton("Companies", View.COMPANIES, new FontIcon(MaterialDesign.MDI_FACTORY));
-        ToggleButton blogsButton = createButton("Blogs", View.BLOGS, new FontIcon(FontAwesomeBrands.BLOGGER));
-        ToggleButton booksButton = createButton("Books", View.BOOKS, new FontIcon(FontAwesomeBrands.AMAZON));
-        ToggleButton tutorialsButton = createButton("Tutorials", View.TUTORIALS, new FontIcon(Material.SCHOOL));
-        ToggleButton libsButton = createButton("Libraries", View.LIBRARIES, new FontIcon(FontAwesomeBrands.GITHUB));
-        ToggleButton toolsButton = createButton("Tools", View.TOOLS, new FontIcon(FontAwesomeBrands.APP_STORE));
-        ToggleButton videosButton = createButton("Videos", View.VIDEOS, new FontIcon(FontAwesomeBrands.YOUTUBE));
-        ToggleButton openJfxButton = createButton("Open JFX", View.OPENJFX, new FontIcon(FontAwesomeBrands.JAVA));
-        ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REALWORLD, new FontIcon(Material.APPS));
-        ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(Material.FILE_DOWNLOAD));
+        ToggleButton homeButton = createButton("Home", View.HOME, new FontIcon(StandardIcons.HOME));
+        ToggleButton newsButton = createButton("Latest News", View.NEWS, new FontIcon(StandardIcons.NEWS));
+        ToggleButton peopleButton = createButton("People", View.PEOPLE, new FontIcon(StandardIcons.PERSON));
+        ToggleButton companyButton = createButton("Companies", View.COMPANIES, new FontIcon(StandardIcons.COMPANY));
+        ToggleButton blogsButton = createButton("Blogs", View.BLOGS, new FontIcon(StandardIcons.BLOG));
+        ToggleButton booksButton = createButton("Books", View.BOOKS, new FontIcon(StandardIcons.BOOK));
+        ToggleButton tutorialsButton = createButton("Tutorials", View.TUTORIALS, new FontIcon(StandardIcons.TUTORIAL));
+        ToggleButton libsButton = createButton("Libraries", View.LIBRARIES, new FontIcon(StandardIcons.LIBRARY));
+        ToggleButton toolsButton = createButton("Tools", View.TOOLS, new FontIcon(StandardIcons.TOOL));
+        ToggleButton videosButton = createButton("Videos", View.VIDEOS, new FontIcon(StandardIcons.VIDEO));
+        ToggleButton openJfxButton = createButton("Open JFX", View.OPENJFX, new FontIcon(StandardIcons.OPENJFX));
+        ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REAL_WORLD, new FontIcon(StandardIcons.REAL_WORLD));
+        ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(StandardIcons.DOWNLOAD));
 
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
@@ -100,7 +97,7 @@ public class TopMenu extends VBox {
             case NEWS:
                 toggleGroup.selectToggle(newsButton);
                 break;
-            case REALWORLD:
+            case REAL_WORLD:
                 toggleGroup.selectToggle(realWorldAppsButton);
                 break;
             case OPENJFX:
@@ -148,7 +145,7 @@ public class TopMenu extends VBox {
             } else if (newSelection == openJfxButton) {
                 changeView(View.OPENJFX);
             } else if (newSelection == realWorldAppsButton) {
-                changeView(View.REALWORLD);
+                changeView(View.REAL_WORLD);
             } else if (newSelection == peopleButton) {
                 changeView(View.PEOPLE);
             } else if (newSelection == companyButton) {

@@ -8,20 +8,16 @@ import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
-import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class PeopleMasterView extends MasterView<Person> {
-
-    private ListView<Person> listView = new ListView<>();
+public class PeopleMasterView extends MasterViewWithListView<Person> {
 
     public PeopleMasterView(RootPane rootPane) {
         super(rootPane, View.PEOPLE);
@@ -34,12 +30,7 @@ public class PeopleMasterView extends MasterView<Person> {
                 Comparator.comparing(Person::getName),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
 
-        bindListViewToSelectedItem(listView);
-
         setCenter(listView);
-
-        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
-        performDefaultSelection(listView);
     }
 
     class PersonCell extends AdvancedListCell<Person> {

@@ -33,6 +33,9 @@ public class DetailView<T extends ModelObject> extends BorderPane {
         centerProperty().bind(contentProperty());
     }
 
+    public void showItem(T item) {
+    }
+
     private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>(this, "selectedItem");
 
     public T getSelectedItem() {

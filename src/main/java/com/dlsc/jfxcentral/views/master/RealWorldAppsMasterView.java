@@ -8,10 +8,8 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
-import javafx.beans.Observable;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -19,13 +17,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class RealWorldAppsMasterView extends MasterView<RealWorldApp> {
-
-    private ListView<RealWorldApp> listView = new ListView<>();
-
+public class RealWorldAppsMasterView extends MasterViewWithListView<RealWorldApp> {
 
     public RealWorldAppsMasterView(RootPane rootPane) {
-        super(rootPane, View.REALWORLD);
+        super(rootPane, View.REAL_WORLD);
 
         getStyleClass().add("real-world-master-view");
 
@@ -38,12 +33,7 @@ public class RealWorldAppsMasterView extends MasterView<RealWorldApp> {
                         StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getCompany(), getFilterText())));
 
-        bindListViewToSelectedItem(listView);
-
         setCenter(listView);
-
-        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
-        performDefaultSelection(listView);
     }
 
     class RealWorldAppListCell extends AdvancedListCell<RealWorldApp> {

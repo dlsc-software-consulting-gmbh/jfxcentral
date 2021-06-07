@@ -12,7 +12,7 @@ import javafx.beans.binding.Bindings;
 public class RealWorldAppsPage extends Page<RealWorldApp> {
 
     public RealWorldAppsPage(RootPane rootPane) {
-        super(rootPane, View.REALWORLD);
+        super(rootPane, View.REAL_WORLD);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Real World Application - " + getSelectedItem().getName() :

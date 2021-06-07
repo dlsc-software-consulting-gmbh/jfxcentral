@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
 import java.util.Comparator;
@@ -34,17 +33,7 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
         setTop(header);
     }
 
-    protected void performDefaultSelection(ListView listView) {
-        if (!listView.getItems().isEmpty()) {
-            listView.getSelectionModel().select(0);
-        } else {
-            listView.getSelectionModel().clearSelection();
-        }
-    }
-
-    protected void bindListViewToSelectedItem(ListView<T> listView) {
-        listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
-        selectedItemProperty().addListener(it -> listView.getSelectionModel().select(getSelectedItem()));
+    public void showItem(T item) {
     }
 
     protected <T> FilteredList<T> createSortedAndFilteredList(ListProperty<T> booksProperty, Comparator<T> comparator, Predicate<T> predicate) {

@@ -2,17 +2,15 @@ package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
-import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,9 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
-public class BlogsMasterView extends MasterView<Blog> {
-
-    private ListView<Blog> listView = new ListView<>();
+public class BlogsMasterView extends MasterViewWithListView<Blog> {
 
     public BlogsMasterView(RootPane rootPane) {
         super(rootPane, View.BLOGS);
@@ -39,8 +35,6 @@ public class BlogsMasterView extends MasterView<Blog> {
 
         VBox.setVgrow(listView, Priority.ALWAYS);
 
-        bindListViewToSelectedItem(listView);
-
         Button button = new Button("Show all posts");
         button.setMaxWidth(Double.MAX_VALUE);
         button.setOnAction(evt -> listView.getSelectionModel().clearSelection());
@@ -53,9 +47,6 @@ public class BlogsMasterView extends MasterView<Blog> {
         vBox.getStyleClass().add("vbox");
 
         setCenter(vBox);
-
-        listView.getItems().addListener((Observable it) -> performDefaultSelection(listView));
-        performDefaultSelection(listView);
     }
 
     class BlogCell extends AdvancedListCell<Blog> {

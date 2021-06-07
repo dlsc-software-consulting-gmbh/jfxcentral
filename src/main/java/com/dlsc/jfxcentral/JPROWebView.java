@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
@@ -62,7 +63,7 @@ public class JPROWebView extends com.jpro.web.View {
         }
 
         Page currentPage = rootPane.getCurrentPage();
-        Object item = null;
+        ModelObject item = null;
 
         switch (view) {
             case BLOGS:
@@ -77,7 +78,7 @@ public class JPROWebView extends com.jpro.web.View {
             case PEOPLE:
                 item = DataRepository.getInstance().getPersonById(id).get();
                 break;
-            case REALWORLD:
+            case REAL_WORLD:
                 item = DataRepository.getInstance().getRealWorldAppById(id).get();
                 break;
             case TOOLS:

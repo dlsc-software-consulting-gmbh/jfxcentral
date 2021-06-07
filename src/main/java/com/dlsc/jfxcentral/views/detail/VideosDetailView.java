@@ -4,13 +4,13 @@ import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.gemsfx.FilterView;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
@@ -29,7 +29,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 import java.util.*;
 
-public class VideosDetailView extends DetailView<Video> {
+public class VideosDetailView extends DetailViewWithListView<Video> {
 
     private final FilterView.FilterGroup<Video> typeGroup = new FilterView.FilterGroup<>("Type");
     private final FilterView.FilterGroup<Video> eventGroup = new FilterView.FilterGroup<>("Event");
@@ -67,8 +67,6 @@ public class VideosDetailView extends DetailView<Video> {
         sectionPane.getNodes().add(listView);
 
         setContent(sectionPane);
-
-        selectedItemProperty().addListener(it -> listView.getSelectionModel().select(getSelectedItem()));
 
         DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
 
