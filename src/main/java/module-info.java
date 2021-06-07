@@ -26,6 +26,7 @@ open module jfxcentral {
     requires org.kordamp.ikonli.fontawesome5;
     requires org.apache.commons.lang3;
     requires jpro.web.core;
+    requires de.sandec.jmemorybuddy;
 
     exports com.dlsc.jfxcentral;
 

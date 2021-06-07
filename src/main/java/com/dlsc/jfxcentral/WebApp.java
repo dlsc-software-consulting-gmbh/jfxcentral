@@ -17,11 +17,19 @@ public class WebApp extends com.jpro.web.WebApp {
         });
 
         addRouteJava((s) -> {
+            if(s.startsWith("/?page=/jmemorybuddy")) {
+                return new JMemoryBuddyView();
+            } else {
+                return null;
+            }
+        });
+        addRouteJava((s) -> {
             if(s.startsWith("/?page=")) {
                 return new JPROWebView(s);
             } else {
                 return null;
             }
         });
+
     }
 }
