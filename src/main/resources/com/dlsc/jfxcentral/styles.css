@@ -34,11 +34,16 @@
     src: url("fonts/Pattaya-Regular.ttf");
 }
 
-
 @font-face {
     font-family: "JetBrains Mono";
     font-face-name: "JetBrains Mono Regular";
     src: url("fonts/JetBrainsMono-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Permanent Marker";
+    font-face-name: "Permanent Marker Regular";
+    src: url("fonts/PermanentMarker-Regular.ttf");
 }
 
 .root {
@@ -261,9 +266,17 @@
     -fx-background-color: -light-blue;
 }
 
+.root-pane .compass-image-wrapper {
+    -fx-background-color: linear-gradient(to bottom right, -light-blue, -fx-accent);
+    -fx-background-radius: 1000px;
+    -fx-effect: -drop-shadow-1;
+    -fx-translate-x: 40px;
+    -fx-translate-y: 10px;
+}
+
 .top-menu {
     -fx-spacing: 5px;
-    -fx-padding: 10px 10px 10px 0px;
+    -fx-padding: 80px 10px 10px 0px;
     -fx-background-color: -light-blue;
     -fx-border-color: rgba(0, 0, 0, .05);
     -fx-border-width: 0px 1px 0px 0px;
@@ -532,8 +545,9 @@
 .people-detail-view .title-section .hbox .vbox .description-label {
 }
 
-.people-detail-view .title-section .hbox .vbox .social-box {
-    -fx-spacing: 10px;
+.people-detail-view .title-section .hbox .vbox .links-box {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
 }
 
 /* Book Cell */
@@ -710,6 +724,11 @@
     -fx-spacing: 20px;
 }
 
+.libraries-detail-view .title-section .button-box {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
 .libraries-detail-view .title-section .hbox {
     -fx-spacing: 20px;
 }
@@ -728,10 +747,6 @@
 }
 
 .libraries-detail-view .title-section .hbox .vbox .description-label {
-}
-
-.libraries-detail-view .title-section .hbox .vbox .social-box {
-    -fx-spacing: 10px;
 }
 
 .libraries-detail-view .book-cell {
@@ -1853,7 +1868,7 @@
  */
 .header-pane {
     -fx-spacing: 10px;
-    -fx-padding: 0px 20px 0px 10px;
+    -fx-padding: 0px 20px 0px 180px;
     -fx-pref-height: 75px;
     -fx-background-color: derive(-fx-accent, +20%);
     /*linear-gradient(rgba(38, 40, 41, 1) 0%, rgba(59, 63, 65, 1) 100%);*/
@@ -1862,18 +1877,20 @@
 }
 
 .header-pane .title {
-    -fx-font-family: "Pattaya";
+    -fx-font-family: "Permanent Marker";
     -fx-font-size: 48px;
     -fx-text-fill: white;
     -fx-alignment: center-left;
+    -fx-effect: -drop-shadow-1;
 }
 
 .header-pane .title-shadow {
-    -fx-font-family: "Pattaya";
+    -fx-font-family: "Permanent Marker";
     -fx-font-size: 48px;
     -fx-text-fill: derive(-fx-accent, -50%);
     -fx-translate-x: 2px;
     -fx-translate-y: 2px;
+    -fx-effect: -drop-shadow-1;
 }
 
 /* ----------------------------------------------------------------------------

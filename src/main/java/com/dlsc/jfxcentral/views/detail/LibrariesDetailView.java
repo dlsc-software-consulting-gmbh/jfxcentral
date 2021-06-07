@@ -18,10 +18,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -33,7 +30,7 @@ import java.text.MessageFormat;
 
 public class LibrariesDetailView extends DetailView<Library> {
 
-    private HBox linksBox;
+    private FlowPane buttonBox;
     private ImageView iconView = new ImageView();
     private MarkdownView descriptionMarkdownView = new MarkdownView();
     private MarkdownView readmeMarkdownView = new MarkdownView();
@@ -155,10 +152,10 @@ public class LibrariesDetailView extends DetailView<Library> {
         descriptionMarkdownView.setHyperlinkCallback(link -> Util.browse(link));
         HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
 
-        linksBox = new HBox();
-        linksBox.getStyleClass().add("social-box");
+        buttonBox = new FlowPane();
+        buttonBox.getStyleClass().add("button-box");
 
-        VBox vBox = new VBox(descriptionMarkdownView, linksBox);
+        VBox vBox = new VBox(descriptionMarkdownView, buttonBox);
         vBox.getStyleClass().add("vbox");
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
@@ -220,14 +217,14 @@ public class LibrariesDetailView extends DetailView<Library> {
 
             iconView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
 
-            linksBox.getChildren().clear();
+            buttonBox.getChildren().clear();
 
             if (StringUtils.isNotEmpty(library.getHomepage())) {
                 Button twitter = new Button("Homepage");
                 twitter.getStyleClass().addAll("social-button", "homepage");
                 twitter.setOnAction(evt -> Util.browse(library.getHomepage()));
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
-                linksBox.getChildren().add(twitter);
+                buttonBox.getChildren().add(twitter);
             }
 
             if (StringUtils.isNotEmpty(library.getRepository())) {
@@ -235,7 +232,7 @@ public class LibrariesDetailView extends DetailView<Library> {
                 linkedIn.getStyleClass().addAll("social-button", "repository");
                 linkedIn.setOnAction(evt -> Util.browse(library.getRepository()));
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
-                linksBox.getChildren().add(linkedIn);
+                buttonBox.getChildren().add(linkedIn);
             }
 
             if (StringUtils.isNotEmpty(library.getIssueTracker())) {
@@ -243,7 +240,7 @@ public class LibrariesDetailView extends DetailView<Library> {
                 blog.getStyleClass().addAll("social-button", "issues");
                 blog.setOnAction(evt -> Util.browse(library.getIssueTracker()));
                 blog.setGraphic(new FontIcon(Material.BUG_REPORT));
-                linksBox.getChildren().add(blog);
+                buttonBox.getChildren().add(blog);
             }
 
             if (StringUtils.isNotEmpty(library.getDiscussionBoard())) {
@@ -251,7 +248,7 @@ public class LibrariesDetailView extends DetailView<Library> {
                 website.getStyleClass().addAll("social-button", "discussion");
                 website.setOnAction(evt -> Util.browse(library.getDiscussionBoard()));
                 website.setGraphic(new FontIcon(Material.COMMENT));
-                linksBox.getChildren().add(website);
+                buttonBox.getChildren().add(website);
             }
 
             if (StringUtils.isNotEmpty(library.getJavadocs())) {
@@ -259,7 +256,7 @@ public class LibrariesDetailView extends DetailView<Library> {
                 website.getStyleClass().addAll("social-button", "api");
                 website.setOnAction(evt -> Util.browse(library.getJavadocs()));
                 website.setGraphic(new FontIcon(Material.CODE));
-                linksBox.getChildren().add(website);
+                buttonBox.getChildren().add(website);
             }
 
             if (StringUtils.isNotEmpty(library.getDocumentation())) {
@@ -267,7 +264,7 @@ public class LibrariesDetailView extends DetailView<Library> {
                 website.getStyleClass().addAll("social-button", "docs");
                 website.setOnAction(evt -> Util.browse(library.getDocumentation()));
                 website.setGraphic(new FontIcon(Material.BOOK));
-                linksBox.getChildren().add(website);
+                buttonBox.getChildren().add(website);
             }
         }
     }

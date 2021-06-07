@@ -11,10 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -24,7 +21,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 // TODO:dl too many listeners on selected item
 public class PeopleDetailView extends DetailView<Person> {
 
-    private HBox linksBox;
+    private FlowPane linksBox;
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
     private MarkdownView descriptionMarkdownView = new MarkdownView();
@@ -199,8 +196,8 @@ public class PeopleDetailView extends DetailView<Person> {
         nameLabel.setGraphic(badgesBox);
         nameLabel.setContentDisplay(ContentDisplay.RIGHT);
 
-        linksBox = new HBox();
-        linksBox.getStyleClass().add("social-box");
+        linksBox = new FlowPane();
+        linksBox.getStyleClass().add("links-box");
 
         VBox vBox = new VBox(nameLabel, descriptionMarkdownView, badgesBox, linksBox);
         vBox.getStyleClass().add("vbox");

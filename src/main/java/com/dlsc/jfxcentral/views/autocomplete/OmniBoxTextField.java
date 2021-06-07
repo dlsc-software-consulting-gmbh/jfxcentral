@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral.views.autocomplete;
 
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
-import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -73,8 +72,6 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 		return omniBox;
 	}
 
-	private boolean applyingSearchResultSelection;
-
 	private boolean updateFieldWithSelectedResult = true;
 
 	public void setUpdateFieldWithSelectedResult(boolean updateFieldWithSelectedResult) {
@@ -88,14 +85,17 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 	private void init() {
 	    getStyleClass().add("omnibox-text-field");
 
+	    setFocusTraversable(false);
+
 		// work-around for bug in CustomTextField
 		setPrefWidth(0);
 		setMinWidth(0);
 
-		omniBox.getListView().getItems().addListener((Observable it) -> omniBox.getListView().setPrefWidth(Math.max(getWidth() - 2, omniBox.getListView().prefWidth(-1))));
+		omniBox.getListView().setPrefWidth(600);
+//		omniBox.getListView().getItems().addListener((Observable it) -> omniBox.getListView().setPrefWidth(Math.max(getWidth() - 2, omniBox.getListView().prefWidth(-1))));
 
 		textProperty().addListener(it -> {
-			if (!applyingSearchResultSelection && !isDisable() && !isDisabled()) {
+			if (!isDisable() && !isDisabled()) {
 				omniBox.setSearchText(getText());
 			}
 		});
@@ -165,7 +165,8 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 			((VBox) omniBox.getSkin().getNode()).requestLayout();
 			((VBox) omniBox.getSkin().getNode()).layout();
 			Point2D pos = getPrefPopupPosition(vBox);
-			omniBox.show(getScene().getWindow(), pos.getX(), pos.getY());
+//			omniBox.show(getScene().getWindow(), pos.getX(), pos.getY());
+			omniBox.show(getScene().getWindow(), localToScreen(getBoundsInLocal()).getMinX() + getWidth() - omniBox.getListView().getPrefWidth(), pos.getY());
 		}
 	}
 

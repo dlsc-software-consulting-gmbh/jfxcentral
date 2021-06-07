@@ -37,11 +37,11 @@ public class HomeDetailView extends DetailView {
         markdownView.mdStringProperty().bind(DataRepository.getInstance().homeTextProperty());
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
-        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
-        imageView.setFitHeight(100);
-        imageView.setPreserveRatio(true);
+//        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
+//        imageView.setFitHeight(100);
+//        imageView.setPreserveRatio(true);
 
-        HBox hBox = new HBox(markdownView, imageView);
+        HBox hBox = new HBox(markdownView);
 
         SectionPane sectionPane = new SectionPane(hBox);
         sectionPane.setTitle("Welcome");

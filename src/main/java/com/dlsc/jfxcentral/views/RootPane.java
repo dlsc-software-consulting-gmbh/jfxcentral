@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.views.page.*;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,17 @@ public class RootPane extends StackPane {
 
     public RootPane() {
         getStyleClass().add("root-pane");
+
+        ImageView compassImageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
+        compassImageView.getStyleClass().add("compass-image-view");
+        compassImageView.setFitWidth(100);
+        compassImageView.setPreserveRatio(true);
+
+        StackPane compassWrapper = new StackPane(compassImageView);
+        compassWrapper.getStyleClass().add("compass-image-wrapper");
+        compassWrapper.setPrefSize(120, 120);
+        compassWrapper.setMaxSize(120, 120);
+        StackPane.setAlignment(compassWrapper, Pos.TOP_LEFT);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(new HeaderPane(this));
@@ -80,7 +92,7 @@ public class RootPane extends StackPane {
                 default:
                     break;
             }
-            getChildren().setAll(borderPane);
+            getChildren().setAll(borderPane, compassWrapper, dialogPane);
             borderPane.setCenter(page);
         });
 
