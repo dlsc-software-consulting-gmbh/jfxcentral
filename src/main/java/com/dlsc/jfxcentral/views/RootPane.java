@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import java.util.Collections;
@@ -27,6 +28,10 @@ public class RootPane extends StackPane {
 
     public RootPane() {
         getStyleClass().add("root-pane");
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(new HeaderPane(this));
+        getChildren().setAll(borderPane, dialogPane);
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
@@ -75,7 +80,8 @@ public class RootPane extends StackPane {
                 default:
                     break;
             }
-            getChildren().setAll(page, dialogPane);
+            getChildren().setAll(borderPane);
+            borderPane.setCenter(page);
         });
 
         if (WebAPI.isBrowser()) {

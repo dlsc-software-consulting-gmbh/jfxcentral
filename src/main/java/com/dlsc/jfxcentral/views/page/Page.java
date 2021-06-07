@@ -17,7 +17,6 @@ import javafx.scene.layout.HBox;
 
 public class Page<T extends ModelObject> extends BorderPane {
 
-    private final HeaderPane headerPane;
     private final DetailScrollPane detailPane;
     private final TopMenu topMenu;
     private final RootPane rootPane;
@@ -32,13 +31,11 @@ public class Page<T extends ModelObject> extends BorderPane {
 
         getStyleClass().add(view.name().toLowerCase());
 
-        headerPane = new HeaderPane(rootPane);
         detailPane = new DetailScrollPane();
         detailPane.setContent(detailView = createDetailView());
 
         topMenu = new TopMenu(this);
 
-        setTop(headerPane);
         setCenter(detailPane);
 
         HBox leftSide = new HBox(wrap(topMenu));

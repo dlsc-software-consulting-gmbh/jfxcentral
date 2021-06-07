@@ -92,15 +92,6 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 		setPrefWidth(0);
 		setMinWidth(0);
 
-		omniBox.selectedSearchResultProperty().addListener(it -> {
-			if (omniBox.getSelectedSearchResult() != null && isUpdateFieldWithSelectedResult()) {
-				applyingSearchResultSelection = true;
-				setText(omniBox.getSelectedSearchResult().getText());
-				positionCaret(getText().length());
-				applyingSearchResultSelection = false;
-			}
-		});
-
 		omniBox.getListView().getItems().addListener((Observable it) -> omniBox.getListView().setPrefWidth(Math.max(getWidth() - 2, omniBox.getListView().prefWidth(-1))));
 
 		textProperty().addListener(it -> {

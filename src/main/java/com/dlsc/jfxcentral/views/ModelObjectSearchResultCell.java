@@ -1,11 +1,15 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.views.autocomplete.OmniBoxSearchField;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -16,7 +20,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
 
-    public ModelObjectSearchResultCell(RootPane rootPane) {
+    public ModelObjectSearchResultCell(OmniBoxSearchField searchField, RootPane rootPane) {
         getStyleClass().add("search-result-list-cell");
 
         VBox vBox = new VBox(titleLabel, subtitleLabel);
@@ -35,6 +39,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
         setPrefWidth(0);
 
         setOnMouseClicked(evt -> {
+            searchField.hideOmniBox();
             SearchResult<?> item = getItem();
             if (item != null) {
                 rootPane.open(item.getValue());

@@ -2009,27 +2009,39 @@
  * OmniBox
  */
 .omnibox-text-field {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-background-color: white;
     -fx-padding: 0 0 0 10;
     -fx-pref-width: 300;
+    -fx-background-radius: 1000px;
+    -fx-text-fill: -fx-accent;
+    -fx-background-insets: 0px;
+}
+
+.omnibox-text-field:focused {
+    -fx-background-insets: 0px;
+    -fx-background-color: white;
 }
 
 .omnibox-text-field .right-pane {
     -fx-padding: 0;
 }
 
-.omnibox-text-field .toggle-button {
-    -fx-background-radius: 0px 4px 4px 0px;
+.omnibox-text-field > * > * > .toggle-button {
+    -fx-background-color: derive(-fx-accent, -20%);
+    -fx-background-insets: 0px -2px 0px 0px; /* otherwise we see some white bg from text field */
+    -fx-background-radius: 0px 1000px 1000px 0px;
     -fx-max-height: infinity;
 }
 
-.omnibox-text-field .toggle-button:selected {
+.omnibox-text-field > * > * > .toggle-button:selected {
     -fx-background-color: grey;
     -fx-text-fill: white;
 }
 
 .omnibox-text-field .ikonli-font-icon {
-    -fx-icon-color: grey;
-    -fx-icon-size: 16px;
+    -fx-icon-color: -fx-accent;
+    -fx-icon-size: 24px;
 }
 
 .omnibox {
@@ -2062,6 +2074,7 @@
 }
 
 .omnibox .search-result-list-view .cell {
+    -fx-background-color: white;
     -fx-padding: 5;
     -fx-spacing: 10;
 }
@@ -2069,6 +2082,10 @@
 .omnibox .search-result-list-view .cell .label {
     -fx-text-alignment: left;
     -fx-alignment: top-left;
+}
+
+.omnibox .search-result-list-view .cell:focused {
+    -fx-background-color: white;
 }
 
 .omnibox .search-result-list-view .cell:selected .label {

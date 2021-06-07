@@ -46,7 +46,7 @@ public class HeaderPane extends HBox {
                 return searchResults;
             }
         });
-        searchField.getOmniBox().getListView().setCellFactory(view -> new ModelObjectSearchResultCell(rootPane));
+        searchField.getOmniBox().getListView().setCellFactory(view -> new ModelObjectSearchResultCell(searchField, rootPane));
 
         Label title1 = new Label("JFX-Central");
         title1.setMaxWidth(Double.MAX_VALUE);
