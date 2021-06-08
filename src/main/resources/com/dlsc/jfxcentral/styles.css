@@ -252,8 +252,8 @@
 }
 
 .root-wrapper {
-    /*-fx-background-color: derive(-fx-accent, +80%);*/
-    -fx-background-color: grey;
+    -fx-background-color: lightgrey;
+    -fx-background-image: url("brushed.jpg");
 }
 
 .root-pane {
