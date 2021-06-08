@@ -18,7 +18,7 @@ public class WebApp extends com.jpro.web.WebApp {
 
         addRouteJava((s) -> {
             if(s.startsWith("/?page=/memory")) {
-                return new JMemoryBuddyView();
+                return new MemoryView();
             } else {
                 return null;
             }
@@ -26,7 +26,7 @@ public class WebApp extends com.jpro.web.WebApp {
 
         addRouteJava((s) -> {
             if(s.startsWith("/?page=")) {
-                return new JPROWebView(s);
+                return new WebView(s);
             } else {
                 return null;
             }

@@ -17,7 +17,7 @@ import javafx.scene.layout.StackPane;
 import java.util.Collections;
 
 public class RootPane extends StackPane {
-    
+
     private final DialogPane dialogPane = new DialogPane();
 
     private Page<?> page;
@@ -29,15 +29,6 @@ public class RootPane extends StackPane {
         compassImageView.getStyleClass().add("logo-image-view");
         compassImageView.setFitWidth(128);
         compassImageView.setPreserveRatio(true);
-
-        double rnd = Math.random() * 3;
-        if (rnd < 1) {
-            compassImageView.getStyleClass().add("image1");
-        } else if (rnd < 2) {
-            compassImageView.getStyleClass().add("image2");
-        } else {
-            compassImageView.getStyleClass().add("image3");
-        }
 
         StackPane compassWrapper = new StackPane(compassImageView);
         compassWrapper.getStyleClass().add("logo-image-wrapper");

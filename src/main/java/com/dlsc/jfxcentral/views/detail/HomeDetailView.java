@@ -37,7 +37,7 @@ public class HomeDetailView extends DetailView {
         markdownView.mdStringProperty().bind(DataRepository.getInstance().homeTextProperty());
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
-//        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
+//        ImageView imageView = new ImageView(WebStarter.class.getResource("duke.png").toExternalForm());
 //        imageView.setFitHeight(100);
 //        imageView.setPreserveRatio(true);
 

@@ -14,7 +14,7 @@ public class IntroView extends StackPane {
     private final Pane pane;
     private final AudioClip plonkSound;
 
-    public IntroView(Pane pane) {
+    public IntroView(Pane pane, Runnable callback) {
         this.pane = pane;
 
         sceneProperty().addListener(it -> {
@@ -63,13 +63,17 @@ public class IntroView extends StackPane {
         thread.start();
 
         animationView.setCursor(Cursor.HAND);
-        animationView.setOnMouseClicked(evt -> showHome(getScene()));
+        animationView.setOnMouseClicked(evt -> {
+            callback.run();
+            showHome(getScene());
+        });
     }
 
     private void showHome(Scene scene) {
         plonkSound.setVolume(0);
         plonkSound.stop();
-        this.getScene().setRoot(pane);
+
+        getScene().setRoot(pane);
         scene.setFill(Color.rgb(224, 229, 234)); // reduce flickering
     }
 }

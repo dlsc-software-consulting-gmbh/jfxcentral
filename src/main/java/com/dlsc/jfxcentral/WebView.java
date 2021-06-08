@@ -10,11 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
 
-public class JPROWebView extends com.jpro.web.View {
+public class WebView extends com.jpro.web.View {
 
     String initialURL;
 
-    public JPROWebView(String initialURL) {
+    public WebView(String initialURL) {
         this.initialURL = initialURL;
     }
 
