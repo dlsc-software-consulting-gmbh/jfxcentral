@@ -234,8 +234,8 @@ public class NewsDetailView extends DetailViewWithListView<News> {
             VBox.setMargin(markdownView, new Insets(20, 0, 0, 0));
             VBox.setMargin(readMoreButton, new Insets(10, 0, 0, 0));
 
+            bannerView.setFitWidth(300);
             bannerView.setPreserveRatio(true);
-            bannerView.fitWidthProperty().bind(coverImageWidthProperty());
 
             itemProperty().addListener(it -> {
                 News item = getItem();
@@ -299,30 +299,12 @@ public class NewsDetailView extends DetailViewWithListView<News> {
 
         private final BooleanProperty showReadMoreLink = new SimpleBooleanProperty(this, "showReadMoreLink", false);
 
-        public boolean isShowReadMoreLink() {
-            return showReadMoreLink.get();
-        }
-
         public BooleanProperty showReadMoreLinkProperty() {
             return showReadMoreLink;
         }
 
         public void setShowReadMoreLink(boolean showReadMoreLink) {
             this.showReadMoreLink.set(showReadMoreLink);
-        }
-
-        private final DoubleProperty coverImageWidth = new SimpleDoubleProperty(this, "coverImageWidth", 300);
-
-        public double getCoverImageWidth() {
-            return coverImageWidth.get();
-        }
-
-        public DoubleProperty coverImageWidthProperty() {
-            return coverImageWidth;
-        }
-
-        public void setCoverImageWidth(double coverImageWidth) {
-            this.coverImageWidth.set(coverImageWidth);
         }
 
         @Override

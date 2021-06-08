@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
@@ -78,7 +79,7 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
         return selectedItem;
     }
 
-    public void setCellLink(Node cell, T item, ObservableList<Node> children) {
-        Util.setLink(cell, "/?page=/" + view.toString() + "/" + item.getId(), item.getId(), children);
+    public void setCellLink(Node cell, T item, String description, ObservableList<Node> children) {
+        Util.setLink(cell, PageUtil.getLink(item), description, children);
     }
 }

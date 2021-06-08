@@ -83,7 +83,7 @@ public class BlogsMasterView extends MasterViewWithListView<Blog> {
                 if (WebAPI.isBrowser()) {
                     setMouseTransparent(true);
                 }
-                setCellLink(getGraphic(), blog, getChildren());
+                setCellLink(getGraphic(), blog, blog.getSummary(), getChildren());
             } else {
                 label.setText("");
                 imageView.imageProperty().unbind();

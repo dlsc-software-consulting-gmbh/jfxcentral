@@ -57,7 +57,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         });
 
         listView = new PrettyListView<>();
-        listView.setCellFactory(view -> new DownloadCell(rootPane, true));
+        listView.setCellFactory(view -> new DownloadCell(true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);
@@ -173,11 +173,9 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         private final Label titleLabel = new Label();
         private final MarkdownView descriptionMarkdownView = new MarkdownView();
         private final ImageView imageView = new ImageView();
-        private final RootPane rootPane;
         private final HBox buttonBox;
 
-        public DownloadCell(RootPane rootPane, boolean insideListView) {
-            this.rootPane = rootPane;
+        public DownloadCell(boolean insideListView) {
 
             getStyleClass().add("download-cell");
 

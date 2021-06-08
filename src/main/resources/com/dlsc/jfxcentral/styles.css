@@ -266,8 +266,24 @@
     -fx-background-color: -light-blue;
 }
 
-.root-pane .compass-image-wrapper {
-    -fx-background-color: linear-gradient(to bottom right, -light-blue, -fx-accent);
+.root-pane .logo-image-view {
+}
+
+
+.root-pane .logo-image-view.image1 {
+    -fx-image: url("duke-stack.png");
+}
+
+.root-pane .logo-image-view.image2 {
+    -fx-image: url("duke-folder.png");
+}
+
+.root-pane .logo-image-view.image3 {
+    -fx-image: url("duke-drive.png");
+}
+
+.root-pane .logo-image-wrapper {
+    /*-fx-background-color: linear-gradient(to bottom right, -light-blue, -fx-accent);*/
     -fx-background-radius: 1000px;
     -fx-effect: -drop-shadow-1;
     -fx-translate-x: 40px;

@@ -123,7 +123,7 @@ public class PeopleMasterView extends MasterViewWithListView<Person> {
                     setMouseTransparent(true);
                 }
 
-                setCellLink(gridPane, person, getChildren());
+                setCellLink(gridPane, person, person.getName(), getChildren());
             } else {
                 nameLabel.setText("");
                 championLabel.setVisible(false);

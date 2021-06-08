@@ -296,7 +296,6 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
                 rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), webView, false);
                 webView.sceneProperty().addListener(it -> {
                     if (webView.getScene() == null) {
-                        System.out.println("Unloading");
                         webView.getEngine().loadContent("empty");
                     }
                 });

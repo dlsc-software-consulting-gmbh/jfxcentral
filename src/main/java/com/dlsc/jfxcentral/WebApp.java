@@ -10,7 +10,7 @@ public class WebApp extends com.jpro.web.WebApp {
 
         addRouteJava((s) -> {
             if(s.equals("") || s.equals("/")) {
-                return new com.jpro.web.Redirect("/?page=/PEOPLE/a.almiray");
+                return new com.jpro.web.Redirect("/?page=/HOME");
             } else {
                 return null;
             }

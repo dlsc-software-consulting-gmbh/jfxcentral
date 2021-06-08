@@ -2,11 +2,9 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
-import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.views.page.*;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
-import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
@@ -17,14 +15,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
 
 public class RootPane extends StackPane {
-
-    private final Map<Class<?>, Consumer<?>> openHandler = new HashMap<>();
-
+    
     private final DialogPane dialogPane = new DialogPane();
 
     private Page<?> page;
@@ -32,13 +25,22 @@ public class RootPane extends StackPane {
     public RootPane() {
         getStyleClass().add("root-pane");
 
-        ImageView compassImageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
-        compassImageView.getStyleClass().add("compass-image-view");
-        compassImageView.setFitWidth(100);
+        ImageView compassImageView = new ImageView();
+        compassImageView.getStyleClass().add("logo-image-view");
+        compassImageView.setFitWidth(128);
         compassImageView.setPreserveRatio(true);
 
+        double rnd = Math.random() * 3;
+        if (rnd < 1) {
+            compassImageView.getStyleClass().add("image1");
+        } else if (rnd < 2) {
+            compassImageView.getStyleClass().add("image2");
+        } else {
+            compassImageView.getStyleClass().add("image3");
+        }
+
         StackPane compassWrapper = new StackPane(compassImageView);
-        compassWrapper.getStyleClass().add("compass-image-wrapper");
+        compassWrapper.getStyleClass().add("logo-image-wrapper");
         compassWrapper.setPrefSize(120, 120);
         compassWrapper.setMaxSize(120, 120);
         StackPane.setAlignment(compassWrapper, Pos.TOP_LEFT);
@@ -131,31 +133,6 @@ public class RootPane extends StackPane {
 
     public DialogPane getDialogPane() {
         return dialogPane;
-    }
-
-    public <T> void registerOpenHandler(Class<T> clazz, Consumer<T> handler) {
-        openHandler.put(clazz, handler);
-    }
-
-    public void open(Object object) {
-        if (!open(object, object.getClass())) {
-            throw new RuntimeException("No handler found to open the item of type " + object.getClass().getSimpleName());
-        }
-    }
-
-    private boolean open(Object object, Class clazz) {
-        Consumer handler = openHandler.get(clazz);
-        if (handler != null) {
-            handler.accept(object);
-            return true;
-        } else {
-            clazz = clazz.getSuperclass();
-            if (clazz != null) {
-                return open(object, clazz);
-            }
-        }
-
-        return false;
     }
 
     public void showImage(String title, Image image) {

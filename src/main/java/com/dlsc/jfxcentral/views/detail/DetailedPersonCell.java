@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.data.model.Person;
@@ -17,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
+
+import java.util.Optional;
 
 public class DetailedPersonCell extends AdvancedListCell<Person> {
 
@@ -97,11 +100,14 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
             }
 
             if (StringUtils.isNotEmpty(person.getBlogId())) {
-                Button blog = new Button("Blog");
-                blog.getStyleClass().addAll("social-button", "blog");
-                Util.setLink(blog, "", "");
-                blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
-                socialBox.getChildren().add(blog);
+                Optional<Blog> blogById = DataRepository.getInstance().getBlogById(person.getBlogId());
+                if (blogById.isPresent()) {
+                    Button blog = new Button("Blog");
+                    blog.getStyleClass().addAll("social-button", "blog");
+                    Util.setLink(blog, blogById.get().getUrl(), blogById.get().getSummary());
+                    blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
+                    socialBox.getChildren().add(blog);
+                }
             }
 
             if (StringUtils.isNotEmpty(person.getWebsite())) {

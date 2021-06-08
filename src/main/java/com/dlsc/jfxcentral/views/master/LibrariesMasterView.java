@@ -110,9 +110,7 @@ public class LibrariesMasterView extends MasterViewWithListView<Library> {
                     setMouseTransparent(true);
                 }
 
-                //TODO:fk why not same method like the other cells?
-                com.jpro.web.Util.setLink(gridPane, "/?page=/LIBRARIES/" + library.getId(), library.getTitle(), getChildren());
-
+                setCellLink(gridPane, library, library.getSummary(), getChildren());
             } else {
                 nameLabel.setText("");
                 imageView.setVisible(false);

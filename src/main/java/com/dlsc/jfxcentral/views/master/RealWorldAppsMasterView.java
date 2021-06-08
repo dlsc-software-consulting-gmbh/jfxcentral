@@ -83,7 +83,7 @@ public class RealWorldAppsMasterView extends MasterViewWithListView<RealWorldApp
                     setMouseTransparent(true);
                 }
 
-                setCellLink(gridPane, app, this.getChildren());
+                setCellLink(gridPane, app, app.getName(), getChildren());
             } else {
                 nameLabel.setText("");
                 imageView.imageProperty().unbind();

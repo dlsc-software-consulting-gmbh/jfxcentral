@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.*;
 import javafx.beans.binding.Bindings;
@@ -302,12 +303,11 @@ public class PeopleDetailView extends DetailView<Person> {
             detailsButton = new Button("Details");
             detailsButton.getStyleClass().addAll("library-button", "details");
             detailsButton.setGraphic(new FontIcon(MaterialDesign.MDI_MORE));
-            detailsButton.setOnAction(evt -> getRootPane().open(getItem()));
+
             buttonBox.getChildren().add(detailsButton);
 
             visitButton = new Button("Visit");
             visitButton.getStyleClass().addAll("library-button", "visit");
-            Util.setLink(visitButton, getItem().getUrl(), getItem().getSummary());
             visitButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(visitButton);
 
@@ -344,6 +344,9 @@ public class PeopleDetailView extends DetailView<Person> {
 
                 buttonBox.setVisible(visitButton.isVisible() || detailsButton.isVisible());
                 buttonBox.setManaged(buttonBox.isVisible());
+
+                Util.setLink(detailsButton, PageUtil.getLink(item), item.getSummary());
+                Util.setLink(visitButton, item.getUrl(), item.getSummary());
             } else {
                 pageImageView.imageProperty().unbind();
                 pageImageView.setVisible(false);
@@ -393,18 +396,15 @@ public class PeopleDetailView extends DetailView<Person> {
             detailsButton = new Button("Details");
             detailsButton.getStyleClass().addAll("library-button", "details");
             detailsButton.setGraphic(new FontIcon(MaterialDesign.MDI_MORE));
-            detailsButton.setOnAction(evt -> getRootPane().open(getItem()));
             buttonBox.getChildren().add(detailsButton);
 
             homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
-            Util.setLink(homepageButton, getItem().getUrl(), getItem().getTitle());
             homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(homepageButton);
 
             amazonButton = new Button("Amazon");
             amazonButton.getStyleClass().addAll("library-button", "amazon");
-            Util.setLink(amazonButton, "http://www.amazon.com/dp/" + getItem().getAmazonASIN(), getItem().getTitle());
             amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
             buttonBox.getChildren().add(amazonButton);
 
@@ -447,6 +447,11 @@ public class PeopleDetailView extends DetailView<Person> {
 
                 buttonBox.setVisible(homepageButton.isVisible() || amazonButton.isVisible());
                 buttonBox.setManaged(buttonBox.isVisible());
+
+                Util.setLink(homepageButton, item.getUrl(), item.getTitle());
+                Util.setLink(detailsButton, PageUtil.getLink(item), item.getTitle());
+                Util.setLink(amazonButton, "http://www.amazon.com/dp/" + item.getAmazonASIN(), item.getTitle());
+
             } else {
                 coverImageView.imageProperty().unbind();
                 coverImageView.setVisible(false);
