@@ -1,24 +1,24 @@
 package com.dlsc.jfxcentral;
 
-import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.Display;
+import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.IntroView;
-import com.dlsc.jfxcentral.views.RootPane;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class WebStarter extends Application {
 
     /* workaround to load data before starting the application */
-    static Node workaround = new RootPane();
+    static {
+        DataRepository.getInstance();
+        ImageManager.getInstance();
+    }
 
     @Override
     public void start(Stage stage) {
@@ -29,8 +29,7 @@ public class WebStarter extends Application {
             root = new IntroView(app);
         }
 
-        Scene scene = new Scene(root, 1200, 800);
-        scene.setFill(Color.TRANSPARENT);
+        Scene scene = new Scene(root, 1200, 1200);
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
         stage.setScene(scene);

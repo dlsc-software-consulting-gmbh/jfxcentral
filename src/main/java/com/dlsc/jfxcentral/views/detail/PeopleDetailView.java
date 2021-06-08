@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.*;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -326,6 +327,10 @@ public class PeopleDetailView extends DetailView<Person> {
 
             setGraphic(hBox);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+            if (WebAPI.isBrowser()) {
+                setMouseTransparent(true);
+            }
         }
 
         @Override

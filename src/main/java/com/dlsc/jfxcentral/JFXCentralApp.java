@@ -8,6 +8,7 @@ import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class JFXCentralApp extends Application {
@@ -24,6 +25,7 @@ public class JFXCentralApp extends Application {
         wrapper.getStyleClass().add("root-wrapper");
 
         Scene scene = new Scene(wrapper);
+        scene.setFill(Color.rgb(68, 131, 160));
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
 //        scene.setOnKeyPressed(evt -> {
