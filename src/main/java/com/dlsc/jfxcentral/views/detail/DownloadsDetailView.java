@@ -228,9 +228,9 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
 
         private void downloadFile(Download.DownloadFile downloadFile) {
             if (StringUtils.isNotBlank(downloadFile.getUrl())) {
-                Util.browse(downloadFile.getUrl(), false);
+                Util.browse(this, downloadFile.getUrl(), false);
             } else {
-                Util.browse(DataRepository.getInstance().getBaseUrl() + "downloads/" + getItem().getId() + "/" + downloadFile.getFileName(), false);
+                Util.browse(this, DataRepository.getInstance().getBaseUrl() + "downloads/" + getItem().getId() + "/" + downloadFile.getFileName(), false);
             }
         }
 

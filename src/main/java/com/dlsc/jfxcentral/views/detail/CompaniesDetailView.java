@@ -59,7 +59,6 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
             setPrefWidth(0);
 
             homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
-            homepageButton.setOnAction(evt -> Util.browse(getItem().getHomepage()));
 
             titleLabel.getStyleClass().addAll("header2", "name-label");
             titleLabel.setWrapText(true);
@@ -106,6 +105,7 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
             super.updateItem(company, empty);
 
             if (!empty && company != null) {
+                Util.setLink(homepageButton, getItem().getHomepage(), getItem().getName());
                 titleLabel.setText(company.getName());
                 descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().companyDescriptionProperty(company));
                 thumbnailView.setVisible(true);

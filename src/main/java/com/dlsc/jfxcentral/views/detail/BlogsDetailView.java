@@ -184,7 +184,7 @@ public class BlogsDetailView extends DetailView<Blog> {
             setOnMouseClicked(evt -> {
                 if (evt.getClickCount() == 2 && evt.getButton() == MouseButton.PRIMARY) {
                     if (evt.isShiftDown()) {
-                        Util.browse(getItem().getSyndEntry().getLink());
+                        Util.browse(this, getItem().getSyndEntry().getLink());
                     } else {
                         showItem();
                     }
@@ -193,7 +193,7 @@ public class BlogsDetailView extends DetailView<Blog> {
         }
 
         private void showItem() {
-            Util.browse(getItem().getSyndEntry().getLink());
+            Util.browse(this, getItem().getSyndEntry().getLink());
         }
 
         @Override

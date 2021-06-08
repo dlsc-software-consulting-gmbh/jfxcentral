@@ -52,25 +52,21 @@ public class LibraryCell extends AdvancedListCell<Library> {
 
             homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
-            homepageButton.setOnAction(evt -> Util.browse(getItem().getHomepage()));
             homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(homepageButton);
 
             repositoryButton = new Button("Repository");
             repositoryButton.getStyleClass().addAll("library-button", "repository");
-            repositoryButton.setOnAction(evt -> Util.browse(getItem().getRepository()));
             repositoryButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
             buttonBox.getChildren().add(repositoryButton);
 
             issueTrackerButton = new Button("Issues");
             issueTrackerButton.getStyleClass().addAll("library-button", "issues");
-            issueTrackerButton.setOnAction(evt -> Util.browse(getItem().getIssueTracker()));
             issueTrackerButton.setGraphic(new FontIcon(MaterialDesign.MDI_BUG));
             buttonBox.getChildren().add(issueTrackerButton);
 
             discussionsButton = new Button("Discussion");
             discussionsButton.getStyleClass().addAll("library-button", "discussion");
-            discussionsButton.setOnAction(evt -> Util.browse(getItem().getDiscussionBoard()));
             discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
             buttonBox.getChildren().add(discussionsButton);
 
@@ -117,6 +113,11 @@ public class LibraryCell extends AdvancedListCell<Library> {
             super.updateItem(item, empty);
 
             if (!empty && item != null) {
+                Util.setLink(homepageButton, getItem().getHomepage(), getItem().getTitle());
+                Util.setLink(repositoryButton, getItem().getRepository(), getItem().getTitle());
+                Util.setLink(issueTrackerButton, getItem().getIssueTracker(), getItem().getTitle());
+                Util.setLink(discussionsButton, getItem().getDiscussionBoard(), getItem().getTitle());
+
                 licenseLabel.setLicense(item.getLicense());
                 licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
 

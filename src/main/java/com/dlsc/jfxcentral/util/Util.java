@@ -13,51 +13,59 @@ import java.net.URISyntaxException;
 
 public class Util {
 
-    public static WebAPI WEB_API;
-
     public static void setLink(Node node, String link, String desc) {
-        com.jpro.web.Util.setLink(node, link, desc);
+        if(link == null) return;
+        if(WebAPI.isBrowser()) {
+            com.jpro.web.Util.setLink(node, link, desc);
+        } else {
+            browseOnClick(node, link);
+        }
     }
 
     public static void setLink(Node node, String link, String desc, ObservableList<Node> parentChildren) {
+        if(link == null) return;
         com.jpro.web.Util.setLink(node, link, desc, parentChildren);
     }
 
-    public static void browse(String link) {
-        browse(link, true);
+    private static void browseOnClick(Node node, String link) {
+        node.setOnMouseClicked(e -> {
+            browse(node, link);
+        });
     }
 
-    public static void browse(String link, boolean tab) {
-        String url = StringUtils.deleteWhitespace(link);
-        BrowserService.create().ifPresentOrElse(service -> {
-            try {
-                service.launchExternalBrowser(url);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }, () -> {
-            if (WebAPI.isBrowser()) {
-                if (tab) {
-                    WEB_API.openURLAsTab(link);
-                } else {
-                    WEB_API.openURL(link);
-                }
+    public static void browse(Node node, String link) {
+        browse(node, link, true);
+    }
+    public static void browse(Node node, String link, boolean tab) {
+        if(link == null) return;
+        if(link.startsWith("/")) {
+            com.jpro.web.Util.gotoPage(node, link);
+        } else {
+            if(WebAPI.isBrowser()){
+                WebAPI.getWebAPI(node.getScene()).openURLAsTab(link);
             } else {
-                if (Desktop.isDesktopSupported()) {
+                BrowserService.create().ifPresentOrElse(service -> {
+                            try {
+                                service.launchExternalBrowser(link);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            }
+                        }, () -> {
+
                     Desktop desktop = Desktop.getDesktop();
                     if (desktop.isSupported(Desktop.Action.BROWSE)) {
                         try {
-                            desktop.browse(new URI(url));
+                            desktop.browse(new URI(link));
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (URISyntaxException e) {
                             e.printStackTrace();
                         }
                     }
-                }
+                });
             }
-        });
+        }
     }
 }

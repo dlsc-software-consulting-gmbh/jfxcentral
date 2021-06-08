@@ -226,7 +226,7 @@ public class PeopleDetailView extends DetailView<Person> {
             if (StringUtils.isNotEmpty(person.getTwitter())) {
                 Button twitter = new Button("Twitter");
                 twitter.getStyleClass().addAll("social-button", "twitter");
-                twitter.setOnAction(evt -> Util.browse("https://twitter.com/" + person.getTwitter()));
+                Util.setLink(twitter, "https://twitter.com/" + person.getTwitter(), person.getName());
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
                 linksBox.getChildren().add(twitter);
             }
@@ -234,10 +234,7 @@ public class PeopleDetailView extends DetailView<Person> {
             if (StringUtils.isNotEmpty(person.getLinkedIn())) {
                 Button linkedIn = new Button("LinkedIn");
                 linkedIn.getStyleClass().addAll("social-button", "linkedin");
-                linkedIn.setOnAction(evt -> {
-                    System.out.println("https://www.linkedin.com/in/" + person.getLinkedIn());
-                    Util.browse("https://www.linkedin.com/in/" + person.getLinkedIn());
-                });
+                Util.setLink(linkedIn, "https://www.linkedin.com/in/" + person.getLinkedIn(), person.getName());
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
                 linksBox.getChildren().add(linkedIn);
             }
@@ -245,7 +242,7 @@ public class PeopleDetailView extends DetailView<Person> {
             if (StringUtils.isNotEmpty(person.getBlogId())) {
                 Button blog = new Button("Blog");
                 blog.getStyleClass().addAll("social-button", "blog");
-                blog.setOnAction(evt -> Util.browse(""));
+                Util.setLink(blog, "", "");
                 blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
                 linksBox.getChildren().add(blog);
             }
@@ -253,7 +250,7 @@ public class PeopleDetailView extends DetailView<Person> {
             if (StringUtils.isNotEmpty(person.getWebsite())) {
                 Button website = new Button("Website");
                 website.getStyleClass().addAll("social-button", "website");
-                website.setOnAction(evt -> Util.browse(person.getWebsite()));
+                Util.setLink(website, person.getWebsite(), person.getName());
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
                 linksBox.getChildren().add(website);
             }
@@ -261,7 +258,7 @@ public class PeopleDetailView extends DetailView<Person> {
             if (StringUtils.isNotEmpty(person.getEmail())) {
                 Button website = new Button("Mail");
                 website.getStyleClass().addAll("social-button", "mail");
-                website.setOnAction(evt -> Util.browse("mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact"));
+                Util.setLink(website, "mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact", person.getName());
                 website.setGraphic(new FontIcon(Material.MAIL));
                 linksBox.getChildren().add(website);
             }
@@ -269,7 +266,7 @@ public class PeopleDetailView extends DetailView<Person> {
             if (StringUtils.isNotEmpty(person.getGitHub())) {
                 Button github = new Button("GitHub");
                 github.getStyleClass().addAll("social-button", "github");
-                github.setOnAction(evt -> Util.browse("https://github.com/" + person.getGitHub()));
+                Util.setLink(github, "https://github.com/" + person.getGitHub(), person.getName());
                 github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
                 linksBox.getChildren().add(github);
             }
@@ -310,7 +307,7 @@ public class PeopleDetailView extends DetailView<Person> {
 
             visitButton = new Button("Visit");
             visitButton.getStyleClass().addAll("library-button", "visit");
-            visitButton.setOnAction(evt -> Util.browse(getItem().getUrl()));
+            Util.setLink(visitButton, getItem().getUrl(), getItem().getSummary());
             visitButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(visitButton);
 
@@ -401,13 +398,13 @@ public class PeopleDetailView extends DetailView<Person> {
 
             homepageButton = new Button("Homepage");
             homepageButton.getStyleClass().addAll("library-button", "homepage");
-            homepageButton.setOnAction(evt -> Util.browse(getItem().getUrl()));
+            Util.setLink(homepageButton, getItem().getUrl(), getItem().getTitle());
             homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
             buttonBox.getChildren().add(homepageButton);
 
             amazonButton = new Button("Amazon");
             amazonButton.getStyleClass().addAll("library-button", "amazon");
-            amazonButton.setOnAction(evt -> Util.browse("http://www.amazon.com/dp/" + getItem().getAmazonASIN()));
+            Util.setLink(amazonButton, "http://www.amazon.com/dp/" + getItem().getAmazonASIN(), getItem().getTitle());
             amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
             buttonBox.getChildren().add(amazonButton);
 
