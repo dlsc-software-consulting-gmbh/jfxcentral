@@ -53,7 +53,7 @@ public class HomeDetailView extends DetailView {
     private void createRecentItemsSection() {
         AdvancedListView<ModelObject> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(10);
+        listView.setVisibleRowCount(8);
         listView.setCellFactory(view -> new RecentItemCell());
         listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);
@@ -61,7 +61,6 @@ public class HomeDetailView extends DetailView {
         SectionPane sectionPane = new SectionPane(listView);
         sectionPane.setTitle("Latest Additions & Updates");
         sectionPane.setSubtitle("Libraries, news, books, people, etc... that have recently been added or updated");
-        VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
         content.getChildren().add(sectionPane);
     }

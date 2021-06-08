@@ -5,8 +5,13 @@ import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.views.page.*;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -27,13 +32,22 @@ public class RootPane extends StackPane {
 
         ImageView compassImageView = new ImageView();
         compassImageView.getStyleClass().add("logo-image-view");
-        compassImageView.setFitWidth(128);
+
+        DoubleBinding imageSizeBinding = Bindings.createDoubleBinding(() -> {
+            if (isExpanded()) {
+                return 128d;
+            }
+            return 80d;
+        }, expandedProperty());
+
+        compassImageView.fitWidthProperty().bind(imageSizeBinding);
+        compassImageView.fitHeightProperty().bind(imageSizeBinding);
         compassImageView.setPreserveRatio(true);
 
         StackPane compassWrapper = new StackPane(compassImageView);
         compassWrapper.getStyleClass().add("logo-image-wrapper");
-        compassWrapper.setPrefSize(120, 120);
-        compassWrapper.setMaxSize(120, 120);
+        compassWrapper.maxWidthProperty().bind(compassImageView.fitWidthProperty());
+        compassWrapper.maxHeightProperty().bind(compassImageView.fitHeightProperty());
         StackPane.setAlignment(compassWrapper, Pos.TOP_LEFT);
 
         BorderPane borderPane = new BorderPane();
@@ -116,6 +130,27 @@ public class RootPane extends StackPane {
                 // determine user locale
             }
         });
+
+        expandedProperty().addListener(it -> updateExpandedPseudoClass());
+        updateExpandedPseudoClass();
+    }
+
+    private void updateExpandedPseudoClass() {
+        pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
+    }
+
+    private final BooleanProperty expanded = new SimpleBooleanProperty(this, "expanded", true);
+
+    public boolean isExpanded() {
+        return expanded.get();
+    }
+
+    public BooleanProperty expandedProperty() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded.set(expanded);
     }
 
     public Page<?> getCurrentPage() {

@@ -128,7 +128,7 @@
 
 .toggle-button,
 .button {
-    -fx-background-radius: 4px;
+    -fx-background-radius: 3px;
     -fx-background-color: -fx-accent;
     -fx-text-fill: white;
     -fx-font-family: "Open Sans Bold";
@@ -215,7 +215,7 @@
 
 .menu-button {
     -fx-background-color: -fx-accent;
-    -fx-background-radius: 4px;
+    -fx-background-radius: 3px;
 }
 
 .menu-button > .label {
@@ -254,10 +254,11 @@
 .root-wrapper {
     -fx-background-color: lightgrey;
     -fx-background-image: url("brushed.jpg");
+    -fx-padding: 20px 20px 0px 20px;
 }
 
 .root-pane {
-    -fx-effect: -drop-shadow-3;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .5), 20, 0.19, -1, 6);
 }
 
 .root-pane .top-spacer {
@@ -271,12 +272,16 @@
 }
 
 .root-pane .logo-image-wrapper {
-    /*-fx-background-color: linear-gradient(to bottom right, -light-blue, -fx-accent);*/
-    -fx-background-radius: 1000px;
     -fx-effect: -drop-shadow-1;
+    -fx-translate-x: 10px;
+    -fx-translate-y: 10px;
+}
+
+.root-pane:expanded .logo-image-wrapper {
     -fx-translate-x: 40px;
     -fx-translate-y: 10px;
 }
+
 
 .loading-view {
     -fx-background-color: -fx-accent;
@@ -310,8 +315,8 @@
 }
 
 .top-menu .toggle-button {
-    -fx-padding: 10px 30px 10px 15px;
-    -fx-background-radius: 0px 4px 4px 0px;
+    -fx-padding: 10px 15px 10px 15px;
+    -fx-background-radius: 0px 3px 3px 0px;
     -fx-background-padding: 0px;
     -fx-background-insets: 0px 5px 0px 0px;
     -fx-background-color: transparent;
@@ -325,6 +330,7 @@
 }
 
 .top-menu:expanded .toggle-button {
+    -fx-padding: 10px 30px 10px 15px;
 }
 
 .top-menu .toggle-button:hover,
@@ -528,7 +534,7 @@
 }
 
 .master-view-header .search-field {
-    -fx-background-radius: 4px;
+    -fx-background-radius: 3px;
     -fx-pref-width: 150px;
 }
 
@@ -946,10 +952,10 @@
  */
 .section-pane {
     -fx-background-color: white;
-    -fx-background-radius: 4px;
+    -fx-background-radius: 3px;
     -fx-border-color: #e0e0e0;
     -fx-border-width: 1;
-    -fx-border-radius: 4px;
+    -fx-border-radius: 3px;
     -fx-effect: -drop-shadow-3;
     -fx-padding: 20;
 }
@@ -1082,7 +1088,7 @@
 .section-pane .search-field {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
-    -fx-background-radius: 4px;
+    -fx-background-radius: 3px;
     -fx-padding: 0px 5px;
     -fx-prompt-text-fill: white;
     -fx-pref-height: 20px;
@@ -1178,7 +1184,7 @@
 .thumbnail-scroll-pane .thumbnail-box {
     -fx-spacing: 5px;
     -fx-background-color: rgb(245, 245, 245);
-    -fx-background-radius: 4px;
+    -fx-background-radius: 3px;
     -fx-padding: 10px;
     -fx-alignment: center-left;
 }
@@ -1579,7 +1585,7 @@
 }
 
 .markdown-heading-5 {
-    -fx-padding: 0px 0px 4px 0px !important;
+    -fx-padding: 0px 0px 3px 0px !important;
 }
 
 .markdown-heading-1 .markdown-text {
@@ -1744,7 +1750,7 @@
  */
 .root-pane > .dialog-panex > .content-pane {
     -fx-border-color: white;
-    -fx-border-radius: 4px;
+    -fx-border-radius: 3px;
     -fx-background-radius: 3px;
     -fx-background-color: rgba(0, 0, 0, 1) !important;
     -fx-effect: -drop-shadow-3;

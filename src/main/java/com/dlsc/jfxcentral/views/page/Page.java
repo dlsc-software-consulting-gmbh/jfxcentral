@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.PrettyScrollPane;
-import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.DetailView;
@@ -123,19 +122,5 @@ public class Page<T extends ModelObject> extends BorderPane {
 
     public RootPane getRootPane() {
         return rootPane;
-    }
-
-    private ObjectProperty<Display> display = new SimpleObjectProperty<>(this, "display");
-
-    public Display getDisplay() {
-        return display.get();
-    }
-
-    public ObjectProperty<Display> displayProperty() {
-        return display;
-    }
-
-    public void setDisplay(Display display) {
-        this.display.set(display);
     }
 }

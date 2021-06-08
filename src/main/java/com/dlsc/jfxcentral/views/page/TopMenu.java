@@ -27,6 +27,17 @@ public class TopMenu extends VBox {
     public TopMenu(Page page) {
         this.page = page;
 
+        expandedProperty().bind(Bindings.createBooleanBinding(() -> {
+            Display display = page.getRootPane().getDisplay();
+            if (display.equals(Display.DESKTOP) || display.equals(Display.WEB)) {
+                return page.getWidth() > 1000;
+            }
+
+            return true;
+        }, page.widthProperty()));
+
+        page.getRootPane().expandedProperty().bind(expandedProperty());
+
         getStyleClass().add("top-menu");
 
         setAlignment(Pos.TOP_CENTER);
@@ -171,18 +182,19 @@ public class TopMenu extends VBox {
         updateExpandedPseudoClass();
     }
 
-    private void changeView(View view) {
-        page.getRootPane().setView(view);
+    private void updateExpandedPseudoClass() {
+        System.out.println("expanded: " + isExpanded());
+        pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
     }
 
-    private void updateExpandedPseudoClass() {
-        pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
+    private void changeView(View view) {
+        page.getRootPane().setView(view);
     }
 
     private ToggleButton createButton(String name, View view, FontIcon icon) {
         ToggleButton button = new ToggleButton(name);
         button.contentDisplayProperty().bind(Bindings.createObjectBinding(() -> {
-            Display display = page.getDisplay();
+            Display display = page.getRootPane().getDisplay();
             if (display == null) {
                 return ContentDisplay.LEFT;
             }
@@ -193,16 +205,18 @@ public class TopMenu extends VBox {
                     // TODO: currently treated equal (tablet, phone).
                     return isExpanded() ? ContentDisplay.LEFT : ContentDisplay.GRAPHIC_ONLY;
                 case DESKTOP:
-                    return ContentDisplay.LEFT;
                 case WEB:
+                    if (isExpanded()) {
+                        return ContentDisplay.LEFT;
+                    }
+                    return ContentDisplay.GRAPHIC_ONLY;
                 default:
                     return ContentDisplay.LEFT;
             }
-        }, expandedProperty(), page.displayProperty()));
+        }, expandedProperty(), page.getRootPane().displayProperty()));
         button.setMaxWidth(Double.MAX_VALUE);
         button.setAlignment(Pos.CENTER_LEFT);
         button.setGraphic(wrap(icon));
-        button.setOnAction(evt -> setExpanded(false));
         Util.setLink(button, PageUtil.getLink(view), name);
         return button;
     }

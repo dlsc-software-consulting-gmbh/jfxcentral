@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.*;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -71,9 +72,9 @@ public class PeopleDetailView extends DetailView<Person> {
         selectedItemProperty().addListener(it -> {
             Person person = getSelectedItem();
             if (person != null) {
-                listView.itemsProperty().bind(DataRepository.getInstance().getBlogsByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getBlogsByPerson(getSelectedItem()));
             } else {
-                listView.getItems().clear();
+                listView.setItems(FXCollections.observableArrayList());
             }
         });
 
@@ -104,9 +105,9 @@ public class PeopleDetailView extends DetailView<Person> {
         selectedItemProperty().addListener(it -> {
             Person person = getSelectedItem();
             if (person != null) {
-                listView.itemsProperty().bind(DataRepository.getInstance().getBooksByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getBooksByPerson(getSelectedItem()));
             } else {
-                listView.getItems().clear();
+                listView.setItems(FXCollections.observableArrayList());
             }
         });
 
@@ -134,10 +135,10 @@ public class PeopleDetailView extends DetailView<Person> {
             Person person = getSelectedItem();
             if (person != null) {
                 sectionPane.setSubtitle("Sessions presented by " + person.getName());
-                listView.itemsProperty().bind(DataRepository.getInstance().getVideosByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getVideosByPerson(getSelectedItem()));
             } else {
                 sectionPane.setSubtitle("");
-                listView.getItems().clear();
+                listView.setItems(FXCollections.observableArrayList());
             }
         });
 
@@ -161,10 +162,10 @@ public class PeopleDetailView extends DetailView<Person> {
             Person person = getSelectedItem();
             if (person != null) {
                 sectionPane.setSubtitle("Libraries developed by " + person.getName());
-                listView.itemsProperty().bind(DataRepository.getInstance().getLibrariesByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getLibrariesByPerson(getSelectedItem()));
             } else {
                 sectionPane.setSubtitle("");
-                listView.getItems().clear();
+                listView.setItems(FXCollections.observableArrayList());
             }
         });
 
