@@ -278,6 +278,29 @@
     -fx-translate-y: 10px;
 }
 
+.loading-view {
+    -fx-background-color: -fx-accent;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.loading-view .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-size: 24px;
+}
+
+.loading-view .progress-bar .bar {
+    -fx-background-color: derive(-fx-accent, -20%);
+    -fx-background-insets: 2px;
+}
+
+.loading-view .progress-bar .track {
+    -fx-background-insets: 1px;
+    -fx-background-radius: 2px;
+    -fx-background-color: white;
+}
+
 .top-menu {
     -fx-spacing: 5px;
     -fx-padding: 80px 10px 10px 0px;

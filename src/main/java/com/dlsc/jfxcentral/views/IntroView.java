@@ -4,18 +4,15 @@ import com.dlsc.jfxcentral.JFXCentralApp;
 import com.gluonhq.attach.audio.AudioService;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 public class IntroView extends StackPane {
 
-    private final Pane pane;
     private final AudioClip plonkSound;
 
-    public IntroView(Pane pane, Runnable callback) {
-        this.pane = pane;
+    public IntroView(Runnable callback) {
 
         sceneProperty().addListener(it -> {
             Scene scene = getScene();
@@ -24,7 +21,7 @@ public class IntroView extends StackPane {
             }
         });
 
-        DukeAnimationView animationView = new DukeAnimationView(() -> showHome(getScene()));
+        DukeAnimationView animationView = new DukeAnimationView(callback);
 
         animationView.sceneProperty().addListener(it -> {
             if (animationView.getScene() != null) {
@@ -54,7 +51,7 @@ public class IntroView extends StackPane {
             // don't bother if user already clicked
             if (getScene() != null && !Boolean.getBoolean("mute")) {
                 plonkSound.setVolume(.2);
-                plonkSound.play();
+//                plonkSound.play();
             }
         });
 
@@ -63,17 +60,6 @@ public class IntroView extends StackPane {
         thread.start();
 
         animationView.setCursor(Cursor.HAND);
-        animationView.setOnMouseClicked(evt -> {
-            callback.run();
-            showHome(getScene());
-        });
-    }
-
-    private void showHome(Scene scene) {
-        plonkSound.setVolume(0);
-        plonkSound.stop();
-
-        getScene().setRoot(pane);
-        scene.setFill(Color.rgb(224, 229, 234)); // reduce flickering
+        animationView.setOnMouseClicked(evt -> callback.run());
     }
 }
