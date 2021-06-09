@@ -1,7 +1,5 @@
 package com.dlsc.jfxcentral.views.autocomplete;
 
-import javafx.animation.Animation;
-import javafx.animation.RotateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -18,7 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
+import org.kordamp.ikonli.material.Material;
 
 import java.time.Duration;
 import java.util.List;
@@ -100,31 +98,18 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 			}
 		});
 
-		FontIcon progressIcon = new FontIcon(MaterialDesign.MDI_RELOAD);
-		progressIcon.setVisible(false);
-
-		RotateTransition rotateTransition = new RotateTransition();
-		rotateTransition.setNode(progressIcon);
-		rotateTransition.setByAngle(360);
-		rotateTransition.setDuration(javafx.util.Duration.seconds(1));
-		rotateTransition.setCycleCount(Animation.INDEFINITE);
-
-		omniBox.searchRunningProperty().addListener(it -> {
-			if (omniBox.isSearchRunning()) {
-				progressIcon.setVisible(true);
-				rotateTransition.play();
-			} else {
-				rotateTransition.stop();
-				progressIcon.setVisible(false);
-			}
-		});
-
 		lookupButton.setOnMouseClicked(evt -> requestFocus());
 		lookupButton.setFocusTraversable(false);
 		lookupButton.setCursor(Cursor.DEFAULT);
 		lookupButton.selectedProperty().bindBidirectional(omniBox.findAllProperty());
 
-		HBox hBox = new HBox(10, progressIcon, lookupButton);
+		FontIcon clearSearch = new FontIcon(Material.CLEAR);
+		clearSearch.setOnMouseClicked(evt -> clear());
+		clearSearch.visibleProperty().bind(textProperty().isNotEmpty());
+		clearSearch.managedProperty().bind(textProperty().isNotEmpty());
+		clearSearch.setCursor(Cursor.DEFAULT);
+
+		HBox hBox = new HBox(10, clearSearch, lookupButton);
 		hBox.setAlignment(Pos.CENTER_RIGHT);
 		setRight(hBox);
 

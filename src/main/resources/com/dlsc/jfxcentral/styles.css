@@ -1497,6 +1497,45 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * TutorialsDetailView
+ */
+
+.tutorials-detail-view .tutorial-cell {
+}
+
+.tutorials-detail-view .tutorial-cell .commercial-label {
+    -fx-border-color: red;
+    -fx-text-fill: red;
+    -fx-border-radius: 3px;
+    -fx-padding: 0px 5px;
+    -fx-font-size: 10px;
+}
+
+.tutorials-detail-view .tutorial-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.tutorials-detail-view .tutorial-cell .thumbnail-wrapper {
+}
+
+.tutorials-detail-view .tutorial-cell .video-cell .hbox {
+    -fx-padding: 10px;
+}
+
+.tutorials-detail-view .tutorial-cell .hbox .vbox {
+    -fx-spacing: 20px;
+}
+
+.tutorials-detail-view .tutorial-cell .title-label {
+    -fx-font-size: 16px;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 10px;
+}
+
+.tutorials-detail-view .tutorial-cell .description-label {
+}
+
+/* ----------------------------------------------------------------------------
  * NewsDetailView
  */
 .news-detail-view .news-cell {
@@ -2091,7 +2130,8 @@
 
 .omnibox-text-field .ikonli-font-icon {
     -fx-icon-color: -fx-accent;
-    -fx-icon-size: 24px;
+    -fx-icon-size: 18px;
+    -fx-translate-x: 5px;
 }
 
 .omnibox {
@@ -2125,8 +2165,8 @@
 
 .omnibox .search-result-list-view .cell {
     -fx-background-color: white;
-    -fx-padding: 5;
-    -fx-spacing: 10;
+    -fx-padding: 5px 10px 5px 5px;
+    -fx-spacing: 5;
 }
 
 .omnibox .search-result-list-view .cell .label {
@@ -2144,7 +2184,7 @@
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox {
     -fx-alignment: center-left;
-    -fx-spacing: 20px;
+    -fx-spacing: 10px;
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .icon-wrapper {

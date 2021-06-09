@@ -13,7 +13,9 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.WeakInvalidationListener;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
@@ -37,6 +39,9 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
     private final FilterView.FilterGroup<Video> platformGroup = new FilterView.FilterGroup<>("Platform");
     private final FilterView.FilterGroup<Video> domainGroup = new FilterView.FilterGroup<>("Domain");
 
+    private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
+    private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
+
     public VideosDetailView(RootPane rootPane) {
         super(rootPane);
 
@@ -50,10 +55,11 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         filterView.setItems(DataRepository.getInstance().videosProperty());
         filterView.getFilterGroups().setAll(typeGroup, eventGroup, speakerGroup, platformGroup, domainGroup);
         filterView.setTextFilterProvider(text -> video -> {
-            if (video.getTitle().toLowerCase().contains(text)) {
+            if (StringUtils.containsAnyIgnoreCase(video.getTitle(), text)) {
                 return true;
             }
-            if (video.getDescription().toLowerCase().contains(text)) {
+
+            if (StringUtils.containsAnyIgnoreCase(video.getDescription(), text)) {
                 return true;
             }
             return false;
@@ -68,7 +74,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
 
         setContent(sectionPane);
 
-        DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
+        DataRepository.getInstance().videosProperty().addListener(weakUpdateFilterListener);
 
         updateFilters();
     }

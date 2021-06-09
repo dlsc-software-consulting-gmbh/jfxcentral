@@ -21,13 +21,19 @@ public class WebView extends com.jpro.web.View {
     @Override
     public String title() {
         Page currentPage = rootPane.getCurrentPage();
-        return currentPage.getTitle();
+        if (currentPage != null) {
+            return currentPage.getTitle();
+        }
+        return "";
     }
 
     @Override
     public String description() {
         Page currentPage = rootPane.getCurrentPage();
-        return currentPage.getDescription();
+        if (currentPage != null) {
+            return currentPage.getDescription();
+        }
+        return "";
     }
 
     @Override
@@ -49,7 +55,8 @@ public class WebView extends com.jpro.web.View {
     }
 
     // IF this returns true, we don't query for a new page
-    @Override public boolean handleURL(String s) {
+    @Override
+    public boolean handleURL(String s) {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
@@ -58,7 +65,7 @@ public class WebView extends com.jpro.web.View {
 
         rootPane.setView(view);
 
-        if(id == null) {
+        if (id == null) {
             return true;
         }
 
@@ -84,8 +91,24 @@ public class WebView extends com.jpro.web.View {
             case TOOLS:
                 item = DataRepository.getInstance().getToolById(id).get();
                 break;
+            case DOWNLOADS:
+                item = DataRepository.getInstance().getDownloadById(id).get();
+                break;
+            case VIDEOS:
+                item = DataRepository.getInstance().getVideoById(id).get();
+                break;
+            case NEWS:
+                item = DataRepository.getInstance().getNewsById(id).get();
+                break;
+            case COMPANIES:
+                item = DataRepository.getInstance().getCompanyById(id).get();
+                break;
+            case TUTORIALS:
+                item = DataRepository.getInstance().getTutorialById(id).get();
+                break;
         }
-        if(item != null) {
+
+        if (currentPage != null && item != null) {
             currentPage.setSelectedItem(item);
         }
 

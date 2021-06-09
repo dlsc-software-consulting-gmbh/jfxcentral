@@ -70,10 +70,6 @@ class ThumbnailScrollPane extends ScrollPane {
         return libraryInfo;
     }
 
-    public void setLibraryInfo(LibraryInfo libraryInfo) {
-        this.libraryInfo.set(libraryInfo);
-    }
-
     private void updateView() {
         thumbnailBox.getChildren().clear();
 

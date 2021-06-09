@@ -13,9 +13,13 @@ import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -36,6 +40,9 @@ public class NewsDetailView extends DetailViewWithListView<News> {
     private final FilterView.FilterGroup<News> personGroup = new FilterView.FilterGroup<>("Person");
     private final FilterView.FilterGroup<News> libraryGroup = new FilterView.FilterGroup<>("Library");
     private final FilterView.FilterGroup<News> timeGroup = new FilterView.FilterGroup<>("Publication Date");
+
+    private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
+    private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public NewsDetailView(RootPane rootPane) {
         super(rootPane);
@@ -75,7 +82,7 @@ public class NewsDetailView extends DetailViewWithListView<News> {
         sectionPane.getNodes().add(listView);
 
         setContent(sectionPane);
-        DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
+        DataRepository.getInstance().newsProperty().addListener(weakUpdateFilterListener);
 
         updateFilters();
 

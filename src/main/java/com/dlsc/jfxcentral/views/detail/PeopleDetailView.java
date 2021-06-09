@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.*;
+import com.dlsc.jfxcentral.views.page.StandardIcons;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -40,6 +41,7 @@ public class PeopleDetailView extends DetailView<Person> {
         createTitleBox();
         createBlogsBox();
         createBooksBox();
+        createTutorialsBox();
         createLibraryBox();
         createVideoBox();
 
@@ -106,6 +108,39 @@ public class PeopleDetailView extends DetailView<Person> {
             Person person = getSelectedItem();
             if (person != null) {
                 listView.setItems(DataRepository.getInstance().getBooksByPerson(getSelectedItem()));
+            } else {
+                listView.setItems(FXCollections.observableArrayList());
+            }
+        });
+
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
+    }
+
+    private void createTutorialsBox() {
+        AdvancedListView<Tutorial> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(1000);
+        listView.setCellFactory(view -> new PersonTutorialCell());
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Tutorials");
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> {
+            Person person = getSelectedItem();
+            if (person != null) {
+                return "Published by " + person.getName();
+            }
+            return "";
+        }, selectedItemProperty()));
+
+        sectionPane.getNodes().add(listView);
+
+        selectedItemProperty().addListener(it -> {
+            Person person = getSelectedItem();
+            if (person != null) {
+                listView.setItems(DataRepository.getInstance().getTutorialsByPerson(getSelectedItem()));
             } else {
                 listView.setItems(FXCollections.observableArrayList());
             }
@@ -461,6 +496,81 @@ public class PeopleDetailView extends DetailView<Person> {
             } else {
                 coverImageView.imageProperty().unbind();
                 coverImageView.setVisible(false);
+                buttonBox.setVisible(false);
+                buttonBox.setManaged(false);
+            }
+        }
+    }
+
+    class PersonTutorialCell extends AdvancedListCell<Tutorial> {
+
+        private final Button visitButton;
+
+        private Label titleLabel = new Label();
+        private Label summaryLabel = new Label();
+        private MarkdownView descriptionLabel = new MarkdownView();
+
+        private javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView();
+        private HBox buttonBox = new HBox();
+
+        public PersonTutorialCell() {
+            getStyleClass().add("tutorial-cell");
+
+            titleLabel.getStyleClass().addAll("header3", "title-label");
+            titleLabel.setMaxWidth(Double.MAX_VALUE);
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+            summaryLabel.getStyleClass().add("subtitle-label");
+            summaryLabel.setMaxWidth(Double.MAX_VALUE);
+            summaryLabel.setWrapText(true);
+            summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+            descriptionLabel.getStyleClass().add("description-label");
+            descriptionLabel.setMaxWidth(Double.MAX_VALUE);
+
+            buttonBox.getStyleClass().add("button-box");
+
+            visitButton = new Button("Visit Tutorial");
+            visitButton.getStyleClass().addAll("library-button", "details");
+            visitButton.setGraphic(new FontIcon(StandardIcons.TUTORIAL));
+            buttonBox.getChildren().add(visitButton);
+
+            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
+            titleLabel.setGraphicTextGap(20);
+
+            VBox vBox = new VBox(titleLabel, summaryLabel, descriptionLabel, buttonBox);
+            vBox.getStyleClass().add("vbox");
+            HBox.setHgrow(vBox, Priority.ALWAYS);
+
+            imageView.setFitWidth(100);
+            imageView.setPreserveRatio(true);
+
+            HBox hBox = new HBox(vBox, imageView);
+            hBox.getStyleClass().add("hbox");
+
+            setGraphic(hBox);
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        }
+
+        @Override
+        protected void updateItem(Tutorial item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (!empty && item != null) {
+                imageView.imageProperty().bind(ImageManager.getInstance().tutorialImageProperty(item));
+                imageView.setVisible(true);
+
+                titleLabel.setText(item.getName());
+                summaryLabel.setText(item.getSummary());
+
+                descriptionLabel.mdStringProperty().bind(DataRepository.getInstance().tutorialTextProperty(item));
+
+                Util.setLink(visitButton, item.getUrl(), item.getName());
+
+            } else {
+                imageView.imageProperty().unbind();
+                imageView.setVisible(false);
                 buttonBox.setVisible(false);
                 buttonBox.setManaged(false);
             }

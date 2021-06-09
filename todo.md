@@ -18,6 +18,7 @@
 - change order of companies
 - finish openjfx page
 - add TestFX to tools page
+- make CovidApp available as download (also on FlexGanttFX website)
 
 ### New Features
 - add "downloads" to PeopleDetailView

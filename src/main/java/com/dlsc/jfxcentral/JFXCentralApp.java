@@ -8,7 +8,6 @@ import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -50,9 +49,6 @@ public class JFXCentralApp extends Application {
             showHome(app, stage);
         } else {
             LoadingView loadingView = new LoadingView(() -> showHome(app, stage));
-
-            DataRepository.getInstance().progressProperty().addListener(it -> Platform.runLater(() -> loadingView.setProgress(DataRepository.getInstance().getProgress())));
-            DataRepository.getInstance().messageProperty().addListener(it -> Platform.runLater(() -> loadingView.setStatus(DataRepository.getInstance().getMessage())));
 
             Scene scene = stage.getScene();
             scene.setRoot(loadingView);

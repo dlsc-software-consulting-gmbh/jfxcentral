@@ -1,5 +1,9 @@
 package com.dlsc.jfxcentral.views;
 
+import com.dlsc.jfxcentral.data.DataRepository;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.WeakInvalidationListener;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,6 +13,14 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 
 public class LoadingView extends VBox {
+
+    private final InvalidationListener progressListener = it -> Platform.runLater(() -> setProgress(DataRepository.getInstance().getProgress()));
+
+    private final WeakInvalidationListener weakProgressListener = new WeakInvalidationListener(progressListener);
+
+    private final InvalidationListener statusListener = it -> Platform.runLater(() -> setStatus(DataRepository.getInstance().getMessage()));
+
+    private final WeakInvalidationListener weakStatusListener = new WeakInvalidationListener(statusListener);
 
     public LoadingView(Runnable callback) {
         getStyleClass().add("loading-view");
@@ -21,13 +33,17 @@ public class LoadingView extends VBox {
 
         getChildren().setAll(label, progressBar);
 
+        DataRepository.getInstance().progressProperty().addListener(weakProgressListener);
+        DataRepository.getInstance().messageProperty().addListener(weakStatusListener);
+
         progressProperty().addListener(it -> maybeCallCallback(callback));
         maybeCallCallback(callback);
     }
 
     private void maybeCallCallback(Runnable callback) {
-        System.out.println(getProgress());
         if (getProgress() >= 1) {
+            DataRepository.getInstance().progressProperty().removeListener(weakProgressListener);
+            DataRepository.getInstance().messageProperty().removeListener(weakStatusListener);
             callback.run();
         }
     }

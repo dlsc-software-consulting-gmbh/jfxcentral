@@ -10,7 +10,9 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.FilterUtil;
 import com.dlsc.jfxcentral.views.*;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.WeakInvalidationListener;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -39,6 +41,9 @@ public class OpenJFXDetailView extends DetailView {
 
     private VBox content = new VBox();
 
+    private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
+    private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
+
     public OpenJFXDetailView(RootPane rootPane) {
         super(rootPane);
 
@@ -50,7 +55,7 @@ public class OpenJFXDetailView extends DetailView {
         content.getChildren().add(new Region());
 
         setContent(content);
-        DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
+        DataRepository.getInstance().pullRequestsProperty().addListener(weakUpdateFilterListener);
 
         updateFilters();
     }
@@ -135,7 +140,7 @@ public class OpenJFXDetailView extends DetailView {
     }
 
     private void createHeader() {
-        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo.png").toExternalForm());
+        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo-text-only.png").toExternalForm());
         logo.setFitWidth(300);
         logo.setFitHeight(60);
         logo.setPreserveRatio(true);

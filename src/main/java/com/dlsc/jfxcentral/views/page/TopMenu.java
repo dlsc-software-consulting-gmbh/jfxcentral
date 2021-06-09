@@ -28,9 +28,13 @@ public class TopMenu extends VBox {
         this.page = page;
 
         expandedProperty().bind(Bindings.createBooleanBinding(() -> {
-            Display display = page.getRootPane().getDisplay();
-            if (display.equals(Display.DESKTOP) || display.equals(Display.WEB)) {
-                return page.getWidth() > 1000;
+            // important to only run this when the menu has been added to the scene,
+            // otherwise the logo will flicker
+            if (getScene() != null) {
+                Display display = page.getRootPane().getDisplay();
+                if (display.equals(Display.DESKTOP) || display.equals(Display.WEB)) {
+                    return page.getWidth() > 1000;
+                }
             }
 
             return true;
@@ -178,12 +182,14 @@ public class TopMenu extends VBox {
             }
         });
 
-        expandedProperty().addListener(it -> updateExpandedPseudoClass());
+        expandedProperty().addListener(it -> {
+            Thread.dumpStack();
+            updateExpandedPseudoClass();
+        });
         updateExpandedPseudoClass();
     }
 
     private void updateExpandedPseudoClass() {
-        System.out.println("expanded: " + isExpanded());
         pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
     }
 

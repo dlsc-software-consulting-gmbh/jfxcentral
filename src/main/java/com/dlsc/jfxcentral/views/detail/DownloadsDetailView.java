@@ -14,7 +14,9 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.WeakInvalidationListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -36,6 +38,9 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
     private final FilterView.FilterGroup<Download> fileTypeGroup = new FilterView.FilterGroup<>("File Type");
     private final FilterView.FilterGroup<Download> personGroup = new FilterView.FilterGroup<>("Person");
     private final FilterView.FilterGroup<Download> companyGroup = new FilterView.FilterGroup<>("Company");
+
+    private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
+    private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public DownloadsDetailView(RootPane rootPane) {
         super(rootPane);
@@ -65,8 +70,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
 
         setContent(sectionPane);
 
-        DataRepository.getInstance().videosProperty().addListener((Observable it) -> updateFilters());
-
+        DataRepository.getInstance().downloadsProperty().addListener(weakUpdateFilterListener);
         updateFilters();
     }
 

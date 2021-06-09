@@ -2,15 +2,15 @@ package com.dlsc.jfxcentral.views.master;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material.Material;
-
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import org.controlsfx.control.textfield.CustomTextField;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.material.Material;
 
 public class MasterViewHeader extends HBox {
 
@@ -25,12 +25,20 @@ public class MasterViewHeader extends HBox {
         backButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         backButton.getStyleClass().add("back-button");
 
-        TextField searchField = new TextField();
+        CustomTextField searchField = new CustomTextField();
         searchField.textProperty().bindBidirectional(filterText);
         searchField.getStyleClass().add("search-field");
         searchField.setMaxWidth(Double.MAX_VALUE);
         searchField.setPromptText("Search ....");
         HBox.setHgrow(searchField, Priority.ALWAYS);
+
+        FontIcon clearSearch = new FontIcon(Material.CLEAR);
+        clearSearch.setOnMouseClicked(evt -> searchField.clear());
+        clearSearch.visibleProperty().bind(searchField.textProperty().isNotEmpty());
+        clearSearch.managedProperty().bind(searchField.textProperty().isNotEmpty());
+        clearSearch.setCursor(Cursor.DEFAULT);
+
+        searchField.setRight(clearSearch);
 
         getChildren().addAll(searchField);
     }
