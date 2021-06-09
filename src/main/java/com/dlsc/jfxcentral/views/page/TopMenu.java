@@ -8,11 +8,13 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.PseudoClass;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -20,11 +22,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class TopMenu extends VBox {
+public class TopMenu extends ToolBar {
 
     private final Page page;
 
     public TopMenu(Page page) {
+        super();
+
+        setOrientation(Orientation.VERTICAL);
+
         this.page = page;
 
         expandedProperty().bind(Bindings.createBooleanBinding(() -> {
@@ -43,9 +49,6 @@ public class TopMenu extends VBox {
         page.getRootPane().expandedProperty().bind(expandedProperty());
 
         getStyleClass().add("top-menu");
-
-        setAlignment(Pos.TOP_CENTER);
-        setFillWidth(true);
 
         ImageView imageView = new ImageView();
         imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> isExpanded() ? 100d : 50d, expandedProperty()));
@@ -90,7 +93,7 @@ public class TopMenu extends VBox {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(
+        getItems().addAll(
                 homeButton,
                 newsButton,
                 openJfxButton,
@@ -182,10 +185,7 @@ public class TopMenu extends VBox {
             }
         });
 
-        expandedProperty().addListener(it -> {
-            Thread.dumpStack();
-            updateExpandedPseudoClass();
-        });
+        expandedProperty().addListener(it -> updateExpandedPseudoClass());
         updateExpandedPseudoClass();
     }
 

@@ -308,13 +308,21 @@
 
 .top-menu {
     -fx-spacing: 5px;
-    -fx-padding: 80px 10px 10px 0px;
+    -fx-padding: 30px 10px 10px 0px;
     -fx-background-color: -light-blue;
     -fx-border-color: rgba(0, 0, 0, .05);
     -fx-border-width: 0px 1px 0px 0px;
 }
 
-.top-menu .toggle-button {
+.top-menu:expanded {
+    -fx-padding: 80px 10px 10px 0px;
+}
+
+.top-menu .tool-bar-overflow-button {
+    -fx-translate-y: 70px; /* work around */
+}
+
+.top-menu > * > .toggle-button {
     -fx-padding: 10px 15px 10px 15px;
     -fx-background-radius: 0px 3px 3px 0px;
     -fx-background-padding: 0px;
@@ -329,30 +337,30 @@
     -fx-graphic-text-gap: 10px;
 }
 
-.top-menu:expanded .toggle-button {
+.top-menu:expanded > * > .toggle-button {
     -fx-padding: 10px 30px 10px 15px;
 }
 
-.top-menu .toggle-button:hover,
-.top-menu .toggle-button:hover:selected {
+.top-menu > * > .toggle-button:hover,
+.top-menu > * > .toggle-button:hover:selected {
     -fx-opacity: 1;
     -fx-background-color: -red;
     -fx-border-color: transparent transparent transparent derive(-red, -20%);
     -fx-text-fill: white;
 }
 
-.top-menu .toggle-button:pressed,
-.top-menu .toggle-button:pressed:selected {
+.top-menu > * > .toggle-button:pressed,
+.top-menu > * > .toggle-button:pressed:selected {
     -fx-opacity: 1;
     -fx-background-color: rgba(250, 0, 20, .5);
 }
 
-.top-menu .toggle-button:hover .icon-wrapper .ikonli-font-icon,
-.top-menu .toggle-button:hover:selected .icon-wrapper .ikonli-font-icon {
+.top-menu > * > .toggle-button:hover .icon-wrapper .ikonli-font-icon,
+.top-menu > * > .toggle-button:hover:selected .icon-wrapper .ikonli-font-icon {
     -fx-icon-color: white;
 }
 
-.top-menu .toggle-button:selected {
+.top-menu > * > .toggle-button:selected {
     -fx-opacity: 1;
     -fx-background-padding: 0px;
     -fx-background-color: -fx-accent;
@@ -361,16 +369,16 @@
     -fx-text-fill: white;
 }
 
-.top-menu .toggle-button .icon-wrapper {
+.top-menu > * > .toggle-button .icon-wrapper {
     -fx-pref-width: 32px;
 }
 
-.top-menu .toggle-button .icon-wrapper .ikonli-font-icon {
+.top-menu > * > .toggle-button .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: black;
 }
 
-.top-menu .toggle-button:selected .icon-wrapper .ikonli-font-icon {
+.top-menu > * > .toggle-button:selected .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: white;
 }
@@ -855,6 +863,19 @@
     -fx-border-width: 0.5;
     -fx-max-width: infinity;
     -fx-font-family: "JetBrains Mono Regular";
+}
+
+.libraries-detail-view .ensemble-pane {
+}
+
+.libraries-detail-view .ensemble-pane .hbox {
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.libraries-detail-view .ensemble-pane .hbox .label {
+    -fx-alignment: left;
+    -fx-font-family: "Open Sans SemiBold";
 }
 
 /* ----------------------------------------------------------------------------
@@ -1481,7 +1502,7 @@
     -fx-border-width: 2px;
 }
 
-.downloads-detail-view .video-cell .hbox {
+.downloads-detail-view .download-cell .hbox {
     -fx-padding: 10px;
 }
 
@@ -1518,7 +1539,7 @@
 .tutorials-detail-view .tutorial-cell .thumbnail-wrapper {
 }
 
-.tutorials-detail-view .tutorial-cell .video-cell .hbox {
+.tutorials-detail-view .tutorial-cell .hbox {
     -fx-padding: 10px;
 }
 

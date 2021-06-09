@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views.detail;
 
+import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
@@ -50,6 +51,7 @@ public class LibrariesDetailView extends DetailView<Library> {
         iconView.managedProperty().bind(iconView.imageProperty().isNotNull());
 
         createTitleBox();
+        createEnsembleBox();
         createScreenshotsBox();
         createCoordinatesBox();
         createReadmeBox();
@@ -90,6 +92,40 @@ public class LibrariesDetailView extends DetailView<Library> {
         sectionPane.getNodes().add(thumbnailScrollPane);
         sectionPane.visibleProperty().bind(thumbnailScrollPane.visibleProperty());
         sectionPane.managedProperty().bind(thumbnailScrollPane.managedProperty());
+
+        content.getChildren().add(sectionPane);
+    }
+
+    private void createEnsembleBox() {
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.getStyleClass().add("ensemble-pane");
+
+        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("jpro-logo.png").toExternalForm());
+        imageView.setFitHeight(48);
+        imageView.setPreserveRatio(true);
+
+        MarkdownView markdownView = new MarkdownView();
+        markdownView.setMinHeight(Region.USE_PREF_SIZE);
+
+        HBox.setHgrow(markdownView, Priority.ALWAYS);
+
+        selectedItemProperty().addListener(it -> {
+            Library selectedItem = getSelectedItem();
+            if (selectedItem != null) {
+                String url = "https://www.jfx-ensemble.com/?page=project/" + selectedItem.getTitle();
+                markdownView.setMdString("Online demos are available for this library on the JFX-Ensemble website. These demos can be [run in the browser](" + url + ") via JPro (free for open source projects).");
+                Util.setLink(markdownView, url, selectedItem.getTitle());
+                Util.setLink(imageView, url, selectedItem.getTitle());
+            }
+        });
+
+        HBox hBox = new HBox(imageView, markdownView);
+        hBox.getStyleClass().add("hbox");
+
+        sectionPane.getNodes().add(hBox);
+
+        sectionPane.visibleProperty().bind(Bindings.createBooleanBinding(() -> getSelectedItem() != null && getSelectedItem().isEnsemble(), selectedItemProperty()));
+        sectionPane.managedProperty().bind(Bindings.createBooleanBinding(() -> getSelectedItem() != null && getSelectedItem().isEnsemble(), selectedItemProperty()));
 
         content.getChildren().add(sectionPane);
     }
