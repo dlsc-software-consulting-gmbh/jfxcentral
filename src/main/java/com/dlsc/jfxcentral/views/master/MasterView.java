@@ -11,8 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.BorderPane;
 
+import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -79,7 +82,14 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
         return selectedItem;
     }
 
-    public void setCellLink(Node cell, T item, String description, ObservableList<Node> children) {
-        Util.setLink(cell, PageUtil.getLink(item), description, children);
+    public void setCellLink(ListCell cell, T item, String description) {
+        try {
+            Method method = Parent.class.getDeclaredMethod("getChildren");
+            method.setAccessible(true);
+            ObservableList<Node> children2 = (ObservableList<Node>) method.invoke(cell.getParent());
+            Util.setLink(cell, "/?page=/" + view.toString() + "/" + item.getId(), description, children2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

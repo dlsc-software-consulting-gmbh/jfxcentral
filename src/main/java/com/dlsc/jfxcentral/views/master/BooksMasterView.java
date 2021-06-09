@@ -66,7 +66,7 @@ public class BooksMasterView extends MasterViewWithListView<Book> {
                 if (WebAPI.isBrowser()) {
                     setMouseTransparent(true);
                 }
-                setCellLink(getGraphic(), book, book.getTitle(), getChildren());
+                setCellLink(this, book, book.getTitle());
             }
         }
     }
