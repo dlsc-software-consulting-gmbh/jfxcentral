@@ -110,7 +110,7 @@ public class LibrariesMasterView extends MasterViewWithListView<Library> {
                     setMouseTransparent(true);
                 }
 
-                setCellLink(gridPane, library, library.getSummary(), getChildren());
+                setCellLink(this, library, library.getSummary());
             } else {
                 nameLabel.setText("");
                 imageView.setVisible(false);

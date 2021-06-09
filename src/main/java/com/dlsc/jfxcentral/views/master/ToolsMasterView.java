@@ -92,7 +92,7 @@ public class ToolsMasterView extends MasterViewWithListView<Tool> {
                     setMouseTransparent(true);
                 }
 
-                setCellLink(gridPane, tool, tool.getSummary(), getChildren());
+                setCellLink(ToolListCell.this, tool, tool.getSummary());
             }
         }
     }
