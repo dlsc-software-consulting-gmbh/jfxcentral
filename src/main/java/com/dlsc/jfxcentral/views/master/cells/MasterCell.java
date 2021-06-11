@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral.views.master.cell;
+package com.dlsc.jfxcentral.views.master.cells;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.util.Util;

@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.master.cell.MasterPersonCell;
+import com.dlsc.jfxcentral.views.master.cells.MasterPersonCell;
 import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 

@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.master.cell.MasterRealWorldAppCell;
+import com.dlsc.jfxcentral.views.master.cells.MasterRealWorldAppCell;
 import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 

@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.master.cell.MasterToolCell;
+import com.dlsc.jfxcentral.views.master.cells.MasterToolCell;
 import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 
