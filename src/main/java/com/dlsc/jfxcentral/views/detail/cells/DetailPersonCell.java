@@ -30,7 +30,7 @@ public class DetailPersonCell extends DetailCell<Person> {
     private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
     public DetailPersonCell() {
-        getStyleClass().add("detailed-person-cell");
+        getStyleClass().add("detail-person-cell");
 
         photoView.setEditable(false);
 

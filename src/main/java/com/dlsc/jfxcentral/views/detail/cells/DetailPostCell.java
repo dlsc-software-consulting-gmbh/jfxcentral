@@ -29,7 +29,7 @@ public class DetailPostCell extends DetailCell<Post> {
     private ImageView imageView = new ImageView();
 
     public DetailPostCell() {
-        getStyleClass().add("post-cell");
+        getStyleClass().add("detail-post-cell");
 
         titleLabel.getStyleClass().add("title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);

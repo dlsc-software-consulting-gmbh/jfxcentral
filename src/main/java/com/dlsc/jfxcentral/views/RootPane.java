@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,8 +33,9 @@ public class RootPane extends StackPane {
     public RootPane() {
         getStyleClass().add("root-pane");
 
-        ImageView compassImageView = new ImageView();
-        compassImageView.getStyleClass().add("logo-image-view");
+        ImageView logoImageView = new ImageView();
+        logoImageView.getStyleClass().add("logo-image-view");
+        logoImageView.setCursor(Cursor.HAND);
 
         DoubleBinding imageSizeBinding = Bindings.createDoubleBinding(() -> {
             if (isExpanded()) {
@@ -42,16 +44,16 @@ public class RootPane extends StackPane {
             return 80d;
         }, expandedProperty());
 
-        compassImageView.fitWidthProperty().bind(imageSizeBinding);
-        compassImageView.fitHeightProperty().bind(imageSizeBinding);
-        compassImageView.setPreserveRatio(true);
+        logoImageView.fitWidthProperty().bind(imageSizeBinding);
+        logoImageView.fitHeightProperty().bind(imageSizeBinding);
+        logoImageView.setPreserveRatio(true);
 
-        Util.setLink(compassImageView, PageUtil.getLink(View.HOME), "Home");
+        Util.setLink(logoImageView, PageUtil.getLink(View.HOME), "Home");
 
-        StackPane compassWrapper = new StackPane(compassImageView);
+        StackPane compassWrapper = new StackPane(logoImageView);
         compassWrapper.getStyleClass().add("logo-image-wrapper");
-        compassWrapper.maxWidthProperty().bind(compassImageView.fitWidthProperty());
-        compassWrapper.maxHeightProperty().bind(compassImageView.fitHeightProperty());
+        compassWrapper.maxWidthProperty().bind(logoImageView.fitWidthProperty());
+        compassWrapper.maxHeightProperty().bind(logoImageView.fitHeightProperty());
         StackPane.setAlignment(compassWrapper, Pos.TOP_LEFT);
 
         BorderPane borderPane = new BorderPane();
@@ -59,6 +61,7 @@ public class RootPane extends StackPane {
         getChildren().setAll(borderPane, dialogPane);
 
         dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         DisplayService.create().ifPresentOrElse(service -> {
             if (service.isDesktop()) {

@@ -24,7 +24,7 @@ public class DetailDownloadCell extends DetailCell<Download> {
 
     public DetailDownloadCell(boolean largeThumbnail) {
 
-        getStyleClass().add("download-cell");
+        getStyleClass().add("detail-download-cell");
         setPrefWidth(0);
 
         titleLabel.getStyleClass().addAll("header3", "title-label");

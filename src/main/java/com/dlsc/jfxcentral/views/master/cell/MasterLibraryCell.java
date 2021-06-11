@@ -21,7 +21,7 @@ public class MasterLibraryCell extends MasterCell<Library> {
     private final GridPane gridPane;
 
     public MasterLibraryCell() {
-        getStyleClass().add("library-list-cell");
+        getStyleClass().add("master-library-list-cell");
 
         imageView.setFitHeight(30);
         imageView.setFitWidth(30);

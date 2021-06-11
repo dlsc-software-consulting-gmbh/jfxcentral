@@ -21,7 +21,7 @@ public class MasterToolCell extends AdvancedListCell<Tool> {
     private final GridPane gridPane;
 
     public MasterToolCell() {
-        getStyleClass().add("tool-list-cell");
+        getStyleClass().add("master-tool-list-cell");
 
         setPrefWidth(0);
 

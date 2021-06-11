@@ -26,7 +26,9 @@ public class JFXCentralApp extends Application {
 
         Scene scene = new Scene(root, 1200, 1200);
         scene.setFill(Color.rgb(68, 131, 160));
+
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         stage.centerOnScreen();
         stage.setTitle("JFX-Central");

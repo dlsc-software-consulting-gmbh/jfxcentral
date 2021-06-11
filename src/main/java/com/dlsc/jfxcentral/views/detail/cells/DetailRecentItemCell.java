@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral.views.detail;
+package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class RecentItemCell extends AdvancedListCell<ModelObject> {
+public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
     // TODO: web api locale lookup?
     private DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
 
@@ -23,8 +23,8 @@ public class RecentItemCell extends AdvancedListCell<ModelObject> {
     private Label subtitleLabel = new Label();
     private Label dateLabel = new Label();
 
-    public RecentItemCell() {
-        getStyleClass().add("recent-item-cell");
+    public DetailRecentItemCell() {
+        getStyleClass().add("detail-recent-item-cell");
 
         VBox vBox = new VBox(titleLabel, subtitleLabel);
         vBox.getStyleClass().add("vbox");

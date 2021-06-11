@@ -33,7 +33,7 @@ public class DetailBookCell extends DetailCell<Book> {
     private HBox buttonBox = new HBox();
 
     public DetailBookCell() {
-        getStyleClass().add("book-cell");
+        getStyleClass().add("detail-book-cell");
 
         titleLabel.getStyleClass().addAll("header3", "title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);

@@ -19,6 +19,7 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
 
     public MarkdownView() {
         getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
     }
 
     private final ObjectProperty<Consumer<Image>> onImageClick = new SimpleObjectProperty<>(this, "onImageClick");

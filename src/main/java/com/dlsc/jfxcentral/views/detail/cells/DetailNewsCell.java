@@ -37,7 +37,7 @@ public class DetailNewsCell extends DetailCell<News> {
 
         setPrefWidth(0);
 
-        getStyleClass().add("news-cell");
+        getStyleClass().add("detail-news-cell");
 
         readMoreButton.getStyleClass().add("read-more-button");
 

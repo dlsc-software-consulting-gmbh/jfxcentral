@@ -26,7 +26,7 @@ public class MasterPersonCell extends AdvancedListCell<Person> {
     private final GridPane gridPane;
 
     public MasterPersonCell() {
-        getStyleClass().add("person-list-cell");
+        getStyleClass().add("master-person-list-cell");
 
         photoView.setEditable(false);
         photoView.setPlaceholder(new Label("test"));

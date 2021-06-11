@@ -9,10 +9,7 @@ import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.dlsc.jfxcentral.views.detail.cells.DetailBlogCell;
-import com.dlsc.jfxcentral.views.detail.cells.DetailBookCell;
-import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
-import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
+import com.dlsc.jfxcentral.views.detail.cells.*;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
@@ -186,7 +183,7 @@ public class PeopleDetailView extends DetailView<Person> {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new LibraryCell(getRootPane()));
+        listView.setCellFactory(view -> new DetailLibraryCell(getRootPane()));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Libraries");

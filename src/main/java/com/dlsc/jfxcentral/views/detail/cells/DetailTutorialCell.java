@@ -28,7 +28,7 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
     public DetailTutorialCell(RootPane rootPane, boolean largeImage) {
         this.rootPane = rootPane;
 
-        getStyleClass().add("tutorial-cell");
+        getStyleClass().add("detail-tutorial-cell");
 
         setPrefWidth(0);
 

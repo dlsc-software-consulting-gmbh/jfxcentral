@@ -14,6 +14,7 @@ import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.cells.DetailNewsCell;
+import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
@@ -233,7 +234,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         AdvancedListView<ModelObject> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
-        listView.setCellFactory(view -> new RecentItemCell());
+        listView.setCellFactory(view -> new DetailRecentItemCell());
         listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);
 

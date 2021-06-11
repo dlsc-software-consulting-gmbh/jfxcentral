@@ -26,7 +26,7 @@ public class DetailCompanyCell extends DetailCell<Company> {
     public DetailCompanyCell(RootPane rootPane) {
         this.rootPane = rootPane;
 
-        getStyleClass().add("company-cell");
+        getStyleClass().add("detail-company-cell");
 
         setPrefWidth(0);
 

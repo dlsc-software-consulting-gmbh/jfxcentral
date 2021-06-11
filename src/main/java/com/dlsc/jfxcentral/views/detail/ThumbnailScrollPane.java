@@ -19,7 +19,7 @@ import javafx.scene.layout.StackPane;
 import java.util.Collections;
 import java.util.List;
 
-class ThumbnailScrollPane extends ScrollPane {
+public class ThumbnailScrollPane extends ScrollPane {
 
     private final HBox thumbnailBox;
     private final RootPane rootPane;

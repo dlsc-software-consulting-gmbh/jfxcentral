@@ -29,7 +29,7 @@ public class DetailBlogCell extends DetailCell<Blog> {
     private HBox buttonBox = new HBox();
 
     public DetailBlogCell() {
-        getStyleClass().add("blog-cell");
+        getStyleClass().add("detail-blog-cell");
 
         titleLabel.getStyleClass().addAll("header3", "title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);

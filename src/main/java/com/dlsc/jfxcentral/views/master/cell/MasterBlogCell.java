@@ -16,7 +16,7 @@ public class MasterBlogCell extends MasterCell<Blog> {
         private Label label = new Label();
 
         public MasterBlogCell() {
-            getStyleClass().add("blog-cell");
+            getStyleClass().add("master-blog-cell");
 
             imageView.setFitWidth(200);
             imageView.setFitHeight(200);

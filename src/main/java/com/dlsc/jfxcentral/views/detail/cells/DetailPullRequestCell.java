@@ -31,7 +31,7 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
     public DetailPullRequestCell(RootPane rootPane) {
         this.rootPane = rootPane;
 
-        getStyleClass().add("pull-request-list-cell");
+        getStyleClass().add("detail-pull-request-cell");
 
         setPrefWidth(0);
 

@@ -13,7 +13,7 @@ public class MasterBookCell extends MasterCell<Book> {
     private final ImageView coverImageView = new ImageView();
 
     public MasterBookCell() {
-        getStyleClass().add("book-list-cell");
+        getStyleClass().add("master-book-list-cell");
 
         coverImageView.setFitWidth(100);
         coverImageView.setPreserveRatio(true);

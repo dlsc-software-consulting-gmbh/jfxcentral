@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral.views.detail;
+package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.detail.ThumbnailScrollPane;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -17,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class LibraryCell extends AdvancedListCell<Library> {
+public class DetailLibraryCell extends AdvancedListCell<Library> {
 
     private final Button homepageButton;
     private final Button repositoryButton;
@@ -33,8 +34,8 @@ public class LibraryCell extends AdvancedListCell<Library> {
 
     private LicenseLabel licenseLabel = new LicenseLabel();
 
-    public LibraryCell(RootPane rootPane) {
-        getStyleClass().add("library-cell");
+    public DetailLibraryCell(RootPane rootPane) {
+        getStyleClass().add("detail-library-cell");
 
         titleLabel.getStyleClass().addAll("header3", "title-label");
         titleLabel.setWrapText(true);

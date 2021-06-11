@@ -18,7 +18,7 @@ public class MasterRealWorldAppCell extends MasterCell<RealWorldApp> {
     private final GridPane gridPane;
 
     public MasterRealWorldAppCell() {
-        getStyleClass().add("app-list-cell");
+        getStyleClass().add("master-app-list-cell");
 
         setPrefWidth(0);
 

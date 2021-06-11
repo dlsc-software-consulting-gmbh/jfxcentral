@@ -29,7 +29,7 @@ public class DetailVideoCell extends DetailCell<Video> {
     public DetailVideoCell(RootPane rootPane, boolean largeImage) {
         this.rootPane = rootPane;
 
-        getStyleClass().add("video-cell");
+        getStyleClass().add("detail-video-cell");
 
         setPrefWidth(0);
 
