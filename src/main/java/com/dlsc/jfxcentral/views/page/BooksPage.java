@@ -12,7 +12,7 @@ import javafx.beans.binding.Bindings;
 public class BooksPage extends Page<Book> {
 
     public BooksPage(RootPane rootPane) {
-        super(rootPane, View.HOME);
+        super(rootPane, View.BOOKS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Book - " + getSelectedItem().getTitle() :
