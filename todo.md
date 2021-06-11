@@ -2,9 +2,13 @@
 
 ### Florian
 
-- [ ] Finish links
-- [ ] Remove static WEB_API in Util Klasse
+- [X] Finish links
+- [X] Remove static WEB_API in Util Klasse
 - [ ] IconFont "OpenSans" seems to get loaded a lot causing flickering icons
+- [ ] TextFlow Bug -> PR OpenJFX
+- [ ] Pretty format URLs? (ohne ?page)
+- [ ] Hide Scrollbar (JPro Render Bug)
+- [ ] .....
 
 ### Views
 
