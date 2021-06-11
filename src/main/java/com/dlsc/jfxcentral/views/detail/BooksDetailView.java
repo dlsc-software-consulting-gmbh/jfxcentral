@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.detail.cells.DetailPersonCell;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -94,7 +95,7 @@ public class BooksDetailView extends DetailView<Book> {
 
         // authors section
         AdvancedListView<Person> authorListView = new AdvancedListView<>();
-        authorListView.setCellFactory(view -> new DetailedPersonCell());
+        authorListView.setCellFactory(view -> new DetailPersonCell());
         authorListView.setPaging(true);
         authorListView.setVisibleRowCount(1000);
         authorListView.setItems(authorsProperty());

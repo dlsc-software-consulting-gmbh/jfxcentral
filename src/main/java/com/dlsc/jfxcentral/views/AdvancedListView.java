@@ -303,13 +303,14 @@ public class AdvancedListView<T> extends StackPane {
                 cell.getStyleClass().add("advanced-list-cell");
                 cell.updateListView(listView);
 
+                box.getChildren().add(cell);
+
                 if (index < getItems().size()) {
                     cell.updateIndex(index);
                 } else {
                     cell.updateIndex(-1);
                 }
                 cell.updateSelected(listView.getSelectionModel().isSelected(index));
-                box.getChildren().add(cell);
 
                 if (index == endIndex - 1) {
                     cell.getStyleClass().add("last");

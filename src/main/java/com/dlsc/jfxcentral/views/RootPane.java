@@ -2,6 +2,8 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.page.*;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
@@ -44,6 +46,8 @@ public class RootPane extends StackPane {
         compassImageView.fitHeightProperty().bind(imageSizeBinding);
         compassImageView.setPreserveRatio(true);
 
+        Util.setLink(compassImageView, PageUtil.getLink(View.HOME), "Home");
+
         StackPane compassWrapper = new StackPane(compassImageView);
         compassWrapper.getStyleClass().add("logo-image-wrapper");
         compassWrapper.maxWidthProperty().bind(compassImageView.fitWidthProperty());
@@ -77,9 +81,6 @@ public class RootPane extends StackPane {
             switch (getView()) {
                 case HOME:
                     page = new HomePage(this);
-                    break;
-                case NEWS:
-                    page = new NewsPage(this);
                     break;
                 case OPENJFX:
                     page = new OpenJFXPage(this);

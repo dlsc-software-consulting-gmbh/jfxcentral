@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.data.model.*;
 import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.material.Material;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -12,7 +13,7 @@ public class StandardIcons {
     public static Ikon OPENJFX = FontAwesomeBrands.JAVA;
     public static Ikon BOOK = FontAwesomeBrands.AMAZON;
     public static Ikon BLOG = FontAwesomeBrands.BLOGGER;
-    public static Ikon TOOL = FontAwesomeBrands.APP_STORE;
+    public static Ikon TOOL = FontAwesome.GEAR;
     public static Ikon NEWS = Material.NOTES;
     public static Ikon LIBRARY = FontAwesomeBrands.GITHUB;
     public static Ikon VIDEO = FontAwesomeBrands.YOUTUBE;

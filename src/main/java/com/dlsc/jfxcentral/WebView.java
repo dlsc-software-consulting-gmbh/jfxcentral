@@ -97,9 +97,6 @@ public class WebView extends com.jpro.web.View {
             case VIDEOS:
                 item = DataRepository.getInstance().getVideoById(id).get();
                 break;
-            case NEWS:
-                item = DataRepository.getInstance().getNewsById(id).get();
-                break;
             case COMPANIES:
                 item = DataRepository.getInstance().getCompanyById(id).get();
                 break;

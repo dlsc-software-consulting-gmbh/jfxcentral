@@ -1,17 +1,11 @@
 package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.jpro.webapi.WebAPI;
-import javafx.geometry.Pos;
+import com.dlsc.jfxcentral.views.master.cell.MasterBlogCell;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -28,7 +22,7 @@ public class BlogsMasterView extends MasterViewWithListView<Blog> {
         getStyleClass().add("blogs-master-view");
 
         listView.setMinWidth(Region.USE_PREF_SIZE);
-        listView.setCellFactory(view -> new BlogCell());
+        listView.setCellFactory(view -> new MasterBlogCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
                 Comparator.comparing(Blog::getTitle),
                 blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getTitle(), getFilterText())));
@@ -47,47 +41,5 @@ public class BlogsMasterView extends MasterViewWithListView<Blog> {
         vBox.getStyleClass().add("vbox");
 
         setCenter(vBox);
-    }
-
-    class BlogCell extends AdvancedListCell<Blog> {
-
-        private ImageView imageView = new ImageView();
-        private Label label = new Label();
-
-        public BlogCell() {
-            getStyleClass().add("blog-cell");
-
-            imageView.setFitWidth(200);
-            imageView.setFitHeight(200);
-            imageView.setPreserveRatio(true);
-
-            label.getStyleClass().add("title-label");
-
-            VBox vbox = new VBox(imageView, label);
-            vbox.setAlignment(Pos.TOP_CENTER);
-
-            setGraphic(vbox);
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-            vbox.visibleProperty().bind(emptyProperty().not());
-        }
-
-        @Override
-        protected void updateItem(Blog blog, boolean empty) {
-            super.updateItem(blog, empty);
-
-            if (!empty && blog != null) {
-                label.setText(blog.getTitle());
-                imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
-
-                if (WebAPI.isBrowser()) {
-                    setMouseTransparent(true);
-                }
-                setCellLink(this, blog, blog.getSummary());
-            } else {
-                label.setText("");
-                imageView.imageProperty().unbind();
-            }
-        }
     }
 }

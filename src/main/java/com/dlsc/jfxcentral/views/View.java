@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral.views;
 
 public enum View {
     HOME,
-    NEWS,
     OPENJFX,
     PEOPLE,
     TUTORIALS,

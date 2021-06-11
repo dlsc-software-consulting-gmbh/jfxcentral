@@ -1,13 +1,12 @@
-package com.dlsc.jfxcentral.views.detail;
+package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.PhotoView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -21,7 +20,7 @@ import org.kordamp.ikonli.material.Material;
 
 import java.util.Optional;
 
-public class DetailedPersonCell extends AdvancedListCell<Person> {
+public class DetailPersonCell extends DetailCell<Person> {
 
     private HBox socialBox;
     private PhotoView photoView = new PhotoView();
@@ -30,7 +29,7 @@ public class DetailedPersonCell extends AdvancedListCell<Person> {
     private javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
     private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
 
-    public DetailedPersonCell() {
+    public DetailPersonCell() {
         getStyleClass().add("detailed-person-cell");
 
         photoView.setEditable(false);

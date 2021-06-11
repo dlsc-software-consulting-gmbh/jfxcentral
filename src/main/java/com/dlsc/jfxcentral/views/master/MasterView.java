@@ -1,10 +1,10 @@
 package com.dlsc.jfxcentral.views.master;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
@@ -84,9 +84,12 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
 
     public void setCellLink(ListCell cell, T item, String description) {
         try {
-            Method method = Parent.class.getDeclaredMethod("getChildren");
-            method.setAccessible(true);
-            ObservableList<Node> children2 = (ObservableList<Node>) method.invoke(cell.getParent());
+            ObservableList<Node> children2 = null;
+            if (WebAPI.isBrowser()) {
+                Method method = Parent.class.getDeclaredMethod("getChildren");
+                method.setAccessible(true);
+                children2 = (ObservableList<Node>) method.invoke(cell.getParent());
+            }
             Util.setLink(cell, "/?page=/" + view.toString() + "/" + item.getId(), description, children2);
         } catch (Exception e) {
             e.printStackTrace();

@@ -4,11 +4,15 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
-import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.*;
-import com.dlsc.jfxcentral.views.page.StandardIcons;
-import com.jpro.webapi.WebAPI;
+import com.dlsc.jfxcentral.views.AdvancedListView;
+import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.PhotoView;
+import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.detail.cells.DetailBlogCell;
+import com.dlsc.jfxcentral.views.detail.cells.DetailBookCell;
+import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
+import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
@@ -20,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 // TODO:dl too many listeners on selected item
 public class PeopleDetailView extends DetailView<Person> {
@@ -57,7 +60,7 @@ public class PeopleDetailView extends DetailView<Person> {
         AdvancedListView<Blog> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(1000);
-        listView.setCellFactory(view -> new PersonBlogCell());
+        listView.setCellFactory(view -> new DetailBlogCell());
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> listView.getItems().size() > 1 ? "Blogs" : "Blog", listView.itemsProperty()));
@@ -90,7 +93,7 @@ public class PeopleDetailView extends DetailView<Person> {
         AdvancedListView<Book> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(1000);
-        listView.setCellFactory(view -> new PersonBookCell());
+        listView.setCellFactory(view -> new DetailBookCell());
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Books");
@@ -123,7 +126,7 @@ public class PeopleDetailView extends DetailView<Person> {
         AdvancedListView<Tutorial> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(1000);
-        listView.setCellFactory(view -> new PersonTutorialCell());
+        listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Tutorials");
@@ -156,11 +159,7 @@ public class PeopleDetailView extends DetailView<Person> {
         AdvancedListView<Video> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> {
-            VideosDetailView.VideoCell videoCell = new VideosDetailView.VideoCell(getRootPane(), false);
-            videoCell.setCoverImageWidth(160);
-            return videoCell;
-        });
+        listView.setCellFactory(view -> new DetailVideoCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Videos");
@@ -307,272 +306,6 @@ public class PeopleDetailView extends DetailView<Person> {
                 Util.setLink(github, "https://github.com/" + person.getGitHub(), person.getName());
                 github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
                 linksBox.getChildren().add(github);
-            }
-        }
-    }
-
-    class PersonBlogCell extends AdvancedListCell<Blog> {
-
-        private final Button detailsButton;
-        private final Button visitButton;
-
-        private Label titleLabel = new Label();
-        private Label descriptionLabel = new Label();
-
-        private javafx.scene.image.ImageView pageImageView = new javafx.scene.image.ImageView();
-        private HBox buttonBox = new HBox();
-
-        public PersonBlogCell() {
-            getStyleClass().add("blog-cell");
-
-            titleLabel.getStyleClass().addAll("header3", "title-label");
-            titleLabel.setMaxWidth(Double.MAX_VALUE);
-            titleLabel.setWrapText(true);
-            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setMaxWidth(Double.MAX_VALUE);
-            descriptionLabel.setWrapText(true);
-            descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            buttonBox.getStyleClass().add("button-box");
-
-            detailsButton = new Button("Details");
-            detailsButton.getStyleClass().addAll("library-button", "details");
-            detailsButton.setGraphic(new FontIcon(MaterialDesign.MDI_MORE));
-
-            buttonBox.getChildren().add(detailsButton);
-
-            visitButton = new Button("Visit");
-            visitButton.getStyleClass().addAll("library-button", "visit");
-            visitButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
-            buttonBox.getChildren().add(visitButton);
-
-            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
-            titleLabel.setGraphicTextGap(20);
-
-            VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
-            vBox.getStyleClass().add("vbox");
-            HBox.setHgrow(vBox, Priority.ALWAYS);
-
-            pageImageView.setFitWidth(100);
-            pageImageView.setPreserveRatio(true);
-
-            HBox hBox = new HBox(vBox, pageImageView);
-            hBox.getStyleClass().add("hbox");
-
-            setGraphic(hBox);
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-            if (WebAPI.isBrowser()) {
-                setMouseTransparent(true);
-            }
-        }
-
-        @Override
-        protected void updateItem(Blog item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (!empty && item != null) {
-                pageImageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(item));
-                pageImageView.setVisible(true);
-
-                titleLabel.setText(item.getTitle());
-                descriptionLabel.setText(StringUtils.abbreviate(item.getSummary(), 250));
-
-                visitButton.setVisible(StringUtils.isNotEmpty(item.getUrl()));
-                visitButton.setManaged(StringUtils.isNotEmpty(item.getUrl()));
-
-                buttonBox.setVisible(visitButton.isVisible() || detailsButton.isVisible());
-                buttonBox.setManaged(buttonBox.isVisible());
-
-                Util.setLink(detailsButton, PageUtil.getLink(item), item.getSummary());
-                Util.setLink(visitButton, item.getUrl(), item.getSummary());
-            } else {
-                pageImageView.imageProperty().unbind();
-                pageImageView.setVisible(false);
-                buttonBox.setVisible(false);
-                buttonBox.setManaged(false);
-            }
-        }
-    }
-
-    class PersonBookCell extends AdvancedListCell<Book> {
-
-        private final Button detailsButton;
-        private final Button homepageButton;
-        private final Button amazonButton;
-
-        private Label titleLabel = new Label();
-        private Label subtitleLabel = new Label();
-        private Label authorsLabel = new Label();
-        private MarkdownView descriptionLabel = new MarkdownView();
-
-        private javafx.scene.image.ImageView coverImageView = new javafx.scene.image.ImageView();
-        private HBox buttonBox = new HBox();
-
-        public PersonBookCell() {
-            getStyleClass().add("book-cell");
-
-            titleLabel.getStyleClass().addAll("header3", "title-label");
-            titleLabel.setMaxWidth(Double.MAX_VALUE);
-            titleLabel.setWrapText(true);
-            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            subtitleLabel.getStyleClass().add("subtitle-label");
-            subtitleLabel.setMaxWidth(Double.MAX_VALUE);
-            subtitleLabel.setWrapText(true);
-            subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            authorsLabel.getStyleClass().add("authors-label");
-            authorsLabel.setMaxWidth(Double.MAX_VALUE);
-            authorsLabel.setWrapText(true);
-            authorsLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setMaxWidth(Double.MAX_VALUE);
-
-            buttonBox.getStyleClass().add("button-box");
-
-            detailsButton = new Button("Details");
-            detailsButton.getStyleClass().addAll("library-button", "details");
-            detailsButton.setGraphic(new FontIcon(MaterialDesign.MDI_MORE));
-            buttonBox.getChildren().add(detailsButton);
-
-            homepageButton = new Button("Homepage");
-            homepageButton.getStyleClass().addAll("library-button", "homepage");
-            homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
-            buttonBox.getChildren().add(homepageButton);
-
-            amazonButton = new Button("Amazon");
-            amazonButton.getStyleClass().addAll("library-button", "amazon");
-            amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
-            buttonBox.getChildren().add(amazonButton);
-
-            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
-            titleLabel.setGraphicTextGap(20);
-
-            VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, descriptionLabel, buttonBox);
-            vBox.getStyleClass().add("vbox");
-            HBox.setHgrow(vBox, Priority.ALWAYS);
-
-            coverImageView.setFitWidth(100);
-            coverImageView.setPreserveRatio(true);
-
-            HBox hBox = new HBox(vBox, coverImageView);
-            hBox.getStyleClass().add("hbox");
-
-            setGraphic(hBox);
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        }
-
-        @Override
-        protected void updateItem(Book item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (!empty && item != null) {
-                coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(item));
-                coverImageView.setVisible(true);
-
-                titleLabel.setText(item.getTitle());
-                subtitleLabel.setText(item.getSubtitle());
-                authorsLabel.setText(item.getAuthors());
-
-                descriptionLabel.mdStringProperty().bind(DataRepository.getInstance().bookTextProperty(item));
-
-                homepageButton.setVisible(StringUtils.isNotEmpty(item.getUrl()));
-                homepageButton.setManaged(StringUtils.isNotEmpty(item.getUrl()));
-
-                amazonButton.setVisible(StringUtils.isNotEmpty(item.getAmazonASIN()));
-                amazonButton.setManaged(StringUtils.isNotEmpty(item.getAmazonASIN()));
-
-                buttonBox.setVisible(homepageButton.isVisible() || amazonButton.isVisible());
-                buttonBox.setManaged(buttonBox.isVisible());
-
-                Util.setLink(homepageButton, item.getUrl(), item.getTitle());
-                Util.setLink(detailsButton, PageUtil.getLink(item), item.getTitle());
-                Util.setLink(amazonButton, "http://www.amazon.com/dp/" + item.getAmazonASIN(), item.getTitle());
-
-            } else {
-                coverImageView.imageProperty().unbind();
-                coverImageView.setVisible(false);
-                buttonBox.setVisible(false);
-                buttonBox.setManaged(false);
-            }
-        }
-    }
-
-    class PersonTutorialCell extends AdvancedListCell<Tutorial> {
-
-        private final Button visitButton;
-
-        private Label titleLabel = new Label();
-        private Label summaryLabel = new Label();
-        private MarkdownView descriptionLabel = new MarkdownView();
-
-        private javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView();
-        private HBox buttonBox = new HBox();
-
-        public PersonTutorialCell() {
-            getStyleClass().add("tutorial-cell");
-
-            titleLabel.getStyleClass().addAll("header3", "title-label");
-            titleLabel.setMaxWidth(Double.MAX_VALUE);
-            titleLabel.setWrapText(true);
-            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            summaryLabel.getStyleClass().add("subtitle-label");
-            summaryLabel.setMaxWidth(Double.MAX_VALUE);
-            summaryLabel.setWrapText(true);
-            summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
-
-            descriptionLabel.getStyleClass().add("description-label");
-            descriptionLabel.setMaxWidth(Double.MAX_VALUE);
-
-            buttonBox.getStyleClass().add("button-box");
-
-            visitButton = new Button("Visit Tutorial");
-            visitButton.getStyleClass().addAll("library-button", "details");
-            visitButton.setGraphic(new FontIcon(StandardIcons.TUTORIAL));
-            buttonBox.getChildren().add(visitButton);
-
-            titleLabel.setContentDisplay(ContentDisplay.RIGHT);
-            titleLabel.setGraphicTextGap(20);
-
-            VBox vBox = new VBox(titleLabel, summaryLabel, descriptionLabel, buttonBox);
-            vBox.getStyleClass().add("vbox");
-            HBox.setHgrow(vBox, Priority.ALWAYS);
-
-            imageView.setFitWidth(100);
-            imageView.setPreserveRatio(true);
-
-            HBox hBox = new HBox(vBox, imageView);
-            hBox.getStyleClass().add("hbox");
-
-            setGraphic(hBox);
-            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        }
-
-        @Override
-        protected void updateItem(Tutorial item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (!empty && item != null) {
-                imageView.imageProperty().bind(ImageManager.getInstance().tutorialImageProperty(item));
-                imageView.setVisible(true);
-
-                titleLabel.setText(item.getName());
-                summaryLabel.setText(item.getSummary());
-
-                descriptionLabel.mdStringProperty().bind(DataRepository.getInstance().tutorialTextProperty(item));
-
-                Util.setLink(visitButton, item.getUrl(), item.getName());
-
-            } else {
-                imageView.imageProperty().unbind();
-                imageView.setVisible(false);
-                buttonBox.setVisible(false);
-                buttonBox.setManaged(false);
             }
         }
     }

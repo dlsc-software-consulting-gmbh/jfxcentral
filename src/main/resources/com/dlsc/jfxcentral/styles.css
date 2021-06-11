@@ -84,6 +84,7 @@
 }
 
 .advanced-list-cell {
+    -fx-padding: 5px 0px 10px 0px;
 }
 
 .header1 {
@@ -322,7 +323,7 @@
     -fx-translate-y: 70px; /* work around */
 }
 
-.top-menu > * > .toggle-button {
+.top-menu > * > * > .toggle-button {
     -fx-padding: 10px 15px 10px 15px;
     -fx-background-radius: 0px 3px 3px 0px;
     -fx-background-padding: 0px;
@@ -337,30 +338,30 @@
     -fx-graphic-text-gap: 10px;
 }
 
-.top-menu:expanded > * > .toggle-button {
+.top-menu:expanded > * > * > .toggle-button {
     -fx-padding: 10px 30px 10px 15px;
 }
 
-.top-menu > * > .toggle-button:hover,
-.top-menu > * > .toggle-button:hover:selected {
+.top-menu > * > * > .toggle-button:hover,
+.top-menu > * > * > .toggle-button:hover:selected {
     -fx-opacity: 1;
     -fx-background-color: -red;
     -fx-border-color: transparent transparent transparent derive(-red, -20%);
     -fx-text-fill: white;
 }
 
-.top-menu > * > .toggle-button:pressed,
-.top-menu > * > .toggle-button:pressed:selected {
+.top-menu > * > * > .toggle-button:pressed,
+.top-menu > * > * > .toggle-button:pressed:selected {
     -fx-opacity: 1;
     -fx-background-color: rgba(250, 0, 20, .5);
 }
 
-.top-menu > * > .toggle-button:hover .icon-wrapper .ikonli-font-icon,
-.top-menu > * > .toggle-button:hover:selected .icon-wrapper .ikonli-font-icon {
+.top-menu > * > * > .toggle-button:hover .icon-wrapper .ikonli-font-icon,
+.top-menu > * > * > .toggle-button:hover:selected .icon-wrapper .ikonli-font-icon {
     -fx-icon-color: white;
 }
 
-.top-menu > * > .toggle-button:selected {
+.top-menu > * > * > .toggle-button:selected {
     -fx-opacity: 1;
     -fx-background-padding: 0px;
     -fx-background-color: -fx-accent;
@@ -369,16 +370,16 @@
     -fx-text-fill: white;
 }
 
-.top-menu > * > .toggle-button .icon-wrapper {
+.top-menu > * > * > .toggle-button .icon-wrapper {
     -fx-pref-width: 32px;
 }
 
-.top-menu > * > .toggle-button .icon-wrapper .ikonli-font-icon {
+.top-menu > * > * > .toggle-button .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: black;
 }
 
-.top-menu > * > .toggle-button:selected .icon-wrapper .ikonli-font-icon {
+.top-menu > * > * > .toggle-button:selected .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
     -fx-icon-color: white;
 }
@@ -1468,8 +1469,12 @@
     -fx-border-width: 2px;
 }
 
+.list-view .video-cell {
+    -fx-padding: 5px 0px 10px 0px;
+}
+
 .list-view .video-cell .hbox {
-    -fx-padding: 10px;
+    -fx-padding: 0px;
 }
 
 .video-cell .hbox .vbox {
@@ -1484,47 +1489,47 @@
 }
 
 /* ----------------------------------------------------------------------------
- * DownloadsDetailView
+ * DownloadCell
  */
-.downloads-detail-view .download-cell {
+.download-cell {
 }
 
-.downloads-detail-view .download-cell .image-wrapper {
+.download-cell .image-wrapper {
     -fx-border-color: -fx-accent;
 }
 
-.downloads-detail-view .hbox {
+.download-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.downloads-detail-view .thumbnail-wrapper {
+.download-cell .thumbnail-wrapper {
     -fx-border-color: -fx-accent;
     -fx-border-width: 2px;
 }
 
-.downloads-detail-view .download-cell .hbox {
+.download-cell .hbox {
     -fx-padding: 10px;
 }
 
-.downloads-detail-view .hbox .vbox {
+.download-cell .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.downloads-detail-view .title-label {
+.download-cell .title-label {
     -fx-font-size: 16px;
 }
 
-.downloads-detail-view .description-label {
+.download-cell .description-label {
 }
 
 /* ----------------------------------------------------------------------------
- * TutorialsDetailView
+ * TutorialCell
  */
 
-.tutorials-detail-view .tutorial-cell {
+.tutorial-cell {
 }
 
-.tutorials-detail-view .tutorial-cell .commercial-label {
+.tutorial-cell .commercial-label {
     -fx-border-color: red;
     -fx-text-fill: red;
     -fx-border-radius: 3px;
@@ -1532,28 +1537,32 @@
     -fx-font-size: 10px;
 }
 
-.tutorials-detail-view .tutorial-cell .hbox {
+.tutorial-cell .hbox {
     -fx-spacing: 20px;
 }
 
-.tutorials-detail-view .tutorial-cell .thumbnail-wrapper {
+.tutorial-cell .thumbnail-wrapper {
+}
+
+.tutorial-cell .hbox {
+    -fx-padding: 0px;
 }
 
 .tutorials-detail-view .tutorial-cell .hbox {
-    -fx-padding: 10px;
+    -fx-padding: 10px 0px 10px 0px;
 }
 
-.tutorials-detail-view .tutorial-cell .hbox .vbox {
+.tutorial-cell .hbox .vbox {
     -fx-spacing: 20px;
 }
 
-.tutorials-detail-view .tutorial-cell .title-label {
+.tutorial-cell .title-label {
     -fx-font-size: 16px;
     -fx-content-display: right;
     -fx-graphic-text-gap: 10px;
 }
 
-.tutorials-detail-view .tutorial-cell .description-label {
+.tutorial-cell .description-label {
 }
 
 /* ----------------------------------------------------------------------------
@@ -1956,6 +1965,45 @@
 .home-detail-view .recent-item-cell .hbox .vbox {
 }
 
+.home-detail-view .news-cell {
+}
+
+.home-detail-view .news-cell .hbox {
+    -fx-spacing: 20px;
+}
+
+.home-detail-view .list-view .news-cell .hbox {
+    -fx-padding: 10px;
+}
+
+.home-detail-view .news-cell .banner-image-wrapper {
+    -fx-border-color: -fx-accent;
+    -fx-border-width: 2px;
+}
+
+.home-detail-view .news-cell .hbox .vbox {
+    -fx-spacing: 0px;
+}
+
+.home-detail-view .news-cell .title-label {
+    -fx-font-size: 20px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.home-detail-view .news-cell .subtitle-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-accent;
+}
+
+.home-detail-view .news-cell .author-label {
+    -fx-font-style: italic;
+    -fx-opacity: .8;
+}
+
+.home-detail-view .news-cell .text-label {
+}
+
 /* ----------------------------------------------------------------------------
  * HeaderPane
  */
@@ -2044,12 +2092,18 @@
     -fx-padding: 10px 10px 10px 0px;
 }
 
+.blogs-detail-view .post-cell .hbox {
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
 .blogs-detail-view .post-cell .title-label {
     -fx-font-family: "Open Sans SemiBold";
+    -fx-font-size: 16px;
 }
 
 .blogs-detail-view .post-cell .blog-label {
-    -size: 150px;
+    -size: 0px;
     -fx-min-width: -size;
     -fx-pref-width: -size;
     -fx-max-width: -size;
@@ -2064,7 +2118,6 @@
 
 .companies-detail-view .company-cell {
     -fx-background-color: white;
-    -fx-padding: 10px 0px;
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
     -fx-border-color: rgba(0, 0, 0, .2);
@@ -2079,11 +2132,6 @@
 
 .companies-detail-view .company-cell:selected .label {
     -fx-text-fill: white;
-}
-
-.companies-detail-view .company-cell.last {
-    -fx-padding: 10px 0px;
-    -fx-border-width: 0px;
 }
 
 .companies-detail-view .company-cell .hbox {

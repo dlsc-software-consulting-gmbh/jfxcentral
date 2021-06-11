@@ -31,9 +31,7 @@ public class PageUtil {
     }
 
     static public View getViewOfObject(Object obj) {
-        if (obj instanceof News) {
-            return View.NEWS;
-        } else if (obj instanceof PullRequest) {
+        if (obj instanceof PullRequest) {
             return View.OPENJFX;
         } else if (obj instanceof Person) {
             return View.PEOPLE;

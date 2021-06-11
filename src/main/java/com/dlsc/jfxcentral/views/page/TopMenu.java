@@ -1,9 +1,9 @@
 package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.View;
-import com.jpro.web.Util;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -57,7 +57,6 @@ public class TopMenu extends ToolBar {
         imageView.getStyleClass().add("duke");
 
         ToggleButton homeButton = createButton("Home", View.HOME, new FontIcon(StandardIcons.HOME));
-        ToggleButton newsButton = createButton("Latest News", View.NEWS, new FontIcon(StandardIcons.NEWS));
         ToggleButton peopleButton = createButton("People", View.PEOPLE, new FontIcon(StandardIcons.PERSON));
         ToggleButton companyButton = createButton("Companies", View.COMPANIES, new FontIcon(StandardIcons.COMPANY));
         ToggleButton blogsButton = createButton("Blogs", View.BLOGS, new FontIcon(StandardIcons.BLOG));
@@ -73,7 +72,6 @@ public class TopMenu extends ToolBar {
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
                 homeButton,
-                newsButton,
                 openJfxButton,
                 peopleButton,
                 companyButton,
@@ -93,27 +91,24 @@ public class TopMenu extends ToolBar {
         spacer.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
+        // wrapping these buttons as the links (JPro) need it.
         getItems().addAll(
-                homeButton,
-                newsButton,
-                openJfxButton,
-                realWorldAppsButton,
-                peopleButton,
-                companyButton,
-                blogsButton,
-                videosButton,
-                booksButton,
-                toolsButton,
-                libsButton,
-                tutorialsButton,
-                downloadsButton);
+                wrap(homeButton),
+                wrap(openJfxButton),
+                wrap(realWorldAppsButton),
+                wrap(peopleButton),
+                wrap(companyButton),
+                wrap(blogsButton),
+                wrap(videosButton),
+                wrap(booksButton),
+                wrap(toolsButton),
+                wrap(libsButton),
+                wrap(tutorialsButton),
+                wrap(downloadsButton));
 
         switch (page.getView()) {
             case HOME:
                 toggleGroup.selectToggle(homeButton);
-                break;
-            case NEWS:
-                toggleGroup.selectToggle(newsButton);
                 break;
             case REAL_WORLD:
                 toggleGroup.selectToggle(realWorldAppsButton);
@@ -155,46 +150,18 @@ public class TopMenu extends ToolBar {
                 toggleGroup.selectToggle(oldSelection);
                 return;
             }
-
-            if (newSelection == homeButton) {
-                changeView(View.HOME);
-            } else if (newSelection == newsButton) {
-                changeView(View.NEWS);
-            } else if (newSelection == openJfxButton) {
-                changeView(View.OPENJFX);
-            } else if (newSelection == realWorldAppsButton) {
-                changeView(View.REAL_WORLD);
-            } else if (newSelection == peopleButton) {
-                changeView(View.PEOPLE);
-            } else if (newSelection == companyButton) {
-                changeView(View.COMPANIES);
-            } else if (newSelection == tutorialsButton) {
-                changeView(View.TUTORIALS);
-            } else if (newSelection == libsButton) {
-                changeView(View.LIBRARIES);
-            } else if (newSelection == toolsButton) {
-                changeView(View.TOOLS);
-            } else if (newSelection == blogsButton) {
-                changeView(View.BLOGS);
-            } else if (newSelection == booksButton) {
-                changeView(View.BOOKS);
-            } else if (newSelection == videosButton) {
-                changeView(View.VIDEOS);
-            } else if (newSelection == downloadsButton) {
-                changeView(View.DOWNLOADS);
-            }
         });
 
         expandedProperty().addListener(it -> updateExpandedPseudoClass());
         updateExpandedPseudoClass();
     }
 
-    private void updateExpandedPseudoClass() {
-        pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
+    private Node wrap(Node node) {
+        return new StackPane(node);
     }
 
-    private void changeView(View view) {
-        page.getRootPane().setView(view);
+    private void updateExpandedPseudoClass() {
+        pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
     }
 
     private ToggleButton createButton(String name, View view, FontIcon icon) {
