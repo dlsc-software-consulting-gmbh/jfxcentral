@@ -26,19 +26,19 @@ public class WebApp extends com.jpro.web.WebApp {
         });
 
         addRouteJava((s) -> {
-            if(s.startsWith("/?page=")) {
-                return new WebView(s);
-            } else {
-                return null;
-            }
-        });
-
-        addRouteJava((s) -> {
             if(s.startsWith("/?page=/refresh")) {
                 DataRepository.getInstance().refreshData();
                 return new com.jpro.web.Redirect("/?page=/HOME");
             }
             return null;
+        });
+
+        addRouteJava((s) -> {
+            if(s.startsWith("/?page=")) {
+                return new WebView(s);
+            } else {
+                return null;
+            }
         });
     }
 }
