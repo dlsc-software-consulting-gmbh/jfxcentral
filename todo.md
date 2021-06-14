@@ -2,6 +2,7 @@
 
 ### Florian
 
+- [ ] "refresh" URL triggers "No enum constant com.dlsc.jfxcentral.views.View.refresh"
 - [X] Finish links
 - [X] Remove static WEB_API in Util Klasse
 - [ ] IconFont "OpenSans" seems to get loaded a lot causing flickering icons
@@ -15,11 +16,14 @@
 - [X] add "tutorials" view
 
 ### Data
-- [ ] Add videos and downloads data to libraries
+- [X] Add videos and downloads data to libraries
 - [X] make Michael Paus's images smaller
 - [ ] add more tools (?)
 - [X] add more companies
-- [ ] add more libs (TilesFX, Medusa, JMetro, ControlsFX)
+- [X] add more libs (TilesFX)
+- [ ] add more libs (Medusa)
+- [ ] add more libs (JMetro)
+- [ ] add more libs (ControlsFX)
 - [ ] clean up readme.md files of libs
 - [X] change order of companies
 - [X] finish openjfx page
@@ -47,9 +51,4 @@
 - [ ] map jfx-central.com domain
 - [ ] perform load testing
 - [ ] add Google webmaster API
-
-### Rollout
-- [ ] invite friends and family
-- [ ] request for additional data (PRs)
-
 
