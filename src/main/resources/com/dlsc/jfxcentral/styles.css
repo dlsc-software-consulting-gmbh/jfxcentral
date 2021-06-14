@@ -261,7 +261,7 @@
 .root-wrapper {
     -fx-background-color: lightgrey;
     -fx-background-image: url("brushed.jpg");
-    -fx-padding: 20px 20px 0px 20px;
+    -fx-padding: 0px 20px 0px 20px;
 }
 
 .root-pane {
@@ -845,6 +845,76 @@
  * AdvancedListView
  */
 .advanced-list-view {
+}
+
+.advanced-list-view .pagination-box {
+    -fx-alignment: center-left;
+    -fx-padding: 5px;
+    -fx-spacing: 10px;
+}
+
+.advanced-list-view .pagination-box .counter-label {
+    -fx-text-fill: -fx-accent;
+}
+
+.advanced-list-view .pagination-box .page-button {
+    -size: 30px;
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: -fx-accent;
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+    -fx-background-radius: 1000px;
+    -fx-border-radius: 1000px;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+}
+
+.advanced-list-view .pagination-box .page-button:hover {
+    -fx-border-color: -fx-accent;
+    -fx-text-fill: -fx-accent;
+}
+
+.advanced-list-view .pagination-box .page-button.current:hover {
+    -fx-background-color: derive(-fx-accent, -20%);
+}
+
+.advanced-list-view .pagination-box .page-button.current {
+    -size: 30px;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 1000px;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+}
+
+.advanced-list-view .pagination-box .spacer {
+    -fx-text-fill: -fx-accent;
+}
+
+.advanced-list-view .pagination-box .next-button,
+.advanced-list-view .pagination-box .previous-button {
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+}
+
+.advanced-list-view .pagination-box .next-button .ikonli-font-icon,
+.advanced-list-view .pagination-box .previous-button .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: -fx-accent;
+}
+
+.advanced-list-view .pagination-box .next-button:hover .ikonli-font-icon,
+.advanced-list-view .pagination-box .previous-button:hover .ikonli-font-icon {
+    -fx-icon-color: -fx-accent;
 }
 
 /* -----------------------------------------------------------------------------

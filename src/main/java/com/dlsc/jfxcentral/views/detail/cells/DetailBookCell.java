@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -29,10 +30,10 @@ public class DetailBookCell extends DetailCell<Book> {
     private Label authorsLabel = new Label();
     private MarkdownView descriptionLabel = new MarkdownView();
 
-    private javafx.scene.image.ImageView coverImageView = new javafx.scene.image.ImageView();
+    private ImageView coverImageView = new ImageView();
     private HBox buttonBox = new HBox();
 
-    public DetailBookCell() {
+    public DetailBookCell(boolean largeImage) {
         getStyleClass().add("detail-book-cell");
 
         titleLabel.getStyleClass().addAll("header3", "title-label");
@@ -77,7 +78,7 @@ public class DetailBookCell extends DetailCell<Book> {
         vBox.getStyleClass().add("vbox");
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        coverImageView.setFitWidth(100);
+        coverImageView.setFitWidth(largeImage ? 320 : 160);
         coverImageView.setPreserveRatio(true);
 
         HBox hBox = new HBox(vBox, coverImageView);

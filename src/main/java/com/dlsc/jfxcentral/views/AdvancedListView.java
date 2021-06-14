@@ -35,6 +35,7 @@ public class AdvancedListView<T> extends StackPane {
         listView.cellFactoryProperty().bindBidirectional(cellFactoryProperty());
 
         box.getStyleClass().add("list-view-replacement");
+        box.setMaxHeight(Region.USE_PREF_SIZE);
 
         placeholder.addListener(it -> updateView());
 
@@ -129,7 +130,7 @@ public class AdvancedListView<T> extends StackPane {
             pageButton.setOnKeyPressed(evt -> {
                 if (evt.getCode().equals(KeyCode.RIGHT)) {
                     setPage(Math.min(getPage() + 1, getPageCount() - 1));
-                } else  if (evt.getCode().equals(KeyCode.LEFT)) {
+                } else if (evt.getCode().equals(KeyCode.LEFT)) {
                     setPage(Math.max(0, getPage() - 1));
                 }
             });
@@ -176,6 +177,25 @@ public class AdvancedListView<T> extends StackPane {
         } else {
             getChildren().setAll(box, listView);
         }
+    }
+
+    @Override
+    protected double computePrefHeight(double width) {
+        double height = getInsets().getTop() + getInsets().getBottom();
+
+        if (box.isManaged()) {
+            height += box.prefHeight(-1);
+        }
+
+        if (listView.isManaged()) {
+            height += listView.prefHeight(-1);
+        }
+
+        if (!box.isManaged() && !listView.isManaged() && getPlaceholder() != null) {
+            height += getPlaceholder().prefHeight(-1);
+        }
+
+        return height;
     }
 
     private final ReadOnlyIntegerWrapper pageCount = new ReadOnlyIntegerWrapper(this, "pageCount", 0);

@@ -89,9 +89,6 @@ public class MasterPersonCell extends AdvancedListCell<Person> {
     @Override
     protected void updateItem(Person person, boolean empty) {
         super.updateItem(person, empty);
-        if (person != null) {
-            System.out.println("updateItem: " + person.getId());
-        }
 
         if (!empty && person != null) {
             nameLabel.setText(person.getName());

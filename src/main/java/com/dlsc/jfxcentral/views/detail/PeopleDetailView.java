@@ -39,11 +39,12 @@ public class PeopleDetailView extends DetailView<Person> {
         getStyleClass().add("people-detail-view");
 
         createTitleBox();
-        createBlogsBox();
-        createBooksBox();
-        createTutorialsBox();
         createLibraryBox();
+        createBlogsBox();
+        createTutorialsBox();
+        createDownloadsBox();
         createVideoBox();
+        createBooksBox();
 
         content.getChildren().forEach(node -> VBox.setVgrow(node, Priority.NEVER));
 
@@ -90,7 +91,7 @@ public class PeopleDetailView extends DetailView<Person> {
         AdvancedListView<Book> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(1000);
-        listView.setCellFactory(view -> new DetailBookCell());
+        listView.setCellFactory(view -> new DetailBookCell(false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Books");
@@ -152,6 +153,39 @@ public class PeopleDetailView extends DetailView<Person> {
         content.getChildren().add(sectionPane);
     }
 
+    private void createDownloadsBox() {
+        AdvancedListView<Download> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(1000);
+        listView.setCellFactory(view -> new DetailDownloadCell(false));
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Downloads");
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> {
+            Person person = getSelectedItem();
+            if (person != null) {
+                return "Published by " + person.getName();
+            }
+            return "";
+        }, selectedItemProperty()));
+
+        sectionPane.getNodes().add(listView);
+
+        selectedItemProperty().addListener(it -> {
+            Person person = getSelectedItem();
+            if (person != null) {
+                listView.setItems(DataRepository.getInstance().getDownloadsByPerson(getSelectedItem()));
+            } else {
+                listView.setItems(FXCollections.observableArrayList());
+            }
+        });
+
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
+    }
+
     private void createVideoBox() {
         AdvancedListView<Video> listView = new AdvancedListView<>();
         listView.setPaging(true);
@@ -182,7 +216,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createLibraryBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(3);
+        listView.setVisibleRowCount(1000);
         listView.setCellFactory(view -> new DetailLibraryCell(getRootPane()));
 
         SectionPane sectionPane = new SectionPane();
