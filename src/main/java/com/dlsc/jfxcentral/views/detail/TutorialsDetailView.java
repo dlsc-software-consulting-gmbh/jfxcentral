@@ -25,7 +25,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
 
     private final FilterView.FilterGroup<Tutorial> formatGroup = new FilterView.FilterGroup<>("Format");
     private final FilterView.FilterGroup<Tutorial> typeGroup = new FilterView.FilterGroup<>("Type");
-    private final FilterView.FilterGroup<Tutorial> personGroup = new FilterView.FilterGroup<>("Speaker");
+    private final FilterView.FilterGroup<Tutorial> personGroup = new FilterView.FilterGroup<>("Person");
 
     private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
@@ -118,7 +118,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
             formatGroup.getFilters().add(new FilterView.Filter<>(type.name()) {
                 @Override
                 public boolean test(Tutorial tutorial) {
-                    return tutorial.getType().equals(type);
+                    return tutorial.getType() != null && tutorial.getType().equals(type);
                 }
             });
         }

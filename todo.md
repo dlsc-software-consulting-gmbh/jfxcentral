@@ -23,7 +23,7 @@
 - [X] add more libs (TilesFX)
 - [ ] add more libs (Medusa)
 - [ ] add more libs (JMetro)
-- [ ] add more libs (ControlsFX)
+- [X] add more libs (ControlsFX)
 - [ ] clean up readme.md files of libs
 - [X] change order of companies
 - [X] finish openjfx page
