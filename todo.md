@@ -36,9 +36,10 @@
 - [X] add "downloads" to PeopleDetailView
 - [ ] auto-refresh the blog posts list (update recent items list)
 - [X] add jfx ensemble demo links to libs
-- [ ] add Google analytics
+- [X] add Google analytics
 - [X] add URL for refreshing the data
 - [ ] add built-in memory check from Florian
+- [ ] add "homepage" button to downloads cell (example speedtest)
 
 ### Enhancements
 - [ ] refine dialogs / lightbox
