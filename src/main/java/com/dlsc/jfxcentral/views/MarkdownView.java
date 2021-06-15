@@ -44,8 +44,6 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
         this.baseURL = baseURL;
     }
 
-    private final ObjectProperty<Consumer<String>> hyperlinkCallback = new SimpleObjectProperty<>(this, "urlCallback");
-
     @Override
     public void setLink(Node node, String link, String description) {
         super.setLink(node, link, description);

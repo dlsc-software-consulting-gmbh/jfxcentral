@@ -4,7 +4,6 @@ import com.gluonhq.attach.browser.BrowserService;
 import com.jpro.webapi.WebAPI;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.io.IOException;
@@ -14,8 +13,8 @@ import java.net.URISyntaxException;
 public class Util {
 
     public static void setLink(Node node, String link, String desc) {
-        if(link == null) return;
-        if(WebAPI.isBrowser()) {
+        if (link == null) return;
+        if (WebAPI.isBrowser()) {
             com.jpro.web.Util.setLink(node, link, desc);
         } else {
             browseOnClick(node, link);
@@ -23,7 +22,7 @@ public class Util {
     }
 
     public static void setLink(Node node, String link, String desc, ObservableList<Node> parentChildren) {
-        if(link == null) return;
+        if (link == null) return;
         com.jpro.web.Util.setLink(node, link, desc, parentChildren);
     }
 
@@ -36,28 +35,32 @@ public class Util {
     public static void browse(Node node, String link) {
         browse(node, link, true);
     }
+
     public static void browse(Node node, String link, boolean tab) {
-        if(link == null) return;
-        if(link.startsWith("/")) {
-            com.jpro.web.Util.gotoPage(node, link);
+        if (link == null) return;
+
+        final String finalLink = link.trim();
+
+        if (finalLink.startsWith("/")) {
+            com.jpro.web.Util.gotoPage(node, finalLink);
         } else {
-            if(WebAPI.isBrowser()){
-                WebAPI.getWebAPI(node.getScene()).openURLAsTab(link);
+            if (WebAPI.isBrowser()) {
+                WebAPI.getWebAPI(node.getScene()).openURLAsTab(finalLink);
             } else {
                 BrowserService.create().ifPresentOrElse(service -> {
-                            try {
-                                service.launchExternalBrowser(link);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (URISyntaxException e) {
-                                e.printStackTrace();
-                            }
-                        }, () -> {
+                    try {
+                        service.launchExternalBrowser(finalLink);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }, () -> {
 
                     Desktop desktop = Desktop.getDesktop();
                     if (desktop.isSupported(Desktop.Action.BROWSE)) {
                         try {
-                            desktop.browse(new URI(link));
+                            desktop.browse(new URI(finalLink));
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (URISyntaxException e) {
