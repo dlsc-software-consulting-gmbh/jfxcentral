@@ -9,6 +9,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 
 public class MasterRealWorldAppCell extends MasterCell<RealWorldApp> {
 
@@ -29,6 +30,8 @@ public class MasterRealWorldAppCell extends MasterCell<RealWorldApp> {
 
         nameLabel.getStyleClass().add("name-label");
         nameLabel.setMinWidth(0);
+        nameLabel.setWrapText(true);
+        nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         gridPane = new GridPane();
         gridPane.getStyleClass().add("grid-pane");

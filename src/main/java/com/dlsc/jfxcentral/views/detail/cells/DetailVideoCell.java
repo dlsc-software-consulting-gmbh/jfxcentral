@@ -4,6 +4,7 @@ import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.util.Util;
+import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
@@ -20,7 +21,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 public class DetailVideoCell extends DetailCell<Video> {
 
     private final Label titleLabel = new Label();
-    private final Label descriptionLabel = new Label();
+    private final MarkdownView descriptionLabel = new MarkdownView();
     private final ImageView thumbnailView = new ImageView();
     private final Button playButton = new Button("Play");
     private final Button playOnYouTubeButton = new Button("YouTube");
@@ -43,8 +44,6 @@ public class DetailVideoCell extends DetailCell<Video> {
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         descriptionLabel.getStyleClass().add("description-label");
-        descriptionLabel.setWrapText(true);
-        descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         thumbnailView.setPreserveRatio(true);
         thumbnailView.setFitWidth(largeImage ? 320 : 160);
@@ -110,7 +109,7 @@ public class DetailVideoCell extends DetailCell<Video> {
             Util.setLink(playOnYouTubeButton, "https://youtu.be/" + getItem().getId(), "https://youtu.be/" + getItem().getId());
 
             titleLabel.setText(video.getTitle());
-            descriptionLabel.setText(video.getDescription());
+            descriptionLabel.setMdString(video.getDescription());
             thumbnailView.setVisible(true);
             thumbnailView.setManaged(true);
             thumbnailView.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));

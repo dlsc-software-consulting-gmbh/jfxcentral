@@ -39,7 +39,8 @@ public class PeopleDetailView extends DetailView<Person> {
         getStyleClass().add("people-detail-view");
 
         createTitleBox();
-        createLibraryBox();
+        createLibrariesBox();
+        createToolsBox();
         createBlogsBox();
         createTutorialsBox();
         createDownloadsBox();
@@ -213,10 +214,10 @@ public class PeopleDetailView extends DetailView<Person> {
         content.getChildren().add(sectionPane);
     }
 
-    private void createLibraryBox() {
+    private void createLibrariesBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(1000);
+        listView.setVisibleRowCount(5);
         listView.setCellFactory(view -> new DetailLibraryCell(getRootPane()));
 
         SectionPane sectionPane = new SectionPane();
@@ -228,6 +229,33 @@ public class PeopleDetailView extends DetailView<Person> {
             if (person != null) {
                 sectionPane.setSubtitle("Libraries developed by " + person.getName());
                 listView.setItems(DataRepository.getInstance().getLibrariesByPerson(getSelectedItem()));
+            } else {
+                sectionPane.setSubtitle("");
+                listView.setItems(FXCollections.observableArrayList());
+            }
+        });
+
+        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
+        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
+
+        content.getChildren().add(sectionPane);
+    }
+
+    private void createToolsBox() {
+        AdvancedListView<Tool> listView = new AdvancedListView<>();
+        listView.setPaging(true);
+        listView.setVisibleRowCount(5);
+        listView.setCellFactory(view -> new DetailToolCell(getRootPane()));
+
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Tools");
+        sectionPane.getNodes().add(listView);
+
+        selectedItemProperty().addListener(it -> {
+            Person person = getSelectedItem();
+            if (person != null) {
+                sectionPane.setSubtitle("Tools developed by " + person.getName());
+                listView.setItems(DataRepository.getInstance().getToolsByPerson(getSelectedItem()));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());

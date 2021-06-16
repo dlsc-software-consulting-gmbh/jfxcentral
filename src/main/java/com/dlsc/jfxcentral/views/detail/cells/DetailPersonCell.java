@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral.views.PhotoView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -26,8 +27,8 @@ public class DetailPersonCell extends DetailCell<Person> {
     private PhotoView photoView = new PhotoView();
     private Label nameLabel = new Label();
     private MarkdownView descriptionLabel = new MarkdownView();
-    private javafx.scene.image.ImageView championImageView = new javafx.scene.image.ImageView();
-    private javafx.scene.image.ImageView rockstarImageView = new javafx.scene.image.ImageView();
+    private ImageView championImageView = new ImageView();
+    private ImageView rockstarImageView = new ImageView();
 
     public DetailPersonCell() {
         getStyleClass().add("detail-person-cell");

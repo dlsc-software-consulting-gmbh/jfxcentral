@@ -508,6 +508,7 @@
 .master-app-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
+    -fx-font-size: 16px;
 }
 
 .master-app-list-cell .grid-pane .summary-markdown-view {
@@ -794,26 +795,6 @@
 .libraries-detail-view .title-section .hbox .vbox .description-label {
 }
 
-.libraries-detail-view .coordinates-pane .vbox {
-    -fx-spacing: 10px;
-}
-
-.libraries-detail-view .coordinates-pane .vbox .header {
-    -fx-spacing: 20px;
-}
-
-.libraries-detail-view .coordinates-pane .vbox .coordinates-label {
-    -fx-spacing: 10px;
-    -fx-padding: 10px;
-    -fx-border-color: -mdfx-border-color-1;
-    -fx-background-color: oldlace;
-    -fx-background-radius: 2px;
-    -fx-border-radius: 2px;
-    -fx-border-width: 0.5;
-    -fx-max-width: infinity;
-    -fx-font-family: "JetBrains Mono Regular";
-}
-
 .libraries-detail-view .ensemble-pane {
 }
 
@@ -825,6 +806,68 @@
 .libraries-detail-view .ensemble-pane .hbox .label {
     -fx-alignment: left;
     -fx-font-family: "Open Sans SemiBold";
+}
+
+/* ----------------------------------------------------------------------------
+ * ToolsDetailView
+ */
+.tools-detail-view {
+}
+
+.tools-detail-view .list-cell:selected {
+    -fx-background-color: white !important;
+}
+
+.tools-detail-view .title-section {
+    -fx-spacing: 20px;
+}
+
+.tools-detail-view .title-section .button-box {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
+.tools-detail-view .title-section .hbox {
+    -fx-spacing: 20px;
+}
+
+.tools-detail-view .title-section .hbox .vbox {
+    -fx-spacing: 20px;
+}
+
+.tools-detail-view .title-section .hbox .vbox .name-label {
+    -fx-graphic-text-gap: 10px;
+}
+
+.tools-detail-view .title-section .hbox .vbox .name-label .badges-box {
+    -fx-spacing: 10px;
+    -fx-translate-y: -5px;
+}
+
+.tools-detail-view .title-section .hbox .vbox .description-label {
+}
+
+/* ----------------------------------------------------------------------------
+ * CoordinatesPane
+ */
+.coordinates-pane .vbox {
+    -fx-spacing: 10px;
+}
+
+.coordinates-pane .vbox .header {
+    -fx-spacing: 20px;
+}
+
+.coordinates-pane .vbox .coordinates-label {
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+    -fx-border-color: -mdfx-border-color-1;
+    -fx-background-color: oldlace;
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
+    -fx-border-width: 0.5;
+    -fx-max-width: infinity;
+    -fx-font-family: "JetBrains Mono Regular";
 }
 
 /* ----------------------------------------------------------------------------
@@ -1143,6 +1186,36 @@
 }
 
 /* -----------------------------------------------------------------------------
+ * DetailToolCell
+ */
+.detail-tool-cell .outer-box {
+    -fx-spacing: 10px;
+}
+
+.detail-tool-cell .outer-box .hbox {
+    -fx-spacing: 20px;
+}
+
+.detail-tool-cell .outer-box .hbox .vbox {
+    -fx-spacing: 10px;
+}
+
+.detail-tool-cell .outer-box .hbox .vbox .title-label {
+    -fx-graphic-text-gap: 20px;
+}
+
+.detail-tool-cell .outer-box .hbox .vbox .summary-label {
+}
+
+.detail-tool-cell .outer-box .button-box {
+    -fx-spacing: 10px;
+}
+
+.detail-tool-cell .outer-box .button-box .button .ikonli-font-icon {
+    -fx-icon-size: 18px;
+}
+
+/* -----------------------------------------------------------------------------
  * ThumbnailScrollPane
  */
 .thumbnail-scroll-pane {
@@ -1432,6 +1505,11 @@
  */
 .detail-download-cell .image-wrapper {
     -fx-border-color: -fx-accent;
+}
+
+.detail-download-cell .button-box {
+    -fx-vgap: 10px;
+    -fx-hgap: 10px;
 }
 
 .detail-download-cell .hbox {
@@ -1804,7 +1882,7 @@
 
 .detail-post-cell .title-label {
     -fx-font-family: "Open Sans SemiBold";
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
 }
 
 /* TODO: will we show the blog name or not? */

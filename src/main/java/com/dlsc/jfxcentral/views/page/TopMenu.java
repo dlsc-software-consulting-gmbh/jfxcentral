@@ -11,10 +11,7 @@ import javafx.css.PseudoClass;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -191,6 +188,45 @@ public class TopMenu extends ToolBar {
         button.setAlignment(Pos.CENTER_LEFT);
         button.setGraphic(wrap(icon));
         Util.setLink(button, PageUtil.getLink(view), name);
+
+        switch (view) {
+            case HOME:
+                button.setTooltip(new Tooltip("Home"));
+                break;
+            case OPENJFX:
+                button.setTooltip(new Tooltip("OpenJFX"));
+                break;
+            case PEOPLE:
+                button.setTooltip(new Tooltip("People"));
+                break;
+            case TUTORIALS:
+                button.setTooltip(new Tooltip("Tutorials"));
+                break;
+            case REAL_WORLD:
+                button.setTooltip(new Tooltip("Real World Applications"));
+                break;
+            case COMPANIES:
+                button.setTooltip(new Tooltip("Companies"));
+                break;
+            case TOOLS:
+                button.setTooltip(new Tooltip("Tools"));
+                break;
+            case LIBRARIES:
+                button.setTooltip(new Tooltip("Libraries"));
+                break;
+            case BLOGS:
+                button.setTooltip(new Tooltip("Blogs"));
+                break;
+            case BOOKS:
+                button.setTooltip(new Tooltip("Books"));
+                break;
+            case VIDEOS:
+                button.setTooltip(new Tooltip("Videos"));
+                break;
+            case DOWNLOADS:
+                button.setTooltip(new Tooltip("Downloads"));
+                break;
+        }
         return button;
     }
 

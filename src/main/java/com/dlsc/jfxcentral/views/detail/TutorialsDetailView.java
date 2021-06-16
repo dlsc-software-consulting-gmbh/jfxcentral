@@ -84,13 +84,11 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
     private void updatePersonGroup() {
         List<String> speakersList = new ArrayList<>();
 
-        DataRepository.getInstance().getTutorials().forEach(tutorial -> {
-            List<String> personIds = tutorial.getPersonIds();
-            if (personIds != null) {
-                for (String id : personIds) {
-                    if (!speakersList.contains(id.trim())) {
-                        speakersList.add(id.trim());
-                    }
+        DataRepository.getInstance().getPeople().forEach(person -> {
+            List<String> tutorialIds = person.getTutorialIds();
+            if (!tutorialIds.isEmpty()) {
+                if (!speakersList.contains(person.getId().trim())) {
+                    speakersList.add(person.getId().trim());
                 }
             }
         });
@@ -103,7 +101,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
                 filters.add(new FilterView.Filter<>(personById.get().getName()) {
                     @Override
                     public boolean test(Tutorial tutorial) {
-                        return tutorial.getPersonIds().contains(item);
+                        return DataRepository.getInstance().getTutorialsByPerson(personById.get()).contains(tutorial);
                     }
                 });
             }

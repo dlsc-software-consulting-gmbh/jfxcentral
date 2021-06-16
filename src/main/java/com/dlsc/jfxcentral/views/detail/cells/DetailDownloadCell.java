@@ -20,7 +20,7 @@ public class DetailDownloadCell extends DetailCell<Download> {
     private final Label titleLabel = new Label();
     private final MarkdownView descriptionMarkdownView = new MarkdownView();
     private final ImageView imageView = new ImageView();
-    private final HBox buttonBox;
+    private final FlowPane buttonBox;
 
     public DetailDownloadCell(boolean largeThumbnail) {
 
@@ -42,14 +42,12 @@ public class DetailDownloadCell extends DetailCell<Download> {
         thumbnailWrapper.setMaxHeight(Region.USE_PREF_SIZE);
         StackPane.setAlignment(imageView, Pos.TOP_LEFT);
 
-        buttonBox = new HBox(10);
+        buttonBox = new FlowPane();
+        buttonBox.getStyleClass().add("button-box");
         buttonBox.setMinHeight(Region.USE_PREF_SIZE);
         buttonBox.setAlignment(Pos.BOTTOM_LEFT);
 
-        Region spacer = new Region();
-        VBox.setVgrow(spacer, Priority.ALWAYS);
-
-        VBox vBox = new VBox(titleLabel, descriptionMarkdownView, spacer, buttonBox);
+        VBox vBox = new VBox(titleLabel, descriptionMarkdownView, buttonBox);
         vBox.setAlignment(Pos.TOP_LEFT);
         vBox.setFillWidth(true);
         vBox.getStyleClass().add("vbox");

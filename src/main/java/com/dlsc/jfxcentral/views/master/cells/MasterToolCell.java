@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 public class MasterToolCell extends AdvancedListCell<Tool> {
 
@@ -33,6 +34,8 @@ public class MasterToolCell extends AdvancedListCell<Tool> {
 
         nameLabel.getStyleClass().add("name-label");
         nameLabel.setMinWidth(0);
+        nameLabel.setWrapText(true);
+        nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         gridPane = new GridPane();
         gridPane.getStyleClass().add("grid-pane");

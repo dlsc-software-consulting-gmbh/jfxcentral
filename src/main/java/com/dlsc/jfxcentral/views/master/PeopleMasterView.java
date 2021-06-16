@@ -5,6 +5,8 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.master.cells.MasterPersonCell;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,6 +24,12 @@ public class PeopleMasterView extends MasterViewWithListView<Person> {
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
                 Comparator.comparing(Person::getName),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
+
+        CheckBox twitterOnly = new CheckBox("Include Twitter");
+
+        BorderPane content = new BorderPane();
+        content.setTop(twitterOnly);
+        content.setCenter(listView);
 
         setCenter(listView);
     }

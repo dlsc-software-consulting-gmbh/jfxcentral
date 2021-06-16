@@ -101,7 +101,6 @@ public class SectionPane extends SectionPaneBase {
     private void updateView() {
         VBox vbox = new VBox();
         vbox.getStyleClass().add("section-pane-container");
-        vbox.setMinHeight(Region.USE_PREF_SIZE);
         VBox.setVgrow(vbox, Priority.ALWAYS);
 
         HBox extrasBox = new HBox();

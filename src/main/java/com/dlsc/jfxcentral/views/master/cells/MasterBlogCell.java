@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class MasterBlogCell extends MasterCell<Blog> {
@@ -23,6 +24,8 @@ public class MasterBlogCell extends MasterCell<Blog> {
             imageView.setPreserveRatio(true);
 
             label.getStyleClass().add("title-label");
+            label.setWrapText(true);
+            label.setMinHeight(Region.USE_PREF_SIZE);
 
             VBox vbox = new VBox(imageView, label);
             vbox.setAlignment(Pos.TOP_CENTER);

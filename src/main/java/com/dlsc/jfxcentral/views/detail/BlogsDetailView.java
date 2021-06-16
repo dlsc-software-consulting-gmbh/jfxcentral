@@ -48,6 +48,7 @@ public class BlogsDetailView extends DetailView<Blog> {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Posts");
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? "List of current posts on " + getSelectedItem().getTitle() : "", selectedItemProperty()));
+        VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
         FilteredList<Post> filteredPosts = new FilteredList(DataRepository.getInstance().postsProperty());
         filteredPosts.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getSelectedItem() == null || post.getBlog().equals(getSelectedItem()), selectedItemProperty()));
@@ -56,8 +57,6 @@ public class BlogsDetailView extends DetailView<Blog> {
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
 
         AdvancedListView<Post> listView = new AdvancedListView<>();
-        listView.setPaging(true);
-        listView.setVisibleRowCount(10);
         listView.setItems(sortedPosts);
         listView.setCellFactory(view -> {
             DetailPostCell cell = new DetailPostCell();

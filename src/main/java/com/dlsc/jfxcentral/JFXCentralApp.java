@@ -24,7 +24,7 @@ public class JFXCentralApp extends Application {
             root = new IntroView(() -> showHomeOrLoadingView(app, stage));
         }
 
-        Scene scene = new Scene(root, 1200, 1200);
+        Scene scene = new Scene(root, 1250, 1200);
         scene.setFill(Color.rgb(68, 131, 160));
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());

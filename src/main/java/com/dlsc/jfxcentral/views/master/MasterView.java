@@ -40,8 +40,8 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
     public void showItem(T item) {
     }
 
-    protected <T> FilteredList<T> createSortedAndFilteredList(ListProperty<T> booksProperty, Comparator<T> comparator, Predicate<T> predicate) {
-        SortedList<T> sortedList = new SortedList<>(booksProperty);
+    protected <T> FilteredList<T> createSortedAndFilteredList(ListProperty<T> listProperty, Comparator<T> comparator, Predicate<T> predicate) {
+        SortedList<T> sortedList = new SortedList<>(listProperty);
         sortedList.setComparator(comparator);
 
         FilteredList<T> filteredList = new FilteredList<>(sortedList);

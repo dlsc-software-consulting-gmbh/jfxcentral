@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.News;
 import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -28,13 +27,10 @@ public class DetailNewsCell extends DetailCell<News> {
     private final Label authorLabel = new Label();
     private final MarkdownView markdownView = new MarkdownView();
     private final ImageView bannerView = new ImageView();
-    private final RootPane rootPane;
     private final Button readMoreButton = new Button("Read more ...");
     private final Map<News, BooleanProperty> readMoreMap = new HashMap<>();
 
-    public DetailNewsCell(RootPane rootPane) {
-        this.rootPane = rootPane;
-
+    public DetailNewsCell() {
         setPrefWidth(0);
 
         getStyleClass().add("detail-news-cell");

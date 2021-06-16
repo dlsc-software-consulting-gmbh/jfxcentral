@@ -18,23 +18,23 @@
 ### Data
 - [X] Add videos and downloads data to libraries
 - [X] make Michael Paus's images smaller
-- [ ] add more tools (?)
+- [X] add more tools (TestFX)
 - [X] add more companies
 - [X] add more libs (TilesFX)
-- [ ] add more libs (Medusa)
-- [ ] add more libs (JMetro)
+- [X] add more libs (Medusa)
 - [X] add more libs (ControlsFX)
 - [ ] clean up readme.md files of libs
 - [X] change order of companies
 - [X] finish openjfx page
-- [ ] add TestFX to tools page
-- [ ] make CovidApp available as download (also on FlexGanttFX website)
+- [X] make CovidApp available as download (also on FlexGanttFX website)
+- [ ] make CovidApp Windows version
 - [X] Gluon Blog should show Gluon Logo instead of Johan's photo (use company ID)
 
 ### New Features
+- [ ] add "detail" button to all list cells showing a model object
 - [X] add link to logo image for "home"
 - [X] add "downloads" to PeopleDetailView
-- [ ] auto-refresh the blog posts list (update recent items list)
+- [X] auto-refresh the blog posts list (update recent items list)
 - [X] add jfx ensemble demo links to libs
 - [X] add Google analytics
 - [X] add URL for refreshing the data

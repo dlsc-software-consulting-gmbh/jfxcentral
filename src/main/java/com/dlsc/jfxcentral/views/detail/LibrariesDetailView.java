@@ -16,25 +16,14 @@ import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-
-import java.text.MessageFormat;
 
 
 public class LibrariesDetailView extends DetailView<Library> {
@@ -44,16 +33,12 @@ public class LibrariesDetailView extends DetailView<Library> {
     private MarkdownView descriptionMarkdownView = new MarkdownView();
     private MarkdownView readmeMarkdownView = new MarkdownView();
     private VBox content = new VBox();
-    private Label repositoryCoordinatesLabel = new Label();
     private ThumbnailScrollPane thumbnailScrollPane;
-    private MarkdownView versionBadgeMarkdownView;
 
     public LibrariesDetailView(RootPane rootPane) {
         super(rootPane);
 
         getStyleClass().add("libraries-detail-view");
-
-        repositoryCoordinatesLabel.getStyleClass().add("coordinates-label");
 
         iconView.visibleProperty().bind(iconView.imageProperty().isNotNull());
         iconView.managedProperty().bind(iconView.imageProperty().isNotNull());
@@ -71,25 +56,6 @@ public class LibrariesDetailView extends DetailView<Library> {
 
         selectedItemProperty().addListener(it -> updateView());
         updateView();
-    }
-
-    public enum BuildTool {
-        MAVEN,
-        GRADLE
-    }
-
-    private final ObjectProperty<BuildTool> buildTool = new SimpleObjectProperty<>(this, "buildTool", BuildTool.MAVEN);
-
-    public BuildTool getBuildTool() {
-        return buildTool.get();
-    }
-
-    public ObjectProperty<BuildTool> buildToolProperty() {
-        return buildTool;
-    }
-
-    public void setBuildTool(BuildTool buildTool) {
-        this.buildTool.set(buildTool);
     }
 
     private void createScreenshotsBox() {
@@ -223,51 +189,8 @@ public class LibrariesDetailView extends DetailView<Library> {
     }
 
     private void createCoordinatesBox() {
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Coordinates");
-        sectionPane.setSubtitle("Repository group and artifact IDs");
-        sectionPane.getStyleClass().add("coordinates-pane");
-
-        versionBadgeMarkdownView = new MarkdownView();
-        sectionPane.setExtras(versionBadgeMarkdownView);
-
-        RadioButton mavenButton = new RadioButton("Maven");
-        RadioButton gradleButton = new RadioButton("Gradle");
-        ToggleGroup toggleGroup = new ToggleGroup();
-        toggleGroup.getToggles().addAll(mavenButton, gradleButton);
-        mavenButton.setOnAction(evt -> setBuildTool(BuildTool.MAVEN));
-        gradleButton.setOnAction(evt -> setBuildTool(BuildTool.GRADLE));
-        mavenButton.setSelected(true);
-
-        Button copyButton = new Button();
-        copyButton.getStyleClass().add("copy-button");
-        copyButton.setGraphic(new FontIcon(MaterialDesign.MDI_CLIPBOARD));
-        copyButton.setOnAction(evt -> {
-            Clipboard clipboard = Clipboard.getSystemClipboard();
-            ClipboardContent content = new ClipboardContent();
-            content.putString(repositoryCoordinatesLabel.getText());
-            clipboard.setContent(content);
-        });
-
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        HBox header = new HBox(mavenButton, gradleButton, spacer, copyButton);
-        header.getStyleClass().add("header");
-
-        VBox vBox = new VBox(header, repositoryCoordinatesLabel);
-        vBox.getStyleClass().add("vbox");
-
-        sectionPane.getNodes().add(vBox);
-
-        selectedItemProperty().addListener(it -> {
-            Library library = getSelectedItem();
-            if (library != null) {
-                sectionPane.setVisible(StringUtils.isNotBlank(library.getGroupId()) && StringUtils.isNotBlank(library.getArtifactId()));
-                sectionPane.setManaged(StringUtils.isNotBlank(library.getGroupId()) && StringUtils.isNotBlank(library.getArtifactId()));
-            }
-        });
-
+        CoordinatesPane sectionPane = new CoordinatesPane();
+        sectionPane.coordinatesProperty().bind(selectedItemProperty());
         content.getChildren().add(sectionPane);
     }
 
@@ -318,28 +241,6 @@ public class LibrariesDetailView extends DetailView<Library> {
 
             thumbnailScrollPane.setLibrary(library);
             thumbnailScrollPane.libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(library));
-
-            String groupId = library.getGroupId();
-            String artifactId = library.getArtifactId();
-
-            if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-                versionBadgeMarkdownView.setMdString(MessageFormat.format("[![Maven Central](https://img.shields.io/maven-central/v/{0}/{1}.png?label=Maven%20Central)](https://search.maven.org/search?q=g:%22{0}%22%20AND%20a:%22{1}%22)", groupId, artifactId));
-
-                StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(library);
-
-                repositoryCoordinatesLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-                    if (getBuildTool().equals(BuildTool.MAVEN)) {
-                        return "<dependency>\n    <groupId>" + groupId + "</groupId>\n    <artifactId>" + artifactId + "</artifactId>\n    <version>" + versionProperty.get() + "</version>\n</dependency>";
-                    }
-                    return "dependencies {\n    implementation '" + groupId + ":" + artifactId + ":" + versionProperty.get() + "'\n}";
-                }, versionProperty, buildTool));
-
-            } else {
-                versionBadgeMarkdownView.setMdString("");
-
-                repositoryCoordinatesLabel.textProperty().unbind();
-            }
-
 
             iconView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
 

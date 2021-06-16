@@ -97,6 +97,7 @@ public class SectionPaneWithFilterView<T> extends SectionPane {
         VBox vbox = new VBox();
         VBox.setVgrow(vbox, Priority.ALWAYS);
         vbox.getStyleClass().add("section-pane-container");
+
         if (isExpanded()) {
             vbox.getChildren().setAll(getFilterView(), childrenBox);
         } else {
