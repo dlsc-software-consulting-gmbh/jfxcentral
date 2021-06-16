@@ -74,8 +74,9 @@ public class ThumbnailScrollPane extends ScrollPane {
         thumbnailBox.getChildren().clear();
 
         LibraryInfo info = getLibraryInfo();
+        Library library = getLibrary();
 
-        if (info != null) {
+        if (info != null && library != null) {
             List<Image> images = info.getImages();
             for (int i = 0; i < images.size(); i++) {
 
@@ -84,7 +85,7 @@ public class ThumbnailScrollPane extends ScrollPane {
                 imageView.setFitWidth(100);
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(true);
-                imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), image.getPath()));
+                imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, image.getPath()));
 
                 final int imageIndex = i;
 
@@ -98,7 +99,7 @@ public class ThumbnailScrollPane extends ScrollPane {
 
                         ImageView bigImageView = new ImageView();
                         bigImageView.setPreserveRatio(true);
-                        bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(getLibrary(), images.get(page).getPath()));
+                        bigImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library, images.get(page).getPath()));
 
                         StackPane stackPane = new StackPane(bigImageView);
                         stackPane.setPrefSize(0, 0); // important

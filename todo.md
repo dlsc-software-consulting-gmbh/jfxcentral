@@ -23,13 +23,14 @@
 - [X] add more libs (TilesFX)
 - [X] add more libs (Medusa)
 - [X] add more libs (ControlsFX)
-- [ ] clean up readme.md files of libs
+- [X] clean up readme.md files of libs
 - [X] change order of companies
 - [X] finish openjfx page
 - [X] make CovidApp available as download (also on FlexGanttFX website)
 - [ ] make CovidApp Windows version
 - [X] Gluon Blog should show Gluon Logo instead of Johan's photo (use company ID)
 - [ ] Add CoachFX as a real world app example, download, jpro link
+- [ ] Add FXSampler to tools
 
 ### New Features
 - [ ] add "detail" button to all list cells showing a model object
