@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.sandec.jpro</groupId>
             <artifactId>jpro-web-core</artifactId>
-            <version>0.8.6</version>
+            <version>0.8.7</version>
             <scope>compile</scope>
         </dependency>
 
@@ -313,7 +313,7 @@
                             <mainClassName>
                                 ${main.class}
                             </mainClassName>
-                            <javafxVersion>16.0.0.3-jpro-SNAPSHOT+0</javafxVersion>
+                          <!--  <javafxVersion>16.0.0.3-jpro-SNAPSHOT+0</javafxVersion> -->
                             <!--<JVMArgs><JVMArg>-Dno.feeds=true</JVMArg>
                                 <JVMArg>-Dshow.refresh.button=false</JVMArg>
                                 <JVMArg>-Dshow.source.box=false</JVMArg></JVMArgs>-->
