@@ -302,6 +302,7 @@ public class AdvancedListView<T> extends StackPane {
 
     public void setItems(ObservableList<T> items) {
         this.items.set(items);
+        setPage(0);
     }
 
     private void updateItems() {

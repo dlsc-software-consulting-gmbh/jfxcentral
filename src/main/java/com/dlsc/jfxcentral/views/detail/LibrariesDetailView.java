@@ -47,10 +47,10 @@ public class LibrariesDetailView extends DetailView<Library> {
         createEnsembleBox();
         createScreenshotsBox();
         createCoordinatesBox();
-        createReadmeBox();
         createVideoBox();
         createDownloadsBox();
         createTutorialsBox();
+        createReadmeBox();
 
         setContent(content);
 

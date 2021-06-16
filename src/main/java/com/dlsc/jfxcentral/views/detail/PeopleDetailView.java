@@ -58,7 +58,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createBlogsBox() {
         AdvancedListView<Blog> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(1000);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailBlogCell());
 
         SectionPane sectionPane = new SectionPane();
@@ -91,7 +91,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createBooksBox() {
         AdvancedListView<Book> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(1000);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailBookCell(false));
 
         SectionPane sectionPane = new SectionPane();
@@ -124,7 +124,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createTutorialsBox() {
         AdvancedListView<Tutorial> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(1000);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
@@ -157,7 +157,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createDownloadsBox() {
         AdvancedListView<Download> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(1000);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailDownloadCell(false));
 
         SectionPane sectionPane = new SectionPane();
@@ -217,7 +217,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createLibrariesBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(5);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailLibraryCell(getRootPane()));
 
         SectionPane sectionPane = new SectionPane();
@@ -244,7 +244,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createToolsBox() {
         AdvancedListView<Tool> listView = new AdvancedListView<>();
         listView.setPaging(true);
-        listView.setVisibleRowCount(5);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailToolCell(getRootPane()));
 
         SectionPane sectionPane = new SectionPane();
