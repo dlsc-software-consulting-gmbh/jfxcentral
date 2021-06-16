@@ -9,11 +9,16 @@
 - [ ] TextFlow Bug -> PR OpenJFX
 - [ ] Pretty format URLs? (ohne ?page)
 - [ ] Hide Scrollbar (JPro Render Bug)
+- [ ] Can't use arrow keys in list views  
 - [ ] .....
 
 ### Views
 
 - [X] add "tutorials" view
+
+### Bugs
+
+- [ ] Styling of status label in Pull Request cell not working properly
 
 ### Data
 - [X] Add videos and downloads data to libraries
@@ -44,6 +49,8 @@
 - [ ] add "homepage" button to downloads cell (example speedtest)
 
 ### Enhancements
+
+- [ ] final design for "selected" cells
 - [ ] refine dialogs / lightbox
 - [X] add "clear" icon to filter text fields
 - [ ] change "recent status" visualization **NEW** or **UPDATED**
