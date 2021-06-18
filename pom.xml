@@ -18,7 +18,7 @@
         <javafx.plugin.version>0.0.5</javafx.plugin.version>
         <main.class>com.dlsc.jfxcentral.JFXCentralApp</main.class>
         <ikonli.version>12.2.0</ikonli.version>
-        <jpro.version>2021.1.1-SNAPSHOT</jpro.version>
+        <jpro.version>2021.1.2-SNAPSHOT</jpro.version>
     </properties>
 
     <dependencies>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.sandec.jpro</groupId>
             <artifactId>jpro-web-core</artifactId>
-            <version>0.8.7</version>
+            <version>0.8.8</version>
             <scope>compile</scope>
         </dependency>
 
@@ -309,6 +309,7 @@
                         <artifactId>jpro-maven-plugin</artifactId>
                         <version>${jpro.version}</version>
                         <configuration>
+                            <port>8088</port>
                             <visible>false</visible>
                             <mainClassName>
                                 ${main.class}

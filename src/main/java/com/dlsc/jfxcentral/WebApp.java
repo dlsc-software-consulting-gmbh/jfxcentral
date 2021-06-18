@@ -11,14 +11,14 @@ public class WebApp extends com.jpro.web.WebApp {
 
         addRouteJava((s) -> {
             if(s.equals("") || s.equals("/")) {
-                return new com.jpro.web.Redirect("/?page=/HOME");
+                return new com.jpro.web.Redirect("/HOME");
             } else {
                 return null;
             }
         });
 
         addRouteJava((s) -> {
-            if(s.startsWith("/?page=/memory")) {
+            if(s.startsWith("/memory")) {
                 return new MemoryView();
             } else {
                 return null;
@@ -26,15 +26,15 @@ public class WebApp extends com.jpro.web.WebApp {
         });
 
         addRouteJava((s) -> {
-            if(s.startsWith("/?page=/refresh")) {
+            if(s.startsWith("/refresh")) {
                 DataRepository.getInstance().refreshData();
-                return new com.jpro.web.Redirect("/?page=/HOME");
+                return new com.jpro.web.Redirect("/HOME");
             }
             return null;
         });
 
         addRouteJava((s) -> {
-            if(s.startsWith("/?page=")) {
+            if(s.startsWith("/")) {
                 return new WebView(s);
             } else {
                 return null;
