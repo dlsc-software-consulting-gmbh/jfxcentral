@@ -60,14 +60,6 @@
     -drop-shadow-2: dropshadow(gaussian, rgba(0, 0, 0, .26), 15, 0.16, -1, 4);
     -drop-shadow-3: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
 
-    -mdfx-link-color: -fx-accent;
-    -mdfx-border-color-1: #888;
-
-    -mdfx-font-color: black;
-    -mdfx-bg-color-1: #ccc;
-    -mdfx-bg-color-2: #ddd;
-    -mdfx-bg-color-3: #eee;
-
     -fx-font-smoothing-type: lcd;
 
     -white-button-text-color: rgb(110, 110, 110);

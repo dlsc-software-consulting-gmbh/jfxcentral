@@ -87,7 +87,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             Library library = getSelectedItem();
             if (library != null) {
                 sectionPane.setSubtitle("Videos relevant for library " + library.getTitle());
-                listView.setItems(DataRepository.getInstance().getVideosByLibrary(library));
+                listView.setItems(DataRepository.getInstance().getVideosByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -114,7 +114,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             Library library = getSelectedItem();
             if (library != null) {
                 sectionPane.setSubtitle("Downloads related to library " + library.getTitle());
-                listView.setItems(DataRepository.getInstance().getDownloadsByLibrary(library));
+                listView.setItems(DataRepository.getInstance().getDownloadsByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -141,7 +141,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             Library library = getSelectedItem();
             if (library != null) {
                 sectionPane.setSubtitle("Tutorials for library " + library.getTitle());
-                listView.setItems(DataRepository.getInstance().getTutorialsByLibrary(library));
+                listView.setItems(DataRepository.getInstance().getTutorialsByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());

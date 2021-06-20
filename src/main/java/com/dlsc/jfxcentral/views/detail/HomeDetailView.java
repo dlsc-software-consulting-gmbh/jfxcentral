@@ -223,7 +223,8 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         HBox hBox = new HBox(markdownView);
 
         SectionPane sectionPane = new SectionPane(hBox);
-        sectionPane.setTitle("Welcome");
+        sectionPane.setTitle("Welcome to JFX-Central");
+        sectionPane.setSubtitle("Home to anything JavaFX related.");
         sectionPane.setExtras(logo);
 
         VBox.setVgrow(sectionPane, Priority.NEVER);

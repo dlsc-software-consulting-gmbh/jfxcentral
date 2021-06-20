@@ -142,7 +142,7 @@ public class ToolsDetailView extends DetailView<Tool> {
             Tool tool = getSelectedItem();
             if (tool != null) {
                 sectionPane.setSubtitle("Videos relevant for tool " + tool.getName());
-                listView.setItems(DataRepository.getInstance().getVideosByTool(tool));
+                listView.setItems(DataRepository.getInstance().getVideosByModelObject(tool));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -169,7 +169,7 @@ public class ToolsDetailView extends DetailView<Tool> {
             Tool tool = getSelectedItem();
             if (tool != null) {
                 sectionPane.setSubtitle("Downloads related to tool " + tool.getName());
-                listView.setItems(DataRepository.getInstance().getDownloadsByTool(tool));
+                listView.setItems(DataRepository.getInstance().getDownloadsByModelObject(tool));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());

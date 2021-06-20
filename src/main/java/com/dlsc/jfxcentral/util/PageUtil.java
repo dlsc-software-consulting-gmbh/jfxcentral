@@ -11,7 +11,11 @@ public class PageUtil {
         int secondSlash = url.indexOf("/", "/".length());
         if (secondSlash == -1) secondSlash = url.length();
         String viewString = url.substring("/".length(), secondSlash);
-        return View.valueOf(viewString);
+        try {
+            return View.valueOf(viewString.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
     }
 
     static public String getIdFromURL(String url) {
@@ -23,7 +27,7 @@ public class PageUtil {
     }
 
     static public String getLink(View view) {
-        return "/" + view.name();
+        return "/" + view.name().toLowerCase();
     }
 
     static public String getLink(ModelObject obj) {

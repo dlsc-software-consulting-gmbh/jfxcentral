@@ -101,7 +101,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
                 filters.add(new FilterView.Filter<>(personById.get().getName()) {
                     @Override
                     public boolean test(Tutorial tutorial) {
-                        return DataRepository.getInstance().getTutorialsByPerson(personById.get()).contains(tutorial);
+                        return DataRepository.getInstance().getTutorialsByModelObject(personById.get()).contains(tutorial);
                     }
                 });
             }

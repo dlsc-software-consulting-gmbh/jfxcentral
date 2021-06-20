@@ -76,7 +76,7 @@ public class PeopleDetailView extends DetailView<Person> {
         selectedItemProperty().addListener(it -> {
             Person person = getSelectedItem();
             if (person != null) {
-                listView.setItems(DataRepository.getInstance().getBlogsByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getBlogsByModelObject(getSelectedItem()));
             } else {
                 listView.setItems(FXCollections.observableArrayList());
             }
@@ -109,7 +109,7 @@ public class PeopleDetailView extends DetailView<Person> {
         selectedItemProperty().addListener(it -> {
             Person person = getSelectedItem();
             if (person != null) {
-                listView.setItems(DataRepository.getInstance().getBooksByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getBooksByModelObject(getSelectedItem()));
             } else {
                 listView.setItems(FXCollections.observableArrayList());
             }
@@ -142,7 +142,7 @@ public class PeopleDetailView extends DetailView<Person> {
         selectedItemProperty().addListener(it -> {
             Person person = getSelectedItem();
             if (person != null) {
-                listView.setItems(DataRepository.getInstance().getTutorialsByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getTutorialsByModelObject(getSelectedItem()));
             } else {
                 listView.setItems(FXCollections.observableArrayList());
             }
@@ -175,7 +175,7 @@ public class PeopleDetailView extends DetailView<Person> {
         selectedItemProperty().addListener(it -> {
             Person person = getSelectedItem();
             if (person != null) {
-                listView.setItems(DataRepository.getInstance().getDownloadsByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getDownloadsByModelObject(getSelectedItem()));
             } else {
                 listView.setItems(FXCollections.observableArrayList());
             }
@@ -201,7 +201,7 @@ public class PeopleDetailView extends DetailView<Person> {
             Person person = getSelectedItem();
             if (person != null) {
                 sectionPane.setSubtitle("Sessions presented by " + person.getName());
-                listView.setItems(DataRepository.getInstance().getVideosByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getVideosByModelObject(getSelectedItem()));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -228,7 +228,7 @@ public class PeopleDetailView extends DetailView<Person> {
             Person person = getSelectedItem();
             if (person != null) {
                 sectionPane.setSubtitle("Libraries developed by " + person.getName());
-                listView.setItems(DataRepository.getInstance().getLibrariesByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getLibrariesByModelObject(getSelectedItem()));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -255,7 +255,7 @@ public class PeopleDetailView extends DetailView<Person> {
             Person person = getSelectedItem();
             if (person != null) {
                 sectionPane.setSubtitle("Tools developed by " + person.getName());
-                listView.setItems(DataRepository.getInstance().getToolsByPerson(getSelectedItem()));
+                listView.setItems(DataRepository.getInstance().getToolsByModelObject(getSelectedItem()));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());

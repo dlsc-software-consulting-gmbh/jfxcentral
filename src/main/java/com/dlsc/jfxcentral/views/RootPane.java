@@ -131,6 +131,11 @@ public class RootPane extends StackPane {
                 WebAPI webAPI = WebAPI.getWebAPI(scene);
                 String language = webAPI.getLanguage();
                 System.out.println("language: " + language);
+
+                if (WebAPI.getWebAPI(scene).isMobile()) {
+                    System.out.println("MOBILE!!!");
+                }
+
                 // determine user locale
             }
         });

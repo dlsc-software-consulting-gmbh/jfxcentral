@@ -1,6 +1,18 @@
 /* ----------------------------------------------------------------------------
  * Markdown
  */
+* {
+    -mdfx-link-color: -fx-accent;
+    -mdfx-border-color-1: #888;
+
+    -mdfx-font-color: black;
+    -mdfx-bg-color-1: #ccc;
+    -mdfx-bg-color-2: #ddd;
+    -mdfx-bg-color-3: #eee;
+
+    -mdfx-bq-color-border: -fx-accent; /* the blockquote's border color */
+    -mdfx-bq-color-background: derive(-fx-accent, +90%); /* the blockquote's background color */
+}
 
 .markdown-text {
     -fx-font-size: 14px;
@@ -165,4 +177,9 @@
 .markdown-hbox1 {
     -fx-spacing: 0;
     -fx-padding: 2;
+}
+
+.markdown-normal-block-quote {
+    -fx-background-insets: 10px 10px 10px 0px;
+    -fx-border-insets: 10px 10px 10px 0px;
 }
