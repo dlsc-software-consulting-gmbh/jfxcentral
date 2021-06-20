@@ -9,7 +9,9 @@
 - [ ] TextFlow Bug -> PR OpenJFX
 - [x] Pretty format URLs? (ohne ?page)
 - [ ] Hide Scrollbar (JPro Render Bug)
-- [ ] Can't use arrow keys in list views  
+- [ ] Can't use arrow keys in list view
+- [X] Block quotes are not styled properly anymore in markdown view
+- [ ] Add certificate to server for https:// support  
 - [ ] .....
 
 ### Views
@@ -38,6 +40,7 @@
 - [ ] Add FXSampler to tools
 
 ### New Features
+- [ ] add "time period" selector to "recent changes" view (last week, last month, etc....)
 - [ ] add "detail" button to all list cells showing a model object
 - [X] add link to logo image for "home"
 - [X] add "downloads" to PeopleDetailView
