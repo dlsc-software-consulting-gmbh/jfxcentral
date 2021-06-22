@@ -36,7 +36,7 @@ public class TopMenu extends ToolBar {
             if (getScene() != null) {
                 Display display = page.getRootPane().getDisplay();
                 if (display.equals(Display.DESKTOP) || display.equals(Display.WEB)) {
-                    return page.getWidth() > 1000;
+                    return page.getWidth() > 1100;
                 }
             }
 

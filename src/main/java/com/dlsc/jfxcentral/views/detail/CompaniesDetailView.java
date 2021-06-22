@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.cells.DetailCompanyCell;
 import javafx.collections.transformation.SortedList;
@@ -24,9 +25,10 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
         SortedList<Company> sortedList = new SortedList<>(DataRepository.getInstance().companiesProperty());
         sortedList.setComparator(Comparator.comparing(Company::getName));
 
-        listView.setCellFactory(view -> new DetailCompanyCell(rootPane));
+        listView.setCellFactory(view -> new DetailCompanyCell(rootPane, true));
         listView.setItems(sortedList);
-        listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
+        listView.setSelectionModel(new EmptySelectionModel<>());
+//        listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
 
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);

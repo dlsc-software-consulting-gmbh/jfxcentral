@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Tutorial.Format;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
 import javafx.beans.InvalidationListener;
@@ -60,6 +61,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
 
         PrettyListView<Tutorial> listView = new PrettyListView<>();
         listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), true));
+        listView.setSelectionModel(new EmptySelectionModel<>());
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);

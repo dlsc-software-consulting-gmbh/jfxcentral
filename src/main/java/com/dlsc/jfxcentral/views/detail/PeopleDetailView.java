@@ -91,7 +91,7 @@ public class PeopleDetailView extends DetailView<Person> {
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailBookCell(false));
+        listView.setCellFactory(view -> new DetailBookCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Books");

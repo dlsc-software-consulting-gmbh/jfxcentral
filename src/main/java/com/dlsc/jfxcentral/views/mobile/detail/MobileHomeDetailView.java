@@ -85,7 +85,7 @@ public class MobileHomeDetailView extends DetailViewWithListView<News> {
         AdvancedListView<News> listView = new AdvancedListView<>();
         listView.setVisibleRowCount(3);
         listView.setPaging(true);
-        listView.setCellFactory(view -> new DetailNewsCell(getRootPane()));
+        listView.setCellFactory(view -> new DetailNewsCell(getRootPane(), true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);

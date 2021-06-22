@@ -13,11 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-public class ResponsiveBox extends HBox {
+public class ResponsiveBox extends VBox {
 
     private final ImageView imageView = new ImageView();
     private final Label titleLabel = new Label();
+    private final Label subtitleLabel = new Label();
     private final MarkdownView markdownView = new MarkdownView();
+    private final HBox hBox;
 
     public enum ImageLocation {
         LARGE_ON_SIDE,
@@ -43,13 +45,20 @@ public class ResponsiveBox extends HBox {
         titleLabel.setWrapText(true);
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
+        subtitleLabel.textProperty().bind(subtitleProperty());
+        subtitleLabel.getStyleClass().addAll("subtitle-label");
+        subtitleLabel.setWrapText(true);
+        subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
+        subtitleLabel.visibleProperty().bind(subtitleLabel.textProperty().isNotEmpty());
+        subtitleLabel.managedProperty().bind(subtitleLabel.textProperty().isNotEmpty());
+
         markdownView.mdStringProperty().bind(descriptionProperty());
         markdownView.getStyleClass().add("description-label");
 
         StackPane imageWrapper = new StackPane(imageView);
         imageWrapper.getStyleClass().add("image-wrapper");
         imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
-        StackPane.setAlignment(imageView, Pos.TOP_LEFT);
+        StackPane.setAlignment(imageView, Pos.TOP_CENTER);
 
         FlowPane buttonBox = new FlowPane();
         Bindings.bindContent(buttonBox.getChildren(), buttonsProperty());
@@ -65,7 +74,10 @@ public class ResponsiveBox extends HBox {
         vBox.getStyleClass().add("vbox");
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        getChildren().add(vBox);
+        hBox = new HBox(vBox);
+        hBox.getStyleClass().add("hbox");
+
+        getChildren().add(hBox);
 
         widthProperty().addListener(it -> updateLayout(imageLocation, imageWrapper, buttonBox, vBox));
         updateLayout(imageLocation, imageWrapper, buttonBox, vBox);
@@ -76,22 +88,55 @@ public class ResponsiveBox extends HBox {
             imageWrapper.setPrefWidth(0);
             imageWrapper.setMinWidth(0);
             imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> imageWrapper.getWidth() - imageWrapper.getInsets().getLeft() - imageWrapper.getInsets().getRight(), imageWrapper.widthProperty(), imageWrapper.insetsProperty()));
-            vBox.getChildren().setAll(titleLabel, imageWrapper, markdownView, buttonBox);
-            getChildren().remove(imageWrapper);
+            vBox.getChildren().setAll(titleLabel, subtitleLabel, imageWrapper, markdownView, buttonBox);
+            hBox.getChildren().remove(imageWrapper);
         } else {
             imageWrapper.setPrefWidth(Region.USE_COMPUTED_SIZE);
             imageWrapper.setMinWidth(Region.USE_COMPUTED_SIZE);
             imageView.fitWidthProperty().unbind();
-            imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? 320d : 160d);
+            imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
 
             Region spacer = new Region();
             VBox.setVgrow(spacer, Priority.ALWAYS);
 
-            vBox.getChildren().setAll(titleLabel, markdownView, spacer, buttonBox);
-            if (!getChildren().contains(imageWrapper)) {
-                getChildren().add(imageWrapper);
+            vBox.getChildren().setAll(titleLabel, subtitleLabel, markdownView, spacer, buttonBox);
+            if (!hBox.getChildren().contains(imageWrapper)) {
+                hBox.getChildren().add(imageWrapper);
             }
         }
+
+        Node footer = getFooter();
+        if (footer != null && !getChildren().contains(footer)) {
+            getChildren().add(footer);
+        }
+    }
+
+    private final DoubleProperty smallImageWidth = new SimpleDoubleProperty(this, "smallImageWidth", 160);
+
+    public double getSmallImageWidth() {
+        return smallImageWidth.get();
+    }
+
+    public DoubleProperty smallImageWidthProperty() {
+        return smallImageWidth;
+    }
+
+    public void setSmallImageWidth(double smallImageWidth) {
+        this.smallImageWidth.set(smallImageWidth);
+    }
+
+    private final DoubleProperty largeImageWidth = new SimpleDoubleProperty(this, "largeImageWidth", 320);
+
+    public double getLargeImageWidth() {
+        return largeImageWidth.get();
+    }
+
+    public DoubleProperty largeImageWidthProperty() {
+        return largeImageWidth;
+    }
+
+    public void setLargeImageWidth(double largeImageWidth) {
+        this.largeImageWidth.set(largeImageWidth);
     }
 
     public Label getTitleLabel() {
@@ -100,6 +145,20 @@ public class ResponsiveBox extends HBox {
 
     public MarkdownView getMarkdownView() {
         return markdownView;
+    }
+
+    private final ObjectProperty<Node> footer = new SimpleObjectProperty<>(this, "footer");
+
+    public Node getFooter() {
+        return footer.get();
+    }
+
+    public ObjectProperty<Node> footerProperty() {
+        return footer;
+    }
+
+    public void setFooter(Node footer) {
+        this.footer.set(footer);
     }
 
     private final ListProperty<Node> buttons = new SimpleListProperty<>(this, "buttons", FXCollections.observableArrayList());
@@ -128,6 +187,20 @@ public class ResponsiveBox extends HBox {
 
     public void setImage(Image image) {
         this.image.set(image);
+    }
+
+    private final StringProperty subtitle = new SimpleStringProperty(this, "subtitle");
+
+    public String getSubtitle() {
+        return subtitle.get();
+    }
+
+    public StringProperty subtitleProperty() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle.set(subtitle);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title", "");

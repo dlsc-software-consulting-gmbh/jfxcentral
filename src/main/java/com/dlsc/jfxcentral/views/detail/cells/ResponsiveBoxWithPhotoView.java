@@ -13,11 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-public class ResponsiveBoxWithPhotoView extends HBox {
+public class ResponsiveBoxWithPhotoView extends VBox {
 
     private final PhotoView photoView = new PhotoView();
     private final Label titleLabel = new Label();
     private final MarkdownView markdownView = new MarkdownView();
+    private final HBox hBox;
 
     public ResponsiveBoxWithPhotoView(ImageLocation imageLocation) {
         getStyleClass().add("responsive-box");
@@ -49,7 +50,10 @@ public class ResponsiveBoxWithPhotoView extends HBox {
         vBox.getStyleClass().add("vbox");
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        getChildren().add(vBox);
+        hBox = new HBox(vBox);
+        hBox.getStyleClass().add("hbox");
+
+        getChildren().add(hBox);
 
         widthProperty().addListener(it -> updateLayout(imageLocation, photoView, buttonBox, vBox));
         updateLayout(imageLocation, photoView, buttonBox, vBox);
@@ -64,7 +68,7 @@ public class ResponsiveBoxWithPhotoView extends HBox {
             if (!markdownView.getStyleClass().contains("centered")) {
                 markdownView.getStyleClass().add("centered");
             }
-            getChildren().remove(photoView);
+            hBox.getChildren().remove(photoView);
         } else {
             Region spacer = new Region();
             VBox.setVgrow(spacer, Priority.ALWAYS);
@@ -75,8 +79,8 @@ public class ResponsiveBoxWithPhotoView extends HBox {
             buttonBox.setAlignment(Pos.CENTER_LEFT);
             markdownView.getStyleClass().remove("centered");
 
-            if (!getChildren().contains(photoView)) {
-                getChildren().add(photoView);
+            if (!hBox.getChildren().contains(photoView)) {
+                hBox.getChildren().add(photoView);
             }
         }
     }

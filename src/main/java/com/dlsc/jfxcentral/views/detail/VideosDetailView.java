@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.InvalidationListener;
@@ -52,6 +53,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         });
 
         PrettyListView<Video> listView = new PrettyListView<>();
+        listView.setSelectionModel(new EmptySelectionModel<>());
         listView.setCellFactory(view -> new DetailVideoCell(getRootPane(), true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
