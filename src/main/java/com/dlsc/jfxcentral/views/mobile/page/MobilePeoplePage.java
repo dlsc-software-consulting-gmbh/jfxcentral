@@ -17,7 +17,7 @@ public class MobilePeoplePage extends MobilePage<Person> {
 
     @Override
     protected MasterView<Person> createMasterView() {
-        return new MobilePeopleMasterView(getRootPane(), person -> showDetail(person));
+        return new MobilePeopleMasterView(getRootPane());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.DetailView;
@@ -12,7 +13,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
-public class Page<T extends ModelObject> extends BorderPane {
+public class Page<T extends ModelObject> extends BorderPane implements IPage<T> {
 
     private final DetailScrollPane detailPane;
     private final TopMenu topMenu;

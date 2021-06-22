@@ -3,7 +3,9 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.views.PhotoView;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
+import com.jpro.webapi.WebAPI;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
@@ -13,10 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
-
-import java.util.function.Consumer;
 
 public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
 
@@ -28,24 +26,8 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
     private final ImageView rockstarImageView = new ImageView();
     private final GridPane gridPane;
 
-    public MobileMasterPersonCell(Consumer<Person> onSelect) {
+    public MobileMasterPersonCell() {
         getStyleClass().add("mobile-master-person-list-cell");
-
-        setOnMouseClicked(evt -> {
-            if (evt.getClickCount() == 1 && getItem() != null) {
-                onSelect.accept(getItem());
-            }
-        });
-
-        FontIcon arrowIcon = new FontIcon(MaterialDesign.MDI_ARROW_RIGHT);
-        arrowIcon.getStyleClass().add("arrow-icon");
-        arrowIcon.visibleProperty().bind(selectedProperty());
-        arrowIcon.managedProperty().bind(selectedProperty());
-        arrowIcon.setOnMouseClicked(evt -> {
-            if (getItem() != null) {
-                onSelect.accept(getItem());
-            }
-        });
 
         photoView.setEditable(false);
         photoView.setPlaceholder(new Label("test"));
@@ -84,7 +66,6 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
         //gridPane.add(arrowIcon, 2, 0);
 
         GridPane.setRowSpan(photoView, 2);
-        GridPane.setRowSpan(arrowIcon, 2);
         GridPane.setHgrow(nameLabel, Priority.ALWAYS);
         GridPane.setHgrow(badgesBox, Priority.ALWAYS);
         GridPane.setVgrow(nameLabel, Priority.ALWAYS);
@@ -119,11 +100,11 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
             rockstarLabel.setManaged(person.isRockstar());
             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
 
-//            if (WebAPI.isBrowser()) {
-//                setMouseTransparent(true);
-//            }
-//
-//            setMasterCellLink(MobileMasterPersonCell.this, person, person.getDescription(), View.PEOPLE);
+            if (WebAPI.isBrowser()) {
+                setMouseTransparent(true);
+            }
+
+            setMasterCellLink(MobileMasterPersonCell.this, person, person.getDescription(), View.PEOPLE);
         } else {
             nameLabel.setText("");
             championLabel.setVisible(false);

@@ -3,9 +3,9 @@ package com.dlsc.jfxcentral;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.page.Page;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
@@ -21,7 +21,7 @@ public class WebView extends com.jpro.web.View {
 
     @Override
     public String title() {
-        Page currentPage = rootPane.getCurrentPage();
+        IPage currentPage = rootPane.getCurrentPage();
         if (currentPage != null) {
             return currentPage.getTitle();
         }
@@ -30,7 +30,7 @@ public class WebView extends com.jpro.web.View {
 
     @Override
     public String description() {
-        Page currentPage = rootPane.getCurrentPage();
+        IPage currentPage = rootPane.getCurrentPage();
         if (currentPage != null) {
             return currentPage.getDescription();
         }
@@ -72,7 +72,7 @@ public class WebView extends com.jpro.web.View {
             return true;
         }
 
-        Page currentPage = rootPane.getCurrentPage();
+        IPage currentPage = rootPane.getCurrentPage();
         ModelObject item = null;
 
         switch (view) {
@@ -108,7 +108,7 @@ public class WebView extends com.jpro.web.View {
                 break;
         }
 
-        if (currentPage != null && item != null) {
+        if (currentPage != null) {
             currentPage.setSelectedItem(item);
         }
 

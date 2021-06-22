@@ -7,8 +7,6 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileMasterViewWithAdvancedListView;
 import com.dlsc.jfxcentral.views.mobile.master.cells.MobileMasterPersonCell;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,7 +15,7 @@ import java.util.function.Consumer;
 
 public class MobilePeopleMasterView extends MobileMasterViewWithAdvancedListView<Person> {
 
-    public MobilePeopleMasterView(RootPane rootPane, Consumer<Person> onSelect) {
+    public MobilePeopleMasterView(RootPane rootPane) {
         super(rootPane, View.PEOPLE);
 
         getStyleClass().addAll("people-master-view", "mobile-people-master-view");
@@ -25,21 +23,14 @@ public class MobilePeopleMasterView extends MobileMasterViewWithAdvancedListView
         listView.setPaging(true);
         listView.setVisibleRowCount(Integer.MAX_VALUE);
         listView.setMinWidth(Region.USE_PREF_SIZE);
-        listView.setCellFactory(view -> new MobileMasterPersonCell(onSelect));
+        listView.setCellFactory(view -> new MobileMasterPersonCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
                 Comparator.comparing(Person::getName),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
 
-        CheckBox twitterOnly = new CheckBox("Include Twitter");
-
-        BorderPane content = new BorderPane();
-        //content.setTop(twitterOnly);
-
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
         scrollPane.setShowScrollToTopButton(true);
         scrollPane.setFitToWidth(true);
-        content.setCenter(scrollPane);
-
-        setCenter(content);
+        setCenter(scrollPane);
     }
 }

@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.mobile;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.DetailView;
@@ -13,7 +14,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-public class MobilePage<T extends ModelObject> extends BorderPane {
+public class MobilePage<T extends ModelObject> extends BorderPane implements IPage<T> {
 
     private final DetailScrollPane detailPane;
     private final RootPane rootPane;
@@ -40,6 +41,15 @@ public class MobilePage<T extends ModelObject> extends BorderPane {
         }
 
         setCenter(stackPane);
+
+        selectedItemProperty().addListener(it -> {
+            T selectedItem = getSelectedItem();
+            if (selectedItem != null) {
+                showDetail(selectedItem);
+            } else {
+                showMaster();
+            }
+        });
     }
 
     public void showMaster() {
@@ -47,16 +57,8 @@ public class MobilePage<T extends ModelObject> extends BorderPane {
     }
 
     public void showDetail(T item) {
-        detailPane.toFront();
         detailView.showItem(item);
-    }
-
-    public void showItem(T item) {
-        if (masterView != null) {
-            masterView.showItem(item);
-        }
-
-        showDetail(item);
+        detailPane.toFront();
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");

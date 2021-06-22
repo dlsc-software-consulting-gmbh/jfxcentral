@@ -5,10 +5,10 @@ import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.mobile.MobileHeader;
-import com.dlsc.jfxcentral.views.mobile.MobilePage;
+import com.dlsc.jfxcentral.views.mobile.MobileTopMenu;
+import com.dlsc.jfxcentral.views.mobile.page.MobileBooksPage;
 import com.dlsc.jfxcentral.views.mobile.page.MobileHomePage;
 import com.dlsc.jfxcentral.views.mobile.page.MobilePeoplePage;
-import com.dlsc.jfxcentral.views.mobile.MobileTopMenu;
 import com.dlsc.jfxcentral.views.page.*;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
@@ -21,6 +21,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,8 +36,7 @@ public class RootPane extends StackPane {
 
     private final DialogPane dialogPane = new DialogPane();
 
-    private Page<?> page;
-    private MobilePage<?> mobilePage;
+    private IPage<?> page;
 
 
     private StackPane contentPane;
@@ -172,17 +172,17 @@ public class RootPane extends StackPane {
     }
 
     private void updateViewMobile() {
-        mobilePage = null;
+        page = null;
         System.out.println("requested view: " + getView());
 
         switch (getView()) {
             case HOME:
-                mobilePage = new MobileHomePage(this);
+                page = new MobileHomePage(this);
                 break;
             case OPENJFX:
                 break;
             case PEOPLE:
-                mobilePage = new MobilePeoplePage(this);
+                page = new MobilePeoplePage(this);
                 break;
             case TUTORIALS:
                 break;
@@ -199,6 +199,7 @@ public class RootPane extends StackPane {
             case BLOGS:
                 break;
             case BOOKS:
+                page = new MobileBooksPage(this);
                 break;
             case VIDEOS:
                 break;
@@ -206,8 +207,8 @@ public class RootPane extends StackPane {
                 break;
         }
 
-        if (mobilePage != null) {
-            contentPane.getChildren().setAll(mobilePage, dialogPane);
+        if (page != null) {
+            contentPane.getChildren().setAll((Node) page, dialogPane);
         }
     }
 
@@ -258,7 +259,7 @@ public class RootPane extends StackPane {
 
         contentPane.getChildren().setAll(borderPane, compassWrapper, dialogPane);
 
-        borderPane.setCenter(page);
+        borderPane.setCenter((Node) page);
     }
 
     private void updateExpandedPseudoClass() {
@@ -279,7 +280,7 @@ public class RootPane extends StackPane {
         this.expanded.set(expanded);
     }
 
-    public Page<?> getCurrentPage() {
+    public IPage<?> getCurrentPage() {
         return page;
     }
 
@@ -313,7 +314,6 @@ public class RootPane extends StackPane {
     public void setView(View view) {
         this.view.set(view);
     }
-
 
     private ObjectProperty<Display> display = new SimpleObjectProperty<>(this, "display");
 
