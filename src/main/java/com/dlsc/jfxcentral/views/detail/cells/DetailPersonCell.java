@@ -5,15 +5,12 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.PhotoView;
+import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBox.ImageLocation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -23,24 +20,12 @@ import java.util.Optional;
 
 public class DetailPersonCell extends DetailCell<Person> {
 
-    private HBox socialBox;
-    private PhotoView photoView = new PhotoView();
-    private Label nameLabel = new Label();
-    private MarkdownView descriptionLabel = new MarkdownView();
+    private final ResponsiveBoxWithPhotoView responsiveBox;
     private ImageView championImageView = new ImageView();
     private ImageView rockstarImageView = new ImageView();
 
-    public DetailPersonCell() {
+    public DetailPersonCell(RootPane rootPane, boolean largeImage) {
         getStyleClass().add("detail-person-cell");
-
-        photoView.setEditable(false);
-
-        nameLabel.getStyleClass().addAll("header2", "name-label");
-        nameLabel.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(nameLabel, Priority.ALWAYS);
-
-        descriptionLabel.getStyleClass().add("description-label");
-        HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
 
         championImageView.getStyleClass().add("champion-image");
         championImageView.setPreserveRatio(true);
@@ -52,22 +37,11 @@ public class DetailPersonCell extends DetailCell<Person> {
 
         HBox badgesBox = new HBox(championImageView, rockstarImageView);
         badgesBox.getStyleClass().add("badges-box");
-        nameLabel.setGraphic(badgesBox);
-        nameLabel.setContentDisplay(ContentDisplay.RIGHT);
 
-        socialBox = new HBox();
-        socialBox.getStyleClass().add("social-box");
+        responsiveBox = new ResponsiveBoxWithPhotoView(rootPane.isMobile() ? ImageLocation.HIDE : largeImage ? ImageLocation.LARGE_ON_SIDE : ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.visibleProperty().bind(emptyProperty().not());
 
-        VBox vBox = new VBox(nameLabel, descriptionLabel, badgesBox, socialBox);
-        vBox.getStyleClass().add("vbox");
-        vBox.setFillWidth(true);
-        HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        HBox hbox = new HBox(vBox, photoView);
-        hbox.getStyleClass().add("hbox");
-        hbox.visibleProperty().bind(itemProperty().isNotNull());
-
-        setGraphic(hbox);
+        setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
 
@@ -76,19 +50,19 @@ public class DetailPersonCell extends DetailCell<Person> {
         super.updateItem(person, empty);
 
         if (!empty && person != null) {
-            nameLabel.setText(person.getName());
-            descriptionLabel.mdStringProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
+            responsiveBox.setTitle(person.getName());
+            responsiveBox.descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());
-            photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-            socialBox.getChildren().clear();
+            responsiveBox.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
+            responsiveBox.getButtons().clear();
 
             if (StringUtils.isNotEmpty(person.getTwitter())) {
                 Button twitter = new Button("Twitter");
                 twitter.getStyleClass().addAll("social-button", "twitter");
                 Util.setLink(twitter, "https://twitter.com/" + person.getTwitter(), person.getName());
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
-                socialBox.getChildren().add(twitter);
+                responsiveBox.getButtons().add(twitter);
             }
 
             if (StringUtils.isNotEmpty(person.getLinkedIn())) {
@@ -96,7 +70,7 @@ public class DetailPersonCell extends DetailCell<Person> {
                 linkedIn.getStyleClass().addAll("social-button", "linkedin");
                 Util.setLink(linkedIn, "https://www.linkedin.com/in/" + person.getLinkedIn(), person.getName());
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
-                socialBox.getChildren().add(linkedIn);
+                responsiveBox.getButtons().add(linkedIn);
             }
 
             if (StringUtils.isNotEmpty(person.getBlogId())) {
@@ -106,7 +80,7 @@ public class DetailPersonCell extends DetailCell<Person> {
                     blog.getStyleClass().addAll("social-button", "blog");
                     Util.setLink(blog, blogById.get().getUrl(), blogById.get().getSummary());
                     blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
-                    socialBox.getChildren().add(blog);
+                    responsiveBox.getButtons().add(blog);
                 }
             }
 
@@ -115,7 +89,7 @@ public class DetailPersonCell extends DetailCell<Person> {
                 website.getStyleClass().addAll("social-button", "website");
                 Util.setLink(website, person.getWebsite(), person.getName());
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
-                socialBox.getChildren().add(website);
+                responsiveBox.getButtons().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getEmail())) {
@@ -123,7 +97,7 @@ public class DetailPersonCell extends DetailCell<Person> {
                 website.getStyleClass().addAll("social-button", "mail");
                 Util.setLink(website, "mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact", person.getName());
                 website.setGraphic(new FontIcon(Material.MAIL));
-                socialBox.getChildren().add(website);
+                responsiveBox.getButtons().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getGitHub())) {
@@ -131,7 +105,7 @@ public class DetailPersonCell extends DetailCell<Person> {
                 github.getStyleClass().addAll("social-button", "github");
                 Util.setLink(github, "https://github.com/" + person.getGitHub(), person.getName());
                 github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
-                socialBox.getChildren().add(github);
+                responsiveBox.getButtons().add(github);
             }
         }
     }

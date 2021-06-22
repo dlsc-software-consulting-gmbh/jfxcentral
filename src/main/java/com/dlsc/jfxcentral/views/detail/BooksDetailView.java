@@ -18,10 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -41,7 +38,7 @@ public class BooksDetailView extends DetailView<Book> {
     private Label publisherLabel = new Label();
     private Label publishDateLabel = new Label();
 
-    private HBox linksBox = new HBox();
+    private FlowPane linksBox = new FlowPane();
 
     public BooksDetailView(RootPane rootPane) {
         super(rootPane);
@@ -54,22 +51,32 @@ public class BooksDetailView extends DetailView<Book> {
 
         titleLabel.getStyleClass().addAll("header1", "title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
+        titleLabel.setWrapText(true);
+        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+
         HBox.setHgrow(titleLabel, Priority.ALWAYS);
 
         subtitleLabel.getStyleClass().add("subtitle-label");
         subtitleLabel.setMaxWidth(Double.MAX_VALUE);
+        subtitleLabel.setWrapText(true);
+        subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
         HBox.setHgrow(subtitleLabel, Priority.ALWAYS);
 
         descriptionMarkdownView.getStyleClass().add("description-markdown-view");
         HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
 
+        authorsLabel.setWrapText(true);
+        authorsLabel.setMinHeight(Region.USE_PREF_SIZE);
         authorsLabel.getStyleClass().add("authors-label");
+
         isbnLabel.getStyleClass().add("isbn-label");
         linksBox.getStyleClass().add("social-box");
         publisherLabel.getStyleClass().add("publisher-label");
         publishDateLabel.getStyleClass().add("publish-date-label");
 
-        HBox miscBox = new HBox(10, publisherLabel, publishDateLabel, isbnLabel);
+        FlowPane miscBox = new FlowPane(publisherLabel, publishDateLabel, isbnLabel);
+        miscBox.setVgap(10);
+        miscBox.setHgap(10);
 
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
@@ -95,7 +102,7 @@ public class BooksDetailView extends DetailView<Book> {
 
         // authors section
         AdvancedListView<Person> authorListView = new AdvancedListView<>();
-        authorListView.setCellFactory(view -> new DetailPersonCell());
+        authorListView.setCellFactory(view -> new DetailPersonCell(rootPane, true));
         authorListView.setPaging(true);
         authorListView.setVisibleRowCount(1000);
         authorListView.setItems(authorsProperty());

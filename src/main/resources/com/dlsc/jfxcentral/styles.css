@@ -691,7 +691,8 @@
 }
 
 .books-detail-view .title-section .content .horizontal-box .vertical-box .social-box {
-    -fx-spacing: 10px;
+    -fx-vgap: 10px;
+    -fx-hgap: 10px;
 }
 
 /* ----------------------------------------------------------------------------
