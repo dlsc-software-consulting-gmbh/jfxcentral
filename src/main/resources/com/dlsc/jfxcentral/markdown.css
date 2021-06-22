@@ -35,6 +35,10 @@
     -fx-line-spacing: 2px;
 }
 
+.markdown-view.centered .markdown-normal-flow {
+    -fx-text-alignment: center;
+}
+
 .markdown-heading .markdown-text {
     -fx-font-size: 14px !important;
 }
@@ -182,4 +186,8 @@
 .markdown-normal-block-quote {
     -fx-background-insets: 10px 10px 10px 0px;
     -fx-border-insets: 10px 10px 10px 0px;
+}
+
+.markdown-normal-block-quote * {
+    -mdfx-font-color: -fx-accent;
 }

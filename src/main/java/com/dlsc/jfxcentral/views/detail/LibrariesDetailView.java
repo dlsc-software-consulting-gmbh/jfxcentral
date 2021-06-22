@@ -104,7 +104,7 @@ public class LibrariesDetailView extends DetailView<Library> {
         AdvancedListView<Download> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailDownloadCell(false));
+        listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Downloads");

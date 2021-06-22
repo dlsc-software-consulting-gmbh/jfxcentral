@@ -10,7 +10,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 public class LoadingView extends VBox {
 
@@ -27,6 +29,9 @@ public class LoadingView extends VBox {
 
         Label label = new Label();
         label.textProperty().bind(statusProperty());
+        label.setWrapText(true);
+        label.setMinHeight(Region.USE_PREF_SIZE);
+        label.setTextAlignment(TextAlignment.CENTER);
 
         ProgressBar progressBar = new ProgressBar();
         progressBar.progressProperty().bind(progressProperty());

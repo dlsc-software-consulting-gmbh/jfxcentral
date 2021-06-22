@@ -57,9 +57,9 @@ public class JFXCentralApp extends Application {
         }
     }
 
-    private void showHome(WebApp app, Stage stage) {
-        app.start(SessionManager.getDefault(app, stage));
-        stage.getScene().setRoot(app);
+    private void showHome(WebApp webApp, Stage stage) {
+        webApp.start(SessionManager.getDefault(webApp, stage));
+        stage.getScene().setRoot(webApp);
         stage.getScene().setFill(Color.rgb(224, 229, 234)); // reduce flickering
     }
 

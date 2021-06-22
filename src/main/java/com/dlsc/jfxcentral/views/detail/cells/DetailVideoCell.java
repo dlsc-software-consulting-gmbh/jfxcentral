@@ -4,28 +4,21 @@ import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import javafx.scene.web.WebView;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class DetailVideoCell extends DetailCell<Video> {
 
-    private final Label titleLabel = new Label();
-    private final MarkdownView descriptionLabel = new MarkdownView();
-    private final ImageView thumbnailView = new ImageView();
     private final Button playButton = new Button("Play");
     private final Button playOnYouTubeButton = new Button("YouTube");
     private final RootPane rootPane;
+    private final ResponsiveBox responsiveBox;
 
     public DetailVideoCell(RootPane rootPane, boolean largeImage) {
         this.rootPane = rootPane;
@@ -39,39 +32,13 @@ public class DetailVideoCell extends DetailCell<Video> {
 
         playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
 
-        titleLabel.getStyleClass().addAll("header3", "title-label");
-        titleLabel.setWrapText(true);
-        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.getButtons().addAll(playButton, playOnYouTubeButton);
 
-        descriptionLabel.getStyleClass().add("description-label");
-
-        thumbnailView.setPreserveRatio(true);
-        thumbnailView.setFitWidth(largeImage ? 320 : 160);
-
-        StackPane thumbnailWrapper = new StackPane(thumbnailView);
-        thumbnailWrapper.getStyleClass().add("thumbnail-wrapper");
-        thumbnailWrapper.setMaxHeight(Region.USE_PREF_SIZE);
-        StackPane.setAlignment(thumbnailView, Pos.TOP_LEFT);
-
-        HBox buttonBox = new HBox(10, playButton, playOnYouTubeButton);
-        buttonBox.setMinHeight(Region.USE_PREF_SIZE);
-        buttonBox.setAlignment(Pos.BOTTOM_LEFT);
-
-        VBox vBox = new VBox(titleLabel, descriptionLabel, buttonBox);
-        vBox.setAlignment(Pos.TOP_LEFT);
-        vBox.setFillWidth(true);
-        vBox.getStyleClass().add("vbox");
-
-        HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        HBox hBox = new HBox(vBox, thumbnailWrapper);
-        hBox.getStyleClass().add("hbox");
-        hBox.setAlignment(Pos.TOP_LEFT);
-
-        setGraphic(hBox);
+        setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
-        hBox.visibleProperty().bind(itemProperty().isNotNull());
+        responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
         setOnMouseClicked(evt -> {
             if (evt.getClickCount() == 2) {
@@ -107,12 +74,9 @@ public class DetailVideoCell extends DetailCell<Video> {
 
         if (!empty && video != null) {
             Util.setLink(playOnYouTubeButton, "https://youtu.be/" + getItem().getId(), "https://youtu.be/" + getItem().getId());
-
-            titleLabel.setText(video.getTitle());
-            descriptionLabel.setMdString(video.getDescription());
-            thumbnailView.setVisible(true);
-            thumbnailView.setManaged(true);
-            thumbnailView.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
+            responsiveBox.setTitle(video.getTitle());
+            responsiveBox.setDescription(video.getDescription());
+            responsiveBox.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         }
     }
 }

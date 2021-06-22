@@ -314,16 +314,14 @@
                             <mainClassName>
                                 ${main.class}
                             </mainClassName>
-                          <!--  <javafxVersion>16.0.0.3-jpro-SNAPSHOT+0</javafxVersion> -->
-                            <!--<JVMArgs><JVMArg>-Dno.feeds=true</JVMArg>
+                            <JVMArgs>
+                                <JVMArg>-Dmute=true</JVMArg>
+                                <JVMArg>-Dno.feeds=true</JVMArg>
                                 <JVMArg>-Dshow.refresh.button=false</JVMArg>
-                                <JVMArg>-Dshow.source.box=false</JVMArg></JVMArgs>-->
+                                <JVMArg>-Dshow.source.box=false</JVMArg>
+                            </JVMArgs>
+                            <openURLOnStartup>false</openURLOnStartup>
                             <openingPath>/</openingPath>
-                            <!--                            <JVMArgs>-->
-                            <!--                                <JVMArg>-->
-                            <!--                                    -Dcloud.instance.tld=${cloud.instance.tld}-->
-                            <!--                                </JVMArg>-->
-                            <!--                            </JVMArgs>-->
                         </configuration>
                         <executions>
                             <execution>

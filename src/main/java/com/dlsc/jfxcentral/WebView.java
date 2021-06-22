@@ -18,6 +18,7 @@ public class WebView extends com.jpro.web.View {
         this.initialURL = initialURL;
     }
 
+
     @Override
     public String title() {
         Page currentPage = rootPane.getCurrentPage();
@@ -41,16 +42,18 @@ public class WebView extends com.jpro.web.View {
         return true;
     }
 
-    private final RootPane rootPane = new RootPane();
+    private RootPane rootPane = new RootPane();
 
     @Override
     public Node content() {
         handleURL(initialURL);
-
+        rootPane.init(isMobile());
         rootPane.setMaxWidth(1200);
-
         StackPane wrapper = new StackPane(rootPane);
         wrapper.getStyleClass().add("root-wrapper");
+        if (isMobile()) {
+            wrapper.getStyleClass().add("mobile");
+        }
         return wrapper;
     }
 

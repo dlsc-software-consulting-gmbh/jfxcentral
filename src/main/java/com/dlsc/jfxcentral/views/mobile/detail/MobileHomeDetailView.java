@@ -1,4 +1,4 @@
-package com.dlsc.jfxcentral.views.detail;
+package com.dlsc.jfxcentral.views.mobile.detail;
 
 import com.dlsc.gemsfx.FilterView;
 import com.dlsc.jfxcentral.JFXCentralApp;
@@ -9,11 +9,11 @@ import com.dlsc.jfxcentral.data.model.News;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
-import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.detail.DetailViewWithListView;
 import com.dlsc.jfxcentral.views.detail.cells.DetailNewsCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
 import javafx.beans.InvalidationListener;
@@ -33,7 +33,7 @@ import org.kordamp.ikonli.material.Material;
 import java.time.LocalDate;
 import java.util.*;
 
-public class HomeDetailView extends DetailViewWithListView<News> {
+public class MobileHomeDetailView extends DetailViewWithListView<News> {
 
     private final VBox content = new VBox();
     private final FilterView.FilterGroup<News> typeGroup = new FilterView.FilterGroup<>("Type");
@@ -44,9 +44,10 @@ public class HomeDetailView extends DetailViewWithListView<News> {
     private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
-    public HomeDetailView(RootPane rootPane) {
+    public MobileHomeDetailView(RootPane rootPane) {
         super(rootPane);
-        getStyleClass().add("home-detail-view");
+
+        getStyleClass().addAll("mobile-home-detail-view", "home-detail-view");
 
         createWelcomeSection();
         createNewsSection();
@@ -62,29 +63,26 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
         FilterView<News> filterView = sectionPane.getFilterView();
         filterView.setItems(DataRepository.getInstance().newsProperty());
-        if (!getRootPane().isMobile()) {
-            filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);
-            filterView.setTextFilterProvider(text -> news -> {
+        filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);
+        filterView.setTextFilterProvider(text -> news -> {
 
-                if (StringUtils.containsAnyIgnoreCase(news.getTitle(), text)) {
-                    return true;
-                }
+            if (StringUtils.containsAnyIgnoreCase(news.getTitle(), text)) {
+                return true;
+            }
 
-                if (StringUtils.containsAnyIgnoreCase(news.getSubtitle(), text)) {
-                    return true;
-                }
+            if (StringUtils.containsAnyIgnoreCase(news.getSubtitle(), text)) {
+                return true;
+            }
 
-                StringProperty stringProperty = DataRepository.getInstance().newsTextProperty(news);
-                if (stringProperty != null && StringUtils.containsAnyIgnoreCase(stringProperty.get(), text)) {
-                    return true;
-                }
+            StringProperty stringProperty = DataRepository.getInstance().newsTextProperty(news);
+            if (stringProperty != null && StringUtils.containsAnyIgnoreCase(stringProperty.get(), text)) {
+                return true;
+            }
 
-                return false;
-            });
-        }
+            return false;
+        });
 
         AdvancedListView<News> listView = new AdvancedListView<>();
-        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setVisibleRowCount(3);
         listView.setPaging(true);
         listView.setCellFactory(view -> new DetailNewsCell(getRootPane()));
@@ -220,8 +218,8 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
         ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo-text-only.png").toExternalForm());
-        logo.setFitWidth(getRootPane().isMobile() ? 150 : 300);
-        logo.setFitHeight(getRootPane().isMobile() ? 30 : 60);
+        logo.setFitWidth(300);
+        logo.setFitHeight(60);
         logo.setPreserveRatio(true);
 
         HBox hBox = new HBox(markdownView);
@@ -237,7 +235,6 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
     private void createRecentItemsSection() {
         AdvancedListView<ModelObject> listView = new AdvancedListView<>();
-        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
         listView.setCellFactory(view -> new DetailRecentItemCell());
@@ -299,18 +296,6 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         socialPane.add(youTubeLabel, 3, 1);
         socialPane.add(mail, 4, 0);
         socialPane.add(mailLabel, 5, 0);
-
-        twitterLabel.setVisible(!getRootPane().isMobile());
-        linkedInLabel.setVisible(!getRootPane().isMobile());
-        gitHubLabel.setVisible(!getRootPane().isMobile());
-        youTubeLabel.setVisible(!getRootPane().isMobile());
-        mailLabel.setVisible(!getRootPane().isMobile());
-
-        twitterLabel.setManaged(!getRootPane().isMobile());
-        linkedInLabel.setManaged(!getRootPane().isMobile());
-        gitHubLabel.setManaged(!getRootPane().isMobile());
-        youTubeLabel.setManaged(!getRootPane().isMobile());
-        mailLabel.setManaged(!getRootPane().isMobile());
 
         Util.setLink(twitter, "https://twitter.com/dlemmermann", "");
         Util.setLink(linkedIn, "https://www.linkedin.com/in/dlemmermann/", "");

@@ -1,0 +1,249 @@
+.header1 {
+    -fx-font-size: 16px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.header2 {
+    -fx-font-size: 18px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.header3 {
+    -fx-font-size: 14px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.mobile-header {
+    -fx-background-color: -fx-accent;
+    -fx-padding: 5px;
+}
+
+.mobile-header .menu-icon {
+    -fx-icon-size: 48px;
+    -fx-icon-color: white;
+}
+
+.mobile-cell {
+    -fx-background-color: white;
+    -fx-min-height: 50px;
+}
+
+.top-menu.mobile {
+    -fx-effect: -drop-shadow-1;
+}
+
+.detail-scroll-pane .viewport {
+    -fx-background-color: red;
+}
+
+/* ----------------------------------------------------------------------------
+ * DetailView
+ */
+.detail-view {
+    -fx-background-color: white;
+    -fx-spacing: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+ * SectionPane
+ */
+.section-pane {
+    -fx-background-color: white;
+    -fx-background-radius: 3px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-radius: 3px;
+    -fx-effect: null;
+    -fx-padding: 10;
+}
+
+.section-pane .extras-box {
+    -fx-spacing: 10px;
+}
+
+.section-pane .extras-box .more-menu-button {
+    -fx-padding: 0px;
+    -fx-background-color: transparent;
+}
+
+.section-pane .extras-box .more-menu-button .label {
+    -fx-padding: 0;
+    -fx-alignment: center-right;
+}
+
+.section-pane .extras-box .more-menu-button .arrow-button {
+    -fx-fill: transparent;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-padding: 0px;
+}
+
+.section-pane .extras-box .more-menu-button > .arrow-button > .arrow {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+.section-pane .extras-box .more-menu-button .ikonli-font-icon {
+    -fx-icon-color: -fx-accent;
+    -fx-icon-size: 24px;
+}
+
+.section-pane .placeholder {
+    -fx-background-color: transparent;
+}
+
+.section-pane .placeholder-label {
+    -fx-alignment: center-left;
+}
+
+.section-pane:no-border {
+    -fx-padding: 0 0 0 0;
+    -fx-border-width: 0;
+    -fx-effect: null;
+}
+
+.section-pane > .section-pane-container .top-pane {
+    -fx-padding: 0px 0px 0px 0px;
+    -fx-background-color: -light-blue;
+    -fx-background-insets: -5px;
+    -fx-background-radius: 4px;
+}
+
+.section-pane > .section-pane-container .top-pane .button,
+.section-pane > .section-pane-container .top-pane .menu-button {
+}
+
+.section-pane > .section-pane-container {
+    -fx-spacing: 20;
+}
+
+.section-pane > .section-pane-container .title-box > .title-label {
+}
+
+.section-pane > .section-pane-container .title-box > .subtitle-label {
+    -fx-text-fill: grey;
+    -fx-font-size: 14px;
+}
+
+.section-pane > .section-pane-container > .children-box {
+    -fx-spacing: 20;
+}
+
+.section-pane > .section-pane-container > .children-box > .button-bar {
+    -fx-spacing: 15px;
+}
+
+.section-pane .filter-view .search-field {
+    -size: 40px;
+    -fx-max-height: -size;
+    -fx-pref-height: -size;
+    -fx-min-height: -size;
+}
+
+.section-pane .filter-view .title {
+    -fx-font-size: 16px;
+    -fx-font-family: "Open Sans SemiBold";
+}
+
+.section-pane .filter-view .subtitle {
+    -fx-font-size: 14px;
+    -fx-opacity: .8;
+}
+
+.section-pane .list-cell {
+    -fx-background-color: white;
+    -fx-padding: 10px 0px;
+}
+
+.section-pane .list-cell:filled {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dashed;
+    -fx-border-color: rgba(0, 0, 0, .2);
+}
+
+.section-pane .list-cell:selected {
+    -fx-background-color: rgba(230, 230, 230);
+}
+
+.section-pane .list-cell:selected .label {
+    -fx-text-fill: black;
+}
+
+.section-pane .list-cell.last {
+    -fx-padding: 10px 0px;
+    -fx-border-width: 0px;
+}
+
+.section-pane .pretty-list-view .scroll-bar:vertical {
+    -fx-translate-x: 15px;
+}
+
+.section-pane .list-cell:selected .button {
+}
+
+.section-pane .list-cell:selected .button .ikonli-font-icon {
+}
+
+.section-pane .search-field {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 3px;
+    -fx-padding: 0px 5px;
+    -fx-prompt-text-fill: white;
+    -fx-pref-height: 20px;
+}
+
+.section-pane .search-field .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 18px;
+}
+
+/* ----------------------------------------------------------------------------
+ * MobileMasterPersonCell
+ */
+.mobile-master-person-list-cell .arrow-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: -fx-accent;
+}
+
+.mobile-master-person-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.mobile-master-person-list-cell .rockstar-label,
+.mobile-master-person-list-cell .champion-label {
+    -fx-font-size: 8;
+    -fx-padding: 0px 3px;
+    -fx-border-color: -fx-accent;
+    -fx-border-radius: 2px;
+    -fx-text-fill: -fx-accent;
+    -fx-opacity: .5;
+}
+
+.mobile-master-person-list-cell .grid-pane .photo-view {
+    -size: 48px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+}
+
+.mobile-master-person-list-cell .grid-pane .photo-view .border-circle {
+    -fx-stroke-width: 1px;
+    -fx-effect: null;
+}
+
+.mobile-master-person-list-cell .grid-pane .badges {
+    -fx-spacing: 10px;
+}
+
+.mobile-master-person-list-cell .grid-pane .name-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+}

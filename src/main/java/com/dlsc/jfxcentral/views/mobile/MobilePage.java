@@ -1,50 +1,54 @@
-package com.dlsc.jfxcentral.views.page;
+package com.dlsc.jfxcentral.views.mobile;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.DetailView;
 import com.dlsc.jfxcentral.views.master.MasterView;
+import com.dlsc.jfxcentral.views.page.DetailScrollPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
-public class Page<T extends ModelObject> extends BorderPane {
+public class MobilePage<T extends ModelObject> extends BorderPane {
 
     private final DetailScrollPane detailPane;
-    private final TopMenu topMenu;
     private final RootPane rootPane;
     private final View view;
 
     private final MasterView<T> masterView;
     private final DetailView<T> detailView;
 
-    public Page(RootPane rootPane, View view) {
+    public MobilePage(RootPane rootPane, View view) {
         this.rootPane = rootPane;
         this.view = view;
-
-        setPrefWidth(0);
 
         getStyleClass().add(view.name().toLowerCase());
 
         detailPane = new DetailScrollPane(rootPane);
         detailPane.setContent(detailView = createDetailView());
 
-        topMenu = new TopMenu(this);
+        StackPane stackPane = new StackPane(detailPane);
 
-        setCenter(detailPane);
-
-        HBox leftSide = new HBox(topMenu);
         masterView = createMasterView();
 
         if (masterView != null) {
-            leftSide.getChildren().add(masterView);
+            stackPane.getChildren().add(masterView);
         }
 
-        setLeft(leftSide);
+        setCenter(stackPane);
+    }
+
+    public void showMaster() {
+        masterView.toFront();
+    }
+
+    public void showDetail(T item) {
+        detailPane.toFront();
+        detailView.showItem(item);
     }
 
     public void showItem(T item) {
@@ -52,7 +56,7 @@ public class Page<T extends ModelObject> extends BorderPane {
             masterView.showItem(item);
         }
 
-        detailView.showItem(item);
+        showDetail(item);
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");

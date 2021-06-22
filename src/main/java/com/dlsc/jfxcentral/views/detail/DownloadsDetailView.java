@@ -52,7 +52,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         });
 
         listView = new PrettyListView<>();
-        listView.setCellFactory(view -> new DetailDownloadCell(true));
+        listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);

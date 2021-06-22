@@ -18,6 +18,7 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
     private String baseURL = "";
 
     public MarkdownView() {
+        getStyleClass().add("markdown-view");
         getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
         getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
     }

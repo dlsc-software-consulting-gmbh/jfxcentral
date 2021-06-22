@@ -7,15 +7,11 @@ import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
-import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.ThumbnailScrollPane;
-import javafx.geometry.Pos;
+import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBox.ImageLocation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -28,69 +24,32 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
     private final Button issueTrackerButton;
     private final Button discussionsButton;
     private final ThumbnailScrollPane infoView;
-
-    private Label titleLabel = new Label();
-    private MarkdownView descriptionMarkdownView = new MarkdownView();
-
-    private ImageView logoImageView = new ImageView();
-    private HBox buttonBox = new HBox();
+    private final ResponsiveBox responsiveBox;
 
     private LicenseLabel licenseLabel = new LicenseLabel();
 
-    public DetailLibraryCell(RootPane rootPane) {
+    public DetailLibraryCell(RootPane rootPane, boolean largeImage) {
         getStyleClass().add("detail-library-cell");
-
-        titleLabel.getStyleClass().addAll("header3", "title-label");
-        titleLabel.setWrapText(true);
-        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
-        titleLabel.setAlignment(Pos.TOP_LEFT);
-        titleLabel.setGraphic(licenseLabel);
-        titleLabel.setContentDisplay(ContentDisplay.RIGHT);
-
-        buttonBox.getStyleClass().add("button-box");
 
         homepageButton = new Button("Homepage");
         homepageButton.getStyleClass().addAll("library-button", "homepage");
         homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
-        buttonBox.getChildren().add(homepageButton);
 
         detailButton = new Button("Detail");
         detailButton.getStyleClass().addAll("library-button", "detail");
         detailButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
-        buttonBox.getChildren().add(detailButton);
 
         repositoryButton = new Button("Repository");
         repositoryButton.getStyleClass().addAll("library-button", "repository");
         repositoryButton.setGraphic(new FontIcon(MaterialDesign.MDI_GITHUB_CIRCLE));
-        buttonBox.getChildren().add(repositoryButton);
 
         issueTrackerButton = new Button("Issues");
         issueTrackerButton.getStyleClass().addAll("library-button", "issues");
         issueTrackerButton.setGraphic(new FontIcon(MaterialDesign.MDI_BUG));
-        buttonBox.getChildren().add(issueTrackerButton);
 
         discussionsButton = new Button("Discussion");
         discussionsButton.getStyleClass().addAll("library-button", "discussion");
         discussionsButton.setGraphic(new FontIcon(MaterialDesign.MDI_COMMENT));
-        buttonBox.getChildren().add(discussionsButton);
-
-        VBox vBox = new VBox(titleLabel, descriptionMarkdownView);
-        vBox.getStyleClass().add("vbox");
-        vBox.setAlignment(Pos.TOP_LEFT);
-
-        HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        logoImageView.setFitWidth(48);
-        logoImageView.setPreserveRatio(true);
-
-        StackPane logoWrapper = new StackPane(logoImageView);
-        logoWrapper.setMinWidth(48);
-        logoWrapper.setMaxWidth(48);
-        StackPane.setAlignment(logoImageView, Pos.TOP_LEFT);
-
-        HBox hBox = new HBox(vBox, logoWrapper);
-        hBox.setAlignment(Pos.TOP_LEFT);
-        hBox.getStyleClass().add("hbox");
 
         infoView = new ThumbnailScrollPane(rootPane);
         infoView.libraryProperty().bind(itemProperty());
@@ -102,14 +61,13 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
             }
         });
 
-        VBox outerBox = new VBox(hBox, infoView, buttonBox);
-        outerBox.visibleProperty().bind(itemProperty().isNotNull());
-        outerBox.getStyleClass().add("outer-box");
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ImageLocation.HIDE : largeImage ? ImageLocation.LARGE_ON_SIDE : ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.getButtons().addAll(homepageButton, detailButton, repositoryButton, issueTrackerButton, discussionsButton);
 
-        setGraphic(outerBox);
+        setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
-        outerBox.visibleProperty().bind(emptyProperty().not());
+        responsiveBox.visibleProperty().bind(emptyProperty().not());
     }
 
     @Override
@@ -126,11 +84,9 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
             licenseLabel.setLicense(item.getLicense());
             licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
 
-            logoImageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
-            logoImageView.setVisible(true);
-
-            titleLabel.setText(item.getTitle());
-            descriptionMarkdownView.setMdString(item.getDescription());
+            responsiveBox.setTitle(item.getTitle());
+            responsiveBox.setDescription(item.getDescription());
+            responsiveBox.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
 
             homepageButton.setVisible(StringUtils.isNotEmpty(item.getHomepage()));
             homepageButton.setManaged(StringUtils.isNotEmpty(item.getHomepage()));

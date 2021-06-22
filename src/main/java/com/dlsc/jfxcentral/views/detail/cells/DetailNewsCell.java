@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.News;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -30,7 +31,7 @@ public class DetailNewsCell extends DetailCell<News> {
     private final Button readMoreButton = new Button("Read more ...");
     private final Map<News, BooleanProperty> readMoreMap = new HashMap<>();
 
-    public DetailNewsCell() {
+    public DetailNewsCell(RootPane rootPane) {
         setPrefWidth(0);
 
         getStyleClass().add("detail-news-cell");
@@ -56,7 +57,6 @@ public class DetailNewsCell extends DetailCell<News> {
         VBox.setMargin(markdownView, new Insets(20, 0, 0, 0));
         VBox.setMargin(readMoreButton, new Insets(10, 0, 0, 0));
 
-        bannerView.setFitWidth(300);
         bannerView.setPreserveRatio(true);
 
         itemProperty().addListener(it -> {
@@ -102,14 +102,27 @@ public class DetailNewsCell extends DetailCell<News> {
         imageWrapper.getStyleClass().add("banner-image-wrapper");
         StackPane.setAlignment(bannerView, Pos.TOP_LEFT);
 
-        VBox vBox = new VBox(titleLabel, subtitleLabel, authorLabel, markdownView, readMoreButton);
+        VBox vBox = new VBox();
+        if (rootPane.isMobile()) {
+            imageWrapper.setPrefWidth(0);
+            imageWrapper.setMinWidth(0);
+            bannerView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> imageWrapper.getWidth() - imageWrapper.getInsets().getLeft() - imageWrapper.getInsets().getRight(), imageWrapper.widthProperty(), imageWrapper.insetsProperty()));
+            vBox.getChildren().setAll(imageWrapper, titleLabel, subtitleLabel, authorLabel, markdownView, readMoreButton);
+        } else {
+            bannerView.setFitWidth(300);
+            vBox.getChildren().setAll(titleLabel, subtitleLabel, authorLabel, markdownView, readMoreButton);
+        }
         vBox.setAlignment(Pos.TOP_LEFT);
         vBox.setFillWidth(true);
         vBox.getStyleClass().add("vbox");
 
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox hBox = new HBox(vBox, imageWrapper);
+        HBox hBox = new HBox(vBox);
+        if (!rootPane.isMobile()) {
+            hBox.getChildren().add(imageWrapper);
+        }
+
         hBox.getStyleClass().add("hbox");
         hBox.setAlignment(Pos.TOP_LEFT);
 

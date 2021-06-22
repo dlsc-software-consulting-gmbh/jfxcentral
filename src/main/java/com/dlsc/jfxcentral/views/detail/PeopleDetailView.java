@@ -4,19 +4,19 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.cells.*;
+import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBox.ImageLocation;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -25,13 +25,10 @@ import org.kordamp.ikonli.material.Material;
 // TODO:dl too many listeners on selected item
 public class PeopleDetailView extends DetailView<Person> {
 
-    private FlowPane linksBox;
-    private PhotoView photoView = new PhotoView();
-    private Label nameLabel = new Label();
-    private MarkdownView descriptionMarkdownView = new MarkdownView();
+    private VBox content = new VBox();
     private ImageView championImageView = new ImageView();
     private ImageView rockstarImageView = new ImageView();
-    private VBox content = new VBox();
+    private ResponsiveBoxWithPhotoView responsiveBox;
 
     public PeopleDetailView(RootPane rootPane) {
         super(rootPane);
@@ -58,8 +55,9 @@ public class PeopleDetailView extends DetailView<Person> {
     private void createBlogsBox() {
         AdvancedListView<Blog> listView = new AdvancedListView<>();
         listView.setPaging(true);
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailBlogCell());
+        listView.setCellFactory(view -> new DetailBlogCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> listView.getItems().size() > 1 ? "Blogs" : "Blog", listView.itemsProperty()));
@@ -90,6 +88,7 @@ public class PeopleDetailView extends DetailView<Person> {
 
     private void createBooksBox() {
         AdvancedListView<Book> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailBookCell(false));
@@ -123,6 +122,7 @@ public class PeopleDetailView extends DetailView<Person> {
 
     private void createTutorialsBox() {
         AdvancedListView<Tutorial> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), false));
@@ -156,9 +156,10 @@ public class PeopleDetailView extends DetailView<Person> {
 
     private void createDownloadsBox() {
         AdvancedListView<Download> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailDownloadCell(false));
+        listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Downloads");
@@ -189,6 +190,7 @@ public class PeopleDetailView extends DetailView<Person> {
 
     private void createVideoBox() {
         AdvancedListView<Video> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailVideoCell(getRootPane(), false));
@@ -216,9 +218,10 @@ public class PeopleDetailView extends DetailView<Person> {
 
     private void createLibrariesBox() {
         AdvancedListView<Library> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailLibraryCell(getRootPane()));
+        listView.setCellFactory(view -> new DetailLibraryCell(getRootPane(), false));
 
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Libraries");
@@ -243,6 +246,7 @@ public class PeopleDetailView extends DetailView<Person> {
 
     private void createToolsBox() {
         AdvancedListView<Tool> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailToolCell(getRootPane()));
@@ -269,16 +273,6 @@ public class PeopleDetailView extends DetailView<Person> {
     }
 
     private void createTitleBox() {
-        photoView.setEditable(false);
-
-        nameLabel.getStyleClass().addAll("header1", "name-label");
-        nameLabel.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(nameLabel, Priority.ALWAYS);
-
-        descriptionMarkdownView.setMinHeight(Region.USE_PREF_SIZE);
-        descriptionMarkdownView.getStyleClass().add("description-label");
-        HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
-
         championImageView.getStyleClass().add("champion-image");
         championImageView.setPreserveRatio(true);
         championImageView.setFitHeight(16);
@@ -289,22 +283,13 @@ public class PeopleDetailView extends DetailView<Person> {
 
         HBox badgesBox = new HBox(championImageView, rockstarImageView);
         badgesBox.getStyleClass().add("badges-box");
-        nameLabel.setGraphic(badgesBox);
-        nameLabel.setContentDisplay(ContentDisplay.RIGHT);
 
-        linksBox = new FlowPane();
-        linksBox.getStyleClass().add("links-box");
+        responsiveBox = new ResponsiveBoxWithPhotoView(getRootPane().isMobile() ? ImageLocation.BANNER : ImageLocation.LARGE_ON_SIDE);
+        responsiveBox.getTitleLabel().setGraphic(badgesBox);
 
-        VBox vBox = new VBox(nameLabel, descriptionMarkdownView, badgesBox, linksBox);
-        vBox.getStyleClass().add("vbox");
-        vBox.setFillWidth(true);
-        HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        HBox titleBox = new HBox(vBox, photoView);
-        titleBox.getStyleClass().add("hbox");
-
-        SectionPane sectionPane = new SectionPane(titleBox);
+        SectionPane sectionPane = new SectionPane(responsiveBox);
         sectionPane.getStyleClass().add("title-section");
+
         content.getChildren().addAll(sectionPane);
     }
 
@@ -312,19 +297,20 @@ public class PeopleDetailView extends DetailView<Person> {
         Person person = getSelectedItem();
         if (person != null) {
 
-            nameLabel.setText(person.getName());
-            descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());
-            photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-            linksBox.getChildren().clear();
+
+            responsiveBox.setTitle(person.getName());
+            responsiveBox.descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
+            responsiveBox.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
+            responsiveBox.getButtons().clear();
 
             if (StringUtils.isNotEmpty(person.getTwitter())) {
                 Button twitter = new Button("Twitter");
                 twitter.getStyleClass().addAll("social-button", "twitter");
                 Util.setLink(twitter, "https://twitter.com/" + person.getTwitter(), person.getName());
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
-                linksBox.getChildren().add(twitter);
+                responsiveBox.getButtons().add(twitter);
             }
 
             if (StringUtils.isNotEmpty(person.getLinkedIn())) {
@@ -332,7 +318,7 @@ public class PeopleDetailView extends DetailView<Person> {
                 linkedIn.getStyleClass().addAll("social-button", "linkedin");
                 Util.setLink(linkedIn, "https://www.linkedin.com/in/" + person.getLinkedIn(), person.getName());
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
-                linksBox.getChildren().add(linkedIn);
+                responsiveBox.getButtons().add(linkedIn);
             }
 
             if (StringUtils.isNotEmpty(person.getBlogId())) {
@@ -340,7 +326,7 @@ public class PeopleDetailView extends DetailView<Person> {
                 blog.getStyleClass().addAll("social-button", "blog");
                 Util.setLink(blog, "", "");
                 blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
-                linksBox.getChildren().add(blog);
+                responsiveBox.getButtons().add(blog);
             }
 
             if (StringUtils.isNotEmpty(person.getWebsite())) {
@@ -348,7 +334,7 @@ public class PeopleDetailView extends DetailView<Person> {
                 website.getStyleClass().addAll("social-button", "website");
                 Util.setLink(website, person.getWebsite(), person.getName());
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
-                linksBox.getChildren().add(website);
+                responsiveBox.getButtons().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getEmail())) {
@@ -356,7 +342,7 @@ public class PeopleDetailView extends DetailView<Person> {
                 website.getStyleClass().addAll("social-button", "mail");
                 Util.setLink(website, "mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact", person.getName());
                 website.setGraphic(new FontIcon(Material.MAIL));
-                linksBox.getChildren().add(website);
+                responsiveBox.getButtons().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getGitHub())) {
@@ -364,7 +350,7 @@ public class PeopleDetailView extends DetailView<Person> {
                 github.getStyleClass().addAll("social-button", "github");
                 Util.setLink(github, "https://github.com/" + person.getGitHub(), person.getName());
                 github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
-                linksBox.getChildren().add(github);
+                responsiveBox.getButtons().add(github);
             }
         }
     }

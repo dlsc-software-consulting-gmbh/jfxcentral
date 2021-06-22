@@ -17,6 +17,8 @@ public class DetailView<T extends ModelObject> extends BorderPane {
 
     protected DetailView(RootPane rootPane) {
         this.rootPane = rootPane;
+        setPrefWidth(0);
+
         getStyleClass().add("detail-view");
         setMinHeight(Region.USE_PREF_SIZE);
 
@@ -34,6 +36,7 @@ public class DetailView<T extends ModelObject> extends BorderPane {
     }
 
     public void showItem(T item) {
+        setSelectedItem(item);
     }
 
     private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>(this, "selectedItem");

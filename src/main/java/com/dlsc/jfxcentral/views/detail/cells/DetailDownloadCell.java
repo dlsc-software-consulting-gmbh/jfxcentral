@@ -4,65 +4,29 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import javafx.geometry.Pos;
+import com.dlsc.jfxcentral.views.RootPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class DetailDownloadCell extends DetailCell<Download> {
 
-    private final Label titleLabel = new Label();
-    private final MarkdownView descriptionMarkdownView = new MarkdownView();
-    private final ImageView imageView = new ImageView();
-    private final FlowPane buttonBox;
+    private final ResponsiveBox responsiveBox;
+    private final RootPane rootPane;
 
-    public DetailDownloadCell(boolean largeThumbnail) {
+    public DetailDownloadCell(RootPane rootPane, boolean largeImage) {
+        this.rootPane = rootPane;
 
         getStyleClass().add("detail-download-cell");
         setPrefWidth(0);
 
-        titleLabel.getStyleClass().addAll("header3", "title-label");
-        titleLabel.setWrapText(true);
-        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
-        descriptionMarkdownView.getStyleClass().add("description-label");
-        VBox.setVgrow(descriptionMarkdownView, Priority.ALWAYS);
-
-        imageView.setFitWidth(largeThumbnail ? 320 : 160);
-        imageView.setPreserveRatio(true);
-
-        StackPane thumbnailWrapper = new StackPane(imageView);
-        thumbnailWrapper.getStyleClass().add("thumbnail-wrapper");
-        thumbnailWrapper.setMaxHeight(Region.USE_PREF_SIZE);
-        StackPane.setAlignment(imageView, Pos.TOP_LEFT);
-
-        buttonBox = new FlowPane();
-        buttonBox.getStyleClass().add("button-box");
-        buttonBox.setMinHeight(Region.USE_PREF_SIZE);
-        buttonBox.setAlignment(Pos.BOTTOM_LEFT);
-
-        VBox vBox = new VBox(titleLabel, descriptionMarkdownView, buttonBox);
-        vBox.setAlignment(Pos.TOP_LEFT);
-        vBox.setFillWidth(true);
-        vBox.getStyleClass().add("vbox");
-
-        HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        HBox hBox = new HBox(vBox, thumbnailWrapper);
-        hBox.setFillHeight(true);
-        hBox.getStyleClass().add("hbox");
-        hBox.setAlignment(Pos.TOP_LEFT);
-
-        setGraphic(hBox);
+        setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-        hBox.visibleProperty().bind(itemProperty().isNotNull());
     }
 
     private void downloadFile(Download.DownloadFile downloadFile) {
@@ -77,28 +41,21 @@ public class DetailDownloadCell extends DetailCell<Download> {
     protected void updateItem(Download download, boolean empty) {
         super.updateItem(download, empty);
 
-        buttonBox.getChildren().clear();
+        responsiveBox.getButtons().clear();
 
         if (!empty && download != null) {
-            titleLabel.setText(download.getTitle());
-            descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
-            imageView.setVisible(true);
-            imageView.setManaged(true);
-            imageView.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
+            responsiveBox.setTitle(download.getTitle());
+            responsiveBox.descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
+            responsiveBox.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
 
-            download.getFiles().forEach(file -> {
-                Button downloadButton = new Button(file.getName());
-                downloadButton.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
-                downloadButton.setOnAction(evt -> downloadFile(file));
-                buttonBox.getChildren().add(downloadButton);
-            });
-
-        } else {
-            titleLabel.setText("");
-            descriptionMarkdownView.mdStringProperty().unbind();
-            imageView.setVisible(false);
-            imageView.setManaged(false);
-            imageView.imageProperty().unbind();
+            if (!rootPane.isMobile()) {
+                download.getFiles().forEach(file -> {
+                    Button downloadButton = new Button(file.getName());
+                    downloadButton.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
+                    downloadButton.setOnAction(evt -> downloadFile(file));
+                    responsiveBox.getButtons().add(downloadButton);
+                });
+            }
         }
     }
 }

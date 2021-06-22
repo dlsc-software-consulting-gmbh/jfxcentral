@@ -4,6 +4,11 @@ import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
+import com.dlsc.jfxcentral.views.mobile.MobileHeader;
+import com.dlsc.jfxcentral.views.mobile.MobilePage;
+import com.dlsc.jfxcentral.views.mobile.page.MobileHomePage;
+import com.dlsc.jfxcentral.views.mobile.page.MobilePeoplePage;
+import com.dlsc.jfxcentral.views.mobile.MobileTopMenu;
 import com.dlsc.jfxcentral.views.page.*;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
@@ -21,6 +26,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
+import org.controlsfx.control.HiddenSidesPane;
 
 import java.util.Collections;
 
@@ -29,9 +36,66 @@ public class RootPane extends StackPane {
     private final DialogPane dialogPane = new DialogPane();
 
     private Page<?> page;
+    private MobilePage<?> mobilePage;
+
+
+    private StackPane contentPane;
+
+    private boolean mobile;
+
+    private HiddenSidesPane hiddenSidesPane;
+    private BorderPane borderPane;
+    private StackPane compassWrapper;
 
     public RootPane() {
         getStyleClass().add("root-pane");
+    }
+
+    public void init(boolean mobile) {
+        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
+
+        if (mobile) {
+            initMobile();
+        } else {
+            initDesktopOrBrowser();
+        }
+
+        viewProperty().addListener(it -> updateView());
+    }
+
+    private void initMobile() {
+        mobile = true;
+
+        getStylesheets().add(JFXCentralApp.class.getResource("mobile.css").toExternalForm());
+
+        BorderPane borderPane = new BorderPane();
+
+        MobileTopMenu topMenu = new MobileTopMenu();
+        topMenu.viewProperty().bind(viewProperty());
+
+        hiddenSidesPane = new HiddenSidesPane();
+        hiddenSidesPane.setAnimationDelay(Duration.ZERO);
+        hiddenSidesPane.setAnimationDuration(Duration.millis(200));
+        hiddenSidesPane.setLeft(topMenu);
+
+        viewProperty().addListener(it -> hiddenSidesPane.setPinnedSide(null));
+
+        contentPane = new StackPane();
+        hiddenSidesPane.setContent(contentPane);
+
+        MobileHeader mobileHeader = new MobileHeader(hiddenSidesPane);
+        borderPane.setTop(mobileHeader);
+
+        borderPane.setCenter(hiddenSidesPane);
+
+        getChildren().addAll(borderPane, dialogPane);
+
+        updateView();
+    }
+
+    private void initDesktopOrBrowser() {
+        mobile = false;
 
         ImageView logoImageView = new ImageView();
         logoImageView.getStyleClass().add("logo-image-view");
@@ -50,18 +114,15 @@ public class RootPane extends StackPane {
 
         Util.setLink(logoImageView, PageUtil.getLink(View.HOME), "Home");
 
-        StackPane compassWrapper = new StackPane(logoImageView);
+        compassWrapper = new StackPane(logoImageView);
         compassWrapper.getStyleClass().add("logo-image-wrapper");
         compassWrapper.maxWidthProperty().bind(logoImageView.fitWidthProperty());
         compassWrapper.maxHeightProperty().bind(logoImageView.fitHeightProperty());
         StackPane.setAlignment(compassWrapper, Pos.TOP_LEFT);
 
-        BorderPane borderPane = new BorderPane();
+        borderPane = new BorderPane();
         borderPane.setTop(new HeaderPane(this));
         getChildren().setAll(borderPane, dialogPane);
-
-        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         DisplayService.create().ifPresentOrElse(service -> {
             if (service.isDesktop()) {
@@ -77,52 +138,6 @@ public class RootPane extends StackPane {
             } else {
                 setDisplay(Display.DESKTOP);
             }
-        });
-
-        viewProperty().addListener(it -> {
-            page = null;
-            switch (getView()) {
-                case HOME:
-                    page = new HomePage(this);
-                    break;
-                case OPENJFX:
-                    page = new OpenJFXPage(this);
-                    break;
-                case PEOPLE:
-                    page = new PeoplePage(this);
-                    break;
-                case TUTORIALS:
-                    page = new TutorialsPage(this);
-                    break;
-                case REAL_WORLD:
-                    page = new RealWorldAppsPage(this);
-                    break;
-                case DOWNLOADS:
-                    page = new DownloadsPage(this);
-                    break;
-                case COMPANIES:
-                    page = new CompaniesPage(this);
-                    break;
-                case TOOLS:
-                    page = new ToolsPage(this);
-                    break;
-                case LIBRARIES:
-                    page = new LibrariesPage(this);
-                    break;
-                case BLOGS:
-                    page = new BlogsPage(this);
-                    break;
-                case BOOKS:
-                    page = new BooksPage(this);
-                    break;
-                case VIDEOS:
-                    page = new VideosPage(this);
-                    break;
-                default:
-                    break;
-            }
-            getChildren().setAll(borderPane, compassWrapper, dialogPane);
-            borderPane.setCenter(page);
         });
 
         sceneProperty().addListener(it -> {
@@ -142,6 +157,108 @@ public class RootPane extends StackPane {
 
         expandedProperty().addListener(it -> updateExpandedPseudoClass());
         updateExpandedPseudoClass();
+
+        contentPane = this;
+
+        updateView();
+    }
+
+    private void updateView() {
+        if (isMobile()) {
+            updateViewMobile();
+        } else {
+            updateViewDesktopOrBrowser();
+        }
+    }
+
+    private void updateViewMobile() {
+        mobilePage = null;
+        System.out.println("requested view: " + getView());
+
+        switch (getView()) {
+            case HOME:
+                mobilePage = new MobileHomePage(this);
+                break;
+            case OPENJFX:
+                break;
+            case PEOPLE:
+                mobilePage = new MobilePeoplePage(this);
+                break;
+            case TUTORIALS:
+                break;
+            case REAL_WORLD:
+                break;
+            case DOWNLOADS:
+                break;
+            case COMPANIES:
+                break;
+            case TOOLS:
+                break;
+            case LIBRARIES:
+                break;
+            case BLOGS:
+                break;
+            case BOOKS:
+                break;
+            case VIDEOS:
+                break;
+            default:
+                break;
+        }
+
+        if (mobilePage != null) {
+            contentPane.getChildren().setAll(mobilePage, dialogPane);
+        }
+    }
+
+    private void updateViewDesktopOrBrowser() {
+        page = null;
+        System.out.println("requested view: " + getView());
+
+        switch (getView()) {
+            case HOME:
+                page = new HomePage(this);
+                break;
+            case OPENJFX:
+                page = new OpenJFXPage(this);
+                break;
+            case PEOPLE:
+                page = new PeoplePage(this);
+                break;
+            case TUTORIALS:
+                page = new TutorialsPage(this);
+                break;
+            case REAL_WORLD:
+                page = new RealWorldAppsPage(this);
+                break;
+            case DOWNLOADS:
+                page = new DownloadsPage(this);
+                break;
+            case COMPANIES:
+                page = new CompaniesPage(this);
+                break;
+            case TOOLS:
+                page = new ToolsPage(this);
+                break;
+            case LIBRARIES:
+                page = new LibrariesPage(this);
+                break;
+            case BLOGS:
+                page = new BlogsPage(this);
+                break;
+            case BOOKS:
+                page = new BooksPage(this);
+                break;
+            case VIDEOS:
+                page = new VideosPage(this);
+                break;
+            default:
+                break;
+        }
+
+        contentPane.getChildren().setAll(borderPane, compassWrapper, dialogPane);
+
+        borderPane.setCenter(page);
     }
 
     private void updateExpandedPseudoClass() {
@@ -210,5 +327,9 @@ public class RootPane extends StackPane {
 
     public void setDisplay(Display display) {
         this.display.set(display);
+    }
+
+    public boolean isMobile() {
+        return mobile;
     }
 }

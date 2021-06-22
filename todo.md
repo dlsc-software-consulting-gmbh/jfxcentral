@@ -12,6 +12,7 @@
 - [ ] Can't use arrow keys in list view
 - [X] Block quotes are not styled properly anymore in markdown view
 - [ ] Add certificate to server for https:// support  
+- [ ] Support for touch scroll events on mobile  
 - [ ] .....
 
 ### Views
@@ -23,8 +24,9 @@
 - [ ] Styling of status label in Pull Request cell not working properly
 
 ### Data
+- [ ] Add OpenJFX "Getting Started" tutorial (pin at top)
 - [X] Add videos and downloads data to libraries
-- [X] make Michael Paus's images smaller
+- [X] make Michael Paus' images smaller
 - [X] add more tools (TestFX)
 - [X] add more companies
 - [X] add more libs (TilesFX)

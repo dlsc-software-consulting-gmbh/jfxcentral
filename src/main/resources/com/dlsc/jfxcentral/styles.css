@@ -253,7 +253,10 @@
 .root-wrapper {
     -fx-background-color: lightgrey;
     -fx-background-image: url("brushed.jpg");
-    -fx-padding: 0px 20px 0px 20px;
+}
+
+.root-wrapper.mobile {
+    -fx-background-image: null;
 }
 
 .root-pane {
@@ -286,6 +289,7 @@
     -fx-background-color: -fx-accent;
     -fx-spacing: 20;
     -fx-alignment: center;
+    -fx-padding: 20px;
 }
 
 .loading-view .label {
@@ -414,12 +418,12 @@
     -fx-padding: 0px;
 }
 
-.master-view .list-view .list-cell {
+.master-view .list-cell {
     -fx-padding: 10px 20px;
     -fx-background-color: -light-blue;
 }
 
-.master-view .list-view .list-cell:selected {
+.master-view .list-cell:selected {
     -fx-background-color: -light-grey;
 }
 
@@ -434,6 +438,11 @@
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */
+.master-person-list-cell .arrow-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: -fx-accent;
+}
+
 .master-person-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;
@@ -546,47 +555,6 @@
 }
 
 /* ----------------------------------------------------------------------------
- * PeopleDetailView
- */
-.people-detail-view {
-}
-
-.people-detail-view .title-section .hbox {
-    -fx-spacing: 20px;
-}
-
-.people-detail-view .title-section .hbox .photo-view {
-    -size: 120px;
-    -fx-min-width: -size;
-    -fx-min-height: -size;
-    -fx-max-width: -size;
-    -fx-max-height: -size;
-    -fx-pref-width: -size;
-    -fx-pref-height: -size;
-}
-
-.people-detail-view .title-section .hbox .vbox {
-    -fx-spacing: 20px;
-}
-
-.people-detail-view .title-section .hbox .vbox .name-label {
-    -fx-graphic-text-gap: 10px;
-}
-
-.people-detail-view .title-section .hbox .vbox .name-label .badges-box {
-    -fx-spacing: 10px;
-    -fx-translate-y: -5px;
-}
-
-.people-detail-view .title-section .hbox .vbox .description-label {
-}
-
-.people-detail-view .title-section .hbox .vbox .links-box {
-    -fx-hgap: 5px;
-    -fx-vgap: 5px;
-}
-
-/* ----------------------------------------------------------------------------
  * DetailBookCell
  */
 .detail-book-cell {
@@ -668,28 +636,6 @@
 .detail-blog-cell.last {
     -fx-padding: 10px 0px;
     -fx-border-width: 0px;
-}
-
-.detail-blog-cell .hbox {
-    -fx-spacing: 20px;
-}
-
-.detail-blog-cell .hbox .vbox {
-    -fx-spacing: 10px;
-}
-
-.detail-blog-cell .hbox .vbox .title-label {
-}
-
-.detail-blog-cell .hbox .vbox .description-label {
-}
-
-.detail-blog-cell .button-box {
-    -fx-spacing: 10px;
-}
-
-.detail-blog-cell .button-box .button .ikonli-font-icon {
-    -fx-icon-size: 18px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1473,52 +1419,37 @@
 }
 
 /* ----------------------------------------------------------------------------
- * DetailVideoCell
+ * ResponsiveBox
  */
-.detail-video-cell .hbox {
-    -fx-spacing: 20px;
+.responsive-box {
+    -fx-spacing: 0px;
 }
 
-.detail-video-cell .hbox .vbox {
-    -fx-spacing: 20px;
+.responsive-box .vbox {
+    -fx-spacing: 10px;
 }
 
-.detail-video-cell .thumbnail-wrapper {
-    -fx-border-color: -fx-accent;
-    -fx-border-width: 2px;
-}
-
-.detail-video-cell .title-label {
-    -fx-font-size: 16px;
-}
-
-/* ----------------------------------------------------------------------------
- * DetailDownloadCell
- */
-.detail-download-cell .image-wrapper {
-    -fx-border-color: -fx-accent;
-}
-
-.detail-download-cell .button-box {
+.responsive-box .vbox .button-box {
     -fx-vgap: 10px;
     -fx-hgap: 10px;
 }
 
-.detail-download-cell .hbox {
-    -fx-spacing: 20px;
+.responsive-box .image-wrapper {
 }
 
-.detail-download-cell .hbox .vbox {
-    -fx-spacing: 20px;
-}
-
-.detail-download-cell .title-label {
+.responsive-box .title-label {
     -fx-font-size: 16px;
+    -fx-content-display: right;
 }
 
-.detail-download-cell .thumbnail-wrapper {
-    -fx-border-color: -fx-accent;
-    -fx-border-width: 2px;
+.responsive-box .photo-view {
+    -size: 120px;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1532,16 +1463,7 @@
     -fx-font-size: 10px;
 }
 
-.detail-tutorial-cell .hbox {
-    -fx-spacing: 20px;
-}
-
-.detail-tutorial-cell .hbox .vbox {
-    -fx-spacing: 20px;
-}
-
 .detail-tutorial-cell .title-label {
-    -fx-font-size: 16px;
     -fx-content-display: right;
     -fx-graphic-text-gap: 10px;
 }
