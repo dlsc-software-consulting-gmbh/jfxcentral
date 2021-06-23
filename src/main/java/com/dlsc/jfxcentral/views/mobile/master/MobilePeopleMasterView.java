@@ -11,7 +11,6 @@ import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
-import java.util.function.Consumer;
 
 public class MobilePeopleMasterView extends MobileMasterViewWithAdvancedListView<Person> {
 

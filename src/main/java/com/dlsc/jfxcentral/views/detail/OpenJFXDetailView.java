@@ -161,6 +161,8 @@ public class OpenJFXDetailView extends DetailView {
 
         if (getRootPane().isMobile()) {
             filterView.getFilterGroups().setAll(stateGroup, labelGroup);
+        } else {
+            filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
 
             filterView.setTextFilterProvider(text -> pullRequest -> {
                 if (pullRequest.getTitle().toLowerCase().contains(text)) {
@@ -177,9 +179,6 @@ public class OpenJFXDetailView extends DetailView {
 
                 return false;
             });
-
-        } else {
-            filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
         }
 
         AdvancedListView<PullRequest> listView = new AdvancedListView<>();

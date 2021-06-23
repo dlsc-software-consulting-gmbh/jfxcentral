@@ -310,3 +310,21 @@
     -fx-icon-size: 24px;
     -fx-icon-color: white;
 }
+
+/* ----------------------------------------------------------------------------
+ * MobileMasterRealWorldAppCell
+ */
+.mobile-master-app-list-cell .grid-pane {
+    -fx-vgap: 5px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.mobile-master-app-list-cell .grid-pane .name-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+    -fx-font-size: 16px;
+}
+
+.mobile-master-app-list-cell .grid-pane .summary-markdown-view {
+}

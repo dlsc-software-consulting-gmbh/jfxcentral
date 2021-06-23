@@ -200,6 +200,7 @@ public class RootPane extends StackPane {
                 page = new MobileTutorialsPage(this);
                 break;
             case REAL_WORLD:
+                page = new MobileRealWorldAppsPage(this);
                 break;
             case DOWNLOADS:
                 page = new MobileDownloadsPage(this);
