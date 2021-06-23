@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.mobile;
 
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
@@ -17,6 +18,7 @@ public abstract class MobileMasterViewWithAdvancedListView<T extends ModelObject
 
         bindListViewToSelectedItem();
 
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.itemsProperty().addListener((Observable it) -> performDefaultSelection());
         performDefaultSelection();
     }

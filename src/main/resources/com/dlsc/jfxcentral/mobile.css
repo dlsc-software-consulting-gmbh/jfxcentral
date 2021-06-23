@@ -29,7 +29,6 @@
 }
 
 .detail-scroll-pane .viewport {
-    -fx-background-color: red;
 }
 
 /* ----------------------------------------------------------------------------
@@ -50,7 +49,7 @@
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-radius: 3px;
     -fx-effect: null;
-    -fx-padding: 10;
+    -fx-padding: 0px 5px 10px 0px;
 }
 
 .section-pane .extras-box {
@@ -197,27 +196,28 @@
  */
 .mobile-master-person-list-cell .arrow-icon {
     -fx-icon-size: 32px;
-    -fx-icon-color: -fx-accent;
+    -fx-icon-color: black;
 }
 
 .mobile-master-person-list-cell .grid-pane {
-    -fx-vgap: 0px;
+    -fx-vgap: 5px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
 
 .mobile-master-person-list-cell .rockstar-label,
 .mobile-master-person-list-cell .champion-label {
-    -fx-font-size: 8;
-    -fx-padding: 0px 3px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 4px;
+    -fx-font-size: 12;
+    -fx-padding: 5px 10px;
     -fx-border-color: -fx-accent;
-    -fx-border-radius: 2px;
-    -fx-text-fill: -fx-accent;
-    -fx-opacity: .5;
+    -fx-border-radius: 4px;
+    -fx-text-fill: white;
 }
 
 .mobile-master-person-list-cell .grid-pane .photo-view {
-    -size: 48px;
+    -size: 64px;
     -fx-min-width: -size;
     -fx-min-height: -size;
     -fx-max-width: -size;
@@ -228,7 +228,7 @@
 
 .mobile-master-person-list-cell .grid-pane .photo-view .border-circle {
     -fx-stroke-width: 1px;
-    -fx-effect: null;
+    -fx-fill: red;
 }
 
 .mobile-master-person-list-cell .grid-pane .badges {
@@ -237,7 +237,8 @@
 
 .mobile-master-person-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
-    -fx-text-fill: -fx-accent;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
 }
 
 .top-menu-scrollpane {
@@ -327,4 +328,26 @@
 }
 
 .mobile-master-app-list-cell .grid-pane .summary-markdown-view {
+}
+
+/* ----------------------------------------------------------------------------
+ * MasterLibraryCell
+ */
+.mobile-master-library-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.mobile-master-library-list-cell .grid-pane .image-view {
+}
+
+.mobile-master-library-list-cell .grid-pane .name-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+}
+
+.master-view .list-cell {
+    -fx-padding: 10px 20px;
+    -fx-background-color: white;
 }

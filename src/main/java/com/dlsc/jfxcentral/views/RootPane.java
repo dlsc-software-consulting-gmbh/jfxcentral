@@ -211,6 +211,7 @@ public class RootPane extends StackPane {
             case TOOLS:
                 break;
             case LIBRARIES:
+                page = new MobileLibrariesPage(this);
                 break;
             case BLOGS:
                 break;

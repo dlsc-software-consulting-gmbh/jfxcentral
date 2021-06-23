@@ -2,10 +2,10 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.PhotoView;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
-import com.jpro.webapi.WebAPI;
+import com.jpro.web.Util;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
@@ -46,11 +46,11 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
 
         championImageView.getStyleClass().add("champion-image");
         championImageView.setPreserveRatio(true);
-        championImageView.setFitHeight(12);
+        championImageView.setFitHeight(16);
 
         rockstarImageView.getStyleClass().add("rockstar-image");
         rockstarImageView.setPreserveRatio(true);
-        rockstarImageView.setFitHeight(12);
+        rockstarImageView.setFitHeight(16);
 
         HBox badgesBox = new HBox(championLabel, rockstarLabel);
         badgesBox.getStyleClass().add("badges");
@@ -86,6 +86,12 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
 
         gridPane.visibleProperty().bind(emptyProperty().not());
         gridPane.managedProperty().bind(emptyProperty().not());
+
+        setOnMouseClicked(evt -> {
+            if (evt.isStillSincePress()) {
+                Util.gotoPage(this, PageUtil.getLink(getItem()));
+            }
+        });
     }
 
     @Override
@@ -99,12 +105,7 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
             rockstarLabel.setVisible(person.isRockstar());
             rockstarLabel.setManaged(person.isRockstar());
             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-
-            if (WebAPI.isBrowser()) {
-                setMouseTransparent(true);
-            }
-
-            setMasterCellLink(MobileMasterPersonCell.this, person, person.getDescription(), View.PEOPLE);
+//            setMasterCellLink(MobileMasterPersonCell.this, person, person.getDescription(), View.PEOPLE);
         } else {
             nameLabel.setText("");
             championLabel.setVisible(false);
