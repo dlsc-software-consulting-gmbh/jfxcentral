@@ -2,10 +2,8 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
-import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
-import com.jpro.web.Util;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
@@ -86,12 +84,6 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
 
         gridPane.visibleProperty().bind(emptyProperty().not());
         gridPane.managedProperty().bind(emptyProperty().not());
-
-        setOnMouseClicked(evt -> {
-            if (evt.isStillSincePress()) {
-                Util.gotoPage(this, PageUtil.getLink(getItem()));
-            }
-        });
     }
 
     @Override
@@ -105,7 +97,6 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
             rockstarLabel.setVisible(person.isRockstar());
             rockstarLabel.setManaged(person.isRockstar());
             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
-//            setMasterCellLink(MobileMasterPersonCell.this, person, person.getDescription(), View.PEOPLE);
         } else {
             nameLabel.setText("");
             championLabel.setVisible(false);

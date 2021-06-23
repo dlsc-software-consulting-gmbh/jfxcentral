@@ -3,9 +3,7 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.panels.LicenseLabel;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
-import com.jpro.webapi.WebAPI;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -66,12 +64,6 @@ public class MobileMasterLibraryCell extends MobileAdvancedListCell<Library> {
             imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
             licenseLabel.setLicense(library.getLicense());
             licenseLabel.setVisible(true);
-
-            if (WebAPI.isBrowser()) {
-                setMouseTransparent(true);
-            }
-
-            setMasterCellLink(this, library, library.getSummary(), View.LIBRARIES);
         } else {
             nameLabel.setText("");
             imageView.setVisible(false);

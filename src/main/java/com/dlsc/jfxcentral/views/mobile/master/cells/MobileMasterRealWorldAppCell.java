@@ -3,9 +3,7 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
-import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -58,12 +56,6 @@ public class MobileMasterRealWorldAppCell extends MobileAdvancedListCell<RealWor
             nameLabel.setText(app.getName());
             imageView.imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
             summaryMarkdownView.setMdString(app.getSummary());
-
-            if (WebAPI.isBrowser()) {
-                setMouseTransparent(true);
-            }
-
-            setMasterCellLink(this, app, app.getName(), View.REAL_WORLD);
         } else {
             nameLabel.setText("");
             imageView.imageProperty().unbind();

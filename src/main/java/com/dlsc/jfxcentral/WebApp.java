@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.util.PageUtil;
+import com.jpro.webapi.WebAPI;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Stage;
 
@@ -38,11 +39,15 @@ public class WebApp extends com.jpro.web.WebApp {
         addRouteJava((s) -> {
             if (s.startsWith("/")) {
                 if (PageUtil.getViewFromURL(s) != null) {
-                    webAPI().getHeaders().forEach((key, value) -> System.out.println(key + ": " + value));
-                    Rectangle2D browserSize = webAPI().getBrowserSize();
-                    System.out.println("browserSize: " + browserSize);
-                    System.out.println("--------");
-                    return new WebView(s, browserSize.getWidth() < 800);
+                    WebAPI webAPI = webAPI();
+                    boolean mobile = false;
+                    if (webAPI != null) {
+                        Rectangle2D browserSize = webAPI.getBrowserSize();
+                        mobile = browserSize.getWidth() < 800;
+                        System.out.println("browserSize: " + browserSize);
+                        System.out.println("--------");
+                    }
+                    return new WebView(s, mobile);
                 } else {
                     return null;
                 }

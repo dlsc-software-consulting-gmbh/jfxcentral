@@ -2,9 +2,7 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
-import com.jpro.webapi.WebAPI;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.ImageView;
@@ -36,11 +34,6 @@ public class MobileMasterBookCell extends MobileAdvancedListCell<Book> {
 
         if (!empty && book != null) {
             coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-            if (WebAPI.isBrowser()) {
-                setMouseTransparent(true);
-            }
-
-            setMasterCellLink(this, book, book.getTitle(), View.BOOKS);
         }
     }
 }
