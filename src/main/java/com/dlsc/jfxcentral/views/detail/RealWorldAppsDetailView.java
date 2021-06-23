@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.views.View;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -15,7 +16,7 @@ public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
     private final VBox vBox = new VBox();
 
     public RealWorldAppsDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.REAL_WORLD);
 
         getStyleClass().add("real-world-detail-view");
 
@@ -50,5 +51,9 @@ public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
         vBox.getChildren().add(sectionPane);
 
         setContent(vBox);
+    }
+
+    protected boolean isUsingMasterView() {
+        return true;
     }
 }

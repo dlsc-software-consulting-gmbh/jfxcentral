@@ -9,6 +9,7 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPersonCell;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
@@ -41,7 +42,7 @@ public class BooksDetailView extends DetailView<Book> {
     private FlowPane linksBox = new FlowPane();
 
     public BooksDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.BOOKS);
 
         getStyleClass().add("books-detail-view");
 
@@ -119,6 +120,10 @@ public class BooksDetailView extends DetailView<Book> {
         setContent(content2);
 
         selectedItemProperty().addListener(it -> updateView());
+    }
+
+    protected boolean isUsingMasterView() {
+        return true;
     }
 
     private void updateView() {

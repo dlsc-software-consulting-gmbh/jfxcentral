@@ -6,26 +6,20 @@ import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class MobileTopMenu extends ToolBar {
+public class MobileTopMenu extends VBox {
 
     public MobileTopMenu() {
         super();
-
-        setOrientation(Orientation.VERTICAL);
 
         getStyleClass().addAll("top-menu", "mobile");
 
@@ -64,13 +58,8 @@ public class MobileTopMenu extends ToolBar {
 
         toggleGroup.selectToggle(homeButton);
 
-        Region spacer = new Region();
-        spacer.getStyleClass().add("spacer");
-        spacer.setMaxHeight(Double.MAX_VALUE);
-        VBox.setVgrow(spacer, Priority.ALWAYS);
-
         // wrapping these buttons as the links (JPro) need it.
-        getItems().addAll(
+        getChildren().addAll(
                 wrap(homeButton),
                 wrap(openJfxButton),
                 wrap(realWorldAppsButton),

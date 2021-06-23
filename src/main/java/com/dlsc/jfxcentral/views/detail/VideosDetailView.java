@@ -4,10 +4,11 @@ import com.dlsc.gemsfx.FilterView;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Video;
-import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
+import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -30,7 +31,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public VideosDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.VIDEOS);
 
         getStyleClass().add("videos-detail-view");
 
@@ -40,20 +41,36 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
 
         FilterView<Video> filterView = sectionPane.getFilterView();
         filterView.setItems(DataRepository.getInstance().videosProperty());
-        filterView.getFilterGroups().setAll(typeGroup, eventGroup, speakerGroup, platformGroup, domainGroup);
-        filterView.setTextFilterProvider(text -> video -> {
-            if (StringUtils.containsAnyIgnoreCase(video.getTitle(), text)) {
-                return true;
-            }
 
-            if (StringUtils.containsAnyIgnoreCase(video.getDescription(), text)) {
-                return true;
-            }
-            return false;
-        });
+        // show less filters, we have less space (width)
+        if (rootPane.isMobile()) {
+            filterView.getFilterGroups().setAll(typeGroup, speakerGroup, domainGroup);
+        } else {
+            filterView.getFilterGroups().setAll(typeGroup, eventGroup, speakerGroup, platformGroup, domainGroup);
 
-        PrettyListView<Video> listView = new PrettyListView<>();
-        listView.setSelectionModel(new EmptySelectionModel<>());
+            filterView.setTextFilterProvider(text -> video -> {
+                if (StringUtils.containsAnyIgnoreCase(video.getTitle(), text)) {
+                    return true;
+                }
+
+                if (StringUtils.containsAnyIgnoreCase(video.getDescription(), text)) {
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        AdvancedListView<Video> listView = new AdvancedListView<>();
+        listView.setPrefWidth(0);
+        listView.setMinWidth(0);
+
+        if (rootPane.isMobile()) {
+            listView.setPaging(true);
+            listView.setVisibleRowCount(5);
+            listView.setShowItemCounter(false);
+        }
+
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setCellFactory(view -> new DetailVideoCell(getRootPane(), true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));

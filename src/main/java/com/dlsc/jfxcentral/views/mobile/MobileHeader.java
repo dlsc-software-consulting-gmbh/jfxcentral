@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral.views.mobile;
 
+import com.dlsc.jfxcentral.views.HiddenSidesPane;
 import javafx.geometry.Side;
 import javafx.scene.layout.HBox;
-import org.controlsfx.control.HiddenSidesPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -14,10 +14,11 @@ public class MobileHeader extends HBox {
         FontIcon hamburgerIcon = new FontIcon(MaterialDesign.MDI_MENU);
         hamburgerIcon.getStyleClass().add("menu-icon");
         hamburgerIcon.setOnMouseClicked(evt -> {
-            if (hiddenSidesPane.getPinnedSide() != null) {
-                hiddenSidesPane.setPinnedSide(null);
+            System.out.println("map: " + hiddenSidesPane.getProperties().get("showPane"));
+            if (hiddenSidesPane.getProperties().containsKey("showPane")) {
+                hiddenSidesPane.hide();
             } else {
-                hiddenSidesPane.setPinnedSide(Side.LEFT);
+                hiddenSidesPane.show(Side.LEFT);
             }
         });
 

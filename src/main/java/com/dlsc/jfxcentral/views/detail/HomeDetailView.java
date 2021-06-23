@@ -14,6 +14,7 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailNewsCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
 import javafx.beans.InvalidationListener;
@@ -45,7 +46,8 @@ public class HomeDetailView extends DetailViewWithListView<News> {
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public HomeDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.HOME);
+
         getStyleClass().add("home-detail-view");
 
         createWelcomeSection();
@@ -219,9 +221,9 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         markdownView.mdStringProperty().bind(DataRepository.getInstance().homeTextProperty());
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
-        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo-text-only.png").toExternalForm());
-        logo.setFitWidth(getRootPane().isMobile() ? 150 : 300);
-        logo.setFitHeight(getRootPane().isMobile() ? 30 : 60);
+        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo.png").toExternalForm());
+        logo.setFitWidth(300);
+        logo.setFitHeight(60);
         logo.setPreserveRatio(true);
 
         HBox hBox = new HBox(markdownView);

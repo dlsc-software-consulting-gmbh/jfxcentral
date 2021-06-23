@@ -68,47 +68,46 @@ public class WebView extends com.jpro.web.View {
 
         rootPane.setView(view);
 
-        if (id == null) {
-            return true;
-        }
-
         IPage currentPage = rootPane.getCurrentPage();
         ModelObject item = null;
 
-        switch (view) {
-            case BLOGS:
-                item = DataRepository.getInstance().getBlogById(id).get();
-                break;
-            case BOOKS:
-                item = DataRepository.getInstance().getBookById(id).get();
-                break;
-            case LIBRARIES:
-                item = DataRepository.getInstance().getLibraryById(id).get();
-                break;
-            case PEOPLE:
-                item = DataRepository.getInstance().getPersonById(id).get();
-                break;
-            case REAL_WORLD:
-                item = DataRepository.getInstance().getRealWorldAppById(id).get();
-                break;
-            case TOOLS:
-                item = DataRepository.getInstance().getToolById(id).get();
-                break;
-            case DOWNLOADS:
-                item = DataRepository.getInstance().getDownloadById(id).get();
-                break;
-            case VIDEOS:
-                item = DataRepository.getInstance().getVideoById(id).get();
-                break;
-            case COMPANIES:
-                item = DataRepository.getInstance().getCompanyById(id).get();
-                break;
-            case TUTORIALS:
-                item = DataRepository.getInstance().getTutorialById(id).get();
-                break;
+        if (id != null) {
+            switch (view) {
+                case BLOGS:
+                    item = DataRepository.getInstance().getBlogById(id).get();
+                    break;
+                case BOOKS:
+                    item = DataRepository.getInstance().getBookById(id).get();
+                    break;
+                case LIBRARIES:
+                    item = DataRepository.getInstance().getLibraryById(id).get();
+                    break;
+                case PEOPLE:
+                    item = DataRepository.getInstance().getPersonById(id).get();
+                    break;
+                case REAL_WORLD:
+                    item = DataRepository.getInstance().getRealWorldAppById(id).get();
+                    break;
+                case TOOLS:
+                    item = DataRepository.getInstance().getToolById(id).get();
+                    break;
+                case DOWNLOADS:
+                    item = DataRepository.getInstance().getDownloadById(id).get();
+                    break;
+                case VIDEOS:
+                    item = DataRepository.getInstance().getVideoById(id).get();
+                    break;
+                case COMPANIES:
+                    item = DataRepository.getInstance().getCompanyById(id).get();
+                    break;
+                case TUTORIALS:
+                    item = DataRepository.getInstance().getTutorialById(id).get();
+                    break;
+            }
         }
 
         if (currentPage != null) {
+            // ok to pass null, resets to master views
             currentPage.setSelectedItem(item);
         }
 

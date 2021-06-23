@@ -7,9 +7,10 @@ import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Download.DownloadType;
 import com.dlsc.jfxcentral.data.model.Download.FileType;
 import com.dlsc.jfxcentral.data.model.Person;
-import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -33,7 +34,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public DownloadsDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.DOWNLOADS);
 
         getStyleClass().add("downloads-detail-view");
 
@@ -51,10 +52,17 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
             return false;
         });
 
-        listView = new PrettyListView<>();
+        listView = new AdvancedListView<>();
         listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
+
+        if (rootPane.isMobile()) {
+            listView.setPaging(true);
+            listView.setVisibleRowCount(5);
+            listView.setShowItemCounter(false);
+        }
+
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);
 

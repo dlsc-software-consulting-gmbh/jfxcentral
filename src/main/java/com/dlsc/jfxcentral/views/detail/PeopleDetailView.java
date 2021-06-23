@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.*;
 import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBox.ImageLocation;
 import javafx.beans.binding.Bindings;
@@ -31,7 +32,7 @@ public class PeopleDetailView extends DetailView<Person> {
     private ResponsiveBoxWithPhotoView responsiveBox;
 
     public PeopleDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.PEOPLE);
 
         getStyleClass().add("people-detail-view");
 
@@ -50,6 +51,10 @@ public class PeopleDetailView extends DetailView<Person> {
 
         selectedItemProperty().addListener(it -> updateView());
         updateView();
+    }
+
+    protected boolean isUsingMasterView() {
+        return true;
     }
 
     private void createBlogsBox() {

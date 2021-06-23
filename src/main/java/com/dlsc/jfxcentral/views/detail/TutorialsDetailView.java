@@ -5,10 +5,11 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Tutorial;
 import com.dlsc.jfxcentral.data.model.Tutorial.Format;
-import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
+import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -32,7 +33,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public TutorialsDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.TUTORIALS);
 
         getStyleClass().add("tutorials-detail-view");
 
@@ -59,13 +60,19 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
             return false;
         });
 
-        PrettyListView<Tutorial> listView = new PrettyListView<>();
+        AdvancedListView<Tutorial> listView = new AdvancedListView<>();
         listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), true));
-        listView.setSelectionModel(new EmptySelectionModel<>());
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);
+
+        if (rootPane.isMobile()) {
+            listView.setPaging(true);
+            listView.setVisibleRowCount(5);
+            listView.setShowItemCounter(false);
+        }
 
         setContent(sectionPane);
 

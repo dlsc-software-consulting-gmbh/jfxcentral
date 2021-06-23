@@ -2,13 +2,12 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.mobile.MobileHeader;
 import com.dlsc.jfxcentral.views.mobile.MobileTopMenu;
-import com.dlsc.jfxcentral.views.mobile.page.MobileBooksPage;
-import com.dlsc.jfxcentral.views.mobile.page.MobileHomePage;
-import com.dlsc.jfxcentral.views.mobile.page.MobilePeoplePage;
+import com.dlsc.jfxcentral.views.mobile.page.*;
 import com.dlsc.jfxcentral.views.page.*;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
@@ -28,7 +27,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import org.controlsfx.control.HiddenSidesPane;
 
 import java.util.Collections;
 
@@ -74,12 +72,25 @@ public class RootPane extends StackPane {
         MobileTopMenu topMenu = new MobileTopMenu();
         topMenu.viewProperty().bind(viewProperty());
 
+        PrettyScrollPane prettyScrollPane = new PrettyScrollPane(topMenu);
+        prettyScrollPane.setShowShadow(false);
+        prettyScrollPane.setShowScrollToTopButton(false);
+        prettyScrollPane.setFitToHeight(true);
+        prettyScrollPane.setFitToWidth(true);
+        prettyScrollPane.getStyleClass().add("top-menu-scrollpane");
+
         hiddenSidesPane = new HiddenSidesPane();
         hiddenSidesPane.setAnimationDelay(Duration.ZERO);
         hiddenSidesPane.setAnimationDuration(Duration.millis(200));
-        hiddenSidesPane.setLeft(topMenu);
+        hiddenSidesPane.setLeft(prettyScrollPane);
+        hiddenSidesPane.setTriggerDistance(0);
 
-        viewProperty().addListener(it -> hiddenSidesPane.setPinnedSide(null));
+//        borderPane.addEventHandler(MouseEvent.MOUSE_CLICKED, evt -> {
+//            System.out.println("evt: " + evt);
+//            hiddenSidesPane.hide();
+//        });
+
+        viewProperty().addListener(it -> hiddenSidesPane.hide());
 
         contentPane = new StackPane();
         hiddenSidesPane.setContent(contentPane);
@@ -180,17 +191,21 @@ public class RootPane extends StackPane {
                 page = new MobileHomePage(this);
                 break;
             case OPENJFX:
+                page = new MobileOpenJFXPage(this);
                 break;
             case PEOPLE:
                 page = new MobilePeoplePage(this);
                 break;
             case TUTORIALS:
+                page = new MobileTutorialsPage(this);
                 break;
             case REAL_WORLD:
                 break;
             case DOWNLOADS:
+                page = new MobileDownloadsPage(this);
                 break;
             case COMPANIES:
+                page = new MobileCompaniesPage(this);
                 break;
             case TOOLS:
                 break;
@@ -202,6 +217,7 @@ public class RootPane extends StackPane {
                 page = new MobileBooksPage(this);
                 break;
             case VIDEOS:
+                page = new MobileVideosPage(this);
                 break;
             default:
                 break;

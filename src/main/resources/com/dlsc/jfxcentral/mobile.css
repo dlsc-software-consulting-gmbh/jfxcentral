@@ -28,10 +28,6 @@
     -fx-min-height: 50px;
 }
 
-.top-menu.mobile {
-    -fx-effect: -drop-shadow-1;
-}
-
 .detail-scroll-pane .viewport {
     -fx-background-color: red;
 }
@@ -176,10 +172,6 @@
     -fx-border-width: 0px;
 }
 
-.section-pane .pretty-list-view .scroll-bar:vertical {
-    -fx-translate-x: 15px;
-}
-
 .section-pane .list-cell:selected .button {
 }
 
@@ -246,4 +238,75 @@
 .mobile-master-person-list-cell .grid-pane .name-label {
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
+}
+
+.top-menu-scrollpane {
+    -fx-effect: -drop-shadow-1;
+}
+
+.top-menu.mobile {
+    -fx-padding: 10px 10px 10px 0px;
+    -fx-background-color: -light-blue;
+    -fx-effect: -drop-shadow-1;
+}
+
+.top-menu.mobile .toggle-button {
+    -fx-padding: 10px 15px 10px 15px;
+    -fx-background-radius: 0px 3px 3px 0px;
+    -fx-background-padding: 0px;
+    -fx-background-insets: 0px 5px 0px 0px;
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-opacity: .6;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-graphic-text-gap: 10px;
+}
+
+.top-menu.mobile:expanded .toggle-button {
+    -fx-padding: 10px 30px 10px 15px;
+}
+
+.top-menu.mobile .toggle-button:hover,
+.top-menu.mobile .toggle-button:hover:selected {
+    -fx-opacity: 1;
+    -fx-background-color: -red;
+    -fx-border-color: transparent transparent transparent derive(-red, -20%);
+    -fx-text-fill: white;
+}
+
+.top-menu.mobile .toggle-button:pressed,
+.top-menu.mobile .toggle-button:pressed:selected {
+    -fx-opacity: 1;
+    -fx-background-color: rgba(250, 0, 20, .5);
+}
+
+.top-menu.mobile .toggle-button:hover .icon-wrapper .ikonli-font-icon,
+.top-menu.mobile .toggle-button:hover:selected .icon-wrapper .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.top-menu.mobile .toggle-button:selected {
+    -fx-opacity: 1;
+    -fx-background-padding: 0px;
+    -fx-background-color: -fx-accent;
+    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-color: transparent transparent transparent derive(-fx-accent, -20%);
+    -fx-text-fill: white;
+}
+
+.top-menu.mobile .toggle-button .icon-wrapper {
+    -fx-pref-width: 32px;
+}
+
+.top-menu.mobile .toggle-button .icon-wrapper .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: black;
+}
+
+.top-menu.mobile .toggle-button:selected .icon-wrapper .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: white;
 }

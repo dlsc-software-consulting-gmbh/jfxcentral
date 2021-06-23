@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailCompanyCell;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.layout.Priority;
@@ -15,7 +16,7 @@ import java.util.Comparator;
 public class CompaniesDetailView extends DetailViewWithListView<Company> {
 
     public CompaniesDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.COMPANIES);
 
         getStyleClass().add("companies-detail-view");
 
@@ -27,8 +28,14 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
 
         listView.setCellFactory(view -> new DetailCompanyCell(rootPane, true));
         listView.setItems(sortedList);
-        listView.setSelectionModel(new EmptySelectionModel<>());
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
 //        listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
+
+        if (rootPane.isMobile()) {
+            listView.setPaging(true);
+            listView.setVisibleRowCount(10);
+            listView.setShowItemCounter(false);
+        }
 
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);

@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPostCell;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
@@ -32,7 +33,7 @@ public class BlogsDetailView extends DetailView<Blog> {
     private VBox content = new VBox();
 
     public BlogsDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.BLOGS);
 
         getStyleClass().add("blogs-detail-view");
 
@@ -42,6 +43,10 @@ public class BlogsDetailView extends DetailView<Blog> {
         createPostsBox();
 
         setContent(content);
+    }
+
+    protected boolean isUsingMasterView() {
+        return true;
     }
 
     private void createPostsBox() {

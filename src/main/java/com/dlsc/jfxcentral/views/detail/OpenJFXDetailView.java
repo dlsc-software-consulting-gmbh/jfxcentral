@@ -10,6 +10,7 @@ import com.dlsc.jfxcentral.util.FilterUtil;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPullRequestCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -39,7 +40,7 @@ public class OpenJFXDetailView extends DetailView {
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public OpenJFXDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.OPENJFX);
 
         getStyleClass().add("openjfx-detail-view");
 
@@ -134,7 +135,7 @@ public class OpenJFXDetailView extends DetailView {
     }
 
     private void createHeader() {
-        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo-text-only.png").toExternalForm());
+        ImageView logo = new ImageView(JFXCentralApp.class.getResource("javafx-logo.png").toExternalForm());
         logo.setFitWidth(300);
         logo.setFitHeight(60);
         logo.setPreserveRatio(true);
@@ -157,23 +158,29 @@ public class OpenJFXDetailView extends DetailView {
 
         FilterView<PullRequest> filterView = sectionPane.getFilterView();
         filterView.setItems(DataRepository.getInstance().getPullRequests());
-        filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
 
-        filterView.setTextFilterProvider(text -> pullRequest -> {
-            if (pullRequest.getTitle().toLowerCase().contains(text)) {
-                return true;
-            }
+        if (getRootPane().isMobile()) {
+            filterView.getFilterGroups().setAll(stateGroup, labelGroup);
 
-            if (pullRequest.getBody().toLowerCase().contains(text)) {
-                return true;
-            }
+            filterView.setTextFilterProvider(text -> pullRequest -> {
+                if (pullRequest.getTitle().toLowerCase().contains(text)) {
+                    return true;
+                }
 
-            if (StringUtils.containsIgnoreCase(pullRequest.getUser().getLogin(), text)) {
-                return true;
-            }
+                if (pullRequest.getBody().toLowerCase().contains(text)) {
+                    return true;
+                }
 
-            return false;
-        });
+                if (StringUtils.containsIgnoreCase(pullRequest.getUser().getLogin(), text)) {
+                    return true;
+                }
+
+                return false;
+            });
+
+        } else {
+            filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
+        }
 
         AdvancedListView<PullRequest> listView = new AdvancedListView<>();
         listView.setPaging(true);

@@ -435,6 +435,22 @@
     -fx-spacing: 20px;
 }
 
+.detail-view .back-label {
+    -fx-translate-x: 10px;
+    -fx-translate-y: 10px;
+    -fx-padding: 0px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 1000px;
+    -fx-text-fill: -fx-accent;
+    -fx-font-size: 18px;
+    -fx-content-display: graphic-only;
+}
+
+.detail-view .back-label .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 32px;
+}
+
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */

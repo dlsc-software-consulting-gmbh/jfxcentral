@@ -45,6 +45,7 @@ public class SectionPane extends SectionPaneBase {
         titleLabel.textProperty().bind(titleProperty());
         titleLabel.managedProperty().bind(titleProperty().isNotEmpty());
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+        titleLabel.setWrapText(true);
 
         HBox titleExtrasBox = new HBox();
         Bindings.bindContent(titleExtrasBox.getChildren(), titleExtrasProperty());
@@ -57,6 +58,7 @@ public class SectionPane extends SectionPaneBase {
         subtitleLabel.textProperty().bind(subtitleProperty());
         subtitleLabel.managedProperty().bind(subtitleProperty().isNotEmpty());
         subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
+        subtitleLabel.setWrapText(true);
 
         VBox titleBox = new VBox(titleLabel, subtitleLabel);
         titleBox.setFillWidth(true);

@@ -12,6 +12,7 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
@@ -36,7 +37,7 @@ public class LibrariesDetailView extends DetailView<Library> {
     private ThumbnailScrollPane thumbnailScrollPane;
 
     public LibrariesDetailView(RootPane rootPane) {
-        super(rootPane);
+        super(rootPane, View.LIBRARIES);
 
         getStyleClass().add("libraries-detail-view");
 
@@ -56,6 +57,10 @@ public class LibrariesDetailView extends DetailView<Library> {
 
         selectedItemProperty().addListener(it -> updateView());
         updateView();
+    }
+
+    protected boolean isUsingMasterView() {
+        return true;
     }
 
     private void createScreenshotsBox() {

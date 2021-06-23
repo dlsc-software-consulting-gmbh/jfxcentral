@@ -8,11 +8,20 @@ import com.dlsc.jfxcentral.views.detail.DetailView;
 import com.dlsc.jfxcentral.views.master.MasterView;
 import com.dlsc.jfxcentral.views.mobile.MobilePage;
 import com.dlsc.jfxcentral.views.mobile.master.MobileBooksMasterView;
+import javafx.beans.binding.Bindings;
 
 public class MobileBooksPage extends MobilePage<Book> {
 
     public MobileBooksPage(RootPane rootPane) {
         super(rootPane, View.BOOKS);
+
+        titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
+                "Book - " + getSelectedItem().getTitle() :
+                "Books", selectedItemProperty()));
+
+        descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
+                "Information about the JavaFX book '" + getSelectedItem().getTitle() + "'" :
+                "Collection of books covering JavaFX technology."));
     }
 
     @Override

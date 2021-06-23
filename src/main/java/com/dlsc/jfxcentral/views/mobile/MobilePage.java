@@ -44,6 +44,7 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
 
         selectedItemProperty().addListener(it -> {
             T selectedItem = getSelectedItem();
+            System.out.println("selected item: " + selectedItem);
             if (selectedItem != null) {
                 showDetail(selectedItem);
             } else {
@@ -52,11 +53,17 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
         });
     }
 
+    public DetailScrollPane getDetailScrollPane() {
+        return detailPane;
+    }
+
     public void showMaster() {
+        System.out.println("showing master");
         masterView.toFront();
     }
 
     public void showDetail(T item) {
+        System.out.println("showing detail");
         detailView.showItem(item);
         detailPane.toFront();
     }
