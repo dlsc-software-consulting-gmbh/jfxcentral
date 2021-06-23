@@ -44,13 +44,17 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
 
         FilterView<Download> filterView = sectionPane.getFilterView();
         filterView.setItems(DataRepository.getInstance().downloadsProperty());
-        filterView.getFilterGroups().setAll(downloadTypeGroup, fileTypeGroup, personGroup, companyGroup);
-        filterView.setTextFilterProvider(text -> video -> {
-            if (video.getTitle().toLowerCase().contains(text)) {
-                return true;
-            }
-            return false;
-        });
+        if (rootPane.isMobile()) {
+            filterView.getFilterGroups().setAll(downloadTypeGroup, personGroup, companyGroup);
+        } else {
+            filterView.getFilterGroups().setAll(downloadTypeGroup, fileTypeGroup, personGroup, companyGroup);
+            filterView.setTextFilterProvider(text -> video -> {
+                if (video.getTitle().toLowerCase().contains(text)) {
+                    return true;
+                }
+                return false;
+            });
+        }
 
         listView = new AdvancedListView<>();
         listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), true));

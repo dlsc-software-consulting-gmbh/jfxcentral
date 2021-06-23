@@ -12,10 +12,12 @@ import javafx.scene.layout.StackPane;
 
 public class WebView extends com.jpro.web.View {
 
-    String initialURL;
+    private final boolean mobile;
+    private final String initialURL;
 
-    public WebView(String initialURL) {
+    public WebView(String initialURL, boolean mobile) {
         this.initialURL = initialURL;
+        this.mobile = mobile;
     }
 
 
@@ -47,11 +49,11 @@ public class WebView extends com.jpro.web.View {
     @Override
     public Node content() {
         handleURL(initialURL);
-        rootPane.init(isMobile());
+        rootPane.init(mobile);
         rootPane.setMaxWidth(1200);
         StackPane wrapper = new StackPane(rootPane);
         wrapper.getStyleClass().add("root-wrapper");
-        if (isMobile()) {
+        if (mobile) {
             wrapper.getStyleClass().add("mobile");
         }
         return wrapper;
