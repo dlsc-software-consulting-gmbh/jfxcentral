@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral.data.model.Download.DownloadType;
 import com.dlsc.jfxcentral.data.model.Download.FileType;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
@@ -57,6 +58,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         }
 
         listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), true));
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));

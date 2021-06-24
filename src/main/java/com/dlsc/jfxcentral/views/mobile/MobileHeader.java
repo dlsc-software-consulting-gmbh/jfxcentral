@@ -14,7 +14,6 @@ public class MobileHeader extends HBox {
         FontIcon hamburgerIcon = new FontIcon(MaterialDesign.MDI_MENU);
         hamburgerIcon.getStyleClass().add("menu-icon");
         hamburgerIcon.setOnMouseClicked(evt -> {
-            System.out.println("map: " + hiddenSidesPane.getProperties().get("showPane"));
             if (hiddenSidesPane.getProperties().containsKey("showPane")) {
                 hiddenSidesPane.hide();
             } else {

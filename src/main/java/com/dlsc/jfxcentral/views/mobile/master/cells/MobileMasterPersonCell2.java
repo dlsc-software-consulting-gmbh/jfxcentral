@@ -1,32 +1,32 @@
 package com.dlsc.jfxcentral.views.mobile.master.cells;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public class MobileMasterToolCell extends MobileAdvancedListCell<Tool> {
+public class MobileMasterPersonCell2 extends MobileAdvancedListCell<Person> {
 
-    private ImageView imageView = new ImageView();
+    private PhotoView photoView = new PhotoView();
     private Label label = new Label();
     private MarkdownView markdownView = new MarkdownView();
 
-    public MobileMasterToolCell() {
-        getStyleClass().add("mobile-master-tool-cell");
+    public MobileMasterPersonCell2() {
+        getStyleClass().add("mobile-master-person-cell");
+
+        photoView.setEditable(false);
 
         setPrefWidth(0);
         setMinWidth(0);
-
-        imageView.setFitWidth(75);
-        imageView.setPreserveRatio(true);
 
         label.getStyleClass().add("title-label");
         label.setWrapText(true);
@@ -36,7 +36,7 @@ public class MobileMasterToolCell extends MobileAdvancedListCell<Tool> {
         vbox.getStyleClass().add("vbox");
         HBox.setHgrow(vbox, Priority.ALWAYS);
 
-        HBox hBox = new HBox(vbox, imageView);
+        HBox hBox = new HBox(vbox, photoView);
         hBox.getStyleClass().add("hbox");
         hBox.setAlignment(Pos.TOP_LEFT);
 
@@ -47,15 +47,16 @@ public class MobileMasterToolCell extends MobileAdvancedListCell<Tool> {
     }
 
     @Override
-    protected void updateItem(Tool tool, boolean empty) {
-        super.updateItem(tool, empty);
+    protected void updateItem(Person person, boolean empty) {
+        super.updateItem(person, empty);
 
-        if (!empty && tool != null) {
-            label.setText(tool.getName());
-            imageView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
-            markdownView.setMdString(tool.getDescription());
+        if (!empty && person != null) {
+            label.setText(person.getName());
+            photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
+            markdownView.mdStringProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
         } else {
-            imageView.imageProperty().unbind();
+            photoView.photoProperty().unbind();
+            markdownView.mdStringProperty().unbind();
         }
     }
 }

@@ -25,7 +25,7 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
     private final GridPane gridPane;
 
     public MobileMasterPersonCell() {
-        getStyleClass().add("mobile-master-person-list-cell");
+        getStyleClass().add("mobile-master-person-cell");
 
         setPrefWidth(0);
         setMinWidth(0);

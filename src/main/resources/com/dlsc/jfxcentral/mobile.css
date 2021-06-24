@@ -13,6 +13,10 @@
     -fx-font-family: "Open Sans SemiBold";
 }
 
+.glass-pane {
+    -fx-background-color: black;
+}
+
 .mobile-header {
     -fx-background-color: -fx-accent;
     -fx-padding: 5px;
@@ -23,9 +27,14 @@
     -fx-icon-color: white;
 }
 
-.mobile-cell {
-    -fx-background-color: white;
-    -fx-min-height: 50px;
+.master-view .mobile-cell {
+    -fx-background-color: white, #e0e0e0, white;
+    -fx-background-insets: 0px, 0px 20px 0px 20px, 0px 0px 1px 0px;
+}
+
+.master-view .mobile-cell:pressed {
+    -fx-background-color: white, #e0e0e0, -light-blue;
+    -fx-background-insets: 0px, 0px 20px 0px 20px, 0px 20px 1px 20px;
 }
 
 .detail-scroll-pane .viewport {
@@ -194,19 +203,17 @@
 /* ----------------------------------------------------------------------------
  * MobileMasterPersonCell
  */
-.mobile-master-person-list-cell .arrow-icon {
-    -fx-icon-size: 32px;
-    -fx-icon-color: black;
+.mobile-master-person-cell .hbox {
+    -fx-spacing: 10px;
+    -fx-padding: 10px 0px;
 }
 
-.mobile-master-person-list-cell .grid-pane {
-    -fx-vgap: 5px;
-    -fx-hgap: 10px;
-    -fx-grid-lines-visible: false;
+.mobile-master-person-cell .hbox .vbox {
+    -fx-spacing: 5px;
 }
 
-.mobile-master-person-list-cell .rockstar-label,
-.mobile-master-person-list-cell .champion-label {
+.mobile-master-person-cell .rockstar-label,
+.mobile-master-person-cell .champion-label {
     -fx-background-color: -fx-accent;
     -fx-background-radius: 4px;
     -fx-font-size: 12;
@@ -216,7 +223,7 @@
     -fx-text-fill: white;
 }
 
-.mobile-master-person-list-cell .grid-pane .photo-view {
+.mobile-master-person-cell .photo-view {
     -size: 64px;
     -fx-min-width: -size;
     -fx-min-height: -size;
@@ -226,19 +233,14 @@
     -fx-pref-height: -size;
 }
 
-.mobile-master-person-list-cell .grid-pane .photo-view .border-circle {
-    -fx-stroke-width: 1px;
-    -fx-fill: red;
-}
-
-.mobile-master-person-list-cell .grid-pane .badges {
+.mobile-master-person-cell .badges {
     -fx-spacing: 10px;
 }
 
-.mobile-master-person-list-cell .grid-pane .name-label {
+.mobile-master-person-cell .title-label {
     -fx-font-family: "Open Sans SemiBold";
-    -fx-text-fill: black;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-accent;
 }
 
 .top-menu-scrollpane-wrapper {
@@ -335,35 +337,34 @@
 /* ----------------------------------------------------------------------------
  * MobileMasterLibraryCell
  */
-.mobile-master-library-list-cell .grid-pane {
-    -fx-vgap: 0px;
-    -fx-hgap: 10px;
-    -fx-grid-lines-visible: false;
+.mobile-master-library-cell .hbox {
+    -fx-spacing: 10px;
 }
 
-.mobile-master-library-list-cell .grid-pane .image-view {
+.mobile-master-library-cell .hbox .vbox {
+    -fx-spacing: 5px;
 }
 
-.mobile-master-library-list-cell .grid-pane .name-label {
+.mobile-master-library-cell .label {
+    -fx-font-size: 16px;
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
-}
-
-.master-view .list-cell {
-    -fx-padding: 10px 20px;
-    -fx-background-color: white;
 }
 
 /* ----------------------------------------------------------------------------
  * MobileMasterToolCell
  */
-.mobile-master-tool-list-cell .grid-pane {
-    -fx-vgap: 0px;
-    -fx-hgap: 10px;
-    -fx-grid-lines-visible: false;
+.mobile-master-tool-cell .hbox {
+    -fx-spacing: 10px;
+    -fx-padding: 10px 0px;
 }
 
-.mobile-master-tool-list-cell .grid-pane .name-label {
+.mobile-master-tool-cell .hbox .vbox {
+    -fx-spacing: 5px;
+}
+
+.mobile-master-tool-cell .label {
+    -fx-font-size: 16px;
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }
@@ -373,7 +374,6 @@
  */
 .mobile-master-blog-cell .hbox {
     -fx-spacing: 10px;
-    -fx-padding: 0px 0px 10px 0px;
 }
 
 .mobile-master-blog-cell .hbox .vbox {
@@ -381,6 +381,25 @@
 }
 
 .mobile-master-blog-cell .label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * MobileMasterBookCell
+ */
+.mobile-master-book-cell .hbox {
+    -fx-spacing: 10px;
+    -fx-padding: 10px 0px;
+}
+
+.mobile-master-book-cell .hbox .vbox {
+    -fx-spacing: 5px;
+}
+
+.mobile-master-book-cell .label {
+    -fx-font-size: 16px;
     -fx-font-family: "Open Sans SemiBold";
     -fx-text-fill: -fx-accent;
 }

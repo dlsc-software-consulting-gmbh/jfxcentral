@@ -2,59 +2,48 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.panels.LicenseLabel;
+import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
-import javafx.geometry.VPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class MobileMasterLibraryCell extends MobileAdvancedListCell<Library> {
 
-    private final ImageView imageView = new ImageView();
-    private final Label nameLabel = new Label();
-    private final LicenseLabel licenseLabel = new LicenseLabel();
-    private final GridPane gridPane;
+    private ImageView imageView = new ImageView();
+    private Label label = new Label();
+    private MarkdownView markdownView = new MarkdownView();
 
     public MobileMasterLibraryCell() {
-        getStyleClass().add("mobile-master-library-list-cell");
+        getStyleClass().add("mobile-master-library-cell");
 
         setPrefWidth(0);
         setMinWidth(0);
 
-        imageView.setFitHeight(30);
-        imageView.setFitWidth(30);
+        imageView.setFitWidth(50);
         imageView.setPreserveRatio(true);
 
-        nameLabel.getStyleClass().add("name-label");
+        label.getStyleClass().add("title-label");
+        label.setWrapText(true);
+        label.setMinHeight(Region.USE_PREF_SIZE);
 
-        gridPane = new GridPane();
-        gridPane.getStyleClass().add("grid-pane");
-        gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        VBox vbox = new VBox(label, markdownView);
+        vbox.getStyleClass().add("vbox");
+        HBox.setHgrow(vbox, Priority.ALWAYS);
 
-        gridPane.add(imageView, 1, 0);
-        gridPane.add(nameLabel, 0, 0);
-        gridPane.add(licenseLabel, 0, 1);
+        HBox hBox = new HBox(vbox, imageView);
+        hBox.getStyleClass().add("hbox");
+        hBox.setAlignment(Pos.TOP_LEFT);
 
-        GridPane.setRowSpan(imageView, 2);
-        GridPane.setHgrow(nameLabel, Priority.ALWAYS);
-        GridPane.setVgrow(nameLabel, Priority.ALWAYS);
-        GridPane.setValignment(nameLabel, VPos.BOTTOM);
-        GridPane.setValignment(licenseLabel, VPos.TOP);
-
-        RowConstraints row1 = new RowConstraints();
-        RowConstraints row2 = new RowConstraints();
-
-        row1.setPercentHeight(50);
-        row2.setPercentHeight(50);
-
-        gridPane.getRowConstraints().setAll(row1, row2);
-
+        setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        setGraphic(gridPane);
+
+        vbox.visibleProperty().bind(emptyProperty().not());
     }
 
     @Override
@@ -62,15 +51,11 @@ public class MobileMasterLibraryCell extends MobileAdvancedListCell<Library> {
         super.updateItem(library, empty);
 
         if (!empty && library != null) {
-            nameLabel.setText(library.getTitle());
-            imageView.setVisible(true);
+            label.setText(library.getTitle());
             imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
-            licenseLabel.setLicense(library.getLicense());
-            licenseLabel.setVisible(true);
+            markdownView.setMdString(library.getSummary());
         } else {
-            nameLabel.setText("");
-            imageView.setVisible(false);
-            licenseLabel.setVisible(false);
+            imageView.imageProperty().unbind();
         }
     }
 }

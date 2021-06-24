@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views;
 
 import com.dlsc.gemsfx.DialogPane;
+import com.dlsc.gemsfx.GlassPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 import com.dlsc.jfxcentral.util.PageUtil;
@@ -21,7 +22,6 @@ import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -45,7 +45,7 @@ public class RootPane extends StackPane {
     private HiddenSidesPane hiddenSidesPane;
     private BorderPane borderPane;
     private StackPane compassWrapper;
-
+    private GlassPane glassPane;
     private Locale locale = Locale.US;
 
     public RootPane() {
@@ -90,10 +90,10 @@ public class RootPane extends StackPane {
         hiddenSidesPane.setLeft(stackPane);
         hiddenSidesPane.setTriggerDistance(0);
 
-//        borderPane.addEventHandler(MouseEvent.MOUSE_CLICKED, evt -> {
-//            System.out.println("evt: " + evt);
-//            hiddenSidesPane.hide();
-//        });
+        glassPane = new GlassPane();
+        glassPane.setFadeInOutDuration(Duration.millis(200));
+        glassPane.hideProperty().bind(Bindings.createBooleanBinding(() -> !hiddenSidesPane.getProperties().containsKey("showPane"), hiddenSidesPane.getProperties()));
+        glassPane.setOnMouseClicked(evt -> hiddenSidesPane.hide());
 
         viewProperty().addListener(it -> hiddenSidesPane.hide());
 
@@ -102,10 +102,9 @@ public class RootPane extends StackPane {
 
         MobileHeader mobileHeader = new MobileHeader(hiddenSidesPane);
         borderPane.setTop(mobileHeader);
-
         borderPane.setCenter(hiddenSidesPane);
 
-        getChildren().addAll(borderPane, dialogPane);
+        getChildren().addAll(borderPane);
 
         updateView();
     }
@@ -156,21 +155,6 @@ public class RootPane extends StackPane {
             }
         });
 
-        sceneProperty().addListener(it -> {
-            Scene scene = getScene();
-            if (scene != null && WebAPI.isBrowser()) {
-                WebAPI webAPI = WebAPI.getWebAPI(scene);
-                String language = webAPI.getLanguage();
-                System.out.println("language: " + language);
-
-                if (WebAPI.getWebAPI(scene).isMobile()) {
-                    System.out.println("MOBILE!!!");
-                }
-
-                // determine user locale
-            }
-        });
-
         expandedProperty().addListener(it -> updateExpandedPseudoClass());
         updateExpandedPseudoClass();
 
@@ -189,7 +173,6 @@ public class RootPane extends StackPane {
 
     private void updateViewMobile() {
         page = null;
-        System.out.println("requested view: " + getView());
 
         switch (getView()) {
             case HOME:
@@ -233,7 +216,7 @@ public class RootPane extends StackPane {
         }
 
         if (page != null) {
-            contentPane.getChildren().setAll((Node) page, dialogPane);
+            contentPane.getChildren().setAll((Node) page, glassPane, dialogPane);
         }
     }
 

@@ -109,6 +109,7 @@ public class WebView extends com.jpro.web.View {
         }
 
         if (currentPage != null) {
+            System.out.println("current page != null, current page = " + currentPage.getClass().getSimpleName());
             // ok to pass null, resets to master views
             currentPage.setSelectedItem(item);
         }

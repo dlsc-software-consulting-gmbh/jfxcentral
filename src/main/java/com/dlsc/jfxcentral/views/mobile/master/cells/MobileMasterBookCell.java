@@ -2,39 +2,60 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class MobileMasterBookCell extends MobileAdvancedListCell<Book> {
 
-    private final ImageView coverImageView = new ImageView();
+    private ImageView imageView = new ImageView();
+    private Label label = new Label();
+    private MarkdownView markdownView = new MarkdownView();
 
     public MobileMasterBookCell() {
-        getStyleClass().add("mobile-master-book-list-cell");
+        getStyleClass().add("mobile-master-book-cell");
 
         setPrefWidth(0);
         setMinWidth(0);
 
-        coverImageView.setFitWidth(96);
-        coverImageView.setPreserveRatio(true);
+        imageView.setFitWidth(100);
+        imageView.setPreserveRatio(true);
 
-        setAlignment(Pos.CENTER_LEFT);
+        label.getStyleClass().add("title-label");
+        label.setWrapText(true);
+        label.setMinHeight(Region.USE_PREF_SIZE);
+
+        VBox vbox = new VBox(label, markdownView);
+        vbox.getStyleClass().add("vbox");
+        HBox.setHgrow(vbox, Priority.ALWAYS);
+
+        HBox hBox = new HBox(vbox, imageView);
+        hBox.getStyleClass().add("hbox");
+        hBox.setAlignment(Pos.TOP_LEFT);
+
+        setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        setGraphic(coverImageView);
 
-        coverImageView.visibleProperty().bind(emptyProperty().not());
+        vbox.visibleProperty().bind(emptyProperty().not());
     }
 
     @Override
     protected void updateItem(Book book, boolean empty) {
         super.updateItem(book, empty);
 
-        coverImageView.imageProperty().unbind();
-
         if (!empty && book != null) {
-            coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+            label.setText(book.getTitle());
+            imageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
+            markdownView.setMdString(book.getSummary());
+        } else {
+            imageView.imageProperty().unbind();
         }
     }
 }
