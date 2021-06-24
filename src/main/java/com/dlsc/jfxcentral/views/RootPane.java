@@ -29,6 +29,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.util.Collections;
+import java.util.Locale;
 
 public class RootPane extends StackPane {
 
@@ -44,6 +45,8 @@ public class RootPane extends StackPane {
     private HiddenSidesPane hiddenSidesPane;
     private BorderPane borderPane;
     private StackPane compassWrapper;
+
+    private Locale locale = Locale.US;
 
     public RootPane() {
         getStyleClass().add("root-pane");
@@ -77,12 +80,14 @@ public class RootPane extends StackPane {
         prettyScrollPane.setShowScrollToTopButton(false);
         prettyScrollPane.setFitToHeight(true);
         prettyScrollPane.setFitToWidth(true);
-        prettyScrollPane.getStyleClass().add("top-menu-scrollpane");
+
+        StackPane stackPane = new StackPane(prettyScrollPane); // wrap for shadow effect
+        stackPane.getStyleClass().add("top-menu-scrollpane-wrapper");
 
         hiddenSidesPane = new HiddenSidesPane();
         hiddenSidesPane.setAnimationDelay(Duration.ZERO);
         hiddenSidesPane.setAnimationDuration(Duration.millis(200));
-        hiddenSidesPane.setLeft(prettyScrollPane);
+        hiddenSidesPane.setLeft(stackPane);
         hiddenSidesPane.setTriggerDistance(0);
 
 //        borderPane.addEventHandler(MouseEvent.MOUSE_CLICKED, evt -> {
@@ -209,11 +214,13 @@ public class RootPane extends StackPane {
                 page = new MobileCompaniesPage(this);
                 break;
             case TOOLS:
+                page = new MobileToolsPage(this);
                 break;
             case LIBRARIES:
                 page = new MobileLibrariesPage(this);
                 break;
             case BLOGS:
+                page = new MobileBlogsPage(this);
                 break;
             case BOOKS:
                 page = new MobileBooksPage(this);
@@ -349,5 +356,9 @@ public class RootPane extends StackPane {
 
     public boolean isMobile() {
         return mobile;
+    }
+
+    public Locale getLocale() {
+        return locale;
     }
 }

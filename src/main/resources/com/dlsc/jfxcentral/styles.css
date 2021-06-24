@@ -1243,11 +1243,11 @@
 
 .detail-pull-request-cell .hbox {
     -fx-spacing: 20px;
-    -fx-alignment: center-left;
 }
 
 .detail-pull-request-cell .hbox .vbox {
     -fx-alignment: center-left;
+    -fx-spacing: 5px;
 }
 
 .detail-pull-request-cell .hbox .photo-view {

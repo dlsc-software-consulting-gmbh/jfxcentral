@@ -6,12 +6,14 @@ import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.time.Duration;
@@ -27,9 +29,12 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
     private final Label statusLabel = new Label();
     private final HBox labelBox = new HBox();
     private final PhotoView photoView = new PhotoView();
+    private final DateTimeFormatter dateTimeFormatter;
 
     public DetailPullRequestCell(RootPane rootPane) {
         this.rootPane = rootPane;
+
+        dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
 
         getStyleClass().add("detail-pull-request-cell");
 
@@ -41,25 +46,44 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
         photoView.managedProperty().bind(photoView.photoProperty().isNotNull());
 
         titleLabel.getStyleClass().add("title-label");
-        titleLabel.setGraphic(labelBox);
         titleLabel.setContentDisplay(ContentDisplay.RIGHT);
 
         summaryLabel.getStyleClass().add("summary-label");
         statusLabel.getStyleClass().add("status-label");
         labelBox.getStyleClass().add("label-box");
 
-        VBox vBox = new VBox(titleLabel, summaryLabel);
+        VBox vBox = new VBox();
+
+        if (rootPane.isMobile()) {
+            titleLabel.setWrapText(true);
+            titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+            summaryLabel.setWrapText(true);
+            summaryLabel.setMinHeight(Region.USE_PREF_SIZE);
+            vBox.getChildren().setAll(statusLabel, titleLabel, summaryLabel, labelBox);
+        } else {
+            titleLabel.setGraphic(labelBox);
+            vBox.getChildren().setAll(titleLabel, summaryLabel);
+        }
+
         vBox.getStyleClass().add("vbox");
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox hBox = new HBox(photoView, vBox, statusLabel);
+        HBox hBox = new HBox();
         hBox.getStyleClass().add("hbox");
+
+        if (rootPane.isMobile()) {
+            hBox.getChildren().setAll(photoView, vBox);
+            hBox.setAlignment(Pos.TOP_LEFT);
+        } else {
+            hBox.getChildren().setAll(photoView, vBox, statusLabel);
+            hBox.setAlignment(Pos.CENTER_LEFT);
+        }
 
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         setOnMouseClicked(evt -> {
-            if (evt.getButton() == MouseButton.PRIMARY && evt.getClickCount() == 2) {
+            if (evt.getButton() == MouseButton.PRIMARY && (evt.getClickCount() == 2 || rootPane.isMobile())) {
                 PullRequest item = getItem();
                 if (item != null) {
                     showPullRequestBody(getItem());
@@ -104,12 +128,14 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
                 case "open":
                     statusLabel.setText("Open");
                     statusLabel.setVisible(false);
+                    statusLabel.setManaged(false);
                     summaryLabel.setText("#" + pr.getNumber() + " opened by " + pr.getUser().getLogin() + " " + createTimeString(pr.getCreatedAt()));
                     statusLabel.getStyleClass().add("open");
                     break;
                 case "closed":
                     statusLabel.setText("Closed");
                     statusLabel.setVisible(true);
+                    statusLabel.setManaged(true);
                     summaryLabel.setText("#" + pr.getNumber() + " closed by " + pr.getUser().getLogin() + " " + createTimeString(pr.getUpdatedAt()));
                     statusLabel.getStyleClass().add("closed");
                     break;
@@ -148,6 +174,6 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
             return between.toDays() + " days ago.";
         }
 
-        return "on " + DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(time) + ".";
+        return "on " + dateTimeFormatter.format(time) + ".";
     }
 }

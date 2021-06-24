@@ -126,7 +126,7 @@ public class HiddenSidesPaneSkin extends SkinBase<HiddenSidesPane> {
         clip.widthProperty().bind(getSkinnable().widthProperty());
         clip.heightProperty().bind(getSkinnable().heightProperty());
 
-        getSkinnable().setClip(clip);
+//        getSkinnable().setClip(clip);
     }
 
     private final MapChangeListener<Object, Object> propertiesMapListener = c -> {

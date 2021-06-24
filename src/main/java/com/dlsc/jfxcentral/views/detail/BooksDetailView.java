@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 public class BooksDetailView extends DetailView<Book> {
 
+    private final DateTimeFormatter dateTimeFormatter;
     private ImageView coverImageView = new ImageView();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
@@ -45,6 +46,8 @@ public class BooksDetailView extends DetailView<Book> {
         super(rootPane, View.BOOKS);
 
         getStyleClass().add("books-detail-view");
+
+        dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
 
         // book section
         coverImageView.setFitWidth(128);
@@ -136,7 +139,7 @@ public class BooksDetailView extends DetailView<Book> {
             authorsLabel.setText(book.getAuthors());
             isbnLabel.setText("ISBN: " + book.getIsbn());
             publisherLabel.setText("Publisher: " + book.getPublisher());
-            publishDateLabel.setText("Publish Date: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(book.getPublishedDate()));
+            publishDateLabel.setText("Publish Date: " + dateTimeFormatter.format(book.getPublishedDate()));
 
             linksBox.getChildren().clear();
 

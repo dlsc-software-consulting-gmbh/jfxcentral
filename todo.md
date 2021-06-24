@@ -22,6 +22,7 @@
 ### Bugs
 
 - [ ] Styling of status label in Pull Request cell not working properly
+- [ ] Consitent use of date format ("March 3rd 2021")
 
 ### Data
 - [ ] Add OpenJFX "Getting Started" tutorial (pin at top)

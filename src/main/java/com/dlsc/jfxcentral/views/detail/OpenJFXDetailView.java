@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.util.FilterUtil;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
@@ -159,31 +160,28 @@ public class OpenJFXDetailView extends DetailView {
         FilterView<PullRequest> filterView = sectionPane.getFilterView();
         filterView.setItems(DataRepository.getInstance().getPullRequests());
 
-        if (getRootPane().isMobile()) {
-            filterView.getFilterGroups().setAll(stateGroup, labelGroup);
-        } else {
-            filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
+        filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
 
-            filterView.setTextFilterProvider(text -> pullRequest -> {
-                if (pullRequest.getTitle().toLowerCase().contains(text)) {
-                    return true;
-                }
+        filterView.setTextFilterProvider(text -> pullRequest -> {
+            if (pullRequest.getTitle().toLowerCase().contains(text)) {
+                return true;
+            }
 
-                if (pullRequest.getBody().toLowerCase().contains(text)) {
-                    return true;
-                }
+            if (pullRequest.getBody().toLowerCase().contains(text)) {
+                return true;
+            }
 
-                if (StringUtils.containsIgnoreCase(pullRequest.getUser().getLogin(), text)) {
-                    return true;
-                }
+            if (StringUtils.containsIgnoreCase(pullRequest.getUser().getLogin(), text)) {
+                return true;
+            }
 
-                return false;
-            });
-        }
+            return false;
+        });
 
         AdvancedListView<PullRequest> listView = new AdvancedListView<>();
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setCellFactory(view -> new DetailPullRequestCell(getRootPane()));
         listView.setItems(filterView.getFilteredItems());
 

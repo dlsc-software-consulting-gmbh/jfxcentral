@@ -62,9 +62,14 @@ public class BlogsDetailView extends DetailView<Blog> {
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
 
         AdvancedListView<Post> listView = new AdvancedListView<>();
+        if (getRootPane().isMobile()) {
+            listView.setPaging(true);
+            listView.setVisibleRowCount(25);
+        }
+
         listView.setItems(sortedPosts);
         listView.setCellFactory(view -> {
-            DetailPostCell cell = new DetailPostCell();
+            DetailPostCell cell = new DetailPostCell(getRootPane());
             cell.blogProperty().bind(selectedItemProperty());
             return cell;
         });

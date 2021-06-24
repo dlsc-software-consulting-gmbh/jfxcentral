@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
+import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -15,16 +16,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
-    // TODO: web api locale lookup?
-    private DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+    private DateTimeFormatter formatter;
 
     private FontIcon fontIcon = new FontIcon();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
     private Label dateLabel = new Label();
 
-    public DetailRecentItemCell() {
+    public DetailRecentItemCell(RootPane rootPane) {
         getStyleClass().add("detail-recent-item-cell");
+
+        formatter  = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
 
         VBox vBox = new VBox(titleLabel, subtitleLabel);
         vBox.getStyleClass().add("vbox");
@@ -59,14 +61,14 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
 
             if (updatedDate != null && createdDate != null) {
                 if (updatedDate.isAfter(createdDate)) {
-                    dateLabel.setText("Updated on: " + formatter.format(updatedDate));
+                    dateLabel.setText(formatter.format(updatedDate));
                 } else {
-                    dateLabel.setText("Created on: " + formatter.format(createdDate));
+                    dateLabel.setText(formatter.format(createdDate));
                 }
             } else if (updatedDate != null) {
-                dateLabel.setText("Updated on: " + formatter.format(updatedDate));
+                dateLabel.setText(formatter.format(updatedDate));
             } else if (createdDate != null) {
-                dateLabel.setText("Created on: " + formatter.format(createdDate));
+                dateLabel.setText(formatter.format(createdDate));
             } else {
                 dateLabel.setText("");
             }

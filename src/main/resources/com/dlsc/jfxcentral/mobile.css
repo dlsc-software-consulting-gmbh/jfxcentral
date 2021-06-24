@@ -241,8 +241,10 @@
     -fx-font-size: 18px;
 }
 
-.top-menu-scrollpane {
-    -fx-effect: -drop-shadow-1;
+.top-menu-scrollpane-wrapper {
+    -fx-padding: 0px 0px 0px 0px;
+    -fx-background-color: white;
+    -fx-effect: -drop-shadow-3;
 }
 
 .top-menu.mobile {
@@ -331,7 +333,7 @@
 }
 
 /* ----------------------------------------------------------------------------
- * MasterLibraryCell
+ * MobileMasterLibraryCell
  */
 .mobile-master-library-list-cell .grid-pane {
     -fx-vgap: 0px;
@@ -350,4 +352,35 @@
 .master-view .list-cell {
     -fx-padding: 10px 20px;
     -fx-background-color: white;
+}
+
+/* ----------------------------------------------------------------------------
+ * MobileMasterToolCell
+ */
+.mobile-master-tool-list-cell .grid-pane {
+    -fx-vgap: 0px;
+    -fx-hgap: 10px;
+    -fx-grid-lines-visible: false;
+}
+
+.mobile-master-tool-list-cell .grid-pane .name-label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * MobileMasterBlogCell
+ */
+.mobile-master-blog-cell .hbox {
+    -fx-spacing: 10px;
+    -fx-padding: 0px 0px 10px 0px;
+}
+
+.mobile-master-blog-cell .hbox .vbox {
+    -fx-spacing: 5px;
+}
+
+.mobile-master-blog-cell .label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: -fx-accent;
 }

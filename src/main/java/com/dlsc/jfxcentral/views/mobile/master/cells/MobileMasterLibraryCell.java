@@ -22,6 +22,9 @@ public class MobileMasterLibraryCell extends MobileAdvancedListCell<Library> {
     public MobileMasterLibraryCell() {
         getStyleClass().add("mobile-master-library-list-cell");
 
+        setPrefWidth(0);
+        setMinWidth(0);
+
         imageView.setFitHeight(30);
         imageView.setFitWidth(30);
         imageView.setPreserveRatio(true);

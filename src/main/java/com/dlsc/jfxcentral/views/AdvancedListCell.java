@@ -48,6 +48,15 @@ public class AdvancedListCell<T> extends ListCell<T> {
         return height + getInsets().getTop() + getInsets().getBottom();
     }
 
+    @Override
+    protected double computeMaxHeight(double width) {
+        double height = 0;
+        for (Node child : getChildren()) {
+            height += child.prefHeight(getWidth());
+        }
+        return height + getInsets().getTop() + getInsets().getBottom();
+    }
+
     public void setMasterCellLink(ListCell cell, ModelObject item, String description, View view) {
         try {
             ObservableList<Node> children2 = null;

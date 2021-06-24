@@ -27,6 +27,9 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
     public MobileMasterPersonCell() {
         getStyleClass().add("mobile-master-person-list-cell");
 
+        setPrefWidth(0);
+        setMinWidth(0);
+
         photoView.setEditable(false);
         photoView.setPlaceholder(new Label("test"));
         photoView.visibleProperty().bind(photoView.photoProperty().isNotNull());

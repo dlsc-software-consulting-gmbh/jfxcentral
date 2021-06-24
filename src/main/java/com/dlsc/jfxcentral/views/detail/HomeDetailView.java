@@ -242,7 +242,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
-        listView.setCellFactory(view -> new DetailRecentItemCell());
+        listView.setCellFactory(view -> new DetailRecentItemCell(getRootPane()));
         listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);
 

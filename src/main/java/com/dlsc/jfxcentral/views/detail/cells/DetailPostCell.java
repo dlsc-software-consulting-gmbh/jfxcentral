@@ -3,12 +3,15 @@ package com.dlsc.jfxcentral.views.detail.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
+import com.dlsc.jfxcentral.views.RootPane;
+import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -22,13 +25,19 @@ import java.util.Date;
 
 public class DetailPostCell extends DetailCell<Post> {
 
+    private final RootPane rootPane;
+    private final DateTimeFormatter dateTimeFormatter;
     private Label titleLabel = new Label();
     private Label blogLabel = new Label();
     private Label ageLabel = new Label();
 
     private ImageView imageView = new ImageView();
 
-    public DetailPostCell() {
+    public DetailPostCell(RootPane rootPane) {
+        this.rootPane = rootPane;
+
+        dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
+
         getStyleClass().add("detail-post-cell");
 
         titleLabel.getStyleClass().add("title-label");
@@ -55,6 +64,16 @@ public class DetailPostCell extends DetailCell<Post> {
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         hbox.visibleProperty().bind(itemProperty().isNotNull());
+
+        if (rootPane.isMobile()) {
+            addEventFilter(MouseEvent.MOUSE_CLICKED,  evt -> {
+                System.out.println(evt);
+                if (evt.isStillSincePress()) {
+                    System.out.println("opening URL");
+                    WebAPI.getWebAPI(getScene()).openURL(getItem().getSyndEntry().getLink());
+                }
+            });
+        }
     }
 
     private final ObjectProperty<Blog> blog = new SimpleObjectProperty<>(this, "blog");
@@ -80,7 +99,10 @@ public class DetailPostCell extends DetailCell<Post> {
             blogLabel.setText(item.getSyndFeed().getTitle());
             ageLabel.setText(getAge(item));
             imageView.imageProperty().bind(ImageManager.getInstance().blogIconImageProperty(item.getBlog()));
-            setLink(item.getSyndEntry().getLink(), item.getSyndEntry().getTitle());
+
+            if (!rootPane.isMobile()) {
+                setLink(item.getSyndEntry().getLink(), item.getSyndEntry().getTitle());
+            }
         } else {
             imageView.imageProperty().unbind();
             titleLabel.setText("");
@@ -106,6 +128,6 @@ public class DetailPostCell extends DetailCell<Post> {
             return days + (days > 1 ? " days" : "day");
         }
 
-        return DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(zonedDateTime);
+        return dateTimeFormatter.format(zonedDateTime);
     }
 }

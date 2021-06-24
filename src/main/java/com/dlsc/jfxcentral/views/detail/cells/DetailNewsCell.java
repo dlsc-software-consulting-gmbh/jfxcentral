@@ -17,9 +17,12 @@ public class DetailNewsCell extends DetailCell<News> {
 
     private final Label authorLabel = new Label();
     private final ResponsiveBox responsiveBox;
+    private final DateTimeFormatter dateTimeFormatter;
 
     public DetailNewsCell(RootPane rootPane, boolean largeImage) {
         setPrefWidth(0);
+
+        dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
 
         getStyleClass().add("detail-news-cell");
 
@@ -61,8 +64,8 @@ public class DetailNewsCell extends DetailCell<News> {
 
     private String createSuffix(News news) {
         if (news.getModifiedOn().isAfter(news.getCreatedOn())) {
-            return " - Updated on: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(news.getModifiedOn());
+            return " - Updated on: " + dateTimeFormatter.format(news.getModifiedOn());
         }
-        return " - Published on: " + DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(news.getCreatedOn());
+        return " - Published on: " + dateTimeFormatter.format(news.getCreatedOn());
     }
 }

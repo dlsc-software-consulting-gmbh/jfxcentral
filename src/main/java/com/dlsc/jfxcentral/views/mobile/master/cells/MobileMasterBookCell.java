@@ -15,11 +15,12 @@ public class MobileMasterBookCell extends MobileAdvancedListCell<Book> {
         getStyleClass().add("mobile-master-book-list-cell");
 
         setPrefWidth(0);
+        setMinWidth(0);
 
-        coverImageView.fitWidthProperty().bind(widthProperty().multiply(.75));
+        coverImageView.setFitWidth(96);
         coverImageView.setPreserveRatio(true);
 
-        setAlignment(Pos.CENTER);
+        setAlignment(Pos.CENTER_LEFT);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         setGraphic(coverImageView);
 
