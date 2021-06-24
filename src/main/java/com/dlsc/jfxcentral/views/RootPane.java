@@ -62,7 +62,7 @@ public class RootPane extends StackPane {
             initDesktopOrBrowser();
         }
 
-        viewProperty().addListener(it -> updateView());
+        viewProperty().addListener((obs, oldView, newView) -> updateView());
     }
 
     private void initMobile() {
@@ -174,7 +174,12 @@ public class RootPane extends StackPane {
     private void updateViewMobile() {
         page = null;
 
-        switch (getView()) {
+        View view = getView();
+        if (view == null) {
+            return;
+        }
+
+        switch (view) {
             case HOME:
                 page = new MobileHomePage(this);
                 break;
@@ -222,7 +227,6 @@ public class RootPane extends StackPane {
 
     private void updateViewDesktopOrBrowser() {
         page = null;
-        System.out.println("requested view: " + getView());
 
         switch (getView()) {
             case HOME:

@@ -48,8 +48,8 @@ public class WebView extends com.jpro.web.View {
 
     @Override
     public Node content() {
-        handleURL(initialURL);
         rootPane.init(mobile);
+        handleURL(initialURL);
         rootPane.setMaxWidth(1200);
         StackPane wrapper = new StackPane(rootPane);
         wrapper.getStyleClass().add("root-wrapper");
@@ -65,12 +65,14 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
-        System.out.println("VIEW: " + view);
-        System.out.println("ID: " + id);
+        System.out.println("view: " + view);
+        System.out.println("id " + id);
 
         rootPane.setView(view);
 
         IPage currentPage = rootPane.getCurrentPage();
+        System.out.println("current page: " + currentPage);
+
         ModelObject item = null;
 
         if (id != null) {

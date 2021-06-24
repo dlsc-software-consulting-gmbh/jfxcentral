@@ -12,11 +12,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 
 public class MobilePage<T extends ModelObject> extends BorderPane implements IPage<T> {
 
-    private final DetailScrollPane detailPane;
+    private final DetailScrollPane detailScrollPane;
     private final RootPane rootPane;
     private final View view;
 
@@ -29,22 +28,19 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
 
         getStyleClass().add(view.name().toLowerCase());
 
-        detailPane = new DetailScrollPane(rootPane);
-        detailPane.setContent(detailView = createDetailView());
-
-        StackPane stackPane = new StackPane(detailPane);
+        detailScrollPane = new DetailScrollPane(rootPane);
+        detailScrollPane.setContent(detailView = createDetailView());
 
         masterView = createMasterView();
 
         if (masterView != null) {
-            stackPane.getChildren().add(masterView);
+            showMaster();
+        } else {
+            showDetail();
         }
-
-        setCenter(stackPane);
 
         selectedItemProperty().addListener(it -> {
             T selectedItem = getSelectedItem();
-            System.out.println("selected item: " + selectedItem);
             if (selectedItem != null) {
                 showDetail(selectedItem);
             } else {
@@ -54,18 +50,20 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
     }
 
     public DetailScrollPane getDetailScrollPane() {
-        return detailPane;
+        return detailScrollPane;
     }
 
     public void showMaster() {
-        System.out.println("showing master");
-        masterView.toFront();
+        setCenter(masterView);
+    }
+
+    public void showDetail() {
+        setCenter(detailScrollPane);
     }
 
     public void showDetail(T item) {
-        System.out.println("showing detail");
         detailView.showItem(item);
-        detailPane.toFront();
+        showDetail();
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");
