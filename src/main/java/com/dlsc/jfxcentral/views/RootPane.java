@@ -228,7 +228,12 @@ public class RootPane extends StackPane {
     private void updateViewDesktopOrBrowser() {
         page = null;
 
-        switch (getView()) {
+        View view = getView();
+        if (view == null) {
+            return;
+        }
+
+        switch (view) {
             case HOME:
                 page = new HomePage(this);
                 break;
