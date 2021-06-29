@@ -20,6 +20,8 @@ import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -53,7 +55,13 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         createWelcomeSection();
         createNewsSection();
         createRecentItemsSection();
-        createContactInfo();
+
+        HBox hBox = new HBox();
+        hBox.getStyleClass().add("footer");
+        content.getChildren().add(hBox);
+
+        createContactInfo(hBox);
+        createSocialInfo(hBox);
 
         setContent(content);
     }
@@ -253,9 +261,9 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         content.getChildren().add(sectionPane);
     }
 
-    private void createContactInfo() {
+    private void createContactInfo(HBox box) {
         MarkdownView markdownView = new MarkdownView();
-        markdownView.setMdString("Asylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
+        markdownView.setMdString("**DLSC Software & Consulting**\n\nAsylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
         markdownView.getStyleClass().add("contact-markdown-view");
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
@@ -264,6 +272,14 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         imageView.setPreserveRatio(true);
         StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
+        SectionPane sectionPane = new SectionPane(markdownView);
+        sectionPane.setTitle("Contact");
+
+        HBox.setHgrow(sectionPane, Priority.ALWAYS);
+        box.getChildren().add(sectionPane);
+    }
+
+    private void createSocialInfo(HBox box) {
         StackPane twitter = wrap(new FontIcon(FontAwesomeBrands.TWITTER));
         StackPane linkedIn = wrap(new FontIcon(FontAwesomeBrands.LINKEDIN));
         StackPane github = wrap(new FontIcon(FontAwesomeBrands.GITHUB));
@@ -288,31 +304,33 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         youTubeLabel.getStyleClass().add("social-label");
         mailLabel.getStyleClass().add("social-label");
 
-        GridPane socialPane = new GridPane();
-        socialPane.getStyleClass().add("social-pane");
+        GridPane gridPane = new GridPane();
+        gridPane.getStyleClass().add("social-pane");
 
-        socialPane.add(twitter, 0, 0);
-        socialPane.add(twitterLabel, 1, 0);
-        socialPane.add(linkedIn, 0, 1);
-        socialPane.add(linkedInLabel, 1, 1);
-        socialPane.add(github, 2, 0);
-        socialPane.add(gitHubLabel, 3, 0);
-        socialPane.add(youtube, 2, 1);
-        socialPane.add(youTubeLabel, 3, 1);
-        socialPane.add(mail, 4, 0);
-        socialPane.add(mailLabel, 5, 0);
+        gridPane.add(twitter, 0, 0);
+        gridPane.add(twitterLabel, 1, 0);
+        gridPane.add(linkedIn, 0, 1);
+        gridPane.add(linkedInLabel, 1, 1);
+        gridPane.add(github, 2, 0);
+        gridPane.add(gitHubLabel, 3, 0);
+        gridPane.add(youtube, 2, 1);
+        gridPane.add(youTubeLabel, 3, 1);
+        gridPane.add(mail, 4, 0);
+        gridPane.add(mailLabel, 5, 0);
 
-        twitterLabel.setVisible(!getRootPane().isMobile());
-        linkedInLabel.setVisible(!getRootPane().isMobile());
-        gitHubLabel.setVisible(!getRootPane().isMobile());
-        youTubeLabel.setVisible(!getRootPane().isMobile());
-        mailLabel.setVisible(!getRootPane().isMobile());
+        BooleanBinding showLabel = Bindings.createBooleanBinding(() -> !getRootPane().isMobile() && getWidth() > 700, widthProperty());
 
-        twitterLabel.setManaged(!getRootPane().isMobile());
-        linkedInLabel.setManaged(!getRootPane().isMobile());
-        gitHubLabel.setManaged(!getRootPane().isMobile());
-        youTubeLabel.setManaged(!getRootPane().isMobile());
-        mailLabel.setManaged(!getRootPane().isMobile());
+        twitterLabel.visibleProperty().bind(showLabel);
+        linkedInLabel.visibleProperty().bind(showLabel);
+        gitHubLabel.visibleProperty().bind(showLabel);
+        youTubeLabel.visibleProperty().bind(showLabel);
+        mailLabel.visibleProperty().bind(showLabel);
+
+        twitterLabel.managedProperty().bind(showLabel);
+        linkedInLabel.managedProperty().bind(showLabel);
+        gitHubLabel.managedProperty().bind(showLabel);
+        youTubeLabel.managedProperty().bind(showLabel);
+        mailLabel.managedProperty().bind(showLabel);
 
         Util.setLink(twitter, "https://twitter.com/dlemmermann", "");
         Util.setLink(linkedIn, "https://www.linkedin.com/in/dlemmermann/", "");
@@ -329,13 +347,11 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         Util.setLink(youTubeLabel, "https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q", "");
         Util.setLink(mailLabel, "mailto:dlemmermann@gmail.com?subject=JFXCentral", "");
 
-        HBox hBox = new HBox(markdownView, socialPane);
-        hBox.getStyleClass().add("footer");
+        SectionPane sectionPane = new SectionPane(gridPane);
+        sectionPane.setTitle("Social");
 
-        SectionPane sectionPane = new SectionPane(hBox);
-        sectionPane.setTitle("Contact Us");
-        sectionPane.setSubtitle("DLSC Software & Consulting GmbH");
-        content.getChildren().add(sectionPane);
+        HBox.setHgrow(sectionPane, Priority.ALWAYS);
+        box.getChildren().add(sectionPane);
     }
 
     private StackPane wrap(FontIcon icon) {

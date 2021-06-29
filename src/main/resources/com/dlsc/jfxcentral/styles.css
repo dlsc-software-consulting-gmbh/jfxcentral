@@ -46,9 +46,63 @@
     src: url("fonts/PermanentMarker-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Regular";
+    src: url("fonts/Inter-Regular.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Italic";
+    src: url("fonts/Inter-Italic.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Bold";
+    src: url("fonts/Inter-Bold.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Bold Italic";
+    src: url("fonts/Inter-BoldItalic.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Semi Bold";
+    src: url("fonts/Inter-SemiBold.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Semi Bold Italic";
+    src: url("fonts/Inter-SemiBoldItalic.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Medium";
+    src: url("fonts/Inter-Medium.otf");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-face-name: "Inter Medium Italic";
+    src: url("fonts/Inter-MediumItalic.otf");
+}
+
+@font-face {
+    font-family: "Pattaya";
+    font-face-name: "Pattaya-Regular";
+    src: url("fonts/Pattaya-Regular.ttf");
+}
+
 .root {
     -fx-font-size: 14px;
-    -fx-font-family: "Open Sans";
+    -fx-font-family: "Inter";
     -fx-accent: rgb(68, 131, 160);
 
     -light-grey: rgba(239, 242, 245);
@@ -87,22 +141,22 @@
 
 .header1 {
     -fx-font-size: 24px;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .header2 {
     -fx-font-size: 18px;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .header3 {
     -fx-font-size: 14px;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .hyperlink {
     -fx-text-fill: white;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-underline: true;
     -fx-padding: 2px 5px;
     -fx-background-color: -fx-accent;
@@ -130,7 +184,7 @@
     -fx-background-radius: 3px;
     -fx-background-color: -fx-accent;
     -fx-text-fill: white;
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
 }
 
 .toggle-button:hover,
@@ -163,7 +217,7 @@
     -fx-border-radius: 2px;
     -fx-background-color: -white-button-background-color;
     -fx-text-fill: -white-button-text-color;
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
 }
 
 .white-button:hover {
@@ -204,7 +258,7 @@
 }
 
 .combo-box-base > * > .text {
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
     -fx-fill: white;
 }
 
@@ -218,12 +272,12 @@
 }
 
 .menu-button > .label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: white;
 }
 
 .menu-button .menu-item {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .menu-button .arrow {
@@ -231,7 +285,7 @@
 }
 
 .chip-view {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .scroll-bar:vertical .decrement-button,
@@ -294,7 +348,7 @@
 
 .loading-view .label {
     -fx-text-fill: white;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-font-size: 24px;
 }
 
@@ -333,7 +387,7 @@
     -fx-background-color: transparent;
     -fx-border-width: 0px 3px 0px 3px;
     -fx-border-color: transparent transparent transparent transparent;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Bold";
     -fx-opacity: .6;
     -fx-font-size: 14px;
     -fx-text-fill: black;
@@ -495,7 +549,7 @@
 }
 
 .master-person-list-cell .grid-pane .name-label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
 
@@ -509,7 +563,7 @@
 }
 
 .master-tool-list-cell .grid-pane .name-label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
 
@@ -523,7 +577,7 @@
 }
 
 .master-app-list-cell .grid-pane .name-label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
     -fx-font-size: 16px;
 }
@@ -544,7 +598,7 @@
 }
 
 .master-library-list-cell .grid-pane .name-label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
 
@@ -609,7 +663,7 @@
 }
 
 .detail-book-cell .hbox .vbox .subtitle-label {
-    -fx-font-family: "Open Sans Italic";
+    -fx-font-family: "Inter Italic";
 }
 
 .detail-book-cell .hbox .vbox .description-label {
@@ -682,12 +736,10 @@
 .books-detail-view .title-section .content .horizontal-box .vertical-box .subtitle-label {
     -fx-font-size: 16px;
     -fx-opacity: .8;
-    -fx-translate-y: -10px;
 }
 
 .books-detail-view .title-section .content .horizontal-box .vertical-box .authors-label {
     -fx-text-fill: -fx-accent;
-    -fx-translate-y: -10px;
 }
 
 .books-detail-view .title-section .content .horizontal-box .vertical-box .description-markdown-view {
@@ -702,7 +754,7 @@
 
 .books-detail-view .title-section .content .horizontal-box .vertical-box .author-title-label {
     -fx-font-size: 16px;
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
     -fx-padding: 20px 0px;
 }
 
@@ -760,7 +812,7 @@
 
 .libraries-detail-view .ensemble-pane .hbox .label {
     -fx-alignment: left;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 /* ----------------------------------------------------------------------------
@@ -834,7 +886,7 @@
 }
 
 .duke-animation-view .start-message {
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
     -fx-text-fill: rgba(255, 255, 255, .8);
     -fx-font-size: 24px;
 }
@@ -857,7 +909,7 @@
 
 .advanced-list-view .pagination-box .page-button {
     -size: 30px;
-    -fx-font-family: "Open Sans Regular";
+    -fx-font-family: "Inter Regular";
     -fx-text-fill: -fx-accent;
     -fx-padding: 5px;
     -fx-background-color: transparent;
@@ -987,12 +1039,17 @@
     -fx-spacing: 20;
 }
 
+.section-pane > .section-pane-container .title-box {
+    -fx-spacing: 5px;
+}
+
 .section-pane > .section-pane-container .title-box > .title-label {
 }
 
 .section-pane > .section-pane-container .title-box > .subtitle-label {
+    -fx-font-style: italic;
     -fx-text-fill: grey;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
 }
 
 .section-pane > .section-pane-container > .children-box {
@@ -1012,7 +1069,7 @@
 
 .section-pane .filter-view .title {
     -fx-font-size: 24px;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .section-pane .filter-view .subtitle {
@@ -1088,7 +1145,7 @@
     -fx-pref-height: 60;
     -fx-padding: 20;
     -fx-font-size: 18;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-background-color: lightgrey;
     -fx-text-fill: grey;
     -fx-graphic-text-gap: 10px;
@@ -1275,12 +1332,12 @@
     -fx-padding: 2px 10px;
     -fx-background-radius: 1000px;
     -fx-border-radius: 1000px;
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
     -fx-font-size: 12px;
 }
 
 .detail-pull-request-cell .title-label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-graphic-text-gap: 10px;
 }
 
@@ -1291,7 +1348,7 @@
 
 .detail-pull-request-cell .status-label {
     -size: 70px;
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-background-radius: 3px;
     -fx-text-fill: white;
     -fx-padding: 2px 10px;
@@ -1664,7 +1721,7 @@
 }
 
 .detail-recent-item-cell .hbox .title-label {
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
 }
 
 .home-detail-view-view .recent-item-cell .hbox .subtitle-label {
@@ -1683,10 +1740,6 @@
 .detail-news-cell {
 }
 
-.detail-news-cell .hbox {
-    -fx-spacing: 20px;
-}
-
 .home-detail-view .list-view .news-cell .hbox {
     -fx-padding: 10px;
 }
@@ -1696,19 +1749,11 @@
     -fx-border-width: 2px;
 }
 
-.detail-news-cell .hbox .vbox {
-    -fx-spacing: 0px;
-}
-
 .detail-news-cell .title-label {
-    -fx-font-size: 20px;
-    -fx-font-family: "Open Sans SemiBold";
 }
 
 .detail-news-cell .subtitle-label {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: -fx-accent;
+    -fx-font-style: italic;
 }
 
 .detail-news-cell .author-label {
@@ -1762,7 +1807,7 @@
  * MasterBlogCell
  */
 .master-blog-cell .label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
 
@@ -1816,7 +1861,7 @@
 }
 
 .detail-post-cell .title-label {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-font-size: 14px;
 }
 
@@ -1840,7 +1885,7 @@
  * OmniBox
  */
 .omnibox-text-field {
-    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-family: "Inter Semi Bold";
     -fx-background-color: white;
     -fx-padding: 0 0 0 10;
     -fx-pref-width: 300;
@@ -1946,7 +1991,7 @@
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .title-label {
-    -fx-font-family: "Open Sans Bold";
+    -fx-font-family: "Inter Bold";
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .subtitle-label {
