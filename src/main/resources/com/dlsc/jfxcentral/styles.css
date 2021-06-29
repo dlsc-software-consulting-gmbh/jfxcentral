@@ -557,7 +557,7 @@
  * MasterToolCell
  */
 .master-tool-list-cell .grid-pane {
-    -fx-vgap: 0px;
+    -fx-vgap: 5px;
     -fx-hgap: 10px;
     -fx-grid-lines-visible: false;
 }
@@ -1721,7 +1721,7 @@
 }
 
 .detail-recent-item-cell .hbox .title-label {
-    -fx-font-family: "Inter Bold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .home-detail-view-view .recent-item-cell .hbox .subtitle-label {

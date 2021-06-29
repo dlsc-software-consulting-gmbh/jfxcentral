@@ -40,6 +40,8 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
         }
 
         selectedItemProperty().addListener(it -> {
+            detailScrollPane.setVvalue(0);
+
             T selectedItem = getSelectedItem();
             if (selectedItem != null) {
                 showDetail(selectedItem);

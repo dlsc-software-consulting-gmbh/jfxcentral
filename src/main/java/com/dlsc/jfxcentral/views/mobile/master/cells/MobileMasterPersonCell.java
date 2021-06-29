@@ -64,7 +64,6 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
         gridPane.add(photoView, 0, 0);
         gridPane.add(nameLabel, 1, 0);
         gridPane.add(badgesBox, 1, 1);
-        //gridPane.add(arrowIcon, 2, 0);
 
         GridPane.setRowSpan(photoView, 2);
         GridPane.setHgrow(nameLabel, Priority.ALWAYS);

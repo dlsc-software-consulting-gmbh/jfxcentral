@@ -46,6 +46,8 @@ public class Page<T extends ModelObject> extends BorderPane implements IPage<T> 
         }
 
         setLeft(leftSide);
+
+        selectedItemProperty().addListener(it -> detailPane.setVvalue(0));
     }
 
     public void showItem(T item) {

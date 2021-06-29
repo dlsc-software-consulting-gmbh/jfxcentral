@@ -65,17 +65,17 @@
 
 .markdown-heading-1 .markdown-text {
     -fx-font-size: 24 !important;
-    -fx-font-family: "Inter Semibold" !important;
+    -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-2 .markdown-text {
     -fx-font-size: 18 !important;
-    -fx-font-family: "Inter Semibold" !important;
+    -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-3 .markdown-text {
     -fx-font-size: 14 !important;
-    -fx-font-family: "Inter Semibold" !important;
+    -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-4 .markdown-text {
