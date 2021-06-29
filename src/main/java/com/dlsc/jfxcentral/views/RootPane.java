@@ -80,6 +80,7 @@ public class RootPane extends StackPane {
         prettyScrollPane.setShowScrollToTopButton(false);
         prettyScrollPane.setFitToHeight(true);
         prettyScrollPane.setFitToWidth(true);
+        prettyScrollPane.setMobile(true);
 
         StackPane stackPane = new StackPane(prettyScrollPane); // wrap for shadow effect
         stackPane.getStyleClass().add("top-menu-scrollpane-wrapper");

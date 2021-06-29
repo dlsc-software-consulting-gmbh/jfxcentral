@@ -104,13 +104,12 @@ public class PrettyScrollPane extends ScrollPane {
         vBar.setManaged(false);
         vBar.setOrientation(Orientation.VERTICAL);
         vBar.getStyleClass().add("vertical-scroll-bar");
-        vBar.visibleProperty().bind(vBar.visibleAmountProperty().lessThan(0.99).or(alwaysShowVerticalScrollBar));
-        vBar.visibleAmountProperty().addListener(it -> System.out.println("visible amount: " + vBar.getVisibleAmount()));
+        vBar.visibleProperty().bind(vBar.visibleAmountProperty().lessThan(0.99).or(alwaysShowVerticalScrollBar).and(mobileProperty().not()));
 
         hBar.setManaged(false);
         hBar.setOrientation(Orientation.HORIZONTAL);
         hBar.getStyleClass().add("horizontal-scroll-bar");
-        hBar.visibleProperty().bind(hBar.visibleAmountProperty().lessThan(0.99).or(alwaysShowHorizontalScrollBar));
+        hBar.visibleProperty().bind(hBar.visibleAmountProperty().lessThan(0.99).or(alwaysShowHorizontalScrollBar).and(mobileProperty().not()));
 
         shadow.setManaged(false);
         shadow.getStyleClass().add("shadow");
@@ -302,5 +301,19 @@ public class PrettyScrollPane extends ScrollPane {
 
             return 0;
         }
+    }
+
+    private final BooleanProperty mobile = new SimpleBooleanProperty(this, "mobile", false);
+
+    public boolean isMobile() {
+        return mobile.get();
+    }
+
+    public BooleanProperty mobileProperty() {
+        return mobile;
+    }
+
+    public void setMobile(boolean mobile) {
+        this.mobile.set(mobile);
     }
 }

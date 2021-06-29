@@ -28,6 +28,7 @@ public class MobilePeopleMasterView extends MobileMasterViewWithAdvancedListView
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
+        scrollPane.setMobile(true);
         scrollPane.setShowScrollToTopButton(true);
         scrollPane.setFitToWidth(true);
         setCenter(scrollPane);

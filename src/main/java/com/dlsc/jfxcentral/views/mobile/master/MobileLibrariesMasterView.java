@@ -31,6 +31,7 @@ public class MobileLibrariesMasterView extends MobileMasterViewWithAdvancedListV
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setLibrary(listView.getSelectionModel().getSelectedItem()));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
+        scrollPane.setMobile(true);
         scrollPane.setShowScrollToTopButton(true);
         scrollPane.setFitToWidth(true);
         setCenter(scrollPane);

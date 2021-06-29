@@ -30,6 +30,7 @@ public class MobileBooksMasterView extends MobileMasterViewWithAdvancedListView<
         filterTextProperty().addListener(it -> System.out.println("filer: " + getFilterText()));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
+        scrollPane.setMobile(true);
         scrollPane.setShowScrollToTopButton(true);
         scrollPane.setFitToWidth(true);
         setCenter(scrollPane);

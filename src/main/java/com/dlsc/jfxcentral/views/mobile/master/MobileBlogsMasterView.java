@@ -28,6 +28,7 @@ public class MobileBlogsMasterView extends MobileMasterViewWithAdvancedListView<
                 blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getTitle(), getFilterText())));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
+        scrollPane.setMobile(true);
         scrollPane.setShowScrollToTopButton(true);
         scrollPane.setFitToWidth(true);
         setCenter(scrollPane);

@@ -26,6 +26,7 @@ public class MobileToolsMasterView extends MobileMasterViewWithAdvancedListView<
                 tool -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tool.getName(), getFilterText()) || StringUtils.containsIgnoreCase(tool.getSummary(), getFilterText())));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
+        scrollPane.setMobile(true);
         scrollPane.setShowScrollToTopButton(true);
         scrollPane.setFitToWidth(true);
         setCenter(scrollPane);
