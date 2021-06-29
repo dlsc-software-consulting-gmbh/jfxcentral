@@ -261,6 +261,7 @@
     -fx-background-padding: 0px;
     -fx-background-insets: 0px 5px 0px 0px;
     -fx-background-color: transparent;
+    -fx-border-radius: 0px;
     -fx-border-width: 0px 3px 0px 3px;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-font-family: "Inter Semi Bold";

@@ -6,20 +6,20 @@ import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
-import javafx.geometry.VPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class MasterToolCell extends AdvancedListCell<Tool> {
 
     private final Label nameLabel = new Label();
     private final ImageView imageView = new ImageView();
     private final MarkdownView markdownView = new MarkdownView();
-    private final GridPane gridPane;
 
     public MasterToolCell() {
         getStyleClass().add("master-tool-list-cell");
@@ -37,27 +37,18 @@ public class MasterToolCell extends AdvancedListCell<Tool> {
         nameLabel.setWrapText(true);
         nameLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-        gridPane = new GridPane();
-        gridPane.getStyleClass().add("grid-pane");
-        gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        VBox vbox = new VBox(nameLabel, markdownView);
+        vbox.getStyleClass().add("vbox");
+        HBox.setHgrow(vbox, Priority.ALWAYS);
 
-        gridPane.add(nameLabel, 0, 0);
-        gridPane.add(markdownView, 0, 1);
-        gridPane.add(imageView, 1, 0);
+        HBox hBox = new HBox(vbox, imageView);
+        hBox.getStyleClass().add("hbox");
+        hBox.setAlignment(Pos.TOP_LEFT);
 
-        GridPane.setRowSpan(imageView, 2);
-
-        GridPane.setHgrow(nameLabel, Priority.ALWAYS);
-        GridPane.setHgrow(markdownView, Priority.ALWAYS);
-
-        GridPane.setValignment(nameLabel, VPos.TOP);
-        GridPane.setValignment(markdownView, VPos.TOP);
-        GridPane.setValignment(imageView, VPos.TOP);
-
+        setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        setGraphic(gridPane);
 
-        gridPane.visibleProperty().bind(emptyProperty().not());
+        vbox.visibleProperty().bind(emptyProperty().not());
     }
 
     @Override

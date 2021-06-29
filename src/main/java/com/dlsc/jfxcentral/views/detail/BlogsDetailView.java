@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
@@ -62,6 +63,7 @@ public class BlogsDetailView extends DetailView<Blog> {
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
 
         AdvancedListView<Post> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         if (getRootPane().isMobile()) {
             listView.setPaging(true);
             listView.setVisibleRowCount(25);

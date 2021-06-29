@@ -39,12 +39,6 @@ public class DetailVideoCell extends DetailCell<Video> {
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
-
-        setOnMouseClicked(evt -> {
-            if (evt.getClickCount() == 2) {
-                showVideo(getItem());
-            }
-        });
     }
 
     private void showVideo(Video video) {

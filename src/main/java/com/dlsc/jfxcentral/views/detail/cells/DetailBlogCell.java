@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
-import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import org.apache.commons.lang3.StringUtils;
@@ -35,10 +34,6 @@ public class DetailBlogCell extends DetailCell<Blog> {
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-        if (WebAPI.isBrowser()) {
-            setMouseTransparent(true);
-        }
     }
 
     @Override

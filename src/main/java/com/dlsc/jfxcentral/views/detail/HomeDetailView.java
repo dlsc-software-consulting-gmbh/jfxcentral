@@ -263,7 +263,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
     private void createContactInfo(HBox box) {
         MarkdownView markdownView = new MarkdownView();
-        markdownView.setMdString("**DLSC Software & Consulting**\n\nAsylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
+        markdownView.setMdString("**DLSC Software & Consulting**\n\n\n\nAsylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
         markdownView.getStyleClass().add("contact-markdown-view");
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 
@@ -332,14 +332,20 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         youTubeLabel.managedProperty().bind(showLabel);
         mailLabel.managedProperty().bind(showLabel);
 
-        Util.setLink(twitter, "https://twitter.com/dlemmermann", "");
-        Util.setLink(linkedIn, "https://www.linkedin.com/in/dlemmermann/", "");
-        Util.setLink(github, "https://github.com/dlemmermann", "");
-        Util.setLink(youtube, "https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q", "");
-        Util.setLink(mail, "mailto:dlemmermann@gmail.com?subject=JFXCentral", "");
+        Util.setLink(twitter, "https://twitter.com/dlemmermann", "Twitter");
+        Util.setLink(linkedIn, "https://www.linkedin.com/in/dlemmermann/", "LinkedIn");
+        Util.setLink(github, "https://github.com/dlemmermann", "GitHub");
+        Util.setLink(youtube, "https://www.youtube.com/channel/UCFyRQ_euxxPDwlqyhff-x0Q", "YouTube");
+        Util.setLink(mail, "mailto:dlemmermann@gmail.com?subject=JFXCentral", "Mail");
 
         GridPane.setMargin(twitterLabel, new Insets(0, 10, 0, 0));
         GridPane.setMargin(linkedInLabel, new Insets(0, 10, 0, 0));
+
+        GridPane.setHgrow(linkedInLabel, Priority.ALWAYS);
+        GridPane.setHgrow(twitterLabel, Priority.ALWAYS);
+        GridPane.setHgrow(mailLabel, Priority.ALWAYS);
+        GridPane.setHgrow(youTubeLabel, Priority.ALWAYS);
+        GridPane.setHgrow(gitHubLabel, Priority.ALWAYS);
 
         Util.setLink(twitterLabel, "https://twitter.com/dlemmermann", "");
         Util.setLink(linkedInLabel, "https://www.linkedin.com/in/dlemmermann/", "");

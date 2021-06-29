@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -66,13 +67,13 @@ public class DetailPostCell extends DetailCell<Post> {
         hbox.visibleProperty().bind(itemProperty().isNotNull());
 
         if (rootPane.isMobile()) {
-            addEventFilter(MouseEvent.MOUSE_CLICKED,  evt -> {
-                System.out.println(evt);
+            addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> {
                 if (evt.isStillSincePress()) {
-                    System.out.println("opening URL");
                     WebAPI.getWebAPI(getScene()).openURL(getItem().getSyndEntry().getLink());
                 }
             });
+        } else {
+            setOnMouseClicked(evt -> Util.browse(this, getItem().getSyndEntry().getLink()));
         }
     }
 

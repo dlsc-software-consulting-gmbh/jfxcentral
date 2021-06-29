@@ -184,7 +184,7 @@
     -fx-background-radius: 3px;
     -fx-background-color: -fx-accent;
     -fx-text-fill: white;
-    -fx-font-family: "Inter Bold";
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .toggle-button:hover,
@@ -194,8 +194,9 @@
 
 .toggle-button:pressed,
 .button:pressed {
-    -fx-background-color: derive(-fx-accent, +20%);
-    -fx-text-fill: derive(-fx-accent, +40%);
+    -fx-background-color: -fx-accent, white;
+    -fx-background-insets: 0px, 1px;
+    -fx-text-fill: -fx-accent;
 }
 
 .toggle-button .ikonli-font-icon,
@@ -209,7 +210,7 @@
 
 .toggle-button:pressed .ikonli-font-icon,
 .button:pressed .ikonli-font-icon {
-    -fx-icon-color: derive(-fx-accent, +40%);
+    -fx-icon-color: -fx-accent;
 }
 
 .white-button {
@@ -385,6 +386,7 @@
     -fx-background-padding: 0px;
     -fx-background-insets: 0px 5px 0px 0px;
     -fx-background-color: transparent;
+    -fx-border-radius: 0px;
     -fx-border-width: 0px 3px 0px 3px;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-font-family: "Inter Bold";
@@ -556,13 +558,15 @@
 /* ----------------------------------------------------------------------------
  * MasterToolCell
  */
-.master-tool-list-cell .grid-pane {
-    -fx-vgap: 5px;
-    -fx-hgap: 10px;
-    -fx-grid-lines-visible: false;
+.master-tool-list-cell .hbox {
+    -fx-spacing: 10px;
 }
 
-.master-tool-list-cell .grid-pane .name-label {
+.master-tool-list-cell .vbox {
+    -fx-spacing: 5px;
+}
+
+.master-tool-list-cell .hbox .vbox .name-label {
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
@@ -699,7 +703,7 @@
     -fx-background-radius: 2px;
 }
 
-.detail-blog-cell:selected .label {
+.detail-blog-cell:hover .label {
     -fx-text-fill: white;
 }
 
@@ -1852,6 +1856,7 @@
  * DetailPostCell
  */
 .detail-post-cell {
+    -fx-cursor: hand;
     -fx-padding: 10px 10px 10px 0px;
 }
 
@@ -1863,6 +1868,10 @@
 .detail-post-cell .title-label {
     -fx-font-family: "Inter Semi Bold";
     -fx-font-size: 14px;
+}
+
+.detail-post-cell:hover .title-label {
+    -fx-underline: true;
 }
 
 /* TODO: will we show the blog name or not? */
