@@ -280,6 +280,7 @@
                         <list>.*\\.jpg$</list>
                         <list>.*\\.jpeg$</list>
                         <list>.*\\.ttf$</list>
+                        <list>.*\\.otf$</list>
                     </resourcesList>
 
                     <attachList>

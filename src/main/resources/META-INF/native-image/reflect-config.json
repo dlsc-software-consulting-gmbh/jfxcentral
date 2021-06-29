@@ -14,6 +14,181 @@
   ]
 },
 {
+  "name":"com.dlsc.jfxcentral.data.model.Blog",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Book",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Company",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Download",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Download$DownloadFile",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Download$DownloadType",
+  "fields":[
+    {"name":"APPLICATION"}, 
+    {"name":"DOCUMENTATION"}, 
+    {"name":"PRESENTATION"}
+  ]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Download$FileType",
+  "fields":[
+    {"name":"DEB"}, 
+    {"name":"DMG"}, 
+    {"name":"EXE"}, 
+    {"name":"JAR"}, 
+    {"name":"MSI"}, 
+    {"name":"PKG"}, 
+    {"name":"RPM"}, 
+    {"name":"TXT"}, 
+    {"name":"ZIP"}
+  ]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Image",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Library",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.LibraryInfo",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.License",
+  "fields":[
+    {"name":"APACHE2"}, 
+    {"name":"BSD2"}, 
+    {"name":"BSD3"}, 
+    {"name":"COMMERCIAL"}, 
+    {"name":"COMMON"}, 
+    {"name":"ECLIPSE"}, 
+    {"name":"GPL"}, 
+    {"name":"LPGL"}, 
+    {"name":"MIT"}, 
+    {"name":"MOZILLA"}, 
+    {"name":"OTHER"}
+  ]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.ModelObject",
+  "allDeclaredFields":true
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.News",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.News$Type",
+  "fields":[
+    {"name":"EVENT"}, 
+    {"name":"LINKS"}, 
+    {"name":"MISC"}, 
+    {"name":"NOTEWORTHY"}, 
+    {"name":"RELEASE"}, 
+    {"name":"TIPS"}
+  ]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Person",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.RealWorldApp",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Tool",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Tutorial",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Tutorial$Format",
+  "fields":[
+    {"name":"VIDEO"}, 
+    {"name":"WEB"}
+  ]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.model.Video",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.pull.Label",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.pull.PullRequest",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.pull.User",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.util.Doc",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.util.Params",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.util.QueryResult",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.util.Response",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.util.ResponseHeader",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.dlsc.jfxcentral.data.util.Spellcheck",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.dlsc.jfxcentral.model.Book",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -66,6 +241,107 @@
   "methods":[{"name":"premain","parameterTypes":["java.lang.String","java.lang.instrument.Instrumentation"] }]
 },
 {
+  "name":"com.rometools.rome.feed.module.DCModuleImpl",
+  "allPublicMethods":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.SyndCategory",
+  "allPublicMethods":true
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForAtom03",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForAtom10",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS090",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS091Netscape",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS091Userland",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS092",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS093",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS094",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS10",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.feed.synd.impl.ConverterForRSS20",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.Atom03Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.Atom10Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.DCModuleParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS090Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS091NetscapeParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS091UserlandParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS092Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS093Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS094Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS10Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS20Parser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.RSS20wNSParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.rometools.rome.io.impl.SyModuleParser",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.sun.crypto.provider.AESCipher$General",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -98,7 +374,15 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.sun.crypto.provider.TlsKeyMaterialGenerator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.sun.crypto.provider.TlsMasterSecretGenerator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.TlsPrfGenerator$V12",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -164,6 +448,10 @@
   "methods":[{"name":"getPlatformInstance","parameterTypes":[] }]
 },
 {
+  "name":"com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"com.sun.prism.GraphicsPipeline",
   "methods":[
     {"name":"getFontFactory","parameterTypes":[] }, 
@@ -219,6 +507,10 @@
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
 {
+  "name":"com.sun.prism.shader.Mask_TextureSuper_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
   "name":"com.sun.prism.shader.Solid_Color_Loader",
   "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
 },
@@ -269,6 +561,14 @@
 {
   "name":"com.sun.scenario.effect.impl.prism.ps.PPSRenderer",
   "methods":[{"name":"createRenderer","parameterTypes":["com.sun.scenario.effect.FilterContext"] }]
+},
+{
+  "name":"com.vladsch.flexmark.util.sequence.BasedOptionsHolder$Options",
+  "allPublicFields":true
+},
+{
+  "name":"com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder$Options",
+  "allPublicFields":true
 },
 {
   "name":"java.lang.Character",
@@ -354,6 +654,9 @@
 },
 {
   "name":"javafx.animation.KeyValue"
+},
+{
+  "name":"javafx.collections.transformation.SortedList$Element[]"
 },
 {
   "name":"javafx.scene.Camera"
@@ -456,6 +759,12 @@
   "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
 },
 {
+  "name":"org.jdom2.Attribute[]"
+},
+{
+  "name":"org.jdom2.Content[]"
+},
+{
   "name":"sun.lwawt.macosx.LWCToolkit",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -549,6 +858,10 @@
 },
 {
   "name":"sun.security.rsa.RSASignature$SHA256withRSA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSASignature$SHA384withRSA",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {

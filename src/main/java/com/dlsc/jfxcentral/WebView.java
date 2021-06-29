@@ -110,9 +110,9 @@ public class WebView extends com.jpro.web.View {
             }
         }
 
-        if (currentPage != null) {
+        if (currentPage != null && (item != null || rootPane.isMobile())) {
             System.out.println("current page != null, current page = " + currentPage.getClass().getSimpleName());
-            // ok to pass null, resets to master views
+            // ok to pass null when "mobile", resets to master views
             currentPage.setSelectedItem(item);
         }
 

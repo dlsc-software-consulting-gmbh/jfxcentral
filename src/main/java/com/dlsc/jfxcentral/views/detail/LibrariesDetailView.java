@@ -55,7 +55,10 @@ public class LibrariesDetailView extends DetailView<Library> {
 
         setContent(content);
 
-        selectedItemProperty().addListener(it -> updateView());
+        selectedItemProperty().addListener(it -> {
+            System.out.println("selected item: " + getSelectedItem());
+            updateView();
+        });
         updateView();
     }
 

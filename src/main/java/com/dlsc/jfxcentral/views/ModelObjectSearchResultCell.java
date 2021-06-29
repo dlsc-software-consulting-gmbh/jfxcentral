@@ -39,7 +39,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
 
         setPrefWidth(0);
 
-        setOnMouseClicked(evt -> searchField.hideOmniBox());
+//        setOnMouseClicked(evt -> searchField.hideOmniBox());
 
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -89,7 +89,6 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
             return ((Download) item).getTitle();
         }
 
-        System.out.println(">>>>>>>> missing title support for " + item.getClass().getSimpleName());
         return "";
     }
 
@@ -122,7 +121,6 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
             return "Download";
         }
 
-        System.out.println(">>>>>>>> missing subtitle support for " + item.getClass().getSimpleName());
         return "";
     }
 }

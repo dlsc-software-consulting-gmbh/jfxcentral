@@ -23,8 +23,6 @@ public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
         vBox.getStyleClass().add("vbox");
 
         SectionPane sectionPane = new SectionPane();
-        // title not needed as we always have a header banner
-//        sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> getApp() != null ? getApp().getName() : "", appProperty()));
         sectionPane.setPrefWidth(0);
         sectionPane.setMinWidth(0);
 

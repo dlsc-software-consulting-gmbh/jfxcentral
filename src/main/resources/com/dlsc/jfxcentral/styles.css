@@ -1289,7 +1289,7 @@
  * BooksMasterView
  */
 .books-master-view .list-view {
-    -fx-pref-width: 150px;
+    /*-fx-pref-width: 150px;*/
 }
 
 /* -----------------------------------------------------------------------------
