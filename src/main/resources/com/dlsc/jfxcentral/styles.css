@@ -125,6 +125,14 @@
     -white-button-background-color-pressed: -fx-accent;
 }
 
+.root.large {
+    -fx-font-size: 16px;
+}
+
+.root.small {
+    -fx-font-size: 12px;
+}
+
 .pagination .page {
     -fx-background-color: transparent;
 }
@@ -140,17 +148,16 @@
 }
 
 .header1 {
-    -fx-font-size: 24px;
+    -fx-font-size: 1.7142em;
     -fx-font-family: "Inter Semi Bold";
 }
 
 .header2 {
-    -fx-font-size: 18px;
+    -fx-font-size: 1.2857em;
     -fx-font-family: "Inter Semi Bold";
 }
 
 .header3 {
-    -fx-font-size: 14px;
     -fx-font-family: "Inter Semi Bold";
 }
 
@@ -285,8 +292,9 @@
     -fx-background-color: white;
 }
 
-.chip-view {
+.chip-view .label {
     -fx-font-family: "Inter Semi Bold";
+    -fx-font-size: 0.8571em;
 }
 
 .scroll-bar:vertical .decrement-button,
@@ -339,7 +347,6 @@
     -fx-translate-y: 10px;
 }
 
-
 .loading-view {
     -fx-background-color: -fx-accent;
     -fx-spacing: 20;
@@ -350,7 +357,7 @@
 .loading-view .label {
     -fx-text-fill: white;
     -fx-font-family: "Inter Semi Bold";
-    -fx-font-size: 24px;
+    -fx-font-size: 1.7142em;
 }
 
 .loading-view .progress-bar .bar {
@@ -365,15 +372,15 @@
 }
 
 .top-menu {
-    -fx-spacing: 5px;
-    -fx-padding: 30px 10px 10px 0px;
+    -fx-spacing: 0.3571em;
+    -fx-padding: 2.1428em 0.7142em 0.7142em 0em;
     -fx-background-color: -light-blue;
     -fx-border-color: rgba(0, 0, 0, .05);
-    -fx-border-width: 0px 1px 0px 0px;
+    -fx-border-width: 0em 0.0714em 0em 0em;
 }
 
 .top-menu:expanded {
-    -fx-padding: 80px 10px 10px 0px;
+    -fx-padding: 5.7142em 0.7142em 0.7142em 0em;
 }
 
 .top-menu .tool-bar-overflow-button {
@@ -381,23 +388,22 @@
 }
 
 .top-menu > * > * > .toggle-button {
-    -fx-padding: 10px 15px 10px 15px;
-    -fx-background-radius: 0px 3px 3px 0px;
-    -fx-background-padding: 0px;
-    -fx-background-insets: 0px 5px 0px 0px;
+    -fx-padding: 0.7142em 1.0714em 0.7142em 1.0714em;
+    -fx-background-radius: 0em 0.2142em 0.2142em 0em;
+    -fx-background-padding: 0em;
+    -fx-background-insets: 0em 0.3571em 0em 0em;
     -fx-background-color: transparent;
-    -fx-border-radius: 0px;
-    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-radius: 0em;
+    -fx-border-width: 0em 0.2142em 0em 0.2142em;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-font-family: "Inter Bold";
     -fx-opacity: .6;
-    -fx-font-size: 14px;
     -fx-text-fill: black;
-    -fx-graphic-text-gap: 10px;
+    -fx-graphic-text-gap: 0.7142em;
 }
 
 .top-menu:expanded > * > * > .toggle-button {
-    -fx-padding: 10px 30px 10px 15px;
+    -fx-padding: 0.7142em 2.1428em 0.7142em 1.0714em;
 }
 
 .top-menu > * > * > .toggle-button:hover,
@@ -423,13 +429,13 @@
     -fx-opacity: 1;
     -fx-background-padding: 0px;
     -fx-background-color: -fx-accent;
-    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-width: 0px 0.2142em 0px 0.2142em;
     -fx-border-color: transparent transparent transparent derive(-fx-accent, -20%);
     -fx-text-fill: white;
 }
 
 .top-menu > * > * > .toggle-button .icon-wrapper {
-    -fx-pref-width: 32px;
+    -fx-pref-width: 2.2857em;
 }
 
 .top-menu > * > * > .toggle-button .icon-wrapper .ikonli-font-icon {
@@ -438,7 +444,6 @@
 }
 
 .top-menu > * > * > .toggle-button:selected .icon-wrapper .ikonli-font-icon {
-    -fx-icon-size: 24px;
     -fx-icon-color: white;
 }
 
@@ -498,7 +503,7 @@
     -fx-background-color: -fx-accent;
     -fx-background-radius: 1000px;
     -fx-text-fill: -fx-accent;
-    -fx-font-size: 18px;
+    -fx-font-size: 1.2857em;
     -fx-content-display: graphic-only;
 }
 
@@ -523,7 +528,7 @@
 
 .master-person-list-cell .rockstar-label,
 .master-person-list-cell .champion-label {
-    -fx-font-size: 8;
+    -fx-font-size: 0.5714em;
     -fx-padding: 0px 3px;
     -fx-border-color: -fx-accent;
     -fx-border-radius: 2px;
@@ -583,7 +588,7 @@
 .master-app-list-cell .grid-pane .name-label {
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
 }
 
 .master-app-list-cell .grid-pane .summary-markdown-view {
@@ -738,7 +743,7 @@
 }
 
 .books-detail-view .title-section .content .horizontal-box .vertical-box .subtitle-label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-opacity: .8;
 }
 
@@ -757,7 +762,7 @@
 }
 
 .books-detail-view .title-section .content .horizontal-box .vertical-box .author-title-label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Bold";
     -fx-padding: 20px 0px;
 }
@@ -892,7 +897,7 @@
 .duke-animation-view .start-message {
     -fx-font-family: "Inter Bold";
     -fx-text-fill: rgba(255, 255, 255, .8);
-    -fx-font-size: 24px;
+    -fx-font-size: 1.7142em;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1053,7 +1058,7 @@
 .section-pane > .section-pane-container .title-box > .subtitle-label {
     -fx-font-style: italic;
     -fx-text-fill: grey;
-    -fx-font-size: 12px;
+    -fx-font-size: 0.8571em;
 }
 
 .section-pane > .section-pane-container > .children-box {
@@ -1072,11 +1077,12 @@
 }
 
 .section-pane .filter-view .title {
-    -fx-font-size: 24px;
+    -fx-font-size: 1.7142em;
     -fx-font-family: "Inter Semi Bold";
 }
 
 .section-pane .filter-view .subtitle {
+    -fx-font-size: 0.8571em;
     -fx-opacity: .8;
 }
 
@@ -1267,7 +1273,7 @@
  * LicenseLabel
  */
 .license-label {
-    -fx-font-size: 8;
+    -fx-font-size: 0.5714em;
     -fx-padding: 0px 3px;
     -fx-border-color: -fx-accent;
     -fx-border-radius: 2px;
@@ -1337,7 +1343,7 @@
     -fx-background-radius: 1000px;
     -fx-border-radius: 1000px;
     -fx-font-family: "Inter Bold";
-    -fx-font-size: 12px;
+    -fx-font-size: 0.8571em;
 }
 
 .detail-pull-request-cell .title-label {
@@ -1347,7 +1353,6 @@
 
 .detail-pull-request-cell .summary-label {
     -fx-opacity: .8;
-    -fx-font-size: 14px;
 }
 
 .detail-pull-request-cell .status-label {
@@ -1520,7 +1525,7 @@
 }
 
 .responsive-box .title-label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-content-display: right;
 }
 
@@ -1867,7 +1872,6 @@
 
 .detail-post-cell .title-label {
     -fx-font-family: "Inter Semi Bold";
-    -fx-font-size: 14px;
 }
 
 .detail-post-cell:hover .title-label {
@@ -2011,4 +2015,45 @@
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .vbox {
+}
+
+/* ----------------------------------------------------------------------------
+ * FontSizeSelector
+ */
+.font-size-selector {
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+.font-size-selector .toggle-button,
+.font-size-selector .toggle-button:hover,
+.font-size-selector .toggle-button:pressed {
+    -fx-background-radius: 0px;
+    -fx-background-color: derive(-fx-accent, +20%);
+    -fx-padding: 0.3571em;
+}
+
+.font-size-selector .toggle-button:selected {
+    -fx-background-color: white, derive(-fx-accent, +20%);
+    -fx-background-insets: 0em, 0em 0em 0.2142em 0em;
+}
+
+.font-size-icon {
+    -fx-icon-color: white;
+}
+
+.font-size-icon.normal {
+    -fx-icon-color: white;
+    -fx-icon-size: 24px;
+}
+
+.font-size-icon.smaller {
+    -fx-icon-color: white;
+    -fx-icon-size: 16px;
+}
+
+.font-size-icon.larger {
+    -fx-icon-color: white;
+    -fx-icon-size: 32px;
 }

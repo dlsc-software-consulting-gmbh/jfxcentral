@@ -3,6 +3,8 @@ package com.dlsc.jfxcentral.views.mobile;
 import com.dlsc.jfxcentral.views.HiddenSidesPane;
 import javafx.geometry.Side;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -21,6 +23,9 @@ public class MobileHeader extends HBox {
             }
         });
 
-        getChildren().add(hamburgerIcon);
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        getChildren().addAll(hamburgerIcon, spacer, new FontSizeSelector());
     }
 }

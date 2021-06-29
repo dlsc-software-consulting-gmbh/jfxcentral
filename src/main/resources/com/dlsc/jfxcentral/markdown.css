@@ -15,7 +15,7 @@
 }
 
 .markdown-text {
-    -fx-font-size: 14px;
+    -fx-font-size: 1em;
     -fx-font-family: "Inter";
 }
 
@@ -32,7 +32,7 @@
 }
 
 .markdown-normal-flow {
-    -fx-line-spacing: 2px;
+    -fx-line-spacing: 0.142em;
 }
 
 .markdown-view.centered .markdown-normal-flow {
@@ -40,50 +40,52 @@
 }
 
 .markdown-heading .markdown-text {
-    -fx-font-size: 14px !important;
+    -fx-font-size: 1em !important;
 }
 
 .markdown-heading-1 {
-    -fx-padding: 0px 0px 14px 0px !important;
+    -fx-padding: 0em 0em 14px 0em !important;
 }
 
 .markdown-heading-2 {
-    -fx-padding: 0px 0px 10px 0px !important;
+    -fx-padding: 1.4285em 0em 0em 0em !important;
 }
 
 .markdown-heading-3 {
-    -fx-padding: 0px 0px 8px 0px !important;
+    -fx-padding: 1.4285em 0em 0em 0em !important;
 }
 
 .markdown-heading-4 {
-    -fx-padding: 0px 0px 6px 0px !important;
+    -fx-padding: 1.4285em 0em 0em 0em !important;
 }
 
 .markdown-heading-5 {
-    -fx-padding: 0px 0px 3px 0px !important;
+    -fx-padding: 0em 0em 3px 0em !important;
 }
 
 .markdown-heading-1 .markdown-text {
-    -fx-font-size: 24 !important;
+    -fx-font-size: 1.714em !important;
     -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-2 .markdown-text {
-    -fx-font-size: 18 !important;
+    -fx-font-size: 1.2857em !important;
     -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-3 .markdown-text {
-    -fx-font-size: 14 !important;
+    -fx-font-size: 1em !important;
     -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-4 .markdown-text {
-    -fx-font-size: 12 !important;
+    -fx-font-size: 1em !important;
+    -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-heading-5 .markdown-text {
-    -fx-font-size: 12 !important;
+    -fx-font-size: 1em !important;
+    -fx-font-family: "Inter Semi Bold" !important;
 }
 
 .markdown-link {
@@ -184,8 +186,8 @@
 }
 
 .markdown-normal-block-quote {
-    -fx-background-insets: 10px 10px 10px 0px;
-    -fx-border-insets: 10px 10px 10px 0px;
+    -fx-background-insets: 10px 10px 10px 0em;
+    -fx-border-insets: 10px 10px 10px 0em;
 }
 
 .markdown-normal-block-quote * {

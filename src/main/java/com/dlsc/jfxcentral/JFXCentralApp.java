@@ -35,11 +35,13 @@ public class JFXCentralApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        DisplayService.create().ifPresentOrElse(service -> {
-            if (service.isDesktop()) {
-                CSSFX.start();
-            }
-        }, () -> CSSFX.start());
+        if (Boolean.getBoolean("cssfx")) {
+            DisplayService.create().ifPresentOrElse(service -> {
+                if (service.isDesktop()) {
+                    CSSFX.start();
+                }
+            }, () -> CSSFX.start());
+        }
 
         if (WebAPI.isBrowser()) {
             showHomeOrLoadingView(app, stage);

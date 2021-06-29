@@ -316,6 +316,7 @@
                             </mainClassName>
                             <JVMArgs>
                                 <JVMArg>-Dmute=true</JVMArg>
+                                <JVMArg>-Dcssfx=true</JVMArg>
                                 <JVMArg>-Dno.feeds=false</JVMArg>
                                 <JVMArg>-Dshow.refresh.button=false</JVMArg>
                                 <JVMArg>-Dshow.source.box=false</JVMArg>

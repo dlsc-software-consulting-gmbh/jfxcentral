@@ -96,10 +96,7 @@ public class ResponsiveBox extends VBox {
             imageView.fitWidthProperty().unbind();
             imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
 
-            Region spacer = new Region();
-            VBox.setVgrow(spacer, Priority.ALWAYS);
-
-            vBox.getChildren().setAll(titleLabel, subtitleLabel, markdownView, spacer, buttonBox);
+            vBox.getChildren().setAll(titleLabel, subtitleLabel, markdownView, buttonBox);
             if (!hBox.getChildren().contains(imageWrapper)) {
                 hBox.getChildren().add(imageWrapper);
             }

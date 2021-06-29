@@ -83,7 +83,7 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         setOnMouseClicked(evt -> {
-            if (evt.getButton() == MouseButton.PRIMARY && (evt.getClickCount() == 2 || rootPane.isMobile())) {
+            if (evt.getButton() == MouseButton.PRIMARY && evt.isStillSincePress() && (evt.getClickCount() == 2 || rootPane.isMobile())) {
                 PullRequest item = getItem();
                 if (item != null) {
                     showPullRequestBody(getItem());

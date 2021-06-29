@@ -1,15 +1,14 @@
 .header1 {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Semi Bold";
 }
 
 .header2 {
-    -fx-font-size: 18px;
+    -fx-font-size: 0.0714em;
     -fx-font-family: "Inter Semi Bold";
 }
 
 .header3 {
-    -fx-font-size: 14px;
     -fx-font-family: "Inter Semi Bold";
 }
 
@@ -19,7 +18,9 @@
 
 .mobile-header {
     -fx-background-color: -fx-accent;
-    -fx-padding: 5px;
+    -fx-padding: 0.3571em 0.3571em 0.3571em 0.3571em;
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
 }
 
 .mobile-header .menu-icon {
@@ -29,12 +30,12 @@
 
 .master-view .mobile-cell {
     -fx-background-color: white, #e0e0e0, white;
-    -fx-background-insets: 0px, 0px 20px 0px 20px, 0px 0px 1px 0px;
+    -fx-background-insets: 0em, 0em 1.4285em 0em 1.4285em, 0em 0em 0.0714em 0em;
 }
 
 .master-view .mobile-cell:pressed {
     -fx-background-color: white, #e0e0e0, -light-blue;
-    -fx-background-insets: 0px, 0px 20px 0px 20px, 0px 20px 1px 20px;
+    -fx-background-insets: 0em, 0em 1.4285em 0em 1.4285em, 0em 1.4285em 0.0714em 1.4285em;
 }
 
 .detail-scroll-pane .viewport {
@@ -45,7 +46,7 @@
  */
 .detail-view {
     -fx-background-color: white;
-    -fx-spacing: 20px;
+    -fx-spacing: 1.4285em;
 }
 
 /* -----------------------------------------------------------------------------
@@ -53,40 +54,40 @@
  */
 .section-pane {
     -fx-background-color: white;
-    -fx-background-radius: 3px;
+    -fx-background-radius: 0.2142em;
     -fx-border-color: #e0e0e0;
-    -fx-border-width: 0px 0px 1px 0px;
-    -fx-border-radius: 3px;
+    -fx-border-width: 0em 0em 0.0714em 0em;
+    -fx-border-radius: 0.2142em;
     -fx-effect: null;
-    -fx-padding: 0px 5px 10px 0px;
+    -fx-padding: 0em 0.3571em 0.7142em 0em;
 }
 
 .section-pane .extras-box {
-    -fx-spacing: 10px;
+    -fx-spacing: 0.7142em;
 }
 
 .section-pane .extras-box .more-menu-button {
-    -fx-padding: 0px;
+    -fx-padding: 0em;
     -fx-background-color: transparent;
 }
 
 .section-pane .extras-box .more-menu-button .label {
-    -fx-padding: 0;
+    -fx-padding: 0em;
     -fx-alignment: center-right;
 }
 
 .section-pane .extras-box .more-menu-button .arrow-button {
     -fx-fill: transparent;
-    -fx-pref-width: 0;
-    -fx-pref-height: 0;
-    -fx-padding: 0px;
+    -fx-pref-width: 0em;
+    -fx-pref-height: 0em;
+    -fx-padding: 0em;
 }
 
 .section-pane .extras-box .more-menu-button > .arrow-button > .arrow {
-    -fx-pref-width: 0;
-    -fx-pref-height: 0;
-    -fx-min-width: 0;
-    -fx-min-height: 0;
+    -fx-pref-width: 0em;
+    -fx-pref-height: 0em;
+    -fx-min-width: 0em;
+    -fx-min-height: 0em;
 }
 
 .section-pane .extras-box .more-menu-button .ikonli-font-icon {
@@ -103,15 +104,15 @@
 }
 
 .section-pane:no-border {
-    -fx-padding: 0 0 0 0;
-    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0em;
+    -fx-border-width: 0em;
     -fx-effect: null;
 }
 
 .section-pane > .section-pane-container .top-pane {
-    -fx-padding: 0px 0px 0px 0px;
+    -fx-padding: 0em 0em 0em 0em;
     -fx-background-color: -light-blue;
-    -fx-background-insets: -5px;
+    -fx-background-insets: -0.3571em;
     -fx-background-radius: 4px;
 }
 
@@ -120,7 +121,7 @@
 }
 
 .section-pane > .section-pane-container {
-    -fx-spacing: 20;
+    -fx-spacing: 1.4285em;
 }
 
 .section-pane > .section-pane-container .title-box > .title-label {
@@ -132,37 +133,37 @@
 }
 
 .section-pane > .section-pane-container > .children-box {
-    -fx-spacing: 20;
+    -fx-spacing: 1.4285em;
 }
 
 .section-pane > .section-pane-container > .children-box > .button-bar {
-    -fx-spacing: 15px;
+    -fx-spacing: 10.3571em;
 }
 
 .section-pane .filter-view .search-field {
-    -size: 40px;
+    -size: 2.8571em;
     -fx-max-height: -size;
     -fx-pref-height: -size;
     -fx-min-height: -size;
 }
 
 .section-pane .filter-view .title {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Semi Bold";
 }
 
 .section-pane .filter-view .subtitle {
-    -fx-font-size: 14px;
+    -fx-font-size: 1em;
     -fx-opacity: .8;
 }
 
 .section-pane .list-cell {
     -fx-background-color: white;
-    -fx-padding: 10px 0px;
+    -fx-padding: 0.7142em 0em;
 }
 
 .section-pane .list-cell:filled {
-    -fx-border-width: 0 0 1 0;
+    -fx-border-width: 0 0 1 0em;
     -fx-border-style: dashed;
     -fx-border-color: rgba(0, 0, 0, .2);
 }
@@ -176,8 +177,8 @@
 }
 
 .section-pane .list-cell.last {
-    -fx-padding: 10px 0px;
-    -fx-border-width: 0px;
+    -fx-padding: 0.7142em 0em;
+    -fx-border-width: 0em;
 }
 
 .section-pane .list-cell:selected .button {
@@ -189,35 +190,35 @@
 .section-pane .search-field {
     -fx-text-fill: white;
     -fx-background-color: -fx-accent;
-    -fx-background-radius: 3px;
-    -fx-padding: 0px 5px;
+    -fx-background-radius: 0.2142em;
+    -fx-padding: 0em 0.3571em;
     -fx-prompt-text-fill: white;
-    -fx-pref-height: 20px;
+    -fx-pref-height: 1.4285em;
 }
 
 .section-pane .search-field .ikonli-font-icon {
     -fx-icon-color: white;
-    -fx-icon-size: 18px;
+    -fx-icon-size: 0.0714em;
 }
 
 /* ----------------------------------------------------------------------------
  * MobileMasterPersonCell
  */
 .mobile-master-person-cell .hbox {
-    -fx-spacing: 10px;
-    -fx-padding: 10px 0px;
+    -fx-spacing: 0.7142em;
+    -fx-padding: 0.7142em 0em;
 }
 
 .mobile-master-person-cell .hbox .vbox {
-    -fx-spacing: 5px;
+    -fx-spacing: 0.3571em;
 }
 
 .mobile-master-person-cell .rockstar-label,
 .mobile-master-person-cell .champion-label {
     -fx-background-color: white;
     -fx-background-radius: 4px;
-    -fx-font-size: 10;
-    -fx-padding: 3px 10px;
+    -fx-font-size: 0.7142em;
+    -fx-padding: 0.2142em 0.7142em;
     -fx-border-color: -fx-accent;
     -fx-border-radius: 4px;
     -fx-text-fill: -fx-accent;
@@ -234,45 +235,45 @@
 }
 
 .mobile-master-person-cell .badges {
-    -fx-spacing: 10px;
+    -fx-spacing: 0.7142em;
 }
 
 .mobile-master-person-cell .title-label {
     -fx-font-family: "Inter Semi Bold";
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-text-fill: -fx-accent;
 }
 
 .top-menu-scrollpane-wrapper {
-    -fx-padding: 0px 0px 0px 0px;
+    -fx-padding: 0em 0em 0em 0em;
     -fx-background-color: white;
     -fx-effect: -drop-shadow-3;
 }
 
 .top-menu.mobile {
-    -fx-padding: 10px 10px 10px 0px;
+    -fx-padding: 0.7142em 0.7142em 0.7142em 0em;
     -fx-background-color: -light-blue;
     -fx-effect: -drop-shadow-1;
 }
 
 .top-menu.mobile .toggle-button {
-    -fx-padding: 10px 15px 10px 15px;
-    -fx-background-radius: 0px 3px 3px 0px;
-    -fx-background-padding: 0px;
-    -fx-background-insets: 0px 5px 0px 0px;
+    -fx-padding: 0.7142em 1.0714em 0.7142em 1.0714em;
+    -fx-background-radius: 0em 0.2142em 0.2142em 0em;
+    -fx-background-padding: 0em;
+    -fx-background-insets: 0em 0.3571em 0em 0em;
     -fx-background-color: transparent;
-    -fx-border-radius: 0px;
-    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-radius: 0em;
+    -fx-border-width: 0em 0.2142em 0em 0.2142em;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-font-family: "Inter Semi Bold";
     -fx-opacity: .6;
     -fx-font-size: 14px;
     -fx-text-fill: black;
-    -fx-graphic-text-gap: 10px;
+    -fx-graphic-text-gap: 0.7142em;
 }
 
 .top-menu.mobile:expanded .toggle-button {
-    -fx-padding: 10px 30px 10px 15px;
+    -fx-padding: 0.7142em 2.1428em 0.7142em 1.0714em;
 }
 
 .top-menu.mobile .toggle-button:hover,
@@ -296,9 +297,9 @@
 
 .top-menu.mobile .toggle-button:selected {
     -fx-opacity: 1;
-    -fx-background-padding: 0px;
+    -fx-background-padding: 0em;
     -fx-background-color: -fx-accent;
-    -fx-border-width: 0px 3px 0px 3px;
+    -fx-border-width: 0em 0.2142em 0em 0.2142em;
     -fx-border-color: transparent transparent transparent derive(-fx-accent, -20%);
     -fx-text-fill: white;
 }
@@ -321,15 +322,15 @@
  * MobileMasterRealWorldAppCell
  */
 .mobile-master-app-list-cell .grid-pane {
-    -fx-vgap: 5px;
-    -fx-hgap: 10px;
+    -fx-vgap: 0.3571em;
+    -fx-hgap: 0.7142em;
     -fx-grid-lines-visible: false;
 }
 
 .mobile-master-app-list-cell .grid-pane .name-label {
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
 }
 
 .mobile-master-app-list-cell .grid-pane .summary-markdown-view {
@@ -339,15 +340,15 @@
  * MobileMasterLibraryCell
  */
 .mobile-master-library-cell .hbox {
-    -fx-spacing: 10px;
+    -fx-spacing: 0.7142em;
 }
 
 .mobile-master-library-cell .hbox .vbox {
-    -fx-spacing: 5px;
+    -fx-spacing: 0.3571em;
 }
 
 .mobile-master-library-cell .label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
@@ -356,16 +357,16 @@
  * MobileMasterToolCell
  */
 .mobile-master-tool-cell .hbox {
-    -fx-spacing: 10px;
-    -fx-padding: 10px 0px;
+    -fx-spacing: 0.7142em;
+    -fx-padding: 0.7142em 0em;
 }
 
 .mobile-master-tool-cell .hbox .vbox {
-    -fx-spacing: 5px;
+    -fx-spacing: 0.3571em;
 }
 
 .mobile-master-tool-cell .label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
@@ -374,15 +375,15 @@
  * MobileMasterBlogCell
  */
 .mobile-master-blog-cell .hbox {
-    -fx-spacing: 10px;
+    -fx-spacing: 0.7142em;
 }
 
 .mobile-master-blog-cell .hbox .vbox {
-    -fx-spacing: 5px;
+    -fx-spacing: 0.3571em;
 }
 
 .mobile-master-blog-cell .label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
@@ -391,16 +392,30 @@
  * MobileMasterBookCell
  */
 .mobile-master-book-cell .hbox {
-    -fx-spacing: 10px;
-    -fx-padding: 10px 0px;
+    -fx-spacing: 0.7142em;
+    -fx-padding: 0.7142em 0em;
 }
 
 .mobile-master-book-cell .hbox .vbox {
-    -fx-spacing: 5px;
+    -fx-spacing: 0.3571em;
 }
 
 .mobile-master-book-cell .label {
-    -fx-font-size: 16px;
+    -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * FontSizeSelector
+ */
+.font-size-selector .toggle-button,
+.font-size-selector .toggle-button:hover,
+.font-size-selector .toggle-button:pressed {
+    -fx-background-color: -fx-accent;
+}
+
+.font-size-selector .toggle-button:selected {
+    -fx-background-color: white, -fx-accent;
+    -fx-background-insets: 0em, 0em 0em 0.2142em 0em;
 }

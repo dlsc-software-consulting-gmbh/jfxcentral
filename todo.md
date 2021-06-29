@@ -13,6 +13,7 @@
 - [X] Block quotes are not styled properly anymore in markdown view
 - [ ] Add certificate to server for https:// support  
 - [ ] Support for touch scroll events on mobile  
+- [ ] Menu button popups do not seem to work (see filter dropdowns for videos, tutorials, etc....)  
 - [ ] .....
 
 ### Views

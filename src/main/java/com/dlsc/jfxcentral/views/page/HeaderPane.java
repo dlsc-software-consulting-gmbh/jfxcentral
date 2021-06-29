@@ -11,6 +11,7 @@ import com.dlsc.jfxcentral.views.autocomplete.OmniBoxSearchField;
 import com.dlsc.jfxcentral.views.autocomplete.OmniBoxService;
 import com.dlsc.jfxcentral.views.autocomplete.SearchContext;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
+import com.dlsc.jfxcentral.views.mobile.FontSizeSelector;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -107,6 +108,6 @@ public class HeaderPane extends HBox {
         sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
         sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
-        getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField);
+        getChildren().addAll(stackPane, refreshButton, sourceComboBox, new FontSizeSelector(), searchField);
     }
 }
