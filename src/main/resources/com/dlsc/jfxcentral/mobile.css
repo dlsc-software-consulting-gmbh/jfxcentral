@@ -129,7 +129,7 @@
 
 .section-pane > .section-pane-container .title-box > .subtitle-label {
     -fx-text-fill: grey;
-    -fx-font-size: 14px;
+    -fx-font-size: 1em;
 }
 
 .section-pane > .section-pane-container > .children-box {

@@ -709,12 +709,16 @@
 }
 
 .detail-blog-cell:hover .label {
-    -fx-text-fill: white;
 }
 
 .detail-blog-cell.last {
     -fx-padding: 10px 0px;
     -fx-border-width: 0px;
+}
+
+.people-detail-view .title-section .responsive-box .title-label {
+    -fx-font-size: 1.7142em;
+    -fx-font-family: "Inter Semi Bold";
 }
 
 /* ----------------------------------------------------------------------------
@@ -1056,9 +1060,8 @@
 }
 
 .section-pane > .section-pane-container .title-box > .subtitle-label {
-    -fx-font-style: italic;
     -fx-text-fill: grey;
-    -fx-font-size: 0.8571em;
+    -fx-font-size: 1.2em;
 }
 
 .section-pane > .section-pane-container > .children-box {
@@ -1525,7 +1528,6 @@
 }
 
 .responsive-box .title-label {
-    -fx-font-size: 1.1428em;
     -fx-content-display: right;
 }
 

@@ -23,7 +23,6 @@ import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
-// TODO:dl too many listeners on selected item
 public class PeopleDetailView extends DetailView<Person> {
 
     private VBox content = new VBox();

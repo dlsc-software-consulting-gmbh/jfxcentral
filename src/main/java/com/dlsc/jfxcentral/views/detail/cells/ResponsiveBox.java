@@ -41,7 +41,7 @@ public class ResponsiveBox extends VBox {
         imageView.managedProperty().bind(showImageView);
 
         titleLabel.textProperty().bind(titleProperty());
-        titleLabel.getStyleClass().addAll("header3", "title-label");
+        titleLabel.getStyleClass().addAll("header2", "title-label");
         titleLabel.setWrapText(true);
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 

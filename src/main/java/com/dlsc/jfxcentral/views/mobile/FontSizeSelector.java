@@ -51,6 +51,7 @@ public class FontSizeSelector extends HBox {
 
     private ToggleButton createButton(FontIcon icon) {
         ToggleButton button = new ToggleButton();
+        button.setFocusTraversable(false);
         toggleGroup.getToggles().add(button);
         button.setGraphic(icon);
         button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

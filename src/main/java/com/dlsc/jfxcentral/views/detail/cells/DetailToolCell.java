@@ -30,7 +30,7 @@ public class DetailToolCell extends AdvancedListCell<Tool> {
     public DetailToolCell(RootPane rootPane) {
         getStyleClass().add("detail-tool-cell");
 
-        titleLabel.getStyleClass().addAll("header3", "title-label");
+        titleLabel.getStyleClass().addAll("header2", "title-label");
         titleLabel.setWrapText(true);
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);
         titleLabel.setAlignment(Pos.TOP_LEFT);
