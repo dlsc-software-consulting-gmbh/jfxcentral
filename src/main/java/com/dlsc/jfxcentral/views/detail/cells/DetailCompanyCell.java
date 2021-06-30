@@ -29,6 +29,7 @@ public class DetailCompanyCell extends DetailCell<Company> {
         responsiveBox.getButtons().addAll(homepageButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
         responsiveBox.setLargeImageWidth(200);
+        responsiveBox.setLargeImageHeight(100);
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

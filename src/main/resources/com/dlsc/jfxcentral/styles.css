@@ -1893,7 +1893,7 @@
  * DetailCompanyCell
  */
 .detail-company-cell {
-    -fx-padding: 0px 30px 0px 0px;
+    -fx-padding: 10px 30px 10px 0px !important;
 }
 
 /* -----------------------------------------------------------------------------------------------------

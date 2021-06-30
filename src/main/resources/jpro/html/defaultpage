@@ -62,7 +62,7 @@
 <body>
 
 <div>
-    <jpro-app loader="none" href="/app/default" fxContextMenu="true" fullscreen="true" snapshot="auto" userSelect="false"/>
+    <jpro-app loader="none" href="/app/default" fxContextMenu="false" fullscreen="true" snapshot="auto" userSelect="true"/>
 </div>
 </body>
 </html>

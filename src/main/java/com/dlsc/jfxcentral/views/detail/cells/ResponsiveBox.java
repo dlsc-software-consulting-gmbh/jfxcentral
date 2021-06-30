@@ -20,6 +20,7 @@ public class ResponsiveBox extends VBox {
     private final Label subtitleLabel = new Label();
     private final MarkdownView markdownView = new MarkdownView();
     private final HBox hBox;
+    private final StackPane imageWrapper;
 
     public enum ImageLocation {
         LARGE_ON_SIDE,
@@ -55,10 +56,10 @@ public class ResponsiveBox extends VBox {
         markdownView.mdStringProperty().bind(descriptionProperty());
         markdownView.getStyleClass().add("description-label");
 
-        StackPane imageWrapper = new StackPane(imageView);
+        imageWrapper = new StackPane(imageView);
         imageWrapper.getStyleClass().add("image-wrapper");
         imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
-        StackPane.setAlignment(imageView, Pos.TOP_CENTER);
+        StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
         FlowPane buttonBox = new FlowPane();
         Bindings.bindContent(buttonBox.getChildren(), buttonsProperty());
@@ -92,9 +93,13 @@ public class ResponsiveBox extends VBox {
             hBox.getChildren().remove(imageWrapper);
         } else {
             imageWrapper.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            imageWrapper.setMinWidth(Region.USE_COMPUTED_SIZE);
+            imageWrapper.setMinWidth(getLargeImageWidth());
+
             imageView.fitWidthProperty().unbind();
             imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
+
+            imageView.fitHeightProperty().unbind();
+            imageView.setFitHeight(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageHeight() : getLargeImageHeight());
 
             vBox.getChildren().setAll(titleLabel, subtitleLabel, markdownView, buttonBox);
             if (!hBox.getChildren().contains(imageWrapper)) {
@@ -106,6 +111,10 @@ public class ResponsiveBox extends VBox {
         if (footer != null && !getChildren().contains(footer)) {
             getChildren().add(footer);
         }
+    }
+
+    public StackPane getImageWrapper() {
+        return imageWrapper;
     }
 
     private final DoubleProperty smallImageWidth = new SimpleDoubleProperty(this, "smallImageWidth", 160);
@@ -120,6 +129,20 @@ public class ResponsiveBox extends VBox {
 
     public void setSmallImageWidth(double smallImageWidth) {
         this.smallImageWidth.set(smallImageWidth);
+    }
+
+    private final DoubleProperty largeImageHeight = new SimpleDoubleProperty(this, "largeImageHeight", -1);
+
+    public double getLargeImageHeight() {
+        return largeImageHeight.get();
+    }
+
+    public DoubleProperty largeImageHeightProperty() {
+        return largeImageHeight;
+    }
+
+    public void setLargeImageHeight(double largeImageHeight) {
+        this.largeImageHeight.set(largeImageHeight);
     }
 
     private final DoubleProperty largeImageWidth = new SimpleDoubleProperty(this, "largeImageWidth", 320);

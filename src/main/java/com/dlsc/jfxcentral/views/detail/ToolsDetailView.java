@@ -146,7 +146,7 @@ public class ToolsDetailView extends DetailView<Tool> {
         selectedItemProperty().addListener(it -> {
             Tool tool = getSelectedItem();
             if (tool != null) {
-                sectionPane.setSubtitle("Videos relevant for tool " + tool.getName());
+                sectionPane.setSubtitle("Videos related to tool " + tool.getName());
                 listView.setItems(DataRepository.getInstance().getVideosByModelObject(tool));
             } else {
                 sectionPane.setSubtitle("");

@@ -65,7 +65,7 @@ public class AdvancedListCell<T> extends ListCell<T> {
                 method.setAccessible(true);
                 children2 = (ObservableList<Node>) method.invoke(cell.getParent());
             }
-            Util.setLink(cell, "/" + view.toString() + "/" + item.getId(), description, children2);
+            Util.setLink(cell, "/" + view.name().toLowerCase() + "/" + item.getId(), description, children2);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -94,7 +94,7 @@ public class LibrariesDetailView extends DetailView<Library> {
         selectedItemProperty().addListener(it -> {
             Library library = getSelectedItem();
             if (library != null) {
-                sectionPane.setSubtitle("Videos relevant for library " + library.getTitle());
+                sectionPane.setSubtitle("Videos related to library " + library.getTitle());
                 listView.setItems(DataRepository.getInstance().getVideosByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
