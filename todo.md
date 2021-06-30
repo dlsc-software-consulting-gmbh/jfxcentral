@@ -23,7 +23,10 @@
 
 - [X] Styling of status label in Pull Request cell not working properly
 - [X] Consistent use of date format ("March 3rd 2021")
-
+- [ ] Blog header / title section -> two issues with image / photos 
+      a) if blog does not have company or person ID then the last image stays
+      b) if the blog is associated with a company then use ImageView, not PhotoView
+  
 ### Data
 - [X] Add OpenJFX "Getting Started" tutorial (pin at top)
 - [X] Add videos and downloads data to libraries
