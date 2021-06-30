@@ -41,7 +41,7 @@ public class MasterBlogCell extends MasterCell<Blog> {
             super.updateItem(blog, empty);
 
             if (!empty && blog != null) {
-                label.setText(blog.getTitle());
+                label.setText(blog.getName());
                 imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
 
                 if (WebAPI.isBrowser()) {

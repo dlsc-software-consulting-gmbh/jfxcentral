@@ -13,6 +13,7 @@ import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
+import javafx.beans.binding.Bindings;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +41,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         sectionPane.setEnableAutoSubtitle(true);
 
         FilterView<Video> filterView = sectionPane.getFilterView();
-        filterView.setItems(DataRepository.getInstance().videosProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().videosProperty());
 
         // show less filters, we have less space (width)
         if (rootPane.isMobile()) {

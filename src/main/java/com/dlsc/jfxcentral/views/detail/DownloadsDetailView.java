@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
+import javafx.beans.binding.Bindings;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -44,7 +45,8 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         sectionPane.setEnableAutoSubtitle(true);
 
         FilterView<Download> filterView = sectionPane.getFilterView();
-        filterView.setItems(DataRepository.getInstance().downloadsProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().downloadsProperty());
+
         if (rootPane.isMobile()) {
             filterView.getFilterGroups().setAll(downloadTypeGroup, personGroup, companyGroup);
         } else {

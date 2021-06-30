@@ -14,6 +14,7 @@ import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
+import javafx.beans.binding.Bindings;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +43,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
         sectionPane.setEnableAutoSubtitle(true);
 
         FilterView<Tutorial> filterView = sectionPane.getFilterView();
-        filterView.setItems(DataRepository.getInstance().tutorialsProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().tutorialsProperty());
         filterView.getFilterGroups().setAll(formatGroup, typeGroup, personGroup);
         filterView.setTextFilterProvider(text -> tutorial -> {
             if (StringUtils.containsAnyIgnoreCase(tutorial.getName(), text)) {

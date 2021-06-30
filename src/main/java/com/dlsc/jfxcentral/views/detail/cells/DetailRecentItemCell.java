@@ -89,9 +89,9 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
         } else if (item instanceof Video) {
             return ((Video) item).getTitle();
         } else if (item instanceof Blog) {
-            return ((Blog) item).getTitle();
+            return ((Blog) item).getName();
         } else if (item instanceof Library) {
-            return ((Library) item).getTitle();
+            return ((Library) item).getName();
         } else if (item instanceof Company) {
             return ((Company) item).getName();
         } else if (item instanceof RealWorldApp) {

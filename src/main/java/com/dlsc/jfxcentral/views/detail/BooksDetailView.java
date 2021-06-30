@@ -15,7 +15,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -109,7 +108,7 @@ public class BooksDetailView extends DetailView<Book> {
         authorListView.setCellFactory(view -> new DetailPersonCell(rootPane, true));
         authorListView.setPaging(true);
         authorListView.setVisibleRowCount(1000);
-        authorListView.setItems(authorsProperty());
+        authorListView.setItems(authors);
         authorListView.visibleProperty().bind(Bindings.isNotEmpty(authors));
         authorListView.managedProperty().bind(Bindings.isNotEmpty(authors));
 
@@ -159,21 +158,9 @@ public class BooksDetailView extends DetailView<Book> {
                 linksBox.getChildren().add(amazon);
             }
 
-            getAuthors().setAll(DataRepository.getInstance().getPeople().stream().filter(person -> book.getPersonIds().contains(person.getId())).collect(Collectors.toList()));
+            authors.setAll(DataRepository.getInstance().getPeople().stream().filter(person -> book.getPersonIds().contains(person.getId())).collect(Collectors.toList()));
         }
     }
 
     private final ListProperty<Person> authors = new SimpleListProperty<>(this, "authors", FXCollections.observableArrayList());
-
-    public ObservableList<Person> getAuthors() {
-        return authors.get();
-    }
-
-    public ListProperty<Person> authorsProperty() {
-        return authors;
-    }
-
-    public void setAuthors(ObservableList<Person> authors) {
-        this.authors.set(authors);
-    }
 }

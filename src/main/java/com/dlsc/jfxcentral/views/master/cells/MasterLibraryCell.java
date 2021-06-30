@@ -60,7 +60,7 @@ public class MasterLibraryCell extends MasterCell<Library> {
         super.updateItem(library, empty);
 
         if (!empty && library != null) {
-            nameLabel.setText(library.getTitle());
+            nameLabel.setText(library.getName());
             imageView.setVisible(true);
             imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
             licenseLabel.setLicense(library.getLicense());

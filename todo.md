@@ -5,16 +5,15 @@
 - [x] "refresh" URL triggers "No enum constant com.dlsc.jfxcentral.views.View.refresh"
 - [X] Finish links
 - [X] Remove static WEB_API in Util Klasse
+- [X] Block quotes are not styled properly anymore in markdown view
+- [X] Add certificate to server for https:// support
+- [x] Pretty format URLs? (ohne ?page)
 - [ ] IconFont "OpenSans" seems to get loaded a lot causing flickering icons
 - [ ] TextFlow Bug -> PR OpenJFX
-- [x] Pretty format URLs? (ohne ?page)
 - [ ] Hide Scrollbar (JPro Render Bug)
 - [ ] Can't use arrow keys in list view
-- [X] Block quotes are not styled properly anymore in markdown view
-- [ ] Add certificate to server for https:// support  
-- [ ] Support for touch scroll events on mobile  
-- [ ] Menu button popups do not seem to work (see filter dropdowns for videos, tutorials, etc....)  
-- [ ] .....
+- [ ] Support for touch scroll events on mobile
+- [ ] Menu button popups do not seem to work (see filter dropdowns for videos, tutorials, etc....)
 
 ### Views
 
@@ -22,11 +21,11 @@
 
 ### Bugs
 
-- [ ] Styling of status label in Pull Request cell not working properly
-- [ ] Consitent use of date format ("March 3rd 2021")
+- [X] Styling of status label in Pull Request cell not working properly
+- [X] Consistent use of date format ("March 3rd 2021")
 
 ### Data
-- [ ] Add OpenJFX "Getting Started" tutorial (pin at top)
+- [X] Add OpenJFX "Getting Started" tutorial (pin at top)
 - [X] Add videos and downloads data to libraries
 - [X] make Michael Paus' images smaller
 - [X] add more tools (TestFX)
@@ -38,34 +37,38 @@
 - [X] change order of companies
 - [X] finish openjfx page
 - [X] make CovidApp available as download (also on FlexGanttFX website)
-- [ ] make CovidApp Windows version
 - [X] Gluon Blog should show Gluon Logo instead of Johan's photo (use company ID)
+- [ ] make CovidApp Windows version
 - [ ] Add CoachFX as a real world app example, download, jpro link
 - [ ] Add FXSampler to tools
 
 ### New Features
-- [ ] add "time period" selector to "recent changes" view (last week, last month, etc....)
-- [ ] add "detail" button to all list cells showing a model object
 - [X] add link to logo image for "home"
 - [X] add "downloads" to PeopleDetailView
 - [X] auto-refresh the blog posts list (update recent items list)
 - [X] add jfx ensemble demo links to libs
 - [X] add Google analytics
 - [X] add URL for refreshing the data
-- [ ] add built-in memory check from Florian
+- [X] add built-in memory check from Florian
 - [ ] add "homepage" button to downloads cell (example speedtest)
 
 ### Enhancements
 
-- [ ] final design for "selected" cells
-- [ ] refine dialogs / lightbox
+- [X] final design for "selected" cells
 - [X] add "clear" icon to filter text fields
+- [ ] refine dialogs / lightbox
 - [ ] change "recent status" visualization **NEW** or **UPDATED**
 - [ ] fine-tune filter for "recent items"
 
 ### Server
-- [ ] deploy app to clusters in europe, asia, us
-- [ ] map jfx-central.com domain
+- [X] deploy app to clusters in europe, asia, us
+- [X] map jfx-central.com domain
 - [ ] perform load testing
 - [ ] add Google webmaster API
+
+### Future
+
+- [ ] add "time period" selector to "recent changes" view (last week, last month, etc....)
+- [ ] add "detail" button to all list cells showing a model object
+
 

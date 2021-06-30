@@ -52,7 +52,7 @@ public class MobileMasterBlogCell extends MobileAdvancedListCell<Blog> {
             super.updateItem(blog, empty);
 
             if (!empty && blog != null) {
-                label.setText(blog.getTitle());
+                label.setText(blog.getName());
                 imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
                 markdownView.setMdString(blog.getSummary());
             } else {

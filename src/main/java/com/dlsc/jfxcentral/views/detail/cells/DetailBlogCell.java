@@ -41,7 +41,7 @@ public class DetailBlogCell extends DetailCell<Blog> {
         super.updateItem(item, empty);
 
         if (!empty && item != null) {
-            responsiveBox.setTitle(item.getTitle());
+            responsiveBox.setTitle(item.getName());
             responsiveBox.setDescription(StringUtils.abbreviate(item.getSummary(), 250));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(item));
 

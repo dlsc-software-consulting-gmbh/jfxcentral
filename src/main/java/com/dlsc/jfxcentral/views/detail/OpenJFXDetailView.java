@@ -16,6 +16,7 @@ import com.dlsc.jfxcentral.views.detail.cells.DetailPullRequestCell;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
+import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -158,7 +159,7 @@ public class OpenJFXDetailView extends DetailView {
         sectionPane.setTitle("Pull Requests");
 
         FilterView<PullRequest> filterView = sectionPane.getFilterView();
-        filterView.setItems(DataRepository.getInstance().getPullRequests());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getPullRequests());
 
         filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
 

@@ -15,11 +15,11 @@ public class BlogsPage extends Page<Blog> {
         super(rootPane, View.BLOGS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Blog - " + getSelectedItem().getTitle() :
+                "Blog - " + getSelectedItem().getName() :
                 "Blogs", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Latest JavaFX posts from the blog '" + getSelectedItem().getTitle() + "'" :
+                "Latest JavaFX posts from the blog '" + getSelectedItem().getName() + "'" :
                 "Collection of blogs covering JavaFX technology."));
     }
 

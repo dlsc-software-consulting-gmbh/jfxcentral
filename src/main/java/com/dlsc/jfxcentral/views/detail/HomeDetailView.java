@@ -17,9 +17,7 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailNewsCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
-import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.StringProperty;
@@ -39,13 +37,11 @@ import java.util.*;
 public class HomeDetailView extends DetailViewWithListView<News> {
 
     private final VBox content = new VBox();
+
     private final FilterView.FilterGroup<News> typeGroup = new FilterView.FilterGroup<>("Type");
     private final FilterView.FilterGroup<News> personGroup = new FilterView.FilterGroup<>("Person");
     private final FilterView.FilterGroup<News> libraryGroup = new FilterView.FilterGroup<>("Library");
     private final FilterView.FilterGroup<News> timeGroup = new FilterView.FilterGroup<>("Publication Date");
-
-    private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
-    private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
     public HomeDetailView(RootPane rootPane) {
         super(rootPane, View.HOME);
@@ -71,7 +67,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         sectionPane.setTitle("News");
 
         FilterView<News> filterView = sectionPane.getFilterView();
-        filterView.setItems(DataRepository.getInstance().newsProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().newsProperty());
         if (!getRootPane().isMobile()) {
             filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);
             filterView.setTextFilterProvider(text -> news -> {
@@ -105,7 +101,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
         content.getChildren().add(sectionPane);
 
-        DataRepository.getInstance().newsProperty().addListener(weakUpdateFilterListener);
+        filterView.itemsProperty().addListener((Observable it) -> updateFilters());
 
         updateFilters();
         updateTimeGroup();
@@ -193,7 +189,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         librariesList.forEach(item -> {
             Optional<Library> libraryById = DataRepository.getInstance().getLibraryById(item);
             if (libraryById.isPresent()) {
-                filters.add(new FilterView.Filter<>(libraryById.get().getTitle()) {
+                filters.add(new FilterView.Filter<>(libraryById.get().getName()) {
                     @Override
                     public boolean test(News news) {
                         return news.getLibraryIds().contains(item);
@@ -251,7 +247,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
         listView.setCellFactory(view -> new DetailRecentItemCell(getRootPane()));
-        listView.itemsProperty().bind(DataRepository.getInstance().recentItemsProperty());
+        Bindings.bindContent(listView.getItems(), DataRepository.getInstance().recentItemsProperty());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         SectionPane sectionPane = new SectionPane(listView);

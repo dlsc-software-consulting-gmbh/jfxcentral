@@ -51,7 +51,7 @@ public class MobileMasterLibraryCell extends MobileAdvancedListCell<Library> {
         super.updateItem(library, empty);
 
         if (!empty && library != null) {
-            label.setText(library.getTitle());
+            label.setText(library.getName());
             imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
             markdownView.setMdString(library.getSummary());
         } else {

@@ -94,8 +94,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         selectedItemProperty().addListener(it -> {
             Library library = getSelectedItem();
             if (library != null) {
-                sectionPane.setSubtitle("Videos related to library " + library.getTitle());
-                listView.setItems(DataRepository.getInstance().getVideosByModelObject(library));
+                sectionPane.setSubtitle("Videos related to library " + library.getName());
+                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getVideosByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -121,8 +121,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         selectedItemProperty().addListener(it -> {
             Library library = getSelectedItem();
             if (library != null) {
-                sectionPane.setSubtitle("Downloads related to library " + library.getTitle());
-                listView.setItems(DataRepository.getInstance().getDownloadsByModelObject(library));
+                sectionPane.setSubtitle("Downloads related to library " + library.getName());
+                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getDownloadsByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -148,8 +148,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         selectedItemProperty().addListener(it -> {
             Library library = getSelectedItem();
             if (library != null) {
-                sectionPane.setSubtitle("Tutorials for library " + library.getTitle());
-                listView.setItems(DataRepository.getInstance().getTutorialsByModelObject(library));
+                sectionPane.setSubtitle("Tutorials for library " + library.getName());
+                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getTutorialsByModelObject(library));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -178,10 +178,10 @@ public class LibrariesDetailView extends DetailView<Library> {
         selectedItemProperty().addListener(it -> {
             Library selectedItem = getSelectedItem();
             if (selectedItem != null) {
-                String url = "https://www.jfx-ensemble.com/?page=project/" + selectedItem.getTitle();
+                String url = "https://www.jfx-ensemble.com/?page=project/" + selectedItem.getName();
                 markdownView.setMdString("Online demos are available for this library on the JFX-Ensemble website. These demos can be [run in the browser](" + url + ") via JPro (free for open source projects).");
-                Util.setLink(markdownView, url, selectedItem.getTitle());
-                Util.setLink(imageView, url, selectedItem.getTitle());
+                Util.setLink(markdownView, url, selectedItem.getName());
+                Util.setLink(imageView, url, selectedItem.getName());
             }
         });
 
@@ -222,7 +222,7 @@ public class LibrariesDetailView extends DetailView<Library> {
         hBox.getStyleClass().add("hbox");
 
         SectionPane sectionPane = new SectionPane();
-        sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getTitle() : "", selectedItemProperty()));
+        sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
         sectionPane.getStyleClass().add("title-section");
         sectionPane.setExtras(iconView);
@@ -257,7 +257,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getHomepage())) {
                 Button twitter = new Button("Homepage");
                 twitter.getStyleClass().addAll("social-button", "homepage");
-                Util.setLink(twitter, library.getHomepage(), library.getTitle());
+                Util.setLink(twitter, library.getHomepage(), library.getName());
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
                 buttonBox.getChildren().add(twitter);
             }
@@ -265,7 +265,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getRepository())) {
                 Button linkedIn = new Button("Repository");
                 linkedIn.getStyleClass().addAll("social-button", "repository");
-                Util.setLink(linkedIn, library.getRepository(), library.getTitle());
+                Util.setLink(linkedIn, library.getRepository(), library.getName());
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
                 buttonBox.getChildren().add(linkedIn);
             }
@@ -273,7 +273,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getIssueTracker())) {
                 Button blog = new Button("Issues Tracker");
                 blog.getStyleClass().addAll("social-button", "issues");
-                Util.setLink(blog, library.getIssueTracker(), library.getTitle());
+                Util.setLink(blog, library.getIssueTracker(), library.getName());
                 blog.setGraphic(new FontIcon(Material.BUG_REPORT));
                 buttonBox.getChildren().add(blog);
             }
@@ -281,7 +281,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getDiscussionBoard())) {
                 Button website = new Button("Discussions");
                 website.getStyleClass().addAll("social-button", "discussion");
-                Util.setLink(website, library.getDiscussionBoard(), library.getTitle());
+                Util.setLink(website, library.getDiscussionBoard(), library.getName());
                 website.setGraphic(new FontIcon(Material.COMMENT));
                 buttonBox.getChildren().add(website);
             }
@@ -289,7 +289,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getJavadocs())) {
                 Button website = new Button("API");
                 website.getStyleClass().addAll("social-button", "api");
-                Util.setLink(website, library.getJavadocs(), library.getTitle());
+                Util.setLink(website, library.getJavadocs(), library.getName());
                 website.setGraphic(new FontIcon(Material.CODE));
                 buttonBox.getChildren().add(website);
             }
@@ -297,7 +297,7 @@ public class LibrariesDetailView extends DetailView<Library> {
             if (StringUtils.isNotEmpty(library.getDocumentation())) {
                 Button website = new Button("Docs");
                 website.getStyleClass().addAll("social-button", "docs");
-                Util.setLink(website, library.getDocumentation(), library.getTitle());
+                Util.setLink(website, library.getDocumentation(), library.getName());
                 website.setGraphic(new FontIcon(Material.BOOK));
                 buttonBox.getChildren().add(website);
             }

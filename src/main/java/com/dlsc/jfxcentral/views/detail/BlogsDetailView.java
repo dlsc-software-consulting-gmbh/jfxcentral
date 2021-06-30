@@ -53,7 +53,7 @@ public class BlogsDetailView extends DetailView<Blog> {
     private void createPostsBox() {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Posts");
-        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? "List of current posts on " + getSelectedItem().getTitle() : "", selectedItemProperty()));
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? "List of current posts on " + getSelectedItem().getName() : "", selectedItemProperty()));
         VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
         FilteredList<Post> filteredPosts = new FilteredList(DataRepository.getInstance().postsProperty());
@@ -110,7 +110,7 @@ public class BlogsDetailView extends DetailView<Blog> {
         Label nameLabel = new Label();
         nameLabel.getStyleClass().addAll("header1", "name-label");
         nameLabel.setMaxWidth(Double.MAX_VALUE);
-        nameLabel.textProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getTitle() : "", selectedItemProperty()));
+        nameLabel.textProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
         Label descriptionLabel = new Label();

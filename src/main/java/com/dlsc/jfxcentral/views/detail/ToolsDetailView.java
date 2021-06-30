@@ -147,7 +147,7 @@ public class ToolsDetailView extends DetailView<Tool> {
             Tool tool = getSelectedItem();
             if (tool != null) {
                 sectionPane.setSubtitle("Videos related to tool " + tool.getName());
-                listView.setItems(DataRepository.getInstance().getVideosByModelObject(tool));
+                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getVideosByModelObject(tool));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());
@@ -174,7 +174,7 @@ public class ToolsDetailView extends DetailView<Tool> {
             Tool tool = getSelectedItem();
             if (tool != null) {
                 sectionPane.setSubtitle("Downloads related to tool " + tool.getName());
-                listView.setItems(DataRepository.getInstance().getDownloadsByModelObject(tool));
+                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getDownloadsByModelObject(tool));
             } else {
                 sectionPane.setSubtitle("");
                 listView.setItems(FXCollections.observableArrayList());

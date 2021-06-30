@@ -78,16 +78,16 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
         super.updateItem(item, empty);
 
         if (!empty && item != null) {
-            Util.setLink(detailButton, PageUtil.getLink(item), getItem().getTitle());
-            Util.setLink(homepageButton, getItem().getHomepage(), getItem().getTitle());
-            Util.setLink(repositoryButton, getItem().getRepository(), getItem().getTitle());
-            Util.setLink(issueTrackerButton, getItem().getIssueTracker(), getItem().getTitle());
-            Util.setLink(discussionsButton, getItem().getDiscussionBoard(), getItem().getTitle());
+            Util.setLink(detailButton, PageUtil.getLink(item), getItem().getName());
+            Util.setLink(homepageButton, getItem().getHomepage(), getItem().getName());
+            Util.setLink(repositoryButton, getItem().getRepository(), getItem().getName());
+            Util.setLink(issueTrackerButton, getItem().getIssueTracker(), getItem().getName());
+            Util.setLink(discussionsButton, getItem().getDiscussionBoard(), getItem().getName());
 
             licenseLabel.setLicense(item.getLicense());
             licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
 
-            responsiveBox.setTitle(item.getTitle());
+            responsiveBox.setTitle(item.getName());
             responsiveBox.setDescription(item.getDescription());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
 

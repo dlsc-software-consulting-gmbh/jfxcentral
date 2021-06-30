@@ -15,11 +15,11 @@ public class LibrariesPage extends Page<Library> {
         super(rootPane, View.LIBRARIES);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Library - " + getSelectedItem().getTitle() :
+                "Library - " + getSelectedItem().getName() :
                 "Libraries", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Information about the library '" + getSelectedItem().getTitle() + "'" :
+                "Information about the library '" + getSelectedItem().getName() + "'" :
                 "Collection of libraries that can be used for developing JavaFX applications."));
     }
 

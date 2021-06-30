@@ -24,8 +24,8 @@ public class BlogsMasterView extends MasterViewWithListView<Blog> {
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MasterBlogCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
-                Comparator.comparing(Blog::getTitle),
-                blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getTitle(), getFilterText())));
+                Comparator.comparing(Blog::getName),
+                blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getName(), getFilterText())));
 
         VBox.setVgrow(listView, Priority.ALWAYS);
 

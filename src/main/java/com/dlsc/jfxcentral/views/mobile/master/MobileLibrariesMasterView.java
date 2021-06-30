@@ -26,8 +26,8 @@ public class MobileLibrariesMasterView extends MobileMasterViewWithAdvancedListV
         listView.setVisibleRowCount(Integer.MAX_VALUE);
         listView.setCellFactory(view -> new MobileMasterLibraryCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().librariesProperty(),
-                Comparator.comparing(Library::getTitle),
-                library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getTitle(), getFilterText())));
+                Comparator.comparing(Library::getName),
+                library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getName(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setLibrary(listView.getSelectionModel().getSelectedItem()));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);

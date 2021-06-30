@@ -22,8 +22,8 @@ public class LibrariesMasterView extends MasterViewWithListView<Library> {
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MasterLibraryCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().librariesProperty(),
-                Comparator.comparing(Library::getTitle),
-                library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getTitle(), getFilterText())));
+                Comparator.comparing(Library::getName),
+                library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getName(), getFilterText())));
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setLibrary(listView.getSelectionModel().getSelectedItem()));
 
         setCenter(listView);
