@@ -26,6 +26,7 @@ public class MasterViewHeader extends HBox {
         backButton.getStyleClass().add("back-button");
 
         CustomTextField searchField = new CustomTextField();
+        searchField.setFocusTraversable(false);
         searchField.textProperty().bindBidirectional(filterText);
         searchField.getStyleClass().add("search-field");
         searchField.setMaxWidth(Double.MAX_VALUE);

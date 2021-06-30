@@ -104,6 +104,8 @@
     -fx-font-size: 14px;
     -fx-font-family: "Inter";
     -fx-accent: rgb(68, 131, 160);
+    -fx-focus-color: rgb(68, 131, 160);
+    -fx-faint-focus-color: rgba(68, 131, 160, .2);
 
     -light-grey: rgba(239, 242, 245);
     -light-blue: rgba(224, 229, 234);
@@ -629,8 +631,14 @@
 }
 
 .master-view-header .search-field {
+    -fx-text-fill: -fx-accent;
+    -fx-background-color: white;
     -fx-background-radius: 3px;
     -fx-pref-width: 150px;
+}
+
+.master-view-header .search-field .ikonli-font-icon {
+    -fx-icon-color: -fx-accent;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1904,14 +1912,16 @@
     -fx-background-color: white;
     -fx-padding: 0 0 0 10;
     -fx-pref-width: 300;
-    -fx-background-radius: 1000px;
+    -fx-background-radius: 3px;
     -fx-text-fill: -fx-accent;
     -fx-background-insets: 0px;
+    -fx-prompt-text-fill: rgb(68, 131, 160, .7)
 }
 
 .omnibox-text-field:focused {
     -fx-background-insets: 0px;
     -fx-background-color: white;
+    -fx-prompt-text-fill: white;
 }
 
 .omnibox-text-field .right-pane {
@@ -1921,7 +1931,7 @@
 .omnibox-text-field > * > * > .toggle-button {
     -fx-background-color: derive(-fx-accent, -20%);
     -fx-background-insets: 0px -2px 0px 0px; /* otherwise we see some white bg from text field */
-    -fx-background-radius: 0px 1000px 1000px 0px;
+    -fx-background-radius: 0px 3px 3px 0px;
     -fx-max-height: infinity;
 }
 
@@ -1944,9 +1954,9 @@
 }
 
 .omnibox > .text-field {
-    -fx-min-height: 30;
-    -fx-max-height: 30;
-    -fx-pref-height: 30;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-pref-height: 30px;
     -fx-border-color: transparent transparent grey transparent;
     -fx-prompt-text-fill: grey;
 }

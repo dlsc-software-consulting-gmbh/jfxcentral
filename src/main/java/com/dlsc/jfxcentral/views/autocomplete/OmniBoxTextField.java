@@ -46,7 +46,7 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 
 	private final OmniBox omniBox = new OmniBox(this);
 
-	private final ToggleButton lookupButton = new ToggleButton("Search");
+	private final ToggleButton lookupButton = new ToggleButton("Go!");
 
 	/**
 	 * Constructs a new textfield.
@@ -82,6 +82,8 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 
 	private void init() {
 	    getStyleClass().add("omnibox-text-field");
+
+	    setPromptText("Search ...");
 
 	    setFocusTraversable(false);
 
