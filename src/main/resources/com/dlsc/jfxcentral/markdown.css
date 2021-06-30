@@ -44,7 +44,7 @@
 }
 
 .markdown-heading-1 {
-    -fx-padding: 0em 0em 14px 0em !important;
+    -fx-padding: 0em 0em 1em 0em !important;
 }
 
 .markdown-heading-2 {
@@ -60,7 +60,7 @@
 }
 
 .markdown-heading-5 {
-    -fx-padding: 0em 0em 3px 0em !important;
+    -fx-padding: 1.4285em 0em 0em 0em !important;
 }
 
 .markdown-heading-1 .markdown-text {
@@ -116,29 +116,28 @@
 .markdown-code,
 .markdown-codeblock {
     -fx-wrap-text: true;
-    -fx-font-size: 12px;
+    -fx-font-size: 0.8571em;
 }
 
 .markdown-code {
-
 }
 
 .markdown-codeblock-box {
     -fx-padding: 8;
-    -fx-border-radius: 2px;
+    -fx-border-radius: 0.1428em;
     -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0.5;
-    -fx-background-radius: 2px;
+    -fx-border-width: 0.0357em;
+    -fx-background-radius: 0.1428em;
     -fx-background-color: oldlace;
     -fx-font-family: "JetBrains Mono Regular";
 }
 
 .markdown-code-background {
     -fx-padding: 8;
-    -fx-border-radius: 2px;
+    -fx-background-radius: 0.1428em;
     -fx-border-color: -mdfx-border-color-1;
-    -fx-border-width: 0.5;
-    -fx-background-radius: 2px;
+    -fx-border-width: 0.0357em;
+    -fx-background-radius: 0.1428em;
     -fx-background-color: oldlace;
 }
 
@@ -186,8 +185,8 @@
 }
 
 .markdown-normal-block-quote {
-    -fx-background-insets: 10px 10px 10px 0em;
-    -fx-border-insets: 10px 10px 10px 0em;
+    -fx-background-insets: 0.7142em 0.7142em 0.7142em 0em;
+    -fx-border-insets: 0.7142em 0.7142em 0.7142em 0em;
 }
 
 .markdown-normal-block-quote * {

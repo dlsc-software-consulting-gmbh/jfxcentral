@@ -41,7 +41,7 @@
 - [X] finish openjfx page
 - [X] make CovidApp available as download (also on FlexGanttFX website)
 - [X] Gluon Blog should show Gluon Logo instead of Johan's photo (use company ID)
-- [ ] make CovidApp Windows version
+- [X] make CovidApp Windows version
 - [ ] Add CoachFX as a real world app example, download, jpro link
 - [ ] Add FXSampler to tools
 
