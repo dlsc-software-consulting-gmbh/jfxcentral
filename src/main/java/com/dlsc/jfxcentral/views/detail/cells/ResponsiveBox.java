@@ -93,7 +93,7 @@ public class ResponsiveBox extends VBox {
             hBox.getChildren().remove(imageWrapper);
         } else {
             imageWrapper.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            imageWrapper.setMinWidth(getLargeImageWidth());
+            imageWrapper.setMinWidth(Region.USE_COMPUTED_SIZE);
 
             imageView.fitWidthProperty().unbind();
             imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
