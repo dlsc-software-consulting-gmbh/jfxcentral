@@ -476,13 +476,8 @@
     -fx-background-color: -light-blue;
 }
 
-.master-view .scroll-bar {
-    -fx-pref-width: 0em;
-    -fx-pref-height: 0em;
-}
-
-.master-view .left-scroll-bar:vertical {
-    -fx-pref-width: 6px;
+.master-view .scroll-bar .track {
+    -fx-background-color: rgba(0, 0, 0, .01);
 }
 
 .master-view .list-view {

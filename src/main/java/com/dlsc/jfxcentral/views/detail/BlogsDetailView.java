@@ -56,7 +56,7 @@ public class BlogsDetailView extends DetailView<Blog> {
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? "List of current posts on " + getSelectedItem().getName() : "", selectedItemProperty()));
         VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
-        FilteredList<Post> filteredPosts = new FilteredList(DataRepository.getInstance().postsProperty());
+        FilteredList<Post> filteredPosts = new FilteredList(DataRepository.getInstance().getPosts());
         filteredPosts.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getSelectedItem() == null || post.getBlog().equals(getSelectedItem()), selectedItemProperty()));
 
         SortedList<Post> sortedPosts = new SortedList<>(filteredPosts);

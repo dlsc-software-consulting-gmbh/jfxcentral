@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 public class IntroView extends StackPane {
 
     private final AudioClip plonkSound;
+    private final DukeAnimationView animationView;
 
     public IntroView(Runnable callback) {
 
@@ -21,7 +22,7 @@ public class IntroView extends StackPane {
             }
         });
 
-        DukeAnimationView animationView = new DukeAnimationView(callback);
+        animationView = new DukeAnimationView(callback);
 
         animationView.sceneProperty().addListener(it -> {
             if (animationView.getScene() != null) {
@@ -60,6 +61,14 @@ public class IntroView extends StackPane {
         thread.start();
 
         animationView.setCursor(Cursor.HAND);
-        animationView.setOnMouseClicked(evt -> callback.run());
+        animationView.setOnMouseClicked(evt -> {
+            if (animationView.isReady()) {
+                callback.run();
+            }
+        });
+    }
+
+    public DukeAnimationView getAnimationView() {
+        return animationView;
     }
 }

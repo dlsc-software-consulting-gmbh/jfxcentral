@@ -1,4 +1,5 @@
 open module jfxcentral {
+    requires org.eclipse.jgit;
     requires jfxcentral.data;
     requires com.rometools.rome;
     requires com.rometools.rome.utils;

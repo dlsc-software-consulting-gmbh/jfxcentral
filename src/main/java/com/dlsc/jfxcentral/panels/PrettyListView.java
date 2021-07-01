@@ -39,6 +39,14 @@ public class PrettyListView<T> extends ListView<T> {
         hBar.visibleProperty().bind(hBar.visibleAmountProperty().isEqualTo(0).not().or(alwaysShowHBarProperty()));
     }
 
+    public ScrollBar getVerticalBar() {
+        return vBar;
+    }
+
+    public ScrollBar getHorizontalBar() {
+        return hBar;
+    }
+
     private final BooleanProperty alwaysShowVBar = new SimpleBooleanProperty(false);
 
     public boolean isAlwaysShowVBar() {
