@@ -61,13 +61,13 @@ public class ResponsiveBox extends VBox {
         imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
         StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
-        FlowPane buttonBox = new FlowPane();
-        Bindings.bindContent(buttonBox.getChildren(), buttonsProperty());
-        buttonBox.getStyleClass().add("button-box");
-        buttonBox.setMinHeight(Region.USE_PREF_SIZE);
-        buttonBox.setAlignment(Pos.BOTTOM_LEFT);
-        buttonBox.visibleProperty().bind(Bindings.isNotEmpty(buttonBox.getChildren()));
-        buttonBox.managedProperty().bind(Bindings.isNotEmpty(buttonBox.getChildren()));
+        FlowPane extraControlsPane = new FlowPane();
+        Bindings.bindContent(extraControlsPane.getChildren(), extraControlsProperty());
+        extraControlsPane.getStyleClass().add("button-box");
+        extraControlsPane.setMinHeight(Region.USE_PREF_SIZE);
+        extraControlsPane.setAlignment(Pos.BOTTOM_LEFT);
+        extraControlsPane.visibleProperty().bind(Bindings.isNotEmpty(extraControlsPane.getChildren()));
+        extraControlsPane.managedProperty().bind(Bindings.isNotEmpty(extraControlsPane.getChildren()));
 
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.TOP_LEFT);
@@ -80,8 +80,8 @@ public class ResponsiveBox extends VBox {
 
         getChildren().add(hBox);
 
-        widthProperty().addListener(it -> updateLayout(imageLocation, imageWrapper, buttonBox, vBox));
-        updateLayout(imageLocation, imageWrapper, buttonBox, vBox);
+        widthProperty().addListener(it -> updateLayout(imageLocation, imageWrapper, extraControlsPane, vBox));
+        updateLayout(imageLocation, imageWrapper, extraControlsPane, vBox);
     }
 
     private void updateLayout(ImageLocation imageLocation, StackPane imageWrapper, FlowPane buttonBox, VBox vBox) {
@@ -181,18 +181,18 @@ public class ResponsiveBox extends VBox {
         this.footer.set(footer);
     }
 
-    private final ListProperty<Node> buttons = new SimpleListProperty<>(this, "buttons", FXCollections.observableArrayList());
+    private final ListProperty<Node> extraControls = new SimpleListProperty<>(this, "buttons", FXCollections.observableArrayList());
 
-    public ObservableList<Node> getButtons() {
-        return buttons.get();
+    public ObservableList<Node> getExtraControls() {
+        return extraControls.get();
     }
 
-    public ListProperty<Node> buttonsProperty() {
-        return buttons;
+    public ListProperty<Node> extraControlsProperty() {
+        return extraControls;
     }
 
-    public void setButtons(ObservableList<Node> buttons) {
-        this.buttons.set(buttons);
+    public void setExtraControls(ObservableList<Node> controls) {
+        this.extraControls.set(controls);
     }
 
     private final ObjectProperty<Image> image = new SimpleObjectProperty<>(this, "image");

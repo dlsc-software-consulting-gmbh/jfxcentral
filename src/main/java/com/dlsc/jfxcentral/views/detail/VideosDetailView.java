@@ -61,7 +61,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
             });
         }
 
-        AdvancedListView<Video> listView = new AdvancedListView<>();
+        listView = new AdvancedListView<>();
         listView.setPrefWidth(0);
         listView.setMinWidth(0);
 

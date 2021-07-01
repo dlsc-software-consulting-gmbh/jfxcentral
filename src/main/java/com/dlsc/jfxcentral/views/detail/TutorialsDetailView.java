@@ -61,7 +61,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
             return false;
         });
 
-        AdvancedListView<Tutorial> listView = new AdvancedListView<>();
+        listView = new AdvancedListView<>();
         listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), true));
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.itemsProperty().bind(filterView.filteredItemsProperty());

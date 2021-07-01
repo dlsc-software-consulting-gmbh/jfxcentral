@@ -39,8 +39,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
 
         setPrefWidth(0);
 
-//        setOnMouseClicked(evt -> searchField.hideOmniBox());
-
+        hBox.visibleProperty().bind(itemProperty().isNotNull());
         setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

@@ -5,8 +5,9 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
-import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -41,7 +42,7 @@ public class DetailDownloadCell extends DetailCell<Download> {
     protected void updateItem(Download download, boolean empty) {
         super.updateItem(download, empty);
 
-        responsiveBox.getButtons().clear();
+        responsiveBox.getExtraControls().clear();
 
         if (!empty && download != null) {
             responsiveBox.setTitle(download.getTitle());
@@ -49,12 +50,14 @@ public class DetailDownloadCell extends DetailCell<Download> {
             responsiveBox.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
 
             if (!rootPane.isMobile()) {
+                MenuButton menuButton = new MenuButton("Downloads");
                 download.getFiles().forEach(file -> {
-                    Button downloadButton = new Button(file.getName());
-                    downloadButton.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
-                    downloadButton.setOnAction(evt -> downloadFile(file));
-                    responsiveBox.getButtons().add(downloadButton);
+                    MenuItem item = new MenuItem(file.getName());
+                    item.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
+                    item.setOnAction(evt -> downloadFile(file));
+                    menuButton.getItems().add(item);
                 });
+                responsiveBox.getExtraControls().add(menuButton);
             }
         }
     }

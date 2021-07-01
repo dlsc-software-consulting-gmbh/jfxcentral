@@ -139,14 +139,8 @@
     -fx-background-color: transparent;
 }
 
-.advanced-list-cell {
-    -fx-padding: 5px 0px 10px 0px;
-}
-
-.master-cell {}
-
-.detail-cell {
-    -fx-padding: 5px 0px 10px 0px;
+.list-view {
+    -fx-background-insets: 0px;
 }
 
 .header1 {
@@ -283,11 +277,20 @@
 
 .menu-button > .label {
     -fx-font-family: "Inter Semi Bold";
-    -fx-text-fill: white;
+    -fx-text-fill: white !important;
 }
 
 .menu-button .menu-item {
     -fx-font-family: "Inter Semi Bold";
+}
+
+.menu-button .menu-item:focused .label,
+.menu-button .menu-item:hover .label {
+    -fx-text-fill: white !important;
+}
+
+.menu-button .menu-item:focused .ikonli-font-icon {
+    -fx-icon-color: white;
 }
 
 .menu-button .arrow {
@@ -496,6 +499,10 @@
 .detail-view {
     -fx-background-color: -light-grey;
     -fx-spacing: 20px;
+}
+
+.detail-view .list-cell {
+    -fx-padding: 0em 0em 20px 0em;
 }
 
 .detail-view .back-label {
@@ -1099,12 +1106,12 @@
 
 .section-pane .list-cell {
     -fx-background-color: white;
-    -fx-padding: 10px 0px;
 }
 
 .section-pane .list-cell:filled {
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
+    -fx-border-insets: 0px 10px 10px 0px;
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
@@ -1117,7 +1124,6 @@
 }
 
 .section-pane .list-cell.last {
-    -fx-padding: 10px 0px;
     -fx-border-width: 0px;
 }
 
@@ -1659,20 +1665,8 @@
     -fx-padding: 50px 0px 0px 0px;
 }
 
-.home-detail-view .title {
-}
-
 .home-detail-view .contact-markdown-view {
     -fx-line-spacing: 2px;
-    -fx-padding: 0px 0px 20px 0px;
-}
-
-.home-detail-view .contact-markdown-view .markdown-text {
-}
-
-.home-detail-view .contact-markdown-view * {
-    -fx-alignment: top-left;
-    -fx-text-alignment: left;
 }
 
 .home-detail-view .footer {
@@ -1982,12 +1976,13 @@
 }
 
 .omnibox .search-result-list-view .cell .label {
+    -fx-text-fill: ;
     -fx-text-alignment: left;
     -fx-alignment: top-left;
 }
 
 .omnibox .search-result-list-view .cell:focused {
-    -fx-background-color: white;
+    -fx-background-color: -light-blue;
 }
 
 .omnibox .search-result-list-view .cell:selected .label {
@@ -2016,11 +2011,13 @@
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .title-label {
+    -fx-text-fill: black;
     -fx-font-family: "Inter Bold";
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .subtitle-label {
     -fx-opacity: .8;
+    -fx-text-fill: black;
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .date-label {

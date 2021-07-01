@@ -26,7 +26,7 @@ public class DetailCompanyCell extends DetailCell<Company> {
         homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
-        responsiveBox.getButtons().addAll(homepageButton);
+        responsiveBox.getExtraControls().addAll(homepageButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
         responsiveBox.setLargeImageWidth(200);
         responsiveBox.setLargeImageHeight(100);

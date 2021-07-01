@@ -29,7 +29,6 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
         listView.setCellFactory(view -> new DetailCompanyCell(rootPane, true));
         listView.setItems(sortedList);
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
-//        listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
 
         if (rootPane.isMobile()) {
             listView.setPaging(true);

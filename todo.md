@@ -14,6 +14,7 @@
 - [ ] Can't use arrow keys in list view
 - [ ] Support for touch scroll events on mobile
 - [ ] Menu button popups do not seem to work (see filter dropdowns for videos, tutorials, etc....)
+- [ ] SessionManager lookup fails when click in popup (see global search)
 
 ### Views
 

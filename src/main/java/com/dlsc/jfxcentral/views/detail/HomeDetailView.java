@@ -89,7 +89,6 @@ public class HomeDetailView extends DetailViewWithListView<News> {
             });
         }
 
-        AdvancedListView<News> listView = new AdvancedListView<>();
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setVisibleRowCount(3);
         listView.setPaging(true);
@@ -259,7 +258,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
     private void createContactInfo(HBox box) {
         MarkdownView markdownView = new MarkdownView();
-        markdownView.setMdString("**DLSC Software & Consulting**\n\n\n\nAsylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
+        markdownView.setMdString("### DLSC Software & Consulting\n\nAsylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
         markdownView.getStyleClass().add("contact-markdown-view");
         HBox.setHgrow(markdownView, Priority.ALWAYS);
 

@@ -37,7 +37,7 @@ public class DetailBookCell extends DetailCell<Book> {
         amazonButton.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
-        responsiveBox.getButtons().addAll(detailsButton, homepageButton, amazonButton);
+        responsiveBox.getExtraControls().addAll(detailsButton, homepageButton, amazonButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
         setGraphic(responsiveBox);

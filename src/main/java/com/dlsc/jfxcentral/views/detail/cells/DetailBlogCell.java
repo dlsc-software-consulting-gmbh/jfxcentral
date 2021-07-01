@@ -29,7 +29,7 @@ public class DetailBlogCell extends DetailCell<Blog> {
         visitButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
-        responsiveBox.getButtons().addAll(detailsButton, visitButton);
+        responsiveBox.getExtraControls().addAll(detailsButton, visitButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
         setGraphic(responsiveBox);

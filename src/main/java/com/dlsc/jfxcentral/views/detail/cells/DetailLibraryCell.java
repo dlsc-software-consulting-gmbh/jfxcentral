@@ -65,7 +65,7 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
         responsiveBox.setFooter(infoView);
         responsiveBox.setSmallImageWidth(48);
         responsiveBox.setLargeImageWidth(48);
-        responsiveBox.getButtons().addAll(homepageButton, detailButton, repositoryButton, issueTrackerButton, discussionsButton);
+        responsiveBox.getExtraControls().addAll(homepageButton, detailButton, repositoryButton, issueTrackerButton, discussionsButton);
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

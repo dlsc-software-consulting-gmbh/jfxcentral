@@ -33,7 +33,7 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getTitleLabel().setGraphic(commercialLabel);
-        responsiveBox.getButtons().addAll(visitButton);
+        responsiveBox.getExtraControls().addAll(visitButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
         setGraphic(responsiveBox);

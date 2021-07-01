@@ -33,7 +33,7 @@ public class DetailVideoCell extends DetailCell<Video> {
         playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
-        responsiveBox.getButtons().addAll(playButton, playOnYouTubeButton);
+        responsiveBox.getExtraControls().addAll(playButton, playOnYouTubeButton);
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.views;
 
-import com.dlsc.jfxcentral.panels.PrettyListView;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -18,7 +17,7 @@ import org.kordamp.ikonli.material.Material;
 public class AdvancedListView<T> extends StackPane {
 
     public static final String PAGE_BUTTON = "page-button";
-    private final PrettyListView<T> listView = new PrettyListView<>();
+    private final ListView<T> listView = new ListView<>();
 
     private final VBox box = new VBox();
 
@@ -41,8 +40,8 @@ public class AdvancedListView<T> extends StackPane {
 
         InvalidationListener updateListener = (Observable it) -> {
 
-            box.setVisible(isPaging() || (getItems().size() > 0 && getItems().size() <= getVisibleRowCount()));
-            listView.setVisible(!isPaging() && getItems().size() > 0 && getItems().size() > getVisibleRowCount());
+            box.setVisible(isPaging());
+            listView.setVisible(!isPaging());
 
             Node placeholder = getPlaceholder();
             if (placeholder != null) {
@@ -80,6 +79,10 @@ public class AdvancedListView<T> extends StackPane {
             } else if (getPage() > startPage.get() + getMaxPageIndicatorCount() - 1) {
                 startPage.set(startPage.get() + getMaxPageIndicatorCount());
             }
+        });
+
+        paging.addListener(it -> {
+            System.out.println("paging: " + isPaging());
         });
     }
 
