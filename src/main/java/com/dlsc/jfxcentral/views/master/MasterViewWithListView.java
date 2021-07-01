@@ -10,7 +10,6 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -52,17 +51,12 @@ public abstract class MasterViewWithListView<T extends ModelObject> extends Mast
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), scrollBar);
         fadeTransition.setFromValue(0);
 
-        anchorPane.addEventFilter(MouseEvent.MOUSE_ENTERED,  evt -> {
-            System.out.println(evt);
-            if (evt.getTarget() == anchorPane) {
+        anchorPane.hoverProperty().addListener(it -> {
+            if (anchorPane.isHover()) {
                 fadeTransition.setFromValue(0);
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
-            }
-        });
-
-        anchorPane.addEventFilter(MouseEvent.MOUSE_EXITED,  evt -> {
-            if (evt.getTarget() == anchorPane) {
+            } else {
                 fadeTransition.setFromValue(1);
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
