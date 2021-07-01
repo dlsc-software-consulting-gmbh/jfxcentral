@@ -64,6 +64,7 @@ public class MasterRealWorldAppCell extends MasterCell<RealWorldApp> {
         } else {
             nameLabel.setText("");
             imageView.imageProperty().unbind();
+            imageView.setImage(null);
             summaryMarkdownView.setMdString("");
         }
     }

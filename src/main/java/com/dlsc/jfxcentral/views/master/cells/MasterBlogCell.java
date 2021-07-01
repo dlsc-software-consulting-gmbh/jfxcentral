@@ -51,6 +51,7 @@ public class MasterBlogCell extends MasterCell<Blog> {
             } else {
                 label.setText("");
                 imageView.imageProperty().unbind();
+                imageView.setImage(null);
             }
         }
     }

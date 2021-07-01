@@ -24,10 +24,10 @@
 
 - [X] Styling of status label in Pull Request cell not working properly
 - [X] Consistent use of date format ("March 3rd 2021")
-- [ ] Blog header / title section -> two issues with image / photos 
-      a) if blog does not have company or person ID then the last image stays
-      b) if the blog is associated with a company then use ImageView, not PhotoView
-- [ ] Fix styling of focused global search result cells (currently white text on white background)
+- [X] Fix styling of focused global search result cells (currently white text on white background)
+- [ ] Blog header / title section -> two issues with image / photos
+      - if blog does not have company or person ID then the last image stays
+      - if the blog is associated with a company then use ImageView, not PhotoView
 
 ### Data
 - [X] Add OpenJFX "Getting Started" tutorial (pin at top)
@@ -55,13 +55,13 @@
 - [X] add Google analytics
 - [X] add URL for refreshing the data
 - [X] add built-in memory check from Florian
-- [ ] add "homepage" button to downloads cell (example speedtest)
+- [X] add "homepage" button to downloads cell (example speedtest)
 
 ### Enhancements
 
 - [X] final design for "selected" cells
 - [X] add "clear" icon to filter text fields
-- [ ] Use "download" menu button for download cell  
+- [X] Use "download" menu button for download cell  
 - [ ] refine dialogs / lightbox
 - [ ] change "recent status" visualization **NEW** or **UPDATED**
 - [ ] fine-tune filter for "recent items"

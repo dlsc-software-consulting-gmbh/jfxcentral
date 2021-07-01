@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -48,6 +49,13 @@ public class DetailDownloadCell extends DetailCell<Download> {
             responsiveBox.setTitle(download.getTitle());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
+
+            if (StringUtils.isNotBlank(download.getHomepage())) {
+                Button homepage = new Button("Homepage");
+                homepage.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
+                Util.setLink(homepage, download.getHomepage(), "Visit homepage");
+                responsiveBox.getExtraControls().add(homepage);
+            }
 
             if (!rootPane.isMobile()) {
                 MenuButton menuButton = new MenuButton("Downloads");

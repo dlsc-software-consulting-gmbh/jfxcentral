@@ -476,6 +476,15 @@
     -fx-background-color: -light-blue;
 }
 
+.master-view .scroll-bar {
+    -fx-pref-width: 0em;
+    -fx-pref-height: 0em;
+}
+
+.master-view .left-scroll-bar:vertical {
+    -fx-pref-width: 6px;
+}
+
 .master-view .list-view {
     -fx-background-color: -light-blue;
     -fx-background-insets: 0px;
@@ -1076,7 +1085,7 @@
 
 .section-pane > .section-pane-container .title-box > .subtitle-label {
     -fx-text-fill: grey;
-    -fx-font-size: 1.2em;
+    -fx-font-size: 1em;
 }
 
 .section-pane > .section-pane-container > .children-box {
@@ -1100,8 +1109,8 @@
 }
 
 .section-pane .filter-view .subtitle {
-    -fx-font-size: 0.8571em;
-    -fx-opacity: .8;
+    -fx-font-size: 1em;
+    -fx-text-fill: grey;
 }
 
 .section-pane .list-cell {
@@ -1486,7 +1495,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .75), 20, 0.19, 0, 6);
 }
 
-.pretty-scroll-pane .scroll-bar {
+.scroll-bar {
     -fx-padding: 0;
     -fx-background-insets: 0;
     -fx-background-color: #e0e0e0;
@@ -1495,25 +1504,25 @@
     -fx-pref-height: 6;
 }
 
-.pretty-scroll-pane .scroll-bar .thumb {
+.scroll-bar .thumb {
     -fx-background-color: -fx-accent;
     -fx-background-radius: 1000;
     -fx-pref-width: 6;
     -fx-pref-height: 6;
 }
 
-.pretty-scroll-pane .scroll-bar:vertical .thumb {
+.scroll-bar:vertical .thumb {
     -fx-background-insets: 0;
 }
 
-.pretty-scroll-pane .scroll-bar:horizontal .thumb {
+.scroll-bar:horizontal .thumb {
     -fx-background-insets: 0;
 }
 
-.pretty-scroll-pane .scroll-bar .increment-button,
-.pretty-scroll-pane .scroll-bar .increment-arrow,
-.pretty-scroll-pane .scroll-bar .decrement-button,
-.pretty-scroll-pane .scroll-bar .decrement-arrow {
+.scroll-bar .increment-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-button,
+.scroll-bar .decrement-arrow {
     -fx-pref-width: 0 !important;
     -fx-pref-height: 0 !important;
 }
@@ -1976,7 +1985,6 @@
 }
 
 .omnibox .search-result-list-view .cell .label {
-    -fx-text-fill: ;
     -fx-text-alignment: left;
     -fx-alignment: top-left;
 }

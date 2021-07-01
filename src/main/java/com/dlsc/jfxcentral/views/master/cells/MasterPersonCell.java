@@ -110,6 +110,7 @@ public class MasterPersonCell extends AdvancedListCell<Person> {
             rockstarLabel.setVisible(false);
             rockstarLabel.setManaged(false);
             photoView.photoProperty().unbind();
+            photoView.setPhoto(null);
         }
     }
 }

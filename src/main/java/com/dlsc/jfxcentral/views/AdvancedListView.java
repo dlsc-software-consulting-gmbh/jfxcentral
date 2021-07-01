@@ -80,10 +80,6 @@ public class AdvancedListView<T> extends StackPane {
                 startPage.set(startPage.get() + getMaxPageIndicatorCount());
             }
         });
-
-        paging.addListener(it -> {
-            System.out.println("paging: " + isPaging());
-        });
     }
 
     private final BooleanProperty showItemCounter = new SimpleBooleanProperty(this, "showItemCounter", true);

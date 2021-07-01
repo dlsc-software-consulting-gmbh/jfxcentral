@@ -38,6 +38,9 @@ public class MasterBookCell extends MasterCell<Book> {
             }
 
             setMasterCellLink(this, book, book.getTitle(), View.BOOKS);
+        } else {
+            coverImageView.imageProperty().unbind();
+            coverImageView.setImage(null);
         }
     }
 }

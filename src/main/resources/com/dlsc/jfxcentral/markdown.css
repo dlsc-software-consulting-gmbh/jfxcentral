@@ -89,6 +89,7 @@
 }
 
 .markdown-link {
+    -fx-cursor: hand;
     -fx-fill: -mdfx-link-color;
 }
 
@@ -187,6 +188,10 @@
 .markdown-normal-block-quote {
     -fx-background-insets: 0.7142em 0.7142em 0.7142em 0em;
     -fx-border-insets: 0.7142em 0.7142em 0.7142em 0em;
+}
+
+.markdown-normal-block-quote .markdown-link {
+    -fx-underline: true;
 }
 
 .markdown-normal-block-quote * {

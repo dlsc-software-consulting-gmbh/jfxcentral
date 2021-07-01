@@ -73,7 +73,8 @@ public class MasterLibraryCell extends MasterCell<Library> {
             setMasterCellLink(this, library, library.getSummary(), View.LIBRARIES);
         } else {
             nameLabel.setText("");
-            imageView.setVisible(false);
+            imageView.imageProperty().unbind();
+            imageView.setImage(null);
             licenseLabel.setVisible(false);
         }
     }

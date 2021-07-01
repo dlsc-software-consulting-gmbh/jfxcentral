@@ -8,7 +8,6 @@ import com.dlsc.jfxcentral.views.master.cells.MasterBlogCell;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,7 +20,6 @@ public class BlogsMasterView extends MasterViewWithListView<Blog> {
 
         getStyleClass().add("blogs-master-view");
 
-        listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MasterBlogCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
                 Comparator.comparing(Blog::getName),

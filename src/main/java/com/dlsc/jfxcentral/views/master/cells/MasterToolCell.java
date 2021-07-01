@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral.views.master.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.webapi.WebAPI;
@@ -15,7 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public class MasterToolCell extends AdvancedListCell<Tool> {
+public class MasterToolCell extends MasterCell<Tool> {
 
     private final Label nameLabel = new Label();
     private final ImageView imageView = new ImageView();
@@ -65,6 +64,11 @@ public class MasterToolCell extends AdvancedListCell<Tool> {
             }
 
             setMasterCellLink(MasterToolCell.this, tool, tool.getSummary(), View.TOOLS);
+        } else {
+            nameLabel.setText("");
+            imageView.imageProperty().unbind();
+            imageView.setImage(null);
+            markdownView.setMdString("");
         }
     }
 }

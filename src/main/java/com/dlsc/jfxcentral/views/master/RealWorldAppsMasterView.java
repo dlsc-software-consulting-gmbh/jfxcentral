@@ -5,7 +5,6 @@ import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.master.cells.MasterRealWorldAppCell;
-import javafx.scene.layout.Region;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
@@ -17,7 +16,6 @@ public class RealWorldAppsMasterView extends MasterViewWithListView<RealWorldApp
 
         getStyleClass().add("real-world-master-view");
 
-        listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MasterRealWorldAppCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().realWorldAppsProperty(),
                 Comparator.comparing(RealWorldApp::getName),
@@ -25,7 +23,5 @@ public class RealWorldAppsMasterView extends MasterViewWithListView<RealWorldApp
                         StringUtils.containsIgnoreCase(app.getName(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getCompany(), getFilterText())));
-
-        setCenter(listView);
     }
 }
