@@ -44,7 +44,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         sectionPane.setEnableAutoSubtitle(true);
 
         FilterView<Download> filterView = sectionPane.getFilterView();
-        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().downloadsProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getDownloads());
 
         if (rootPane.isMobile()) {
             filterView.getFilterGroups().setAll(downloadTypeGroup, personGroup, companyGroup);

@@ -67,7 +67,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         sectionPane.setTitle("News");
 
         FilterView<News> filterView = sectionPane.getFilterView();
-        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().newsProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getNews());
 
         if (!getRootPane().isMobile()) {
             filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);

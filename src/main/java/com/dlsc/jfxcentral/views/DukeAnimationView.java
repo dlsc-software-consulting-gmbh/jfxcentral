@@ -40,7 +40,7 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
     public DukeAnimationView(Runnable callback) {
         getStyleClass().add("duke-animation-view");
 
-        label = new Label("Press to continue");
+        label = new Label();
         label.getStyleClass().add("start-message");
         label.setVisible(callback != null);
         label.setManaged(callback != null);
@@ -74,6 +74,10 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
         }));
     }
 
+    public Label getLabel() {
+        return label;
+    }
+
     public void play() {
         if (!timeline.getStatus().equals(Animation.Status.STOPPED)) {
             timeline.stop();
@@ -96,6 +100,11 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
         timeline.play();
     }
 
+    public void showLastImage() {
+        stop();
+        imageView.setImage(images[images.length - 1]);
+    }
+
     public void stop() {
         timeline.stop();
     }
@@ -116,13 +125,10 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
         });
 
         ready = false;
-
-        System.out.println("start: total = " + totalTasks);
     }
 
     @Override
     public void beginTask(String title, int work) {
-        System.out.println("title: " + title);
         progress = 0;
         totalWork = work;
         this.title = title.replace("remote: ", "");
@@ -139,11 +145,18 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
 
     @Override
     public void endTask() {
-        Platform.runLater(() -> {
-            label.setText("Press to continue");
-        });
+        Platform.runLater(() -> label.setText(getEndText()));
         ready = true;
-        System.out.println("end task");
+    }
+
+    private String endText = "Press to continue";
+
+    public String getEndText() {
+        return endText;
+    }
+
+    public void setEndText(String endText) {
+        this.endText = endText;
     }
 
     @Override

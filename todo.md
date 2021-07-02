@@ -65,6 +65,7 @@
 - [ ] refine dialogs / lightbox
 - [ ] change "recent status" visualization **NEW** or **UPDATED**
 - [ ] fine-tune filter for "recent items"
+- [ ] cache the YouTube thumbnail images locally
 
 ### Server
 - [X] deploy app to clusters in europe, asia, us

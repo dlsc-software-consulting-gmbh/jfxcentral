@@ -20,7 +20,6 @@ public class WebView extends com.jpro.web.View {
         this.mobile = mobile;
     }
 
-
     @Override
     public String title() {
         IPage currentPage = rootPane.getCurrentPage();

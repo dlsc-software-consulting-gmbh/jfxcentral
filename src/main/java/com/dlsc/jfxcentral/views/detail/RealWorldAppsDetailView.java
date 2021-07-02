@@ -2,10 +2,10 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.MarkdownView;
-import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;
@@ -13,15 +13,22 @@ import javafx.scene.layout.VBox;
 
 public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
 
-    private final VBox vBox = new VBox();
+    private final VBox content = new VBox();
 
     public RealWorldAppsDetailView(RootPane rootPane) {
         super(rootPane, View.REAL_WORLD);
 
         getStyleClass().add("real-world-detail-view");
 
-        vBox.getStyleClass().add("vbox");
+        content.getStyleClass().add("vbox");
 
+        createHeaderSection();
+        createReadMeSection();
+
+        setContent(content);
+    }
+
+    private void createHeaderSection() {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setPrefWidth(0);
         sectionPane.setMinWidth(0);
@@ -30,25 +37,46 @@ public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
         imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> sectionPane.getWidth() - sectionPane.getInsets().getLeft() - sectionPane.getInsets().getRight(), sectionPane.widthProperty(), sectionPane.insetsProperty()));
         imageView.setPreserveRatio(true);
 
-        MarkdownView markdownView = new MarkdownView();
-        markdownView.setOnImageClick(image -> rootPane.showImage(getSelectedItem().getName(), image));
-        sectionPane.getNodes().addAll(imageView, markdownView);
+        sectionPane.getNodes().add(imageView);
 
         selectedItemProperty().addListener(it -> {
             RealWorldApp app = getSelectedItem();
             if (app != null) {
+                sectionPane.setTitle(app.getName());
+                sectionPane.setSubtitle(app.getSummary());
                 imageView.imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
+            } else {
+                sectionPane.setTitle("");
+                sectionPane.setSubtitle("");
+                imageView.imageProperty().unbind();
+            }
+        });
+
+        content.getChildren().add(sectionPane);
+    }
+
+    private void createReadMeSection() {
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setPrefWidth(0);
+        sectionPane.setMinWidth(0);
+        sectionPane.setTitle("Description");
+        sectionPane.setSubtitle("Information about the application and screenshots");
+
+        MarkdownView markdownView = new MarkdownView();
+        markdownView.setOnImageClick(image -> getRootPane().showImage(getSelectedItem().getName(), image));
+        sectionPane.getNodes().add(markdownView);
+
+        selectedItemProperty().addListener(it -> {
+            RealWorldApp app = getSelectedItem();
+            if (app != null) {
                 markdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "realworld/" + app.getId());
                 markdownView.mdStringProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(getSelectedItem()));
             } else {
-                imageView.imageProperty().unbind();
                 markdownView.mdStringProperty().unbind();
             }
         });
 
-        vBox.getChildren().add(sectionPane);
-
-        setContent(vBox);
+        content.getChildren().add(sectionPane);
     }
 
     protected boolean isUsingMasterView() {

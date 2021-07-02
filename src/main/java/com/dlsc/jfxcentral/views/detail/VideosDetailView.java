@@ -41,7 +41,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         sectionPane.setEnableAutoSubtitle(true);
 
         FilterView<Video> filterView = sectionPane.getFilterView();
-        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().videosProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getVideos());
 
         // show less filters, we have less space (width)
         if (rootPane.isMobile()) {

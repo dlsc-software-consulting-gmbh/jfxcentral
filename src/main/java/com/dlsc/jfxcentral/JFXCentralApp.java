@@ -1,8 +1,8 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.IntroView;
-import com.dlsc.jfxcentral.views.LoadingView;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
@@ -26,6 +26,8 @@ public class JFXCentralApp extends Application {
 
     private static final String REPOSITORY = "jfxcentralrepo";
 
+    private static boolean repositoryInitialized;
+
     @Override
     public void start(Stage stage) throws IOException, GitAPIException {
         DataRepository.BASE_URL = getRepoDirectory().toURI().toURL().toExternalForm() + "/";
@@ -37,7 +39,9 @@ public class JFXCentralApp extends Application {
             root = new IntroView(() -> showHomeOrLoadingView(app, stage));
             updateRepositoryInBackground(((IntroView) root).getAnimationView());
         } else {
-            updateRepository(new TextProgressMonitor());
+            if (!repositoryInitialized) {
+                updateRepository(new TextProgressMonitor());
+            }
         }
 
         Scene scene = new Scene(root, 1250, 1200);
@@ -64,7 +68,7 @@ public class JFXCentralApp extends Application {
         }
     }
 
-    private void updateRepositoryInBackground(ProgressMonitor monitor) {
+    public static void updateRepositoryInBackground(ProgressMonitor monitor) {
         Thread thread = new Thread(() -> {
             try {
                 updateRepository(monitor);
@@ -81,6 +85,7 @@ public class JFXCentralApp extends Application {
     }
 
     public static void updateRepository(ProgressMonitor monitor) throws GitAPIException, IOException {
+        repositoryInitialized = true;
         System.out.println("updating repository, monitor = " + monitor);
         File repoDirectory = getRepoDirectory();
         if (!repoDirectory.exists()) {
@@ -98,6 +103,11 @@ public class JFXCentralApp extends Application {
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
             System.out.println("done updating");
         }
+
+        monitor.endTask();
+
+        DataRepository.getInstance().refreshData();
+        ImageManager.getInstance().clear();
     }
 
     private static File getRepoDirectory() {
@@ -105,14 +115,14 @@ public class JFXCentralApp extends Application {
     }
 
     private void showHomeOrLoadingView(WebApp app, Stage stage) {
-        if (DataRepository.getInstance().isLoaded()) {
+//        if (DataRepository.getInstance().isLoaded()) {
             showHome(app, stage);
-        } else {
-            LoadingView loadingView = new LoadingView(() -> showHome(app, stage));
-
-            Scene scene = stage.getScene();
-            scene.setRoot(loadingView);
-        }
+//        } else {
+//            LoadingView loadingView = new LoadingView(() -> showHome(app, stage));
+//
+//            Scene scene = stage.getScene();
+//            scene.setRoot(loadingView);
+//        }
     }
 
     private void showHome(WebApp webApp, Stage stage) {

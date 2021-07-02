@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral.views.page;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.DataRepository.Source;
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.views.ModelObjectSearchResultCell;
 import com.dlsc.jfxcentral.views.RootPane;
@@ -21,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
+import org.eclipse.jgit.lib.TextProgressMonitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +63,7 @@ public class HeaderPane extends HBox {
         StackPane.setAlignment(title2, Pos.CENTER_LEFT);
 
         Button refreshButton = new Button("Refresh");
-        refreshButton.setOnAction(evt -> {
-            DataRepository.getInstance().refreshData();
-            ImageManager.getInstance().clear();
-        });
+        refreshButton.setOnAction(evt -> JFXCentralApp.updateRepositoryInBackground(new TextProgressMonitor()));
 
         ComboBox<Source> sourceComboBox = new ComboBox<>();
         sourceComboBox.getItems().addAll(Source.values());

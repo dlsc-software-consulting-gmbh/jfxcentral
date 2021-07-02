@@ -43,7 +43,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
         sectionPane.setEnableAutoSubtitle(true);
 
         FilterView<Tutorial> filterView = sectionPane.getFilterView();
-        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().tutorialsProperty());
+        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getTutorials());
 
         filterView.getFilterGroups().setAll(formatGroup, typeGroup, personGroup);
         filterView.setTextFilterProvider(text -> tutorial -> {
