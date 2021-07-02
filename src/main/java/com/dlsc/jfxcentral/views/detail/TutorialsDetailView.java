@@ -44,6 +44,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
 
         FilterView<Tutorial> filterView = sectionPane.getFilterView();
         Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().tutorialsProperty());
+
         filterView.getFilterGroups().setAll(formatGroup, typeGroup, personGroup);
         filterView.setTextFilterProvider(text -> tutorial -> {
             if (StringUtils.containsAnyIgnoreCase(tutorial.getName(), text)) {

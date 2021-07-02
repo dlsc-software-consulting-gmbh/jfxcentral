@@ -8,7 +8,6 @@ import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -28,10 +27,8 @@ public class JFXCentralApp extends Application {
     private static final String REPOSITORY = "jfxcentralrepo";
 
     @Override
-    public void start(Stage stage) throws GitAPIException, IOException {
+    public void start(Stage stage) throws IOException, GitAPIException {
         DataRepository.BASE_URL = getRepoDirectory().toURI().toURL().toExternalForm() + "/";
-
-        DataRepository.getInstance().getPosts().addListener((Observable obs) -> System.out.println(">>>> posts: " + DataRepository.getInstance().getPosts().size()));
 
         WebApp app = new WebApp(stage);
 
@@ -40,7 +37,7 @@ public class JFXCentralApp extends Application {
             root = new IntroView(() -> showHomeOrLoadingView(app, stage));
             updateRepositoryInBackground(((IntroView) root).getAnimationView());
         } else {
-            updateRepositoryInBackground(new TextProgressMonitor());
+            updateRepository(new TextProgressMonitor());
         }
 
         Scene scene = new Scene(root, 1250, 1200);
