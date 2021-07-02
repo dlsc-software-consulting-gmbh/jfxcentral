@@ -5,6 +5,10 @@ import com.dlsc.jfxcentral.util.PageUtil;
 import com.jpro.webapi.WebAPI;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Stage;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.TextProgressMonitor;
+
+import java.io.IOException;
 
 
 public class WebApp extends com.jpro.web.WebApp {
@@ -30,8 +34,16 @@ public class WebApp extends com.jpro.web.WebApp {
 
         addRouteJava((s) -> {
             if (s.startsWith("/refresh")) {
-                DataRepository.getInstance().refreshData();
-                return new com.jpro.web.Redirect("/home");
+                try {
+                    JFXCentralApp.updateRepository(new TextProgressMonitor());
+                    DataRepository.getInstance().refreshData();
+                } catch (GitAPIException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    return new com.jpro.web.Redirect("/home");
+                }
             }
             return null;
         });

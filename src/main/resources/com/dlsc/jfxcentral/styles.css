@@ -1805,9 +1805,27 @@
     -fx-font-family: "Permanent Marker";
     -fx-font-size: 48px;
     -fx-text-fill: derive(-fx-accent, -50%);
+    -fx-effect: -drop-shadow-1;
+}
+
+.root-pane .header-pane .title {
+    -fx-translate-x: -70px;
+    -fx-translate-y: 0px;
+}
+
+.root-pane .header-pane .title-shadow {
+    -fx-translate-x: -70px;
+    -fx-translate-y: 0px;
+}
+
+.root-pane:expanded .header-pane .title {
+    -fx-translate-x: 0px;
+    -fx-translate-y: 0px;
+}
+
+.root-pane:expanded .header-pane .title-shadow {
     -fx-translate-x: 2px;
     -fx-translate-y: 2px;
-    -fx-effect: -drop-shadow-1;
 }
 
 /* ----------------------------------------------------------------------------
