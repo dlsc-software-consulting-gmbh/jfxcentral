@@ -63,9 +63,6 @@
 - [X] add "clear" icon to filter text fields
 - [X] Use "download" menu button for download cell  
 - [ ] refine dialogs / lightbox
-- [ ] change "recent status" visualization **NEW** or **UPDATED**
-- [ ] fine-tune filter for "recent items"
-- [ ] cache the YouTube thumbnail images locally
 
 ### Server
 - [X] deploy app to clusters in europe, asia, us
@@ -75,7 +72,10 @@
 
 ### Future
 
+- [ ] change "recent status" visualization **NEW** or **UPDATED**
+- [ ] fine-tune filter for "recent items"
 - [ ] add "time period" selector to "recent changes" view (last week, last month, etc....)
 - [ ] add "detail" button to all list cells showing a model object
+- [ ] cache the YouTube thumbnail images locally
 
 

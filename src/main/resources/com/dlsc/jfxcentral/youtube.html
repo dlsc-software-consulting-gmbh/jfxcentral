@@ -1,0 +1,29 @@
+<html>
+<head>
+    <style>
+        .yt {
+            position: relative;
+            display: block;
+            width: 90%; /* width of iframe wrapper */
+            height: 0;
+            margin: auto;
+            padding: 0% 0% 56.25%; /* 16:9 ratio */
+            overflow: hidden;
+        }
+        .yt iframe {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="yt">
+    <iframe width="960" height="540" src="https://www.youtube.com/embed/mIR2TucAwSQ" allowfullscreen></iframe>
+</div>
+</body>
+</html>

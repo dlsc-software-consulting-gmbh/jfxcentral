@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.views;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.gemsfx.GlassPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.panels.PrettyScrollPane;
@@ -28,15 +27,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
-import java.util.Collections;
 import java.util.Locale;
 
 public class RootPane extends StackPane {
 
-    private final DialogPane dialogPane = new DialogPane();
-
     private IPage<?> page;
 
+    private OverlayPane overlayPane = new OverlayPane();
 
     private StackPane contentPane;
 
@@ -53,8 +50,8 @@ public class RootPane extends StackPane {
     }
 
     public void init(boolean mobile) {
-        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-        dialogPane.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
+        overlayPane.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        overlayPane.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         if (mobile) {
             initMobile();
@@ -138,7 +135,7 @@ public class RootPane extends StackPane {
 
         borderPane = new BorderPane();
         borderPane.setTop(new HeaderPane(this));
-        getChildren().setAll(borderPane, dialogPane);
+        getChildren().setAll(borderPane);
 
         DisplayService.create().ifPresentOrElse(service -> {
             if (service.isDesktop()) {
@@ -222,7 +219,7 @@ public class RootPane extends StackPane {
         }
 
         if (page != null) {
-            contentPane.getChildren().setAll((Node) page, glassPane, dialogPane);
+            contentPane.getChildren().setAll((Node) page, glassPane);
         }
     }
 
@@ -275,7 +272,7 @@ public class RootPane extends StackPane {
                 break;
         }
 
-        contentPane.getChildren().setAll(borderPane, compassWrapper, dialogPane);
+        contentPane.getChildren().setAll(borderPane, compassWrapper);
 
         borderPane.setCenter((Node) page);
     }
@@ -302,8 +299,8 @@ public class RootPane extends StackPane {
         return page;
     }
 
-    public DialogPane getDialogPane() {
-        return dialogPane;
+    public OverlayPane getOverlayPane() {
+        return overlayPane;
     }
 
     public void showImage(String title, Image image) {
@@ -316,7 +313,7 @@ public class RootPane extends StackPane {
 
         imageView.fitWidthProperty().bind(stackPane.widthProperty().multiply(.8));
 
-        getDialogPane().showNode(DialogPane.Type.BLANK, title, stackPane, false, Collections.emptyList());
+        getOverlayPane().setContent(stackPane);
     }
 
     private ObjectProperty<View> view = new SimpleObjectProperty<>(this, "view");

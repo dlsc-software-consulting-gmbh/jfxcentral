@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.views.detail.cells;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral.views.MarkdownView;
@@ -108,8 +107,7 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
-
-        rootPane.getDialogPane().showNode(DialogPane.Type.INFORMATION, "#" + pr.getNumber() + " - " + pr.getTitle(), scrollPane, false);
+        rootPane.getOverlayPane().setContent(scrollPane);
     }
 
     @Override

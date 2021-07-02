@@ -1,11 +1,10 @@
 package com.dlsc.jfxcentral.views.detail;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.data.model.Image;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.data.model.LibraryInfo;
+import com.dlsc.jfxcentral.views.RootPane;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -16,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ThumbnailScrollPane extends ScrollPane {
@@ -113,7 +111,7 @@ public class ThumbnailScrollPane extends ScrollPane {
 
                     pagination.setCurrentPageIndex(imageIndex);
 
-                    rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, image.getTitle(), pagination, false, Collections.emptyList());
+                    rootPane.getOverlayPane().setContent(pagination);
 
                     Platform.runLater(() -> pagination.requestFocus());
                 });

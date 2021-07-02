@@ -1,7 +1,7 @@
 package com.dlsc.jfxcentral.views.detail;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.views.OverlayPane;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import javafx.beans.property.ObjectProperty;
@@ -88,7 +88,7 @@ public class DetailView<T extends ModelObject> extends BorderPane {
         return rootPane;
     }
 
-    public DialogPane getDialogPane() {
-        return rootPane.getDialogPane();
+    public OverlayPane getOverlayPane() {
+        return rootPane.getOverlayPane();
     }
 }

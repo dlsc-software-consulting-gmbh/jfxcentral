@@ -1,14 +1,15 @@
 package com.dlsc.jfxcentral.views.detail.cells;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -44,16 +45,29 @@ public class DetailVideoCell extends DetailCell<Video> {
     private void showVideo(Video video) {
         if (WebAPI.isBrowser()) {
             HTMLView htmlView = new HTMLView();
-            htmlView.setContent("<iframe width=\"960\" height=\"540\" src=\"https://www.youtube.com/embed/" + video.getId() + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
-            htmlView.setPrefSize(960, 540);
-            htmlView.setMaxSize(960, 540);
-            htmlView.setMinSize(960, 540);
-            rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), htmlView, false);
+            htmlView.setContent("<div class=\"yt\"><iframe width=\"960\" height=\"540\" src=\"https://www.youtube.com/embed/" + video.getId() + "\" allowfullscreen></iframe></div></body></html>\n");
+
+            System.out.println(htmlView.getContent());
+
+            rootPane.getOverlayPane().setContent(htmlView);
         } else {
             WebView webView = new WebView();
-            webView.setMaxSize(960, 540);
+            webView.parentProperty().addListener(it -> {
+                Parent parent = webView.getParent();
+                if (parent != null) {
+                    webView.prefWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
+                    webView.prefHeightProperty().bind((((Region) parent).heightProperty().multiply(.9)));
+                    webView.minWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
+                    webView.minHeightProperty().bind((((Region) parent).heightProperty().multiply(.9)));
+                    webView.maxWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
+                    webView.maxHeightProperty().bind((((Region) parent).heightProperty().multiply(.9)));
+                } else {
+                    webView.prefWidthProperty().unbind();
+                    webView.prefHeightProperty().unbind();
+                }
+            });
             webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
-            rootPane.getDialogPane().showNode(DialogPane.Type.BLANK, video.getTitle(), webView, false);
+            rootPane.getOverlayPane().setContent(webView);
             webView.sceneProperty().addListener(it -> {
                 if (webView.getScene() == null) {
                     webView.getEngine().loadContent("empty");

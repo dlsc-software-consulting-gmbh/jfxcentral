@@ -2087,3 +2087,10 @@
     -fx-icon-color: white;
     -fx-icon-size: 32px;
 }
+
+/* ----------------------------------------------------------------------------
+ * OverlayPane
+ */
+.overlay-pane {
+    -fx-background-color: rgba(0, 0, 0, .95);
+}

@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.views.detail;
 
-import com.dlsc.gemsfx.DialogPane;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
@@ -145,6 +144,6 @@ public class BlogsDetailView extends DetailView<Blog> {
         largeImageView.setFitWidth(800);
         largeImageView.setPreserveRatio(true);
         largeImageView.imageProperty().bind(ImageManager.getInstance().blogPageLargeImageProperty(blog));
-        getRootPane().getDialogPane().showNode(DialogPane.Type.BLANK, "Title", largeImageView);
+        getRootPane().getOverlayPane().setContent(largeImageView);
     }
 }

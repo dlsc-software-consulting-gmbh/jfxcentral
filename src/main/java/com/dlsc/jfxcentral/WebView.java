@@ -50,7 +50,9 @@ public class WebView extends com.jpro.web.View {
         rootPane.init(mobile);
         handleURL(initialURL);
         rootPane.setMaxWidth(1200);
-        StackPane wrapper = new StackPane(rootPane);
+
+        StackPane wrapper = new StackPane(rootPane, rootPane.getOverlayPane());
+
         wrapper.getStyleClass().add("root-wrapper");
         if (mobile) {
             wrapper.getStyleClass().add("mobile");
