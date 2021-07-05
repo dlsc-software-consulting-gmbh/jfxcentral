@@ -2094,3 +2094,39 @@
 .overlay-pane {
     -fx-background-color: rgba(0, 0, 0, .95);
 }
+
+.overlay-pane .content-wrapper {
+    -fx-padding: 20px;
+    -fx-border-color: white;
+    -fx-border-radius: 3px;
+    -fx-border-insets: 100px;
+}
+
+.overlay-pane .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.overlay-pane .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.overlay-pane .scroll-pane .markdown-codeblock-box,
+.overlay-pane .scroll-pane .markdown-code,
+.overlay-pane .scroll-pane .markdown-codeblock {
+    -fx-background-color: white !important;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+.overlay-pane .scroll-pane .markdown-text {
+    -mdfx-link-color: -fx-accent;
+    -mdfx-border-color-1: #888;
+
+    -mdfx-font-color: white;
+    -mdfx-bg-color-1: #ccc;
+    -mdfx-bg-color-2: #ddd;
+    -mdfx-bg-color-3: #eee;
+
+    -mdfx-bq-color-border: -fx-accent; /* the blockquote's border color */
+    -mdfx-bq-color-background: derive(-fx-accent, +90%); /* the blockquote's background color */
+}

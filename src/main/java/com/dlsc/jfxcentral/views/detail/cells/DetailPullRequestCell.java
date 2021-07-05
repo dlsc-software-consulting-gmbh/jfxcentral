@@ -10,10 +10,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -106,8 +103,12 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
         ScrollPane scrollPane = new ScrollPane(markdownView);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+        scrollPane.getStyleClass().add("transparent");
 
-        rootPane.getOverlayPane().setContent(scrollPane);
+        StackPane stackPane = new StackPane(scrollPane);
+        stackPane.getStyleClass().add("content-wrapper");
+
+        rootPane.getOverlayPane().setContent(stackPane);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -61,8 +62,11 @@ public class CoordinatesPane extends SectionPane {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        HBox header = new HBox(mavenButton, gradleButton, spacer, copyButton);
+        HBox header = new HBox(mavenButton, gradleButton, spacer);
         header.getStyleClass().add("header");
+        if (!WebAPI.isBrowser()) {
+            header.getChildren().add(copyButton);
+        }
 
         VBox vBox = new VBox(header, repositoryCoordinatesLabel);
         vBox.getStyleClass().add("vbox");

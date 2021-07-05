@@ -36,7 +36,11 @@ public class JFXCentralApp extends Application {
 
         Parent root = app;
         if (!WebAPI.isBrowser()) {
-            root = new IntroView(() -> showHomeOrLoadingView(app, stage));
+            root = new IntroView(() -> {
+                if (repositoryInitialized) {
+                    showHomeOrLoadingView(app, stage);
+                }
+            });
             updateRepositoryInBackground(((IntroView) root).getAnimationView());
         } else {
             if (!repositoryInitialized) {
@@ -68,6 +72,10 @@ public class JFXCentralApp extends Application {
         }
     }
 
+    public static boolean isRepositoryInitialized() {
+        return repositoryInitialized;
+    }
+
     public static void updateRepositoryInBackground(ProgressMonitor monitor) {
         Thread thread = new Thread(() -> {
             try {
@@ -85,11 +93,9 @@ public class JFXCentralApp extends Application {
     }
 
     public static void updateRepository(ProgressMonitor monitor) throws GitAPIException, IOException {
-        repositoryInitialized = true;
         System.out.println("updating repository, monitor = " + monitor);
         File repoDirectory = getRepoDirectory();
         if (!repoDirectory.exists()) {
-            System.out.println("cloning repo");
             Git.cloneRepository()
                     .setURI("https://github.com/dlemmermann/jfxcentral-data.git")
                     .setBranch("live")
@@ -97,17 +103,17 @@ public class JFXCentralApp extends Application {
                     .setProgressMonitor(monitor)
                     .call();
         } else {
-            System.out.println("updating repo");
             repoDirectory = new File(System.getProperty("user.home") + "/" + REPOSITORY + "/.git");
             Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
-            System.out.println("done updating");
         }
 
         monitor.endTask();
 
         DataRepository.getInstance().refreshData();
         ImageManager.getInstance().clear();
+
+        repositoryInitialized = true;
     }
 
     private static File getRepoDirectory() {

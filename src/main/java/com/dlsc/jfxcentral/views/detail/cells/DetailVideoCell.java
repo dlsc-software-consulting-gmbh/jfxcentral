@@ -46,6 +46,19 @@ public class DetailVideoCell extends DetailCell<Video> {
         if (WebAPI.isBrowser()) {
             HTMLView htmlView = new HTMLView();
             htmlView.setContent("<div class=\"yt\"><iframe width=\"960\" height=\"540\" src=\"https://www.youtube.com/embed/" + video.getId() + "\" allowfullscreen></iframe></div></body></html>\n");
+            htmlView.parentProperty().addListener(it -> {
+                Parent parent = htmlView.getParent();
+                if (parent != null) {
+                    htmlView.prefWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
+                    htmlView.prefHeightProperty().bind(htmlView.prefWidthProperty().divide(16).multiply(9));
+
+                    htmlView.minWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
+                    htmlView.minHeightProperty().bind(htmlView.minWidthProperty().divide(16).multiply(9));
+
+                    htmlView.maxWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
+                    htmlView.maxHeightProperty().bind(htmlView.maxWidthProperty().divide(16).multiply(9));
+                }
+            });
 
             System.out.println(htmlView.getContent());
 
@@ -56,14 +69,13 @@ public class DetailVideoCell extends DetailCell<Video> {
                 Parent parent = webView.getParent();
                 if (parent != null) {
                     webView.prefWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
-                    webView.prefHeightProperty().bind((((Region) parent).heightProperty().multiply(.9)));
+                    webView.prefHeightProperty().bind(webView.prefWidthProperty().divide(16).multiply(9));
+
                     webView.minWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
-                    webView.minHeightProperty().bind((((Region) parent).heightProperty().multiply(.9)));
+                    webView.minHeightProperty().bind(webView.minWidthProperty().divide(16).multiply(9));
+
                     webView.maxWidthProperty().bind((((Region) parent).widthProperty().multiply(.9)));
-                    webView.maxHeightProperty().bind((((Region) parent).heightProperty().multiply(.9)));
-                } else {
-                    webView.prefWidthProperty().unbind();
-                    webView.prefHeightProperty().unbind();
+                    webView.maxHeightProperty().bind(webView.maxWidthProperty().divide(16).multiply(9));
                 }
             });
             webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());

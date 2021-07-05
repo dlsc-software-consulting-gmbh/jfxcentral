@@ -45,7 +45,7 @@ public class AdvancedListView<T> extends StackPane {
 
             Node placeholder = getPlaceholder();
             if (placeholder != null) {
-                placeholder.setVisible(getItems().isEmpty());
+                placeholder.setVisible(getItems() == null || getItems().isEmpty());
                 placeholder.setManaged(placeholder.isVisible());
             }
 
@@ -311,7 +311,7 @@ public class AdvancedListView<T> extends StackPane {
         if (cellFactory != null) {
 
             int startIndex = getPage() * getVisibleRowCount();
-            int endIndex = Math.min(startIndex + getVisibleRowCount(), getItems().size());
+            int endIndex = Math.min(startIndex + getVisibleRowCount(), getItems() != null ? getItems().size() : 0);
 
             if (isPaging() && getPageCount() > 1) {
                 // endIndex = startIndex + getVisibleRowCount();

@@ -22,6 +22,7 @@
 
 ### Bugs
 
+- [ ] "Extreme GUI makeover" downloads does not work properly, videos not showing in DMG
 - [X] Styling of status label in Pull Request cell not working properly
 - [X] Consistent use of date format ("March 3rd 2021")
 - [X] Fix styling of focused global search result cells (currently white text on white background)
