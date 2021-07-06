@@ -2,10 +2,12 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -104,11 +106,25 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         scrollPane.getStyleClass().add("transparent");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        StackPane stackPane = new StackPane(scrollPane);
-        stackPane.getStyleClass().add("content-wrapper");
+        Label titleLabel = new Label(pr.getTitle());
+        titleLabel.getStyleClass().add("title-label");
 
-        rootPane.getOverlayPane().setContent(stackPane);
+        titleLabel.setWrapText(true);
+        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+
+        Button showOnGitHub = new Button("Show on GitHub");
+        Util.setLink(showOnGitHub, pr.getHtmlUrl(), "GitHub");
+
+        HBox buttonBar = new HBox(showOnGitHub);
+        buttonBar.setAlignment(Pos.CENTER_RIGHT);
+        buttonBar.getStyleClass().add("button-bar");
+
+        VBox vBox = new VBox(titleLabel, scrollPane, buttonBar);
+        vBox.getStyleClass().add("content-wrapper");
+
+        rootPane.getOverlayPane().setContent(vBox);
     }
 
     @Override

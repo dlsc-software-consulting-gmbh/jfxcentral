@@ -2095,11 +2095,46 @@
     -fx-background-color: rgba(0, 0, 0, .95);
 }
 
+.overlay-pane .close-button {
+    -size: 64px;
+    -fx-pref-width: -size;
+    -fx-pref-height: -size;
+    -fx-min-width: -size;
+    -fx-min-height: -size;
+    -fx-max-width: -size;
+    -fx-max-height: -size;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-border-radius: 1000px;
+    -fx-background-color: transparent;
+}
+
+.overlay-pane .close-button:pressed {
+    -fx-border-color: -fx-accent;
+}
+
+.overlay-pane .close-button .ikonli-font-icon {
+    -fx-icon-size: 48px;
+}
+
 .overlay-pane .content-wrapper {
     -fx-padding: 20px;
+    -fx-spacing: 20px;
     -fx-border-color: white;
     -fx-border-radius: 3px;
     -fx-border-insets: 100px;
+}
+
+.overlay-pane .content-wrapper .title-label {
+    -fx-text-fill: white;
+    -fx-font-family: "Inter Bold";
+    -fx-font-size: 1.7142em;
+}
+
+.overlay-pane .content-wrapper .button {
+    -fx-text-fill: black;
+    -fx-padding: 20px;
+    -fx-background-color: white;
 }
 
 .overlay-pane .scroll-pane {

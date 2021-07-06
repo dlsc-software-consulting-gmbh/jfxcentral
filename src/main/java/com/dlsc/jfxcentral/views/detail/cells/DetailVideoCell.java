@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -35,6 +36,8 @@ public class DetailVideoCell extends DetailCell<Video> {
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getExtraControls().addAll(playButton, playOnYouTubeButton);
+        responsiveBox.getImageView().setOnMouseClicked(evt -> showVideo(getItem()));
+        responsiveBox.getImageView().setCursor(Cursor.HAND);
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -79,6 +82,7 @@ public class DetailVideoCell extends DetailCell<Video> {
                 }
             });
             webView.getEngine().load("https://www.youtube.com/embed/" + video.getId());
+
             rootPane.getOverlayPane().setContent(webView);
             webView.sceneProperty().addListener(it -> {
                 if (webView.getScene() == null) {

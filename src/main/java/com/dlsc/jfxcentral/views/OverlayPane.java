@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class OverlayPane extends StackPane {
 
@@ -16,7 +18,9 @@ public class OverlayPane extends StackPane {
         visibleProperty().bind(contentProperty().isNotNull());
         managedProperty().bind(contentProperty().isNotNull());
 
-        Button close = new Button("close");
+        Button close = new Button();
+        close.getStyleClass().add("close-button");
+        close.setGraphic(new FontIcon(MaterialDesign.MDI_CLOSE));
         close.setOnAction(evt -> setContent(null));
         StackPane.setAlignment(close, Pos.TOP_RIGHT);
         StackPane.setMargin(close, new Insets(20));

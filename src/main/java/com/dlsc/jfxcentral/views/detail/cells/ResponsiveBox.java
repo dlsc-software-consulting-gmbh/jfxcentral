@@ -113,6 +113,10 @@ public class ResponsiveBox extends VBox {
         }
     }
 
+    public ImageView getImageView() {
+        return imageView;
+    }
+
     public StackPane getImageWrapper() {
         return imageWrapper;
     }
