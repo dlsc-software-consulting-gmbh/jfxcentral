@@ -2096,7 +2096,7 @@
 }
 
 .overlay-pane .close-button {
-    -size: 64px;
+    -size: 48px;
     -fx-pref-width: -size;
     -fx-pref-height: -size;
     -fx-min-width: -size;
@@ -2122,7 +2122,7 @@
     -fx-spacing: 20px;
     -fx-border-color: white;
     -fx-border-radius: 3px;
-    -fx-border-insets: 100px;
+    -fx-border-insets: 10px;
 }
 
 .overlay-pane .content-wrapper .title-label {

@@ -427,3 +427,10 @@
 .detail-company-cell {
     -fx-padding: 10px 0px !important;
 }
+
+/* ----------------------------------------------------------------------------
+ * OverlayPane
+ */
+.overlay-pane .content-wrapper {
+    -fx-border-insets: 10px !important;
+}

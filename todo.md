@@ -64,6 +64,7 @@
 - [X] add "clear" icon to filter text fields
 - [X] Use "download" menu button for download cell  
 - [X] refine dialogs / lightbox
+- [ ] Book details should show multiple sections, one for title, one for readme.
 
 ### Server
 - [X] deploy app to clusters in europe, asia, us
