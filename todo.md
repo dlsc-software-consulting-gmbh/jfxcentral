@@ -7,14 +7,16 @@
 - [X] Remove static WEB_API in Util Klasse
 - [X] Block quotes are not styled properly anymore in markdown view
 - [X] Add certificate to server for https:// support
-- [x] Pretty format URLs? (ohne ?page)
-- [ ] IconFont "OpenSans" seems to get loaded a lot causing flickering icons
+- [X] Pretty format URLs? (ohne ?page)
+- [X] Can't use arrow keys in list view
+- [X] SessionManager lookup fails when click in popup (see global search)
+
+- [ ] Fonts seem to get loaded a lot causing flickering icons
 - [ ] TextFlow Bug -> PR OpenJFX
-- [ ] Hide Scrollbar (JPro Render Bug)
-- [ ] Can't use arrow keys in list view
 - [ ] Support for touch scroll events on mobile
-- [ ] Menu button popups do not seem to work (see filter dropdowns for videos, tutorials, etc....)
-- [ ] SessionManager lookup fails when click in popup (see global search)
+- [ ] Menu button popups do not seem to work on mobile (see filter dropdowns for videos, tutorials, etc....)
+
+- [ ] Hide Scrollbar (JPro Render Bug)
 
 ### Views
 
@@ -22,13 +24,11 @@
 
 ### Bugs
 
-- [ ] "Extreme GUI makeover" downloads does not work properly, videos not showing in DMG
 - [X] Styling of status label in Pull Request cell not working properly
 - [X] Consistent use of date format ("March 3rd 2021")
 - [X] Fix styling of focused global search result cells (currently white text on white background)
-- [ ] Blog header / title section -> two issues with image / photos
-      - if blog does not have company or person ID then the last image stays
-      - if the blog is associated with a company then use ImageView, not PhotoView
+- [ ] Selected search result item not highlighted in detail view when chosen
+- [ ] "Extreme GUI makeover" downloads does not work properly, videos not showing in DMG
 
 ### Data
 - [X] Add OpenJFX "Getting Started" tutorial (pin at top)
@@ -45,8 +45,7 @@
 - [X] make CovidApp available as download (also on FlexGanttFX website)
 - [X] Gluon Blog should show Gluon Logo instead of Johan's photo (use company ID)
 - [X] make CovidApp Windows version
-- [ ] Add CoachFX as a real world app example, download, jpro link
-- [ ] Add FXSampler to tools
+- [X] Add FXSampler to tools
 
 ### New Features
 - [X] add link to logo image for "home"
@@ -57,13 +56,14 @@
 - [X] add URL for refreshing the data
 - [X] add built-in memory check from Florian
 - [X] add "homepage" button to downloads cell (example speedtest)
+- [ ] add buttons to PR overlay to goto OpenJFX GitHub repo
 
 ### Enhancements
 
 - [X] final design for "selected" cells
 - [X] add "clear" icon to filter text fields
 - [X] Use "download" menu button for download cell  
-- [ ] refine dialogs / lightbox
+- [X] refine dialogs / lightbox
 
 ### Server
 - [X] deploy app to clusters in europe, asia, us
@@ -71,12 +71,17 @@
 - [ ] perform load testing
 - [ ] add Google webmaster API
 
-### Future
+### Future Dirk
 
+- [ ] Add CoachFX as a real world app example, download, jpro link (obfuscated code only, limit features)
 - [ ] change "recent status" visualization **NEW** or **UPDATED**
 - [ ] fine-tune filter for "recent items"
 - [ ] add "time period" selector to "recent changes" view (last week, last month, etc....)
 - [ ] add "detail" button to all list cells showing a model object
 - [ ] cache the YouTube thumbnail images locally
+- [ ] Blog header / title section -> two issues with image / photos
+  - if blog does not have company or person ID then the last image stays
+  - if the blog is associated with a company then use ImageView, not PhotoView
 
+### Future Florian
 

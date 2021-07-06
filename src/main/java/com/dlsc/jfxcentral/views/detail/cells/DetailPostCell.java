@@ -43,6 +43,7 @@ public class DetailPostCell extends DetailCell<Post> {
 
         titleLabel.getStyleClass().add("title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
+        titleLabel.setWrapText(true);
 
         blogLabel.getStyleClass().add("blog-label");
         blogLabel.visibleProperty().bind(blogProperty().isNull());

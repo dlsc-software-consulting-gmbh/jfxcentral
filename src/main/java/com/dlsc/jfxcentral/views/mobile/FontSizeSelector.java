@@ -10,8 +10,16 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class FontSizeSelector extends HBox {
 
+    private ToggleGroup toggleGroup = new ToggleGroup();
+
     public FontSizeSelector() {
         getStyleClass().add("font-size-selector");
+
+        toggleGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
+            if (newToggle == null) {
+                toggleGroup.selectToggle(oldToggle);
+            }
+        });
 
         FontIcon smallerIcon = new FontIcon(MaterialDesign.MDI_FORMAT_SIZE);
         smallerIcon.getStyleClass().addAll("font-size-icon", "smaller");
@@ -46,8 +54,6 @@ public class FontSizeSelector extends HBox {
 
         getChildren().setAll(smallerButton, normalButton, largerButton);
     }
-
-    private ToggleGroup toggleGroup = new ToggleGroup();
 
     private ToggleButton createButton(FontIcon icon) {
         ToggleButton button = new ToggleButton();

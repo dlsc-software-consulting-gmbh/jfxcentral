@@ -8,7 +8,7 @@ public class DetailScrollPane extends PrettyScrollPane {
     public DetailScrollPane(RootPane rootPane) {
         getStyleClass().add("detail-scroll-pane");
         setShowScrollToTopButton(true);
-        setShowShadow(true); //rootPane.isMobile());
+        setShowShadow(rootPane.isMobile());
         setFitToHeight(true);
         setFitToWidth(true);
         setMobile(rootPane.isMobile());

@@ -27,7 +27,9 @@ public abstract class MasterViewWithListView<T extends ModelObject> extends Mast
         ScrollBar scrollBar = listView.getVerticalBar();
         if (scrollBar != null) {
             scrollBar.setOpacity(0);
+
             FadeTransition fadeTransition = new FadeTransition(Duration.millis(300), scrollBar);
+            fadeTransition.setDelay(Duration.millis(500));
             fadeTransition.setFromValue(0);
 
             hoverProperty().addListener(it2 -> {
