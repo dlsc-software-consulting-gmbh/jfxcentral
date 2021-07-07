@@ -3,21 +3,13 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.Tutorial;
-import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
-import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
-import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -27,13 +19,11 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 
 
-public class LibrariesDetailView extends DetailView<Library> {
+public class LibrariesDetailView extends ModelObjectDetailView<Library> {
 
     private FlowPane buttonBox;
     private ImageView iconView = new ImageView();
     private MarkdownView descriptionMarkdownView = new MarkdownView();
-    private MarkdownView readmeMarkdownView = new MarkdownView();
-    private VBox content = new VBox();
     private ThumbnailScrollPane thumbnailScrollPane;
 
     public LibrariesDetailView(RootPane rootPane) {
@@ -48,15 +38,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         createEnsembleBox();
         createScreenshotsBox();
         createCoordinatesBox();
-        createVideoBox();
-        createDownloadsBox();
-        createTutorialsBox();
-        createReadmeBox();
-
-        setContent(content);
-
-        selectedItemProperty().addListener(it -> updateView());
-        updateView();
+        createReadMeBox(library -> DataRepository.BASE_URL + "libraries/" + library.getId(), library -> DataRepository.getInstance().libraryReadMeProperty(library));
+        createStandardBoxes();
     }
 
     protected boolean isUsingMasterView() {
@@ -74,87 +57,6 @@ public class LibrariesDetailView extends DetailView<Library> {
         sectionPane.getNodes().add(thumbnailScrollPane);
         sectionPane.visibleProperty().bind(thumbnailScrollPane.visibleProperty());
         sectionPane.managedProperty().bind(thumbnailScrollPane.managedProperty());
-
-        content.getChildren().add(sectionPane);
-    }
-
-    private void createVideoBox() {
-        AdvancedListView<Video> listView = new AdvancedListView<>();
-        listView.setPaging(true);
-        listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailVideoCell(getRootPane(), false));
-
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Videos");
-        sectionPane.getNodes().add(listView);
-
-        selectedItemProperty().addListener(it -> {
-            Library library = getSelectedItem();
-            if (library != null) {
-                sectionPane.setSubtitle("Videos related to library " + library.getName());
-                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getVideosByModelObject(library));
-            } else {
-                sectionPane.setSubtitle("");
-                listView.setItems(FXCollections.observableArrayList());
-            }
-        });
-
-        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
-        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
-
-        content.getChildren().add(sectionPane);
-    }
-
-    private void createDownloadsBox() {
-        AdvancedListView<Download> listView = new AdvancedListView<>();
-        listView.setPaging(true);
-        listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), false));
-
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Downloads");
-        sectionPane.getNodes().add(listView);
-
-        selectedItemProperty().addListener(it -> {
-            Library library = getSelectedItem();
-            if (library != null) {
-                sectionPane.setSubtitle("Downloads related to library " + library.getName());
-                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getDownloadsByModelObject(library));
-            } else {
-                sectionPane.setSubtitle("");
-                listView.setItems(FXCollections.observableArrayList());
-            }
-        });
-
-        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
-        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
-
-        content.getChildren().add(sectionPane);
-    }
-
-    private void createTutorialsBox() {
-        AdvancedListView<Tutorial> listView = new AdvancedListView<>();
-        listView.setPaging(true);
-        listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailTutorialCell(getRootPane(), false));
-
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Tutorials");
-        sectionPane.getNodes().add(listView);
-
-        selectedItemProperty().addListener(it -> {
-            Library library = getSelectedItem();
-            if (library != null) {
-                sectionPane.setSubtitle("Tutorials for library " + library.getName());
-                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getTutorialsByModelObject(library));
-            } else {
-                sectionPane.setSubtitle("");
-                listView.setItems(FXCollections.observableArrayList());
-            }
-        });
-
-        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
-        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
 
         content.getChildren().add(sectionPane);
     }
@@ -199,7 +101,8 @@ public class LibrariesDetailView extends DetailView<Library> {
         content.getChildren().add(sectionPane);
     }
 
-    private void createTitleBox() {
+    @Override
+    protected void createTitleBox() {
         iconView.setFitWidth(128);
         iconView.setFitHeight(64);
         iconView.setPreserveRatio(true);
@@ -229,20 +132,10 @@ public class LibrariesDetailView extends DetailView<Library> {
         content.getChildren().addAll(sectionPane);
     }
 
-    private void createReadmeBox() {
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Readme");
-        sectionPane.setSubtitle("Basic information on this library to get you started");
-        sectionPane.getNodes().add(readmeMarkdownView);
-        content.getChildren().add(sectionPane);
-    }
-
-    private void updateView() {
-        Library library = getSelectedItem();
+    @Override
+    protected void updateView(Library oldObject, Library library) {
         if (library != null) {
             descriptionMarkdownView.setMdString(library.getDescription());
-            readmeMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "libraries/" + library.getId());
-            readmeMarkdownView.mdStringProperty().bind(DataRepository.getInstance().libraryReadMeProperty(library));
 
             thumbnailScrollPane.setLibrary(library);
             thumbnailScrollPane.libraryInfoProperty().bind(DataRepository.getInstance().libraryInfoProperty(library));

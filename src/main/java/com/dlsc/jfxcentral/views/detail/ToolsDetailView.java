@@ -2,19 +2,13 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.data.model.Tool;
-import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
-import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -25,31 +19,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class ToolsDetailView extends DetailView<Tool> {
-
-    private final VBox content = new VBox();
+public class ToolsDetailView extends ModelObjectDetailView<Tool> {
 
     public ToolsDetailView(RootPane rootPane) {
         super(rootPane, View.TOOLS);
 
         getStyleClass().add("tools-detail-view");
 
-        content.getStyleClass().add("vbox");
-
         createTitleBox();
         createCoordinatesBox();
-        createDownloadsBox();
-        createVideoBox();
         createReadMeBox();
-
-        setContent(content);
+        createStandardBoxes();
     }
 
     protected boolean isUsingMasterView() {
         return true;
     }
 
-    private void createTitleBox() {
+    @Override
+    protected void createTitleBox() {
         MarkdownView descriptionMarkdownView = new MarkdownView();
 
         ImageView iconView = new ImageView();
@@ -129,60 +117,6 @@ public class ToolsDetailView extends DetailView<Tool> {
                 markdownView.mdStringProperty().bind(DataRepository.getInstance().toolDescriptionProperty(getSelectedItem()));
             }
         });
-
-        content.getChildren().add(sectionPane);
-    }
-
-    private void createVideoBox() {
-        AdvancedListView<Video> listView = new AdvancedListView<>();
-        listView.setPaging(true);
-        listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailVideoCell(getRootPane(), false));
-
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Videos");
-        sectionPane.getNodes().add(listView);
-
-        selectedItemProperty().addListener(it -> {
-            Tool tool = getSelectedItem();
-            if (tool != null) {
-                sectionPane.setSubtitle("Videos related to tool " + tool.getName());
-                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getVideosByModelObject(tool));
-            } else {
-                sectionPane.setSubtitle("");
-                listView.setItems(FXCollections.observableArrayList());
-            }
-        });
-
-        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
-        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
-
-        content.getChildren().add(sectionPane);
-    }
-
-    private void createDownloadsBox() {
-        AdvancedListView<Download> listView = new AdvancedListView<>();
-        listView.setPaging(true);
-        listView.setVisibleRowCount(3);
-        listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), false));
-
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Downloads");
-        sectionPane.getNodes().add(listView);
-
-        selectedItemProperty().addListener(it -> {
-            Tool tool = getSelectedItem();
-            if (tool != null) {
-                sectionPane.setSubtitle("Downloads related to tool " + tool.getName());
-                Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getDownloadsByModelObject(tool));
-            } else {
-                sectionPane.setSubtitle("");
-                listView.setItems(FXCollections.observableArrayList());
-            }
-        });
-
-        sectionPane.visibleProperty().bind(listView.itemsProperty().emptyProperty().not());
-        sectionPane.managedProperty().bind(listView.itemsProperty().emptyProperty().not());
 
         content.getChildren().add(sectionPane);
     }

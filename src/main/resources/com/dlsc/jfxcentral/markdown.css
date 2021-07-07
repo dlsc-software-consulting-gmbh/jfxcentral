@@ -135,7 +135,7 @@
 
 .markdown-code-background {
     -fx-padding: 8;
-    -fx-background-radius: 0.1428em;
+    -fx-border-radius: 0.1428em;
     -fx-border-color: -mdfx-border-color-1;
     -fx-border-width: 0.0357em;
     -fx-background-radius: 0.1428em;

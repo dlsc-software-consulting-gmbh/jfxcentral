@@ -63,6 +63,9 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
             }
         });
 
+        sectionPane.visibleProperty().bind(Bindings.isNotEmpty(markdownView.mdStringProperty()));
+        sectionPane.managedProperty().bind(Bindings.isNotEmpty(markdownView.mdStringProperty()));
+
         content.getChildren().add(sectionPane);
     }
 
