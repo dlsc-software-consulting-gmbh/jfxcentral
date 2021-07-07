@@ -16,11 +16,11 @@ public class MobileBooksPage extends MobilePage<Book> {
         super(rootPane, View.BOOKS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Book - " + getSelectedItem().getTitle() :
+                "Book - " + getSelectedItem().getName() :
                 "Books", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Information about the JavaFX book '" + getSelectedItem().getTitle() + "'" :
+                "Information about the JavaFX book '" + getSelectedItem().getName() + "'" :
                 "Collection of books covering JavaFX technology."));
     }
 

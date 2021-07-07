@@ -81,13 +81,13 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
 
     private String createTitle(ModelObject item) {
         if (item instanceof Book) {
-            return ((Book) item).getTitle();
+            return ((Book) item).getName();
         } else if (item instanceof Person) {
             return ((Person) item).getName();
         } else if (item instanceof News) {
-            return ((News) item).getTitle();
+            return ((News) item).getName();
         } else if (item instanceof Video) {
-            return ((Video) item).getTitle();
+            return ((Video) item).getName();
         } else if (item instanceof Blog) {
             return ((Blog) item).getName();
         } else if (item instanceof Library) {
@@ -101,7 +101,9 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
         } else if (item instanceof Tutorial) {
             return ((Tutorial) item).getName();
         } else if (item instanceof Download) {
-            return ((Download) item).getTitle();
+            return ((Download) item).getName();
+        } else if (item instanceof Tip) {
+            return ((Tip) item).getName();
         }
 
         return "";
@@ -134,6 +136,8 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
             return ((Tutorial) item).getSummary();
         } else if (item instanceof Download) {
             return "Download";
+        } else if (item instanceof Tip) {
+            return "Tips & Tricks";
         }
 
         return "";

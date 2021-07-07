@@ -65,13 +65,13 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
 
     private String createTitle(ModelObject item) {
         if (item instanceof Book) {
-            return ((Book) item).getTitle();
+            return ((Book) item).getName();
         } else if (item instanceof Person) {
             return ((Person) item).getName();
         } else if (item instanceof News) {
-            return ((News) item).getTitle();
+            return ((News) item).getName();
         } else if (item instanceof Video) {
-            return ((Video) item).getTitle();
+            return ((Video) item).getName();
         } else if (item instanceof Blog) {
             return ((Blog) item).getName();
         } else if (item instanceof Library) {
@@ -85,7 +85,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
         } else if (item instanceof Tutorial) {
             return ((Tutorial) item).getName();
         } else if (item instanceof Download) {
-            return ((Download) item).getTitle();
+            return ((Download) item).getName();
         }
 
         return "";

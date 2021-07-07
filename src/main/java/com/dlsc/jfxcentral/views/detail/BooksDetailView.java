@@ -131,7 +131,7 @@ public class BooksDetailView extends DetailView<Book> {
     private void updateView() {
         Book book = getSelectedItem();
         if (book != null) {
-            titleLabel.setText(book.getTitle());
+            titleLabel.setText(book.getName());
             subtitleLabel.setText(book.getSubtitle());
             descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().bookTextProperty(book));
             coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
@@ -145,7 +145,7 @@ public class BooksDetailView extends DetailView<Book> {
             if (StringUtils.isNotEmpty(book.getUrl())) {
                 Button website = new Button("Website");
                 website.getStyleClass().addAll("social-button", "website");
-                Util.setLink(website, book.getUrl(), book.getTitle());
+                Util.setLink(website, book.getUrl(), book.getName());
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
                 linksBox.getChildren().add(website);
             }
@@ -153,7 +153,7 @@ public class BooksDetailView extends DetailView<Book> {
             if (StringUtils.isNotEmpty(book.getAmazonASIN())) {
                 Button amazon = new Button("Amazon");
                 amazon.getStyleClass().addAll("social-button", "amazon");
-                Util.setLink(amazon, "http://www.amazon.com/dp/" + book.getAmazonASIN(), book.getTitle());
+                Util.setLink(amazon, "http://www.amazon.com/dp/" + book.getAmazonASIN(), book.getName());
                 amazon.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
                 linksBox.getChildren().add(amazon);
             }

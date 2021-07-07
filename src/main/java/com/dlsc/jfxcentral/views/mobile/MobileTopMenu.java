@@ -40,11 +40,13 @@ public class MobileTopMenu extends VBox {
         ToggleButton openJfxButton = createButton("Open JFX", View.OPENJFX, new FontIcon(StandardIcons.OPENJFX));
         ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REAL_WORLD, new FontIcon(StandardIcons.REAL_WORLD));
         ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(StandardIcons.DOWNLOAD));
+        ToggleButton tipsButton = createButton("Tips & Tricks", View.TIPS, new FontIcon(StandardIcons.TIP));
 
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
                 homeButton,
                 openJfxButton,
+                tipsButton,
                 peopleButton,
                 companyButton,
                 blogsButton,
@@ -62,6 +64,7 @@ public class MobileTopMenu extends VBox {
         getChildren().addAll(
                 wrap(homeButton),
                 wrap(openJfxButton),
+                wrap(tipsButton),
                 wrap(realWorldAppsButton),
                 wrap(peopleButton),
                 wrap(companyButton),
@@ -95,6 +98,9 @@ public class MobileTopMenu extends VBox {
                     break;
                 case OPENJFX:
                     toggleGroup.selectToggle(openJfxButton);
+                    break;
+                case TIPS:
+                    toggleGroup.selectToggle(tipsButton);
                     break;
                 case PEOPLE:
                     toggleGroup.selectToggle(peopleButton);
@@ -158,6 +164,9 @@ public class MobileTopMenu extends VBox {
                 break;
             case OPENJFX:
                 button.setTooltip(new Tooltip("OpenJFX"));
+                break;
+            case TIPS:
+                button.setTooltip(new Tooltip("Tips & Tricks"));
                 break;
             case PEOPLE:
                 button.setTooltip(new Tooltip("People"));

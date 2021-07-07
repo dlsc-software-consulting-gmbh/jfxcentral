@@ -46,7 +46,7 @@ public class DetailDownloadCell extends DetailCell<Download> {
         responsiveBox.getExtraControls().clear();
 
         if (!empty && download != null) {
-            responsiveBox.setTitle(download.getTitle());
+            responsiveBox.setTitle(download.getName());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
 

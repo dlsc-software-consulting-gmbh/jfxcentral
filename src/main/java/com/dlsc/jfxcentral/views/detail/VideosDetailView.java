@@ -50,7 +50,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
             filterView.getFilterGroups().setAll(typeGroup, eventGroup, speakerGroup, platformGroup, domainGroup);
 
             filterView.setTextFilterProvider(text -> video -> {
-                if (StringUtils.containsAnyIgnoreCase(video.getTitle(), text)) {
+                if (StringUtils.containsAnyIgnoreCase(video.getName(), text)) {
                     return true;
                 }
 

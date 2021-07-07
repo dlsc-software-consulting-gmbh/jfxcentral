@@ -12,5 +12,6 @@ public enum View {
     BLOGS,
     BOOKS,
     VIDEOS,
-    DOWNLOADS
+    DOWNLOADS,
+    TIPS
 }

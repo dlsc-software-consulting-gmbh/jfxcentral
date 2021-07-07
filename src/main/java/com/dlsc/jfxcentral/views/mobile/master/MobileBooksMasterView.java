@@ -25,7 +25,7 @@ public class MobileBooksMasterView extends MobileMasterViewWithAdvancedListView<
         listView.setCellFactory(view -> new MobileMasterBookCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().booksProperty(),
                 Comparator.comparing(Book::getPublisher),
-                book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getTitle(), getFilterText())));
+                book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getName(), getFilterText())));
 
         filterTextProperty().addListener(it -> System.out.println("filer: " + getFilterText()));
 

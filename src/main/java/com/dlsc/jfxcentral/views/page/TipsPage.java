@@ -1,38 +1,38 @@
 package com.dlsc.jfxcentral.views.page;
 
-import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.detail.BooksDetailView;
 import com.dlsc.jfxcentral.views.detail.DetailView;
-import com.dlsc.jfxcentral.views.master.BooksMasterView;
+import com.dlsc.jfxcentral.views.detail.TipsDetailView;
 import com.dlsc.jfxcentral.views.master.MasterView;
+import com.dlsc.jfxcentral.views.master.TipsMasterView;
 import javafx.beans.binding.Bindings;
 
-public class BooksPage extends Page<Book> {
+public class TipsPage extends Page<Tip> {
 
-    public BooksPage(RootPane rootPane) {
+    public TipsPage(RootPane rootPane) {
         super(rootPane, View.BOOKS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Book - " + getSelectedItem().getName() :
-                "Books", selectedItemProperty()));
+                "Tip - " + getSelectedItem().getName() :
+                "Tips", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Information about the JavaFX book '" + getSelectedItem().getName() + "'" :
-                "Collection of books covering JavaFX technology."));
+                "A tip for JavaFX titled '" + getSelectedItem().getName() + "'" :
+                "Collection of tips for the JavaFX technology."));
     }
 
     @Override
     protected MasterView createMasterView() {
-        BooksMasterView view = new BooksMasterView(getRootPane());
+        TipsMasterView view = new TipsMasterView(getRootPane());
         selectedItemProperty().bindBidirectional(view.selectedItemProperty());
         return view;
     }
 
     @Override
     protected DetailView createDetailView() {
-        BooksDetailView view = new BooksDetailView(getRootPane());
+        TipsDetailView view = new TipsDetailView(getRootPane());
         selectedItemProperty().bindBidirectional(view.selectedItemProperty());
         return view;
     }

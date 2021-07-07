@@ -52,7 +52,7 @@ public class DetailBookCell extends DetailCell<Book> {
 
         if (!empty && item != null) {
             responsiveBox.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(item));
-            responsiveBox.setTitle(item.getTitle());
+            responsiveBox.setTitle(item.getName());
             responsiveBox.setSubtitle(item.getSubtitle());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().bookTextProperty(item));
 
@@ -62,9 +62,9 @@ public class DetailBookCell extends DetailCell<Book> {
             amazonButton.setVisible(StringUtils.isNotEmpty(item.getAmazonASIN()));
             amazonButton.setManaged(StringUtils.isNotEmpty(item.getAmazonASIN()));
 
-            Util.setLink(homepageButton, item.getUrl(), item.getTitle());
-            Util.setLink(detailsButton, PageUtil.getLink(item), item.getTitle());
-            Util.setLink(amazonButton, "http://www.amazon.com/dp/" + item.getAmazonASIN(), item.getTitle());
+            Util.setLink(homepageButton, item.getUrl(), item.getName());
+            Util.setLink(detailsButton, PageUtil.getLink(item), item.getName());
+            Util.setLink(amazonButton, "http://www.amazon.com/dp/" + item.getAmazonASIN(), item.getName());
         }
     }
 }

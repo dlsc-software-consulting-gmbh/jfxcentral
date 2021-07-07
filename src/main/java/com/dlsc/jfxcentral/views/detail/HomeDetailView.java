@@ -73,7 +73,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
             filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);
             filterView.setTextFilterProvider(text -> news -> {
 
-                if (StringUtils.containsAnyIgnoreCase(news.getTitle(), text)) {
+                if (StringUtils.containsAnyIgnoreCase(news.getName(), text)) {
                     return true;
                 }
 

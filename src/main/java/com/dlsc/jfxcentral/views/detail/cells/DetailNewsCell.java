@@ -54,7 +54,7 @@ public class DetailNewsCell extends DetailCell<News> {
         super.updateItem(news, empty);
 
         if (!empty && news != null) {
-            responsiveBox.setTitle(news.getTitle());
+            responsiveBox.setTitle(news.getName());
             responsiveBox.setSubtitle(news.getSubtitle());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().newsBannerImageProperty(news));
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().newsTextProperty(news));

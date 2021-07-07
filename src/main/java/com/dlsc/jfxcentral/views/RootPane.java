@@ -268,6 +268,9 @@ public class RootPane extends StackPane {
             case VIDEOS:
                 page = new VideosPage(this);
                 break;
+            case TIPS:
+                page = new TipsPage(this);
+                break;
             default:
                 break;
         }

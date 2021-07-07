@@ -98,7 +98,7 @@ public class DetailVideoCell extends DetailCell<Video> {
 
         if (!empty && video != null) {
             Util.setLink(playOnYouTubeButton, "https://youtu.be/" + getItem().getId(), "https://youtu.be/" + getItem().getId());
-            responsiveBox.setTitle(video.getTitle());
+            responsiveBox.setTitle(video.getName());
             responsiveBox.setDescription(video.getDescription());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         }

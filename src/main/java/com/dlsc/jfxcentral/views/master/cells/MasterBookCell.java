@@ -37,7 +37,7 @@ public class MasterBookCell extends MasterCell<Book> {
                 setMouseTransparent(true);
             }
 
-            setMasterCellLink(this, book, book.getTitle(), View.BOOKS);
+            setMasterCellLink(this, book, book.getName(), View.BOOKS);
         } else {
             coverImageView.imageProperty().unbind();
             coverImageView.setImage(null);

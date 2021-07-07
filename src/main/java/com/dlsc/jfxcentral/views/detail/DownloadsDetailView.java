@@ -51,7 +51,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         } else {
             filterView.getFilterGroups().setAll(downloadTypeGroup, fileTypeGroup, personGroup, companyGroup);
             filterView.setTextFilterProvider(text -> video -> {
-                if (video.getTitle().toLowerCase().contains(text)) {
+                if (video.getName().toLowerCase().contains(text)) {
                     return true;
                 }
                 return false;

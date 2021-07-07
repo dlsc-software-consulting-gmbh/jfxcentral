@@ -19,6 +19,6 @@ public class BooksMasterView extends MasterViewWithListView<Book> {
         listView.setCellFactory(view -> new MasterBookCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().booksProperty(),
                 Comparator.comparing(Book::getPublisher),
-                book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getTitle(), getFilterText())));
+                book -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(book.getName(), getFilterText())));
     }
 }
