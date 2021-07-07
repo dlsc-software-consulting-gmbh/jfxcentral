@@ -9,26 +9,22 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
-public class RealWorldAppsDetailView extends DetailView<RealWorldApp> {
-
-    private final VBox content = new VBox();
+public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp> {
 
     public RealWorldAppsDetailView(RootPane rootPane) {
         super(rootPane, View.REAL_WORLD);
 
         getStyleClass().add("real-world-detail-view");
 
-        content.getStyleClass().add("vbox");
-
-        createHeaderSection();
+        createTitleBox();
         createReadMeSection();
+        createStandardBoxes();
 
-        setContent(content);
     }
 
-    private void createHeaderSection() {
+    @Override
+    protected void createTitleBox() {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setPrefWidth(0);
         sectionPane.setMinWidth(0);

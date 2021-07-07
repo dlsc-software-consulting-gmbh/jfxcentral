@@ -31,14 +31,17 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
     }
 
     protected void createStandardBoxes() {
-        createListViewBox("Libraries", listView -> new DetailLibraryCell(getRootPane(), false), item -> DataRepository.getInstance().getLibrariesByModelObject(item));
-        createListViewBox("Tools", listView -> new DetailToolCell(getRootPane()), item -> DataRepository.getInstance().getToolsByModelObject(item));
-        createListViewBox("Blogs", listView -> new DetailBlogCell(getRootPane(), false), item -> DataRepository.getInstance().getBlogsByModelObject(item));
-        createListViewBox("Tutorials", listView -> new DetailTutorialCell(getRootPane(), false), item -> DataRepository.getInstance().getTutorialsByModelObject(item));
-        createListViewBox("Downloads", listView -> new DetailDownloadCell(getRootPane(), false), item -> DataRepository.getInstance().getDownloadsByModelObject(item));
-        createListViewBox("Videos", listView -> new DetailVideoCell(getRootPane(), false), item -> DataRepository.getInstance().getVideosByModelObject(item));
-        createListViewBox("Books", listView -> new DetailBookCell(getRootPane(), false), item -> DataRepository.getInstance().getBooksByModelObject(item));
-        createListViewBox("People", listView -> new DetailPersonCell(getRootPane(), false), item -> DataRepository.getInstance().getPeopleByModelObject(item));
+        DataRepository repository = DataRepository.getInstance();
+        createListViewBox("Libraries", listView -> new DetailLibraryCell(getRootPane(), false), item -> repository.getLibrariesByModelObject(item));
+        createListViewBox("Tools", listView -> new DetailToolCell(getRootPane()), item -> repository.getToolsByModelObject(item));
+        createListViewBox("Blogs", listView -> new DetailBlogCell(getRootPane(), false), item -> repository.getBlogsByModelObject(item));
+        createListViewBox("Tutorials", listView -> new DetailTutorialCell(getRootPane(), false), item -> repository.getTutorialsByModelObject(item));
+        createListViewBox("Downloads", listView -> new DetailDownloadCell(getRootPane(), false), item -> repository.getDownloadsByModelObject(item));
+        createListViewBox("Videos", listView -> new DetailVideoCell(getRootPane(), false), item -> repository.getVideosByModelObject(item));
+        createListViewBox("Books", listView -> new DetailBookCell(getRootPane(), false), item -> repository.getBooksByModelObject(item));
+        createListViewBox("People", listView -> new DetailPersonCell(getRootPane(), false), item -> repository.getPeopleByModelObject(item));
+        createListViewBox("Companies", listView -> new DetailCompanyCell(getRootPane(), false), item -> repository.getCompaniesByModelObject(item));
+        createListViewBox("Apps", listView -> new DetailRealWorldAppCell(getRootPane(), false), item -> repository.getRealWorldAppsByModelObject(item));
     }
 
     protected boolean isUsingMasterView() {

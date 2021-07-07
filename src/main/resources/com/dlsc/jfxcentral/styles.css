@@ -749,48 +749,44 @@
 .books-detail-view .title-section {
 }
 
-.books-detail-view .title-section .content {
+.books-detail-view .title-section {
     -fx-spacing: 20px;
 }
 
-.books-detail-view .title-section .content .horizontal-box {
+.books-detail-view .title-section .horizontal-box {
     -fx-spacing: 20px;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box {
+.books-detail-view .title-section .horizontal-box .vertical-box {
     -fx-spacing: 10px;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box .title-label {
+.books-detail-view .title-section .horizontal-box .vertical-box .title-label {
     -fx-graphic-text-gap: 10px;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box .subtitle-label {
+.books-detail-view .title-section .horizontal-box .vertical-box .subtitle-label {
     -fx-font-size: 1.1428em;
     -fx-opacity: .8;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box .authors-label {
+.books-detail-view .title-section .horizontal-box .vertical-box .authors-label {
     -fx-text-fill: -fx-accent;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box .description-markdown-view {
-    -fx-padding: 30px 0px;
-}
-
-.books-detail-view .title-section .content .publisher-label,
-.books-detail-view .title-section .content .publish-date-label,
-.books-detail-view .title-section .content .isbn-label {
+.books-detail-view .title-section .publisher-label,
+.books-detail-view .title-section .publish-date-label,
+.books-detail-view .title-section .isbn-label {
     -fx-text-fill: -fx-accent;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box .author-title-label {
+.books-detail-view .title-section .horizontal-box .vertical-box .author-title-label {
     -fx-font-size: 1.1428em;
     -fx-font-family: "Inter Bold";
     -fx-padding: 20px 0px;
 }
 
-.books-detail-view .title-section .content .horizontal-box .vertical-box .social-box {
+.books-detail-view .title-section .horizontal-box .vertical-box .social-box {
     -fx-vgap: 10px;
     -fx-hgap: 10px;
 }

@@ -3,18 +3,10 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Book;
-import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListView;
-import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.detail.cells.DetailPersonCell;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -25,15 +17,13 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.stream.Collectors;
 
-public class BooksDetailView extends DetailView<Book> {
+public class BooksDetailView extends ModelObjectDetailView<Book> {
 
     private final DateTimeFormatter dateTimeFormatter;
     private ImageView coverImageView = new ImageView();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
-    private MarkdownView descriptionMarkdownView = new MarkdownView();
     private Label authorsLabel = new Label();
     private Label isbnLabel = new Label();
     private Label publisherLabel = new Label();
@@ -48,6 +38,13 @@ public class BooksDetailView extends DetailView<Book> {
 
         dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
 
+        createTitleBox();
+        createReadMeBox(book -> DataRepository.BASE_URL + "books/" + book.getId(), book -> DataRepository.getInstance().bookTextProperty(book));
+        createStandardBoxes();
+    }
+
+    @Override
+    protected void createTitleBox() {
         // book section
         coverImageView.setFitWidth(128);
         coverImageView.setPreserveRatio(true);
@@ -65,9 +62,6 @@ public class BooksDetailView extends DetailView<Book> {
         subtitleLabel.setMinHeight(Region.USE_PREF_SIZE);
         HBox.setHgrow(subtitleLabel, Priority.ALWAYS);
 
-        descriptionMarkdownView.getStyleClass().add("description-markdown-view");
-        HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
-
         authorsLabel.setWrapText(true);
         authorsLabel.setMinHeight(Region.USE_PREF_SIZE);
         authorsLabel.getStyleClass().add("authors-label");
@@ -84,7 +78,7 @@ public class BooksDetailView extends DetailView<Book> {
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
-        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, spacer, miscBox, linksBox);
+        VBox vBox = new VBox(titleLabel, subtitleLabel, authorsLabel, miscBox, spacer, linksBox);
 
         vBox.getStyleClass().add("vertical-box");
         vBox.setFillWidth(true);
@@ -92,48 +86,26 @@ public class BooksDetailView extends DetailView<Book> {
 
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox titleBox = new HBox(vBox, coverImageView);
-        titleBox.setMinHeight(Region.USE_PREF_SIZE);
-        titleBox.getStyleClass().add("horizontal-box");
+        HBox hBox = new HBox(vBox, coverImageView);
+        hBox.setMinHeight(Region.USE_PREF_SIZE);
+        hBox.getStyleClass().add("horizontal-box");
 
-        VBox content = new VBox(titleBox, descriptionMarkdownView);
-        content.getStyleClass().add("content");
+        SectionPane sectionPane = new SectionPane(hBox);
+        sectionPane.getStyleClass().add("title-section");
+        sectionPane.setMinHeight(Region.USE_PREF_SIZE);
 
-        SectionPane bookSectionPane = new SectionPane(content);
-        bookSectionPane.getStyleClass().add("title-section");
-        bookSectionPane.setMinHeight(Region.USE_PREF_SIZE);
-
-        // authors section
-        AdvancedListView<Person> authorListView = new AdvancedListView<>();
-        authorListView.setCellFactory(view -> new DetailPersonCell(rootPane, true));
-        authorListView.setPaging(true);
-        authorListView.setVisibleRowCount(1000);
-        authorListView.setItems(authors);
-        authorListView.visibleProperty().bind(Bindings.isNotEmpty(authors));
-        authorListView.managedProperty().bind(Bindings.isNotEmpty(authors));
-
-        SectionPane authorSectionPane = new SectionPane(authorListView);
-        authorSectionPane.setMinHeight(Region.USE_PREF_SIZE);
-        authorSectionPane.visibleProperty().bind(authorListView.itemsProperty().emptyProperty().not());
-        authorSectionPane.managedProperty().bind(authorListView.itemsProperty().emptyProperty().not());
-
-        VBox content2 = new VBox(bookSectionPane, authorSectionPane);
-
-        setContent(content2);
-
-        selectedItemProperty().addListener(it -> updateView());
+        content.getChildren().add(sectionPane);
     }
 
     protected boolean isUsingMasterView() {
         return true;
     }
 
-    private void updateView() {
-        Book book = getSelectedItem();
+    @Override
+    protected void updateView(Book oldBook, Book book) {
         if (book != null) {
             titleLabel.setText(book.getName());
             subtitleLabel.setText(book.getSubtitle());
-            descriptionMarkdownView.mdStringProperty().bind(DataRepository.getInstance().bookTextProperty(book));
             coverImageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
             authorsLabel.setText(book.getAuthors());
             isbnLabel.setText("ISBN: " + book.getIsbn());
@@ -157,10 +129,6 @@ public class BooksDetailView extends DetailView<Book> {
                 amazon.setGraphic(new FontIcon(FontAwesomeBrands.AMAZON));
                 linksBox.getChildren().add(amazon);
             }
-
-            authors.setAll(DataRepository.getInstance().getPeople().stream().filter(person -> book.getPersonIds().contains(person.getId())).collect(Collectors.toList()));
         }
     }
-
-    private final ListProperty<Person> authors = new SimpleListProperty<>(this, "authors", FXCollections.observableArrayList());
 }
