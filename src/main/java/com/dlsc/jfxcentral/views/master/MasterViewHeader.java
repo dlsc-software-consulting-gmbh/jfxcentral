@@ -30,7 +30,7 @@ public class MasterViewHeader extends HBox {
         searchField.textProperty().bindBidirectional(filterText);
         searchField.getStyleClass().add("search-field");
         searchField.setMaxWidth(Double.MAX_VALUE);
-        searchField.setPromptText("Search ....");
+        searchField.setPromptText("Filter ....");
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
         FontIcon clearSearch = new FontIcon(Material.CLEAR);
