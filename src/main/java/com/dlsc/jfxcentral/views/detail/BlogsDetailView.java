@@ -13,11 +13,13 @@ import com.dlsc.jfxcentral.views.PhotoView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPostCell;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -28,9 +30,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class BlogsDetailView extends DetailView<Blog> {
+public class BlogsDetailView extends ModelObjectDetailView<Blog> {
 
     private VBox content = new VBox();
+
+    private final ObservableList<Post> posts = FXCollections.observableArrayList();
 
     public BlogsDetailView(RootPane rootPane) {
         super(rootPane, View.BLOGS);
@@ -43,6 +47,21 @@ public class BlogsDetailView extends DetailView<Blog> {
         createPostsBox();
 
         setContent(content);
+
+        selectedItemProperty().addListener(it -> {
+            posts.clear();
+
+            Blog blog = getSelectedItem();
+            if (blog != null) {
+                Thread thread = new Thread(() -> {
+                    List<Post> result = DataRepository.getInstance().loadPosts(blog);
+                    Platform.runLater(() -> posts.setAll(result));
+                });
+                thread.setDaemon(true);
+                thread.setName("Blog Loader Thread");
+                thread.start();
+            }
+        });
     }
 
     protected boolean isUsingMasterView() {
@@ -53,36 +72,40 @@ public class BlogsDetailView extends DetailView<Blog> {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle("Posts");
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? "List of current posts on " + getSelectedItem().getName() : "", selectedItemProperty()));
-        VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
-        FilteredList<Post> filteredPosts = new FilteredList(DataRepository.getInstance().getPosts());
+        FilteredList<Post> filteredPosts = new FilteredList(posts);
         filteredPosts.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getSelectedItem() == null || post.getBlog().equals(getSelectedItem()), selectedItemProperty()));
 
         SortedList<Post> sortedPosts = new SortedList<>(filteredPosts);
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
 
         AdvancedListView<Post> listView = new AdvancedListView<>();
+        listView.setPlaceholder(new Label("Loading posts ..."));
+        VBox.setVgrow(listView, Priority.ALWAYS);
+
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         if (getRootPane().isMobile()) {
             listView.setPaging(true);
             listView.setVisibleRowCount(25);
         }
 
-        listView.setItems(sortedPosts);
         listView.setCellFactory(view -> {
             DetailPostCell cell = new DetailPostCell(getRootPane());
             cell.blogProperty().bind(selectedItemProperty());
             return cell;
         });
 
-        VBox.setVgrow(listView, Priority.ALWAYS);
+        listView.setItems(sortedPosts);
 
         sectionPane.getNodes().add(listView);
+
+        VBox.setVgrow(sectionPane, Priority.ALWAYS);
 
         content.getChildren().add(sectionPane);
     }
 
-    private void createTitleBox() {
+    @Override
+    protected void createTitleBox() {
         PhotoView photoView = new PhotoView();
         photoView.setEditable(false);
         selectedItemProperty().addListener(it -> {
@@ -137,13 +160,5 @@ public class BlogsDetailView extends DetailView<Blog> {
         sectionPane.managedProperty().bind(selectedItemProperty().isNotNull());
 
         content.getChildren().addAll(sectionPane);
-    }
-
-    private void showBlogDetails(Blog blog) {
-        ImageView largeImageView = new ImageView();
-        largeImageView.setFitWidth(800);
-        largeImageView.setPreserveRatio(true);
-        largeImageView.imageProperty().bind(ImageManager.getInstance().blogPageLargeImageProperty(blog));
-        getRootPane().getOverlayPane().setContent(largeImageView);
     }
 }

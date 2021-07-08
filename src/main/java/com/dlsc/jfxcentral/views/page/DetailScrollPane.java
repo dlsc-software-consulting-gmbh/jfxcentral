@@ -12,6 +12,7 @@ public class DetailScrollPane extends PrettyScrollPane {
         setFitToHeight(true);
         setFitToWidth(true);
         setMobile(rootPane.isMobile());
+        setPannable(rootPane.isMobile());
     }
 }
 

@@ -38,12 +38,8 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
         selectedItemProperty().addListener(it -> {
             RealWorldApp app = getSelectedItem();
             if (app != null) {
-                sectionPane.setTitle(app.getName());
-                sectionPane.setSubtitle(app.getSummary());
                 imageView.imageProperty().bind(ImageManager.getInstance().realWorldAppLargeImageProperty(app));
             } else {
-                sectionPane.setTitle("");
-                sectionPane.setSubtitle("");
                 imageView.imageProperty().unbind();
             }
         });

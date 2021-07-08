@@ -42,7 +42,7 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
         createListViewBox("People", listView -> new DetailPersonCell(getRootPane(), false), item -> repository.getPeopleByModelObject(item));
         createListViewBox("Companies", listView -> new DetailCompanyCell(getRootPane(), false), item -> repository.getCompaniesByModelObject(item));
         createListViewBox("Apps", listView -> new DetailRealWorldAppCell(getRootPane(), false), item -> repository.getRealWorldAppsByModelObject(item));
-        createListViewBox("Tips", listView -> new DetailTipCell(getRootPane()), item -> repository.getTipsByModelObject(item));
+        createListViewBox("Tips", listView -> new DetailTipCell(getRootPane(), false), item -> repository.getTipsByModelObject(item));
     }
 
     protected boolean isUsingMasterView() {

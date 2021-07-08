@@ -64,31 +64,7 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
     }
 
     private String createTitle(ModelObject item) {
-        if (item instanceof Book) {
-            return ((Book) item).getName();
-        } else if (item instanceof Person) {
-            return ((Person) item).getName();
-        } else if (item instanceof News) {
-            return ((News) item).getName();
-        } else if (item instanceof Video) {
-            return ((Video) item).getName();
-        } else if (item instanceof Blog) {
-            return ((Blog) item).getName();
-        } else if (item instanceof Library) {
-            return ((Library) item).getName();
-        } else if (item instanceof Company) {
-            return ((Company) item).getName();
-        } else if (item instanceof RealWorldApp) {
-            return ((RealWorldApp) item).getName();
-        } else if (item instanceof Tool) {
-            return ((Tool) item).getName();
-        } else if (item instanceof Tutorial) {
-            return ((Tutorial) item).getName();
-        } else if (item instanceof Download) {
-            return ((Download) item).getName();
-        }
-
-        return "";
+        return item.getName();
     }
 
     private String createSubTitle(ModelObject item) {
@@ -99,27 +75,15 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
         } else if (item instanceof News) {
             return ((News) item).getSubtitle();
         } else if (item instanceof Video) {
-            String description = ((Video) item).getDescription();
+            String description = item.getDescription();
             if (StringUtils.isNotBlank(description)) {
                 return description.substring(0, Math.min(100, description.length())).replace("\n", " ");
             }
             return "";
-        } else if (item instanceof Blog) {
-            return ((Blog) item).getSummary();
-        } else if (item instanceof Library) {
-            return ((Library) item).getSummary();
-        } else if (item instanceof Company) {
-            return ((Company) item).getHomepage();
-        } else if (item instanceof RealWorldApp) {
-            return ((RealWorldApp) item).getSummary();
-        } else if (item instanceof Tool) {
-            return ((Tool) item).getSummary();
-        } else if (item instanceof Tutorial) {
-            return ((Tutorial) item).getSummary();
         } else if (item instanceof Download) {
             return "Download";
+        } else {
+            return item.getSummary();
         }
-
-        return "";
     }
 }

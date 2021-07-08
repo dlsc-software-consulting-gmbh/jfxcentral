@@ -1,69 +1,37 @@
 package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.model.Tip;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
-import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
-import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 
-public class DetailTipCell extends AdvancedListCell<Tip> {
+public class DetailTipCell extends DetailCell<Tip> {
 
-    private Label titleLabel = new Label();
-    private MarkdownView descriptionMarkdownView = new MarkdownView();
+    private final RootPane rootPane;
+    private final ResponsiveBox responsiveBox;
 
-    private ImageView logoImageView = new ImageView();
-    private HBox buttonBox = new HBox();
+    public DetailTipCell(RootPane rootPane, boolean largeImage) {
+        this.rootPane = rootPane;
 
-    public DetailTipCell(RootPane rootPane) {
-        getStyleClass().add("detail-tool-cell");
+        getStyleClass().add("detail-tip-cell");
 
-        titleLabel.getStyleClass().addAll("header2", "title-label");
-        titleLabel.setWrapText(true);
-        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
-        titleLabel.setAlignment(Pos.TOP_LEFT);
-        titleLabel.setContentDisplay(ContentDisplay.RIGHT);
+        setPrefWidth(0);
 
-        VBox vBox = new VBox(titleLabel, descriptionMarkdownView);
-        vBox.getStyleClass().add("vbox");
-        vBox.setAlignment(Pos.TOP_LEFT);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
+        responsiveBox.setLargeImageWidth(200);
+        responsiveBox.setLargeImageHeight(100);
 
-        HBox.setHgrow(vBox, Priority.ALWAYS);
-
-        logoImageView.setFitWidth(48);
-        logoImageView.setPreserveRatio(true);
-
-        StackPane logoWrapper = new StackPane(logoImageView);
-        logoWrapper.setMinWidth(48);
-        logoWrapper.setMaxWidth(48);
-        StackPane.setAlignment(logoImageView, Pos.TOP_LEFT);
-
-        HBox hBox = new HBox(vBox, logoWrapper);
-        hBox.setAlignment(Pos.TOP_LEFT);
-        hBox.getStyleClass().add("hbox");
-
-        VBox outerBox = new VBox(hBox, buttonBox);
-        outerBox.visibleProperty().bind(itemProperty().isNotNull());
-        outerBox.getStyleClass().add("outer-box");
-
-        setGraphic(outerBox);
+        setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-        outerBox.visibleProperty().bind(emptyProperty().not());
     }
 
     @Override
-    protected void updateItem(Tip item, boolean empty) {
-        super.updateItem(item, empty);
+    protected void updateItem(Tip tip, boolean empty) {
+        super.updateItem(tip, empty);
 
-        if (!empty && item != null) {
-//            logoImageView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(item));
-            logoImageView.setVisible(true);
-            titleLabel.setText(item.getName());
-            descriptionMarkdownView.setMdString(item.getSummary());
+        if (!empty && tip != null) {
+            responsiveBox.setTitle(tip.getName());
+            responsiveBox.setDescription(tip.getSummary());
         }
     }
 }

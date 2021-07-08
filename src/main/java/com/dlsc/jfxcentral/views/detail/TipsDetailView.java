@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.views.detail;
 
-import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -61,7 +60,7 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
         vBox.setMaxHeight(Region.USE_PREF_SIZE);
         StackPane.setAlignment(vBox, Pos.TOP_LEFT);
 
-        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("tips.png").toExternalForm());
+        ImageView imageView = new ImageView();
         imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> sectionPane.getWidth() - sectionPane.getInsets().getLeft() - sectionPane.getInsets().getRight(), sectionPane.widthProperty(), sectionPane.insetsProperty()));
         imageView.setPreserveRatio(true);
 

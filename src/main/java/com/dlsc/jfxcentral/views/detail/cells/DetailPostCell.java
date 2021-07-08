@@ -9,14 +9,19 @@ import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -24,12 +29,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
-public class DetailPostCell extends DetailCell<Post> {
+public class DetailPostCell extends ListCell<Post> {
 
     private final RootPane rootPane;
     private final DateTimeFormatter dateTimeFormatter;
     private Label titleLabel = new Label();
-    private Label blogLabel = new Label();
     private Label ageLabel = new Label();
 
     private ImageView imageView = new ImageView();
@@ -45,10 +49,6 @@ public class DetailPostCell extends DetailCell<Post> {
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setWrapText(true);
 
-        blogLabel.getStyleClass().add("blog-label");
-        blogLabel.visibleProperty().bind(blogProperty().isNull());
-        blogLabel.managedProperty().bind(blogProperty().isNull());
-
         imageView.setFitHeight(32);
         imageView.setFitWidth(32);
         imageView.setPreserveRatio(true);
@@ -56,7 +56,7 @@ public class DetailPostCell extends DetailCell<Post> {
         ageLabel.getStyleClass().add("age-label");
         ageLabel.setMinWidth(Region.USE_PREF_SIZE);
 
-        HBox hbox = new HBox(imageView, blogLabel, titleLabel, ageLabel);
+        HBox hbox = new HBox(imageView, titleLabel, ageLabel);
         HBox.setHgrow(titleLabel, Priority.ALWAYS);
         hbox.getStyleClass().add("hbox");
         hbox.setMinWidth(0);
@@ -98,18 +98,33 @@ public class DetailPostCell extends DetailCell<Post> {
 
         if (!empty && item != null) {
             titleLabel.setText(item.getSyndEntry().getTitle());
-            blogLabel.setText(item.getSyndFeed().getTitle());
             ageLabel.setText(getAge(item));
             imageView.imageProperty().bind(ImageManager.getInstance().blogIconImageProperty(item.getBlog()));
 
             if (!rootPane.isMobile()) {
-                setLink(item.getSyndEntry().getLink(), item.getSyndEntry().getTitle());
+               setLink(item.getSyndEntry().getLink(), item.getSyndEntry().getTitle());
             }
         } else {
             imageView.imageProperty().unbind();
             titleLabel.setText("");
-            blogLabel.setText("");
             ageLabel.setText("");
+        }
+    }
+
+    protected void setLink(String url, String description) {
+        try {
+            ObservableList<Node> children2 = null;
+            if (WebAPI.isBrowser()) {
+                if (getParent() == null) {
+                    throw new NullPointerException("missing parent");
+                }
+                Method method = Parent.class.getDeclaredMethod("getChildren");
+                method.setAccessible(true);
+                children2 = (ObservableList<Node>) method.invoke(getParent());
+            }
+            Util.setLink(this, url, description, children2);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

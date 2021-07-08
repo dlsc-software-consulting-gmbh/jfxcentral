@@ -1257,6 +1257,13 @@
 }
 
 /* -----------------------------------------------------------------------------
+ * DetailTipCell
+ */
+.detail-tip-cell .image-view {
+    -fx-image: url("tip-round.jpg");
+}
+
+/* -----------------------------------------------------------------------------
  * ThumbnailScrollPane
  */
 .thumbnail-scroll-pane {
@@ -1902,15 +1909,6 @@
     -fx-underline: true;
 }
 
-/* TODO: will we show the blog name or not? */
-.detail-post-cell .blog-label {
-    -size: 0px;
-    -fx-min-width: -size;
-    -fx-pref-width: -size;
-    -fx-max-width: -size;
-    -fx-opacity: .7;
-}
-
 /* ----------------------------------------------------------------------------
  * DetailCompanyCell
  */
@@ -2167,6 +2165,10 @@
 /* ----------------------------------------------------------------------------
  * TipsDetailView
  */
+.tips-detail-view .title-section .image-view {
+    -fx-image: url("tips-banner.jpg");
+}
+
 .tips-detail-view .title-section .vbox {
     -fx-padding: 10px;
     -fx-spacing: 10px;

@@ -13,16 +13,19 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPullRequestCell;
-import javafx.beans.InvalidationListener;
+import javafx.application.Platform;
 import javafx.beans.Observable;
-import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -38,8 +41,11 @@ public class OpenJFXDetailView extends DetailView {
 
     private VBox content = new VBox();
 
-    private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
-    private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
+    // static, shared across UI instances
+    private static final ObservableList<PullRequest> pullRequests = FXCollections.observableArrayList();
+
+    private static ZonedDateTime pullRequestUpdateTime;
+    private FilterView<PullRequest> filterView;
 
     public OpenJFXDetailView(RootPane rootPane) {
         super(rootPane, View.OPENJFX);
@@ -52,9 +58,21 @@ public class OpenJFXDetailView extends DetailView {
         content.getChildren().add(new Region());
 
         setContent(content);
-        DataRepository.getInstance().pullRequestsProperty().addListener(weakUpdateFilterListener);
+        pullRequests.addListener((Observable it) -> updateFilters());
 
-        updateFilters();
+        // using static update time field as this will be for shared clients on the web server
+        if (pullRequestUpdateTime == null || Duration.between(pullRequestUpdateTime, ZonedDateTime.now()).toHours() > 3) {
+            System.out.println("LOADING");
+            Thread thread = new Thread(() -> {
+                List<PullRequest> result = DataRepository.getInstance().loadPullRequests();
+                Platform.runLater(() -> pullRequests.setAll(result));
+            });
+            thread.setDaemon(true);
+            thread.setName("OpenJFX PR Thread");
+            thread.start();
+
+            pullRequestUpdateTime = ZonedDateTime.now();
+        }
     }
 
     private void updateFilters() {
@@ -70,12 +88,16 @@ public class OpenJFXDetailView extends DetailView {
         timeGroup.getFilters().clear();
 
         FilterUtil.createFilters(timeGroup, "Date", pr -> DateTimeFormatter.ISO_DATE_TIME.parse(pr.getUpdatedAt() != null ? pr.getUpdatedAt() : pr.getCreatedAt(), ZonedDateTime::from));
+
+        // need to make this call here ... timing issue, otherwise menu items do not show up
+        // in menu dropdowns
+        filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
     }
 
     private void updateUserGroup() {
         List<String> userList = new ArrayList<>();
 
-        DataRepository.getInstance().getPullRequests().forEach(pr -> {
+        pullRequests.forEach(pr -> {
             String id = pr.getUser().getLogin();
             if (!userList.contains(id.trim())) {
                 userList.add(id.trim());
@@ -115,7 +137,7 @@ public class OpenJFXDetailView extends DetailView {
     private void updateLabelGroup() {
         List<String> labels = new ArrayList<>();
 
-        DataRepository.getInstance().getPullRequests().forEach(pr -> {
+        pullRequests.forEach(pr -> {
             pr.getLabels().forEach(label -> {
                 if (!labels.contains(label.getName())) {
                     labels.add(label.getName());
@@ -158,10 +180,8 @@ public class OpenJFXDetailView extends DetailView {
         SectionPaneWithFilterView<PullRequest> sectionPane = new SectionPaneWithFilterView();
         sectionPane.setTitle("Pull Requests");
 
-        FilterView<PullRequest> filterView = sectionPane.getFilterView();
-        Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getPullRequests());
-
-        filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
+        filterView = sectionPane.getFilterView();
+        Bindings.bindContent(filterView.getItems(), pullRequests);
 
         filterView.setTextFilterProvider(text -> pullRequest -> {
             if (pullRequest.getTitle().toLowerCase().contains(text)) {
@@ -180,6 +200,7 @@ public class OpenJFXDetailView extends DetailView {
         });
 
         AdvancedListView<PullRequest> listView = new AdvancedListView<>();
+        listView.setPlaceholder(new Label("Loading pull requests from GitHub ..."));
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());

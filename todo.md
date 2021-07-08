@@ -46,6 +46,7 @@
 - [X] Gluon Blog should show Gluon Logo instead of Johan's photo (use company ID)
 - [X] make CovidApp Windows version
 - [X] Add FXSampler to tools
+- [ ] Fix ikonli tip according to Michael Paus' findings
 
 ### New Features
 - [X] add link to logo image for "home"

@@ -108,6 +108,9 @@ public class WebView extends com.jpro.web.View {
                 case TUTORIALS:
                     item = DataRepository.getInstance().getTutorialById(id).get();
                     break;
+                case TIPS:
+                    item = DataRepository.getInstance().getTipById(id).get();
+                    break;
             }
         }
 
