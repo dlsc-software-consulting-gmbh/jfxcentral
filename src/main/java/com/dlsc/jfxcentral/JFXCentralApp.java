@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class JFXCentralApp extends Application {
 
-    private static final String REPOSITORY = "jfxcentralrepo";
+    public static final String REPOSITORY = ".jfxcentralrepo";
 
     private static boolean repositoryInitialized;
 

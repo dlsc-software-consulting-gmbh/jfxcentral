@@ -12,7 +12,7 @@ import java.io.IOException;
 public class GitApp {
 
     public static void main(String[] args) throws GitAPIException, IOException {
-        File repoDirectory = new File(System.getProperty("user.home") + "/.jfxcentralrepo");
+        File repoDirectory = new File(System.getProperty("user.home") + "/" + JFXCentralApp.REPOSITORY);
         if (!repoDirectory.exists()) {
             Git.cloneRepository()
                     .setURI("https://github.com/dlemmermann/jfxcentral-data.git")
@@ -21,7 +21,7 @@ public class GitApp {
                     .setProgressMonitor(new TextProgressMonitor())
                     .call();
         } else {
-            repoDirectory = new File(System.getProperty("user.home") + "/.jfxcentralrepo/.git");
+            repoDirectory = new File(System.getProperty("user.home") + "/" + JFXCentralApp.REPOSITORY + "/.git");
             Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
