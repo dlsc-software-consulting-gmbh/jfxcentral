@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 public class MasterTipCell extends MasterCell<Tip> {
 
     public MasterTipCell() {
-        getStyleClass().add("master-tool-list-cell");
+        getStyleClass().add("master-tip-list-cell");
 
         setPrefWidth(0);
 

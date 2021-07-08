@@ -491,6 +491,8 @@
 .master-view .list-cell {
     -fx-padding: 10px 20px;
     -fx-background-color: -light-blue;
+    -fx-text-fill: -fx-accent;
+    -fx-font-family: "Inter Semi Bold";
 }
 
 .master-view .list-cell:selected {

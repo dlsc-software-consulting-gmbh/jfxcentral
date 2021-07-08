@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views.detail;
 
+import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -31,41 +32,44 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
 
     @Override
     protected void createTitleBox() {
-        MarkdownView descriptionMarkdownView = new MarkdownView();
+        MarkdownView summaryMarkdownView = new MarkdownView();
 
         ImageView iconView = new ImageView();
         iconView.setFitWidth(128);
         iconView.setFitHeight(64);
         iconView.setPreserveRatio(true);
 
-        descriptionMarkdownView.getStyleClass().add("description-label");
-        HBox.setHgrow(descriptionMarkdownView, Priority.ALWAYS);
+        summaryMarkdownView.getStyleClass().add("description-label");
+        HBox.setHgrow(summaryMarkdownView, Priority.ALWAYS);
 
         FlowPane buttonBox = new FlowPane();
         buttonBox.getStyleClass().add("button-box");
 
-        VBox vBox = new VBox(descriptionMarkdownView, buttonBox);
+        VBox vBox = new VBox(summaryMarkdownView, buttonBox);
         vBox.getStyleClass().add("vbox");
         vBox.setFillWidth(true);
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        HBox hBox = new HBox(vBox);
-        hBox.getStyleClass().add("hbox");
-
         SectionPane sectionPane = new SectionPane();
         sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
-        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
         sectionPane.getStyleClass().add("title-section");
         sectionPane.setExtras(iconView);
+        sectionPane.setPrefWidth(0);
+        sectionPane.setMinWidth(0);
 
-        sectionPane.getNodes().add(hBox);
+        ImageView imageView = new ImageView(JFXCentralApp.class.getResource("tips.png").toExternalForm());
+        imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> sectionPane.getWidth() - sectionPane.getInsets().getLeft() - sectionPane.getInsets().getRight(), sectionPane.widthProperty(), sectionPane.insetsProperty()));
+        imageView.setPreserveRatio(true);
+
+        sectionPane.getNodes().add(imageView);
 
         selectedItemProperty().addListener(it -> {
             Tip tip = getSelectedItem();
             if (tip != null) {
 //                iconView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tip));
-                descriptionMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "tools/" + tip.getId());
-//                descriptionMarkdownView.setMdString(tip.getDescription());
+                summaryMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "tools/" + tip.getId());
+                summaryMarkdownView.setMdString(tip.getDescription());
                 buttonBox.getChildren().clear();
             }
         });
