@@ -30,7 +30,7 @@ jobs:
       with:
         maven-version: 3.6.3
     - name: Build with Maven
-      run: mvn -B install -Dinstaller=true --file pom.xml -s settings.xml
+      run: mvn -B install -Dinstaller=true --file pom.xml
     - name: Upload MSI
       uses: actions/upload-artifact@v2
       with:
