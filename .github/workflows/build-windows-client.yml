@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: MSI file
-        path: JFXCentral/target/installer/*.msi
+        path: target/installer/*.msi

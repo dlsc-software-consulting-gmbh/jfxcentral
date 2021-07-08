@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Installer files
-        path: JFXCentral/target/installer/*
+        path: target/installer/*
