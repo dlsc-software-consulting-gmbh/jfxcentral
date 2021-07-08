@@ -2163,3 +2163,28 @@
     -mdfx-bq-color-border: -fx-accent; /* the blockquote's border color */
     -mdfx-bq-color-background: derive(-fx-accent, +90%); /* the blockquote's background color */
 }
+
+/* ----------------------------------------------------------------------------
+ * TipsDetailView
+ */
+.tips-detail-view .title-section .vbox {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-background-color: rgba(0, 0, 0, .7);
+}
+
+.tips-detail-view .title-section .vbox .label {
+    -fx-text-fill: white;
+}
+
+.tips-detail-view .title-section .vbox .title-label {
+    -fx-font-size: 1.7142em;
+    -fx-font-family: "Inter Semi Bold";
+}
+
+.tips-detail-view .title-section .vbox .summary-label {
+    -fx-font-size: 1.1428em;
+    -fx-font-family: "Inter Semi Bold";
+}
+
+
