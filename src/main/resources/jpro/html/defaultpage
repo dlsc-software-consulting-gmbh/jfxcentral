@@ -103,6 +103,7 @@
         #myBtn:hover {
           background-color: white;
           border: rgb(68, 131, 160);
+          border-width: 1px;
           color: rgb(68, 131, 160);
         }
 

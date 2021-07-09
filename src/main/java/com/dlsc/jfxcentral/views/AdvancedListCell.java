@@ -58,6 +58,14 @@ public class AdvancedListCell<T> extends ListCell<T> {
     }
 
     public void setMasterCellLink(ListCell cell, ModelObject item, String description, View view) {
+        if (cell == null) {
+            System.out.println("null cell");
+            return;
+        }
+        if (cell.getParent() == null) {
+            System.out.println("null parent");
+            return;
+        }
         try {
             ObservableList<Node> children2 = null;
             if (WebAPI.isBrowser()) {
