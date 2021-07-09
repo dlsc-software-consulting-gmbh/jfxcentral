@@ -30,7 +30,7 @@ public class AdvancedListView<T> extends StackPane {
         paginationBox.visibleProperty().bind(pagingProperty().and(pageCountProperty().greaterThan(1)));
         paginationBox.managedProperty().bind(pagingProperty().and(pageCountProperty().greaterThan(1)));
 
-        listView.itemsProperty().bind(itemsProperty());
+        Bindings.bindBidirectional(listView.itemsProperty(), itemsProperty());
         listView.cellFactoryProperty().bindBidirectional(cellFactoryProperty());
 
         box.getStyleClass().add("list-view-replacement");

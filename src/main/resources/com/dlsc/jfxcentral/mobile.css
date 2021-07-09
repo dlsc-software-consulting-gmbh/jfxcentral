@@ -39,7 +39,7 @@
     -fx-background-insets: 0em, 0em 1.4285em 0em 1.4285em, 0em 1.4285em 0.0714em 1.4285em;
 }
 
-.detail-scroll-pane .viewport {
+.detail-scroll-pane .scroll-pane .viewport {
 }
 
 /* ----------------------------------------------------------------------------

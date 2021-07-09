@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.data.model.Video;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.AdvancedListView;
+import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailVideoCell;
@@ -65,7 +66,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         listView.setPrefWidth(0);
         listView.setMinWidth(0);
 
-        if (rootPane.isMobile()) {
+        if (rootPane.getDisplay().equals(Display.WEB)) {
             listView.setPaging(true);
             listView.setVisibleRowCount(5);
             listView.setShowItemCounter(false);

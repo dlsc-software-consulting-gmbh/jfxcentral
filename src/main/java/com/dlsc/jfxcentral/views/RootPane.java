@@ -135,6 +135,7 @@ public class RootPane extends StackPane {
 
         borderPane = new BorderPane();
         borderPane.setTop(new HeaderPane(this));
+
         getChildren().setAll(borderPane);
 
         DisplayService.create().ifPresentOrElse(service -> {

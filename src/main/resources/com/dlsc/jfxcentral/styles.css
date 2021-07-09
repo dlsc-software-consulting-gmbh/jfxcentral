@@ -456,7 +456,7 @@
     -fx-image: url("duke.png");
 }
 
-.detail-scroll-pane {
+.detail-scroll-pane .scroll-pane {
     -fx-padding: 20px;
     -fx-background-color: -light-grey;
 }
