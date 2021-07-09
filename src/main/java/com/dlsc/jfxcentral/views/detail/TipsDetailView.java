@@ -41,6 +41,8 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
         sectionPane.getStyleClass().add("title-section");
         sectionPane.setPrefWidth(0);
         sectionPane.setMinWidth(0);
+        sectionPane.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
+        sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
 
         Label titleLabel = new Label();
         titleLabel.setWrapText(true);
@@ -64,7 +66,7 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
         imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> sectionPane.getWidth() - sectionPane.getInsets().getLeft() - sectionPane.getInsets().getRight(), sectionPane.widthProperty(), sectionPane.insetsProperty()));
         imageView.setPreserveRatio(true);
 
-        StackPane stackPane = new StackPane(imageView, vBox);
+        StackPane stackPane = new StackPane(imageView);
 
         sectionPane.getNodes().add(stackPane);
 
