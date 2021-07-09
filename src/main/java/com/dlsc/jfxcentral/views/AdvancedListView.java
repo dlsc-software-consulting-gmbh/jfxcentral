@@ -43,14 +43,14 @@ public class AdvancedListView<T> extends StackPane {
             box.setVisible(isPaging());
             listView.setVisible(!isPaging());
 
+            box.setManaged(box.isVisible());
+            listView.setManaged(listView.isVisible());
+
             Node placeholder = getPlaceholder();
             if (placeholder != null) {
                 placeholder.setVisible(getItems() == null || getItems().isEmpty());
                 placeholder.setManaged(placeholder.isVisible());
             }
-
-            box.setManaged(box.isVisible());
-            listView.setManaged(listView.isVisible());
 
             if (isPaging() || (getItems().size() <= getVisibleRowCount())) {
                 updateItems();

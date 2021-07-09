@@ -9,7 +9,7 @@
 # PROJECT_VERSION: version used in pom.xml, e.g. 1.0-SNAPSHOT
 # APP_VERSION: the application version, e.g. 1.0.0, shown in "about" dialog
 
-JAVA_VERSION=11
+JAVA_VERSION=16
 JAVA_HOME=$JAVA_HOME
 PROJECT_VERSION=$PROJECT_VERSION
 APP_VERSION=$APP_VERSION

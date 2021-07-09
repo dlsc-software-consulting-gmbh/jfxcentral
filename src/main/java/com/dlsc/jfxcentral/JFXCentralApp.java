@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.views.IntroView;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.web.sessionmanager.SessionManager;
@@ -110,8 +109,8 @@ public class JFXCentralApp extends Application {
 
         monitor.endTask();
 
-        DataRepository.getInstance().refreshData();
-        ImageManager.getInstance().clear();
+        // trigger the data loading inside the data repository if needed
+        DataRepository.getInstance();
 
         repositoryInitialized = true;
     }

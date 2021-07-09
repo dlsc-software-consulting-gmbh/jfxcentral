@@ -83,7 +83,7 @@ public class OmniBoxTextField extends CustomTextField implements OmniBoxOwner {
 	private void init() {
 	    getStyleClass().add("omnibox-text-field");
 
-	    setPromptText("Search ...");
+	    setPromptText("Search all ...");
 
 	    setFocusTraversable(false);
 

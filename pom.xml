@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>16</javafx.version>
+        <javafx.version>17-ea+13</javafx.version>
         <attach.version>4.0.11</attach.version>
         <client.version>1.0.0</client.version>
         <client.name>JFXCentral</client.name>
@@ -45,6 +45,12 @@
             <artifactId>jpro-web-core</artifactId>
             <version>0.8.9</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- strangely required for some reason -->
@@ -58,6 +64,12 @@
             <groupId>com.sandec</groupId>
             <artifactId>mdfx</artifactId>
             <version>0.2.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -97,6 +109,10 @@
             <exclusions>
                 <exclusion>
                     <groupId>com.dlsc.unitfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>

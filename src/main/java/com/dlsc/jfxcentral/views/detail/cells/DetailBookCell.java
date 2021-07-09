@@ -42,8 +42,6 @@ public class DetailBookCell extends DetailCell<Book> {
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
 
     @Override

@@ -62,9 +62,9 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
 
             commercialLabel.setVisible(tutorial.isCommercial());
 
+            responsiveBox.imageProperty().bind(ImageManager.getInstance().tutorialImageProperty(tutorial));
             responsiveBox.getMarkdownView().setBaseURL(DataRepository.BASE_URL + "tutorials/" + tutorial.getId());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().tutorialTextProperty(tutorial));
-            responsiveBox.imageProperty().bind(ImageManager.getInstance().tutorialImageProperty(tutorial));
 
             Util.setLink(visitButton, tutorial.getUrl(), tutorial.getName());
         }
