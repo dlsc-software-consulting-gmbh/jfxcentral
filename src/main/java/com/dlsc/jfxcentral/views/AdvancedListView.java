@@ -34,7 +34,6 @@ public class AdvancedListView<T> extends StackPane {
         listView.cellFactoryProperty().bindBidirectional(cellFactoryProperty());
 
         box.getStyleClass().add("list-view-replacement");
-        box.setMaxHeight(Region.USE_PREF_SIZE);
 
         placeholder.addListener(it -> updateView());
 
@@ -321,7 +320,6 @@ public class AdvancedListView<T> extends StackPane {
 
                 ListCell<T> cell = cellFactory.call(listView);
                 cell.getStyleClass().add("advanced-list-cell");
-                cell.updateListView(listView);
 
                 box.getChildren().add(cell);
 
@@ -335,6 +333,8 @@ public class AdvancedListView<T> extends StackPane {
                 if (index == endIndex - 1) {
                     cell.getStyleClass().add("last");
                 }
+
+                cell.updateListView(listView);
 
             }
         }

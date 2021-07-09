@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral.views.page;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.DataRepository.Source;
-import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.views.ModelObjectSearchResultCell;
 import com.dlsc.jfxcentral.views.RootPane;
@@ -11,7 +10,6 @@ import com.dlsc.jfxcentral.views.autocomplete.OmniBoxSearchField;
 import com.dlsc.jfxcentral.views.autocomplete.OmniBoxService;
 import com.dlsc.jfxcentral.views.autocomplete.SearchContext;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
-import com.dlsc.jfxcentral.views.mobile.FontSizeSelector;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -70,7 +68,6 @@ public class HeaderPane extends HBox {
             try {
                 JFXCentralApp.updateRepository(new TextProgressMonitor());
                 DataRepository.getInstance().refreshData();
-                ImageManager.getInstance().clear();
             } catch (GitAPIException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -118,6 +115,7 @@ public class HeaderPane extends HBox {
         sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
         sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
-        getChildren().addAll(stackPane, refreshButton, sourceComboBox, new FontSizeSelector(), searchField);
+//        getChildren().addAll(stackPane, refreshButton, sourceComboBox, new FontSizeSelector(), searchField);
+        getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField);
     }
 }

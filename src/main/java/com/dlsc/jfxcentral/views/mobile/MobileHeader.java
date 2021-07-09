@@ -26,6 +26,7 @@ public class MobileHeader extends HBox {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        getChildren().addAll(hamburgerIcon, spacer, new FontSizeSelector());
+        getChildren().addAll(hamburgerIcon);
+//        getChildren().addAll(hamburgerIcon, spacer, new FontSizeSelector());
     }
 }

@@ -26,6 +26,8 @@ public class GitApp {
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
 
+        Git.shutdown();
+
         System.out.println("done");
     }
 }

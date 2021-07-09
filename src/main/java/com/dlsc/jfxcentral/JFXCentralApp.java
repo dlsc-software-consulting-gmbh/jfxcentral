@@ -53,6 +53,7 @@ public class JFXCentralApp extends Application {
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
         scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
+        stage.setOnCloseRequest(evt -> System.exit(0));
         stage.centerOnScreen();
         stage.setTitle("JFX-Central");
         stage.setScene(scene);
@@ -106,6 +107,8 @@ public class JFXCentralApp extends Application {
             Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
+
+        Git.shutdown();
 
         monitor.endTask();
 

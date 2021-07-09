@@ -12,6 +12,7 @@ open module jfxcentral {
     requires javafx.web;
     requires javafx.media;
     requires javafx.swing;
+    requires javafx.fxml;
     requires java.desktop;
     requires gson.javatime.serialisers;
     requires org.controlsfx.controls;
