@@ -474,6 +474,7 @@
  */
 .master-view {
     -fx-background-color: -light-blue;
+    -fx-pref-width: 250px;
 }
 
 .master-view .scroll-bar .track {
@@ -489,7 +490,7 @@
 }
 
 .master-view .list-cell {
-    -fx-padding: 10px 20px;
+    -fx-padding: 15px 20px;
     -fx-background-color: -light-blue;
     -fx-text-fill: -fx-accent;
     -fx-font-family: "Inter Semi Bold";
