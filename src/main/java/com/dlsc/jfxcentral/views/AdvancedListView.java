@@ -182,15 +182,15 @@ public class AdvancedListView<T> extends StackPane {
         double height = getInsets().getTop() + getInsets().getBottom();
 
         if (box.isManaged()) {
-            height += box.prefHeight(-1);
+            height += box.prefHeight(width);
         }
 
         if (listView.isManaged()) {
-            height += listView.prefHeight(-1);
+            height += listView.prefHeight(width);
         }
 
         if (!box.isManaged() && !listView.isManaged() && getPlaceholder() != null) {
-            height += getPlaceholder().prefHeight(-1);
+            height += getPlaceholder().prefHeight(width);
         }
 
         return height;
@@ -320,6 +320,7 @@ public class AdvancedListView<T> extends StackPane {
 
                 ListCell<T> cell = cellFactory.call(listView);
                 cell.getStyleClass().add("advanced-list-cell");
+                cell.updateListView(listView);
 
                 box.getChildren().add(cell);
 
@@ -328,14 +329,12 @@ public class AdvancedListView<T> extends StackPane {
                 } else {
                     cell.updateIndex(-1);
                 }
+
                 cell.updateSelected(listView.getSelectionModel().isSelected(index));
 
                 if (index == endIndex - 1) {
                     cell.getStyleClass().add("last");
                 }
-
-                cell.updateListView(listView);
-
             }
         }
         box.getChildren().add(paginationBox);

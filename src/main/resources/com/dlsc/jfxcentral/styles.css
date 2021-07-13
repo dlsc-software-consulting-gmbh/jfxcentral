@@ -320,7 +320,6 @@
 
 .root-wrapper {
     -fx-background-color: lightgrey;
-    -fx-background-image: url("brushed.jpg");
 }
 
 .root-wrapper.mobile {
