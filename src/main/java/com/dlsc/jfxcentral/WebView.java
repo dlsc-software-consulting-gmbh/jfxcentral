@@ -49,7 +49,7 @@ public class WebView extends com.jpro.web.View {
     public Node content() {
         rootPane.init(mobile);
         handleURL(initialURL);
-        rootPane.setMaxWidth(1200);
+//        rootPane.setMaxWidth(1200);
 
         StackPane wrapper = new StackPane(rootPane, rootPane.getOverlayPane());
 
