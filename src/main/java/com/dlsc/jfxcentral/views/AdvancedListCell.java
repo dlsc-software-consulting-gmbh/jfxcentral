@@ -43,7 +43,7 @@ public class AdvancedListCell<T> extends ListCell<T> {
     protected double computeMinHeight(double width) {
         double height = 0;
         for (Node child : getChildren()) {
-            height += child.prefHeight(getWidth());
+            height += child.prefHeight(width);
         }
         return height + getInsets().getTop() + getInsets().getBottom();
     }
@@ -52,7 +52,7 @@ public class AdvancedListCell<T> extends ListCell<T> {
     protected double computeMaxHeight(double width) {
         double height = 0;
         for (Node child : getChildren()) {
-            height += child.prefHeight(getWidth());
+            height += child.prefHeight(width);
         }
         return height + getInsets().getTop() + getInsets().getBottom();
     }
