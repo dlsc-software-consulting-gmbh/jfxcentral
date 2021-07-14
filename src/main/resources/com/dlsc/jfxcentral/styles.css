@@ -489,10 +489,16 @@
 }
 
 .master-view .list-cell {
-    -fx-padding: 15px 20px;
     -fx-background-color: -light-blue;
     -fx-text-fill: -fx-accent;
     -fx-font-family: "Inter Semi Bold";
+}
+
+.master-view .list-cell .hbox {
+    -fx-padding: 15px 20px;
+}
+.master-view .list-cell .grid-pane {
+    -fx-padding: 15px 20px;
 }
 
 .master-view .list-cell:selected {
@@ -578,7 +584,12 @@
 /* ----------------------------------------------------------------------------
  * MasterToolCell
  */
+.master-tool-list-cell {
+    -fx-insets: 0px;
+    -fx-padding: 0px;
+}
 .master-tool-list-cell .hbox {
+    /*-fx-padding: 15px;*/
     -fx-spacing: 10px;
 }
 
