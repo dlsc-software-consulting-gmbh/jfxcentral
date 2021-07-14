@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.util.Util;
 import com.jpro.webapi.WebAPI;
 import javafx.collections.ObservableList;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ListCell;
@@ -11,6 +12,11 @@ import javafx.scene.control.ListCell;
 import java.lang.reflect.Method;
 
 public class AdvancedListCell<T> extends ListCell<T> {
+
+    @Override
+    public Orientation getContentBias() {
+        return Orientation.HORIZONTAL;
+    }
 
     public AdvancedListCell() {
         getStyleClass().add("advanced-list-cell");
@@ -47,7 +53,14 @@ public class AdvancedListCell<T> extends ListCell<T> {
         }
         return height + getInsets().getTop() + getInsets().getBottom();
     }
-
+    @Override
+    protected double computePrefHeight(double width) {
+        double height = 0;
+        for (Node child : getChildren()) {
+            height += child.prefHeight(width);
+        }
+        return height + getInsets().getTop() + getInsets().getBottom();
+    }
     @Override
     protected double computeMaxHeight(double width) {
         double height = 0;
