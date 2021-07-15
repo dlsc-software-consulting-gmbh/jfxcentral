@@ -109,7 +109,7 @@
 
     </style>
 </head>
-<body style="padding: 0px;">
+<body>
 
 <div>
     <jpro-app loader="none" href="/app/default" nativeScrolling="true" fxContextMenu="false" fullscreen="true" snapshot="auto" userSelect="true"/>
