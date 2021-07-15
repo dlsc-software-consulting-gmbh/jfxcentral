@@ -491,10 +491,6 @@
     -fx-text-fill: -fx-accent;
     -fx-font-family: "Inter Semi Bold";
 }
-
-.master-view .list-cell .hbox {
-    -fx-padding: 5px 10px;
-}
 .master-view .list-cell .grid-pane {
     -fx-padding: 15px 20px;
 }
@@ -592,8 +588,9 @@
     -fx-padding: 0px;
 }
 .master-tool-list-cell .hbox {
-    /*-fx-padding: 15px;*/
-    -fx-spacing: 10px;
+    -fx-padding: 10px 15px;
+    -fx-alignment:center;
+    -fx-spacing: 5px;
 }
 
 .master-tool-list-cell .vbox {
