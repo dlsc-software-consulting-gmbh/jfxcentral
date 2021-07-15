@@ -57,8 +57,27 @@ public class PageUtil {
             return View.VIDEOS;
         } else if (obj instanceof Download) {
             return View.DOWNLOADS;
+        } else if (obj instanceof Tip) {
+            return View.TIPS;
         } else {
             return View.HOME;
         }
+    }
+
+    static public Class getClassOfView(View view) {
+        if(view == View.OPENJFX) return PullRequest.class;
+        if(view == View.PEOPLE) return Person.class;
+        if(view == View.TUTORIALS) return Tutorial.class;
+        if(view == View.REAL_WORLD) return RealWorldApp.class;
+        if(view == View.COMPANIES) return Company.class;
+        if(view == View.TOOLS) return Tool.class;
+        if(view == View.LIBRARIES) return Library.class;
+        if(view == View.BLOGS) return Blog.class;
+        if(view == View.BOOKS) return Book.class;
+        if(view == View.VIDEOS) return Video.class;
+        if(view == View.DOWNLOADS) return Download.class;
+        if(view == View.TIPS) return Tip.class;
+        if(view == View.HOME) return null;
+        throw new RuntimeException("No Class associated with the view " + view);
     }
 }

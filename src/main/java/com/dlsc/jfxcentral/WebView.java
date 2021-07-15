@@ -6,8 +6,13 @@ import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.jpro.web.Util;
+import com.jpro.web.sessionmanager.SessionManager;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
+
+import java.util.Comparator;
 
 
 public class WebView extends com.jpro.web.View {
@@ -66,6 +71,18 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
+        if(id == null && view != View.HOME && view != View.OPENJFX) {
+            Object obj = DataRepository.getInstance()
+                    .getList(PageUtil.getClassOfView(view))
+                    .stream().sorted(Comparator.comparing((ModelObject x) -> x.getName().toLowerCase()))
+                    .findFirst().get();
+            String firstID = ((ModelObject) obj).getId();
+            Platform.runLater(() -> {
+                Util.gotoPage(rootPane, s + "/" + firstID);
+            });
+            return true;
+        }
+
         System.out.println("view: " + view);
         System.out.println("id " + id);
 
@@ -77,41 +94,7 @@ public class WebView extends com.jpro.web.View {
         ModelObject item = null;
 
         if (id != null) {
-            switch (view) {
-                case BLOGS:
-                    item = DataRepository.getInstance().getBlogById(id).get();
-                    break;
-                case BOOKS:
-                    item = DataRepository.getInstance().getBookById(id).get();
-                    break;
-                case LIBRARIES:
-                    item = DataRepository.getInstance().getLibraryById(id).get();
-                    break;
-                case PEOPLE:
-                    item = DataRepository.getInstance().getPersonById(id).get();
-                    break;
-                case REAL_WORLD:
-                    item = DataRepository.getInstance().getRealWorldAppById(id).get();
-                    break;
-                case TOOLS:
-                    item = DataRepository.getInstance().getToolById(id).get();
-                    break;
-                case DOWNLOADS:
-                    item = DataRepository.getInstance().getDownloadById(id).get();
-                    break;
-                case VIDEOS:
-                    item = DataRepository.getInstance().getVideoById(id).get();
-                    break;
-                case COMPANIES:
-                    item = DataRepository.getInstance().getCompanyById(id).get();
-                    break;
-                case TUTORIALS:
-                    item = DataRepository.getInstance().getTutorialById(id).get();
-                    break;
-                case TIPS:
-                    item = DataRepository.getInstance().getTipById(id).get();
-                    break;
-            }
+            item = DataRepository.getInstance().getByID(PageUtil.getClassOfView(view),id);
         }
 
         if (currentPage != null && (item != null || rootPane.isMobile())) {
