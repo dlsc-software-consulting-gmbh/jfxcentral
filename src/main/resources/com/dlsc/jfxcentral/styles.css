@@ -1825,7 +1825,7 @@
 }
 
 .header-pane .title {
-    -fx-font-family: "Permanent Marker";
+    -fx-font-family: "Inter Bold";
     -fx-font-size: 48px;
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -1833,7 +1833,7 @@
 }
 
 .header-pane .title-shadow {
-    -fx-font-family: "Permanent Marker";
+    -fx-font-family: "Inter Bold";
     -fx-font-size: 48px;
     -fx-text-fill: derive(-fx-accent, -50%);
     -fx-effect: -drop-shadow-1;
