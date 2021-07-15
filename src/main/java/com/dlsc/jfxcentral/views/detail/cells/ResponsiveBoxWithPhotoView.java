@@ -102,6 +102,7 @@ public class ResponsiveBoxWithPhotoView extends Pane {
         double x = insets.getLeft();
         double y = insets.getTop();
         double w = getWidth() - insets.getLeft() - insets.getRight();
+        double originalWidth = w;
 
         double ph;
 
@@ -159,7 +160,7 @@ public class ResponsiveBoxWithPhotoView extends Pane {
         Node footer = getFooter();
         if (footer != null && footer.isManaged()) {
             ph = footer.prefHeight(w);
-            footer.resizeRelocate(x, y, w, ph);
+            footer.resizeRelocate(x, y, originalWidth, ph);
         }
     }
 

@@ -536,6 +536,7 @@
  */
 .master-person-list-cell .grid-pane {
     -fx-padding: 10px 10px !important;
+    -fx-vgap: 5px !important;
 }
 
 .master-person-list-cell .arrow-icon {
@@ -625,18 +626,26 @@
 /* ----------------------------------------------------------------------------
  * MasterLibraryCell
  */
-.master-library-list-cell .grid-pane {
-    -fx-vgap: 0px;
-    -fx-hgap: 10px;
-    -fx-grid-lines-visible: false;
+.master-library-list-cell .vbox {
+    -fx-spacing: 5px;
+    -fx-padding: 10px;
 }
 
-.master-library-list-cell .grid-pane .image-view {
-}
-
-.master-library-list-cell .grid-pane .name-label {
+.master-library-list-cell .vbox .name-label {
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 10px;
+    -fx-alignment: top-left;
+}
+
+.master-library-list-cell .vbox .summary-label {
+    -fx-font-family: "Inter";
+}
+
+.master-library-list-cell:selected .vbox .summary-label {
+    -fx-font-family: "Inter";
+    -fx-text-fill: black;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1317,7 +1326,7 @@
     -fx-border-color: -fx-accent;
     -fx-border-radius: 2px;
     -fx-text-fill: -fx-accent;
-    -fx-opacity: .5;
+    -fx-opacity: .75;
 }
 
 .license-label .ikonli-font-icon {
@@ -1334,6 +1343,10 @@
 /* -----------------------------------------------------------------------------
  * MasterBookCell
  */
+.master-book-list-cell {
+    -fx-padding: 10px 0px;
+}
+
 .master-book-list-cell .grid-pane {
     -fx-vgap: 0px;
     -fx-hgap: 10px;

@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
-public class ResponsiveBox extends Pane {
+public class ResponsiveBox2 extends Pane {
 
     private final ImageView imageView = new ImageView();
     private final Label titleLabel = new Label();
@@ -35,7 +35,12 @@ public class ResponsiveBox extends Pane {
         HIDE
     }
 
-    public ResponsiveBox(ImageLocation imageLocation) {
+    @Override
+    public Orientation getContentBias() {
+        return Orientation.HORIZONTAL;
+    }
+
+    public ResponsiveBox2(ImageLocation imageLocation) {
         this.imageLocation = imageLocation;
 
         getStyleClass().add("responsive-box");
@@ -46,6 +51,8 @@ public class ResponsiveBox extends Pane {
 
         imageView.setPreserveRatio(true);
         imageView.imageProperty().bind(imageProperty());
+        imageView.visibleProperty().bind(showImageView);
+        imageView.managedProperty().bind(showImageView);
 
         titleLabel.textProperty().bind(titleProperty());
         titleLabel.getStyleClass().addAll("header2", "title-label");
@@ -66,8 +73,6 @@ public class ResponsiveBox extends Pane {
         imageWrapper = new StackPane(imageView);
         imageWrapper.getStyleClass().add("image-wrapper");
         imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
-        imageWrapper.visibleProperty().bind(showImageView);
-        imageWrapper.managedProperty().bind(showImageView);
         StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
         extraControlsPane = new FlowPane();
@@ -78,7 +83,7 @@ public class ResponsiveBox extends Pane {
         extraControlsPane.visibleProperty().bind(Bindings.isNotEmpty(extraControlsPane.getChildren()));
         extraControlsPane.managedProperty().bind(Bindings.isNotEmpty(extraControlsPane.getChildren()));
 
-        getChildren().setAll(imageWrapper, titleLabel, subtitleLabel, markdownView, extraControlsPane);
+        getChildren().setAll(titleLabel, subtitleLabel, markdownView, extraControlsPane);
 
         footerProperty().addListener((obs, oldFooter, newFooter) -> {
             if (oldFooter != null) {
@@ -90,45 +95,28 @@ public class ResponsiveBox extends Pane {
         });
     }
 
-    @Override
-    public Orientation getContentBias() {
-        return Orientation.HORIZONTAL;
-    }
-
     protected void layoutChildren() {
         Insets insets = getInsets();
 
         double x = insets.getLeft();
         double y = insets.getTop();
         double w = getWidth() - insets.getLeft() - insets.getRight();
-
-        double originalWidth = w;
-
-        double ph;
+        double h = getHeight() - insets.getTop() - insets.getBottom();
 
         if (imageLocation.equals(ImageLocation.BANNER) || getWidth() < 500) {
-            imageView.setFitWidth(w);
-            imageView.setFitHeight(Region.USE_PREF_SIZE);
-
-            ph = imageWrapper.prefHeight(w);
-            imageWrapper.resizeRelocate(x, y, w, ph);
-
-            if (titleLabel.isManaged() || subtitleLabel.isManaged() ||markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
-                y += ph + getVgap();
-            }
-
+//            imageWrapper.setPrefWidth(0);
+//            imageWrapper.setMinWidth(0);
+//            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> imageWrapper.getWidth() - imageWrapper.getInsets().getLeft() - imageWrapper.getInsets().getRight(), imageWrapper.widthProperty(), imageWrapper.insetsProperty()));
         } else {
-            imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
-            imageView.setFitHeight(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageHeight() : getLargeImageHeight());
-
-            ph = imageWrapper.prefHeight(w);
-            double pw = imageWrapper.prefWidth(w);
-
-            imageWrapper.resizeRelocate(x + w - pw, y, pw, ph);
-
-            w -= pw; // less available horizontal space now
-            w -= getHgap();
+//            imageWrapper.setPrefWidth(Region.USE_COMPUTED_SIZE);
+//            imageWrapper.setMinWidth(Region.USE_COMPUTED_SIZE);
+//            imageView.fitWidthProperty().unbind();
+//            imageView.fitHeightProperty().unbind();
+//            imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
+//            imageView.setFitHeight(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageHeight() : getLargeImageHeight());
         }
+
+        double ph;
 
         if (titleLabel.isManaged()) {
             ph = titleLabel.prefHeight(w);
@@ -166,7 +154,7 @@ public class ResponsiveBox extends Pane {
         Node footer = getFooter();
         if (footer != null && footer.isManaged()) {
             ph = footer.prefHeight(w);
-            footer.resizeRelocate(x, y, originalWidth, ph);
+            footer.resizeRelocate(x, y, w, ph);
         }
     }
 
@@ -201,21 +189,6 @@ public class ResponsiveBox extends Pane {
     @Override
     protected double computePrefHeight(double w) {
         double h =  getInsets().getTop() + getInsets().getBottom();
-
-        if (imageWrapper.isManaged()) {
-            if ((imageLocation.equals(ImageLocation.BANNER) || w < 500)) {
-                h += imageWrapper.prefHeight(w);
-                if (titleLabel.isManaged() || subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
-                    h += getVgap();
-                }
-            } else if (imageLocation.equals(ImageLocation.LARGE_ON_SIDE)) {
-                w -= getLargeImageWidth();
-                w -= getHgap();
-            } else if (imageLocation.equals(ImageLocation.SMALL_ON_SIDE)) {
-                w -= getSmallImageWidth();
-                w -= getHgap();
-            }
-        }
 
         if (titleLabel.isManaged()) {
             h += titleLabel.prefHeight(w);
