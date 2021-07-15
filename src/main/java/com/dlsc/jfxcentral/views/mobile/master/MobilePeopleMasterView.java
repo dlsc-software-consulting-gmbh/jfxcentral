@@ -24,7 +24,7 @@ public class MobilePeopleMasterView extends MobileMasterViewWithAdvancedListView
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MobileMasterPersonCell2());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
-                Comparator.comparing(Person::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);

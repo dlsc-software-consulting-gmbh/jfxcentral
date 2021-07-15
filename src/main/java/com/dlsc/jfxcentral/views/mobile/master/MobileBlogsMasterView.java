@@ -24,7 +24,7 @@ public class MobileBlogsMasterView extends MobileMasterViewWithAdvancedListView<
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MobileMasterBlogCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
-                Comparator.comparing(Blog::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getName(), getFilterText())));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);

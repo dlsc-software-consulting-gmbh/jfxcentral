@@ -113,7 +113,7 @@ public class OpenJFXDetailView extends DetailView {
             }
         }));
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         userGroup.getFilters().setAll(filters);
     }
 
@@ -154,7 +154,7 @@ public class OpenJFXDetailView extends DetailView {
             }
         }));
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         labelGroup.getFilters().setAll(filters);
     }
 

@@ -18,7 +18,7 @@ public class TipsMasterView extends MasterViewWithListView<Tip> {
 
         listView.setCellFactory(view -> new MasterTipCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().tipsProperty(),
-                Comparator.comparing(Tip::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 tip -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tip.getName(), getFilterText())));
     }
 }

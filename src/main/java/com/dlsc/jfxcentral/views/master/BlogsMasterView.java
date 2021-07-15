@@ -22,7 +22,7 @@ public class BlogsMasterView extends MasterViewWithListView<Blog> {
 
         listView.setCellFactory(view -> new MasterBlogCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().blogsProperty(),
-                Comparator.comparing(Blog::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 blog -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(blog.getName(), getFilterText())));
 
         VBox.setVgrow(listView, Priority.ALWAYS);

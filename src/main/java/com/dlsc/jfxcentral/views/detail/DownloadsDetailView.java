@@ -118,7 +118,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
             }
         });
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         personGroup.getFilters().setAll(filters);
     }
 
@@ -150,7 +150,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
             }
         });
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         companyGroup.getFilters().setAll(filters);
     }
 

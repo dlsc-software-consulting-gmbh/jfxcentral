@@ -18,7 +18,7 @@ public class PeopleMasterView extends MasterViewWithListView<Person> {
 
         listView.setCellFactory(view -> new MasterPersonCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().peopleProperty(),
-                Comparator.comparing(Person::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 person -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(person.getName(), getFilterText())));
     }
 }

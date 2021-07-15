@@ -127,7 +127,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
             }
         });
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         speakerGroup.getFilters().setAll(filters);
     }
 

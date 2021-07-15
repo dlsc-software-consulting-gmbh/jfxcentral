@@ -118,7 +118,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
             }
         });
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         personGroup.getFilters().setAll(filters);
     }
 

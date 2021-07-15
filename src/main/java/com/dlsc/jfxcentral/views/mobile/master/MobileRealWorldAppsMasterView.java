@@ -24,7 +24,7 @@ public class MobileRealWorldAppsMasterView extends MobileMasterViewWithAdvancedL
         listView.setMinWidth(Region.USE_PREF_SIZE);
         listView.setCellFactory(view -> new MobileMasterRealWorldAppCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().realWorldAppsProperty(),
-                Comparator.comparing(RealWorldApp::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 app -> StringUtils.isBlank(getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getName(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||

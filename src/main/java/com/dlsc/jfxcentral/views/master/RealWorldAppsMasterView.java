@@ -18,7 +18,7 @@ public class RealWorldAppsMasterView extends MasterViewWithListView<RealWorldApp
 
         listView.setCellFactory(view -> new MasterRealWorldAppCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().realWorldAppsProperty(),
-                Comparator.comparing(RealWorldApp::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 app -> StringUtils.isBlank(getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getName(), getFilterText()) ||
                         StringUtils.containsIgnoreCase(app.getSummary(), getFilterText()) ||

@@ -18,7 +18,7 @@ public class LibrariesMasterView extends MasterViewWithListView<Library> {
 
         listView.setCellFactory(view -> new MasterLibraryCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().librariesProperty(),
-                Comparator.comparing(Library::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 library -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(library.getName(), getFilterText())));
     }
 }

@@ -168,7 +168,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
             }
         });
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         personGroup.getFilters().setAll(filters);
     }
 
@@ -198,7 +198,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
             }
         });
 
-        filters.sort(Comparator.comparing(FilterView.Filter::getName));
+        filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         libraryGroup.getFilters().setAll(filters);
     }
 

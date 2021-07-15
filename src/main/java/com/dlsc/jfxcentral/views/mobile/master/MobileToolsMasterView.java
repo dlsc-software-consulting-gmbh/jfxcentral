@@ -22,7 +22,7 @@ public class MobileToolsMasterView extends MobileMasterViewWithAdvancedListView<
         listView.setVisibleRowCount(Integer.MAX_VALUE);
         listView.setCellFactory(view -> new MobileMasterToolCell());
         listView.setItems(createSortedAndFilteredList(DataRepository.getInstance().toolsProperty(),
-                Comparator.comparing(Tool::getName),
+                Comparator.comparing(x -> x.getName().toLowerCase()),
                 tool -> StringUtils.isBlank(getFilterText()) || StringUtils.containsIgnoreCase(tool.getName(), getFilterText()) || StringUtils.containsIgnoreCase(tool.getSummary(), getFilterText())));
 
         PrettyScrollPane scrollPane = new PrettyScrollPane(listView);
