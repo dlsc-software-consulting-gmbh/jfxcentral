@@ -5,6 +5,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
+import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuButton;
@@ -58,15 +59,28 @@ public class DetailDownloadCell extends DetailCell<Download> {
             }
 
             if (!rootPane.isMobile()) {
-                MenuButton menuButton = new MenuButton("Downloads");
                 download.getFiles().forEach(file -> {
-                    MenuItem item = new MenuItem(file.getName());
-                    item.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
-                    item.setOnAction(evt -> downloadFile(file));
-                    menuButton.getItems().add(item);
+                    Button downloadButton = new Button(file.getName());
+                    downloadButton.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
+                    if(WebAPI.isBrowser()) {
+                        Util.setLink(downloadButton,file.getUrl(),file.getName());
+                    } else {
+                        downloadButton.setOnAction(evt -> downloadFile(file));
+                    }
+                    responsiveBox.getExtraControls().add(downloadButton);
                 });
-                responsiveBox.getExtraControls().add(menuButton);
             }
+
+            // Deactivated menu version for now, because the download is hard to implement.
+            //if (!rootPane.isMobile()) {
+            //    MenuButton menuButton = new MenuButton("Downloads");
+            //    download.getFiles().forEach(file -> {
+            //        MenuItem item = new MenuItem(file.getName());
+            //        item.setGraphic(new FontIcon(MaterialDesign.MDI_DOWNLOAD));
+            //        item.setOnAction(evt -> downloadFile(file));
+            //        menuButton.getItems().add(item);
+            //    });
+            //}
         }
     }
 }
