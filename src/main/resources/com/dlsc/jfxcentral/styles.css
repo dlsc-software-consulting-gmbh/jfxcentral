@@ -526,7 +526,18 @@
     -fx-icon-color: white;
     -fx-icon-size: 32px;
 }
-
+/* ----------------------------------------------------------------------------
+ * MasterPersonCell
+ */
+.master-tip-list-cell {
+  -fx-padding: 0;
+}
+.master-tip-list-cell .textflow {
+  -fx-padding: 10px 15px;
+}
+.master-tip-list-cell .textflow .headline {
+  -fx-fill: -fx-accent;
+}
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */
