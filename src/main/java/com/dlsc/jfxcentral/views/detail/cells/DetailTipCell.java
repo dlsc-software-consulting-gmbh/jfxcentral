@@ -1,8 +1,10 @@
 package com.dlsc.jfxcentral.views.detail.cells;
 
+import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
 
 public class DetailTipCell extends DetailCell<Tip> {
 
@@ -17,6 +19,7 @@ public class DetailTipCell extends DetailCell<Tip> {
         setPrefWidth(0);
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.setImage(new Image(JFXCentralApp.class.getResource("tip-round.jpg").toExternalForm()));
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
         responsiveBox.setLargeImageWidth(200);
         responsiveBox.setLargeImageHeight(100);

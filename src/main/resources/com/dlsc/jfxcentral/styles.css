@@ -493,7 +493,7 @@
 }
 
 .master-view .list-cell .hbox {
-    -fx-padding: 15px 20px;
+    -fx-padding: 5px 10px;
 }
 .master-view .list-cell .grid-pane {
     -fx-padding: 15px 20px;
@@ -534,6 +534,10 @@
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */
+.master-person-list-cell .grid-pane {
+    -fx-padding: 10px 10px !important;
+}
+
 .master-person-list-cell .arrow-icon {
     -fx-icon-size: 32px;
     -fx-icon-color: -fx-accent;
@@ -1564,7 +1568,7 @@
 }
 
 .responsive-box .photo-view {
-    -size: 120px;
+    -size: 80px;
     -fx-min-width: -size;
     -fx-min-height: -size;
     -fx-max-width: -size;

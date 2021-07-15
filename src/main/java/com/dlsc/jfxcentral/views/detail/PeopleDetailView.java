@@ -7,7 +7,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBox.ImageLocation;
+import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBoxWithPhotoView.ImageLocation;
 import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBoxWithPhotoView;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -67,14 +67,14 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
             responsiveBox.setTitle(person.getName());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().personImageProperty(person));
-            responsiveBox.getButtons().clear();
+            responsiveBox.getExtraControls().clear();
 
             if (StringUtils.isNotEmpty(person.getTwitter())) {
                 Button twitter = new Button("Twitter");
                 twitter.getStyleClass().addAll("social-button", "twitter");
                 Util.setLink(twitter, "https://twitter.com/" + person.getTwitter(), person.getName());
                 twitter.setGraphic(new FontIcon(FontAwesomeBrands.TWITTER));
-                responsiveBox.getButtons().add(twitter);
+                responsiveBox.getExtraControls().add(twitter);
             }
 
             if (StringUtils.isNotEmpty(person.getLinkedIn())) {
@@ -82,7 +82,7 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
                 linkedIn.getStyleClass().addAll("social-button", "linkedin");
                 Util.setLink(linkedIn, "https://www.linkedin.com/in/" + person.getLinkedIn(), person.getName());
                 linkedIn.setGraphic(new FontIcon(FontAwesomeBrands.LINKEDIN));
-                responsiveBox.getButtons().add(linkedIn);
+                responsiveBox.getExtraControls().add(linkedIn);
             }
 
             if (StringUtils.isNotEmpty(person.getBlogId())) {
@@ -90,7 +90,7 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
                 blog.getStyleClass().addAll("social-button", "blog");
                 Util.setLink(blog, "", "");
                 blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
-                responsiveBox.getButtons().add(blog);
+                responsiveBox.getExtraControls().add(blog);
             }
 
             if (StringUtils.isNotEmpty(person.getWebsite())) {
@@ -98,7 +98,7 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
                 website.getStyleClass().addAll("social-button", "website");
                 Util.setLink(website, person.getWebsite(), person.getName());
                 website.setGraphic(new FontIcon(FontAwesomeBrands.SAFARI));
-                responsiveBox.getButtons().add(website);
+                responsiveBox.getExtraControls().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getEmail())) {
@@ -106,7 +106,7 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
                 website.getStyleClass().addAll("social-button", "mail");
                 Util.setLink(website, "mailto:" + person.getEmail() + "?subject=JFXCentral%20Mail%20Contact", person.getName());
                 website.setGraphic(new FontIcon(Material.MAIL));
-                responsiveBox.getButtons().add(website);
+                responsiveBox.getExtraControls().add(website);
             }
 
             if (StringUtils.isNotEmpty(person.getGitHub())) {
@@ -114,7 +114,7 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
                 github.getStyleClass().addAll("social-button", "github");
                 Util.setLink(github, "https://github.com/" + person.getGitHub(), person.getName());
                 github.setGraphic(new FontIcon(FontAwesomeBrands.GITHUB));
-                responsiveBox.getButtons().add(github);
+                responsiveBox.getExtraControls().add(github);
             }
         }
     }

@@ -21,6 +21,7 @@ public class AdvancedListCell<T> extends ListCell<T> {
     public AdvancedListCell() {
         getStyleClass().add("advanced-list-cell");
         setMaxWidth(Double.MAX_VALUE);
+        setPrefWidth(0);
     }
 
     protected void setLink(String url, String description) {
