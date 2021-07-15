@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
-import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailCompanyCell;
@@ -31,7 +30,7 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
         listView.setItems(sortedList);
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
 
-        if (rootPane.getDisplay().equals(Display.WEB)) {
+        if (true) { //rootPane.getDisplay().equals(Display.WEB)) {
             listView.setPaging(true);
             listView.setVisibleRowCount(10);
             listView.setShowItemCounter(false);

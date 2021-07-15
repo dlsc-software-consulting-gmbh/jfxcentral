@@ -6,21 +6,27 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
-public class ResponsiveBox extends VBox {
+public class ResponsiveBox extends Pane {
 
     private final ImageView imageView = new ImageView();
     private final Label titleLabel = new Label();
     private final Label subtitleLabel = new Label();
     private final MarkdownView markdownView = new MarkdownView();
-    private final HBox hBox;
     private final StackPane imageWrapper;
+    private final ImageLocation imageLocation;
+    private final FlowPane extraControlsPane;
 
     public enum ImageLocation {
         LARGE_ON_SIDE,
@@ -30,6 +36,8 @@ public class ResponsiveBox extends VBox {
     }
 
     public ResponsiveBox(ImageLocation imageLocation) {
+        this.imageLocation = imageLocation;
+
         getStyleClass().add("responsive-box");
 
         setPrefWidth(0);
@@ -38,8 +46,6 @@ public class ResponsiveBox extends VBox {
 
         imageView.setPreserveRatio(true);
         imageView.imageProperty().bind(imageProperty());
-        imageView.visibleProperty().bind(showImageView);
-        imageView.managedProperty().bind(showImageView);
 
         titleLabel.textProperty().bind(titleProperty());
         titleLabel.getStyleClass().addAll("header2", "title-label");
@@ -54,14 +60,17 @@ public class ResponsiveBox extends VBox {
         subtitleLabel.managedProperty().bind(subtitleLabel.textProperty().isNotEmpty());
 
         markdownView.mdStringProperty().bind(descriptionProperty());
+        markdownView.setMinHeight(Region.USE_PREF_SIZE);
         markdownView.getStyleClass().add("description-label");
 
         imageWrapper = new StackPane(imageView);
         imageWrapper.getStyleClass().add("image-wrapper");
         imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
+        imageWrapper.visibleProperty().bind(showImageView);
+        imageWrapper.managedProperty().bind(showImageView);
         StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
 
-        FlowPane extraControlsPane = new FlowPane();
+        extraControlsPane = new FlowPane();
         Bindings.bindContent(extraControlsPane.getChildren(), extraControlsProperty());
         extraControlsPane.getStyleClass().add("button-box");
         extraControlsPane.setMinHeight(Region.USE_PREF_SIZE);
@@ -69,48 +78,187 @@ public class ResponsiveBox extends VBox {
         extraControlsPane.visibleProperty().bind(Bindings.isNotEmpty(extraControlsPane.getChildren()));
         extraControlsPane.managedProperty().bind(Bindings.isNotEmpty(extraControlsPane.getChildren()));
 
-        VBox vBox = new VBox();
-        vBox.setAlignment(Pos.TOP_LEFT);
-        vBox.setFillWidth(true);
-        vBox.getStyleClass().add("vbox");
-        HBox.setHgrow(vBox, Priority.ALWAYS);
+        getChildren().setAll(imageWrapper, titleLabel, subtitleLabel, markdownView, extraControlsPane);
 
-        hBox = new HBox(vBox);
-        hBox.getStyleClass().add("hbox");
-
-        getChildren().add(hBox);
-
-        widthProperty().addListener(it -> updateLayout(imageLocation, imageWrapper, extraControlsPane, vBox));
-        updateLayout(imageLocation, imageWrapper, extraControlsPane, vBox);
+        footerProperty().addListener((obs, oldFooter, newFooter) -> {
+            if (oldFooter != null) {
+                getChildren().remove(oldFooter);
+            }
+            if (newFooter != null) {
+                getChildren().add(newFooter);
+            }
+        });
     }
 
-    private void updateLayout(ImageLocation imageLocation, StackPane imageWrapper, FlowPane buttonBox, VBox vBox) {
+    @Override
+    public Orientation getContentBias() {
+        return Orientation.HORIZONTAL;
+    }
+
+    protected void layoutChildren() {
+        Insets insets = getInsets();
+
+        double x = insets.getLeft();
+        double y = insets.getTop();
+        double w = getWidth() - insets.getLeft() - insets.getRight();
+
+        double ph;
+
         if (imageLocation.equals(ImageLocation.BANNER) || getWidth() < 500) {
-            imageWrapper.setPrefWidth(0);
-            imageWrapper.setMinWidth(0);
-            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> imageWrapper.getWidth() - imageWrapper.getInsets().getLeft() - imageWrapper.getInsets().getRight(), imageWrapper.widthProperty(), imageWrapper.insetsProperty()));
-            vBox.getChildren().setAll(titleLabel, subtitleLabel, imageWrapper, markdownView, buttonBox);
-            hBox.getChildren().remove(imageWrapper);
+            imageView.setFitWidth(w);
+            imageView.setFitHeight(Region.USE_PREF_SIZE);
+
+            ph = imageWrapper.prefHeight(w);
+            imageWrapper.resizeRelocate(x, y, w, ph);
+
+            if (titleLabel.isManaged() || subtitleLabel.isManaged() ||markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                y += ph + getVgap();
+            }
+
         } else {
-            imageWrapper.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            imageWrapper.setMinWidth(Region.USE_COMPUTED_SIZE);
-
-            imageView.fitWidthProperty().unbind();
             imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
-
-            imageView.fitHeightProperty().unbind();
             imageView.setFitHeight(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageHeight() : getLargeImageHeight());
 
-            vBox.getChildren().setAll(titleLabel, subtitleLabel, markdownView, buttonBox);
-            if (!hBox.getChildren().contains(imageWrapper)) {
-                hBox.getChildren().add(imageWrapper);
+            ph = imageWrapper.prefHeight(w);
+            double pw = imageWrapper.prefWidth(w);
+
+            imageWrapper.resizeRelocate(x + w - pw, y, pw, ph);
+
+            w -= pw; // less available horizontal space now
+            w -= getHgap();
+        }
+
+        if (titleLabel.isManaged()) {
+            ph = titleLabel.prefHeight(w);
+            titleLabel.resizeRelocate(x, y, w, ph);
+
+            if (subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                y += ph + getVgap();
+            }
+        }
+
+        if (subtitleLabel.isManaged()) {
+            ph = subtitleLabel.prefHeight(w);
+            subtitleLabel.resizeRelocate(x, y, w, ph);
+            if (markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                y += ph + getVgap();
+            }
+        }
+
+        if (markdownView.isManaged()) {
+            ph = markdownView.prefHeight(w);
+            markdownView.resizeRelocate(x, y, w, ph);
+            if (extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                y += ph + getVgap();
+            }
+        }
+
+        if (extraControlsPane.isManaged()) {
+            ph = extraControlsPane.prefHeight(w);
+            extraControlsPane.resizeRelocate(x, y, w, ph);
+            if (getFooter() != null && getFooter().isManaged()) {
+                y += ph + getVgap();
             }
         }
 
         Node footer = getFooter();
-        if (footer != null && !getChildren().contains(footer)) {
-            getChildren().add(footer);
+        if (footer != null && footer.isManaged()) {
+            ph = footer.prefHeight(w);
+            footer.resizeRelocate(x, y, w, ph);
         }
+    }
+
+    private final DoubleProperty hgap = new SimpleDoubleProperty(this, "hgap", 10);
+
+    public double getHgap() {
+        return hgap.get();
+    }
+
+    public DoubleProperty hgapProperty() {
+        return hgap;
+    }
+
+    public void setHgap(double hgap) {
+        this.hgap.set(hgap);
+    }
+
+    private final DoubleProperty vgap = new SimpleDoubleProperty(this, "vgap", 10);
+
+    public double getVgap() {
+        return vgap.get();
+    }
+
+    public DoubleProperty vgapProperty() {
+        return vgap;
+    }
+
+    public void setVgap(double vgap) {
+        this.vgap.set(vgap);
+    }
+
+    @Override
+    protected double computePrefHeight(double w) {
+        double h =  getInsets().getTop() + getInsets().getBottom();
+
+        if (imageWrapper.isManaged()) {
+            if ((imageLocation.equals(ImageLocation.BANNER) || w < 500)) {
+                h += imageWrapper.prefHeight(w);
+                if (titleLabel.isManaged() || subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                    h += getVgap();
+                }
+            } else if (imageLocation.equals(ImageLocation.LARGE_ON_SIDE)) {
+                w -= getLargeImageWidth();
+                w -= getHgap();
+            } else if (imageLocation.equals(ImageLocation.SMALL_ON_SIDE)) {
+                w -= getSmallImageWidth();
+                w -= getHgap();
+            }
+        }
+
+        if (titleLabel.isManaged()) {
+            h += titleLabel.prefHeight(w);
+            if (subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                h += getVgap();
+            }
+        }
+
+        if (subtitleLabel.isManaged()) {
+            h += subtitleLabel.prefHeight(w);
+            if (markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                h += getVgap();
+            }
+        }
+
+        if (markdownView.isManaged()) {
+            h += markdownView.prefHeight(w);
+            if (extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                h += getVgap();
+            }
+        }
+
+        if (extraControlsPane.isManaged()) {
+            h += extraControlsPane.prefHeight(w);
+            if (getFooter() != null && getFooter().isManaged()) {
+                h += getVgap();
+            }
+        }
+
+        Node footer = getFooter();
+        if (footer != null && footer.isManaged()) {
+            h += footer.prefHeight(w);
+        }
+
+        return h;
+    }
+
+    @Override
+    protected double computeMaxHeight(double width) {
+        return computePrefHeight(width);
+    }
+
+    @Override
+    protected double computeMinHeight(double width) {
+        return super.computePrefHeight(width);
     }
 
     public ImageView getImageView() {

@@ -9,7 +9,6 @@ import com.dlsc.jfxcentral.data.model.Download.FileType;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
-import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailDownloadCell;
@@ -64,7 +63,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         listView.itemsProperty().bind(filterView.filteredItemsProperty());
         listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
 
-        if (rootPane.getDisplay().equals(Display.WEB)) {
+        if (true) { //rootPane.getDisplay().equals(Display.WEB)) {
             listView.setPaging(true);
             listView.setVisibleRowCount(5);
             listView.setShowItemCounter(false);

@@ -40,7 +40,7 @@ public class WebView extends com.jpro.web.View {
 
     @Override
     public boolean fullscreen() {
-        return false;
+        return true;
     }
 
     private RootPane rootPane = new RootPane();

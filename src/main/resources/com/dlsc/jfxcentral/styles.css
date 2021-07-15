@@ -327,7 +327,6 @@
 }
 
 .root-pane {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .5), 20, 0.19, -1, 6);
 }
 
 .root-pane .top-spacer {
@@ -456,7 +455,6 @@
 }
 
 .detail-scroll-pane .scroll-pane {
-    -fx-padding: 20px;
     -fx-background-color: -light-grey;
 }
 

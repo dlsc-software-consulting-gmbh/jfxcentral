@@ -8,7 +8,6 @@ import com.dlsc.jfxcentral.data.model.Tutorial.Format;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.views.AdvancedListView;
-import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailTutorialCell;
@@ -71,7 +70,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
         VBox.setVgrow(listView, Priority.ALWAYS);
         sectionPane.getNodes().add(listView);
 
-        if (rootPane.getDisplay().equals(Display.WEB)) {
+        if (true) { //rootPane.getDisplay().equals(Display.WEB)) {
             listView.setPaging(true);
             listView.setVisibleRowCount(5);
             listView.setShowItemCounter(false);

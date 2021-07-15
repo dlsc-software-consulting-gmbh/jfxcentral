@@ -1,7 +1,6 @@
 package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.panels.PrettyScrollPane;
-import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -14,7 +13,7 @@ public class DetailScrollPane extends StackPane {
     public DetailScrollPane(RootPane rootPane) {
         getStyleClass().add("detail-scroll-pane");
 
-        if (!rootPane.getDisplay().equals(Display.WEB)) {
+//        if (!rootPane.getDisplay().equals(Display.WEB)) {
             scrollPane = new PrettyScrollPane();
             scrollPane.setShowScrollToTopButton(true);
             scrollPane.setShowShadow(rootPane.isMobile());
@@ -23,7 +22,7 @@ public class DetailScrollPane extends StackPane {
             scrollPane.setMobile(rootPane.isMobile());
             scrollPane.setPannable(rootPane.isMobile());
             getChildren().add(scrollPane);
-        }
+//        }
     }
 
     public void setContent(Node content) {

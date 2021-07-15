@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral.views.master;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.PrettyListView;
 import com.dlsc.jfxcentral.views.AdvancedListView;
-import com.dlsc.jfxcentral.views.Display;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import javafx.animation.FadeTransition;
@@ -20,7 +19,7 @@ public abstract class MasterViewWithListView<T extends ModelObject> extends Mast
     public MasterViewWithListView(RootPane rootPane, View view) {
         super(rootPane, view);
 
-        if (rootPane.getDisplay().equals(Display.WEB)) {
+        if (false) { //rootPane.getDisplay().equals(Display.WEB)) {
             AdvancedListView<T> advancedListView = new AdvancedListView<>();
             advancedListView.setPaging(true);
             advancedListView.setVisibleRowCount(20);

@@ -7,5 +7,6 @@ public class MasterCell<T> extends AdvancedListCell<T> {
     public MasterCell() {
         getStyleClass().add("master-cell");
         setMaxWidth(Double.MAX_VALUE);
+        setPrefWidth(0);
     }
 }
