@@ -14,7 +14,9 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPullRequestCell;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +49,8 @@ public class OpenJFXDetailView extends DetailView {
     private static ZonedDateTime pullRequestUpdateTime;
     private FilterView<PullRequest> filterView;
 
+    private InvalidationListener updatePR = (Observable it) -> updateFilters();
+
     public OpenJFXDetailView(RootPane rootPane) {
         super(rootPane, View.OPENJFX);
 
@@ -58,7 +62,7 @@ public class OpenJFXDetailView extends DetailView {
         content.getChildren().add(new Region());
 
         setContent(content);
-        pullRequests.addListener((Observable it) -> updateFilters());
+        pullRequests.addListener(new WeakInvalidationListener(updatePR));
 
         // using static update time field as this will be for shared clients on the web server
         if (pullRequestUpdateTime == null || Duration.between(pullRequestUpdateTime, ZonedDateTime.now()).toHours() > 3) {
