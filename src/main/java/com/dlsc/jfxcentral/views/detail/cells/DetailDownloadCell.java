@@ -9,8 +9,6 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.WebAPI;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -19,14 +17,16 @@ public class DetailDownloadCell extends DetailCell<Download> {
 
     private final ResponsiveBox responsiveBox;
     private final RootPane rootPane;
+    private final boolean primaryView;
 
-    public DetailDownloadCell(RootPane rootPane, boolean largeImage) {
+    public DetailDownloadCell(RootPane rootPane, boolean primaryView) {
         this.rootPane = rootPane;
-
+        this.primaryView = primaryView;
+        
         getStyleClass().add("detail-download-cell");
         setPrefWidth(0);
 
-        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
         setGraphic(responsiveBox);
@@ -49,7 +49,9 @@ public class DetailDownloadCell extends DetailCell<Download> {
 
         if (!empty && download != null) {
             responsiveBox.setTitle(download.getName());
-            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(download), download.getName());
+            if (!primaryView) {
+                Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(download), download.getName());
+            }
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
 

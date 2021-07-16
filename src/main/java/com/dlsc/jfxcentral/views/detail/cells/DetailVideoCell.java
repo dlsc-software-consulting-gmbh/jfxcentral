@@ -22,9 +22,11 @@ public class DetailVideoCell extends DetailCell<Video> {
     private final Button playOnYouTubeButton = new Button("YouTube");
     private final RootPane rootPane;
     private final ResponsiveBox responsiveBox;
+    private final boolean primaryView;
 
-    public DetailVideoCell(RootPane rootPane, boolean largeImage) {
+    public DetailVideoCell(RootPane rootPane, boolean primaryView) {
         this.rootPane = rootPane;
+        this.primaryView = primaryView;
 
         getStyleClass().add("detail-video-cell");
 
@@ -35,7 +37,7 @@ public class DetailVideoCell extends DetailCell<Video> {
 
         playOnYouTubeButton.setGraphic(new FontIcon(MaterialDesign.MDI_YOUTUBE_PLAY));
 
-        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getExtraControls().addAll(playButton, playOnYouTubeButton);
         responsiveBox.getImageView().setOnMouseClicked(evt -> showVideo(getItem()));
         responsiveBox.getImageView().setCursor(Cursor.HAND);
@@ -100,7 +102,9 @@ public class DetailVideoCell extends DetailCell<Video> {
         if (!empty && video != null) {
             Util.setLink(playOnYouTubeButton, "https://youtu.be/" + getItem().getId(), "https://youtu.be/" + getItem().getId());
             responsiveBox.setTitle(video.getName());
-            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(video), video.getName());
+            if (!primaryView) {
+                Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(video), video.getName());
+            }
             responsiveBox.setDescription(video.getDescription());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         }

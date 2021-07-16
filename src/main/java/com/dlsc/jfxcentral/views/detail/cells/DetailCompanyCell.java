@@ -16,9 +16,11 @@ public class DetailCompanyCell extends DetailCell<Company> {
     private final Button homepageButton = new Button("Homepage");
     private final RootPane rootPane;
     private final ResponsiveBox responsiveBox;
+    private final boolean primaryView;
 
-    public DetailCompanyCell(RootPane rootPane, boolean largeImage) {
+    public DetailCompanyCell(RootPane rootPane, boolean primaryView) {
         this.rootPane = rootPane;
+        this.primaryView = primaryView;
 
         getStyleClass().add("detail-company-cell");
 
@@ -26,7 +28,7 @@ public class DetailCompanyCell extends DetailCell<Company> {
 
         homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
 
-        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getExtraControls().addAll(homepageButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
         responsiveBox.setLargeImageWidth(200);
@@ -42,7 +44,9 @@ public class DetailCompanyCell extends DetailCell<Company> {
 
         if (!empty && company != null) {
             responsiveBox.setTitle(company.getName());
-            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(company), company.getName());
+            if (!primaryView) {
+                Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(company), company.getName());
+            }
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().companyDescriptionProperty(company));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
 

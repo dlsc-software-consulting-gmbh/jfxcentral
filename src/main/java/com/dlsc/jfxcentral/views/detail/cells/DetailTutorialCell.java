@@ -19,9 +19,11 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
     private final Label commercialLabel = new Label("$$$");
     private final RootPane rootPane;
     private final ResponsiveBox responsiveBox;
+    private final boolean primaryView;
 
-    public DetailTutorialCell(RootPane rootPane, boolean largeImage) {
+    public DetailTutorialCell(RootPane rootPane, boolean primaryView) {
         this.rootPane = rootPane;
+        this.primaryView = primaryView;
 
         getStyleClass().add("detail-tutorial-cell");
 
@@ -31,7 +33,7 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
 
         visitButton.setGraphic(new FontIcon(StandardIcons.TUTORIAL));
 
-        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getTitleLabel().setGraphic(commercialLabel);
         responsiveBox.getExtraControls().addAll(visitButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
@@ -60,7 +62,10 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
 
         if (!empty && tutorial != null) {
             responsiveBox.setTitle(tutorial.getName());
-            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(tutorial), tutorial.getName());
+
+            if (!primaryView) {
+                Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(tutorial), tutorial.getName());
+            }
 
             commercialLabel.setVisible(tutorial.isCommercial());
 
