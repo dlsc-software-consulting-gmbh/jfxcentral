@@ -1750,14 +1750,10 @@
 /* ----------------------------------------------------------------------------
  * DetailRecentItemList
  */
-.detail-recent-item-cell,
-.detail-recent-item-cell.last {
-    -fx-padding: 5px 10px 5px 5px;
-}
-
 .detail-recent-item-cell .hbox {
     -fx-alignment: center-left;
     -fx-spacing: 20px;
+
 }
 
 .detail-recent-item-cell .hbox .icon-wrapper {
