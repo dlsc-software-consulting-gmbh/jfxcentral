@@ -32,7 +32,7 @@ public abstract class MasterView<T extends ModelObject> extends BorderPane {
 
         getStyleClass().add("master-view");
 
-        MasterViewHeader header = new MasterViewHeader();
+        MasterViewHeader header = new MasterViewHeader(rootPane);
         header.filterTextProperty().bindBidirectional(filterTextProperty());
         setTop(header);
     }

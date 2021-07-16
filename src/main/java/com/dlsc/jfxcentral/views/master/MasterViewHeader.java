@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views.master;
 
+import com.dlsc.jfxcentral.views.RootPane;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -15,7 +16,7 @@ import org.kordamp.ikonli.material.Material;
 
 public class MasterViewHeader extends HBox {
 
-    public MasterViewHeader() {
+    public MasterViewHeader(RootPane rootPane) {
         getStyleClass().add("master-view-header");
 
         setAlignment(Pos.CENTER);
@@ -32,9 +33,11 @@ public class MasterViewHeader extends HBox {
         searchField.getStyleClass().add("search-field");
         searchField.setMaxWidth(Double.MAX_VALUE);
         searchField.setPromptText("Filter ....");
-        Platform.runLater(() -> {
-            searchField.requestFocus();
-        });
+        if(!rootPane.isMobile()) {
+            Platform.runLater(() -> {
+                searchField.requestFocus();
+            });
+        }
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
         FontIcon clearSearch = new FontIcon(Material.CLEAR);
