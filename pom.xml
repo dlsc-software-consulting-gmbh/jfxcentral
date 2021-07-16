@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>15</javafx.version>
+        <javafx.version>17-ea+13</javafx.version>
         <attach.version>4.0.11</attach.version>
         <client.version>1.0.0</client.version>
         <client.name>JFXCentral</client.name>
@@ -36,8 +36,8 @@
             <groupId>com.dlsc.jfxcentral</groupId>
             <artifactId>model</artifactId>
             <version>1.0-SNAPSHOT</version>
-          <!--  <scope>system</scope> -->
-          <!--  <systemPath>${project.basedir}/model-1.0-SNAPSHOT.jar</systemPath> -->
+            <scope>system</scope>
+            <systemPath>${project.basedir}/model-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <dependency>
