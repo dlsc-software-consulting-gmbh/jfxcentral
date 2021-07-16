@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Video;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.HTMLView;
@@ -99,6 +100,7 @@ public class DetailVideoCell extends DetailCell<Video> {
         if (!empty && video != null) {
             Util.setLink(playOnYouTubeButton, "https://youtu.be/" + getItem().getId(), "https://youtu.be/" + getItem().getId());
             responsiveBox.setTitle(video.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(video), video.getName());
             responsiveBox.setDescription(video.getDescription());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().youTubeImageProperty(video));
         }

@@ -2,6 +2,8 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.model.Tip;
+import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
@@ -34,6 +36,7 @@ public class DetailTipCell extends DetailCell<Tip> {
 
         if (!empty && tip != null) {
             responsiveBox.setTitle(tip.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(tip), tip.getName());
             responsiveBox.setDescription(tip.getSummary());
         }
     }

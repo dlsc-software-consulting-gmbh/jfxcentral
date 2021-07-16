@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Company;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.scene.control.Button;
@@ -41,6 +42,7 @@ public class DetailCompanyCell extends DetailCell<Company> {
 
         if (!empty && company != null) {
             responsiveBox.setTitle(company.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(company), company.getName());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().companyDescriptionProperty(company));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().companyImageProperty(company));
 

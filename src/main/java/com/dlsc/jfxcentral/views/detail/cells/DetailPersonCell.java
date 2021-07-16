@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBoxWithPhotoView.ImageLocation;
@@ -51,6 +52,7 @@ public class DetailPersonCell extends DetailCell<Person> {
 
         if (!empty && person != null) {
             responsiveBox.setTitle(person.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(person), person.getName());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             championImageView.setVisible(person.isChampion());
             rockstarImageView.setVisible(person.isRockstar());

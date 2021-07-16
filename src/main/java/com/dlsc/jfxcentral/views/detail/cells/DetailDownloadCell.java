@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Download;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.WebAPI;
@@ -48,6 +49,7 @@ public class DetailDownloadCell extends DetailCell<Download> {
 
         if (!empty && download != null) {
             responsiveBox.setTitle(download.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(download), download.getName());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().downloadTextProperty(download));
             responsiveBox.imageProperty().bind(ImageManager.getInstance().downloadBannerImageProperty(download));
 

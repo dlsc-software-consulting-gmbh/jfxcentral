@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
@@ -88,6 +89,7 @@ public class DetailToolCell extends AdvancedListCell<Tool> {
             logoImageView.setVisible(true);
 
             titleLabel.setText(item.getName());
+            Util.setLink(titleLabel, PageUtil.getLink(item), item.getName());
             descriptionMarkdownView.setMdString(item.getDescription());
 
             homepageButton.setVisible(StringUtils.isNotEmpty(item.getHomepage()));

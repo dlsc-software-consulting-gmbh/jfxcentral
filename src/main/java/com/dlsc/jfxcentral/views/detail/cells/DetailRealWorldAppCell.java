@@ -2,6 +2,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.RealWorldApp;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.scene.control.Button;
@@ -40,6 +41,7 @@ public class DetailRealWorldAppCell extends DetailCell<RealWorldApp> {
 
         if (!empty && app != null) {
             responsiveBox.setTitle(app.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(app), app.getName());
             responsiveBox.setDescription(app.getSummary());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().realWorldAppImageProperty(app));
 

@@ -51,6 +51,7 @@ public class DetailBookCell extends DetailCell<Book> {
         if (!empty && item != null) {
             responsiveBox.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(item));
             responsiveBox.setTitle(item.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(item), item.getName());
             responsiveBox.setSubtitle(item.getSubtitle());
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().bookTextProperty(item));
 

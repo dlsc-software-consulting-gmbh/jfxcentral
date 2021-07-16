@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.detail.cells;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tutorial;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
@@ -59,6 +60,7 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
 
         if (!empty && tutorial != null) {
             responsiveBox.setTitle(tutorial.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(tutorial), tutorial.getName());
 
             commercialLabel.setVisible(tutorial.isCommercial());
 

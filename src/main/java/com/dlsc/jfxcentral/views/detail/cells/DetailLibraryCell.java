@@ -18,7 +18,6 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class DetailLibraryCell extends AdvancedListCell<Library> {
 
-    private final Button detailButton;
     private final Button homepageButton;
     private final Button repositoryButton;
     private final Button issueTrackerButton;
@@ -34,10 +33,6 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
         homepageButton = new Button("Homepage");
         homepageButton.getStyleClass().addAll("library-button", "homepage");
         homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
-
-        detailButton = new Button("Detail");
-        detailButton.getStyleClass().addAll("library-button", "detail");
-        detailButton.setGraphic(new FontIcon(MaterialDesign.MDI_WEB));
 
         repositoryButton = new Button("Repository");
         repositoryButton.getStyleClass().addAll("library-button", "repository");
@@ -65,7 +60,7 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
         responsiveBox.setFooter(infoView);
         responsiveBox.setSmallImageWidth(48);
         responsiveBox.setLargeImageWidth(48);
-        responsiveBox.getExtraControls().addAll(homepageButton, detailButton, repositoryButton, issueTrackerButton, discussionsButton);
+        responsiveBox.getExtraControls().addAll(homepageButton, repositoryButton, issueTrackerButton, discussionsButton);
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -78,7 +73,6 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
         super.updateItem(item, empty);
 
         if (!empty && item != null) {
-            Util.setLink(detailButton, PageUtil.getLink(item), getItem().getName());
             Util.setLink(homepageButton, getItem().getHomepage(), getItem().getName());
             Util.setLink(repositoryButton, getItem().getRepository(), getItem().getName());
             Util.setLink(issueTrackerButton, getItem().getIssueTracker(), getItem().getName());
@@ -88,6 +82,7 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
             licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
 
             responsiveBox.setTitle(item.getName());
+            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(item), item.getName());
             responsiveBox.setDescription(item.getDescription());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
 
