@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.views.master;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
@@ -31,6 +32,9 @@ public class MasterViewHeader extends HBox {
         searchField.getStyleClass().add("search-field");
         searchField.setMaxWidth(Double.MAX_VALUE);
         searchField.setPromptText("Filter ....");
+        Platform.runLater(() -> {
+            searchField.requestFocus();
+        });
         HBox.setHgrow(searchField, Priority.ALWAYS);
 
         FontIcon clearSearch = new FontIcon(Material.CLEAR);
