@@ -2137,6 +2137,7 @@
     -fx-border-width: 3px;
     -fx-border-radius: 1000px;
     -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 
 .overlay-pane .close-button:pressed {

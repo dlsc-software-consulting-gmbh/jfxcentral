@@ -74,6 +74,7 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
             imageView.setOnMouseClicked(evt -> {
                 Consumer<Image> onImageClick = getOnImageClick();
                 if (onImageClick != null) {
+                    imageView.getStyleClass().add("clickable-image");
                     onImageClick.accept(imageView.getImage());
                 }
             });

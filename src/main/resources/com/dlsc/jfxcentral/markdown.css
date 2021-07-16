@@ -14,6 +14,10 @@
     -mdfx-bq-color-background: derive(-fx-accent, +90%); /* the blockquote's background color */
 }
 
+.clickable-image {
+  -fx-cursor: hand;
+}
+
 .markdown-text {
     -fx-font-size: 1em;
     -fx-font-family: "Inter";
