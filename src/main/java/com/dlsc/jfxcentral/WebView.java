@@ -71,7 +71,7 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
-        if(id == null && view != View.HOME && view != View.OPENJFX) {
+        if(id == null && view != View.HOME && view != View.OPENJFX && view != View.COMPANIES && view != View.TUTORIALS && view != View.VIDEOS) {
             Object obj = DataRepository.getInstance()
                     .getList(PageUtil.getClassOfView(view))
                     .stream().sorted(Comparator.comparing((ModelObject x) -> x.getName().toLowerCase()))
