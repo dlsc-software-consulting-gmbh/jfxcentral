@@ -2,7 +2,6 @@ package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.util.PageUtil;
-import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
@@ -83,33 +82,7 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
     }
 
     private String createTitle(ModelObject item) {
-        if (item instanceof Book) {
-            return ((Book) item).getName();
-        } else if (item instanceof Person) {
-            return ((Person) item).getName();
-        } else if (item instanceof News) {
-            return ((News) item).getName();
-        } else if (item instanceof Video) {
-            return ((Video) item).getName();
-        } else if (item instanceof Blog) {
-            return ((Blog) item).getName();
-        } else if (item instanceof Library) {
-            return ((Library) item).getName();
-        } else if (item instanceof Company) {
-            return ((Company) item).getName();
-        } else if (item instanceof RealWorldApp) {
-            return ((RealWorldApp) item).getName();
-        } else if (item instanceof Tool) {
-            return ((RealWorldApp) item).getName();
-        } else if (item instanceof Tutorial) {
-            return ((Tutorial) item).getName();
-        } else if (item instanceof Download) {
-            return ((Download) item).getName();
-        } else if (item instanceof Tip) {
-            return ((Tip) item).getName();
-        }
-
-        return "";
+        return item.getName();
     }
 
     private String createSubTitle(ModelObject item) {
@@ -120,23 +93,23 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
         } else if (item instanceof News) {
             return ((News) item).getSubtitle();
         } else if (item instanceof Video) {
-            String description = ((Video) item).getDescription();
+            String description = item.getDescription();
             if (StringUtils.isNotBlank(description)) {
                 return description.substring(0, Math.min(100, description.length())).replace("\n", " ");
             }
             return "";
         } else if (item instanceof Blog) {
-            return ((Blog) item).getSummary();
+            return item.getSummary();
         } else if (item instanceof Library) {
-            return ((Library) item).getSummary();
+            return item.getSummary();
         } else if (item instanceof Company) {
             return ((Company) item).getHomepage();
         } else if (item instanceof RealWorldApp) {
-            return ((RealWorldApp) item).getSummary();
+            return item.getSummary();
         } else if (item instanceof Tool) {
-            return ((RealWorldApp) item).getSummary();
+            return item.getSummary();
         } else if (item instanceof Tutorial) {
-            return ((Tutorial) item).getSummary();
+            return item.getSummary();
         } else if (item instanceof Download) {
             return "Download";
         } else if (item instanceof Tip) {
