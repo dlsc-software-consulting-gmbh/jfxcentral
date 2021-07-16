@@ -2224,4 +2224,13 @@
     -fx-font-family: "Inter Semi Bold";
 }
 
-
+.no-mobile-pane {
+  -fx-padding: 25;
+  -fx-font-size: 22;
+  -fx-background-color: -fx-focus-color;
+}
+.no-mobile-pane .label {
+  -fx-wrap-text: true;
+  -fx-text-alignment: center;
+  -fx-text-fill: white;
+}

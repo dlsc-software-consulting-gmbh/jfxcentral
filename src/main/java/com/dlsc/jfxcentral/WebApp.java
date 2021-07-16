@@ -11,6 +11,12 @@ public class WebApp extends com.jpro.web.WebApp {
     WebApp(Stage stage) {
         super(stage);
 
+        if(WebAPI.isBrowser() && WebAPI.getWebAPI(stage).isMobile()) {
+            addRouteJava((s) -> {
+                return new MobileNotSupportedView();
+            });
+        }
+
         addRouteJava((s) -> {
             if (s.equals("") || s.equals("/")) {
                 return new com.jpro.web.Redirect("/home");
