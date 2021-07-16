@@ -19,9 +19,9 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 @DefaultProperty("nodes")
 public class SectionPane extends SectionPaneBase {
 
-    private final FancyLabel titleLabel = new FancyLabel();
+    private final Label titleLabel = new Label();
 
-    private final FancyLabel subtitleLabel = new FancyLabel();
+    private final Label subtitleLabel = new Label();
 
     private final BorderPane topPane = new BorderPane();
     private final Node placeholder;
@@ -159,11 +159,11 @@ public class SectionPane extends SectionPaneBase {
         return placeholder;
     }
 
-    public final FancyLabel getTitleLabel() {
+    public final Label getTitleLabel() {
         return titleLabel;
     }
 
-    public final FancyLabel getSubtitleLabel() {
+    public final Label getSubtitleLabel() {
         return subtitleLabel;
     }
 
