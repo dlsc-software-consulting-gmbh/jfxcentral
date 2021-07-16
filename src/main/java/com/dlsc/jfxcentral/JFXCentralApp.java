@@ -119,8 +119,8 @@ public class JFXCentralApp extends Application {
     }
 
     private static File getRepoDirectory() {
-       // return new File(System.getProperty("user.home") + "/" + REPOSITORY);
-        return new File("/Users/floriankirmaier/projects/jfxcentral-data");
+        return new File(System.getProperty("user.home") + "/" + REPOSITORY);
+//        return new File("/Users/floriankirmaier/projects/jfxcentral-data");
     }
 
     private void showHomeOrLoadingView(WebApp app, Stage stage) {
