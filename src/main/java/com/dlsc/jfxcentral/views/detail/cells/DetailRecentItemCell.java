@@ -89,7 +89,11 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
         if (item instanceof Book) {
             return ((Book) item).getSubtitle();
         } else if (item instanceof Person) {
-            return ((Person) item).getWebsite();
+            String description = item.getDescription();
+            if (StringUtils.isNotBlank(description)) {
+                return description.substring(0, Math.min(100, description.length())).replace("\n", " ");
+            }
+            return "";
         } else if (item instanceof News) {
             return ((News) item).getSubtitle();
         } else if (item instanceof Video) {
