@@ -1,6 +1,8 @@
 package com.dlsc.jfxcentral.views.detail.cells;
 
 import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
@@ -52,6 +54,7 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
         super.updateItem(item, empty);
 
         if (!empty && item != null) {
+            setLink(PageUtil.getLink(item), item.getName());
             titleLabel.setText(createTitle(item));
             subtitleLabel.setText(createSubTitle(item));
             fontIcon.setIconCode(createIkonCode(item));
