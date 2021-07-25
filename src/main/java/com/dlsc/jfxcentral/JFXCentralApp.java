@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class JFXCentralApp extends Application {
 
-    public static final String REPOSITORY = ".jfxcentralrepo";
+    public static final String REPOSITORY = System.getProperty("jfxcentral.repo",System.getProperty("user.home") + "/" + ".jfxcentralrepo");
 
     private static boolean repositoryInitialized;
 
@@ -103,7 +103,7 @@ public class JFXCentralApp extends Application {
                     .setProgressMonitor(monitor)
                     .call();
         } else {
-            repoDirectory = new File(System.getProperty("user.home") + "/" + REPOSITORY + "/.git");
+            repoDirectory = new File(REPOSITORY + "/.git");
             Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
@@ -119,8 +119,7 @@ public class JFXCentralApp extends Application {
     }
 
     private static File getRepoDirectory() {
-        return new File(System.getProperty("user.home") + "/" + REPOSITORY);
-//        return new File("/Users/floriankirmaier/projects/jfxcentral-data");
+        return new File(REPOSITORY);
     }
 
     private void showHomeOrLoadingView(WebApp app, Stage stage) {
