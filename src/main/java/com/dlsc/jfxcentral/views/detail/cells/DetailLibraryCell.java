@@ -79,7 +79,9 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
             Util.setLink(discussionsButton, getItem().getDiscussionBoard(), getItem().getName());
 
             licenseLabel.setLicense(item.getLicense());
-            licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
+            if(item.getLicense() != null) {
+                licenseLabel.getStyleClass().setAll("label", "license-label", item.getLicense().name().toLowerCase());
+            }
 
             responsiveBox.setTitle(item.getName());
             Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(item), item.getName());
