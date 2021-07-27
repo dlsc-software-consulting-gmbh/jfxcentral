@@ -2,8 +2,10 @@ package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
+import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
@@ -88,7 +90,9 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
             if (StringUtils.isNotEmpty(person.getBlogId())) {
                 Button blog = new Button("Blog");
                 blog.getStyleClass().addAll("social-button", "blog");
-                Util.setLink(blog, "", "");
+                Blog blogEntity = DataRepository.getInstance().getBlogById(person.getBlogId()).get();
+                String link = PageUtil.getLink(blogEntity);
+                Util.setLink(blog, link, blog.getText());
                 blog.setGraphic(new FontIcon(FontAwesomeBrands.BLOGGER));
                 responsiveBox.getExtraControls().add(blog);
             }
