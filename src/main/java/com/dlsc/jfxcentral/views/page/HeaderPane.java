@@ -67,7 +67,7 @@ public class HeaderPane extends HBox {
         refreshButton.setOnAction(evt -> {
             try {
                 JFXCentralApp.updateRepository(new TextProgressMonitor());
-                DataRepository.getInstance().refreshData();
+                DataRepository.getInstance().loadData();
             } catch (GitAPIException e) {
                 e.printStackTrace();
             } catch (IOException e) {

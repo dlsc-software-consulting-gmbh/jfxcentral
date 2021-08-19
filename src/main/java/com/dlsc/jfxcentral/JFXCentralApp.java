@@ -40,7 +40,7 @@ public class JFXCentralApp extends Application {
                     showHomeOrLoadingView(app, stage);
                 }
             });
-            updateRepositoryInBackground(((IntroView) root).getAnimationView());
+            updateRepositoryInBackground(((IntroView) root).getAnimationView(), () -> {});
         } else {
             if (!repositoryInitialized) {
                 updateRepository(new TextProgressMonitor());
@@ -76,10 +76,11 @@ public class JFXCentralApp extends Application {
         return repositoryInitialized;
     }
 
-    public static void updateRepositoryInBackground(ProgressMonitor monitor) {
+    public static void updateRepositoryInBackground(ProgressMonitor monitor, Runnable callback) {
         Thread thread = new Thread(() -> {
             try {
                 updateRepository(monitor);
+                callback.run();
             } catch (GitAPIException e) {
                 e.printStackTrace();
             } catch (IOException e) {

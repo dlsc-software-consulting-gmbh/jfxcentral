@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.views.DukeAnimationView;
 import javafx.scene.Node;
 
@@ -23,7 +24,7 @@ public class RefreshView extends com.jpro.web.View {
         view.setEndText("Done!");
         view.showLastImage();
 
-        JFXCentralApp.updateRepositoryInBackground(view);
+        JFXCentralApp.updateRepositoryInBackground(view, () -> DataRepository.getInstance().loadData());
 
         return view;
     }
