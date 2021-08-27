@@ -33,6 +33,8 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
     private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
+    private final FilterView<Tutorial> filterView;
+
     public TutorialsDetailView(RootPane rootPane) {
         super(rootPane, View.TUTORIALS);
 
@@ -42,7 +44,7 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
         sectionPane.setTitle("Tutorials");
         sectionPane.setEnableAutoSubtitle(true);
 
-        FilterView<Tutorial> filterView = sectionPane.getFilterView();
+        filterView = sectionPane.getFilterView();
         Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getTutorials());
 
         filterView.getFilterGroups().setAll(formatGroup, typeGroup, personGroup);
@@ -80,6 +82,12 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
 
         DataRepository.getInstance().tutorialsProperty().addListener(weakUpdateFilterListener);
         updateFilters();
+    }
+
+    @Override
+    public void showItem(Tutorial item) {
+        filterView.getFilters().clear();
+        filterView.setFilterText(item.getName());
     }
 
     private void updateFilters() {

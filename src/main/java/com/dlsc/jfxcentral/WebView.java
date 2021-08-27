@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.jpro.web.Util;
-import com.jpro.web.sessionmanager.SessionManager;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
@@ -100,7 +99,7 @@ public class WebView extends com.jpro.web.View {
         if (currentPage != null && (item != null || rootPane.isMobile())) {
             System.out.println("current page != null, current page = " + currentPage.getClass().getSimpleName());
             // ok to pass null when "mobile", resets to master views
-            currentPage.setSelectedItem(item);
+            currentPage.showItem(item);
         }
 
         return true;

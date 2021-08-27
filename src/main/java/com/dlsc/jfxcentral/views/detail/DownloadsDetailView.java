@@ -34,6 +34,8 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
     private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
+    private final FilterView<Download> filterView;
+
     public DownloadsDetailView(RootPane rootPane) {
         super(rootPane, View.DOWNLOADS);
 
@@ -43,7 +45,7 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
         sectionPane.setTitle("Downloads");
         sectionPane.setEnableAutoSubtitle(true);
 
-        FilterView<Download> filterView = sectionPane.getFilterView();
+        filterView = sectionPane.getFilterView();
         Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getDownloads());
 
         if (rootPane.isMobile()) {
@@ -76,6 +78,12 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
 
         DataRepository.getInstance().downloadsProperty().addListener(weakUpdateFilterListener);
         updateFilters();
+    }
+
+    @Override
+    public void showItem(Download item) {
+        filterView.getFilters().clear();
+        filterView.setFilterText(item.getName());
     }
 
     private void updateFilters() {

@@ -8,4 +8,6 @@ public interface IPage<T extends ModelObject> {
     String getDescription();
 
     void setSelectedItem(T item);
+
+    void showItem(T item);
 }

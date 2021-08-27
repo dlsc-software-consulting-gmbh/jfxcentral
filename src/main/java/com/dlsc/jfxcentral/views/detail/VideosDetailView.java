@@ -31,6 +31,8 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
     private final InvalidationListener updateFilterListener = (Observable it) -> updateFilters();
     private final WeakInvalidationListener weakUpdateFilterListener = new WeakInvalidationListener(updateFilterListener);
 
+    private final FilterView<Video> filterView;
+
     public VideosDetailView(RootPane rootPane) {
         super(rootPane, View.VIDEOS);
 
@@ -40,7 +42,7 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         sectionPane.setTitle("Videos");
         sectionPane.setEnableAutoSubtitle(true);
 
-        FilterView<Video> filterView = sectionPane.getFilterView();
+        filterView = sectionPane.getFilterView();
         Bindings.bindContent(filterView.getItems(), DataRepository.getInstance().getVideos());
 
         // show less filters, we have less space (width)
@@ -83,6 +85,12 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         DataRepository.getInstance().videosProperty().addListener(weakUpdateFilterListener);
 
         updateFilters();
+    }
+
+    @Override
+    public void showItem(Video item) {
+        filterView.getFilters().clear();
+        filterView.setFilterText(item.getName());
     }
 
     private void updateFilters() {

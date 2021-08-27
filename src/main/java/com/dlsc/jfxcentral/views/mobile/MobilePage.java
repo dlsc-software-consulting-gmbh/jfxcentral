@@ -68,6 +68,11 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
         showDetail();
     }
 
+    @Override
+    public void showItem(T item) {
+        showDetail(item);
+    }
+
     private final StringProperty title = new SimpleStringProperty(this, "title");
 
     public String getTitle() {

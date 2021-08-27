@@ -64,7 +64,39 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
     }
 
     private String createTitle(ModelObject item) {
-        return item.getName();
+        return getTypePrefix(item.getClass()) + ": " + item.getName();
+    }
+
+    private String getTypePrefix(Class<? extends ModelObject> clazz) {
+        if (clazz.equals(Tip.class)) {
+            return "Tip";
+        } else if (clazz.equals(RealWorldApp.class)) {
+            return "Real World App";
+        } else if (clazz.equals(Person.class)) {
+            return "Person";
+        } else if (clazz.equals(Company.class)) {
+            return "Company";
+        } else if (clazz.equals(Blog.class)) {
+            return "Blog";
+        } else if (clazz.equals(Video.class)) {
+            return "Video";
+        } else if (clazz.equals(Book.class)) {
+            return "Book";
+        } else if (clazz.equals(Tool.class)) {
+            return "Tool";
+        } else if (clazz.equals(Library.class)) {
+            return "Library";
+        } else if (clazz.equals(Tutorial.class)) {
+            return "Tutorial";
+        } else if (clazz.equals(Download.class)) {
+            return "Download";
+        } else if (clazz.equals(News.class)) {
+            return "News";
+        } else if (clazz.equals(Post.class)) {
+            return "Post";
+        } else {
+            return "Item";
+        }
     }
 
     private String createSubTitle(ModelObject item) {
