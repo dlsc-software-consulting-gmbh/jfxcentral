@@ -39,7 +39,11 @@ public class DetailVideoCell extends DetailCell<Video> {
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getExtraControls().addAll(playButton, playOnYouTubeButton);
-        responsiveBox.getImageView().setOnMouseClicked(evt -> showVideo(getItem()));
+        responsiveBox.getImageView().setOnMouseClicked(evt -> {
+            if (evt.isStillSincePress()) {
+                showVideo(getItem());
+            }
+        });
         responsiveBox.getImageView().setCursor(Cursor.HAND);
 
         setGraphic(responsiveBox);
