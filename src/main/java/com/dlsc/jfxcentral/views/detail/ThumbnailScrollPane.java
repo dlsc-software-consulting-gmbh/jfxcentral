@@ -30,7 +30,6 @@ public class ThumbnailScrollPane extends ScrollPane {
         thumbnailBox = new HBox();
         thumbnailBox.getStyleClass().add("thumbnail-box");
 
-        setPannable(true);
         setContent(thumbnailBox);
         setFitToWidth(true);
         setFitToHeight(true);

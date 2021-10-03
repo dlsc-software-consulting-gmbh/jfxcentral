@@ -85,7 +85,6 @@ public class AdvancedScrollPane extends ScrollPane {
 
         getStyleClass().add("advanced-scroll-pane");
         setFitToWidth(true);
-        setPannable(true);
 
         shadow.setManaged(false);
         shadow.getStyleClass().add("shadow");

@@ -99,7 +99,6 @@ public class PrettyScrollPane extends ScrollPane {
         setFitToWidth(true);
         setVbarPolicy(ScrollBarPolicy.NEVER);
         setHbarPolicy(ScrollBarPolicy.NEVER);
-        setPannable(true);
 
         vBar.setManaged(false);
         vBar.setOrientation(Orientation.VERTICAL);

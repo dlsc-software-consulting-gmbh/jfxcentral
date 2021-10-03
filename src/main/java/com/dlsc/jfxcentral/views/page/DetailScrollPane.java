@@ -20,7 +20,6 @@ public class DetailScrollPane extends StackPane {
             scrollPane.setFitToHeight(true);
             scrollPane.setFitToWidth(true);
             scrollPane.setMobile(rootPane.isMobile());
-            scrollPane.setPannable(true);
             getChildren().add(scrollPane);
 //        }
     }
