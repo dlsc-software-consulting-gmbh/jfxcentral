@@ -70,7 +70,11 @@ public class MobilePage<T extends ModelObject> extends BorderPane implements IPa
 
     @Override
     public void showItem(T item) {
-        showDetail(item);
+        if (item != null || masterView == null) {
+            showDetail(item);
+        } else {
+            showMaster();
+        }
     }
 
     private final StringProperty title = new SimpleStringProperty(this, "title");

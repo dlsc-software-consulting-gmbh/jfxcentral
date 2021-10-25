@@ -14,9 +14,6 @@ import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPullRequestCell;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.WeakInvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,11 +33,6 @@ import java.util.List;
 
 public class OpenJFXDetailView extends DetailView {
 
-    private final FilterView.FilterGroup<PullRequest> stateGroup = new FilterView.FilterGroup<>("State");
-    private final FilterView.FilterGroup<PullRequest> labelGroup = new FilterView.FilterGroup<>("Label");
-    private final FilterView.FilterGroup<PullRequest> userGroup = new FilterView.FilterGroup<>("User");
-    private final FilterView.FilterGroup<PullRequest> timeGroup = new FilterView.FilterGroup<>("Time");
-
     private VBox content = new VBox();
 
     // static, shared across UI instances
@@ -48,8 +40,6 @@ public class OpenJFXDetailView extends DetailView {
 
     private static ZonedDateTime pullRequestUpdateTime;
     private FilterView<PullRequest> filterView;
-
-    private InvalidationListener updatePR = (Observable it) -> updateFilters();
 
     public OpenJFXDetailView(RootPane rootPane) {
         super(rootPane, View.OPENJFX);
@@ -62,14 +52,15 @@ public class OpenJFXDetailView extends DetailView {
         content.getChildren().add(new Region());
 
         setContent(content);
-        pullRequests.addListener(new WeakInvalidationListener(updatePR));
 
         // using static update time field as this will be for shared clients on the web server
         if (pullRequestUpdateTime == null || Duration.between(pullRequestUpdateTime, ZonedDateTime.now()).toHours() > 3) {
-            System.out.println("LOADING");
             Thread thread = new Thread(() -> {
                 List<PullRequest> result = DataRepository.getInstance().loadPullRequests();
-                Platform.runLater(() -> pullRequests.setAll(result));
+                Platform.runLater(() -> {
+                    pullRequests.setAll(result);
+                    updateFilters();
+                });
             });
             thread.setDaemon(true);
             thread.setName("OpenJFX PR Thread");
@@ -77,28 +68,26 @@ public class OpenJFXDetailView extends DetailView {
 
             pullRequestUpdateTime = ZonedDateTime.now();
         }
+
+        updateFilters();
     }
 
     private void updateFilters() {
-        stateGroup.getFilters().clear();
-        labelGroup.getFilters().clear();
-        userGroup.getFilters().clear();
-        timeGroup.getFilters().clear();
+        FilterView.FilterGroup<PullRequest> stateGroup = new FilterView.FilterGroup<>("State");
+        FilterView.FilterGroup<PullRequest> labelGroup = new FilterView.FilterGroup<>("Label");
+        FilterView.FilterGroup<PullRequest> userGroup = new FilterView.FilterGroup<>("User");
+        FilterView.FilterGroup<PullRequest> timeGroup = new FilterView.FilterGroup<>("Time");
 
-        updateStateGroup();
-        updateLabelGroup();
-        updateUserGroup();
-
-        timeGroup.getFilters().clear();
+        updateStateGroup(stateGroup);
+        updateLabelGroup(labelGroup);
+        updateUserGroup(userGroup);
 
         FilterUtil.createFilters(timeGroup, "Date", pr -> DateTimeFormatter.ISO_DATE_TIME.parse(pr.getUpdatedAt() != null ? pr.getUpdatedAt() : pr.getCreatedAt(), ZonedDateTime::from));
 
-        // need to make this call here ... timing issue, otherwise menu items do not show up
-        // in menu dropdowns
         filterView.getFilterGroups().setAll(stateGroup, labelGroup, userGroup, timeGroup);
     }
 
-    private void updateUserGroup() {
+    private void updateUserGroup(FilterView.FilterGroup<PullRequest> userGroup) {
         List<String> userList = new ArrayList<>();
 
         pullRequests.forEach(pr -> {
@@ -121,7 +110,7 @@ public class OpenJFXDetailView extends DetailView {
         userGroup.getFilters().setAll(filters);
     }
 
-    private void updateStateGroup() {
+    private void updateStateGroup(FilterView.FilterGroup<PullRequest> stateGroup) {
         List<String> stateList = new ArrayList<>();
         stateList.add("open");
         stateList.add("closed");
@@ -138,9 +127,10 @@ public class OpenJFXDetailView extends DetailView {
         stateGroup.getFilters().setAll(filters);
     }
 
-    private void updateLabelGroup() {
+    private void updateLabelGroup(FilterView.FilterGroup<PullRequest> labelGroup) {
         List<String> labels = new ArrayList<>();
 
+        System.out.println("pr size: " + pullRequests.size());
         pullRequests.forEach(pr -> {
             pr.getLabels().forEach(label -> {
                 if (!labels.contains(label.getName())) {
@@ -151,12 +141,15 @@ public class OpenJFXDetailView extends DetailView {
 
         List<FilterView.Filter<PullRequest>> filters = new ArrayList<>();
 
-        labels.forEach(item -> filters.add(new FilterView.Filter<>(item) {
-            @Override
-            public boolean test(PullRequest pr) {
-                return pr.getLabels().stream().anyMatch(label -> label.getName().equals(item));
-            }
-        }));
+        labels.forEach(item -> {
+            System.out.println("item: " + item);
+            filters.add(new FilterView.Filter<>(item) {
+                @Override
+                public boolean test(PullRequest pr) {
+                    return pr.getLabels().stream().anyMatch(label -> label.getName().equals(item));
+                }
+            });
+        });
 
         filters.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
         labelGroup.getFilters().setAll(filters);
@@ -185,6 +178,7 @@ public class OpenJFXDetailView extends DetailView {
         sectionPane.setTitle("Pull Requests");
 
         filterView = sectionPane.getFilterView();
+
         Bindings.bindContent(filterView.getItems(), pullRequests);
 
         filterView.setTextFilterProvider(text -> pullRequest -> {

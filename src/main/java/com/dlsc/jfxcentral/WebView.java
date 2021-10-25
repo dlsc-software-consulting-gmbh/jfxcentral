@@ -70,16 +70,18 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
-        if(id == null && view != View.HOME && view != View.OPENJFX && view != View.COMPANIES && view != View.TUTORIALS && view != View.VIDEOS) {
-            Object obj = DataRepository.getInstance()
-                    .getList(PageUtil.getClassOfView(view))
-                    .stream().sorted(Comparator.comparing((ModelObject x) -> x.getName().toLowerCase()))
-                    .findFirst().get();
-            String firstID = ((ModelObject) obj).getId();
-            Platform.runLater(() -> {
-                Util.gotoPage(rootPane, s + "/" + firstID);
-            });
-            return true;
+        if (!isMobile()) {
+            if (id == null && view != View.HOME && view != View.OPENJFX && view != View.COMPANIES && view != View.TUTORIALS && view != View.VIDEOS) {
+                Object obj = DataRepository.getInstance()
+                        .getList(PageUtil.getClassOfView(view))
+                        .stream().sorted(Comparator.comparing((ModelObject x) -> x.getName().toLowerCase()))
+                        .findFirst().get();
+                String firstID = ((ModelObject) obj).getId();
+                Platform.runLater(() -> {
+                    Util.gotoPage(rootPane, s + "/" + firstID);
+                });
+                return true;
+            }
         }
 
         System.out.println("view: " + view);
@@ -93,13 +95,15 @@ public class WebView extends com.jpro.web.View {
         ModelObject item = null;
 
         if (id != null) {
-            item = DataRepository.getInstance().getByID(PageUtil.getClassOfView(view),id);
+            item = DataRepository.getInstance().getByID(PageUtil.getClassOfView(view), id);
         }
 
-        if (currentPage != null && (item != null || rootPane.isMobile())) {
-            System.out.println("current page != null, current page = " + currentPage.getClass().getSimpleName());
-            // ok to pass null when "mobile", resets to master views
-            currentPage.showItem(item);
+        if (currentPage != null) {
+            if (isMobile()) {
+                currentPage.showItem(item); // even when item is null (because mobile)
+            } else if (item != null) {
+                currentPage.showItem(item);
+            }
         }
 
         return true;

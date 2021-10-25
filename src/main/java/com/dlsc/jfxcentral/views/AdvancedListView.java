@@ -64,7 +64,7 @@ public class AdvancedListView<T> extends StackPane {
 
         updateView();
 
-        pageCount.bind(Bindings.createIntegerBinding(() -> (int) Math.ceil((double) getItems().size() / (double) getVisibleRowCount()), itemsProperty(), visibleRowCountProperty()));
+        pageCount.bind(Bindings.createIntegerBinding(() -> getItems() != null ? ((int) Math.ceil((double) getItems().size() / (double) getVisibleRowCount())) : 0, itemsProperty(), visibleRowCountProperty()));
 
         InvalidationListener buildPaginationControlsListener = it -> buildPaginationControls();
         maxPageIndicatorCountProperty().addListener(buildPaginationControlsListener);
@@ -79,6 +79,8 @@ public class AdvancedListView<T> extends StackPane {
                 startPage.set(startPage.get() + getMaxPageIndicatorCount());
             }
         });
+
+        buildPaginationControls();
     }
 
     private final BooleanProperty showItemCounter = new SimpleBooleanProperty(this, "showItemCounter", true);
@@ -102,7 +104,7 @@ public class AdvancedListView<T> extends StackPane {
 
         Label counterLabel = new Label();
         counterLabel.getStyleClass().add("counter-label");
-        counterLabel.textProperty().bind(Bindings.createStringBinding(() -> "Items: " + getItems().size(), getItems()));
+        counterLabel.textProperty().bind(Bindings.createStringBinding(() -> "Items: " + (getItems() != null ? getItems().size() : 0), itemsProperty()));
         counterLabel.visibleProperty().bind(showItemCounterProperty());
         counterLabel.managedProperty().bind(showItemCounterProperty());
         paginationBox.getChildren().add(counterLabel);
