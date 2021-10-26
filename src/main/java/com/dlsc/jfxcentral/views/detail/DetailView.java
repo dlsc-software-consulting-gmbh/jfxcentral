@@ -38,7 +38,9 @@ public class DetailView<T extends ModelObject> extends BorderPane {
         contentProperty().addListener(it -> {
             Node content = getContent();
             if (content != null) {
-                BorderPane.setMargin(content, new Insets(20));
+                if (!rootPane.isMobile()) {
+                    BorderPane.setMargin(content, new Insets(20));
+                }
                 if (content instanceof VBox) {
                     ((VBox) content).setSpacing(20);
                 }

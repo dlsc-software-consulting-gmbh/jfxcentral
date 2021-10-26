@@ -112,7 +112,7 @@
 <body>
 
 <div>
-    <jpro-app loader="none" href="/app/default" nativeScrolling="true" fxContextMenu="false" fullscreen="true" snapshot="auto" userSelect="true"/>
+    <jpro-app loader="none" href="/app/default" fxContextMenu="false" fullscreen="true" snapshot="auto" userSelect="true"/>
 </div>
 
 </body>

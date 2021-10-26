@@ -39,9 +39,6 @@
     -fx-background-insets: 0em, 0em 1.4285em 0em 1.4285em, 0em 1.4285em 0.0714em 1.4285em;
 }
 
-.detail-scroll-pane .scroll-pane .viewport {
-}
-
 /* ----------------------------------------------------------------------------
  * DetailView
  */
@@ -50,14 +47,17 @@
     -fx-spacing: 1.4285em;
 }
 
+.detail-scroll-pane .scroll-pane .viewport {
+}
+
 /* -----------------------------------------------------------------------------
  * SectionPane
  */
 .section-pane {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-background-radius: 0.2142em;
     -fx-border-color: #e0e0e0;
-    -fx-border-width: 0em 0em 0.0714em 0em;
+    -fx-border-width: 0em 0em 0em 0em;
     -fx-border-radius: 0.2142em;
     -fx-effect: null;
     -fx-padding: 0em 0.3571em 0.7142em 0em;
@@ -125,6 +125,11 @@
     -fx-spacing: 1.4285em;
 }
 
+.section-pane > .section-pane-container .title-box {
+    -fx-background-radius: 0px;
+    -fx-padding: 10px;
+}
+
 .section-pane > .section-pane-container .title-box > .title-label {
 }
 
@@ -135,10 +140,17 @@
 
 .section-pane > .section-pane-container > .children-box {
     -fx-spacing: 1.4285em;
+    -fx-padding: 0px 10px;
 }
 
 .section-pane > .section-pane-container > .children-box > .button-bar {
     -fx-spacing: 10.3571em;
+}
+
+.section-pane .filter-view .header-box {
+    -fx-spacing: 0px;
+    -fx-background-color: -light-blue;
+    -fx-padding: 0px 10px 5px 0px;
 }
 
 .section-pane .filter-view .search-field {
@@ -146,6 +158,7 @@
     -fx-max-height: -size;
     -fx-pref-height: -size;
     -fx-min-height: -size;
+    -fx-translate-y: 10px;
 }
 
 .section-pane .filter-view .title {
@@ -156,6 +169,39 @@
 .section-pane .filter-view .subtitle {
     -fx-font-size: 1em;
     -fx-opacity: .8;
+    -fx-padding: 0px 10px;
+    -fx-translate-y: -5px;
+}
+
+.filter-view .filter-groups {
+    -fx-spacing: 0px;
+}
+
+.filter-view .filter-groups .menu-button {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+    -fx-background-insets: 0px;
+}
+
+.filter-view .filter-groups .menu-button:focused {
+    -fx-background-color: -fx-accent;
+    -fx-background-insets: 0px;
+}
+
+.filter-view .filter-container {
+    -fx-spacing: 0px;
+}
+
+.filter-view .filters {
+    -fx-padding: 10px 5px 0px 5px;
+}
+
+.filter-view .filters .clear-filter-label {
+}
+
+.filter-view .filters .chip-view .label {
+    -fx-font-size: 14px;
 }
 
 .section-pane .list-cell {
@@ -165,7 +211,7 @@
 
 .section-pane .list-cell:filled {
     -fx-border-width: 0 0 1 0;
-    -fx-border-style: dashed;
+    /*-fx-border-style: dashed;*/
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
