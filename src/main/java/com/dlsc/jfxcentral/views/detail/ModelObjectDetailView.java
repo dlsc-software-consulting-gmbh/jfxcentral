@@ -26,6 +26,8 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
         super(rootPane, view);
 
         setContent(content);
+        content.setPrefWidth(0);
+        content.setMinWidth(0);
 
         selectedItemProperty().addListener((obs, oldItem, newItem) -> updateView(oldItem, newItem));
     }
@@ -36,7 +38,9 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
         createListViewBox("Tools", listView -> new DetailToolCell(getRootPane()), item -> repository.getToolsByModelObject(item));
         createListViewBox("Blogs", listView -> new DetailBlogCell(getRootPane(), false), item -> repository.getBlogsByModelObject(item));
         createListViewBox("Tutorials", listView -> new DetailTutorialCell(getRootPane(), false), item -> repository.getTutorialsByModelObject(item));
-        createListViewBox("Downloads", listView -> new DetailDownloadCell(getRootPane(), false), item -> repository.getDownloadsByModelObject(item));
+        if (!getRootPane().isMobile()) {
+            createListViewBox("Downloads", listView -> new DetailDownloadCell(getRootPane(), false), item -> repository.getDownloadsByModelObject(item));
+        }
         createListViewBox("Videos", listView -> new DetailVideoCell(getRootPane(), false), item -> repository.getVideosByModelObject(item));
         createListViewBox("Books", listView -> new DetailBookCell(getRootPane(), false), item -> repository.getBooksByModelObject(item));
         createListViewBox("People", listView -> new DetailPersonCell(getRootPane(), false), item -> repository.getPeopleByModelObject(item));
@@ -50,8 +54,12 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
     }
 
     protected void createReadMeBox(Callback<T, String> baseUrlProvider, Callback<T, StringProperty> textPropertyProvider) {
+        createReadMeBox("Readme", baseUrlProvider, textPropertyProvider);
+    }
+
+    protected void createReadMeBox(String title, Callback<T, String> baseUrlProvider, Callback<T, StringProperty> textPropertyProvider) {
         SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Readme");
+        sectionPane.setTitle(title);
 
         MarkdownView markdownView = new MarkdownView();
         sectionPane.getNodes().add(markdownView);

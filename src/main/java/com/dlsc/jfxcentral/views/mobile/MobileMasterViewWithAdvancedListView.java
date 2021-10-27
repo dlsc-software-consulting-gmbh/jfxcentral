@@ -37,9 +37,7 @@ public abstract class MobileMasterViewWithAdvancedListView<T extends ModelObject
     }
 
     protected void bindListViewToSelectedItem() {
-        listView.getSelectionModel().selectedItemProperty().addListener(it -> {
-            setSelectedItem(listView.getSelectionModel().getSelectedItem());
-        });
+        listView.getSelectionModel().selectedItemProperty().addListener(it -> setSelectedItem(listView.getSelectionModel().getSelectedItem()));
 
         selectedItemProperty().addListener(it -> {
             T selectedItem = getSelectedItem();

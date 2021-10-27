@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
@@ -55,6 +56,7 @@ public class MobileMasterBlogCell extends MobileAdvancedListCell<Blog> {
                 label.setText(blog.getName());
                 imageView.imageProperty().bind(ImageManager.getInstance().blogPageImageProperty(blog));
                 markdownView.setMdString(blog.getSummary());
+                setMasterCellLink(MobileMasterBlogCell.this, blog, blog.getSummary(), View.BLOGS);
             } else {
                 label.setText("");
                 imageView.imageProperty().unbind();

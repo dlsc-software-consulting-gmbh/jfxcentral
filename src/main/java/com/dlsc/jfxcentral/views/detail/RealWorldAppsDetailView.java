@@ -20,20 +20,17 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
         createTitleBox();
         createReadMeSection();
         createStandardBoxes();
-
     }
 
     @Override
     protected void createTitleBox() {
         SectionPane sectionPane = new SectionPane();
+        sectionPane.getStyleClass().add("title-box");
         sectionPane.setPrefWidth(0);
         sectionPane.setMinWidth(0);
 
         ImageView imageView = new ImageView();
-        imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> sectionPane.getWidth() - sectionPane.getInsets().getLeft() - sectionPane.getInsets().getRight(), sectionPane.widthProperty(), sectionPane.insetsProperty()));
         imageView.setPreserveRatio(true);
-
-        sectionPane.getNodes().add(imageView);
 
         selectedItemProperty().addListener(it -> {
             RealWorldApp app = getSelectedItem();
@@ -44,7 +41,14 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
             }
         });
 
-        content.getChildren().add(sectionPane);
+        if (getRootPane().isMobile()) {
+            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> content.getWidth(), content.widthProperty()));
+            content.getChildren().add(imageView);
+        } else {
+            imageView.fitWidthProperty().bind(Bindings.createDoubleBinding(() -> sectionPane.getWidth() - sectionPane.getInsets().getLeft() - sectionPane.getInsets().getRight(), sectionPane.widthProperty(), sectionPane.insetsProperty()));
+            sectionPane.getNodes().add(imageView);
+            content.getChildren().add(sectionPane);
+        }
     }
 
     private void createReadMeSection() {

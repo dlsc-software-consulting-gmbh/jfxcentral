@@ -83,7 +83,9 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
     @Override
     public void showItem(Download item) {
         filterView.getFilters().clear();
-        filterView.setFilterText(item.getName());
+        if (item != null) {
+            filterView.setFilterText(item.getName());
+        }
     }
 
     private void updateFilters() {

@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral.util.Util;
+import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -14,7 +15,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
-public class DetailPostCell extends ListCell<Post> {
+public class DetailPostCell extends AdvancedListCell<Post> {
 
     private final RootPane rootPane;
     private final DateTimeFormatter dateTimeFormatter;
@@ -45,10 +45,12 @@ public class DetailPostCell extends ListCell<Post> {
 
         getStyleClass().add("detail-post-cell");
 
+        setPrefWidth(0);
+
         titleLabel.getStyleClass().add("title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
-        titleLabel.setWrapText(true);
-        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+//        titleLabel.setWrapText(true);
+//        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         imageView.setFitHeight(32);
         imageView.setFitWidth(32);
@@ -58,10 +60,8 @@ public class DetailPostCell extends ListCell<Post> {
         ageLabel.setMinWidth(Region.USE_PREF_SIZE);
 
         HBox hbox = new HBox(imageView, titleLabel, ageLabel);
-        HBox.setHgrow(titleLabel, Priority.ALWAYS);
         hbox.getStyleClass().add("hbox");
-        hbox.setMinWidth(0);
-        hbox.setPrefWidth(0);
+        HBox.setHgrow(titleLabel, Priority.ALWAYS);
 
         setGraphic(hbox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

@@ -1,33 +1,35 @@
 package com.dlsc.jfxcentral.views.mobile.master.cells;
 
-import com.dlsc.jfxcentral.data.ImageManager;
-import com.dlsc.jfxcentral.data.model.Book;
+import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.data.model.Tip;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public class MobileMasterBookCell extends MobileAdvancedListCell<Book> {
+public class MobileMasterTipsCell extends MobileAdvancedListCell<Tip> {
 
     private ImageView imageView = new ImageView();
     private Label label = new Label();
     private MarkdownView markdownView = new MarkdownView();
 
-    public MobileMasterBookCell() {
-        getStyleClass().add("mobile-master-book-cell");
+    public MobileMasterTipsCell() {
+        getStyleClass().add("mobile-master-tips-cell");
 
         setPrefWidth(0);
         setMinWidth(0);
 
-        imageView.setFitWidth(100);
+        imageView.setFitWidth(50);
         imageView.setPreserveRatio(true);
+        imageView.setImage(new Image(JFXCentralApp .class.getResource("tip-round.jpg").toExternalForm()));
 
         label.getStyleClass().add("title-label");
         label.setWrapText(true);
@@ -48,16 +50,16 @@ public class MobileMasterBookCell extends MobileAdvancedListCell<Book> {
     }
 
     @Override
-    protected void updateItem(Book book, boolean empty) {
-        super.updateItem(book, empty);
+    protected void updateItem(Tip tip, boolean empty) {
+        super.updateItem(tip, empty);
 
-        if (!empty && book != null) {
-            label.setText(book.getName());
-            imageView.imageProperty().bind(ImageManager.getInstance().bookCoverImageProperty(book));
-            markdownView.setMdString(book.getSummary());
-            setMasterCellLink(MobileMasterBookCell.this, book, book.getSummary(), View.BOOKS);
+        if (!empty && tip != null) {
+            label.setText(tip.getName());
+            markdownView.setMdString(tip.getSummary());
+            setMasterCellLink(MobileMasterTipsCell.this, tip, tip.getSummary(), View.TIPS);
         } else {
-            imageView.imageProperty().unbind();
+            label.setText("");
+            markdownView.setMdString("");
         }
     }
 }

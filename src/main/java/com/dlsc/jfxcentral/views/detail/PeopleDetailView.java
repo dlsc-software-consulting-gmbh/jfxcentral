@@ -51,7 +51,7 @@ public class PeopleDetailView extends ModelObjectDetailView<Person> {
         HBox badgesBox = new HBox(championImageView, rockstarImageView);
         badgesBox.getStyleClass().add("badges-box");
 
-        responsiveBox = new ResponsiveBoxWithPhotoView(getRootPane().isMobile() ? ImageLocation.BANNER : ImageLocation.LARGE_ON_SIDE);
+        responsiveBox = new ResponsiveBoxWithPhotoView(ImageLocation.LARGE_ON_SIDE);
         responsiveBox.getTitleLabel().setGraphic(badgesBox);
 
         SectionPane sectionPane = new SectionPane(responsiveBox);

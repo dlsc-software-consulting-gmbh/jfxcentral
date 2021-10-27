@@ -8,12 +8,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class DetailView<T extends ModelObject> extends BorderPane {
 
@@ -26,14 +23,14 @@ public class DetailView<T extends ModelObject> extends BorderPane {
         getStyleClass().add("detail-view");
         setMinHeight(Region.USE_PREF_SIZE);
 
-        if (isUsingMasterView() && rootPane.isMobile()) {
-            FontIcon fontIcon = new FontIcon(MaterialDesign.MDI_ARROW_LEFT);
-            Label label = new Label("Back");
-            label.setGraphic(fontIcon);
-            label.getStyleClass().add("back-label");
-            label.setOnMouseClicked(evt -> com.jpro.web.Util.goBack(label));
-            setTop(label);
-        }
+//        if (isUsingMasterView() && rootPane.isMobile()) {
+//            FontIcon fontIcon = new FontIcon(MaterialDesign.MDI_ARROW_LEFT);
+//            Label label = new Label("Back");
+//            label.setGraphic(fontIcon);
+//            label.getStyleClass().add("back-label");
+//            label.setOnMouseClicked(evt -> com.jpro.web.Util.goBack(label));
+//            setTop(label);
+//        }
 
         contentProperty().addListener(it -> {
             Node content = getContent();

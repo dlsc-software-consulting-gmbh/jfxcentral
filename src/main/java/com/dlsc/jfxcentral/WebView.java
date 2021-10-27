@@ -70,27 +70,25 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
-        if (!isMobile()) {
+        if (!rootPane.isMobile()) {
             if (id == null && view != View.HOME && view != View.OPENJFX && view != View.COMPANIES && view != View.TUTORIALS && view != View.VIDEOS) {
                 Object obj = DataRepository.getInstance()
                         .getList(PageUtil.getClassOfView(view))
                         .stream().sorted(Comparator.comparing((ModelObject x) -> x.getName().toLowerCase()))
                         .findFirst().get();
                 String firstID = ((ModelObject) obj).getId();
-                Platform.runLater(() -> {
-                    Util.gotoPage(rootPane, s + "/" + firstID);
-                });
+                Platform.runLater(() -> Util.gotoPage(rootPane, s + "/" + firstID));
                 return true;
             }
         }
 
-        System.out.println("view: " + view);
-        System.out.println("id " + id);
+//        System.out.println("view: " + view);
+//        System.out.println("id " + id);
 
         rootPane.setView(view);
 
         IPage currentPage = rootPane.getCurrentPage();
-        System.out.println("current page: " + currentPage);
+//        System.out.println("current page: " + currentPage);
 
         ModelObject item = null;
 
@@ -99,10 +97,8 @@ public class WebView extends com.jpro.web.View {
         }
 
         if (currentPage != null) {
-            if (isMobile()) {
+            if (isMobile() || item != null) {
                 currentPage.showItem(item); // even when item is null (because mobile)
-            } else if (item != null) {
-                currentPage.showItem(item);
             }
         }
 

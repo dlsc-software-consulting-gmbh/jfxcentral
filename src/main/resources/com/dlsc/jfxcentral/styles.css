@@ -103,8 +103,8 @@
 .root {
     -fx-font-size: 14px;
     -fx-font-family: "Inter";
-    -fx-accent: rgb(68, 131, 160);
-    -fx-focus-color: rgb(68, 131, 160);
+    -fx-accent: #4483A0;
+    -fx-focus-color: #4483A0;
     -fx-faint-focus-color: rgba(68, 131, 160, .2);
 
     -light-grey: rgba(239, 242, 245);
@@ -1823,7 +1823,7 @@
     -fx-spacing: 10px;
     -fx-padding: 0px 20px 0px 180px;
     -fx-pref-height: 75px;
-    -fx-background-color: derive(-fx-accent, +20%);
+    -fx-background-color: -fx-accent;
     -fx-border-color: rgba(0, 0, 0, .05);
     -fx-border-width: 0px 0px 1px 0px;
 }

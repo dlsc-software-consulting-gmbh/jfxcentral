@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
@@ -60,7 +59,6 @@ public abstract class MasterViewWithListView<T extends ModelObject> extends Mast
 
     public void showItem(T item) {
         setSelectedItem(item);
-        Platform.runLater(() -> listView.scrollTo(item));
     }
 
     protected void performDefaultSelection() {

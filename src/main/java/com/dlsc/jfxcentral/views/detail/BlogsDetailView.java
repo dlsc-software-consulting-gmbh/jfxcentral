@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
-import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -24,7 +23,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 import java.util.List;
@@ -51,17 +49,45 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
         selectedItemProperty().addListener(it -> {
             posts.clear();
 
+            if (loadPostsThread != null) {
+                loadPostsThread.cancel();
+            }
+
             Blog blog = getSelectedItem();
             if (blog != null) {
-                Thread thread = new Thread(() -> {
-                    List<Post> result = DataRepository.getInstance().loadPosts(blog);
-                    Platform.runLater(() -> posts.setAll(result));
-                });
-                thread.setDaemon(true);
-                thread.setName("Blog Loader Thread");
-                thread.start();
+                loadPostsThread = new LoadPostsThread(blog);
+                loadPostsThread.start();
             }
         });
+    }
+
+    private LoadPostsThread loadPostsThread;
+
+    private final class LoadPostsThread extends Thread {
+        private final Blog blog;
+        private boolean running = true;
+
+        public LoadPostsThread(Blog blog) {
+            this.blog = blog;
+            setName("Load Posts Thread");
+            setDaemon(true);
+        }
+
+        @Override
+        public void run() {
+            if (running) {
+                List<Post> result = DataRepository.getInstance().loadPosts(blog);
+                Platform.runLater(() -> {
+                    if (running) {
+                        posts.setAll(result);
+                    }
+                });
+            }
+        }
+
+        public void cancel() {
+            running = false;
+        }
     }
 
     protected boolean isUsingMasterView() {
@@ -73,8 +99,8 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
         sectionPane.setTitle("Posts");
         sectionPane.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? "List of current posts on " + getSelectedItem().getName() : "", selectedItemProperty()));
 
-        FilteredList<Post> filteredPosts = new FilteredList(posts);
-        filteredPosts.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getSelectedItem() == null || post.getBlog().equals(getSelectedItem()), selectedItemProperty()));
+        FilteredList<Post> filteredPosts = new FilteredList<>(posts);
+        filteredPosts.predicateProperty().bind(Bindings.createObjectBinding(() -> post -> getSelectedItem() == null || post.getBlog().getId().equals(getSelectedItem().getId()), selectedItemProperty()));
 
         SortedList<Post> sortedPosts = new SortedList<>(filteredPosts);
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
@@ -84,10 +110,8 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
-        if (getRootPane().isMobile()) {
-            listView.setPaging(true);
-            listView.setVisibleRowCount(25);
-        }
+        listView.setPaging(true);
+        listView.setVisibleRowCount(20);
 
         listView.setCellFactory(view -> {
             DetailPostCell cell = new DetailPostCell(getRootPane());
@@ -107,17 +131,21 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
     @Override
     protected void createTitleBox() {
         PhotoView photoView = new PhotoView();
+        photoView.visibleProperty().bind(photoView.photoProperty().isNotNull());
+        photoView.managedProperty().bind(photoView.photoProperty().isNotNull());
         photoView.setEditable(false);
         selectedItemProperty().addListener(it -> {
             Blog blog = getSelectedItem();
+            photoView.photoProperty().unbind();
+            photoView.setPhoto(null);
             if (blog != null) {
-                String companyId = blog.getCompanyId();
-                if (StringUtils.isNotBlank(companyId)) {
-                    Optional<Company> companyById = DataRepository.getInstance().getCompanyById(companyId);
-                    if (companyById.isPresent()) {
-                        photoView.photoProperty().bind(ImageManager.getInstance().companyImageProperty(companyById.get()));
-                    }
-                } else {
+//                String companyId = blog.getCompanyId();
+//                if (StringUtils.isNotBlank(companyId)) {
+//                    Optional<Company> companyById = DataRepository.getInstance().getCompanyById(companyId);
+//                    if (companyById.isPresent()) {
+//                        photoView.photoProperty().bind(ImageManager.getInstance().companyImageProperty(companyById.get()));
+//                    }
+//                } else {
                     List<String> personIds = blog.getPersonIds();
                     if (!personIds.isEmpty()) {
                         Optional<Person> personById = DataRepository.getInstance().getPersonById(personIds.get(0));
@@ -125,7 +153,7 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
                             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(personById.get()));
                         }
                     }
-                }
+//                }
             }
         });
 

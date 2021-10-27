@@ -50,18 +50,18 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
             filterView.getFilterGroups().setAll(typeGroup, speakerGroup, domainGroup);
         } else {
             filterView.getFilterGroups().setAll(typeGroup, eventGroup, speakerGroup, platformGroup, domainGroup);
-
-            filterView.setTextFilterProvider(text -> video -> {
-                if (StringUtils.containsAnyIgnoreCase(video.getName(), text)) {
-                    return true;
-                }
-
-                if (StringUtils.containsAnyIgnoreCase(video.getDescription(), text)) {
-                    return true;
-                }
-                return false;
-            });
         }
+
+        filterView.setTextFilterProvider(text -> video -> {
+            if (StringUtils.containsAnyIgnoreCase(video.getName(), text)) {
+                return true;
+            }
+
+            if (StringUtils.containsAnyIgnoreCase(video.getDescription(), text)) {
+                return true;
+            }
+            return false;
+        });
 
         listView = new AdvancedListView<>();
         listView.setPrefWidth(0);
@@ -90,7 +90,9 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
     @Override
     public void showItem(Video item) {
         filterView.getFilters().clear();
-        filterView.setFilterText(item.getName());
+        if (item != null) {
+            filterView.setFilterText(item.getName());
+        }
     }
 
     private void updateFilters() {

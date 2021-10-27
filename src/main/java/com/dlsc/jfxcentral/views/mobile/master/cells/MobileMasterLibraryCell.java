@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
@@ -54,6 +55,7 @@ public class MobileMasterLibraryCell extends MobileAdvancedListCell<Library> {
             label.setText(library.getName());
             imageView.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(library));
             markdownView.setMdString(library.getSummary());
+            setMasterCellLink(MobileMasterLibraryCell.this, library, library.getSummary(), View.LIBRARIES);
         } else {
             imageView.imageProperty().unbind();
         }

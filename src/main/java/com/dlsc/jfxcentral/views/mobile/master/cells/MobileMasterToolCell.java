@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.mobile.master.cells;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
@@ -54,6 +55,8 @@ public class MobileMasterToolCell extends MobileAdvancedListCell<Tool> {
             label.setText(tool.getName());
             imageView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
             markdownView.setMdString(tool.getDescription());
+
+            setMasterCellLink(MobileMasterToolCell.this, tool, tool.getSummary(), View.TOOLS);
         } else {
             imageView.imageProperty().unbind();
         }

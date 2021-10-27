@@ -106,11 +106,11 @@ public class ResponsiveBoxWithPhotoView extends Pane {
 
         double ph;
 
-        if (imageLocation.equals(ImageLocation.BANNER) || getWidth() < 500) {
+        if (imageLocation.equals(ImageLocation.BANNER)) { // || getWidth() < 500) {
             ph = imageWrapper.prefHeight(w);
             imageWrapper.resizeRelocate(x, y, w, ph);
 
-            if (titleLabel.isManaged() || subtitleLabel.isManaged() ||markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+            if (titleLabel.isManaged() || subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
                 y += ph + getVgap();
             }
 
@@ -194,19 +194,16 @@ public class ResponsiveBoxWithPhotoView extends Pane {
 
     @Override
     protected double computePrefHeight(double w) {
-        double h =  getInsets().getTop() + getInsets().getBottom();
+        double h = getInsets().getTop() + getInsets().getBottom();
 
         if (imageWrapper.isManaged()) {
-            if ((imageLocation.equals(ImageLocation.BANNER) || w < 500)) {
+            if (imageLocation.equals(ImageLocation.BANNER)) { // || w < 500)) {
                 h += imageWrapper.prefHeight(w);
                 if (titleLabel.isManaged() || subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
                     h += getVgap();
                 }
-            } else if (imageLocation.equals(ImageLocation.LARGE_ON_SIDE)) {
-                w -= getLargeImageWidth();
-                w -= getHgap();
-            } else if (imageLocation.equals(ImageLocation.SMALL_ON_SIDE)) {
-                w -= getSmallImageWidth();
+            } else {
+                w -= photoView.prefWidth(-1);
                 w -= getHgap();
             }
         }

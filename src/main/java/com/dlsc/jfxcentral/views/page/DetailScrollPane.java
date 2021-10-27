@@ -13,15 +13,14 @@ public class DetailScrollPane extends StackPane {
     public DetailScrollPane(RootPane rootPane) {
         getStyleClass().add("detail-scroll-pane");
 
-//        if (!rootPane.getDisplay().equals(Display.WEB)) {
-            scrollPane = new PrettyScrollPane();
-            scrollPane.setShowScrollToTopButton(true);
-            scrollPane.setShowShadow(rootPane.isMobile());
-            scrollPane.setFitToHeight(true);
-            scrollPane.setFitToWidth(true);
-            scrollPane.setMobile(rootPane.isMobile());
-            getChildren().add(scrollPane);
-//        }
+        scrollPane = new PrettyScrollPane();
+        scrollPane.setShowScrollToTopButton(true);
+        scrollPane.setShowShadow(rootPane.isMobile());
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setMobile(rootPane.isMobile());
+
+        getChildren().add(scrollPane);
     }
 
     public void setContent(Node content) {

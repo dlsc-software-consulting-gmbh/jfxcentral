@@ -87,7 +87,9 @@ public class TutorialsDetailView extends DetailViewWithListView<Tutorial> {
     @Override
     public void showItem(Tutorial item) {
         filterView.getFilters().clear();
-        filterView.setFilterText(item.getName());
+        if (item != null) {
+            filterView.setFilterText(item.getName());
+        }
     }
 
     private void updateFilters() {

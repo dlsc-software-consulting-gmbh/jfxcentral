@@ -63,6 +63,9 @@ public class HeaderPane extends HBox {
         title2.getStyleClass().addAll("title", "title-shadow");
         StackPane.setAlignment(title2, Pos.CENTER_LEFT);
 
+        StackPane stackPane = new StackPane(title2, title1);
+        HBox.setHgrow(stackPane, Priority.ALWAYS);
+
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(evt -> {
             try {
@@ -105,9 +108,6 @@ public class HeaderPane extends HBox {
         imageView.setFitHeight(48);
         imageView.setPreserveRatio(true);
         StackPane.setAlignment(imageView, Pos.TOP_LEFT);
-
-        StackPane stackPane = new StackPane(title2, title1);
-        HBox.setHgrow(stackPane, Priority.ALWAYS);
 
         refreshButton.setVisible(Boolean.getBoolean("show.refresh.button"));
         refreshButton.setManaged(Boolean.getBoolean("show.refresh.button"));

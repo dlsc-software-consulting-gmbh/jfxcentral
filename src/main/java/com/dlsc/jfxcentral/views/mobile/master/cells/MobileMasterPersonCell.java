@@ -1,41 +1,40 @@
 package com.dlsc.jfxcentral.views.mobile.master.cells;
 
+import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.PhotoView;
+import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
+import javafx.beans.binding.Bindings;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
 
-    private final PhotoView photoView = new PhotoView();
-    private final Label nameLabel = new Label();
     private final Label championLabel = new Label("CHAMPION");
     private final Label rockstarLabel = new Label("ROCKSTAR");
+    private PhotoView photoView = new PhotoView();
+    private Label label = new Label();
+    private MarkdownView markdownView = new MarkdownView();
     private final ImageView championImageView = new ImageView();
     private final ImageView rockstarImageView = new ImageView();
-    private final GridPane gridPane;
 
     public MobileMasterPersonCell() {
         getStyleClass().add("mobile-master-person-cell");
 
+        photoView.setEditable(false);
+
         setPrefWidth(0);
         setMinWidth(0);
-
-        photoView.setEditable(false);
-        photoView.setPlaceholder(new Label("test"));
-        photoView.visibleProperty().bind(photoView.photoProperty().isNotNull());
-        photoView.managedProperty().bind(photoView.photoProperty().isNotNull());
-
-        nameLabel.getStyleClass().add("name-label");
 
         championLabel.getStyleClass().add("champion-label");
         championLabel.setGraphic(championImageView);
@@ -56,36 +55,26 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
         HBox badgesBox = new HBox(championLabel, rockstarLabel);
         badgesBox.getStyleClass().add("badges");
         badgesBox.setAlignment(Pos.TOP_LEFT);
+        badgesBox.visibleProperty().bind(Bindings.createBooleanBinding(() -> championLabel.isVisible() || rockstarLabel.isVisible(), championLabel.visibleProperty(), rockstarLabel.visibleProperty()));
+        badgesBox.managedProperty().bind(Bindings.createBooleanBinding(() -> championLabel.isVisible() || rockstarLabel.isVisible(), championLabel.visibleProperty(), rockstarLabel.visibleProperty()));
+        VBox.setMargin(badgesBox, new Insets(10, 0, 0, 0));
 
-        gridPane = new GridPane();
-        gridPane.getStyleClass().add("grid-pane");
-        gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        label.getStyleClass().add("title-label");
+        label.setWrapText(true);
+        label.setMinHeight(Region.USE_PREF_SIZE);
 
-        gridPane.add(photoView, 0, 0);
-        gridPane.add(nameLabel, 1, 0);
-        gridPane.add(badgesBox, 1, 1);
+        VBox vbox = new VBox(label, markdownView, badgesBox);
+        vbox.getStyleClass().add("vbox");
+        HBox.setHgrow(vbox, Priority.ALWAYS);
 
-        GridPane.setRowSpan(photoView, 2);
-        GridPane.setHgrow(nameLabel, Priority.ALWAYS);
-        GridPane.setHgrow(badgesBox, Priority.ALWAYS);
-        GridPane.setVgrow(nameLabel, Priority.ALWAYS);
-        GridPane.setVgrow(badgesBox, Priority.ALWAYS);
-        GridPane.setValignment(nameLabel, VPos.BOTTOM);
-        GridPane.setValignment(badgesBox, VPos.TOP);
+        HBox hBox = new HBox(vbox, photoView);
+        hBox.getStyleClass().add("hbox");
+        hBox.setAlignment(Pos.TOP_LEFT);
 
-        RowConstraints row1 = new RowConstraints();
-        RowConstraints row2 = new RowConstraints();
-
-        row1.setPercentHeight(50);
-        row2.setPercentHeight(50);
-
-        gridPane.getRowConstraints().setAll(row1, row2);
-
+        setGraphic(hBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        setGraphic(gridPane);
 
-        gridPane.visibleProperty().bind(emptyProperty().not());
-        gridPane.managedProperty().bind(emptyProperty().not());
+        vbox.visibleProperty().bind(emptyProperty().not());
     }
 
     @Override
@@ -93,19 +82,21 @@ public class MobileMasterPersonCell extends MobileAdvancedListCell<Person> {
         super.updateItem(person, empty);
 
         if (!empty && person != null) {
-            nameLabel.setText(person.getName());
+            label.setText(person.getName());
+            photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
+            markdownView.mdStringProperty().bind(DataRepository.getInstance().personDescriptionProperty(person));
             championLabel.setVisible(person.isChampion());
             championLabel.setManaged(person.isChampion());
             rockstarLabel.setVisible(person.isRockstar());
             rockstarLabel.setManaged(person.isRockstar());
-            photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(person));
+            setMasterCellLink(MobileMasterPersonCell.this, person, person.getSummary(), View.PEOPLE);
         } else {
-            nameLabel.setText("");
             championLabel.setVisible(false);
             championLabel.setManaged(false);
             rockstarLabel.setVisible(false);
             rockstarLabel.setManaged(false);
             photoView.photoProperty().unbind();
+            markdownView.mdStringProperty().unbind();
         }
     }
 }
