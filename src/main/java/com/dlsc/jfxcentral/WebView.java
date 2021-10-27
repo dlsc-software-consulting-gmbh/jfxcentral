@@ -6,12 +6,8 @@ import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.jpro.web.Util;
-import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
-
-import java.util.Comparator;
 
 
 public class WebView extends com.jpro.web.View {
@@ -70,25 +66,9 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
-        if (!rootPane.isMobile()) {
-            if (id == null && view != View.HOME && view != View.OPENJFX && view != View.COMPANIES && view != View.TUTORIALS && view != View.VIDEOS) {
-                Object obj = DataRepository.getInstance()
-                        .getList(PageUtil.getClassOfView(view))
-                        .stream().sorted(Comparator.comparing((ModelObject x) -> x.getName().toLowerCase()))
-                        .findFirst().get();
-                String firstID = ((ModelObject) obj).getId();
-                Platform.runLater(() -> Util.gotoPage(rootPane, s + "/" + firstID));
-                return true;
-            }
-        }
-
-//        System.out.println("view: " + view);
-//        System.out.println("id " + id);
-
         rootPane.setView(view);
 
         IPage currentPage = rootPane.getCurrentPage();
-//        System.out.println("current page: " + currentPage);
 
         ModelObject item = null;
 
