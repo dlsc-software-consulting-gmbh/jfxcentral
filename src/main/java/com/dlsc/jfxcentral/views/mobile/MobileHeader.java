@@ -42,6 +42,7 @@ public class MobileHeader extends HBox {
         StackPane stackPane = new StackPane(title2, title1);
         stackPane.getStyleClass().add("title-wrapper");
         HBox.setHgrow(stackPane, Priority.ALWAYS);
+        com.jpro.web.Util.setLink(stackPane, "/home", "JFX-Central");
 
         getChildren().addAll(stackPane, spacer, hamburgerIcon);
     }

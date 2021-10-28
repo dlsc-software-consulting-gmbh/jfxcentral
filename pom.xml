@@ -366,7 +366,7 @@
                         <artifactId>jpro-maven-plugin</artifactId>
                         <version>${jpro.version}</version>
                         <configuration>
-                            <javafxVersion>16</javafxVersion>
+                            <javafxVersion>17</javafxVersion>
                             <port>8088</port>
                             <visible>false</visible>
                             <mainClassName>

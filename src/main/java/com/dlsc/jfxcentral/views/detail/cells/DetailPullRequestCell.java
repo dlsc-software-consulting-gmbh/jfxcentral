@@ -89,8 +89,8 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
             }
         });
 
-        visibleProperty().bind(itemProperty().isNotNull());
-        managedProperty().bind(itemProperty().isNotNull());
+      //  visibleProperty().bind(itemProperty().isNotNull());
+      //  managedProperty().bind(itemProperty().isNotNull());
     }
 
     private void showPullRequestBody(PullRequest pr) {
