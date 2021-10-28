@@ -23,6 +23,10 @@ public class PageUtil {
         int secondSlash = url.indexOf("/", "/".length());
         if (secondSlash == -1) return null;
         String idString = url.substring(secondSlash + 1);
+        int paramIndex = idString.indexOf("?"); // cut of parameters
+        if (paramIndex != -1) {
+            idString = idString.substring(0, paramIndex);
+        }
         return idString;
     }
 
