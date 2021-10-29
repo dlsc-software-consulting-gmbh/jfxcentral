@@ -11,6 +11,10 @@ public class PageUtil {
         int secondSlash = url.indexOf("/", "/".length());
         if (secondSlash == -1) secondSlash = url.length();
         String viewString = url.substring("/".length(), secondSlash);
+        int paramIndex = viewString.indexOf("?"); // cut of parameters
+        if (paramIndex != -1) {
+            viewString = viewString.substring(0, paramIndex);
+        }
         try {
             return View.valueOf(viewString.toUpperCase());
         } catch (IllegalArgumentException ex) {
