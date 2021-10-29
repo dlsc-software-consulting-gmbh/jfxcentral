@@ -40,6 +40,8 @@ public class CoordinatesPane extends SectionPane {
 
         repositoryCoordinatesLabel = new Label();
         repositoryCoordinatesLabel.getStyleClass().add("coordinates-label");
+        repositoryCoordinatesLabel.setWrapText(true);
+        repositoryCoordinatesLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         RadioButton mavenButton = new RadioButton("Maven");
         RadioButton gradleButton = new RadioButton("Gradle");

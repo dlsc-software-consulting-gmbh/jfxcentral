@@ -106,22 +106,24 @@ public class ResponsiveBoxWithPhotoView extends Pane {
 
         double ph;
 
-        if (imageLocation.equals(ImageLocation.BANNER)) { // || getWidth() < 500) {
-            ph = imageWrapper.prefHeight(w);
-            imageWrapper.resizeRelocate(x, y, w, ph);
+        if (!imageLocation.equals(ImageLocation.HIDE)) {
+            if (imageLocation.equals(ImageLocation.BANNER)) { // || getWidth() < 500) {
+                ph = imageWrapper.prefHeight(w);
+                imageWrapper.resizeRelocate(x, y, w, ph);
 
-            if (titleLabel.isManaged() || subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
-                y += ph + getVgap();
+                if (titleLabel.isManaged() || subtitleLabel.isManaged() || markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                    y += ph + getVgap();
+                }
+
+            } else {
+                ph = imageWrapper.prefHeight(w);
+                double pw = imageWrapper.prefWidth(w);
+
+                imageWrapper.resizeRelocate(x + w - pw, y, pw, ph);
+
+                w -= pw; // less available horizontal space now
+                w -= getHgap();
             }
-
-        } else {
-            ph = imageWrapper.prefHeight(w);
-            double pw = imageWrapper.prefWidth(w);
-
-            imageWrapper.resizeRelocate(x + w - pw, y, pw, ph);
-
-            w -= pw; // less available horizontal space now
-            w -= getHgap();
         }
 
         if (titleLabel.isManaged()) {

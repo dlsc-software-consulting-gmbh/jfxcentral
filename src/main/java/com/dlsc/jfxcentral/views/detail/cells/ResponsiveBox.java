@@ -68,7 +68,8 @@ public class ResponsiveBox extends Pane {
         imageWrapper.setMaxHeight(Region.USE_PREF_SIZE);
         imageWrapper.visibleProperty().bind(showImageView);
         imageWrapper.managedProperty().bind(showImageView);
-        StackPane.setAlignment(imageView, Pos.TOP_RIGHT);
+        imageWrapper.setMinWidth(0);
+        StackPane.setAlignment(imageView, Pos.TOP_CENTER);
 
         extraControlsPane = new FlowPane();
         Bindings.bindContent(extraControlsPane.getChildren(), extraControlsProperty());
@@ -95,6 +96,12 @@ public class ResponsiveBox extends Pane {
         return Orientation.HORIZONTAL;
     }
 
+    private boolean forceImageLocation;
+
+    public void setForceImageLocation(boolean forceImageLocation) {
+        this.forceImageLocation = forceImageLocation;
+    }
+
     protected void layoutChildren() {
         Insets insets = getInsets();
 
@@ -106,28 +113,30 @@ public class ResponsiveBox extends Pane {
 
         double ph;
 
-        if (imageLocation.equals(ImageLocation.BANNER) || getWidth() < 500) {
-            imageView.setFitWidth(w);
-            imageView.setFitHeight(Region.USE_PREF_SIZE);
+        if (!imageLocation.equals(ImageLocation.HIDE)) {
+            if (imageLocation.equals(ImageLocation.BANNER) || (getWidth() < 500 && !forceImageLocation)) {
+                imageView.setFitWidth(w);
+                imageView.setFitHeight(getLargeImageHeight());
 
-            ph = imageWrapper.prefHeight(w);
-            imageWrapper.resizeRelocate(x, y, w, ph);
+                ph = imageWrapper.prefHeight(w);
+                imageWrapper.resizeRelocate(x, y, w, ph);
 
-            if (titleLabel.isManaged() || subtitleLabel.isManaged() ||markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
-                y += ph + getVgap();
+                if (titleLabel.isManaged() || subtitleLabel.isManaged() ||markdownView.isManaged() || extraControlsPane.isManaged() || (getFooter() != null && getFooter().isManaged())) {
+                    y += ph + getVgap();
+                }
+
+            } else {
+                imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
+                imageView.setFitHeight(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageHeight() : getLargeImageHeight());
+
+                ph = imageWrapper.prefHeight(w);
+                double pw = imageWrapper.prefWidth(w);
+
+                imageWrapper.resizeRelocate(x + w - pw, y, pw, ph);
+
+                w -= pw; // less available horizontal space now
+                w -= getHgap();
             }
-
-        } else {
-            imageView.setFitWidth(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageWidth() : getSmallImageWidth());
-            imageView.setFitHeight(imageLocation.equals(ImageLocation.LARGE_ON_SIDE) ? getLargeImageHeight() : getLargeImageHeight());
-
-            ph = imageWrapper.prefHeight(w);
-            double pw = imageWrapper.prefWidth(w);
-
-            imageWrapper.resizeRelocate(x + w - pw, y, pw, ph);
-
-            w -= pw; // less available horizontal space now
-            w -= getHgap();
         }
 
         if (titleLabel.isManaged()) {

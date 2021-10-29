@@ -45,6 +45,10 @@
     -fx-translate-y: 1px;
 }
 
+.master-view .viewport {
+    -fx-background-color: white;
+}
+
 .master-view .mobile-cell {
     -fx-background-color: white, #e0e0e0, white;
     -fx-background-insets: 0em, 0em 0em 0em 0em, 0em 0em 0.0714em 0em;
@@ -82,7 +86,7 @@
     -fx-border-width: 0em 0em 0em 0em;
     -fx-border-radius: 0.2142em;
     -fx-effect: null;
-    -fx-padding: 0em 0.3571em 0.7142em 0em;
+    -fx-padding: 0em;
 }
 
 .section-pane .extras-box {
@@ -271,13 +275,17 @@
 }
 
 .people-detail-view .title-section .responsive-box {
-    -fx-padding: 20px 0px 0px 0px;
+    -fx-padding: 20px 0px 10px 0px;
 }
 
 .people-detail-view .title-section .responsive-box .button-box {
 }
 
 .responsive-box {
+}
+
+.section-pane-container {
+    -fx-spacing: 10px !important;
 }
 
 /* ----------------------------------------------------------------------------
@@ -394,27 +402,32 @@
 /* ----------------------------------------------------------------------------
  * MobileMasterRealWorldAppCell
  */
-.mobile-master-app-list-cell .grid-pane {
-    -fx-vgap: 0.3571em;
-    -fx-hgap: 0.7142em;
-    -fx-grid-lines-visible: false;
+.mobile-master-app-list-cell .hbox {
     -fx-padding: 0.7142em 0em;
+    -fx-spacing: 0.7142em;
+    -fx-alignment: top-left;
+    -fx-fill-height: true;
 }
 
-.mobile-master-app-list-cell .grid-pane .title-label {
+.mobile-master-app-list-cell .hbox .vbox {
+    -fx-spacing: 0.3571em;
+}
+
+.mobile-master-app-list-cell .hbox .vbox .title-label {
     -fx-padding: 0px 0px 5px 0px;
 }
 
-.mobile-master-app-list-cell .grid-pane .summary-label {
+.mobile-master-app-list-cell .hbox .vbox .summary-label {
     -fx-padding: 0px 0px 5px 0px;
 }
 
-.mobile-master-app-list-cell .grid-pane .markdown-view {
+.mobile-master-app-list-cell .hbox .vbox .markdown-view {
     -fx-padding: 0px 0px 5px 0px;
 }
 
-.mobile-master-app-list-cell .grid-pane .icon-wrapper {
-    -fx-spacing: 10px;
+.mobile-master-app-list-cell .hbox .vbox .icon-wrapper {
+    -fx-spacing: 5px;
+    -fx-alignment: center-left;
 }
 
 /* ----------------------------------------------------------------------------

@@ -18,7 +18,7 @@ public class DetailCompanyCell extends DetailCell<Company> {
     private final ResponsiveBox responsiveBox;
     private final boolean primaryView;
 
-    public DetailCompanyCell(RootPane rootPane, boolean primaryView) {
+    public DetailCompanyCell(boolean companyPage, RootPane rootPane, boolean primaryView) {
         this.rootPane = rootPane;
         this.primaryView = primaryView;
 
@@ -28,11 +28,11 @@ public class DetailCompanyCell extends DetailCell<Company> {
 
         homepageButton.setGraphic(new FontIcon(MaterialDesign.MDI_HOME));
 
-        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox = new ResponsiveBox((rootPane.isMobile() && !companyPage) ? ResponsiveBox.ImageLocation.HIDE : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.getExtraControls().addAll(homepageButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
-        responsiveBox.setLargeImageWidth(200);
-        responsiveBox.setLargeImageHeight(100);
+        responsiveBox.setLargeImageWidth(192);
+        responsiveBox.setLargeImageHeight(64);
 
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

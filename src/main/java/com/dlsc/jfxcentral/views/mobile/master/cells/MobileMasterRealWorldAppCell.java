@@ -6,15 +6,14 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.mobile.MobileAdvancedListCell;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -26,7 +25,7 @@ public class MobileMasterRealWorldAppCell extends MobileAdvancedListCell<RealWor
 
     private final ImageView imageView = new ImageView();
     private final MarkdownView summaryMarkdownView = new MarkdownView();
-    private final GridPane gridPane;
+    private final VBox vBox;
 
     public MobileMasterRealWorldAppCell() {
         getStyleClass().add("mobile-master-app-list-cell");
@@ -59,26 +58,20 @@ public class MobileMasterRealWorldAppCell extends MobileAdvancedListCell<RealWor
         domainLabel.managedProperty().bind(domainLabel.textProperty().isNotEmpty());
         domainLabel.setAlignment(Pos.TOP_LEFT);
 
-        gridPane = new GridPane();
-        gridPane.getStyleClass().add("grid-pane");
-        gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        vBox = new VBox(nameLabel, summaryMarkdownView, wrap(new FontIcon(MaterialDesign.MDI_FACTORY), companyLabel), wrap(new FontIcon(MaterialDesign.MDI_DOMAIN), domainLabel));
+        vBox.getStyleClass().add("vbox");
+        vBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        HBox.setHgrow(vBox, Priority.ALWAYS);
 
-        gridPane.add(nameLabel, 0, 0);
-        gridPane.add(summaryMarkdownView, 0, 1);
-        gridPane.add(wrap(new FontIcon(MaterialDesign.MDI_FACTORY), companyLabel), 0, 2);
-        gridPane.add(wrap(new FontIcon(MaterialDesign.MDI_DOMAIN), domainLabel), 0, 3);
-        gridPane.add(imageView, 1, 0);
-
-        GridPane.setValignment(imageView, VPos.TOP);
-        GridPane.setRowSpan(imageView, 4);
-        GridPane.setHgrow(nameLabel, Priority.ALWAYS);
+        HBox hBox = new HBox(vBox, imageView);
+        hBox.getStyleClass().add("hbox");
 
         imageView.setFitWidth(120);
 
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        setGraphic(gridPane);
+        setGraphic(hBox);
 
-        gridPane.visibleProperty().bind(emptyProperty().not());
+        hBox.visibleProperty().bind(emptyProperty().not());
     }
 
     private Node wrap(FontIcon fontIcon, Label label) {

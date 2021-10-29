@@ -44,7 +44,7 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
         createListViewBox("Videos", listView -> new DetailVideoCell(getRootPane(), false), item -> repository.getVideosByModelObject(item));
         createListViewBox("Books", listView -> new DetailBookCell(getRootPane(), false), item -> repository.getBooksByModelObject(item));
         createListViewBox("People", listView -> new DetailPersonCell(getRootPane(), false), item -> repository.getPeopleByModelObject(item));
-        createListViewBox("Companies", listView -> new DetailCompanyCell(getRootPane(), false), item -> repository.getCompaniesByModelObject(item));
+        createListViewBox("Companies", listView -> new DetailCompanyCell(false, getRootPane(), false), item -> repository.getCompaniesByModelObject(item));
         createListViewBox("Apps", listView -> new DetailRealWorldAppCell(getRootPane(), false), item -> repository.getRealWorldAppsByModelObject(item));
         createListViewBox("Tips", listView -> new DetailTipCell(getRootPane(), false), item -> repository.getTipsByModelObject(item));
     }

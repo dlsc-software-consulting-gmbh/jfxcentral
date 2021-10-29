@@ -70,8 +70,6 @@ public class DetailVideoCell extends DetailCell<Video> {
                 }
             });
 
-            System.out.println(htmlView.getContent());
-
             rootPane.getOverlayPane().setContent(htmlView);
         } else {
             WebView webView = new WebView();

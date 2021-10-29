@@ -52,13 +52,14 @@ public class DownloadsDetailView extends DetailViewWithListView<Download> {
             filterView.getFilterGroups().setAll(downloadTypeGroup, personGroup, companyGroup);
         } else {
             filterView.getFilterGroups().setAll(downloadTypeGroup, fileTypeGroup, personGroup, companyGroup);
-            filterView.setTextFilterProvider(text -> video -> {
-                if (video.getName().toLowerCase().contains(text)) {
-                    return true;
-                }
-                return false;
-            });
         }
+
+        filterView.setTextFilterProvider(text -> video -> {
+            if (video.getName().toLowerCase().contains(text)) {
+                return true;
+            }
+            return false;
+        });
 
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setCellFactory(view -> new DetailDownloadCell(getRootPane(), true));

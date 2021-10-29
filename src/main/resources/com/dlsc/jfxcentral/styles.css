@@ -867,7 +867,7 @@
 
 .libraries-detail-view .ensemble-pane .hbox {
     -fx-spacing: 10px;
-    -fx-alignment: center-left;
+    -fx-alignment: top-left;
 }
 
 .libraries-detail-view .ensemble-pane .hbox .label {
@@ -917,11 +917,15 @@
 /* ----------------------------------------------------------------------------
  * CoordinatesPane
  */
+.coordinates-pane .extras-box {
+    -fx-padding: 10px 10px 0px 0px;
+}
 .coordinates-pane .vbox {
     -fx-spacing: 10px;
 }
 
 .coordinates-pane .vbox .header {
+    -fx-padding: 10px 0px 0px 0px;
     -fx-spacing: 20px;
 }
 
@@ -935,6 +939,7 @@
     -fx-border-width: 0.5;
     -fx-max-width: infinity;
     -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 0.8571em;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1724,6 +1729,7 @@
 .home-detail-view .social-pane {
     -fx-hgap: 10px;
     -fx-vgap: 10px;
+    -fx-padding: 0px 0px 20px 0px;
 }
 
 .home-detail-view .social-pane .social-label {
@@ -2229,4 +2235,13 @@
   -fx-wrap-text: true;
   -fx-text-alignment: center;
   -fx-text-fill: white;
+}
+
+.list-view-replacement {
+    -fx-min-width: 0;
+}
+
+.filter-groups,
+.filter-groups .menu-button {
+    -fx-min-width: 0;
 }

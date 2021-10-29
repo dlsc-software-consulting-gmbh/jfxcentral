@@ -49,8 +49,8 @@ public class DetailPostCell extends AdvancedListCell<Post> {
 
         titleLabel.getStyleClass().add("title-label");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
-//        titleLabel.setWrapText(true);
-//        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
+        titleLabel.setWrapText(true);
+        titleLabel.setMinHeight(Region.USE_PREF_SIZE);
 
         imageView.setFitHeight(32);
         imageView.setFitWidth(32);

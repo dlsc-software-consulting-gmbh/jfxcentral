@@ -52,12 +52,18 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         createNewsSection();
         createRecentItemsSection();
 
-        HBox hBox = new HBox();
-        hBox.getStyleClass().add("footer");
-        content.getChildren().add(hBox);
+        Pane box;
+        if (rootPane.isMobile()) {
+            box = new VBox();
+        } else {
+            box = new HBox();
+        }
 
-        createContactInfo(hBox);
-        createSocialInfo(hBox);
+        box.getStyleClass().add("footer");
+        content.getChildren().add(box);
+
+        createContactInfo(box);
+        createSocialInfo(box);
 
         setContent(content);
     }
@@ -257,7 +263,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         content.getChildren().add(sectionPane);
     }
 
-    private void createContactInfo(HBox box) {
+    private void createContactInfo(Pane box) {
         MarkdownView markdownView = new MarkdownView();
         markdownView.setMdString("### DLSC Software & Consulting\n\nAsylweg 28, 8134 Adliswil\n\nSwitzerland\n\nPhone: +41-79-800-23-20");
         markdownView.getStyleClass().add("contact-markdown-view");
@@ -271,11 +277,14 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         SectionPane sectionPane = new SectionPane(markdownView);
         sectionPane.setTitle("Contact");
 
-        HBox.setHgrow(sectionPane, Priority.ALWAYS);
+        if (box instanceof HBox) {
+            HBox.setHgrow(sectionPane, Priority.ALWAYS);
+        }
+
         box.getChildren().add(sectionPane);
     }
 
-    private void createSocialInfo(HBox box) {
+    private void createSocialInfo(Pane box) {
         StackPane twitter = wrap(new FontIcon(FontAwesomeBrands.TWITTER));
         StackPane linkedIn = wrap(new FontIcon(FontAwesomeBrands.LINKEDIN));
         StackPane github = wrap(new FontIcon(FontAwesomeBrands.GITHUB));
@@ -314,7 +323,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         gridPane.add(mail, 4, 0);
         gridPane.add(mailLabel, 5, 0);
 
-        BooleanBinding showLabel = Bindings.createBooleanBinding(() -> !getRootPane().isMobile() && getWidth() > 700, widthProperty());
+        BooleanBinding showLabel = Bindings.createBooleanBinding(() -> true, widthProperty());
 
         twitterLabel.visibleProperty().bind(showLabel);
         linkedInLabel.visibleProperty().bind(showLabel);
@@ -352,7 +361,10 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         SectionPane sectionPane = new SectionPane(gridPane);
         sectionPane.setTitle("Social");
 
-        HBox.setHgrow(sectionPane, Priority.ALWAYS);
+        if (box instanceof HBox) {
+            HBox.setHgrow(sectionPane, Priority.ALWAYS);
+        }
+
         box.getChildren().add(sectionPane);
     }
 

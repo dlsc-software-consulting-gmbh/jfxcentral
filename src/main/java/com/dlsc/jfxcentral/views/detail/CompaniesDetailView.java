@@ -26,7 +26,7 @@ public class CompaniesDetailView extends DetailViewWithListView<Company> {
         SortedList<Company> sortedList = new SortedList<>(DataRepository.getInstance().companiesProperty());
         sortedList.setComparator(Comparator.comparing(x -> x.getName().toLowerCase()));
 
-        listView.setCellFactory(view -> new DetailCompanyCell(rootPane, true));
+        listView.setCellFactory(view -> new DetailCompanyCell(true, rootPane, true));
         listView.setItems(sortedList);
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
 

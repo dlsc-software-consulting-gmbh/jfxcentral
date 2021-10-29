@@ -104,9 +104,12 @@ public class AdvancedListView<T> extends StackPane {
 
         Label counterLabel = new Label();
         counterLabel.getStyleClass().add("counter-label");
-        counterLabel.textProperty().bind(Bindings.createStringBinding(() -> "Items: " + (getItems() != null ? getItems().size() : 0), itemsProperty()));
+//        counterLabel.textProperty().bind(Bindings.createStringBinding(() -> "Items: " + (getItems() != null ? getItems().size() : 0), itemsProperty()));
         counterLabel.visibleProperty().bind(showItemCounterProperty());
         counterLabel.managedProperty().bind(showItemCounterProperty());
+        counterLabel.setWrapText(true);
+        counterLabel.setMinHeight(Region.USE_PREF_SIZE);
+
         paginationBox.getChildren().add(counterLabel);
 
         Region spacer = new Region();
@@ -212,7 +215,7 @@ public class AdvancedListView<T> extends StackPane {
         this.pageCount.set(pageCount);
     }
 
-    private final IntegerProperty maxPageIndicatorCount = new SimpleIntegerProperty(this, "maxPageIndicatorCount", 5);
+    private final IntegerProperty maxPageIndicatorCount = new SimpleIntegerProperty(this, "maxPageIndicatorCount", 3);
 
     public int getMaxPageIndicatorCount() {
         return maxPageIndicatorCount.get();

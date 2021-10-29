@@ -36,9 +36,9 @@ public class SectionPaneWithFilterView<T> extends SectionPane {
 
                 if (!filterView.getFilters().isEmpty() || itemCount != filterCount) {
                     if (filterCount > 1) {
-                        setSubtitle("Showing " + filterCount + " items out of " + itemCount);
+                        setSubtitle("Showing " + filterCount + " items of " + itemCount);
                     } else if (filterCount == 1) {
-                        setSubtitle("Showing one item out of " + itemCount);
+                        setSubtitle("Showing one item of " + itemCount);
                     } else {
                         setSubtitle("No items match");
                     }
@@ -46,7 +46,7 @@ public class SectionPaneWithFilterView<T> extends SectionPane {
                     if (itemCount > 1) {
                         setSubtitle("Showing all " + itemCount + " items");
                     } else if (itemCount == 1){
-                        setSubtitle("Showing the only item found");
+                        setSubtitle("Showing only item found");
                     } else {
                         setSubtitle("No items found");
                     }
