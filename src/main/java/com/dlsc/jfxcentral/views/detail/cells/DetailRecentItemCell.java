@@ -82,6 +82,9 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
     }
 
     private String createTitle(ModelObject item) {
+        if (item instanceof LinksOfTheWeek) {
+            return "Links of the Week, " + DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(item.getCreatedOn());
+        }
         return item.getName();
     }
 
@@ -93,7 +96,6 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
             if (StringUtils.isNotBlank(description)) {
                 return description.substring(0, Math.min(100, description.length())).replace("\n", " ");
             }
-            return "";
         } else if (item instanceof News) {
             return ((News) item).getSubtitle();
         } else if (item instanceof Video) {
@@ -118,6 +120,8 @@ public class DetailRecentItemCell extends AdvancedListCell<ModelObject> {
             return "Download";
         } else if (item instanceof Tip) {
             return "Tips & Tricks";
+        } else if (item instanceof LinksOfTheWeek) {
+            return "JavaFX findings on the web";
         }
 
         return "";

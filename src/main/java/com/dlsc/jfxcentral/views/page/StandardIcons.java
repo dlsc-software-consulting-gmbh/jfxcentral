@@ -23,6 +23,7 @@ public class StandardIcons {
     public static Ikon REAL_WORLD = Material.APPS;
     public static Ikon DOWNLOAD = Material.FILE_DOWNLOAD;
     public static Ikon TIP = Material.LIGHTBULB_OUTLINE;
+    public static Ikon LINKS_OF_THE_WEEK = Material.LINK;
 
     public static Ikon getIcon(Object obj) {
         Class cl = obj.getClass();
@@ -50,6 +51,8 @@ public class StandardIcons {
             return DOWNLOAD;
         } else if (cl.equals(Tip.class)) {
             return TIP;
+        } else if (cl.equals(LinksOfTheWeek.class)) {
+            return LINKS_OF_THE_WEEK;
         }
 
         throw new IllegalArgumentException("unsupported class");

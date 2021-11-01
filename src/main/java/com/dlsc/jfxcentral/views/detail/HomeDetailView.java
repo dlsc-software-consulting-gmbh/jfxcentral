@@ -3,10 +3,7 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.gemsfx.FilterView;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.data.model.Library;
-import com.dlsc.jfxcentral.data.model.ModelObject;
-import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.data.model.Person;
+import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
@@ -15,6 +12,7 @@ import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.dlsc.jfxcentral.views.detail.cells.DetailLinksOfTheWeekCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailNewsCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
 import javafx.beans.Observable;
@@ -49,6 +47,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         getStyleClass().add("home-detail-view");
 
         createWelcomeSection();
+        createLinksOfTheWeekSection();
         createNewsSection();
         createRecentItemsSection();
 
@@ -244,6 +243,22 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         sectionPane.setExtras(logo);
 
         VBox.setVgrow(sectionPane, Priority.NEVER);
+        content.getChildren().add(sectionPane);
+    }
+
+    private void createLinksOfTheWeekSection() {
+        AdvancedListView<LinksOfTheWeek> listView = new AdvancedListView<>();
+        listView.getListView().setSelectionModel(new EmptySelectionModel<>());
+        listView.setPaging(true);
+        listView.setVisibleRowCount(8);
+        listView.setCellFactory(view -> new DetailLinksOfTheWeekCell(getRootPane()));
+        Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getLinksOfTheWeek());
+        VBox.setVgrow(listView, Priority.ALWAYS);
+
+        SectionPane sectionPane = new SectionPane(listView);
+        sectionPane.setTitle("Links of the Week");
+        sectionPane.setSubtitle("JavaFX findings of the web");
+
         content.getChildren().add(sectionPane);
     }
 

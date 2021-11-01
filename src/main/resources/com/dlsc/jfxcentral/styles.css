@@ -491,6 +491,7 @@
     -fx-text-fill: -fx-accent;
     -fx-font-family: "Inter Semi Bold";
 }
+
 .master-view .list-cell .grid-pane {
     -fx-padding: 15px 20px;
 }
@@ -526,18 +527,22 @@
     -fx-icon-color: white;
     -fx-icon-size: 32px;
 }
+
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */
 .master-tip-list-cell {
-  -fx-padding: 0;
+    -fx-padding: 0;
 }
+
 .master-tip-list-cell .textflow {
-  -fx-padding: 10px 15px;
+    -fx-padding: 10px 15px;
 }
+
 .master-tip-list-cell .textflow .headline {
-  -fx-fill: -fx-accent;
+    -fx-fill: -fx-accent;
 }
+
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */
@@ -598,9 +603,10 @@
     -fx-insets: 0px;
     -fx-padding: 0px;
 }
+
 .master-tool-list-cell .hbox {
     -fx-padding: 10px 15px;
-    -fx-alignment:center;
+    -fx-alignment: center;
     -fx-spacing: 5px;
 }
 
@@ -920,6 +926,7 @@
 .coordinates-pane .extras-box {
     -fx-padding: 10px 10px 0px 0px;
 }
+
 .coordinates-pane .vbox {
     -fx-spacing: 10px;
 }
@@ -1823,6 +1830,25 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * DetailLinksOfTheWeekCell
+ */
+.detail-links-of-the-week-cell {
+}
+
+.home-detail-view .list-view .detail-links-of-the-week-cell .vbox {
+    -fx-padding: 10px;
+}
+
+.detail-links-of-the-week-cell .title-label {
+    -fx-font-family: "Inter Semi Bold";
+    -fx-font-size: 1.1428em;
+}
+
+.detail-links-of-the-week-cell .vbox {
+    -fx-spacing: 10px;
+}
+
+/* ----------------------------------------------------------------------------
  * HeaderPane
  */
 .header-pane {
@@ -2227,14 +2253,15 @@
 }
 
 .no-mobile-pane {
-  -fx-padding: 25;
-  -fx-font-size: 22;
-  -fx-background-color: -fx-focus-color;
+    -fx-padding: 25;
+    -fx-font-size: 22;
+    -fx-background-color: -fx-focus-color;
 }
+
 .no-mobile-pane .label {
-  -fx-wrap-text: true;
-  -fx-text-alignment: center;
-  -fx-text-fill: white;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-text-fill: white;
 }
 
 .list-view-replacement {
