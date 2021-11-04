@@ -528,6 +528,12 @@
     -fx-icon-size: 32px;
 }
 
+.real-world-detail-view .section-pane.title-box {
+    -fx-background-insets: 0px;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+}
+
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */

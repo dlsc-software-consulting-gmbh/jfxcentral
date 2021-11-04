@@ -257,7 +257,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
         SectionPane sectionPane = new SectionPane(listView);
         sectionPane.setTitle("Links of the Week");
-        sectionPane.setSubtitle("JavaFX findings of the web");
+        sectionPane.setSubtitle("Miscellaneous JavaFX stuff found on the web");
 
         content.getChildren().add(sectionPane);
     }
