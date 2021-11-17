@@ -46,10 +46,10 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
         getStyleClass().add("home-detail-view");
 
-        createWelcomeSection();
         createLinksOfTheWeekSection();
         createNewsSection();
         createRecentItemsSection();
+        createWelcomeSection();
 
         Pane box;
         if (rootPane.isMobile()) {
@@ -238,7 +238,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         HBox hBox = new HBox(markdownView);
 
         SectionPane sectionPane = new SectionPane(hBox);
-        sectionPane.setTitle("Welcome to JFX-Central");
+        sectionPane.setTitle("About JFX-Central");
         sectionPane.setSubtitle("Home to anything JavaFX related.");
         sectionPane.setExtras(logo);
 
