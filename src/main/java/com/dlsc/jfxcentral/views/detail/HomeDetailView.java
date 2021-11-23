@@ -19,6 +19,7 @@ import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.StringProperty;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -247,12 +248,16 @@ public class HomeDetailView extends DetailViewWithListView<News> {
     }
 
     private void createLinksOfTheWeekSection() {
+        SortedList<LinksOfTheWeek> sortedList = new SortedList<>(DataRepository.getInstance().getLinksOfTheWeek());
+        sortedList.setComparator(Comparator.comparing(ModelObject::getCreationOrUpdateDate).reversed());
+
         AdvancedListView<LinksOfTheWeek> listView = new AdvancedListView<>();
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
-        listView.setVisibleRowCount(8);
+        listView.setVisibleRowCount(3);
         listView.setCellFactory(view -> new DetailLinksOfTheWeekCell(getRootPane()));
-        Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getLinksOfTheWeek());
+        Bindings.bindContent(listView.getItems(), sortedList);
+
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         SectionPane sectionPane = new SectionPane(listView);
@@ -268,6 +273,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         listView.setPaging(true);
         listView.setVisibleRowCount(8);
         listView.setCellFactory(view -> new DetailRecentItemCell(getRootPane()));
+
         Bindings.bindContent(listView.getItems(), DataRepository.getInstance().getRecentItems());
         VBox.setVgrow(listView, Priority.ALWAYS);
 
