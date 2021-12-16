@@ -83,7 +83,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
                 htmlView.setPrefWidth(300);
                 htmlView.setMinWidth(300);
                 htmlView.setMaxWidth(300);
-                htmlView.setContent("<html><body><a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></body><html>");
+                htmlView.setContent("<a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
 
                 node = htmlView;
 
