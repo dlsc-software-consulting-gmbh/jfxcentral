@@ -13,6 +13,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
@@ -78,6 +79,11 @@ public class SectionPane extends SectionPaneBase {
         childrenBox.visibleProperty().bind(expandedProperty());
         childrenBox.managedProperty().bind(expandedProperty());
         childrenBox.setMinHeight(Region.USE_PREF_SIZE);
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(childrenBox.widthProperty());
+        clip.heightProperty().bind(childrenBox.heightProperty());
+        childrenBox.setClip(clip);
 
         VBox.setVgrow(childrenBox, Priority.ALWAYS);
 

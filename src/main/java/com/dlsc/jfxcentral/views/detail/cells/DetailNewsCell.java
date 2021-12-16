@@ -33,7 +33,7 @@ public class DetailNewsCell extends DetailCell<News> {
         authorLabel.setMinHeight(Region.USE_PREF_SIZE);
         authorLabel.setMaxWidth(Double.MAX_VALUE);
 
-        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : largeImage ? ResponsiveBox.ImageLocation.HIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
         responsiveBox.setFooter(authorLabel);
 

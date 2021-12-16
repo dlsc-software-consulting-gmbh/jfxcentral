@@ -15,6 +15,8 @@ import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailLinksOfTheWeekCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailNewsCell;
 import com.dlsc.jfxcentral.views.detail.cells.DetailRecentItemCell;
+import com.jpro.webapi.HTMLView;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -22,9 +24,11 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.web.WebView;
 import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -35,7 +39,7 @@ import java.util.*;
 
 public class HomeDetailView extends DetailViewWithListView<News> {
 
-    private final VBox content = new VBox();
+    private final VBox content = new VBox(20);
 
     private final FilterView.FilterGroup<News> typeGroup = new FilterView.FilterGroup<>("Type");
     private final FilterView.FilterGroup<News> personGroup = new FilterView.FilterGroup<>("Person");
@@ -65,7 +69,40 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         createContactInfo(box);
         createSocialInfo(box);
 
-        setContent(content);
+
+        if (rootPane.isMobile()) {
+            // no Twitter feed on mobile
+            setContent(content);
+        } else {
+            SectionPane webviewSectionPane = new SectionPane();
+
+            Node node;
+
+            if (WebAPI.isBrowser()) {
+                HTMLView htmlView = new HTMLView();
+                htmlView.setPrefWidth(300);
+                htmlView.setMinWidth(300);
+                htmlView.setMaxWidth(300);
+                htmlView.setContent("<html><body><a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></body><html>");
+
+                node = htmlView;
+
+            } else {
+                WebView webView = new WebView();
+                webView.setPrefWidth(300);
+                webView.setMinWidth(300);
+                webView.setMaxWidth(300);
+                VBox.setVgrow(webView, Priority.ALWAYS);
+                webView.getEngine().loadContent("<a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
+                node = webView;
+            }
+
+            webviewSectionPane.getNodes().add(node);
+
+            HBox hBox = new HBox(10, content, webviewSectionPane);
+
+            setContent(hBox);
+        }
     }
 
     private void createNewsSection() {
