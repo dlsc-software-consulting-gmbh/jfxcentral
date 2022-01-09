@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views;
 import com.dlsc.gemsfx.GlassPane;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.panels.PrettyScrollPane;
+import com.dlsc.jfxcentral.util.DeveloperTool;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.mobile.MobileHeader;
@@ -13,10 +14,9 @@ import com.gluonhq.attach.display.DisplayService;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -47,6 +47,9 @@ public class RootPane extends StackPane {
 
     public RootPane() {
         getStyleClass().add("root-pane");
+
+        getDeveloperTools().add(new DeveloperTool("CSS Docs", DeveloperTool.Tool.CSS_DOCS));
+        getDeveloperTools().add(new DeveloperTool("Ikonli Browser", DeveloperTool.Tool.IKONLI));
     }
 
     public void init(boolean mobile) {
@@ -275,6 +278,9 @@ public class RootPane extends StackPane {
             case TIPS:
                 page = new TipsPage(this);
                 break;
+            case DEVELOPMENT:
+                page = new DevToolsPage(this);
+                break;
             default:
                 break;
         }
@@ -357,5 +363,19 @@ public class RootPane extends StackPane {
 
     public Locale getLocale() {
         return locale;
+    }
+
+    private final ListProperty<DeveloperTool> developerTools = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+    public ObservableList<DeveloperTool> getDeveloperTools() {
+        return developerTools.get();
+    }
+
+    public ListProperty<DeveloperTool> developerToolsProperty() {
+        return developerTools;
+    }
+
+    public void setDeveloperTools(ObservableList<DeveloperTool> developerTools) {
+        this.developerTools.set(developerTools);
     }
 }

@@ -67,6 +67,8 @@ public class PageUtil {
             return View.DOWNLOADS;
         } else if (obj instanceof Tip) {
             return View.TIPS;
+        } else if (obj instanceof DeveloperTool) {
+            return View.DEVELOPMENT;
         } else {
             return View.HOME;
         }
@@ -85,6 +87,7 @@ public class PageUtil {
         if(view == View.VIDEOS) return Video.class;
         if(view == View.DOWNLOADS) return Download.class;
         if(view == View.TIPS) return Tip.class;
+        if(view == View.DEVELOPMENT) return DeveloperTool.class;
         if(view == View.HOME) return null;
         throw new RuntimeException("No Class associated with the view " + view);
     }

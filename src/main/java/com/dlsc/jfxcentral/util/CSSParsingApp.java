@@ -6,9 +6,7 @@ import javafx.css.StyleConverter;
 import javafx.css.Styleable;
 import javafx.css.converter.*;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.lang.reflect.Field;
@@ -32,6 +30,12 @@ public class CSSParsingApp extends Application {
         dumpStylingSupport(Button.class);
         System.out.println("------------------- Label -------------------");
         dumpStylingSupport(Label.class);
+        System.out.println("------------------- Pagination -------------------");
+        dumpStylingSupport(Pagination.class);
+        System.out.println("------------------- MenuButton -------------------");
+        dumpStylingSupport(MenuButton.class);
+        System.out.println("------------------- TableView -------------------");
+        dumpStylingSupport(TableView.class);
     }
 
     private void dumpStylingSupport(Class styleable) {

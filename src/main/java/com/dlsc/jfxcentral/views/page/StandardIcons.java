@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.data.model.*;
+import com.dlsc.jfxcentral.util.DeveloperTool;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.fontawesome.FontAwesome;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
@@ -24,6 +25,7 @@ public class StandardIcons {
     public static Ikon DOWNLOAD = Material.FILE_DOWNLOAD;
     public static Ikon TIP = Material.LIGHTBULB_OUTLINE;
     public static Ikon LINKS_OF_THE_WEEK = Material.LINK;
+    public static Ikon DEVELOPMENT = Material.EDIT;
 
     public static Ikon getIcon(Object obj) {
         Class cl = obj.getClass();
@@ -53,6 +55,8 @@ public class StandardIcons {
             return TIP;
         } else if (cl.equals(LinksOfTheWeek.class)) {
             return LINKS_OF_THE_WEEK;
+        } else if (cl.equals(DeveloperTool.class)) {
+            return DEVELOPMENT;
         }
 
         throw new IllegalArgumentException("unsupported class");

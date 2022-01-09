@@ -1,3 +1,5 @@
+import org.kordamp.ikonli.IkonProvider;
+
 open module jfxcentral {
     requires org.eclipse.jgit;
     requires jfxcentral.data;
@@ -34,4 +36,7 @@ open module jfxcentral {
 
     requires fr.brouillard.oss.cssfx;
     requires org.kordamp.ikonli.core;
+    requires jdk.xml.dom;
+
+    uses IkonProvider;
 }

@@ -2,12 +2,15 @@ package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.util.DeveloperTool;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
+
+import java.util.Optional;
 
 
 public class WebView extends com.jpro.web.View {
@@ -73,7 +76,14 @@ public class WebView extends com.jpro.web.View {
         ModelObject item = null;
 
         if (id != null) {
-            item = DataRepository.getInstance().getByID(PageUtil.getClassOfView(view), id);
+            if (view.equals(View.DEVELOPMENT)) {
+                Optional<DeveloperTool> optional = rootPane.getDeveloperTools().filtered(o -> o.getId().equals(id)).stream().findFirst();
+                if (optional.isPresent()) {
+                    item = optional.get();
+                }
+            } else {
+                item = DataRepository.getInstance().getByID(PageUtil.getClassOfView(view), id);
+            }
         }
 
         if (currentPage != null) {

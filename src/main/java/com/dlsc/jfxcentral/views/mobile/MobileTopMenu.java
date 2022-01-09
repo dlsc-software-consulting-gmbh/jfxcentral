@@ -41,6 +41,7 @@ public class MobileTopMenu extends VBox {
         ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REAL_WORLD, new FontIcon(StandardIcons.REAL_WORLD));
         ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(StandardIcons.DOWNLOAD));
         ToggleButton tipsButton = createButton("Tips & Tricks", View.TIPS, new FontIcon(StandardIcons.TIP));
+        ToggleButton developmentButton = createButton("Development", View.DEVELOPMENT, new FontIcon(StandardIcons.DEVELOPMENT));
 
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
@@ -56,7 +57,8 @@ public class MobileTopMenu extends VBox {
                 libsButton,
                 tutorialsButton,
                 realWorldAppsButton,
-                downloadsButton);
+                downloadsButton,
+                developmentButton);
 
         toggleGroup.selectToggle(homeButton);
 
@@ -74,7 +76,9 @@ public class MobileTopMenu extends VBox {
                 wrap(toolsButton),
                 wrap(libsButton),
                 wrap(tutorialsButton),
-                wrap(downloadsButton));
+                wrap(downloadsButton),
+                wrap(developmentButton)
+        );
 
         toggleGroup.selectedToggleProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
@@ -128,6 +132,9 @@ public class MobileTopMenu extends VBox {
                     break;
                 case DOWNLOADS:
                     toggleGroup.selectToggle(downloadsButton);
+                    break;
+                case DEVELOPMENT:
+                    toggleGroup.selectToggle(developmentButton);
                     break;
             }
         });
@@ -197,6 +204,9 @@ public class MobileTopMenu extends VBox {
                 break;
             case DOWNLOADS:
                 button.setTooltip(new Tooltip("Downloads"));
+                break;
+            case DEVELOPMENT:
+                button.setTooltip(new Tooltip("Online Developer Tools"));
                 break;
         }
         return button;
