@@ -3,10 +3,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
-    <meta name="description" content="JavaFX, libraries, real world, news, videos, downloads, tutorials, blogs"/>
+    <meta name="description" content="JavaFX, libraries, real world, news, videos, downloads, tutorials, blogs, tools, open source"/>
     <meta name="theme-color" content="#4483A0">
 
-    <title>JFX-Central</title>
+    <title>JFX-Central - Everything JavaFX</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ESHCVKRV2S"></script>
