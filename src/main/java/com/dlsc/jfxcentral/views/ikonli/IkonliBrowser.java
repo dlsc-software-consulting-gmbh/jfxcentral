@@ -1,13 +1,20 @@
 package com.dlsc.jfxcentral.views.ikonli;
 
-import javafx.geometry.Insets;
+import com.dlsc.jfxcentral.panels.PrettyScrollPane;
+import javafx.beans.Observable;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.geometry.VPos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
+import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.IkonProvider;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -18,95 +25,127 @@ import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class IkonliBrowser extends VBox {
+public class IkonliBrowser extends BorderPane {
 
-    private final FlowGridPane flowGridPane = new FlowGridPane(8, 10);
+    private static final int COLUMNS = 5;
+
+    private final TextField selection;
+    private final GridPane gridPane;
+    private final IkonSearchField searchField;
 
     public IkonliBrowser() {
-        ComboBox<IkonData> fontsComboBox = new ComboBox<>();
-        fontsComboBox.getItems().setAll(resolveIkonData());
-        fontsComboBox.valueProperty().addListener(it -> udpateFlowGridPane(fontsComboBox.getValue()));
-        fontsComboBox.getSelectionModel().select(0);
+        getStyleClass().add("ikonli-browser");
 
-        Label label = new Label("Icon Font:");
-        label.getStyleClass().add("box-label");
+        gridPane = new GridPane();
+        gridPane.getStyleClass().add("icon-grid");
+        gridPane.setAlignment(Pos.CENTER);
 
-        HBox header = new HBox(label, fontsComboBox);
-        header.setAlignment(Pos.CENTER_LEFT);
-        header.getStyleClass().add("header");
+        for (int i = 0; i < COLUMNS; i++) {
+            ColumnConstraints col = new ColumnConstraints();
+            col.setPercentWidth(100 / COLUMNS);
+            gridPane.getColumnConstraints().add(col);
+        }
 
-        getChildren().addAll(header, flowGridPane);
-    }
+        ListView<IkonData> fontsListView = new ListView<>();
+        fontsListView.setMinWidth(Region.USE_PREF_SIZE);
+        fontsListView.getItems().setAll(resolveIkonData());
+        fontsListView.getSelectionModel().selectedItemProperty().addListener(it -> updateFlowGridPane(fontsListView.getSelectionModel().getSelectedItem()));
 
-    private void udpateFlowGridPane(IkonData value) {
-        System.out.println("name: " + value);
-        System.out.println("provider: " + value.getIkonProvider());
+        Label fontLabel = new Label("Icon Font:");
+        fontLabel.getStyleClass().add("box-label");
 
-        IkonProvider ikonProvider = value.getIkonProvider();
-        flowGridPane.getChildren().add(createIkonGrid(EnumSet.allOf(ikonProvider.getIkon())));
-    }
-
-    private static Node createIkonGrid(EnumSet<? extends Ikon> enumSet) {
-        BorderPane borderPane = new BorderPane();
-
-        Label label = new Label("Selection:");
-        TextField selection = new TextField();
+        Label selectionLabel = new Label("Selection:");
+        selection = new TextField();
         selection.setEditable(false);
+
         Button copy = new Button();
         copy.setGraphic(FontIcon.of(MaterialDesign.MDI_CONTENT_COPY, Color.WHITE));
-        copy.getStyleClass().addAll("btn", "btm-sm", "btn-primary");
-        HBox.setMargin(label, new Insets(10, 5, 10, 10));
-        HBox.setMargin(selection, new Insets(10, 5, 10, 5));
-        HBox.setMargin(copy, new Insets(10, 10, 10, 5));
-        HBox.setHgrow(selection, Priority.ALWAYS);
-        HBox hbox = new HBox(label, selection, copy);
-        hbox.setAlignment(Pos.BASELINE_CENTER);
-        borderPane.setTop(hbox);
-
         copy.disableProperty().bind(selection.textProperty().isEmpty());
         copy.setOnAction(e -> {
-            final Clipboard clipboard = Clipboard.getSystemClipboard();
-            final ClipboardContent content = new ClipboardContent();
+            Clipboard clipboard = Clipboard.getSystemClipboard();
+            ClipboardContent content = new ClipboardContent();
             content.putString(selection.getText());
             clipboard.setContent(content);
         });
 
-        GridPane pane = new GridPane();
-        pane.setHgap(5);
-        pane.setVgap(5);
-        pane.setAlignment(Pos.CENTER);
-        pane.setCenterShape(true);
-        pane.setPadding(new Insets(5));
-        pane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        borderPane.setCenter(new ScrollPane(pane));
+        searchField = new IkonSearchField();
+        searchField.getSuggestions().addListener((Observable it) -> updateFlowGridPane(fontsListView.getSelectionModel().getSelectedItem()));
+        searchField.setPromptText("Search by name ...");
+
+        fontsListView.getSelectionModel().selectedItemProperty().addListener(it -> {
+            searchField.setText("");
+            selection.setText("");
+        });
+
+        HBox header = new HBox(selectionLabel, selection, copy, searchField);
+        header.setAlignment(Pos.CENTER_RIGHT);
+        header.getStyleClass().add("header");
+
+        PrettyScrollPane prettyScrollPane = new PrettyScrollPane(gridPane);
+        prettyScrollPane.setShowScrollToTopButton(true);
+        prettyScrollPane.setShowShadow(false);
+
+        setTop(header);
+        setLeft(fontsListView);
+        setCenter(prettyScrollPane);
+
+        fontsListView.getSelectionModel().select(0);
+
+        setPrefHeight(0);
+        VBox.setVgrow(this, Priority.ALWAYS);
+    }
+
+    private void updateFlowGridPane(IkonData value) {
+        IkonProvider ikonProvider = value.getIkonProvider();
+        fillIkonGridPane(EnumSet.allOf(ikonProvider.getIkon()));
+    }
+
+    private VBox previousSelection;
+
+    private void fillIkonGridPane(EnumSet<? extends Ikon> enumSet) {
+        searchField.setIconSet(enumSet);
+
+        gridPane.getChildren().clear();
 
         int column = 0;
         int row = 0;
         int index = 0;
 
-        FontIcon[] previousIcon = new FontIcon[1];
-
         for (Ikon value : enumSet) {
+            if (!(StringUtils.isBlank(searchField.getText()) || searchField.getSuggestions().contains(value))) {
+                continue;
+            }
             FontIcon icon = FontIcon.of(value);
-            icon.getStyleClass().setAll("font-icon");
-            icon.setOnMouseClicked(me -> {
-                if (previousIcon[0] != null) {
-                    previousIcon[0].getStyleClass().remove("active-icon");
+            Label nameLabel = new Label(value.getDescription());
+            nameLabel.setWrapText(true);
+            nameLabel.setMinHeight(Region.USE_PREF_SIZE);
+            nameLabel.setTextAlignment(TextAlignment.CENTER);
+
+            VBox wrapper = new VBox(icon, nameLabel);
+            wrapper.getStyleClass().add("wrapper");
+
+            wrapper.setOnMouseClicked(me -> {
+                if (previousSelection != null) {
+                    previousSelection.getStyleClass().remove("active-icon");
                 }
-                FontIcon nextIcon = (FontIcon) me.getSource();
-                selection.setText(nextIcon.getIconCode().getDescription());
-                nextIcon.getStyleClass().add("active-icon");
-                previousIcon[0] = nextIcon;
+
+                selection.setText(icon.getIconCode().getDescription());
+                wrapper.getStyleClass().add("active-icon");
+                previousSelection = wrapper;
             });
-            pane.add(icon, column++, row);
-            GridPane.setMargin(icon, new Insets(10, 10, 10, 10));
-            if (++index % 10 == 0) {
+
+            gridPane.add(wrapper, column++, row);
+
+            GridPane.setHalignment(wrapper, HPos.CENTER);
+            GridPane.setValignment(wrapper, VPos.CENTER);
+            GridPane.setHgrow(wrapper, Priority.ALWAYS);
+            GridPane.setFillWidth(wrapper, false);
+
+            if (++index % COLUMNS == 0) {
                 column = 0;
                 row++;
             }
         }
-
-        return borderPane;
     }
 
     private Set<IkonData> resolveIkonData() {

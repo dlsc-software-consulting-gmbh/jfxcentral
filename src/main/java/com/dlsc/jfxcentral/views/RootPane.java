@@ -50,6 +50,7 @@ public class RootPane extends StackPane {
 
         getDeveloperTools().add(new DeveloperTool("CSS Docs", DeveloperTool.Tool.CSS_DOCS));
         getDeveloperTools().add(new DeveloperTool("Ikonli Browser", DeveloperTool.Tool.IKONLI));
+        getDeveloperTools().add(new DeveloperTool("ShowcaseFX", DeveloperTool.Tool.CSS_SHOWCASE));
     }
 
     public void init(boolean mobile) {

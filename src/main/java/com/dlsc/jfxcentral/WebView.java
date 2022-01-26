@@ -69,6 +69,8 @@ public class WebView extends com.jpro.web.View {
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
 
+        System.out.println("view: " + view + ", id = " + id);
+
         rootPane.setView(view);
 
         IPage currentPage = rootPane.getCurrentPage();
@@ -80,11 +82,15 @@ public class WebView extends com.jpro.web.View {
                 Optional<DeveloperTool> optional = rootPane.getDeveloperTools().filtered(o -> o.getId().equals(id)).stream().findFirst();
                 if (optional.isPresent()) {
                     item = optional.get();
+                } else {
+                    System.out.println("no item present");
                 }
             } else {
                 item = DataRepository.getInstance().getByID(PageUtil.getClassOfView(view), id);
             }
         }
+
+        System.out.println("item: " + item);
 
         if (currentPage != null) {
             if (isMobile() || item != null) {

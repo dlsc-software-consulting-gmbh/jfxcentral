@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 
 public class Page<T extends ModelObject> extends BorderPane implements IPage<T> {
 
-    private final DetailScrollPane detailPane;
     private final TopMenu topMenu;
     private final RootPane rootPane;
     private final View view;
@@ -31,12 +30,17 @@ public class Page<T extends ModelObject> extends BorderPane implements IPage<T> 
 
         getStyleClass().add(view.name().toLowerCase());
 
-        detailPane = new DetailScrollPane(rootPane);
-        detailPane.setContent(detailView = createDetailView());
+        detailView = createDetailView();
+        if (detailView.isUsingScrollPane()) {
+            DetailScrollPane detailPane = new DetailScrollPane(rootPane);
+            detailPane.setContent(detailView);
+            setCenter(detailPane);
+            selectedItemProperty().addListener(it -> detailPane.setVvalue(0));
+        } else {
+            setCenter(detailView);
+        }
 
         topMenu = new TopMenu(this);
-
-        setCenter(detailPane);
 
         HBox leftSide = new HBox(topMenu);
         masterView = createMasterView();
@@ -46,8 +50,6 @@ public class Page<T extends ModelObject> extends BorderPane implements IPage<T> 
         }
 
         setLeft(leftSide);
-
-        selectedItemProperty().addListener(it -> detailPane.setVvalue(0));
     }
 
     public void showItem(T item) {

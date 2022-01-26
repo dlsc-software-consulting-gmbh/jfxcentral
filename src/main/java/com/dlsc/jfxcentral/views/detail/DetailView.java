@@ -8,6 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.SubScene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -35,7 +36,7 @@ public class DetailView<T extends ModelObject> extends BorderPane {
         contentProperty().addListener(it -> {
             Node content = getContent();
             if (content != null) {
-                if (!rootPane.isMobile()) {
+                if (!rootPane.isMobile() && !(content instanceof SubScene)) {
                     BorderPane.setMargin(content, new Insets(20));
                 }
                 if (content instanceof VBox) {
@@ -49,6 +50,10 @@ public class DetailView<T extends ModelObject> extends BorderPane {
 
     protected boolean isUsingMasterView() {
         return false;
+    }
+
+    public boolean isUsingScrollPane() {
+        return true;
     }
 
     public void showItem(T item) {

@@ -1154,26 +1154,27 @@
     -fx-text-fill: grey;
 }
 
-.section-pane .list-cell {
+.section-pane .list-view-replacement .list-cell,
+.section-pane .list-view .list-cell {
     -fx-background-color: white;
 }
 
-.section-pane .list-cell:filled {
+.section-pane .list-view .list-cell:filled {
     -fx-border-width: 0 0 1 0;
     -fx-border-style: dashed;
     -fx-border-insets: 0px 10px 10px 0px;
     -fx-border-color: rgba(0, 0, 0, .2);
 }
 
-.section-pane .list-cell:selected {
+.section-pane .list-view .list-cell:selected {
     -fx-background-color: rgba(230, 230, 230);
 }
 
-.section-pane .list-cell:selected .label {
+.section-pane .list-view .list-cell:selected .label {
     -fx-text-fill: black;
 }
 
-.section-pane .list-cell.last {
+.section-pane .list-view .list-cell.last {
     -fx-border-width: 0px;
 }
 
@@ -1181,10 +1182,10 @@
     -fx-translate-x: 15px;
 }
 
-.section-pane .list-cell:selected .button {
+.section-pane .list-view .list-cell:selected .button {
 }
 
-.section-pane .list-cell:selected .button .ikonli-font-icon {
+.section-pane .list-view .list-cell:selected .button .ikonli-font-icon {
 }
 
 .section-pane .search-field {
@@ -2277,4 +2278,76 @@
 .filter-groups,
 .filter-groups .menu-button {
     -fx-min-width: 0;
+}
+
+/* ----------------------------------------------------------------------------
+ * IkonliBrowser
+ */
+.ikonli-browser .header {
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+}
+
+.ikonli-browser .viewport {
+    -fx-background-color: white;
+}
+
+.ikonli-browser .icon-grid {
+    -fx-padding: 10px;
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+    -fx-background-color: white;
+}
+
+.ikonli-browser .icon-grid .ikonli-font-icon {
+    -fx-icon-size: 32px;
+    -fx-icon-color: rgba(0, 0, 0, .75);
+}
+
+.ikonli-browser .icon-grid .wrapper {
+    -fx-alignment: top-center;
+    -fx-padding: 5px 10px;
+    -fx-spacing: 5px;
+}
+
+.ikonli-browser .icon-grid .wrapper .label {
+    -fx-font-size: .8em;
+    -fx-text-fill: grey;
+}
+
+.ikonli-browser .icon-grid .wrapper.active-icon {
+    -fx-background-radius: 4px;
+    -fx-background-color: -fx-accent;
+}
+
+.ikonli-browser .icon-grid .wrapper.active-icon .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.ikonli-browser .icon-grid .wrapper.active-icon .label {
+    -fx-text-fill: white;
+}
+
+.ikonli-browser .search-field {
+    -fx-padding: 0px;
+}
+
+.ikonli-browser .list-view .list-cell {
+    -fx-padding: 5px;
+    -fx-background-insets: 0px !important;
+    -fx-border-insets: 0px !important;
+    -fx-border-width: 0px !important;
+    -fx-alignment: center-left;
+}
+
+.ikonli-browser .list-view .list-cell:selected {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-background-insets: 0px 10px 0px 0px !important;
+    -fx-background-radius: 4px;
+}
+
+.developer-tools-detail-view .disclaimer {
+    -fx-font-family: "Inter Italic";
+    -fx-text-fill: gray;
 }

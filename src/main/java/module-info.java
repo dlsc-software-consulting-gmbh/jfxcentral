@@ -31,6 +31,7 @@ open module jfxcentral {
     requires org.apache.commons.lang3;
     requires jpro.web.core;
     requires de.sandec.jmemorybuddy;
+    requires com.dlsc.showcasefx;
 
     exports com.dlsc.jfxcentral;
 
