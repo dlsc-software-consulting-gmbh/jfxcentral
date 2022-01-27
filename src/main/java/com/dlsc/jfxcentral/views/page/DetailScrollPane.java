@@ -15,7 +15,7 @@ public class DetailScrollPane extends StackPane {
 
         scrollPane = new PrettyScrollPane();
         scrollPane.setShowScrollToTopButton(true);
-        scrollPane.setShowShadow(rootPane.isMobile());
+        scrollPane.setShowShadow(true); //rootPane.isMobile());
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
         scrollPane.setMobile(rootPane.isMobile());

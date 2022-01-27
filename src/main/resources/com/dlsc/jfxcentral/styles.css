@@ -529,9 +529,6 @@
 }
 
 .real-world-detail-view .section-pane.title-box {
-    -fx-background-insets: 0px;
-    -fx-border-width: 0px;
-    -fx-padding: 0px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -1154,38 +1151,38 @@
     -fx-text-fill: grey;
 }
 
-.section-pane .list-view-replacement .list-cell,
-.section-pane .list-view .list-cell {
+.section-pane .list-cell {
     -fx-background-color: white;
 }
 
-.section-pane .list-view .list-cell:filled {
-    -fx-border-width: 0 0 2 0 !important;
-    -fx-border-style: solid !important;
-    -fx-border-insets: 0px 10px 10px 0px !important;
-    -fx-border-color: red !important;
+.section-pane .list-cell:filled {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: segments(4, 2);
+    -fx-border-insets: 0px 0px 20px 0px !important;
+    -fx-border-color: lightgrey !important;
 }
 
-.section-pane .list-view .list-cell:selected {
+.section-pane .list-cell:selected {
     -fx-background-color: rgba(230, 230, 230);
 }
 
-.section-pane .list-view .list-cell:selected .label {
+.section-pane .list-cell:selected .label {
     -fx-text-fill: black;
 }
 
-.section-pane .list-view .list-cell.last {
+.section-pane .list-cell.last {
     -fx-border-width: 0px;
+    -fx-padding: 0px;
 }
 
 .section-pane .pretty-list-view .scroll-bar:vertical {
     -fx-translate-x: 15px;
 }
 
-.section-pane .list-view .list-cell:selected .button {
+.section-pane .list-cell:selected .button {
 }
 
-.section-pane .list-view .list-cell:selected .button .ikonli-font-icon {
+.section-pane .list-cell:selected .button .ikonli-font-icon {
 }
 
 .section-pane .search-field {
