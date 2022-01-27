@@ -1,0 +1,12 @@
+.drop-info-label {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-padding: 20px;
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Inter Bold";
+    -fx-max-width: Infinity;
+}
+
+.file-upload-stack-pane:drag-over {
+    -fx-opacity: .5;
+}

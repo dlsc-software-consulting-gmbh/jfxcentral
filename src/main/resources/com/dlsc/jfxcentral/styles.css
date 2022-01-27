@@ -100,7 +100,7 @@
     src: url("fonts/Pattaya-Regular.ttf");
 }
 
-.root {
+.root-pane {
     -fx-font-size: 14px;
     -fx-font-family: "Inter";
     -fx-accent: #4483A0;
@@ -127,11 +127,11 @@
     -white-button-background-color-pressed: -fx-accent;
 }
 
-.root.large {
+.root-pane.large {
     -fx-font-size: 16px;
 }
 
-.root.small {
+.root-pane.small {
     -fx-font-size: 12px;
 }
 
@@ -2293,9 +2293,7 @@
 }
 
 .ikonli-browser .icon-grid {
-    -fx-padding: 10px;
-    -fx-hgap: 10px;
-    -fx-vgap: 10px;
+    -fx-padding: 0px;
     -fx-background-color: white;
 }
 
@@ -2308,6 +2306,10 @@
     -fx-alignment: top-center;
     -fx-padding: 5px 10px;
     -fx-spacing: 5px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 100px;
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
 }
 
 .ikonli-browser .icon-grid .wrapper .label {

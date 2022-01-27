@@ -66,10 +66,12 @@ public class WebView extends com.jpro.web.View {
     // IF this returns true, we don't query for a new page
     @Override
     public boolean handleURL(String s) {
+        if (s.equalsIgnoreCase("/showcase")) {
+            return false;
+        }
+
         View view = PageUtil.getViewFromURL(s);
         String id = PageUtil.getIdFromURL(s);
-
-        System.out.println("view: " + view + ", id = " + id);
 
         rootPane.setView(view);
 

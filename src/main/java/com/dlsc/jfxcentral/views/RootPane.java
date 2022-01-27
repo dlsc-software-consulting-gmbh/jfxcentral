@@ -48,6 +48,8 @@ public class RootPane extends StackPane {
     public RootPane() {
         getStyleClass().add("root-pane");
 
+        getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+
         getDeveloperTools().add(new DeveloperTool("CSS Docs", DeveloperTool.Tool.CSS_DOCS));
         getDeveloperTools().add(new DeveloperTool("Ikonli Browser", DeveloperTool.Tool.IKONLI));
         getDeveloperTools().add(new DeveloperTool("ShowcaseFX", DeveloperTool.Tool.CSS_SHOWCASE));

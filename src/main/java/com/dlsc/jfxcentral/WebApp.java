@@ -26,6 +26,13 @@ public class WebApp extends com.jpro.web.WebApp {
         });
 
         addRouteJava((s) -> {
+            if (s.startsWith("/showcase")) {
+                return new ShowcaseView();
+            }
+            return null;
+        });
+
+        addRouteJava((s) -> {
             if (s.startsWith("/refresh")) {
                 return new RefreshView();
             }
