@@ -66,7 +66,7 @@ public class TopMenu extends ToolBar {
         ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REAL_WORLD, new FontIcon(StandardIcons.REAL_WORLD));
         ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(StandardIcons.DOWNLOAD));
         ToggleButton tipsButton = createButton("Tips & Tricks", View.TIPS, new FontIcon(StandardIcons.TIP));
-        ToggleButton developmentButton = createButton("Development", View.DEVELOPMENT, new FontIcon(StandardIcons.DEVELOPMENT));
+        ToggleButton developmentButton = createButton("Dev", View.DEVELOPMENT, new FontIcon(StandardIcons.DEVELOPMENT));
 
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(

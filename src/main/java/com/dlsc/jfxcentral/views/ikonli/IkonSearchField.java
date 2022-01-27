@@ -3,23 +3,24 @@ package com.dlsc.jfxcentral.views.ikonli;
 import com.dlsc.gemsfx.SearchField;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.Ikon;
 
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.stream.Collectors;
 
 public class IkonSearchField extends SearchField<Ikon> {
 
     public IkonSearchField() {
-        iconSet.addListener(it -> updateField());
+        icons.addListener(it -> updateField());
         setHidePopupWithSingleChoice(true);
     }
 
     private void updateField() {
-        EnumSet<? extends Ikon> iconSet = getIconSet();
-        setSuggestionProvider(request -> iconSet.stream().filter(ikon -> ikon.getDescription().toLowerCase().contains(request.getUserText().toLowerCase())).collect(Collectors.toList()));
+        setSuggestionProvider(request -> getIcons().stream().filter(ikon -> ikon.getDescription().toLowerCase().contains(request.getUserText().toLowerCase())).collect(Collectors.toList()));
+
         setMatcher((ikon, text) -> ikon.getDescription().toLowerCase().startsWith(text.toLowerCase()));
         setComparator(Comparator.comparing(Ikon::getDescription));
         setConverter(new StringConverter<>() {
@@ -38,17 +39,17 @@ public class IkonSearchField extends SearchField<Ikon> {
         });
     }
 
-    private final ObjectProperty<EnumSet<? extends Ikon>> iconSet = new SimpleObjectProperty<>(this, "iconSet");
+    private final ObjectProperty<ObservableList<? extends Ikon>> icons = new SimpleObjectProperty<>(this, "iconSet", FXCollections.observableArrayList());
 
-    public EnumSet<? extends Ikon> getIconSet() {
-        return iconSet.get();
+    public ObservableList<? extends Ikon> getIcons() {
+        return icons.get();
     }
 
-    public ObjectProperty<EnumSet<? extends Ikon>> iconSetProperty() {
-        return iconSet;
+    public ObjectProperty<ObservableList<? extends Ikon>> iconsProperty() {
+        return icons;
     }
 
-    public void setIconSet(EnumSet<? extends Ikon> iconSet) {
-        this.iconSet.set(iconSet);
+    public void setIcons(ObservableList<? extends Ikon> icons) {
+        this.icons.set(icons);
     }
 }

@@ -8,12 +8,14 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.ikonli.IkonliBrowser;
+import com.dlsc.showcase.CssShowcaseView;
 import com.jpro.webapi.HTMLView;
 import com.jpro.webapi.WebAPI;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -22,6 +24,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperTool> {
 
@@ -105,8 +109,22 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
         imageView.setPreserveRatio(true);
         imageView.setCursor(Cursor.HAND);
 
-        Util.setLink(imageView, "/showcase", "Showcase App");
-        Util.setLink(button, "/showcase", "Showcase App");
+        if (WebAPI.isBrowser()) {
+            Util.setLink(imageView, "/showcase", "Showcase App");
+            Util.setLink(button, "/showcase", "Showcase App");
+        } else {
+            button.setOnAction(evt -> {
+                Stage stage = new Stage(StageStyle.DECORATED);
+                stage.setTitle("ShowcaseFX");
+                CssShowcaseView view = new CssShowcaseView();
+                Scene scene = new Scene(view);
+                stage.setScene(scene);
+                stage.setWidth(1000);
+                stage.setHeight(800);
+                stage.centerOnScreen();
+                stage.show();
+            });
+        }
 
         MarkdownView markdownView = new MarkdownView();
         markdownView.setMdString("ShowcaseFX is a tool that allows you to verify your CSS stylesheets easily. The tool lists all default controls and you can quickly see how your stylesheet's CSS rules are being applied. You can either drag and drop CSS files onto the view or use the file menu to load one or more. This application's project can be [found on GitHub](https://github.com/dlsc-software-consulting-gmbh/ShowcaseFX).");

@@ -7,10 +7,12 @@ import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.ProgressMonitor;
@@ -47,11 +49,15 @@ public class JFXCentralApp extends Application {
             }
         }
 
-        Scene scene = new Scene(root, 1250, 1200);
+        CustomStage customStage = new CustomStage(stage, root);
+        customStage.setCloseHandler(() -> Platform.exit());
+
+        Scene scene = new Scene(customStage, 1250, 1200);
         scene.setFill(Color.rgb(68, 131, 160));
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setOnCloseRequest(evt -> System.exit(0));
         stage.centerOnScreen();
         stage.setTitle("JFX-Central");
@@ -135,8 +141,10 @@ public class JFXCentralApp extends Application {
 
     private void showHome(WebApp webApp, Stage stage) {
         webApp.start(SessionManager.getDefault(webApp, stage));
-        stage.getScene().setRoot(webApp);
-        stage.getScene().setFill(Color.rgb(224, 229, 234)); // reduce flickering
+
+        CustomStage customStage = new CustomStage(stage, webApp);
+        customStage.setCloseHandler(() -> Platform.exit());
+        stage.getScene().setRoot(customStage);
     }
 
     public static void main(String args[]) {

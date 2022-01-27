@@ -1160,10 +1160,10 @@
 }
 
 .section-pane .list-view .list-cell:filled {
-    -fx-border-width: 0 0 1 0;
-    -fx-border-style: dashed;
-    -fx-border-insets: 0px 10px 10px 0px;
-    -fx-border-color: rgba(0, 0, 0, .2);
+    -fx-border-width: 0 0 2 0 !important;
+    -fx-border-style: solid !important;
+    -fx-border-insets: 0px 10px 10px 0px !important;
+    -fx-border-color: red !important;
 }
 
 .section-pane .list-view .list-cell:selected {
@@ -2345,8 +2345,16 @@
 .ikonli-browser .list-view .list-cell:selected {
     -fx-background-color: -fx-accent;
     -fx-text-fill: white;
-    -fx-background-insets: 0px 10px 0px 0px !important;
+    -fx-background-insets: 2px 10px 2px 0px !important;
     -fx-background-radius: 4px;
+}
+
+.ikonli-browser .status-label {
+    -fx-padding: 15px 15px;
+    -fx-alignment: center-right;
+    -fx-max-width: Infinity;
+    -fx-text-fill: grey;
+    -fx-background-color: white;
 }
 
 .developer-tools-detail-view .disclaimer {

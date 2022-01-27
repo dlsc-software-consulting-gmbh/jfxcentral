@@ -25,7 +25,7 @@ public class StandardIcons {
     public static Ikon DOWNLOAD = Material.FILE_DOWNLOAD;
     public static Ikon TIP = Material.LIGHTBULB_OUTLINE;
     public static Ikon LINKS_OF_THE_WEEK = Material.LINK;
-    public static Ikon DEVELOPMENT = Material.EDIT;
+    public static Ikon DEVELOPMENT = Material.COMPUTER;
 
     public static Ikon getIcon(Object obj) {
         Class cl = obj.getClass();

@@ -1,0 +1,85 @@
+.custom-stage {
+    -fx-background-color: -toolbar-unfocused-background-color;
+    -fx-padding: 2 4 4 4;
+}
+
+.custom-stage:stage-focused {
+    -fx-background-color: gray, -toolbar-background-color;
+    -fx-background-insets: 0, 1;
+}
+
+.custom-stage:web {
+    -fx-padding: 0 0 0 0;
+    -fx-background-insets: 0;
+}
+
+.custom-stage:web:stage-focused {
+    -fx-padding: 0 0 0 0;
+    -fx-background-insets: 0;
+}
+
+.custom-stage .title-bar {
+    -fx-padding: 5 10 5 10;
+    -fx-alignment: center-left;
+    -fx-background-color: -toolbar-unfocused-background-color;
+    -fx-spacing: 10;
+}
+
+.custom-stage:stage-focused .title-bar {
+    -fx-background-color: -toolbar-background-color;
+}
+
+.custom-stage .title-bar > .title > .badges {
+    -fx-spacing: 10px;
+}
+
+.custom-stage .title-bar > .title > .badges > .memory-label,
+.custom-stage .title-bar > .title > .badges > .cpu-label {
+    -fx-alignment: center;
+    -fx-min-width: 120px;
+    -fx-background-radius: 2px;
+    -fx-background-color: -white-four;
+    -fx-padding: 2px 5px;
+    -fx-font-family: "Rubik Medium";
+    -fx-font-size: .7em;
+    -fx-text-fill: -charcoal-grey-two;
+}
+
+.custom-stage .title-bar > .title {
+    -fx-text-fill: white;
+    -fx-padding: 5;
+}
+
+.custom-stage .title-bar > .title > .badges > .memory-label.medium,
+.custom-stage .title-bar > .title > .badges > .cpu-label.medium {
+    -fx-background-color: -blue;
+    -fx-text-fill: -white-four;
+}
+
+.custom-stage .title-bar > .title > .badges > .memory-label.high,
+.custom-stage .title-bar > .title > .badges > .cpu-label.high {
+    -fx-background-color: -tomato;
+    -fx-text-fill: -white-four;
+}
+
+.custom-stage .title-bar > .button,
+.custom-stage .title-bar > .toggle-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
+.custom-stage .title-bar > .button .ikonli-font-icon,
+.custom-stage .title-bar > .toggle-button .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.custom-stage .title-bar > .button:hover .ikonli-font-icon,
+.custom-stage .title-bar > .toggle-button:hover .ikonli-font-icon {
+    -fx-icon-color: orange;
+}
+
+.custom-stage .title-bar > .button:pressed .ikonli-font-icon,
+.custom-stage .title-bar > .toggle-button:pressed .ikonli-font-icon {
+    -fx-icon-color: -tomato;
+}
+

@@ -40,6 +40,8 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
     public DukeAnimationView(Runnable callback) {
         getStyleClass().add("duke-animation-view");
 
+        getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+
         label = new Label();
         label.getStyleClass().add("start-message");
         label.setVisible(callback != null);

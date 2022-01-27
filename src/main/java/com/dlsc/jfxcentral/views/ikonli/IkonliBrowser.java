@@ -21,10 +21,7 @@ import org.kordamp.ikonli.IkonProvider;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-import java.util.EnumSet;
-import java.util.ServiceLoader;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class IkonliBrowser extends BorderPane {
@@ -32,9 +29,16 @@ public class IkonliBrowser extends BorderPane {
     private final TextField selection = new TextField();
     private final GridView<Ikon> gridView;
     private final IkonSearchField searchField;
+    private final Label statusLabel;
 
     public IkonliBrowser() {
         getStyleClass().add("ikonli-browser");
+
+        ListView<IkonData> fontsListView = new ListView<>();
+        fontsListView.setMinWidth(Region.USE_PREF_SIZE);
+        fontsListView.getItems().setAll(resolveIkonData());
+        fontsListView.getSelectionModel().getSelectedItems().addListener((Observable it) -> fillGridView(fontsListView.getSelectionModel().getSelectedItems()));
+        fontsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         gridView = new GridView<>();
         gridView.setHorizontalCellSpacing(20);
@@ -76,15 +80,15 @@ public class IkonliBrowser extends BorderPane {
 
                 if (item != null && !empty) {
                     icon.setIconCode(item);
-                    nameLabel.setText(item.getDescription());
+                    if (fontsListView.getSelectionModel().getSelectedItems().size() > 1) {
+                        nameLabel.setText(item.getDescription() + "\n(" + DATA_MAP.get(item).name + ")");
+                    } else {
+                        nameLabel.setText(item.getDescription());
+                    }
                 }
             }
         });
 
-        ListView<IkonData> fontsListView = new ListView<>();
-        fontsListView.setMinWidth(Region.USE_PREF_SIZE);
-        fontsListView.getItems().setAll(resolveIkonData());
-        fontsListView.getSelectionModel().selectedItemProperty().addListener(it -> fillGridView(fontsListView.getSelectionModel().getSelectedItem()));
 
         Label fontLabel = new Label("Icon Font:");
         fontLabel.getStyleClass().add("box-label");
@@ -103,7 +107,7 @@ public class IkonliBrowser extends BorderPane {
         });
 
         searchField = new IkonSearchField();
-        searchField.getSuggestions().addListener((Observable it) -> fillGridView(fontsListView.getSelectionModel().getSelectedItem()));
+        searchField.getSuggestions().addListener((Observable it) -> fillGridView(fontsListView.getSelectionModel().getSelectedItems()));
         searchField.setPromptText("Search by name ...");
 
         fontsListView.getSelectionModel().selectedItemProperty().addListener(it -> {
@@ -115,9 +119,13 @@ public class IkonliBrowser extends BorderPane {
         header.setAlignment(Pos.CENTER_RIGHT);
         header.getStyleClass().add("header");
 
+        statusLabel = new Label();
+        statusLabel.getStyleClass().add("status-label");
+
         setTop(header);
         setLeft(fontsListView);
         setCenter(gridView);
+        setBottom(statusLabel);
 
         fontsListView.getSelectionModel().select(0);
 
@@ -127,25 +135,30 @@ public class IkonliBrowser extends BorderPane {
 
     private VBox previousSelection;
 
-    private void fillGridView(IkonData value) {
-        IkonProvider ikonProvider = value.getIkonProvider();
-        EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
-        searchField.setIconSet(enumSet);
+    private void fillGridView(ObservableList<IkonData> selection) {
         Platform.runLater(() -> {
-            ObservableList<? extends Ikon> icons = FXCollections.observableArrayList(enumSet);
+            ObservableList<? extends Ikon> icons = FXCollections.observableArrayList();
+            selection.forEach(data -> {
+                IkonProvider ikonProvider = data.getIkonProvider();
+                EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
+                icons.addAll(enumSet);
+            });
+
+            searchField.setIcons(icons);
+            statusLabel.setText("Number of icons: " + icons.size());
+
             FilteredList<? extends Ikon> filteredList = new FilteredList<>(icons);
-            filteredList.predicateProperty().bind(Bindings.createObjectBinding(() -> new Predicate<Ikon>() {
-                @Override
-                public boolean test(Ikon ikon) {
-                    if (StringUtils.isBlank(searchField.getText())) {
-                        return true;
-                    }
-                    return searchField.getSuggestions().contains(ikon);
+            filteredList.predicateProperty().bind(Bindings.createObjectBinding(() -> (Predicate<Ikon>) ikon -> {
+                if (StringUtils.isBlank(searchField.getText())) {
+                    return true;
                 }
+                return searchField.getSuggestions().contains(ikon);
             }, searchField.getSuggestions(), searchField.textProperty()));
             gridView.getItems().setAll(filteredList);
         });
     }
+
+    private static Map<Ikon, IkonData> DATA_MAP = new HashMap<>();
 
     private Set<IkonData> resolveIkonData() {
         Set<IkonData> ikons = new TreeSet<>();
@@ -158,6 +171,14 @@ public class IkonliBrowser extends BorderPane {
                 ikons.add(IkonData.of(provider));
             }
         }
+
+        ikons.forEach(data -> {
+            IkonProvider ikonProvider = data.getIkonProvider();
+            EnumSet enumSet = EnumSet.allOf(ikonProvider.getIkon());
+            enumSet.forEach(icon -> DATA_MAP.put((Ikon) icon, data));
+        });
+
+        System.out.println("size: " + DATA_MAP.size());
 
         return ikons;
     }

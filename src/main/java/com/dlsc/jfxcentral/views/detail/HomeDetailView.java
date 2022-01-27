@@ -20,7 +20,6 @@ import com.jpro.webapi.WebAPI;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.StringProperty;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -114,23 +113,6 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
         if (!getRootPane().isMobile()) {
             filterView.getFilterGroups().setAll(typeGroup, personGroup, libraryGroup, timeGroup);
-            filterView.setTextFilterProvider(text -> news -> {
-
-                if (StringUtils.containsAnyIgnoreCase(news.getName(), text)) {
-                    return true;
-                }
-
-                if (StringUtils.containsAnyIgnoreCase(news.getSubtitle(), text)) {
-                    return true;
-                }
-
-                StringProperty stringProperty = DataRepository.getInstance().newsTextProperty(news);
-                if (stringProperty != null && StringUtils.containsAnyIgnoreCase(stringProperty.get(), text)) {
-                    return true;
-                }
-
-                return false;
-            });
         }
 
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
