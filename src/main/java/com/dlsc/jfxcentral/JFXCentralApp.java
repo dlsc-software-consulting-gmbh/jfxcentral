@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.IntroView;
 import com.dlsc.jfxcentral.views.ikonli.IkonliBrowser;
+import com.dlsc.showcase.CssShowcaseView;
 import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import com.gluonhq.attach.display.DisplayService;
 import com.jpro.web.Util;
@@ -13,7 +14,6 @@ import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -63,7 +63,7 @@ public class JFXCentralApp extends Application {
         }
 
         CustomStage customStage = new CustomStage(stage, root);
-        customStage.setCloseHandler(() -> Platform.exit());
+        customStage.setCloseHandler(() -> System.exit(0));
 
         Scene scene = new Scene(customStage, 1250, 1200);
         scene.setFill(Color.rgb(68, 131, 160));
@@ -102,6 +102,7 @@ public class JFXCentralApp extends Application {
         Menu tutorials = new Menu("Tutorials");
         Menu downloads = new Menu("Downloads");
         Menu companies = new Menu("Companies");
+        Menu books = new Menu("Books");
 
         DataRepository.getInstance().getTools().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tools, mo));
         DataRepository.getInstance().getPeople().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(people, mo));
@@ -117,6 +118,11 @@ public class JFXCentralApp extends Application {
         DataRepository.getInstance().getDownloads().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(downloads, mo));
         DataRepository.getInstance().getBlogs().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(blogs, mo));
         DataRepository.getInstance().getLibraries().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(libraries, mo));
+        DataRepository.getInstance().getBooks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(books, mo));
+
+        MenuItem openjfx = new MenuItem("Visit openjfx.io");
+        openjfx.setOnAction(evt -> showURL("https://openjfx.io"));
+        icon.addMenuItem(openjfx);
 
         MenuItem iconBrowser = new MenuItem("Ikonli Browser");
         iconBrowser.setOnAction(evt -> showIkonliBrowser());
@@ -126,89 +132,87 @@ public class JFXCentralApp extends Application {
 //        scenicView.setOnAction(evt -> showScenicView());
 //        icon.addMenuItem(scenicView);
 
+        MenuItem showcase = new MenuItem("Showcase");
+        showcase.setOnAction(evt -> showShowcase());
+        icon.addMenuItem(showcase);
+
+        MenuItem cssDocs = new MenuItem("CSS Documentation");
+        cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html"));
+        icon.addMenuItem(cssDocs);
+
         // ------
         icon.addSeparator();
 
+        MenuItem addInfoToJfxCentral = new MenuItem("Add Info to JFX-Central");
+        addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data"));
+        icon.addMenuItem(addInfoToJfxCentral);
+
+        MenuItem reportIssue = new MenuItem("Report an Issue");
+        reportIssue.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data/issues"));
+        icon.addMenuItem(reportIssue);
+
+        // ------
+        icon.addSeparator();
+
+        icon.addMenuItem(libraries);
         icon.addMenuItem(tools);
+        icon.addMenuItem(books);
         icon.addMenuItem(people);
+        icon.addMenuItem(blogs);
         icon.addMenuItem(videos);
         icon.addMenuItem(tutorials);
         icon.addMenuItem(companies);
         icon.addMenuItem(downloads);
-        icon.addMenuItem(blogs);
-        icon.addMenuItem(libraries);
 
         // ------
         icon.addSeparator();
 
-        MenuItem exit = new MenuItem("Exit");
-        exit.setOnAction(evt -> Platform.exit());
+        icon.addExitItem(true);
 
-        icon.addMenuItem(exit);
+        // ------
+        icon.addSeparator();
 
         icon.show();
     }
 
-    private void showIkonliBrowser() {
-        Platform.runLater(() -> {
-            SectionPane sectionPane = new SectionPane();
-            sectionPane.setTitle("Ikonli Browser");
-            sectionPane.setSubtitle("Explore all available icon fonts in Ikonli");
-            sectionPane.getNodes().add(new IkonliBrowser());
-            sectionPane.setPrefHeight(0);
-            sectionPane.setMinHeight(0);
-
-            Scene scene = new Scene(sectionPane);
-            scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
-
-            Stage stage = new Stage(StageStyle.UTILITY);
-            stage.setTitle("Ikonli Browser");
-            stage.setScene(scene);
-            stage.setWidth(800);
-            stage.setHeight(1000);
-            stage.show();
-        });
+    private void showURL(String url) {
+        try {
+            Desktop.getDesktop().browse(URI.create(url));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-//    private void showScenicView2() {
-//        String[] cmdarray = new String[]{"java", "-classpath", System.getProperty("java.class.path"), "org.scenicview.ScenicView", ""};
-//        System.out.println(Arrays.toString(cmdarray));
-//
-//        try {
-//            ProcessBuilder processBuilder = new ProcessBuilder();
-//            processBuilder.inheritIO();
-//            ProcessBuilder command = processBuilder.command(cmdarray);
-//            command.start();
-////            Process p = Runtime.getRuntime().exec(cmdarray);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void showScenicView() {
-//        Thread scenicViewBootThread = new Thread(() -> {
-//            while (true) {
-//                try {
-//                    Platform.runLater(() -> {
-//                        try {
-//                            (new ScenicView()).start(new Stage());
-//                        } catch (Exception var1) {
-//                            var1.printStackTrace();
-//                        }
-//
-//                    });
-//                    return;
-//                } catch (IllegalStateException var3) {
-//                    try {
-//                        Thread.sleep(500L);
-//                    } catch (InterruptedException var2) {
-//                    }
-//                }
-//            }
-//        }, "scenic-view-boot");
-//        scenicViewBootThread.setDaemon(true);
-//        scenicViewBootThread.start();
-//    }
+    private void showShowcase() {
+        CssShowcaseView view = new CssShowcaseView();
+        Scene scene = new Scene(view);
+
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("ShowcaseFX");
+        stage.setScene(scene);
+        stage.setWidth(1000);
+        stage.setHeight(800);
+        stage.show();
+    }
+
+    private void showIkonliBrowser() {
+        SectionPane sectionPane = new SectionPane();
+        sectionPane.setTitle("Ikonli Browser");
+        sectionPane.setSubtitle("Explore all available icon fonts in Ikonli");
+        sectionPane.getNodes().add(new IkonliBrowser());
+        sectionPane.setPrefHeight(0);
+        sectionPane.setMinHeight(0);
+
+        Scene scene = new Scene(sectionPane);
+        scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Ikonli Browser");
+        stage.setScene(scene);
+        stage.setWidth(900);
+        stage.setHeight(1000);
+        stage.show();
+    }
 
     private void createMenuItem(Menu people, ModelObject mo) {
         createMenuItem(people, mo, m -> showModelObject(m));
@@ -222,6 +226,9 @@ public class JFXCentralApp extends Application {
 
     private void showModelObject(ModelObject mo) {
         Util.getSessionManager(app).gotoURL(PageUtil.getLink(mo));
+        Stage stage = (Stage) app.getScene().getWindow();
+        stage.show();
+        stage.toFront();
     }
 
     public static boolean isRepositoryInitialized() {
@@ -290,8 +297,13 @@ public class JFXCentralApp extends Application {
         webApp.start(SessionManager.getDefault(webApp, stage));
 
         CustomStage customStage = new CustomStage(stage, webApp);
-        customStage.setCloseHandler(() -> Platform.exit());
-        stage.getScene().setRoot(customStage);
+        customStage.setCloseHandler(() -> stage.hide());
+        Scene scene = stage.getScene();
+        scene.setRoot(customStage);
+
+        if (!WebAPI.isBrowser()) {
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("desktop.css").toExternalForm());
+        }
     }
 
     public static void main(String args[]) {

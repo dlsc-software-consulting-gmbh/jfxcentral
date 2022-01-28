@@ -54,6 +54,8 @@ public class CustomStage extends BorderPane {
         getStylesheets().add(CustomStage.class.getResource("stage.css").toExternalForm());
         getStyleClass().add("custom-stage");
 
+        setCloseHandler(() -> System.exit(0));
+
         stage.focusedProperty().addListener(it -> updateStyleBasedOnStageFocus(stage));
 
         TitleBar titleBar = new TitleBar();

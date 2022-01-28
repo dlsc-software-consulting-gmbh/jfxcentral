@@ -2,9 +2,10 @@ package com.dlsc.jfxcentral.views;
 
 import com.dlsc.jfxcentral.data.model.*;
 import com.dlsc.jfxcentral.util.PageUtil;
-import com.dlsc.jfxcentral.views.autocomplete.OmniBoxSearchField;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
+import com.jpro.web.Util;
+import com.jpro.webapi.WebAPI;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -17,11 +18,14 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?>> {
 
+    private final RootPane rootPane;
     private FontIcon fontIcon = new FontIcon();
     private Label titleLabel = new Label();
     private Label subtitleLabel = new Label();
 
-    public ModelObjectSearchResultCell(OmniBoxSearchField searchField, RootPane rootPane) {
+    public ModelObjectSearchResultCell(RootPane rootPane) {
+        this.rootPane = rootPane;
+
         getStyleClass().add("search-result-list-cell");
 
         VBox vBox = new VBox(titleLabel, subtitleLabel);
@@ -55,7 +59,16 @@ public class ModelObjectSearchResultCell extends AdvancedListCell<SearchResult<?
             subtitleLabel.setText(createSubTitle(item));
             fontIcon.setIconCode(createIkonCode(item));
 
-            setLink(PageUtil.getLink((ModelObject) searchResult.getValue()), "Search Result");
+            if (WebAPI.isBrowser()) {
+                setLink(PageUtil.getLink((ModelObject) searchResult.getValue()), "Search Result");
+            } else {
+
+                // work around ... setLink() should work after a fix from Florian
+                setOnMouseClicked(evt -> {
+                    getScene().getWindow().hide();
+                    Util.getSessionManager(rootPane).gotoURL(PageUtil.getLink(item));
+                });
+            }
         }
     }
 

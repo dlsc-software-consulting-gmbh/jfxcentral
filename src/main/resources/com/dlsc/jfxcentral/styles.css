@@ -53,10 +53,12 @@
 }
 
 .root {
+    -blue: #4483A0;
+
     -fx-font-family: "Inter Regular";
     -fx-font-size: 14px;
-    -fx-accent: #4483A0;
-    -fx-focus-color: #4483A0;
+    -fx-accent: -blue;
+    -fx-focus-color: -blue;
     -fx-faint-focus-color: rgba(68, 131, 160, .2);
 
     -light-grey: rgba(239, 242, 245);
@@ -75,6 +77,15 @@
     -white-button-background-color: rgb(230, 230, 230);
     -white-button-background-color-hover: rgb(150, 150, 150);
     -white-button-background-color-pressed: -fx-accent;
+}
+
+.filter-view .search-field .ikonli-font-icon,
+.filter-view .search-text-field .ikonli-font-icon {
+    -fx-icon-color: white !important;
+}
+
+.jpro-web-app .scroll-pane {
+    -fx-padding: 0px;
 }
 
 .root-pane.large {
