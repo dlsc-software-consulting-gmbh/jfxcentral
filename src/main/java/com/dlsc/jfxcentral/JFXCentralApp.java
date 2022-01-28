@@ -31,7 +31,9 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.function.Consumer;
 
@@ -89,6 +91,11 @@ public class JFXCentralApp extends Application {
         if (WebAPI.isBrowser()) {
             showHomeOrLoadingView(app, stage);
         }
+
+        File logFolder = new File(System.getProperty("user.dir"), ".jfxcentral");
+        logFolder.mkdirs();
+        System.setOut(new PrintStream(new File(logFolder, "out.txt"), StandardCharsets.UTF_8));
+        System.setErr(new PrintStream(new File(logFolder, "err.txt"), StandardCharsets.UTF_8));
     }
 
     private void buildTrayIcon(Stage stage) {
@@ -103,6 +110,8 @@ public class JFXCentralApp extends Application {
         Menu downloads = new Menu("Downloads");
         Menu companies = new Menu("Companies");
         Menu books = new Menu("Books");
+        Menu realWorld = new Menu("Real World Apps");
+        Menu tips = new Menu("Tips & Tricks");
 
         DataRepository.getInstance().getTools().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tools, mo));
         DataRepository.getInstance().getPeople().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(people, mo));
@@ -119,6 +128,8 @@ public class JFXCentralApp extends Application {
         DataRepository.getInstance().getBlogs().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(blogs, mo));
         DataRepository.getInstance().getLibraries().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(libraries, mo));
         DataRepository.getInstance().getBooks().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(books, mo));
+        DataRepository.getInstance().getRealWorldApps().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(realWorld, mo));
+        DataRepository.getInstance().getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
 
         MenuItem openjfx = new MenuItem("Visit openjfx.io");
         openjfx.setOnAction(evt -> showURL("https://openjfx.io"));
@@ -163,6 +174,8 @@ public class JFXCentralApp extends Application {
         icon.addMenuItem(tutorials);
         icon.addMenuItem(companies);
         icon.addMenuItem(downloads);
+        icon.addMenuItem(realWorld);
+        icon.addMenuItem(tips);
 
         // ------
         icon.addSeparator();
@@ -206,7 +219,7 @@ public class JFXCentralApp extends Application {
         Scene scene = new Scene(sectionPane);
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
-        Stage stage = new Stage(StageStyle.UTILITY);
+        Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle("Ikonli Browser");
         stage.setScene(scene);
         stage.setWidth(900);

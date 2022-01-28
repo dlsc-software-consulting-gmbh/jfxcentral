@@ -29,6 +29,7 @@
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: white;
     -fx-padding: 5;
+    -fx-font-size: 1.2em;
 }
 
 .custom-stage .title-bar > .button,
@@ -45,7 +46,7 @@
 
 .custom-stage .title-bar > .button:hover .ikonli-font-icon,
 .custom-stage .title-bar > .toggle-button:hover .ikonli-font-icon {
-    -fx-icon-color: -red;
+    -fx-icon-color: rgba(0, 0, 0, .6);
 }
 
 .custom-stage .title-bar > .button:pressed .ikonli-font-icon,

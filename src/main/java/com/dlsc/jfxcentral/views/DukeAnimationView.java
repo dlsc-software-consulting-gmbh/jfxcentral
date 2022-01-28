@@ -151,7 +151,7 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
         ready = true;
     }
 
-    private String endText = "Press to continue";
+    private String endText = "Click to continue";
 
     public String getEndText() {
         return endText;

@@ -23,7 +23,7 @@ public class IntroView extends StackPane {
         });
 
         animationView = new DukeAnimationView(callback);
-        animationView.setEndText("Press to continue!");
+        animationView.setEndText("Click to continue!");
 
         animationView.sceneProperty().addListener(it -> {
             if (animationView.getScene() != null) {
