@@ -31,9 +31,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.function.Consumer;
 
@@ -91,11 +89,6 @@ public class JFXCentralApp extends Application {
         if (WebAPI.isBrowser()) {
             showHomeOrLoadingView(app, stage);
         }
-
-        File logFolder = new File(System.getProperty("user.dir"), ".jfxcentral");
-        logFolder.mkdirs();
-        System.setOut(new PrintStream(new File(logFolder, "out.txt"), StandardCharsets.UTF_8));
-        System.setErr(new PrintStream(new File(logFolder, "err.txt"), StandardCharsets.UTF_8));
     }
 
     private void buildTrayIcon(Stage stage) {
