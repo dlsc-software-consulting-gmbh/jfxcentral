@@ -14,7 +14,7 @@ set JAVA_HOME=%JAVA_HOME%
 set PROJECT_VERSION=%PROJECT_VERSION%
 set APP_VERSION=%APP_VERSION%
 set APP_NAME=%APP_NAME%
-set MAIN_JAR=app-%PROJECT_VERSION%.jar
+set MAIN_JAR=jfxcentral-%PROJECT_VERSION%.jar
 
 rem ------ SETUP DIRECTORIES AND FILES ----------------------------------------
 rem Remove previously generated java runtime and installers. Copy all required
