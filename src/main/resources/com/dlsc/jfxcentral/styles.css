@@ -1,49 +1,7 @@
 @font-face {
-    font-family: "Open Sans";
-    font-face-name: "Open Sans Regular";
-    src: url("fonts/OpenSans-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Open Sans";
-    font-face-name: "Open Sans Italic";
-    src: url("fonts/OpenSans-Italic.ttf");
-}
-
-@font-face {
-    font-family: "Open Sans";
-    font-face-name: "Open Sans Bold";
-    src: url("fonts/OpenSans-Bold.ttf");
-}
-
-@font-face {
-    font-family: "Open Sans";
-    font-face-name: "Open Sans SemiBold";
-    src: url("fonts/OpenSans-SemiBold.ttf");
-}
-
-@font-face {
-    font-family: "Open Sans";
-    font-face-name: "Open Sans SemiBoldItalic";
-    src: url("fonts/OpenSans-SemiBoldItalic.ttf");
-}
-
-@font-face {
-    font-family: "Pattaya";
-    font-face-name: "Pattaya-Regular";
-    src: url("fonts/Pattaya-Regular.ttf");
-}
-
-@font-face {
     font-family: "JetBrains Mono";
     font-face-name: "JetBrains Mono Regular";
     src: url("fonts/JetBrainsMono-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Permanent Marker";
-    font-face-name: "Permanent Marker Regular";
-    src: url("fonts/PermanentMarker-Regular.ttf");
 }
 
 @font-face {
@@ -94,15 +52,9 @@
     src: url("fonts/Inter-MediumItalic.otf");
 }
 
-@font-face {
-    font-family: "Pattaya";
-    font-face-name: "Pattaya-Regular";
-    src: url("fonts/Pattaya-Regular.ttf");
-}
-
-.root-pane {
+.root {
+    -fx-font-family: "Inter Regular";
     -fx-font-size: 14px;
-    -fx-font-family: "Inter";
     -fx-accent: #4483A0;
     -fx-focus-color: #4483A0;
     -fx-faint-focus-color: rgba(68, 131, 160, .2);
@@ -115,8 +67,6 @@
     -drop-shadow-1: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
     -drop-shadow-2: dropshadow(gaussian, rgba(0, 0, 0, .26), 15, 0.16, -1, 4);
     -drop-shadow-3: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
-
-    -fx-font-smoothing-type: lcd;
 
     -white-button-text-color: rgb(110, 110, 110);
     -white-button-text-color-hover: rgb(255, 255, 255);
@@ -657,11 +607,9 @@
 }
 
 .master-library-list-cell .vbox .summary-label {
-    -fx-font-family: "Inter";
 }
 
 .master-library-list-cell:selected .vbox .summary-label {
-    -fx-font-family: "Inter";
     -fx-text-fill: black;
 }
 

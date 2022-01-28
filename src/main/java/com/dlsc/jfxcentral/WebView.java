@@ -92,7 +92,11 @@ public class WebView extends com.jpro.web.View {
             }
         }
 
-        System.out.println("item: " + item);
+        if (item != null) {
+            System.out.println("item: " + item.getName() + ", id = " + item.getId());
+        } else {
+            System.out.println("item is null");
+        }
 
         if (currentPage != null) {
             if (isMobile() || item != null) {

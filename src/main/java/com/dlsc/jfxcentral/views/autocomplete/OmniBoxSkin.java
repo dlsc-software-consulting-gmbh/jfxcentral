@@ -28,7 +28,7 @@ public class OmniBoxSkin implements Skin<OmniBox> {
 
         vbox = new VBox(listView);
         vbox.getStyleClass().add("omnibox");
-
+		
 		VBox.setVgrow(listView, Priority.ALWAYS);
 	}
 

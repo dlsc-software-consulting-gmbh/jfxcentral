@@ -1,6 +1,9 @@
 import org.kordamp.ikonli.IkonProvider;
 
 open module jfxcentral {
+    requires java.instrument;
+    requires org.scenicview.scenicview;
+    requires FXTrayIcon;
     requires org.eclipse.jgit;
     requires jfxcentral.data;
     requires com.rometools.rome;

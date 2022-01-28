@@ -58,7 +58,7 @@ public abstract class MasterViewWithListView<T extends ModelObject> extends Mast
     }
 
     public void showItem(T item) {
-        System.out.println("selected item in master view: " + item);
+        System.out.println("selected item in master view: " + item.getName() + ", id = " + item.getId());
         setSelectedItem(item);
     }
 

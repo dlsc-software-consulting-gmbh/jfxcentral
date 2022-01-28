@@ -1,8 +1,14 @@
 package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.data.DataRepository;
+import com.dlsc.jfxcentral.data.model.ModelObject;
+import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.IntroView;
+import com.dlsc.jfxcentral.views.ikonli.IkonliBrowser;
+import com.dustinredmond.fxtrayicon.FXTrayIcon;
 import com.gluonhq.attach.display.DisplayService;
+import com.jpro.web.Util;
 import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
@@ -10,6 +16,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,20 +28,25 @@ import org.eclipse.jgit.lib.TextProgressMonitor;
 import org.eclipse.jgit.merge.ContentMergeStrategy;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.util.Comparator;
+import java.util.function.Consumer;
 
 public class JFXCentralApp extends Application {
 
-    public static final String REPOSITORY = System.getProperty("jfxcentral.repo",System.getProperty("user.home") + "/" + ".jfxcentralrepo");
+    public static final String REPOSITORY = System.getProperty("jfxcentral.repo", System.getProperty("user.home") + "/" + ".jfxcentralrepo");
 
     private static boolean repositoryInitialized;
+    private WebApp app;
 
     @Override
     public void start(Stage stage) throws IOException, GitAPIException {
         DataRepository.BASE_URL = getRepoDirectory().toURI().toURL().toExternalForm() + "/";
 
-        WebApp app = new WebApp(stage);
+        app = new WebApp(stage);
 
         Parent root = app;
         if (!WebAPI.isBrowser()) {
@@ -42,7 +55,7 @@ public class JFXCentralApp extends Application {
                     showHomeOrLoadingView(app, stage);
                 }
             });
-            updateRepositoryInBackground(((IntroView) root).getAnimationView(), () -> {});
+            updateRepositoryInBackground(((IntroView) root).getAnimationView(), () -> buildTrayIcon(stage));
         } else {
             if (!repositoryInitialized) {
                 updateRepository(new TextProgressMonitor());
@@ -55,6 +68,7 @@ public class JFXCentralApp extends Application {
         Scene scene = new Scene(customStage, 1250, 1200);
         scene.setFill(Color.rgb(68, 131, 160));
 
+        scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
         scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         stage.initStyle(StageStyle.UNDECORATED);
@@ -75,6 +89,139 @@ public class JFXCentralApp extends Application {
         if (WebAPI.isBrowser()) {
             showHomeOrLoadingView(app, stage);
         }
+    }
+
+    private void buildTrayIcon(Stage stage) {
+        FXTrayIcon icon = new FXTrayIcon(stage, JFXCentralApp.class.getResource("duke.png"));
+
+        Menu libraries = new Menu("Libraries");
+        Menu people = new Menu("People");
+        Menu tools = new Menu("Tools");
+        Menu blogs = new Menu("Blogs");
+        Menu videos = new Menu("Videos");
+        Menu tutorials = new Menu("Tutorials");
+        Menu downloads = new Menu("Downloads");
+        Menu companies = new Menu("Companies");
+
+        DataRepository.getInstance().getTools().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tools, mo));
+        DataRepository.getInstance().getPeople().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(people, mo));
+        DataRepository.getInstance().getVideos().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(videos, mo, modelObject -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://www.youtube.com/watch?v=" + modelObject.getId()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
+        DataRepository.getInstance().getTutorials().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tutorials, mo));
+        DataRepository.getInstance().getCompanies().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(companies, mo));
+        DataRepository.getInstance().getDownloads().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(downloads, mo));
+        DataRepository.getInstance().getBlogs().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(blogs, mo));
+        DataRepository.getInstance().getLibraries().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(libraries, mo));
+
+        MenuItem iconBrowser = new MenuItem("Ikonli Browser");
+        iconBrowser.setOnAction(evt -> showIkonliBrowser());
+        icon.addMenuItem(iconBrowser);
+
+//        MenuItem scenicView = new MenuItem("Scenic View");
+//        scenicView.setOnAction(evt -> showScenicView());
+//        icon.addMenuItem(scenicView);
+
+        // ------
+        icon.addSeparator();
+
+        icon.addMenuItem(tools);
+        icon.addMenuItem(people);
+        icon.addMenuItem(videos);
+        icon.addMenuItem(tutorials);
+        icon.addMenuItem(companies);
+        icon.addMenuItem(downloads);
+        icon.addMenuItem(blogs);
+        icon.addMenuItem(libraries);
+
+        // ------
+        icon.addSeparator();
+
+        MenuItem exit = new MenuItem("Exit");
+        exit.setOnAction(evt -> Platform.exit());
+
+        icon.addMenuItem(exit);
+
+        icon.show();
+    }
+
+    private void showIkonliBrowser() {
+        Platform.runLater(() -> {
+            SectionPane sectionPane = new SectionPane();
+            sectionPane.setTitle("Ikonli Browser");
+            sectionPane.setSubtitle("Explore all available icon fonts in Ikonli");
+            sectionPane.getNodes().add(new IkonliBrowser());
+            sectionPane.setPrefHeight(0);
+            sectionPane.setMinHeight(0);
+
+            Scene scene = new Scene(sectionPane);
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+
+            Stage stage = new Stage(StageStyle.UTILITY);
+            stage.setTitle("Ikonli Browser");
+            stage.setScene(scene);
+            stage.setWidth(800);
+            stage.setHeight(1000);
+            stage.show();
+        });
+    }
+
+//    private void showScenicView2() {
+//        String[] cmdarray = new String[]{"java", "-classpath", System.getProperty("java.class.path"), "org.scenicview.ScenicView", ""};
+//        System.out.println(Arrays.toString(cmdarray));
+//
+//        try {
+//            ProcessBuilder processBuilder = new ProcessBuilder();
+//            processBuilder.inheritIO();
+//            ProcessBuilder command = processBuilder.command(cmdarray);
+//            command.start();
+////            Process p = Runtime.getRuntime().exec(cmdarray);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void showScenicView() {
+//        Thread scenicViewBootThread = new Thread(() -> {
+//            while (true) {
+//                try {
+//                    Platform.runLater(() -> {
+//                        try {
+//                            (new ScenicView()).start(new Stage());
+//                        } catch (Exception var1) {
+//                            var1.printStackTrace();
+//                        }
+//
+//                    });
+//                    return;
+//                } catch (IllegalStateException var3) {
+//                    try {
+//                        Thread.sleep(500L);
+//                    } catch (InterruptedException var2) {
+//                    }
+//                }
+//            }
+//        }, "scenic-view-boot");
+//        scenicViewBootThread.setDaemon(true);
+//        scenicViewBootThread.start();
+//    }
+
+    private void createMenuItem(Menu people, ModelObject mo) {
+        createMenuItem(people, mo, m -> showModelObject(m));
+    }
+
+    private void createMenuItem(Menu people, ModelObject mo, Consumer<ModelObject> consumer) {
+        MenuItem item = new MenuItem(mo.getName());
+        item.setOnAction(evt -> consumer.accept(mo));
+        people.getItems().add(item);
+    }
+
+    private void showModelObject(ModelObject mo) {
+        Util.getSessionManager(app).gotoURL(PageUtil.getLink(mo));
     }
 
     public static boolean isRepositoryInitialized() {
@@ -130,7 +277,7 @@ public class JFXCentralApp extends Application {
 
     private void showHomeOrLoadingView(WebApp app, Stage stage) {
 //        if (DataRepository.getInstance().isLoaded()) {
-            showHome(app, stage);
+        showHome(app, stage);
 //        } else {
 //            LoadingView loadingView = new LoadingView(() -> showHome(app, stage));
 //
@@ -148,7 +295,7 @@ public class JFXCentralApp extends Application {
     }
 
     public static void main(String args[]) {
-//        System.setProperty("prism.lcdtext", "true");
+        System.setProperty("prism.lcdtext", "true");
         launch(args);
     }
 }

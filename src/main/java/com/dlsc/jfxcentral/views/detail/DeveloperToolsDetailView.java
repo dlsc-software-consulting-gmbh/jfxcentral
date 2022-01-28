@@ -72,7 +72,7 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
 
         Node node;
 
-        String url = "https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html";
+        String url = "https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html";
         if (WebAPI.isBrowser()) {
             HTMLView htmlView = new HTMLView();
             String content = "<iframe src=\"" + url + "\" frameborder=\"0\" style=\"width: 100%; height: 100%; \"></iframe>";
