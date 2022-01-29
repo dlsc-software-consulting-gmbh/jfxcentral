@@ -158,6 +158,7 @@ public class IkonliBrowser extends BorderPane {
         });
     }
 
+    // yes, this can be static and shared across JPro sessions
     private static Map<Ikon, IkonData> DATA_MAP = new HashMap<>();
 
     private Set<IkonData> resolveIkonData() {
