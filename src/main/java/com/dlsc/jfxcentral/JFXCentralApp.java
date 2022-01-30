@@ -303,7 +303,7 @@ public class JFXCentralApp extends Application {
         webApp.start(SessionManager.getDefault(webApp, stage));
 
         CustomStage customStage = new CustomStage(stage, webApp);
-        customStage.setCloseHandler(() -> stage.hide());
+        customStage.setCloseHandler(() -> System.exit(0));
         Scene scene = stage.getScene();
         scene.setRoot(customStage);
 
