@@ -216,7 +216,7 @@ public class JFXCentralApp extends Application {
         stage.setTitle("Ikonli Browser");
         stage.setScene(scene);
         stage.setWidth(900);
-        stage.setHeight(1000);
+        stage.setHeight(700);
         stage.show();
     }
 
