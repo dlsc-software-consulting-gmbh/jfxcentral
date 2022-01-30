@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.PageUtil;
+import com.dlsc.jfxcentral.util.StageSession;
 import com.dlsc.jfxcentral.views.IntroView;
 import com.dlsc.jfxcentral.views.ikonli.IkonliBrowser;
 import com.dlsc.showcase.CssShowcaseView;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Comparator;
 import java.util.function.Consumer;
+import java.util.prefs.Preferences;
 
 public class JFXCentralApp extends Application {
 
@@ -65,7 +67,7 @@ public class JFXCentralApp extends Application {
         CustomStage customStage = new CustomStage(stage, root);
         customStage.setCloseHandler(() -> System.exit(0));
 
-        Scene scene = new Scene(customStage, 1250, 1200);
+        Scene scene = new Scene(customStage, 1250, 800);
         scene.setFill(Color.rgb(68, 131, 160));
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
@@ -76,6 +78,9 @@ public class JFXCentralApp extends Application {
         stage.centerOnScreen();
         stage.setTitle("JFX-Central");
         stage.setScene(scene);
+
+        new StageSession(stage, Preferences.userNodeForPackage(JFXCentralApp.class));
+
         stage.show();
 
         if (Boolean.getBoolean("cssfx")) {

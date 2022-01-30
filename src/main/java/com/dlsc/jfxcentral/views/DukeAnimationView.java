@@ -60,6 +60,7 @@ public class DukeAnimationView extends StackPane implements ProgressMonitor {
 
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(vBox.widthProperty().multiply(.6));
+        imageView.fitHeightProperty().bind(vBox.heightProperty().multiply(.6));
 
         OrientationService.create().ifPresent(service -> service.orientationProperty().addListener(it -> {
             System.out.println("orientation now: " + service.orientationProperty().get());

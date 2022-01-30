@@ -41,6 +41,7 @@ open module jfxcentral {
     requires fr.brouillard.oss.cssfx;
     requires org.kordamp.ikonli.core;
     requires jdk.xml.dom;
+    requires java.prefs;
 
     uses IkonProvider;
 }

@@ -27,10 +27,8 @@ public class IntroView extends StackPane {
 
         animationView.sceneProperty().addListener(it -> {
             if (animationView.getScene() != null) {
-                System.out.println("starting");
                 animationView.play();
             } else {
-                System.out.println("stopping");
                 animationView.stop();
             }
         });
@@ -53,7 +51,7 @@ public class IntroView extends StackPane {
             // don't bother if user already clicked
             if (getScene() != null && !Boolean.getBoolean("mute")) {
                 plonkSound.setVolume(.2);
-//                plonkSound.play();
+                plonkSound.play();
             }
         });
 
