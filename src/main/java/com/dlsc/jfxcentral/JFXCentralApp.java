@@ -4,7 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.PageUtil;
-import com.dlsc.jfxcentral.util.StageSession;
+import com.dlsc.jfxcentral.util.StageManager;
 import com.dlsc.jfxcentral.views.IntroView;
 import com.dlsc.jfxcentral.views.ikonli.IkonliBrowser;
 import com.dlsc.showcase.CssShowcaseView;
@@ -35,7 +35,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Comparator;
 import java.util.function.Consumer;
-import java.util.prefs.Preferences;
 
 public class JFXCentralApp extends Application {
 
@@ -50,6 +49,8 @@ public class JFXCentralApp extends Application {
 
         app = new WebApp(stage);
 
+        Scene scene;
+
         Parent root = app;
         if (!WebAPI.isBrowser()) {
             root = new IntroView(() -> {
@@ -57,20 +58,22 @@ public class JFXCentralApp extends Application {
                     showHomeOrLoadingView(app, stage);
                 }
             });
+
             updateRepositoryInBackground(((IntroView) root).getAnimationView(), () -> buildTrayIcon(stage));
+            CustomStage customStage = new CustomStage(stage, root);
+            customStage.setCloseHandler(() -> System.exit(0));
+            scene = new Scene(customStage);
         } else {
             if (!repositoryInitialized) {
                 updateRepository(new TextProgressMonitor());
             }
+            scene = new Scene(root);
         }
 
-        CustomStage customStage = new CustomStage(stage, root);
-        customStage.setCloseHandler(() -> System.exit(0));
-
-        Scene scene = new Scene(customStage, 1250, 800);
         scene.setFill(Color.rgb(68, 131, 160));
 
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(JFXCentralApp.class.getResource("performance.css").toExternalForm());
         scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         stage.initStyle(StageStyle.UNDECORATED);
@@ -78,8 +81,10 @@ public class JFXCentralApp extends Application {
         stage.centerOnScreen();
         stage.setTitle("JFX-Central");
         stage.setScene(scene);
+        stage.setWidth(1200);
+        stage.setHeight(800);
 
-        new StageSession(stage, Preferences.userNodeForPackage(JFXCentralApp.class));
+        StageManager.install(stage, "main-window");
 
         stage.show();
 
@@ -149,9 +154,6 @@ public class JFXCentralApp extends Application {
         cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html"));
         icon.addMenuItem(cssDocs);
 
-        // ------
-        icon.addSeparator();
-
         MenuItem addInfoToJfxCentral = new MenuItem("Add Info to JFX-Central");
         addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data"));
         icon.addMenuItem(addInfoToJfxCentral);
@@ -159,9 +161,6 @@ public class JFXCentralApp extends Application {
         MenuItem reportIssue = new MenuItem("Report an Issue");
         reportIssue.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data/issues"));
         icon.addMenuItem(reportIssue);
-
-        // ------
-        icon.addSeparator();
 
         icon.addMenuItem(libraries);
         icon.addMenuItem(tools);
@@ -175,13 +174,7 @@ public class JFXCentralApp extends Application {
         icon.addMenuItem(realWorld);
         icon.addMenuItem(tips);
 
-        // ------
-        icon.addSeparator();
-
         icon.addExitItem(true);
-
-        // ------
-        icon.addSeparator();
 
         icon.show();
     }
@@ -194,35 +187,50 @@ public class JFXCentralApp extends Application {
         }
     }
 
-    private void showShowcase() {
-        CssShowcaseView view = new CssShowcaseView();
-        Scene scene = new Scene(view);
+    private Stage showcaseStage;
 
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("ShowcaseFX");
-        stage.setScene(scene);
-        stage.setWidth(1000);
-        stage.setHeight(800);
-        stage.show();
+    private void showShowcase() {
+        if (showcaseStage == null) {
+            CssShowcaseView view = new CssShowcaseView();
+            Scene scene = new Scene(view);
+
+            showcaseStage = new Stage(StageStyle.DECORATED);
+            showcaseStage.setTitle("ShowcaseFX");
+            showcaseStage.setScene(scene);
+            showcaseStage.setWidth(1000);
+            showcaseStage.setHeight(800);
+
+            StageManager.install(showcaseStage, "showcasefx");
+        }
+
+        showcaseStage.show();
     }
 
+    private Stage ikonliStage;
+
     private void showIkonliBrowser() {
-        SectionPane sectionPane = new SectionPane();
-        sectionPane.setTitle("Ikonli Browser");
-        sectionPane.setSubtitle("Explore all available icon fonts in Ikonli");
-        sectionPane.getNodes().add(new IkonliBrowser());
-        sectionPane.setPrefHeight(0);
-        sectionPane.setMinHeight(0);
+        if (ikonliStage == null) {
+            SectionPane sectionPane = new SectionPane();
+            sectionPane.setTitle("Ikonli Browser");
+            sectionPane.setSubtitle("Explore all available icon fonts in Ikonli");
+            sectionPane.getNodes().add(new IkonliBrowser());
+            sectionPane.setPrefHeight(0);
+            sectionPane.setMinHeight(0);
 
-        Scene scene = new Scene(sectionPane);
-        scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
+            Scene scene = new Scene(sectionPane);
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
 
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("Ikonli Browser");
-        stage.setScene(scene);
-        stage.setWidth(900);
-        stage.setHeight(700);
-        stage.show();
+            ikonliStage = new Stage(StageStyle.DECORATED);
+
+            ikonliStage.setTitle("Ikonli Browser");
+            ikonliStage.setScene(scene);
+            ikonliStage.setWidth(900);
+            ikonliStage.setHeight(700);
+
+            StageManager.install(ikonliStage, "ikonli-browser");
+        }
+
+        ikonliStage.show();
     }
 
     private void createMenuItem(Menu people, ModelObject mo) {
@@ -307,13 +315,15 @@ public class JFXCentralApp extends Application {
     private void showHome(WebApp webApp, Stage stage) {
         webApp.start(SessionManager.getDefault(webApp, stage));
 
-        CustomStage customStage = new CustomStage(stage, webApp);
-        customStage.setCloseHandler(() -> System.exit(0));
-        Scene scene = stage.getScene();
-        scene.setRoot(customStage);
-
         if (!WebAPI.isBrowser()) {
+            CustomStage customStage = new CustomStage(stage, webApp);
+            customStage.setCloseHandler(() -> System.exit(0));
+            Scene scene = stage.getScene();
+            scene.setRoot(customStage);
             scene.getStylesheets().add(JFXCentralApp.class.getResource("desktop.css").toExternalForm());
+        } else {
+            stage.getScene().setRoot(webApp);
+            stage.getScene().setFill(Color.rgb(224, 229, 234)); // reduce flickering
         }
     }
 

@@ -1,0 +1,20 @@
+.section-pane {
+    -fx-effect: null;
+}
+
+.thumbnail-scroll-pane {
+    -fx-effect: null;
+    -fx-border-color: #e0e0e0;
+}
+
+.header-pane .title {
+    -fx-effect: null;
+}
+
+.header-pane .title-shadow {
+    -fx-effect: null;
+}
+
+.root-pane .logo-image-wrapper {
+    -fx-effect: null;
+}

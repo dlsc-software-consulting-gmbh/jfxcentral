@@ -79,7 +79,13 @@
     -white-button-background-color-pressed: -fx-accent;
 }
 
-.filter-view .search-field .ikonli-font-icon,
+.filter-view .search-text-field {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 3px;
+    -fx-prompt-text-fill: white;
+}
+
+.filter-view .search-text-field .ikonli-font-icon,
 .filter-view .search-text-field .ikonli-font-icon {
     -fx-icon-color: white !important;
 }
@@ -570,8 +576,7 @@
 
 .master-tool-list-cell .hbox {
     -fx-padding: 10px 15px;
-    -fx-alignment: center;
-    -fx-spacing: 5px;
+    -fx-spacing: 10px;
 }
 
 .master-tool-list-cell .vbox {
@@ -579,6 +584,72 @@
 }
 
 .master-tool-list-cell .hbox .vbox .name-label {
+    -fx-font-family: "Inter Semi Bold";
+    -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * MasterBookCell
+ */
+.master-book-list-cell {
+    -fx-insets: 0px;
+    -fx-padding: 0px;
+}
+
+.master-book-list-cell .hbox {
+    -fx-padding: 10px 15px;
+    -fx-spacing: 10px;
+}
+
+.master-book-list-cell .vbox {
+    -fx-spacing: 5px;
+}
+
+.master-book-list-cell .hbox .vbox .name-label {
+    -fx-font-family: "Inter Semi Bold";
+    -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * MasterTipCell
+ */
+.master-tip-list-cell {
+    -fx-insets: 0px;
+    -fx-padding: 0px;
+}
+
+.master-tip-list-cell .hbox {
+    -fx-padding: 10px 15px;
+    -fx-spacing: 10px;
+}
+
+.master-tip-list-cell .vbox {
+    -fx-spacing: 5px;
+}
+
+.master-tip-list-cell .hbox .vbox .name-label {
+    -fx-font-family: "Inter Semi Bold";
+    -fx-text-fill: -fx-accent;
+}
+
+/* ----------------------------------------------------------------------------
+ * MasterBlogCell
+ */
+.master-blog-list-cell {
+    -fx-insets: 0px;
+    -fx-padding: 0px;
+}
+
+.master-blog-list-cell .hbox {
+    -fx-padding: 10px 15px;
+    -fx-spacing: 10px;
+}
+
+.master-blog-list-cell .vbox {
+    -fx-spacing: 5px;
+}
+
+.master-blog-list-cell .hbox .vbox .name-label {
     -fx-font-family: "Inter Semi Bold";
     -fx-text-fill: -fx-accent;
 }
@@ -2316,4 +2387,24 @@
 .developer-tools-detail-view .disclaimer {
     -fx-font-family: "Inter Italic";
     -fx-text-fill: gray;
+}
+
+.intro-view .check-box {
+    -fx-text-fill: white;
+}
+
+.intro-view .check-box > .box {
+    -fx-background-color: white;
+}
+
+.intro-view .check-box > .box > .mark {
+    -fx-background-color: white;
+}
+
+.intro-view .check-box > .box > .mark {
+    -fx-background-color: transparent;
+}
+
+.intro-view .check-box:selected > .box > .mark {
+    -fx-background-color: -fx-accent;
 }

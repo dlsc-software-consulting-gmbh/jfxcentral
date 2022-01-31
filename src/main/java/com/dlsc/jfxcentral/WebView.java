@@ -7,6 +7,8 @@ import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.views.IPage;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
@@ -17,10 +19,13 @@ public class WebView extends com.jpro.web.View {
 
     private final boolean mobile;
     private final String initialURL;
+    private RootPane rootPane = new RootPane();
 
     public WebView(String initialURL, boolean mobile) {
         this.initialURL = initialURL;
         this.mobile = mobile;
+
+        rootPane.disableEffectsProperty().bind(disableEffectsProperty());
     }
 
     @Override
@@ -45,8 +50,6 @@ public class WebView extends com.jpro.web.View {
     public boolean fullscreen() {
         return true;
     }
-
-    private RootPane rootPane = new RootPane();
 
     @Override
     public Node content() {
@@ -105,5 +108,19 @@ public class WebView extends com.jpro.web.View {
         }
 
         return true;
+    }
+
+    private final BooleanProperty disableEffects = new SimpleBooleanProperty(this, "disableEffects", true);
+
+    public boolean isDisableEffects() {
+        return disableEffects.get();
+    }
+
+    public BooleanProperty disableEffectsProperty() {
+        return disableEffects;
+    }
+
+    public void setDisableEffects(boolean disableEffects) {
+        this.disableEffects.set(disableEffects);
     }
 }

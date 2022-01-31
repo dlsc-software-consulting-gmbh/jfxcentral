@@ -24,11 +24,15 @@
 }
 
 .markdown-italic {
-    -fx-font-style: italic;
+    -fx-font-family: "Inter Italic";
 }
 
 .markdown-bold {
-    -fx-font-weight: bold;
+    -fx-font-family: "Inter Semi Bold";
+}
+
+.markdown-italic.markdown-bold {
+    -fx-font-family: "Inter Semi Bold Italic";
 }
 
 .markdown-strikethrough {

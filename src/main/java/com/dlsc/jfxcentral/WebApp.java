@@ -2,6 +2,8 @@ package com.dlsc.jfxcentral;
 
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.jpro.webapi.WebAPI;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Stage;
 
@@ -48,7 +50,9 @@ public class WebApp extends com.jpro.web.WebApp {
                         Rectangle2D browserSize = webAPI.getBrowserSize();
                         mobile = browserSize.getWidth() < 800;
                     }
-                    return new WebView(s, mobile);
+                    WebView webView = new WebView(s, mobile);
+                    webView.disableEffectsProperty().bind(disableEffectsProperty());
+                    return webView;
                 } else {
                     return null;
                 }
@@ -58,5 +62,19 @@ public class WebApp extends com.jpro.web.WebApp {
         });
 
         addRouteJava((s) -> new ErrorView(s));
+    }
+
+    private final BooleanProperty disableEffects = new SimpleBooleanProperty(this, "disableEffects", true);
+
+    public boolean isDisableEffects() {
+        return disableEffects.get();
+    }
+
+    public BooleanProperty disableEffectsProperty() {
+        return disableEffects;
+    }
+
+    public void setDisableEffects(boolean disableEffects) {
+        this.disableEffects.set(disableEffects);
     }
 }

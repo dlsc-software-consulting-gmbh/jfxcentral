@@ -379,4 +379,18 @@ public class RootPane extends StackPane {
     public void setDeveloperTools(ObservableList<DeveloperTool> developerTools) {
         this.developerTools.set(developerTools);
     }
+
+    private final BooleanProperty disableEffects = new SimpleBooleanProperty(this, "disableEffects", true);
+
+    public boolean isDisableEffects() {
+        return disableEffects.get();
+    }
+
+    public BooleanProperty disableEffectsProperty() {
+        return disableEffects;
+    }
+
+    public void setDisableEffects(boolean disableEffects) {
+        this.disableEffects.set(disableEffects);
+    }
 }

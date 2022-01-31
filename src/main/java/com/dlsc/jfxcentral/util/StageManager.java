@@ -9,16 +9,21 @@ import javafx.stage.Stage;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
-public class StageSession {
+public class StageManager {
 
-    private final Logger LOG = Logger.getLogger(StageSession.class.getSimpleName());
+    private final Logger LOG = Logger.getLogger(StageManager.class.getSimpleName());
 
     private final Stage stage;
     private final Preferences preferences;
 
-    public StageSession(Stage stage, Preferences preferences) {
+    public static StageManager install(Stage stage, String path) {
+        return new StageManager(stage, path);
+    }
+
+    private StageManager(Stage stage, String path) {
         this.stage = stage;
-        this.preferences = preferences;
+
+        preferences = Preferences.userRoot().node(path);
 
         restoreStage();
 
@@ -26,7 +31,7 @@ public class StageSession {
             try {
                 saveStage();
             } catch (SecurityException ex) {
-                LOG.throwing(StageSession.class.getName(), "init", ex);
+                LOG.throwing(StageManager.class.getName(), "init", ex);
             }
         };
 
@@ -46,15 +51,21 @@ public class StageSession {
 
     private void restoreStage() throws SecurityException {
         Preferences preferences = getPreferences();
-        double x = preferences.getDouble("x", stage.getX());
-        double y = preferences.getDouble("y", stage.getY());
+
+        double x = preferences.getDouble("x", -1);
+        double y = preferences.getDouble("y", -1);
         double w = preferences.getDouble("width", stage.getWidth());
         double h = preferences.getDouble("height", stage.getHeight());
 
         Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
-        stage.setX(Math.max(0, x));
-        stage.setY(Math.max(0, y));
+        if (x == -1 && y == -1) {
+            stage.centerOnScreen();
+        } else {
+            stage.setX(Math.max(0, x));
+            stage.setY(Math.max(0, y));
+        }
+
         stage.setWidth(Math.max(CustomStage.MIN_STAGE_WIDTH, Math.min(w, bounds.getWidth())));
         stage.setHeight(Math.max(CustomStage.MIN_STAGE_HEIGHT, Math.min(h, bounds.getHeight())));
     }
