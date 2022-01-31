@@ -88,7 +88,7 @@ do
   --name "${APP_NAME}" \
   --main-class com.dlsc.jfxcentral.JFXCentralAppLauncher \
   --main-jar ${MAIN_JAR} \
-  --java-options -Xmx512m \
+  --java-options -Xmx1024m \
   --runtime-image target/java-runtime \
   --icon src/main/logo/macosx/duke.icns \
   --app-version ${APP_VERSION} \
