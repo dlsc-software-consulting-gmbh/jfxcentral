@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
@@ -34,6 +35,9 @@ public class CustomStage extends BorderPane {
 
     private double startX;
     private double startY;
+
+    // Points for dragging
+    private Point2D pointDragScreen, pointStartDrag, pointShifting;
 
     private enum Operation {
         NONE,
@@ -73,6 +77,7 @@ public class CustomStage extends BorderPane {
         if (!WebAPI.isBrowser()) {
 
             EventHandler<MouseEvent> mouseMovedHandler = evt -> {
+
                 double x = evt.getX();
                 double y = evt.getY();
 
@@ -141,8 +146,14 @@ public class CustomStage extends BorderPane {
                 } else {
                     operation = Operation.NONE;
                 }
-
                 setOperation(operation);
+
+                // Store start drag point by event coords
+                pointDragScreen = new Point2D(evt.getScreenX(), evt.getScreenY());
+                // Store start drag point by window screen coords
+                pointStartDrag = new Point2D(getScene().getWindow().getX(), getScene().getWindow().getY());
+                // calculate shifting
+                pointShifting = pointStartDrag.subtract(pointDragScreen);
             };
 
             addEventFilter(MouseEvent.MOUSE_PRESSED, mousePressedHandler);
@@ -247,10 +258,18 @@ public class CustomStage extends BorderPane {
                         evt.consume();
                         break;
                     case MOVE:
-                        getScene().getWindow().setX(getScene().getWindow().getX() + deltaX);
-                        getScene().getWindow().setY(getScene().getWindow().getY() + deltaY);
+                        // Event coords
+                        final Point2D pointCursor = new Point2D(evt.getScreenX(), evt.getScreenY());
+                        // Changing point coords according shift
+                        final Point2D point = pointCursor.add(pointShifting);
+
+                        window.setX(point.getX());
+                        window.setY(point.getY());
+
                         startX = x;
                         startY = y;
+
+                        pointDragScreen = new Point2D(evt.getScreenX(), evt.getScreenY());
                         break;
                 }
             });
