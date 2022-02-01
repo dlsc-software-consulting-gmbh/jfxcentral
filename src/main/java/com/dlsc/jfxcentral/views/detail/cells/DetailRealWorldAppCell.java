@@ -31,6 +31,8 @@ public class DetailRealWorldAppCell extends DetailCell<RealWorldApp> {
         responsiveBox.setLargeImageWidth(200);
         responsiveBox.setLargeImageHeight(100);
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

@@ -46,6 +46,8 @@ public class DetailVideoCell extends DetailCell<Video> {
         });
         responsiveBox.getImageView().setCursor(Cursor.HAND);
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 

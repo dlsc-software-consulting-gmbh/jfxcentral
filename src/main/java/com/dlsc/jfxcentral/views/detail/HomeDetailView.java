@@ -68,7 +68,6 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         createContactInfo(box);
         createSocialInfo(box);
 
-
         if (rootPane.isMobile()) {
             // no Twitter feed on mobile
             setContent(content);

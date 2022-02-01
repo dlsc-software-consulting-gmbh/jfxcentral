@@ -40,6 +40,8 @@ public class DetailBookCell extends DetailCell<Book> {
         responsiveBox.getExtraControls().addAll(detailsButton, homepageButton, amazonButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

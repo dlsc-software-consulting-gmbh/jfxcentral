@@ -26,6 +26,8 @@ public class DetailTipCell extends DetailCell<Tip> {
         responsiveBox.setLargeImageWidth(200);
         responsiveBox.setLargeImageHeight(100);
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

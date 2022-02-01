@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.page;
 
 import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.NavigationView;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.DataRepository.Source;
 import com.dlsc.jfxcentral.data.model.ModelObject;
@@ -12,6 +13,7 @@ import com.dlsc.jfxcentral.views.autocomplete.SearchContext;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -156,6 +158,11 @@ public class HeaderPane extends HBox {
         sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
         sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
-        getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField);
+        NavigationView navigationView = new NavigationView();
+        navigationView.setVisible(!WebAPI.isBrowser());
+        navigationView.setManaged(!WebAPI.isBrowser());
+        HBox.setMargin(navigationView, new Insets(0, 0, 0, 20));
+
+        getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField, navigationView);
     }
 }

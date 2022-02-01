@@ -6,7 +6,6 @@ import com.dlsc.jfxcentral.data.model.Library;
 import com.dlsc.jfxcentral.panels.LicenseLabel;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.detail.ThumbnailScrollPane;
 import com.dlsc.jfxcentral.views.detail.cells.ResponsiveBox.ImageLocation;
@@ -16,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class DetailLibraryCell extends AdvancedListCell<Library> {
+public class DetailLibraryCell extends DetailCell<Library> {
 
     private final Button homepageButton;
     private final Button repositoryButton;
@@ -65,6 +64,8 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
 
         responsiveBox.getExtraControls().addAll(homepageButton, repositoryButton, issueTrackerButton, discussionsButton);
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
@@ -88,6 +89,7 @@ public class DetailLibraryCell extends AdvancedListCell<Library> {
 
             responsiveBox.setTitle(item.getName());
             Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(item), item.getName());
+
             responsiveBox.setDescription(item.getDescription());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().libraryImageProperty(item));
 

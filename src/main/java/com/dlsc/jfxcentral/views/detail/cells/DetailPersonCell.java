@@ -42,6 +42,8 @@ public class DetailPersonCell extends DetailCell<Person> {
         responsiveBox = new ResponsiveBoxWithPhotoView(rootPane.isMobile() ? ImageLocation.HIDE : largeImage ? ImageLocation.LARGE_ON_SIDE : ImageLocation.SMALL_ON_SIDE);
         responsiveBox.visibleProperty().bind(emptyProperty().not());
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

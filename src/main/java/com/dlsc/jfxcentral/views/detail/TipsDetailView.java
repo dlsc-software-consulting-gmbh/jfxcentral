@@ -26,10 +26,12 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
 
         getStyleClass().add("tips-detail-view");
 
-        createTitleBox();
-        createReadMeBox(null,
+//        createTitleBox();
+        SectionPane readMeBox = createReadMeBox(null,
                 tip -> DataRepository.getInstance().getBaseUrl() + "tips/" + tip.getId(),
                 tip -> DataRepository.getInstance().tipDescriptionProperty(getSelectedItem()));
+        readMeBox.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
+        readMeBox.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
         createStandardBoxes();
     }
 

@@ -82,7 +82,9 @@
 .filter-view .search-text-field {
     -fx-background-color: -fx-accent;
     -fx-background-radius: 3px;
+    -fx-text-fill: white;
     -fx-prompt-text-fill: white;
+    -fx-pref-width: 200px;
 }
 
 .filter-view .search-text-field .ikonli-font-icon,
@@ -2407,4 +2409,52 @@
 
 .intro-view .check-box:selected > .box > .mark {
     -fx-background-color: -fx-accent;
+}
+
+.detail-view .section-pane .details-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: black;
+    -fx-content-display: right;
+    -fx-padding: 2px 5px;
+}
+
+.detail-view .section-pane .details-label .open-link {
+    -fx-icon-color: -fx-accent;
+    -fx-icon-size: 16px;
+}
+
+.detail-view.companies-detail-view .section-pane .details-label .open-link,
+.detail-view.downloads-detail-view .section-pane .details-label .open-link,
+.detail-view.tutorials-detail-view .section-pane .details-label .open-link,
+.detail-view.videos-detail-view .section-pane .details-label .open-link {
+    visibility: hidden;
+}
+
+.navigation-view {
+    -fx-spacing: 10px;
+}
+
+.navigation-view .button {
+    -fx-pref-width: 48px;
+    -fx-pref-height: 48px;
+    -fx-background-color: derive(-fx-accent, -20%);
+    -fx-background-radius: 1000px;
+}
+
+.navigation-view .button .ikonli-font-icon {
+    -fx-icon-size: white;
+    -fx-icon-size: 24px;
+}
+
+.navigation-view .button:pressed {
+    -fx-background-color: derive(-fx-accent, -10%) !important;
+}
+
+.navigation-view .button:pressed .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.navigation-view .button:hover {
+    -fx-background-color: white, derive(-fx-accent, -20%);
+    -fx-background-insets: 0px, 1px;
 }

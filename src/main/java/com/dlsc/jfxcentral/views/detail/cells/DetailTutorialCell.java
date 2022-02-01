@@ -38,6 +38,8 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
         responsiveBox.getExtraControls().addAll(visitButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 

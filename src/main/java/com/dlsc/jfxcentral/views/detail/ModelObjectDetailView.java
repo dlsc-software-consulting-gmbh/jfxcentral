@@ -57,7 +57,7 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
         createReadMeBox("Readme", baseUrlProvider, textPropertyProvider);
     }
 
-    protected void createReadMeBox(String title, Callback<T, String> baseUrlProvider, Callback<T, StringProperty> textPropertyProvider) {
+    protected SectionPane createReadMeBox(String title, Callback<T, String> baseUrlProvider, Callback<T, StringProperty> textPropertyProvider) {
         SectionPane sectionPane = new SectionPane();
         sectionPane.setTitle(title);
 
@@ -76,6 +76,8 @@ public abstract class ModelObjectDetailView<T extends ModelObject> extends Detai
         sectionPane.managedProperty().bind(Bindings.isNotEmpty(markdownView.mdStringProperty()));
 
         content.getChildren().add(sectionPane);
+
+        return sectionPane;
     }
 
     private <M extends ModelObject> void createListViewBox(String name, Callback<ListView<M>, ListCell<M>> cellFactory, Callback<T, ObservableList<M>> listProvider) {

@@ -34,6 +34,8 @@ public class DetailCompanyCell extends DetailCell<Company> {
         responsiveBox.setLargeImageWidth(192);
         responsiveBox.setLargeImageHeight(64);
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

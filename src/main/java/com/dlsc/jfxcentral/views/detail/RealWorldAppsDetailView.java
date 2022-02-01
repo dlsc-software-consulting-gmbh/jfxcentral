@@ -7,6 +7,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
+import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;
 
@@ -17,7 +18,9 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
 
         getStyleClass().add("real-world-detail-view");
 
-        createTitleBox();
+        if (WebAPI.isBrowser()) {
+            createTitleBox();
+        }
         createReadMeSection();
         createStandardBoxes();
     }
@@ -67,9 +70,13 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
         selectedItemProperty().addListener(it -> {
             RealWorldApp app = getSelectedItem();
             if (app != null) {
+                sectionPane.setTitle(app.getName());
+                sectionPane.setSubtitle(app.getSummary());
                 markdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "realworld/" + app.getId());
                 markdownView.mdStringProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(getSelectedItem()));
             } else {
+                sectionPane.setTitle("");
+                sectionPane.setSubtitle("");
                 markdownView.mdStringProperty().unbind();
             }
         });

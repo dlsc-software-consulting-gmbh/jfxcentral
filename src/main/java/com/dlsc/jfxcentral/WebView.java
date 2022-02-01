@@ -69,6 +69,8 @@ public class WebView extends com.jpro.web.View {
     // IF this returns true, we don't query for a new page
     @Override
     public boolean handleURL(String s) {
+        System.out.println("URL: " + s);
+
         if (s.equalsIgnoreCase("/showcase")) {
             return false;
         }

@@ -32,6 +32,8 @@ public class DetailBlogCell extends DetailCell<Blog> {
         responsiveBox.getExtraControls().addAll(detailsButton, visitButton);
         responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
+        addLinkIcon(responsiveBox.getTitleLabel());
+
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }

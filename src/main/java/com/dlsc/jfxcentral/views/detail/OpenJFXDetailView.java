@@ -13,15 +13,17 @@ import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
 import com.dlsc.jfxcentral.views.detail.cells.DetailPullRequestCell;
+import com.jpro.webapi.HTMLView;
+import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.web.WebView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.Duration;
@@ -70,6 +72,50 @@ public class OpenJFXDetailView extends DetailView {
         }
 
         updateFilters();
+
+        Pane box;
+        if (rootPane.isMobile()) {
+            box = new VBox();
+        } else {
+            box = new HBox();
+        }
+
+        box.getStyleClass().add("footer");
+        content.getChildren().add(box);
+
+        if (rootPane.isMobile()) {
+            // no Twitter feed on mobile
+            setContent(content);
+        } else {
+            SectionPane webviewSectionPane = new SectionPane();
+
+            Node node;
+
+            if (WebAPI.isBrowser()) {
+                HTMLView htmlView = new HTMLView();
+                htmlView.setPrefWidth(300);
+                htmlView.setMinWidth(300);
+                htmlView.setMaxWidth(300);
+                htmlView.setContent("<a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
+
+                node = htmlView;
+
+            } else {
+                WebView webView = new WebView();
+                webView.setPrefWidth(300);
+                webView.setMinWidth(300);
+                webView.setMaxWidth(300);
+                VBox.setVgrow(webView, Priority.ALWAYS);
+                webView.getEngine().loadContent("<a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
+                node = webView;
+            }
+
+            webviewSectionPane.getNodes().add(node);
+
+            HBox hBox = new HBox(10, content, webviewSectionPane);
+
+            setContent(hBox);
+        }
     }
 
     private void updateFilters() {
