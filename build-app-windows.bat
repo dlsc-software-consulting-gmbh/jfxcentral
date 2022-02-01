@@ -87,4 +87,4 @@ call "%JAVA_HOME%\bin\jpackage" ^
   --win-menu ^
   --win-dir-chooser ^
   --vendor "DLSC GmbH" ^
-  --copyright "Copyright © 2021 DLSC GmbH"
+  --copyright "Copyright © 2022 DLSC GmbH"

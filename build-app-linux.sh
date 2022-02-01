@@ -88,5 +88,23 @@ $JAVA_HOME/bin/jpackage \
   --app-version ${APP_VERSION} \
   --linux-deb-maintainer dlemmermann@gmail.com \
   --linux-shortcut \
+  --resource-dir app/assets/linux \
   --vendor "DLSC Software & Consulting GmbH" \
-  --copyright "Copyright © 2021 DLSC GmbH"
+  --copyright "Copyright © 2022 DLSC GmbH"
+
+$JAVA_HOME/bin/jpackage \
+   --type "rpm" \
+    --dest target/installer \
+    --input target/installer/input/libs \
+    --name "${APP_NAME}" \
+    --main-class com.dlsc.jfxcentral.JFXCentralAppLauncher \
+    --main-jar ${MAIN_JAR} \
+    --java-options -Xmx1024m \
+    --runtime-image target/java-runtime \
+    --icon src/main/logo/linux/duke.png \
+    --app-version ${APP_VERSION} \
+    --linux-deb-maintainer dlemmermann@gmail.com \
+    --linux-shortcut \
+    --resource-dir app/assets/linux \
+    --vendor "DLSC Software & Consulting GmbH" \
+    --copyright "Copyright © 2022 DLSC GmbH"

@@ -93,7 +93,7 @@ do
   --icon src/main/logo/macosx/duke.icns \
   --app-version ${APP_VERSION} \
   --vendor "DLSC Software & Consulting GmbH" \
-  --copyright "Copyright © 2021 DLSC GmbH" \
+  --copyright "Copyright © 2022 DLSC GmbH" \
   --mac-package-identifier com.dlsc.jfxcentral \
   --mac-package-name "${APP_NAME}"
 done
