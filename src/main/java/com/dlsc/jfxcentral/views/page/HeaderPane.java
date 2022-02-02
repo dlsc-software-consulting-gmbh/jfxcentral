@@ -159,15 +159,19 @@ public class HeaderPane extends HBox {
         sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
         sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
-        NavigationView navigationView = new NavigationView();
-        navigationView.setVisible(!WebAPI.isBrowser());
-        navigationView.setManaged(!WebAPI.isBrowser());
-        HBox.setMargin(navigationView, new Insets(0, 0, 0, 20));
+        if (!WebAPI.isBrowser()) {
+            NavigationView navigationView = new NavigationView();
+            navigationView.setVisible(!WebAPI.isBrowser());
+            navigationView.setManaged(!WebAPI.isBrowser());
+            HBox.setMargin(navigationView, new Insets(0, 0, 0, 20));
 
-        Button scenicView = new Button("Scenic View");
-        scenicView.setOnAction(evt -> ScenicView.show(getScene()));
-        scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
-        scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
-        getChildren().addAll(stackPane, refreshButton, sourceComboBox, scenicView, searchField, navigationView);
+            Button scenicView = new Button("Scenic View");
+            scenicView.setOnAction(evt -> ScenicView.show(getScene()));
+            scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
+            scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
+            getChildren().addAll(stackPane, refreshButton, sourceComboBox, scenicView, searchField, navigationView);
+        } else {
+            getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField);
+        }
     }
 }

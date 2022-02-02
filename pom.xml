@@ -1142,7 +1142,7 @@
                                 ${main.class}
                             </mainClassName>
                             <localJVMArgs>
-                                <JVMArg>-Dcssfx=true</JVMArg>
+                                <JVMArg>-Dcssfx=false</JVMArg>
                                 <JVMArg>-Dshow.refresh.button=true</JVMArg>
                                 <JVMArg>-Djpro=true</JVMArg>
                             </localJVMArgs>

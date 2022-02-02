@@ -2436,27 +2436,27 @@
     -fx-spacing: 10px;
 }
 
-.navigation-view .menu-button {
+.navigation-view .button {
     -fx-pref-width: 48px;
     -fx-pref-height: 48px;
     -fx-background-color: derive(-fx-accent, -20%);
     -fx-background-radius: 1000px;
 }
 
-.navigation-view .menu-button .ikonli-font-icon {
-    -fx-icon-size: white !important;
+.navigation-view .button .ikonli-font-icon {
+    -fx-icon-color: white;
     -fx-icon-size: 24px;
 }
 
-.navigation-view .menu-button:pressed {
+.navigation-view .button:pressed {
     -fx-background-color: derive(-fx-accent, -10%) !important;
 }
 
-.navigation-view .menu-button:pressed .ikonli-font-icon {
+.navigation-view .button:pressed .ikonli-font-icon {
     -fx-icon-color: white;
 }
 
-.navigation-view .menu-button:hover {
+.navigation-view .button:hover {
     -fx-background-color: white, derive(-fx-accent, -20%);
     -fx-background-insets: 0px, 1px;
 }

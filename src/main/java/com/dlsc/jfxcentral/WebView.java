@@ -104,9 +104,7 @@ public class WebView extends com.jpro.web.View {
         }
 
         if (currentPage != null) {
-            if (isMobile() || item != null) {
-                currentPage.showItem(item); // even when item is null (because mobile)
-            }
+            currentPage.showItem(item); // even when item is null (because mobile)
         }
 
         return true;

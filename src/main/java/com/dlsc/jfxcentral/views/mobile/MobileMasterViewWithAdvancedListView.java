@@ -24,8 +24,12 @@ public abstract class MobileMasterViewWithAdvancedListView<T extends ModelObject
     }
 
     public void showItem(T item) {
-        setSelectedItem(item);
-        Platform.runLater(() -> listView.getListView().scrollTo(item));
+        if (item == null) {
+            Platform.runLater(() -> performDefaultSelection());
+        } else {
+            setSelectedItem(item);
+            Platform.runLater(() -> listView.getListView().scrollTo(item));
+        }
     }
 
     protected void performDefaultSelection() {
