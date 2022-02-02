@@ -1,6 +1,5 @@
 package com.dlsc.jfxcentral.util;
 
-import com.dlsc.jfxcentral.CustomStage;
 import javafx.beans.InvalidationListener;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -16,12 +15,29 @@ public class StageManager {
     private final Stage stage;
     private final Preferences preferences;
 
+    private double minWidth;
+    private double minHeight;
+
     public static StageManager install(Stage stage, String path) {
-        return new StageManager(stage, path);
+        return install(stage, path, 850, 800);
     }
 
-    private StageManager(Stage stage, String path) {
+    public static StageManager install(Stage stage, String path, double minWidth, double minHeight) {
+        StageManager manager = new StageManager(stage, path, minWidth, minHeight);
+        return manager;
+    }
+
+    private StageManager(Stage stage, String path, double minWidth, double minHeight) {
+        if (minWidth <= 0) {
+            throw new IllegalArgumentException("min width must be larger than 0");
+        }
+        if (minHeight <= 0) {
+            throw new IllegalArgumentException("min height must be larger than 0");
+        }
+
         this.stage = stage;
+        this.minWidth = minWidth;
+        this.minHeight = minHeight;
 
         preferences = Preferences.userRoot().node(path);
 
@@ -66,8 +82,8 @@ public class StageManager {
             stage.setY(Math.max(0, y));
         }
 
-        stage.setWidth(Math.max(CustomStage.MIN_STAGE_WIDTH, Math.min(w, bounds.getWidth())));
-        stage.setHeight(Math.max(CustomStage.MIN_STAGE_HEIGHT, Math.min(h, bounds.getHeight())));
+        stage.setWidth(Math.max(minWidth, Math.min(w, bounds.getWidth())));
+        stage.setHeight(Math.max(minHeight, Math.min(h, bounds.getHeight())));
     }
 
     public Preferences getPreferences() throws SecurityException {

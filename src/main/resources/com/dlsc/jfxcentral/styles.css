@@ -85,6 +85,8 @@
     -fx-text-fill: white;
     -fx-prompt-text-fill: white;
     -fx-pref-width: 200px;
+    -fx-max-width: 200px;
+    -fx-min-width: 200px;
 }
 
 .filter-view .search-text-field .ikonli-font-icon,
@@ -2434,27 +2436,27 @@
     -fx-spacing: 10px;
 }
 
-.navigation-view .button {
+.navigation-view .menu-button {
     -fx-pref-width: 48px;
     -fx-pref-height: 48px;
     -fx-background-color: derive(-fx-accent, -20%);
     -fx-background-radius: 1000px;
 }
 
-.navigation-view .button .ikonli-font-icon {
-    -fx-icon-size: white;
+.navigation-view .menu-button .ikonli-font-icon {
+    -fx-icon-size: white !important;
     -fx-icon-size: 24px;
 }
 
-.navigation-view .button:pressed {
+.navigation-view .menu-button:pressed {
     -fx-background-color: derive(-fx-accent, -10%) !important;
 }
 
-.navigation-view .button:pressed .ikonli-font-icon {
+.navigation-view .menu-button:pressed .ikonli-font-icon {
     -fx-icon-color: white;
 }
 
-.navigation-view .button:hover {
+.navigation-view .menu-button:hover {
     -fx-background-color: white, derive(-fx-accent, -20%);
     -fx-background-insets: 0px, 1px;
 }

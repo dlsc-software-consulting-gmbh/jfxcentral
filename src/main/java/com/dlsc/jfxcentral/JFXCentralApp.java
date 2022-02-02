@@ -84,7 +84,9 @@ public class JFXCentralApp extends Application {
         stage.setWidth(1200);
         stage.setHeight(800);
 
-        StageManager.install(stage, "main-window");
+        if (!WebAPI.isBrowser()) {
+            StageManager.install(stage, "main-window", CustomStage.MIN_STAGE_WIDTH, CustomStage.MIN_STAGE_HEIGHT);
+        }
 
         stage.show();
 

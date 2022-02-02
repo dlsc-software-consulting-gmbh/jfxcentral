@@ -2,8 +2,9 @@ package com.dlsc.jfxcentral;
 
 import com.jpro.web.Util;
 import com.jpro.web.sessionmanager.SessionManager;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -17,13 +18,13 @@ public class NavigationView extends HBox {
         setFillHeight(true);
         setAlignment(Pos.CENTER);
 
-        Button back = new Button();
+        MenuButton back = new MenuButton();
         back.setGraphic(new FontIcon(Material.ARROW_BACK));
         back.setOnAction(evt -> Util.goBack(this));
         back.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(back, Priority.ALWAYS);
 
-        Button forward = new Button();
+        MenuButton forward = new MenuButton();
         forward.setGraphic(new FontIcon(Material.ARROW_FORWARD));
         forward.setOnAction(evt -> Util.goForward(this));
         forward.setMaxWidth(Double.MAX_VALUE);
@@ -32,8 +33,8 @@ public class NavigationView extends HBox {
         sceneProperty().addListener(it -> {
             if (getScene() != null) {
                 SessionManager sessionManager = Util.getSessionManager(this);
-//                back.disableProperty().bind(Bindings.isEmpty(sessionManager.getHistoryBackward()));
-//                forward.disableProperty().bind(Bindings.isEmpty(sessionManager.getHistoryForwards()));
+                back.disableProperty().bind(Bindings.isEmpty(sessionManager.getHistoryBackward()));
+                forward.disableProperty().bind(Bindings.isEmpty(sessionManager.getHistoryForwards()));
             }
         });
 

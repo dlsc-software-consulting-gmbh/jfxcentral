@@ -24,6 +24,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 import org.eclipse.jgit.lib.ProgressMonitor;
+import org.scenicview.ScenicView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,6 +164,10 @@ public class HeaderPane extends HBox {
         navigationView.setManaged(!WebAPI.isBrowser());
         HBox.setMargin(navigationView, new Insets(0, 0, 0, 20));
 
-        getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField, navigationView);
+        Button scenicView = new Button("Scenic View");
+        scenicView.setOnAction(evt -> ScenicView.show(getScene()));
+        scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
+        scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
+        getChildren().addAll(stackPane, refreshButton, sourceComboBox, scenicView, searchField, navigationView);
     }
 }
