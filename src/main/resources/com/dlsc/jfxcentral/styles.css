@@ -2439,6 +2439,10 @@
 .navigation-view .button {
     -fx-pref-width: 48px;
     -fx-pref-height: 48px;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-max-width: 48px;
+    -fx-max-height: 48px;
     -fx-background-color: derive(-fx-accent, -20%);
     -fx-background-radius: 1000px;
 }
