@@ -3,6 +3,8 @@ package com.dlsc.jfxcentral.views.ikonli;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -48,30 +50,34 @@ public class IkonliBrowser extends BorderPane {
 
             FontIcon icon = new FontIcon();
             Label nameLabel = new Label();
+            VBox wrapper;
 
             {
                 nameLabel.setWrapText(true);
                 nameLabel.setMinHeight(Region.USE_PREF_SIZE);
                 nameLabel.setTextAlignment(TextAlignment.CENTER);
 
-                VBox wrapper = new VBox(icon, nameLabel);
+                wrapper = new VBox(icon, nameLabel);
                 wrapper.getStyleClass().add("wrapper");
                 wrapper.setAlignment(Pos.TOP_CENTER);
 
-                wrapper.setOnMouseClicked(me -> {
-                    if (previousSelection != null) {
-                        previousSelection.getStyleClass().remove("active-icon");
-                    }
-
-                    selection.setText(icon.getIconCode().getDescription());
-                    wrapper.getStyleClass().add("active-icon");
-                    previousSelection = wrapper;
-                });
+                selectedIkonProperty().addListener(it -> updateWrapperStyleClass());
+                wrapper.setOnMouseClicked(me -> setSelectedIkon(getItem()));
 
                 setGraphic(wrapper);
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 setMinWidth(80);
                 wrapper.visibleProperty().bind(emptyProperty().not());
+            }
+
+            private void updateWrapperStyleClass() {
+                wrapper.getStyleClass().remove("selected");
+                Ikon item = getItem();
+                if (item != null) {
+                    if (item.equals(getSelectedIkon())) {
+                        wrapper.getStyleClass().add("selected");
+                    }
+                }
             }
 
             @Override
@@ -85,6 +91,7 @@ public class IkonliBrowser extends BorderPane {
                     } else {
                         nameLabel.setText(item.getDescription());
                     }
+                    updateWrapperStyleClass();
                 }
             }
         });
@@ -131,9 +138,23 @@ public class IkonliBrowser extends BorderPane {
 
         setPrefHeight(0);
         VBox.setVgrow(this, Priority.ALWAYS);
+
+        selectedIkon.addListener(it -> selection.setText(getSelectedIkon() != null ? getSelectedIkon().getDescription() : ""));
     }
 
-    private VBox previousSelection;
+    private final ObjectProperty<Ikon> selectedIkon = new SimpleObjectProperty<>(this, "selectedItem");
+
+    public Ikon getSelectedIkon() {
+        return selectedIkon.get();
+    }
+
+    public ObjectProperty<Ikon> selectedIkonProperty() {
+        return selectedIkon;
+    }
+
+    public void setSelectedIkon(Ikon selectedIkon) {
+        this.selectedIkon.set(selectedIkon);
+    }
 
     private void fillGridView(ObservableList<IkonData> selection) {
         Platform.runLater(() -> {

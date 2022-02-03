@@ -517,6 +517,18 @@
     -fx-fill: -fx-accent;
 }
 
+.master-tip-list-cell .date-label {
+    -fx-line-spacing: 0px;
+    -fx-pref-width: 45px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 4px;
+    -fx-font-size: 0.7em;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-padding: 5px 5px;
+    -fx-alignment: center;
+}
+
 /* ----------------------------------------------------------------------------
  * MasterPersonCell
  */
@@ -1207,6 +1219,7 @@
 .section-pane .list-cell.last {
     -fx-border-width: 0px;
     -fx-padding: 0px;
+    -fx-border-insets: 0px 0px 0px 0px !important;
 }
 
 .section-pane .pretty-list-view .scroll-bar:vertical {
@@ -2328,12 +2341,12 @@
     -fx-background-color: white;
 }
 
-.ikonli-browser .icon-grid .ikonli-font-icon {
+.ikonli-browser .icon-grid .grid-cell .ikonli-font-icon {
     -fx-icon-size: 32px;
     -fx-icon-color: rgba(0, 0, 0, .75);
 }
 
-.ikonli-browser .icon-grid .wrapper {
+.ikonli-browser .icon-grid .grid-cell .wrapper {
     -fx-alignment: top-center;
     -fx-padding: 5px 10px;
     -fx-spacing: 5px;
@@ -2343,21 +2356,21 @@
     -fx-min-height: 100px;
 }
 
-.ikonli-browser .icon-grid .wrapper .label {
+.ikonli-browser .icon-grid .grid-cell .wrapper .label {
     -fx-font-size: .8em;
     -fx-text-fill: grey;
 }
 
-.ikonli-browser .icon-grid .wrapper.active-icon {
+.ikonli-browser .icon-grid .grid-cell .wrapper.selected {
     -fx-background-radius: 4px;
     -fx-background-color: -fx-accent;
 }
 
-.ikonli-browser .icon-grid .wrapper.active-icon .ikonli-font-icon {
+.ikonli-browser .icon-grid .grid-cell .wrapper.selected .ikonli-font-icon {
     -fx-icon-color: white;
 }
 
-.ikonli-browser .icon-grid .wrapper.active-icon .label {
+.ikonli-browser .icon-grid .grid-cell .wrapper.selected .label {
     -fx-text-fill: white;
 }
 
