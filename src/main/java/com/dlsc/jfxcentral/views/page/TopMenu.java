@@ -30,20 +30,11 @@ public class TopMenu extends ToolBar {
 
         this.page = page;
 
-        expandedProperty().bind(Bindings.createBooleanBinding(() -> {
-            // important to only run this when the menu has been added to the scene,
-            // otherwise the logo will flicker
-            if (getScene() != null) {
-                Display display = page.getRootPane().getDisplay();
-                if (display.equals(Display.DESKTOP) || display.equals(Display.WEB)) {
-                    return page.getWidth() > 1100;
-                }
-            }
-
-            return true;
-        }, page.widthProperty()));
-
-        page.getRootPane().expandedProperty().bind(expandedProperty());
+        // --- all steps are important, otherwise top menu flickers
+        page.widthProperty().addListener(it -> updateExpanded());
+        sceneProperty().addListener(it -> updateExpanded());
+        sceneProperty().addListener(it -> page.getRootPane().expandedProperty().bind(expandedProperty()));
+        // end of important
 
         getStyleClass().add("top-menu");
 
@@ -169,6 +160,15 @@ public class TopMenu extends ToolBar {
         return new StackPane(node);
     }
 
+    private void updateExpanded() {
+        if (getScene() != null) {
+            Display display = page.getRootPane().getDisplay();
+            if (display.equals(Display.DESKTOP) || display.equals(Display.WEB)) {
+                setExpanded(getScene().getWidth() > 1100);
+            }
+        }
+    }
+
     private void updateExpandedPseudoClass() {
         pseudoClassStateChanged(PseudoClass.getPseudoClass("expanded"), isExpanded());
     }
@@ -254,7 +254,7 @@ public class TopMenu extends ToolBar {
         return stackPane;
     }
 
-    private final BooleanProperty expanded = new SimpleBooleanProperty(this, "expanded", true);
+    private final BooleanProperty expanded = new SimpleBooleanProperty(this, "expanded");
 
     public boolean isExpanded() {
         return expanded.get();
