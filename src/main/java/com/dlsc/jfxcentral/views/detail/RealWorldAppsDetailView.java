@@ -62,9 +62,7 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
         sectionPane.setSubtitle("Information about the application and screenshots");
 
         MarkdownView markdownView = new MarkdownView();
-        markdownView.setOnImageClick(image -> {
-            getRootPane().showImage(getSelectedItem().getName(), image);
-        });
+        markdownView.setOnImageClick(image -> getRootPane().showImage(getSelectedItem().getName(), image));
         sectionPane.getNodes().add(markdownView);
 
         selectedItemProperty().addListener(it -> {

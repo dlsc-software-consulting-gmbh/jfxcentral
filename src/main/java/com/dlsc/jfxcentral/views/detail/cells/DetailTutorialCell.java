@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class DetailTutorialCell extends DetailCell<Tutorial> {
@@ -36,9 +35,9 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
         visitButton.setGraphic(new FontIcon(StandardIcons.TUTORIAL));
 
         responsiveBox = new ResponsiveBox(rootPane.isMobile() ? ResponsiveBox.ImageLocation.BANNER : primaryView ? ResponsiveBox.ImageLocation.LARGE_ON_SIDE : ResponsiveBox.ImageLocation.SMALL_ON_SIDE);
+        responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
         responsiveBox.getTitleLabel().setGraphic(commercialLabel);
         responsiveBox.getExtraControls().addAll(visitButton);
-        responsiveBox.visibleProperty().bind(itemProperty().isNotNull());
 
         addLinkIcon(responsiveBox.getTitleLabel());
 
@@ -47,7 +46,7 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
 
         responsiveBox.getImageView().setCursor(Cursor.HAND);
         responsiveBox.getImageView().setOnMouseClicked(evt -> {
-            if (evt.getClickCount() == 1 && evt.getButton().equals(MouseButton.PRIMARY)) {
+            if (evt.isStillSincePress()) {
                 showLargeImage(getItem());
             }
         });

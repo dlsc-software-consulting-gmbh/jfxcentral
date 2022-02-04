@@ -8,6 +8,7 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.util.FilterUtil;
+import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.AdvancedListView;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
@@ -20,9 +21,12 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,6 +53,12 @@ public class OpenJFXDetailView extends DetailView {
         getStyleClass().add("openjfx-detail-view");
 
         createHeader();
+
+        Button bugButton = new Button("REPORT AN ISSUE / A BUG");
+        bugButton.getStyleClass().add("report-bug-button");
+        content.getChildren().add(bugButton);
+        Util.setLink(bugButton, "", "JavaFX Bug Tracker");
+
         createPullRequests();
 
         // using static update time field as this will be for shared clients on the web server

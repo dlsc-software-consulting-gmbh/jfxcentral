@@ -1678,6 +1678,12 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * DetailDownloadCell
+ */
+.detail-download-cell .button-box {
+}
+
+/* ----------------------------------------------------------------------------
  * DetailPersonCell
  */
 .detail-person-cell .hbox {
@@ -2201,7 +2207,7 @@
  * OverlayPane
  */
 .overlay-pane {
-    -fx-background-color: rgba(0, 0, 0, .95);
+    -fx-background-color: rgba(0, 0, 0, .8);
 }
 
 .overlay-pane .close-button {
@@ -2477,4 +2483,23 @@
 .navigation-view .button:hover {
     -fx-background-color: white, derive(-fx-accent, -20%);
     -fx-background-insets: 0px, 1px;
+}
+
+.download-box {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+}
+
+.download-box .download-button-big {
+    -fx-cursor: hand;
+    -fx-padding: 20px;
+    -fx-graphic-text-gap: 20px;
+    -fx-min-width: 400px;
+    -fx-font-size: 24px;
+    -fx-background-color: rgba(0, 0, 0, .6);
+    -fx-alignment: left;
+}
+
+.download-box .download-button-big .ikonli-font-icon {
+    -fx-icon-size: 32px;
 }

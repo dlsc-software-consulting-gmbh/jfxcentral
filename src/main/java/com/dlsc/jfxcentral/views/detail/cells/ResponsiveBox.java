@@ -96,6 +96,10 @@ public class ResponsiveBox extends Pane {
         return Orientation.HORIZONTAL;
     }
 
+    public FlowPane getExtraControlsPane() {
+        return extraControlsPane;
+    }
+
     private boolean forceImageLocation;
 
     public void setForceImageLocation(boolean forceImageLocation) {
