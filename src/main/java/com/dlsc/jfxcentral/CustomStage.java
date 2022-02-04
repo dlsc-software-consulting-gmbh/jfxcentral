@@ -30,8 +30,8 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class CustomStage extends BorderPane {
 
     private static final int OFFSET = 5;
-    public static final double MIN_STAGE_WIDTH = 850;
-    public static final double MIN_STAGE_HEIGHT = 800;
+    public static final double MIN_STAGE_WIDTH = 900;
+    public static final double MIN_STAGE_HEIGHT = 600;
 
     private double startX;
     private double startY;

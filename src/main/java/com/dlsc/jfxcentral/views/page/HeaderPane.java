@@ -15,6 +15,8 @@ import com.jpro.webapi.WebAPI;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -173,5 +175,29 @@ public class HeaderPane extends HBox {
         } else {
             getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField);
         }
+
+//        Button count = new Button("count");
+//        count.setOnAction(evt -> countTree(getScene()));
+//        getChildren().add(count);
+    }
+
+    class Counter {
+        int count;
+    }
+
+    private void countTree(Scene scene) {
+        Counter counter = new Counter();
+
+        countTree(scene.getRoot(), counter);
+        System.out.println("counter: " + counter.count);
+    }
+
+    private void countTree(Parent root, Counter counter) {
+        counter.count += root.getChildrenUnmodifiable().size();
+        root.getChildrenUnmodifiable().forEach(child -> {
+            if (child instanceof Parent) {
+                countTree((Parent) child, counter);
+            }
+        });
     }
 }

@@ -380,8 +380,7 @@
     -fx-padding: 0.7142em 2.1428em 0.7142em 1.0714em;
 }
 
-.top-menu > * > * > .toggle-button:hover,
-.top-menu > * > * > .toggle-button:hover:selected {
+.top-menu > * > * > .toggle-button:hover {
     -fx-opacity: 1;
     -fx-background-color: -red;
     -fx-border-color: transparent transparent transparent derive(-red, -20%);
@@ -399,7 +398,8 @@
     -fx-icon-color: white;
 }
 
-.top-menu > * > * > .toggle-button:selected {
+.top-menu > * > * > .toggle-button:selected,
+.top-menu > * > * > .toggle-button:selected:hover {
     -fx-opacity: 1;
     -fx-background-padding: 0px;
     -fx-background-color: -fx-accent;

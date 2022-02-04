@@ -136,9 +136,19 @@ public class JFXCentralApp extends Application {
         DataRepository.getInstance().getRealWorldApps().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(realWorld, mo));
         DataRepository.getInstance().getTips().stream().sorted(Comparator.comparing(ModelObject::getName)).forEach(mo -> createMenuItem(tips, mo));
 
+        MenuItem showApp = new MenuItem("Main Window");
+        showApp.setOnAction(evt -> {
+            stage.show();
+            stage.setIconified(false);
+            stage.toFront();
+        });
+        icon.addMenuItem(showApp);
+
         MenuItem openjfx = new MenuItem("Visit openjfx.io");
         openjfx.setOnAction(evt -> showURL("https://openjfx.io"));
         icon.addMenuItem(openjfx);
+
+        icon.addSeparator();
 
         MenuItem iconBrowser = new MenuItem("Ikonli Browser");
         iconBrowser.setOnAction(evt -> showIkonliBrowser());
@@ -156,13 +166,17 @@ public class JFXCentralApp extends Application {
         cssDocs.setOnAction(evt -> showURL("https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html"));
         icon.addMenuItem(cssDocs);
 
+        icon.addSeparator();
+
         MenuItem addInfoToJfxCentral = new MenuItem("Add Info to JFX-Central");
         addInfoToJfxCentral.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data"));
         icon.addMenuItem(addInfoToJfxCentral);
 
         MenuItem reportIssue = new MenuItem("Report an Issue");
-        reportIssue.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral-data/issues"));
+        reportIssue.setOnAction(evt -> showURL("https://github.com/dlemmermann/jfxcentral/issues"));
         icon.addMenuItem(reportIssue);
+
+        icon.addSeparator();
 
         icon.addMenuItem(libraries);
         icon.addMenuItem(tools);
@@ -205,7 +219,9 @@ public class JFXCentralApp extends Application {
             StageManager.install(showcaseStage, "showcasefx");
         }
 
+        showcaseStage.setIconified(false);
         showcaseStage.show();
+        showcaseStage.toFront();
     }
 
     private Stage ikonliStage;
@@ -232,7 +248,9 @@ public class JFXCentralApp extends Application {
             StageManager.install(ikonliStage, "ikonli-browser");
         }
 
+        ikonliStage.setIconified(false);
         ikonliStage.show();
+        ikonliStage.toFront();
     }
 
     private void createMenuItem(Menu people, ModelObject mo) {

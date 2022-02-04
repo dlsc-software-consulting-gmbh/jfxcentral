@@ -7,10 +7,12 @@ import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.page.StandardIcons;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class DetailTutorialCell extends DetailCell<Tutorial> {
@@ -43,8 +45,9 @@ public class DetailTutorialCell extends DetailCell<Tutorial> {
         setGraphic(responsiveBox);
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
-        setOnMouseClicked(evt -> {
-            if (evt.getClickCount() == 2) {
+        responsiveBox.getImageView().setCursor(Cursor.HAND);
+        responsiveBox.getImageView().setOnMouseClicked(evt -> {
+            if (evt.getClickCount() == 1 && evt.getButton().equals(MouseButton.PRIMARY)) {
                 showLargeImage(getItem());
             }
         });

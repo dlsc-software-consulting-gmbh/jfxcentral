@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral.views.detail;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
+import com.dlsc.jfxcentral.data.model.Company;
 import com.dlsc.jfxcentral.data.model.Person;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral.panels.SectionPane;
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 import java.util.List;
@@ -139,13 +141,13 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
             photoView.photoProperty().unbind();
             photoView.setPhoto(null);
             if (blog != null) {
-//                String companyId = blog.getCompanyId();
-//                if (StringUtils.isNotBlank(companyId)) {
-//                    Optional<Company> companyById = DataRepository.getInstance().getCompanyById(companyId);
-//                    if (companyById.isPresent()) {
-//                        photoView.photoProperty().bind(ImageManager.getInstance().companyImageProperty(companyById.get()));
-//                    }
-//                } else {
+                String companyId = blog.getCompanyId();
+                if (StringUtils.isNotBlank(companyId)) {
+                    Optional<Company> companyById = DataRepository.getInstance().getCompanyById(companyId);
+                    if (companyById.isPresent()) {
+                        photoView.photoProperty().bind(ImageManager.getInstance().companyImageProperty(companyById.get()));
+                    }
+                } else {
                     List<String> personIds = blog.getPersonIds();
                     if (!personIds.isEmpty()) {
                         Optional<Person> personById = DataRepository.getInstance().getPersonById(personIds.get(0));
@@ -153,7 +155,7 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
                             photoView.photoProperty().bind(ImageManager.getInstance().personImageProperty(personById.get()));
                         }
                     }
-//                }
+                }
             }
         });
 

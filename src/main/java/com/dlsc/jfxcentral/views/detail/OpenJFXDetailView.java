@@ -35,7 +35,7 @@ import java.util.List;
 
 public class OpenJFXDetailView extends DetailView {
 
-    private VBox content = new VBox();
+    private VBox content = new VBox(20);
 
     // static, shared across UI instances
     private static final ObservableList<PullRequest> pullRequests = FXCollections.observableArrayList();
@@ -50,10 +50,6 @@ public class OpenJFXDetailView extends DetailView {
 
         createHeader();
         createPullRequests();
-
-        content.getChildren().add(new Region());
-
-        setContent(content);
 
         // using static update time field as this will be for shared clients on the web server
         if (pullRequestUpdateTime == null || Duration.between(pullRequestUpdateTime, ZonedDateTime.now()).toHours() > 3) {
@@ -72,16 +68,6 @@ public class OpenJFXDetailView extends DetailView {
         }
 
         updateFilters();
-
-        Pane box;
-        if (rootPane.isMobile()) {
-            box = new VBox();
-        } else {
-            box = new HBox();
-        }
-
-        box.getStyleClass().add("footer");
-        content.getChildren().add(box);
 
         if (rootPane.isMobile()) {
             // no Twitter feed on mobile
@@ -250,6 +236,7 @@ public class OpenJFXDetailView extends DetailView {
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setCellFactory(view -> new DetailPullRequestCell(getRootPane()));
         listView.setItems(filterView.getFilteredItems());
+        listView.setMinHeight(700);
 
         sectionPane.getNodes().add(listView);
 

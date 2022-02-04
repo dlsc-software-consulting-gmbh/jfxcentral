@@ -4,7 +4,6 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Tool;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.geometry.Pos;
@@ -17,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
-public class DetailToolCell extends AdvancedListCell<Tool> {
+public class DetailToolCell extends DetailCell<Tool> {
 
     private final Button homepageButton;
     private final Button repositoryButton;
@@ -36,6 +35,8 @@ public class DetailToolCell extends AdvancedListCell<Tool> {
         titleLabel.setMinHeight(Region.USE_PREF_SIZE);
         titleLabel.setAlignment(Pos.TOP_LEFT);
         titleLabel.setContentDisplay(ContentDisplay.RIGHT);
+
+        addLinkIcon(titleLabel);
 
         buttonBox.getStyleClass().add("button-box");
 
