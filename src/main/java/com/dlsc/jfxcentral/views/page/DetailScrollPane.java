@@ -20,6 +20,15 @@ public class DetailScrollPane extends StackPane {
         scrollPane.setFitToWidth(true);
         scrollPane.setMobile(rootPane.isMobile());
         getChildren().add(scrollPane);
+
+        scrollPane.getVerticalScrollBar().setOpacity(0);
+        scrollPane.getVerticalScrollBar().valueProperty().addListener(it -> showScrollBar(true));
+        hoverProperty().addListener(it -> showScrollBar(isHover()));
+
+    }
+
+    private void showScrollBar(boolean show) {
+        scrollPane.getVerticalScrollBar().setOpacity(show ? 1 : 0);
     }
 
     public void setContent(Node content) {
