@@ -96,7 +96,7 @@ public class LibrariesDetailView extends ModelObjectDetailView<Library> {
     }
 
     private void createCoordinatesBox() {
-        CoordinatesPane sectionPane = new CoordinatesPane();
+        CoordinatesPane sectionPane = new CoordinatesPane(getRootPane());
         sectionPane.coordinatesProperty().bind(selectedItemProperty());
         content.getChildren().add(sectionPane);
     }

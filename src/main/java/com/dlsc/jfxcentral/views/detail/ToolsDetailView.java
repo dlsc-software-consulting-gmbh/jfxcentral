@@ -98,7 +98,7 @@ public class ToolsDetailView extends ModelObjectDetailView<Tool> {
     }
 
     private void createCoordinatesBox() {
-        CoordinatesPane coordinatesPane = new CoordinatesPane();
+        CoordinatesPane coordinatesPane = new CoordinatesPane(getRootPane());
         coordinatesPane.coordinatesProperty().bind(selectedItemProperty());
         content.getChildren().add(coordinatesPane);
     }

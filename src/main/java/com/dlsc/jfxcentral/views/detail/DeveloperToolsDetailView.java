@@ -1,6 +1,7 @@
 package com.dlsc.jfxcentral.views.detail;
 
 import com.dlsc.jfxcentral.JFXCentralApp;
+import com.dlsc.jfxcentral.panels.PrettyScrollPane;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.DeveloperTool;
 import com.dlsc.jfxcentral.util.Util;
@@ -38,8 +39,7 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
             if (selectedItem != null) {
                 switch (selectedItem.getTool()) {
                     case CSS_DOCS:
-                        Node cssDocsView = createCSSDocsView();
-                        setContent(cssDocsView);
+                        setContent(createCSSDocsView());
                         break;
                     case IKONLI:
                         setContent(createIkonliView());
@@ -143,8 +143,17 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
         vBox.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox, Priority.ALWAYS);
 
+        PrettyScrollPane scrollPane = new PrettyScrollPane(vBox);
+        scrollPane.setShowScrollToTopButton(false);
+        scrollPane.setShowShadow(false);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setMinHeight(0);
+        scrollPane.setPrefHeight(0);
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
         SectionPane sectionPane2 = new SectionPane();
-        sectionPane2.getNodes().add(vBox);
+        sectionPane2.getNodes().add(scrollPane);
         VBox.setVgrow(sectionPane2, Priority.ALWAYS);
 
         return new VBox(sectionPane1, sectionPane2);

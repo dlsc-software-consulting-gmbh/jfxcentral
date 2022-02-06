@@ -39,9 +39,7 @@ public class MobileTopMenu extends VBox {
         ToggleButton videosButton = createButton("Videos", View.VIDEOS, new FontIcon(StandardIcons.VIDEO));
         ToggleButton openJfxButton = createButton("Open JFX", View.OPENJFX, new FontIcon(StandardIcons.OPENJFX));
         ToggleButton realWorldAppsButton = createButton("Real World Apps", View.REAL_WORLD, new FontIcon(StandardIcons.REAL_WORLD));
-        ToggleButton downloadsButton = createButton("Downloads", View.DOWNLOADS, new FontIcon(StandardIcons.DOWNLOAD));
         ToggleButton tipsButton = createButton("Tips & Tricks", View.TIPS, new FontIcon(StandardIcons.TIP));
-        ToggleButton developmentButton = createButton("Dev", View.DEVELOPMENT, new FontIcon(StandardIcons.DEVELOPMENT));
 
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(
@@ -56,9 +54,7 @@ public class MobileTopMenu extends VBox {
                 toolsButton,
                 libsButton,
                 tutorialsButton,
-                realWorldAppsButton,
-                downloadsButton,
-                developmentButton);
+                realWorldAppsButton);
 
         toggleGroup.selectToggle(homeButton);
 
@@ -75,10 +71,7 @@ public class MobileTopMenu extends VBox {
                 wrap(booksButton),
                 wrap(toolsButton),
                 wrap(libsButton),
-                wrap(tutorialsButton),
-                wrap(downloadsButton),
-                wrap(developmentButton)
-        );
+                wrap(tutorialsButton));
 
         toggleGroup.selectedToggleProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
@@ -129,12 +122,6 @@ public class MobileTopMenu extends VBox {
                     break;
                 case VIDEOS:
                     toggleGroup.selectToggle(videosButton);
-                    break;
-                case DOWNLOADS:
-                    toggleGroup.selectToggle(downloadsButton);
-                    break;
-                case DEVELOPMENT:
-                    toggleGroup.selectToggle(developmentButton);
                     break;
             }
         });

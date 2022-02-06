@@ -20,6 +20,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -54,10 +55,20 @@ public class OpenJFXDetailView extends DetailView {
 
         createHeader();
 
-        Button bugButton = new Button("REPORT AN ISSUE / A BUG");
+        Button openJFXButton = new Button("VISIT THE PROJECT HOMEPAGE\nON OPENJFX.IO");
+        openJFXButton.getStyleClass().add("openjfxio-button");
+        Util.setLink(openJFXButton, "https://openjfx.io", "JavaFX Bug Tracker");
+        content.getChildren().add(openJFXButton);
+
+        Button bugButton = new Button("REPORT AN ISSUE / A BUG\nRELATED TO JAVAFX");
         bugButton.getStyleClass().add("report-bug-button");
+        Util.setLink(bugButton, "https://bugs.openjdk.java.net", "JavaFX Bug Tracker");
         content.getChildren().add(bugButton);
-        Util.setLink(bugButton, "", "JavaFX Bug Tracker");
+
+        if (rootPane.isMobile()) {
+            VBox.setMargin(openJFXButton, new Insets(0, 10, 0, 10));
+            VBox.setMargin(bugButton, new Insets(0, 10, 0, 10));
+        }
 
         createPullRequests();
 
@@ -223,21 +234,23 @@ public class OpenJFXDetailView extends DetailView {
 
         Bindings.bindContent(filterView.getItems(), pullRequests);
 
-        filterView.setTextFilterProvider(text -> pullRequest -> {
-            if (pullRequest.getTitle().toLowerCase().contains(text)) {
-                return true;
-            }
+        if (!getRootPane().isMobile()) {
+            filterView.setTextFilterProvider(text -> pullRequest -> {
+                if (pullRequest.getTitle().toLowerCase().contains(text)) {
+                    return true;
+                }
 
-            if (pullRequest.getBody().toLowerCase().contains(text)) {
-                return true;
-            }
+                if (pullRequest.getBody().toLowerCase().contains(text)) {
+                    return true;
+                }
 
-            if (StringUtils.containsIgnoreCase(pullRequest.getUser().getLogin(), text)) {
-                return true;
-            }
+                if (StringUtils.containsIgnoreCase(pullRequest.getUser().getLogin(), text)) {
+                    return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
+        }
 
         AdvancedListView<PullRequest> listView = new AdvancedListView<>();
         listView.setPlaceholder(new Label("Loading pull requests from GitHub ..."));

@@ -4,6 +4,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.Coordinates;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.views.MarkdownView;
+import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -30,7 +31,7 @@ public class CoordinatesPane extends SectionPane {
     private final MarkdownView versionBadgeMarkdownView;
     private final Label repositoryCoordinatesLabel;
 
-    public CoordinatesPane() {
+    public CoordinatesPane(RootPane rootPane) {
         setTitle("Coordinates");
         setSubtitle("Repository group and artifact IDs");
         getStyleClass().add("coordinates-pane");
@@ -85,7 +86,9 @@ public class CoordinatesPane extends SectionPane {
                 String artifactId = coordinates.getArtifactId();
 
                 if (StringUtils.isNotBlank(groupId) && StringUtils.isNotBlank(artifactId)) {
-                    versionBadgeMarkdownView.setMdString(MessageFormat.format("[![Maven Central](https://img.shields.io/maven-central/v/{0}/{1}.png?label=Maven%20Central)](https://search.maven.org/search?q=g:%22{0}%22%20AND%20a:%22{1}%22)", groupId, artifactId));
+                    if (!rootPane.isMobile()) {
+                        versionBadgeMarkdownView.setMdString(MessageFormat.format("[![Maven Central](https://img.shields.io/maven-central/v/{0}/{1}.png?label=Maven%20Central)](https://search.maven.org/search?q=g:%22{0}%22%20AND%20a:%22{1}%22)", groupId, artifactId));
+                    }
 
                     StringProperty versionProperty = DataRepository.getInstance().getArtifactVersion(coordinates);
 

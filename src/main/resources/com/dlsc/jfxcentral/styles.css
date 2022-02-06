@@ -828,6 +828,28 @@
 }
 
 /* ----------------------------------------------------------------------------
+ * OpenJFXDetailView
+ */
+.openjfx-detail-view .openjfxio-button {
+    -fx-cursor: hand;
+    -fx-max-width: infinity;
+    -fx-text-alignment: center;
+    -fx-padding: 10px;
+}
+
+.openjfx-detail-view .report-bug-button {
+    -fx-cursor: hand;
+    -fx-max-width: infinity;
+    -fx-background-color: -red;
+    -fx-text-alignment: center;
+    -fx-padding: 10px;
+}
+
+.openjfx-detail-view .report-bug-button:hover {
+    -fx-background-color: derive(-red, -20%);
+}
+
+/* ----------------------------------------------------------------------------
  * BooksDetailView
  */
 .books-detail-view {
@@ -2410,6 +2432,10 @@
 .developer-tools-detail-view .disclaimer {
     -fx-font-family: "Inter Italic";
     -fx-text-fill: gray;
+}
+
+.developer-tools-detail-view .scroll-pane .viewport {
+    -fx-background-color: white;
 }
 
 .intro-view .check-box {

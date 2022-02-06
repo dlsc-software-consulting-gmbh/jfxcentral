@@ -72,7 +72,7 @@
             <dependency>
                 <groupId>com.sandec.jpro</groupId>
                 <artifactId>jpro-web-core</artifactId>
-                <version>0.9.6</version>
+                <version>0.9.7</version>
                 <scope>compile</scope>
                 <exclusions>
                     <exclusion>

@@ -28,9 +28,6 @@ public class AdvancedListCell<T> extends ListCell<T> {
         try {
             ObservableList<Node> children2 = null;
             if (WebAPI.isBrowser()) {
-                if (getParent() == null) {
-                    throw new NullPointerException("missing parent");
-                }
                 Method method = Parent.class.getDeclaredMethod("getChildren");
                 method.setAccessible(true);
                 children2 = (ObservableList<Node>) method.invoke(getParent());
@@ -74,14 +71,6 @@ public class AdvancedListCell<T> extends ListCell<T> {
     }
 
     public void setMasterCellLink(ListCell cell, ModelObject item, String description, View view) {
-        if (cell == null) {
-            System.out.println("null cell");
-            return;
-        }
-        if (cell.getParent() == null) {
-            System.out.println("null parent");
-            return;
-        }
         try {
             ObservableList<Node> children2 = null;
             if (WebAPI.isBrowser()) {

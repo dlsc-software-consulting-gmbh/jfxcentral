@@ -4,15 +4,11 @@ import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.Blog;
 import com.dlsc.jfxcentral.data.model.Post;
 import com.dlsc.jfxcentral.util.Util;
-import com.dlsc.jfxcentral.views.AdvancedListCell;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.jpro.webapi.WebAPI;
 import com.rometools.rome.feed.synd.SyndEntry;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -21,7 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
-import java.lang.reflect.Method;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -29,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
-public class DetailPostCell extends AdvancedListCell<Post> {
+public class DetailPostCell extends DetailCell<Post> {
 
     private final RootPane rootPane;
     private final DateTimeFormatter dateTimeFormatter;
@@ -114,16 +109,7 @@ public class DetailPostCell extends AdvancedListCell<Post> {
 
     protected void setLink(String url, String description) {
         try {
-            ObservableList<Node> children2 = null;
-            if (WebAPI.isBrowser()) {
-                if (getParent() == null) {
-                    throw new NullPointerException("missing parent");
-                }
-                Method method = Parent.class.getDeclaredMethod("getChildren");
-                method.setAccessible(true);
-                children2 = (ObservableList<Node>) method.invoke(getParent());
-            }
-            Util.setLink(this, url, description, children2);
+            Util.setLink(this, url, description);
         } catch (Exception e) {
             e.printStackTrace();
         }

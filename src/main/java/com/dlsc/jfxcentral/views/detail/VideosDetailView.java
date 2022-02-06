@@ -108,11 +108,6 @@ public class VideosDetailView extends DetailViewWithListView<Video> {
         updateTypeGroup();
         updatePlatformGroup();
         updateSpeakersGroup();
-
-        Optional<FilterView.Filter<Video>> defaultEvent = eventGroup.getFilters().stream().filter(f -> f.getName().equals("JFX Days 2020")).findFirst();
-        if (defaultEvent.isPresent()) {
-            filterView.getFilters().setAll(defaultEvent.get());
-        }
     }
 
     private void updateSpeakersGroup() {
