@@ -421,6 +421,31 @@
     -fx-icon-color: white;
 }
 
+.top-menu .tool-bar-overflow-button .context-menu .toggle-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-max-width: infinity;
+}
+
+.top-menu .tool-bar-overflow-button .context-menu .toggle-button .ikonli-font-icon {
+    -fx-icon-color: black;
+}
+
+.top-menu .tool-bar-overflow-button .context-menu .menu-item:focused .toggle-button,
+.top-menu .tool-bar-overflow-button .context-menu .menu-item:hover .toggle-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.top-menu .tool-bar-overflow-button .context-menu .menu-item:pressed {
+    -fx-background-color: -red;
+}
+
+.top-menu .tool-bar-overflow-button .context-menu .menu-item:focused .toggle-button .ikonli-font-icon,
+.top-menu .tool-bar-overflow-button .context-menu .menu-item:hover .toggle-button .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
 .top-menu .duke {
     -fx-image: url("duke.png");
 }

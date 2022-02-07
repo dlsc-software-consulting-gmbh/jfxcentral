@@ -12,7 +12,6 @@ import com.dlsc.jfxcentral.views.autocomplete.OmniBoxService;
 import com.dlsc.jfxcentral.views.autocomplete.SearchContext;
 import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.jpro.webapi.WebAPI;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -25,7 +24,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
-import org.eclipse.jgit.lib.ProgressMonitor;
 import org.scenicview.ScenicView;
 
 import java.util.ArrayList;
@@ -74,56 +72,6 @@ public class HeaderPane extends HBox {
         Label statusLabel = new Label();
         Label percentageLabel = new Label();
 
-        Button refreshButton = new Button("Refresh");
-        refreshButton.getStyleClass().add("refresh-button");
-
-        refreshButton.setOnAction(evt -> {
-            JFXCentralApp.updateRepositoryInBackground(new ProgressMonitor() {
-                double total;
-                double completed;
-
-                @Override
-                public void start(int totalTasks) {
-                    total = totalTasks;
-                    updatePercentage();
-                }
-
-                @Override
-                public void beginTask(String title, int totalWork) {
-                    Platform.runLater(() -> statusLabel.setText(title));
-                    updatePercentage();
-                }
-
-                @Override
-                public void update(int completed) {
-                    this.completed = completed;
-                    updatePercentage();
-                }
-
-                @Override
-                public void endTask() {
-                    Platform.runLater(() -> {
-                        statusLabel.setText("");
-                        percentageLabel.setText("");
-                    });
-                }
-
-                @Override
-                public boolean isCancelled() {
-                    return false;
-                }
-
-                private void updatePercentage() {
-                    Platform.runLater(() -> {
-                        percentageLabel.setText((completed / total) + "%");
-                        System.out.println("pl: " + percentageLabel.getText());
-                    });
-                }
-            }, () -> {
-            });
-            DataRepository.getInstance().loadData();
-        });
-
         ComboBox<Source> sourceComboBox = new ComboBox<>();
         sourceComboBox.getItems().addAll(Source.values());
         sourceComboBox.valueProperty().bindBidirectional(DataRepository.getInstance().sourceProperty());
@@ -155,9 +103,6 @@ public class HeaderPane extends HBox {
         imageView.setPreserveRatio(true);
         StackPane.setAlignment(imageView, Pos.TOP_LEFT);
 
-        refreshButton.setVisible(!WebAPI.isBrowser() && Boolean.getBoolean("show.refresh.button"));
-        refreshButton.setManaged(!WebAPI.isBrowser() && Boolean.getBoolean("show.refresh.button"));
-
         sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
         sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
@@ -171,9 +116,9 @@ public class HeaderPane extends HBox {
             scenicView.setOnAction(evt -> ScenicView.show(getScene()));
             scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
             scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
-            getChildren().addAll(stackPane, refreshButton, sourceComboBox, scenicView, searchField, navigationView);
+            getChildren().addAll(stackPane, sourceComboBox, scenicView, searchField, navigationView);
         } else {
-            getChildren().addAll(stackPane, refreshButton, sourceComboBox, searchField);
+            getChildren().addAll(stackPane, sourceComboBox, searchField);
         }
 
 //        Button count = new Button("count");

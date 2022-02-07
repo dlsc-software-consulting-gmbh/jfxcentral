@@ -24,6 +24,6 @@ public class ErrorView extends View {
 
     @Override
     public Node content() {
-        return new Label("falsch: " + path);
+        return new Label("invalid path: " + path);
     }
 }

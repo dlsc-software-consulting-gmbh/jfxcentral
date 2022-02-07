@@ -107,14 +107,6 @@ public class DetailPostCell extends DetailCell<Post> {
         }
     }
 
-    protected void setLink(String url, String description) {
-        try {
-            Util.setLink(this, url, description);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private String getAge(Post item) {
         SyndEntry syndEntry = item.getSyndEntry();
         Date date = syndEntry.getUpdatedDate();

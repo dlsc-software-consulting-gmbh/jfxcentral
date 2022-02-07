@@ -62,7 +62,7 @@ public class OpenJFXDetailView extends DetailView {
 
         Button bugButton = new Button("REPORT AN ISSUE / A BUG\nRELATED TO JAVAFX");
         bugButton.getStyleClass().add("report-bug-button");
-        Util.setLink(bugButton, "https://bugs.openjdk.java.net", "JavaFX Bug Tracker");
+        Util.setLink(bugButton, "https://bugreport.java.com/bugreport/", "JavaFX Bug Report");
         content.getChildren().add(bugButton);
 
         if (rootPane.isMobile()) {

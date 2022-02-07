@@ -26,17 +26,25 @@ public class AdvancedListCell<T> extends ListCell<T> {
 
     protected void setLink(String url, String description) {
         try {
-            ObservableList<Node> children2 = null;
-            if (WebAPI.isBrowser()) {
-                Method method = Parent.class.getDeclaredMethod("getChildren");
-                method.setAccessible(true);
-                children2 = (ObservableList<Node>) method.invoke(getParent());
-            }
-            Util.setLink(this, url, description, children2);
+            Util.setLink(this, url, description);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+//    protected void setLink(String url, String description) {
+//        try {
+//            ObservableList<Node> children2 = null;
+//            if (WebAPI.isBrowser()) {
+//                Method method = Parent.class.getDeclaredMethod("getChildren");
+//                method.setAccessible(true);
+//                children2 = (ObservableList<Node>) method.invoke(getParent());
+//            }
+//            Util.setLink(this, url, description, children2);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /*
      * Super important. For some reason the default compute min height method for a list cell

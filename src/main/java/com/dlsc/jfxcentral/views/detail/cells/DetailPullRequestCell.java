@@ -81,16 +81,13 @@ public class DetailPullRequestCell extends DetailCell<PullRequest> {
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
         setOnMouseClicked(evt -> {
-            if (evt.getButton() == MouseButton.PRIMARY && evt.isStillSincePress() && (evt.getClickCount() == 2 || rootPane.isMobile())) {
+            if (evt.getButton() == MouseButton.PRIMARY && evt.isStillSincePress() && (evt.getClickCount() == 1 || rootPane.isMobile())) {
                 PullRequest item = getItem();
                 if (item != null) {
                     showPullRequestBody(getItem());
                 }
             }
         });
-
-      //  visibleProperty().bind(itemProperty().isNotNull());
-      //  managedProperty().bind(itemProperty().isNotNull());
     }
 
     private void showPullRequestBody(PullRequest pr) {
