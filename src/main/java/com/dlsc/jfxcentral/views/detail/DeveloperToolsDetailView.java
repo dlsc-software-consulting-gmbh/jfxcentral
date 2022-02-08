@@ -113,17 +113,8 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
             Util.setLink(imageView, "/showcase", "Showcase App");
             Util.setLink(button, "/showcase", "Showcase App");
         } else {
-            button.setOnAction(evt -> {
-                Stage stage = new Stage(StageStyle.DECORATED);
-                stage.setTitle("ShowcaseFX");
-                CssShowcaseView view = new CssShowcaseView();
-                Scene scene = new Scene(view);
-                stage.setScene(scene);
-                stage.setWidth(1000);
-                stage.setHeight(800);
-                stage.centerOnScreen();
-                stage.show();
-            });
+            imageView.setOnMouseClicked(evt -> showShowcaseFX());
+            button.setOnAction(evt -> showShowcaseFX());
         }
 
         MarkdownView markdownView = new MarkdownView();
@@ -138,6 +129,7 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
         Label label = new Label("ShowcaseFX must be launched in its own window, otherwise it\nwould inherit the stylesheet of JFX-Central");
         label.setTextAlignment(TextAlignment.CENTER);
         label.getStyleClass().add("disclaimer");
+        label.setMinHeight(Region.USE_PREF_SIZE);
 
         VBox vBox = new VBox(50, label, imageView, button);
         vBox.setAlignment(Pos.CENTER);
@@ -157,6 +149,18 @@ public class DeveloperToolsDetailView extends ModelObjectDetailView<DeveloperToo
         VBox.setVgrow(sectionPane2, Priority.ALWAYS);
 
         return new VBox(sectionPane1, sectionPane2);
+    }
+
+    private void showShowcaseFX() {
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("ShowcaseFX");
+        CssShowcaseView view = new CssShowcaseView();
+        Scene scene = new Scene(view);
+        stage.setScene(scene);
+        stage.setWidth(1000);
+        stage.setHeight(800);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     protected boolean isUsingMasterView() {
