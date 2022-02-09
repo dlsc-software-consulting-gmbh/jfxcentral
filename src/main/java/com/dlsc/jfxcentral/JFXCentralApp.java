@@ -76,6 +76,12 @@ public class JFXCentralApp extends Application {
         scene.getStylesheets().add(JFXCentralApp.class.getResource("performance.css").toExternalForm());
         scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
+        if (WebAPI.isBrowser()) {
+            WebAPI webAPI = WebAPI.getWebAPI(stage);
+            webAPI.darkMode().addListener(it -> updateDark(scene, webAPI.isDarkMode()));
+            updateDark(scene, webAPI.isDarkMode());
+        }
+
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setOnCloseRequest(evt -> System.exit(0));
         stage.centerOnScreen();
@@ -100,6 +106,13 @@ public class JFXCentralApp extends Application {
 
         if (WebAPI.isBrowser()) {
             showHomeOrLoadingView(app, stage);
+        }
+    }
+
+    private void updateDark(Scene scene, boolean darkMode) {
+        scene.getStylesheets().remove(JFXCentralApp.class.getResource("dark.css").toExternalForm());
+        if (darkMode) {
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("dark.css").toExternalForm());
         }
     }
 

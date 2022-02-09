@@ -30,7 +30,7 @@
         <javafx.plugin.version>0.0.5</javafx.plugin.version>
         <main.class>com.dlsc.jfxcentral.JFXCentralApp</main.class>
         <ikonli.version>12.3.0</ikonli.version>
-        <jpro.version>2021.2.2</jpro.version>
+        <jpro.version>2021.2.4-SNAPSHOT</jpro.version>
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <ikonli.version>12.3.0</ikonli.version>
     </properties>

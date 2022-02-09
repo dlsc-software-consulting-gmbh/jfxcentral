@@ -1,0 +1,26 @@
+.root {
+    -blue: gray;
+
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 14px;
+    -fx-accent: -blue;
+    -fx-focus-color: -blue;
+    -fx-faint-focus-color: rgba(68, 131, 160, .2);
+
+    -light-grey: rgba(239, 242, 245);
+    -light-blue: rgba(224, 229, 234);
+    -red: rgba(250, 80, 80, 1);
+    -green: forestgreen;
+    -grey: rgba(0, 0, 0, .4);
+    -drop-shadow-1: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
+    -drop-shadow-2: dropshadow(gaussian, rgba(0, 0, 0, .26), 15, 0.16, -1, 4);
+    -drop-shadow-3: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
+
+    -white-button-text-color: rgb(110, 110, 110);
+    -white-button-text-color-hover: rgb(255, 255, 255);
+    -white-button-text-color-pressed: white;
+
+    -white-button-background-color: rgb(230, 230, 230);
+    -white-button-background-color-hover: rgb(150, 150, 150);
+    -white-button-background-color-pressed: -fx-accent;
+}

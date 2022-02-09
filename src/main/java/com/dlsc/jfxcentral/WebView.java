@@ -71,7 +71,7 @@ public class WebView extends com.jpro.web.View {
     public boolean handleURL(String s) {
         System.out.println("URL: " + s);
 
-        if (s.equalsIgnoreCase("/showcase")) {
+        if (s.equalsIgnoreCase("/showcase") || s.equalsIgnoreCase("/refresh")) {
             return false;
         }
 
