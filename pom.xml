@@ -1182,6 +1182,7 @@
                                     <jdeps>
                                         <multiRelease>${jdk.version}</multiRelease>
                                         <ignoreMissingDeps>true</ignoreMissingDeps>
+                                        <useWildcardInPath>false</useWildcardInPath>
                                         <targets>
                                             <target>${project.build.directory}/classes/com/dlsc/jfxcentral/JFXCentralAppLauncher.class</target>
                                             <target>${project.build.directory}/classes/com/dlsc/jfxcentral/JFXCentralApp.class</target>
