@@ -96,6 +96,7 @@
 
 .jpro-web-app .scroll-pane {
     -fx-padding: 0px;
+    -fx-background-color: transparent;
 }
 
 .root-pane.large {
@@ -1959,7 +1960,7 @@
     -fx-spacing: 10px;
     -fx-padding: 0px 20px 0px 180px;
     -fx-pref-height: 75px;
-    -fx-background-color: -fx-accent;
+    -fx-background-color: -blue;
     -fx-border-color: rgba(0, 0, 0, .05);
     -fx-border-width: 0px 0px 1px 0px;
 }

@@ -3,6 +3,7 @@ package com.dlsc.jfxcentral;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.SectionPane;
+import com.dlsc.jfxcentral.util.Detector;
 import com.dlsc.jfxcentral.util.PageUtil;
 import com.dlsc.jfxcentral.util.StageManager;
 import com.dlsc.jfxcentral.views.IntroView;
@@ -80,6 +81,8 @@ public class JFXCentralApp extends Application {
             WebAPI webAPI = WebAPI.getWebAPI(stage);
             webAPI.darkMode().addListener(it -> updateDark(scene, webAPI.isDarkMode()));
             updateDark(scene, webAPI.isDarkMode());
+        } else {
+            updateDark(scene, Detector.isDarkMode());
         }
 
         stage.initStyle(StageStyle.UNDECORATED);
@@ -111,8 +114,10 @@ public class JFXCentralApp extends Application {
 
     private void updateDark(Scene scene, boolean darkMode) {
         scene.getStylesheets().remove(JFXCentralApp.class.getResource("dark.css").toExternalForm());
+        scene.getStylesheets().remove(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
         if (darkMode) {
             scene.getStylesheets().add(JFXCentralApp.class.getResource("dark.css").toExternalForm());
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
         }
     }
 

@@ -1,15 +1,18 @@
 .root {
-    -blue: gray;
+    -blue: rgb(60, 63, 65);
 
+    -orange: rgb(244, 189, 79);
     -fx-font-family: "Inter Regular";
     -fx-font-size: 14px;
-    -fx-accent: -blue;
+    -fx-accent: -orange;
     -fx-focus-color: -blue;
     -fx-faint-focus-color: rgba(68, 131, 160, .2);
 
-    -light-grey: rgba(239, 242, 245);
-    -light-blue: rgba(224, 229, 234);
-    -red: rgba(250, 80, 80, 1);
+    -fx-text-fill: rgb(177, 177, 177);
+
+    -light-grey: #838A93;
+    -light-blue: #555C62;
+    -red: #DC2F34;
     -green: forestgreen;
     -grey: rgba(0, 0, 0, .4);
     -drop-shadow-1: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
@@ -23,4 +26,199 @@
     -white-button-background-color: rgb(230, 230, 230);
     -white-button-background-color-hover: rgb(150, 150, 150);
     -white-button-background-color-pressed: -fx-accent;
+}
+
+.section-pane,
+.section-pane .list-cell {
+    -fx-background-color: rgb(60, 63, 65);
+}
+
+.section-pane {
+    -fx-border-color: #555C62;
+}
+
+.section-pane .title,
+.section-pane .title-label,
+.section-pane .subtitle,
+.section-pane .subtitle-label {
+    -fx-text-fill: rgb(177, 177, 177) !important;
+}
+
+.master-cell {
+
+}
+
+.top-menu {
+    -fx-background-color: derive(rgb(60, 63, 65), +10%);
+}
+
+.top-menu .toggle-button {
+    -fx-text-fill: rgb(197, 197, 197);
+}
+
+.top-menu .toggle-button .ikonli-font-icon {
+    -fx-icon-color: rgb(177, 177, 177) !important;
+}
+
+.top-menu .toggle-button:selected {
+    -fx-background-color: rgb(244, 189, 79);
+    -fx-border-color: transparent transparent transparent derive(rgb(244, 189, 79), -20%);
+}
+
+.top-menu .toggle-button:selected {
+    -fx-text-fill: rgba(0, 0, 0, .9) !important;
+}
+
+.top-menu .toggle-button:selected .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .7) !important;
+}
+
+.toggle-button,
+.button {
+    -fx-background-radius: 3px;
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: rgba(0, 0, 0, .8);
+    -fx-font-family: "Inter Semi Bold";
+}
+
+.toggle-button .ikonli-font-icon,
+.button .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .8);
+}
+
+.filter-view .search-text-field {
+    -fx-text-fill: rgba(0, 0, 0, .8) !important;
+    -fx-prompt-text-fill: rgba(0, 0, 0, .8) !important;
+}
+
+.filter-view .search-text-field .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .8) !important;
+}
+
+.filter-view .menu-button .label {
+    -fx-text-fill: rgba(0, 0, 0, .8) !important;
+}
+
+.filter-view .menu-button .arrow {
+    -fx-background-color: rgba(0, 0, 0, .8) !important;
+}
+
+/* -----------------------------------------------------------------------------------------------------
+ * OmniBox
+ */
+.omnibox-text-field {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: rgba(0, 0, 0, .8);
+    -fx-prompt-text-fill:  rgba(0, 0, 0, .5);
+}
+
+.omnibox-text-field:focused {
+    -fx-background-insets: 0px;
+    -fx-background-color: white;
+    -fx-prompt-text-fill: white;
+}
+
+.omnibox-text-field .right-pane {
+    -fx-padding: 0;
+}
+
+.omnibox-text-field > * > * > .toggle-button {
+    -fx-background-color: derive(-fx-accent, -20%);
+    -fx-background-insets: 0px -2px 0px 0px; /* otherwise we see some white bg from text field */
+    -fx-background-radius: 0px 3px 3px 0px;
+    -fx-max-height: infinity;
+}
+
+.omnibox-text-field > * > * > .toggle-button:selected {
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+}
+
+.omnibox-text-field .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .8);
+}
+
+.omnibox {
+    -fx-background-color: white;
+    -fx-border-color: -fx-accent;
+    -fx-border-width: 1px;
+    -fx-effect: -drop-shadow-1;
+}
+
+.omnibox > .text-field {
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-pref-height: 30px;
+    -fx-border-color: transparent transparent grey transparent;
+    -fx-prompt-text-fill: grey;
+}
+
+.omnibox > .label {
+    -fx-alignment: center;
+    -fx-background-color: lightgray;
+}
+
+.omnibox .search-result-list-view {
+}
+
+.omnibox .search-result-list-view:focused {
+}
+
+.omnibox .search-result-list-view:focused {
+}
+
+.omnibox .search-result-list-view .cell {
+    -fx-background-color: white;
+    -fx-padding: 5px 10px 5px 5px;
+    -fx-spacing: 5;
+}
+
+.omnibox .search-result-list-view .cell .label {
+    -fx-text-alignment: left;
+    -fx-alignment: top-left;
+}
+
+.omnibox .search-result-list-view .cell:focused {
+    -fx-background-color: -light-blue;
+}
+
+.omnibox .search-result-list-view .cell:selected .label {
+    -fx-text-fill: white;
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox {
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox .icon-wrapper {
+    -fx-pref-width: 32px;
+    -fx-pref-height: 32px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 2px;
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox .icon-wrapper .ikonli-font-icon {
+    -fx-icon-size: 24px;
+    -fx-icon-color: white;
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox .title-label {
+    -fx-text-fill: black;
+    -fx-font-family: "Inter Bold";
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox .subtitle-label {
+    -fx-opacity: .8;
+    -fx-text-fill: black;
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox .date-label {
+}
+
+.omnibox .search-result-list-view .search-result-list-cell .hbox .vbox {
 }

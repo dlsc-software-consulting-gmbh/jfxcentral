@@ -2,10 +2,10 @@
  * Markdown
  */
 .root {
-    -mdfx-link-color: -fx-accent;
+    -mdfx-link-color: -orange;
     -mdfx-border-color-1: #888;
 
-    -mdfx-font-color: black;
+    -mdfx-font-color: rgb(177, 177, 177);
     -mdfx-bg-color-1: #ccc;
     -mdfx-bg-color-2: #ddd;
     -mdfx-bg-color-3: #eee;
@@ -15,7 +15,7 @@
 }
 
 .clickable-image {
-  -fx-cursor: hand;
+    -fx-cursor: hand;
 }
 
 .markdown-text {
@@ -137,7 +137,7 @@
     -fx-border-color: -mdfx-border-color-1;
     -fx-border-width: 0.0357em;
     -fx-background-radius: 0.1428em;
-    -fx-background-color: oldlace;
+    -fx-background-color: rgb(43, 43, 43);
     -fx-font-family: "JetBrains Mono Regular";
 }
 
@@ -147,7 +147,7 @@
     -fx-border-color: -mdfx-border-color-1;
     -fx-border-width: 0.0357em;
     -fx-background-radius: 0.1428em;
-    -fx-background-color: oldlace;
+    -fx-background-color: rgb(43, 43, 43);
 }
 
 .markdown-code-anti-padding {

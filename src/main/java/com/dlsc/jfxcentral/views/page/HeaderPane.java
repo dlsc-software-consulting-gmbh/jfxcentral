@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -116,7 +117,13 @@ public class HeaderPane extends HBox {
             scenicView.setOnAction(evt -> ScenicView.show(getScene()));
             scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
             scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
-            getChildren().addAll(stackPane, sourceComboBox, scenicView, searchField, navigationView);
+
+            ToggleButton dark = new ToggleButton("Dark Mode");
+            dark.selectedProperty().addListener(it -> updateDark(getScene(), dark.isSelected()));
+            dark.setVisible(Boolean.getBoolean("show.dark.button"));
+            dark.setManaged(Boolean.getBoolean("show.dark.button"));
+
+            getChildren().addAll(stackPane, sourceComboBox, dark, scenicView, searchField, navigationView);
         } else {
             getChildren().addAll(stackPane, sourceComboBox, searchField);
         }
@@ -124,6 +131,19 @@ public class HeaderPane extends HBox {
 //        Button count = new Button("count");
 //        count.setOnAction(evt -> countTree(getScene()));
 //        getChildren().add(count);
+    }
+
+    private void updateDark(Scene scene, boolean darkMode) {
+        System.out.println("dark: " + darkMode);
+        scene.getStylesheets().remove(JFXCentralApp.class.getResource("dark.css").toExternalForm());
+        scene.getStylesheets().remove(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
+        scene.getStylesheets().remove(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
+        if (darkMode) {
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("dark.css").toExternalForm());
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
+        } else {
+            scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
+        }
     }
 
     class Counter {
