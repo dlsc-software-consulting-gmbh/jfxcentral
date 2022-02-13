@@ -67,11 +67,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DISTRO }}
 
-      - name: Setup Maven
-        uses: stCarolas/setup-maven@v4
-        with:
-          maven-version: ${{ env.MVN_VERSION }}
-
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -81,7 +76,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: JReleaser assemble
-        run: mvn -Passemble package -DskipTests
+        run: mvnw --no-transfer-progress -Passemble package -DskipTests
 
       - name: JReleaser assemble output
         if: always()
@@ -118,11 +113,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DISTRO }}
 
-      - name: Setup Maven
-        uses: stCarolas/setup-maven@v4
-        with:
-          maven-version: ${{ env.MVN_VERSION }}
-
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -132,10 +122,10 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build
-        run: mvn -B install --file pom.xml
+        run: mvnw --no-transfer-progress -B install --file pom.xml
 
       - name: JPro
-        run: mvn -B jpro:release --file pom.xml -Pjpro
+        run: mvnw --no-transfer-progress -B jpro:release --file pom.xml -Pjpro
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -162,11 +152,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DISTRO }}
 
-      - name: Setup Maven
-        uses: stCarolas/setup-maven@v4
-        with:
-          maven-version: ${{ env.MVN_VERSION }}
-
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:
@@ -178,7 +163,7 @@ jobs:
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mvn -B -ntp -Prelease
+          mvnw --no-transfer-progress -B -ntp -Prelease
 
       - name: JReleaser output
         if: always()
