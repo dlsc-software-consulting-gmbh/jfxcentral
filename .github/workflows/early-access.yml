@@ -22,11 +22,30 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRO }}
+
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4
+        with:
+          maven-version: ${{ env.MVN_VERSION }}
+
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
       - name: Version
         id: vars
         shell: bash
         run: |
-          version=$(cat VERSION)
+          version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo ::set-output name=VERSION::$(echo "$version")
 
   build:
