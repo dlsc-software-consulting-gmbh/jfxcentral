@@ -1245,7 +1245,7 @@
                                         <resourceDir>app/assets/linux</resourceDir>
                                     </linux>
                                     <windows>
-                                        <types>msi></types>
+                                        <types>msi</types>
                                         <shortcut>true</shortcut>
                                         <perUserInstall>true</perUserInstall>
                                         <menu>true</menu>
