@@ -372,7 +372,6 @@ public class JFXCentralApp extends Application {
             scene.getStylesheets().add(JFXCentralApp.class.getResource("desktop.css").toExternalForm());
         } else {
             stage.getScene().setRoot(webApp);
-            stage.getScene().setFill(Color.rgb(224, 229, 234)); // reduce flickering
         }
     }
 
