@@ -145,6 +145,11 @@ jobs:
 
       - name: Download all build artifacts
         uses: actions/download-artifact@v2
+        with:
+          name: artifacts
+
+      - name: Display downloaded artifacts
+        run: ls -R artifacts
 
       - name: Setup Java
         uses: actions/setup-java@v2
@@ -163,7 +168,7 @@ jobs:
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ./mvnw --no-transfer-progress -B -ntp -Prelease
+          ./mvnw --no-transfer-progress -B -Prelease
 
       - name: JReleaser output
         if: always()
