@@ -1971,6 +1971,8 @@
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-effect: -drop-shadow-1;
+    -fx-translate-x: -70px;
+    -fx-translate-y: 0px;
 }
 
 .header-pane .title-shadow {
@@ -1978,16 +1980,8 @@
     -fx-font-size: 48px;
     -fx-text-fill: derive(-fx-accent, -50%);
     -fx-effect: -drop-shadow-1;
-}
-
-.root-pane .header-pane .title {
     -fx-translate-x: -70px;
-    -fx-translate-y: 0px;
-}
-
-.root-pane .header-pane .title-shadow {
-    -fx-translate-x: -70px;
-    -fx-translate-y: 0px;
+    -fx-translate-y: 2px;
 }
 
 .root-pane:expanded .header-pane .title {

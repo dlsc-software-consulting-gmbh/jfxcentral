@@ -14,7 +14,6 @@ import com.dlsc.jfxcentral.views.autocomplete.SearchResult;
 import com.jpro.webapi.WebAPI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -24,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 import org.scenicview.ScenicView;
 
@@ -67,11 +67,13 @@ public class HeaderPane extends HBox {
         title2.getStyleClass().addAll("title", "title-shadow");
         StackPane.setAlignment(title2, Pos.CENTER_LEFT);
 
+        title1.visibleProperty().bind(rootPane.widthProperty().greaterThan(1000));
+        title1.managedProperty().bind(rootPane.widthProperty().greaterThan(1000));
+        title2.visibleProperty().bind(rootPane.widthProperty().greaterThan(1000));
+        title2.managedProperty().bind(rootPane.widthProperty().greaterThan(1000));
+
         StackPane stackPane = new StackPane(title2, title1);
         HBox.setHgrow(stackPane, Priority.ALWAYS);
-
-        Label statusLabel = new Label();
-        Label percentageLabel = new Label();
 
         ComboBox<Source> sourceComboBox = new ComboBox<>();
         sourceComboBox.getItems().addAll(Source.values());
@@ -107,6 +109,11 @@ public class HeaderPane extends HBox {
         sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
         sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
+        ToggleButton dark = new ToggleButton("Dark Mode");
+        dark.selectedProperty().addListener(it -> updateDark(getScene(), dark.isSelected()));
+        dark.setVisible(Boolean.getBoolean("show.dark.button"));
+        dark.setManaged(Boolean.getBoolean("show.dark.button"));
+
         if (!WebAPI.isBrowser()) {
             NavigationView navigationView = new NavigationView();
             navigationView.setVisible(!WebAPI.isBrowser());
@@ -118,51 +125,20 @@ public class HeaderPane extends HBox {
             scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
             scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
 
-            ToggleButton dark = new ToggleButton("Dark Mode");
-            dark.selectedProperty().addListener(it -> updateDark(getScene(), dark.isSelected()));
-            dark.setVisible(Boolean.getBoolean("show.dark.button"));
-            dark.setManaged(Boolean.getBoolean("show.dark.button"));
-
             getChildren().addAll(stackPane, sourceComboBox, dark, scenicView, searchField, navigationView);
         } else {
-            getChildren().addAll(stackPane, sourceComboBox, searchField);
+            getChildren().addAll(stackPane, sourceComboBox, dark, searchField);
         }
-
-//        Button count = new Button("count");
-//        count.setOnAction(evt -> countTree(getScene()));
-//        getChildren().add(count);
     }
 
     private void updateDark(Scene scene, boolean darkMode) {
-        System.out.println("dark: " + darkMode);
+        scene.setFill(Color.web("#4483A0"));
         scene.getStylesheets().remove(JFXCentralApp.class.getResource("dark.css").toExternalForm());
-        scene.getStylesheets().remove(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
         scene.getStylesheets().remove(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
         if (darkMode) {
+            scene.setFill(Color.rgb(60, 63, 65));
             scene.getStylesheets().add(JFXCentralApp.class.getResource("dark.css").toExternalForm());
             scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
-        } else {
-            scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
         }
-    }
-
-    class Counter {
-        int count;
-    }
-
-    private void countTree(Scene scene) {
-        Counter counter = new Counter();
-
-        countTree(scene.getRoot(), counter);
-        System.out.println("counter: " + counter.count);
-    }
-
-    private void countTree(Parent root, Counter counter) {
-        counter.count += root.getChildrenUnmodifiable().size();
-        root.getChildrenUnmodifiable().forEach(child -> {
-            if (child instanceof Parent) {
-                countTree((Parent) child, counter);
-            }
-        });
     }
 }

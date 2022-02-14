@@ -1398,6 +1398,7 @@
                             <localJVMArgs>
                                 <JVMArg>-Dcssfx=false</JVMArg>
                                 <JVMArg>-Dshow.refresh.button=true</JVMArg>
+                                <JVMArg>-Dshow.dark.button=true</JVMArg>
                                 <JVMArg>-Djpro=true</JVMArg>
                             </localJVMArgs>
                             <JVMArgs>
