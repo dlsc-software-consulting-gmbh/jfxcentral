@@ -16,6 +16,7 @@ import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -34,6 +35,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.*;
 import java.util.Comparator;
 import java.util.function.Consumer;
 
@@ -110,6 +112,8 @@ public class JFXCentralApp extends Application {
         if (WebAPI.isBrowser()) {
             showHomeOrLoadingView(app, stage);
         }
+
+        watchForAppearanceChanged(scene);
     }
 
     private void updateDark(Scene scene, boolean darkMode) {
@@ -363,6 +367,39 @@ public class JFXCentralApp extends Application {
             stage.getScene().setRoot(webApp);
             stage.getScene().setFill(Color.rgb(224, 229, 234)); // reduce flickering
         }
+    }
+
+    private void watchForAppearanceChanged(Scene scene) {
+        if (!Detector.getOperatingSystem().equals(Detector.OperatingSystem.MACOS)) {
+            return;
+        }
+
+        final Path path = FileSystems.getDefault().getPath(System.getProperty("user.home"), "/Library/Preferences/");
+        Thread thread = new Thread(() -> {
+            try {
+                WatchService watchService = FileSystems.getDefault().newWatchService();
+                try {
+                    path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                    WatchKey key;
+                    while ((key = watchService.take()) != null) {
+                        for (WatchEvent<?> event : key.pollEvents()) {
+                            final Path changed = (Path) event.context();
+                            if (changed.endsWith(".GlobalPreferences.plist")) {
+                                Platform.runLater(() -> updateDark(scene, Detector.isDarkMode()));
+                                //setAccentColor(Detector.getMacOSAccentColor());
+                            }
+                        }
+                        key.reset();
+                    }
+                } finally {
+                    watchService.close();
+                }
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     public static void main(String args[]) {
