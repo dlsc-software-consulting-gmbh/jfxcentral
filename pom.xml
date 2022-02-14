@@ -1139,7 +1139,7 @@
                         <environment>
                             <properties>
                                 <jdkFilePrefix>zulu17.30.15-ca-jdk17.0.1</jdkFilePrefix>
-                                <artifactsDir>target/jreleaser/assemble/JFXCentral/jpackage</artifactsDir>
+                                <artifactsDir>target/jreleaser/assemble/jfxcentral/jpackage</artifactsDir>
                             </properties>
                         </environment>
                         <project>
@@ -1257,7 +1257,7 @@
                             </jpackage>
                         </assemble>
                         <distributions>
-                            <JFXCentral>
+                            <jfxcentral>
                                 <type>NATIVE_PACKAGE</type>
                                 <artifacts>
                                     <artifact>
@@ -1281,7 +1281,7 @@
                                         <platform>linux-x86_64</platform>
                                     </artifact>
                                 </artifacts>
-                            </JFXCentral>
+                            </jfxcentral>
                             <web-client>
                                 <type>BINARY</type>
                                 <artifacts>
