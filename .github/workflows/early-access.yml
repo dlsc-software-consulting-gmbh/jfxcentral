@@ -93,11 +93,11 @@ jobs:
         with:
           name: artifacts
           path: |
-            target/jreleaser/assemble/JFXCentral/jpackage/*.dmg
-            target/jreleaser/assemble/JFXCentral/jpackage/*.pkg
-            target/jreleaser/assemble/JFXCentral/jpackage/*.msi
-            target/jreleaser/assemble/JFXCentral/jpackage/*.deb
-            target/jreleaser/assemble/JFXCentral/jpackage/*.rpm
+            target/jreleaser/assemble/jfxcentral/jpackage/*.dmg
+            target/jreleaser/assemble/jfxcentral/jpackage/*.pkg
+            target/jreleaser/assemble/jfxcentral/jpackage/*.msi
+            target/jreleaser/assemble/jfxcentral/jpackage/*.deb
+            target/jreleaser/assemble/jfxcentral/jpackage/*.rpm
 
   web:
     needs: [precheck]

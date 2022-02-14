@@ -1033,10 +1033,6 @@
             <id>jpro - sandec repository</id>
             <url>https://sandec.jfrog.io/artifactory/repo</url>
         </repository>
-        <repository>
-            <id>bintray</id>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
     </repositories>
 
     <pluginRepositories>
