@@ -131,7 +131,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
-          path: target/app-jpro.zip
+          path: target/jfxcentral-jpro.zip
 
   early-access:
     needs: [precheck, build, web]
