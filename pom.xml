@@ -1147,7 +1147,7 @@
                             <website>https://www.jfx-central.com/</website>
                             <tags>javafx</tags>
                             <vendor>DLSC</vendor>
-                            <copyright>Copyright 2022 DLSC GmbH</copyright>
+                            <copyright>DLSC</copyright>
                             <java>
                                 <version>${jdk.version}</version>
                                 <mainClass>com.dlsc.jfxcentral.JFXCentralAppLauncher</mainClass>
@@ -1228,7 +1228,6 @@
                                     <applicationPackage>
                                         <appVersion>${client.version}</appVersion>
                                         <vendor>DLSC</vendor>
-                                        <copyright>Copyright 2022 DLSC</copyright>
                                     </applicationPackage>
                                     <launcher>
                                         <javaOptions>-Xmx1024m</javaOptions>
