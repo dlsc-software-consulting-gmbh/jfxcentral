@@ -131,6 +131,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
+          retention-days: 10
           path: target/jfxcentral-jpro.zip
 
   early-access:
