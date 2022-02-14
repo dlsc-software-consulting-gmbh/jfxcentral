@@ -1282,7 +1282,7 @@
                                 <type>BINARY</type>
                                 <artifacts>
                                     <artifact>
-                                        <path>{{artifactsDir}}/app-jpro.zip</path>
+                                        <path>{{artifactsDir}}/jfxcentral-jpro.zip</path>
                                         <!-- supply a value for platform -->
                                         <platform>linux-x86_64</platform>
                                     </artifact>
