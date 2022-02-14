@@ -13,12 +13,12 @@
         <groupId>com.dlsc</groupId>
         <artifactId>dlsc-maven-parent</artifactId>
         <version>1.0.0</version>
-    </parent>
+    </parent >
 
     <properties>
         <project.identifier>jfxcentral</project.identifier>
         <project.github.repository>dlsc-software-consulting-gmbh/jfxcentral</project.github.repository>
-        <local.repository.path>/tmp/repository</local.repository.path>
+        <local.repository.path>/tmp/repfository</local.repository.path>
         <java.version>16</java.version>
         <jdk.version>17</jdk.version>
         <jdk.full.version>${jdk.version}.0.1</jdk.full.version>
@@ -1147,7 +1147,7 @@
                             <website>https://www.jfx-central.com/</website>
                             <tags>javafx</tags>
                             <vendor>DLSC</vendor>
-                            <copyright>Copyright © 2022 DLSC GmbH</copyright>
+                            <copyright>Copyright 2022 DLSC GmbH</copyright>
                             <java>
                                 <version>${jdk.version}</version>
                                 <mainClass>com.dlsc.jfxcentral.JFXCentralAppLauncher</mainClass>
@@ -1174,7 +1174,7 @@
                         </release>
                         <assemble>
                             <jlink>
-                                <jfxcentralk-jlink>
+                                <jfxcentral-jlink>
                                     <active>ALWAYS</active>
                                     <exported>false</exported>
                                     <imageName>{{distributionName}}-{{projectVersion}}</imageName>
@@ -1219,14 +1219,16 @@
                                             <pattern>${project.build.directory}/libs/*.jar</pattern>
                                         </jar>
                                     </jars>
-                                </jfxcentralk-jlink>
+                                </jfxcentral-jlink>
                             </jlink>
                             <jpackage>
                                 <jfxcentral>
                                     <active>ALWAYS</active>
-                                    <jlink>jfxcentralk-jlink</jlink>
+                                    <jlink>jfxcentral-jlink</jlink>
                                     <applicationPackage>
                                         <appVersion>${client.version}</appVersion>
+                                        <vendor>DLSC</vendor>
+                                        <copyright>Copyright 2022 DLSC</copyright>
                                     </applicationPackage>
                                     <launcher>
                                         <javaOptions>-Xmx1024m</javaOptions>
