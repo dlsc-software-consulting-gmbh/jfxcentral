@@ -1269,7 +1269,7 @@
                                         <platform>windows-x86_64</platform>
                                     </artifact>
                                     <artifact>
-                                        <path>{{artifactsDir}}/{{distributionName}}-${client.version}-1_amd64.deb</path>
+                                        <path>{{artifactsDir}}/{{distributionName}}_${client.version}-1_amd64.deb</path>
                                         <platform>linux-x86_64</platform>
                                     </artifact>
                                     <artifact>
