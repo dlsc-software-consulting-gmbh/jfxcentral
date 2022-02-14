@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
     <meta name="description" content="JavaFX, libraries, real world, news, videos, downloads, tutorials, blogs, tools, open source"/>
-    <meta name="theme-color" content="#4483A0">
 
     <title>JFX-Central - Everything JavaFX</title>
 
@@ -55,7 +54,6 @@
     <!-- For IE10 Metro -->
     <meta name="msapplication-TileColor" content="#FFFFFF">
     <meta name="msapplication-TileImage" content="favicon-144.png">
-    <meta name="theme-color" content="#ffffff">
 
     <!-- Chrome for Android -->
     <link rel="manifest" href="manifest.json">
@@ -113,7 +111,7 @@
 <body style="background-color:#4483A0">
 
 <div>
-    <jpro-app loader="none" href="/app/default" fxContextMenu="false" fullscreen="true" snapshot="auto" userSelect="true"/>
+    <jpro-app loader="none" href="/app/default" fxContextMenu="false" setThemeColor="true" fullscreen="true" snapshot="auto" userSelect="true"/>
 </div>
 
 </body>

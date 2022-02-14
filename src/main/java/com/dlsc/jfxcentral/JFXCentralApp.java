@@ -14,6 +14,7 @@ import com.gluonhq.attach.display.DisplayService;
 import com.jpro.web.Util;
 import com.jpro.web.sessionmanager.SessionManager;
 import com.jpro.webapi.WebAPI;
+import com.sun.nio.file.SensitivityWatchEventModifier;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -73,15 +74,17 @@ public class JFXCentralApp extends Application {
             scene = new Scene(root);
         }
 
-        scene.setFill(Color.rgb(68, 131, 160));
-
         scene.getStylesheets().add(JFXCentralApp.class.getResource("styles.css").toExternalForm());
         scene.getStylesheets().add(JFXCentralApp.class.getResource("performance.css").toExternalForm());
         scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown.css").toExternalForm());
 
         if (WebAPI.isBrowser()) {
             WebAPI webAPI = WebAPI.getWebAPI(stage);
-            webAPI.darkMode().addListener(it -> updateDark(scene, webAPI.isDarkMode()));
+            webAPI.darkMode().addListener(it -> {
+                System.out.println("listener invoked");
+                updateDark(scene, webAPI.isDarkMode());
+            });
+            System.out.println("web api dark: " + webAPI.isDarkMode());
             updateDark(scene, webAPI.isDarkMode());
         } else {
             updateDark(scene, Detector.isDarkMode());
@@ -94,6 +97,7 @@ public class JFXCentralApp extends Application {
         stage.setScene(scene);
         stage.setWidth(1200);
         stage.setHeight(800);
+        scene.fillProperty().addListener(it -> System.out.println("scene fill: " + scene.getFill()));
 
         if (!WebAPI.isBrowser()) {
             StageManager.install(stage, "main-window", CustomStage.MIN_STAGE_WIDTH, CustomStage.MIN_STAGE_HEIGHT);
@@ -117,9 +121,12 @@ public class JFXCentralApp extends Application {
     }
 
     private void updateDark(Scene scene, boolean darkMode) {
+        System.out.println("updating dark: " + darkMode);
+        scene.setFill(Color.web("#4483A0"));
         scene.getStylesheets().remove(JFXCentralApp.class.getResource("dark.css").toExternalForm());
         scene.getStylesheets().remove(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
         if (darkMode) {
+            scene.setFill(Color.rgb(60, 63, 65));
             scene.getStylesheets().add(JFXCentralApp.class.getResource("dark.css").toExternalForm());
             scene.getStylesheets().add(JFXCentralApp.class.getResource("markdown-dark.css").toExternalForm());
         }
@@ -379,7 +386,7 @@ public class JFXCentralApp extends Application {
             try {
                 WatchService watchService = FileSystems.getDefault().newWatchService();
                 try {
-                    path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                    path.register(watchService, new WatchEvent.Kind[]{ StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE}, SensitivityWatchEventModifier.HIGH);
                     WatchKey key;
                     while ((key = watchService.take()) != null) {
                         for (WatchEvent<?> event : key.pollEvents()) {
