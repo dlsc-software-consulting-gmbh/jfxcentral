@@ -59,11 +59,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.dlsc.jfxcentral</groupId>
-                <artifactId>model</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <scope>system</scope>
-                <systemPath>${project.basedir}/model-1.0-SNAPSHOT.jar</systemPath>
+                <groupId>com.github.dlemmermann</groupId>
+                <artifactId>jfxcentral-data</artifactId>
+                <version>live-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -605,8 +603,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.dlsc.jfxcentral</groupId>
-            <artifactId>model</artifactId>
+            <groupId>com.github.dlemmermann</groupId>
+            <artifactId>jfxcentral-data</artifactId>
         </dependency>
 
         <dependency>
@@ -1032,6 +1030,11 @@
         <repository>
             <id>jpro - sandec repository</id>
             <url>https://sandec.jfrog.io/artifactory/repo</url>
+        </repository>
+
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
