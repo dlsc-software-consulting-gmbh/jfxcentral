@@ -1,4 +1,5 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 11+
 //REPOS jitpack,mavencentral
 //REPOS sandec=https://sandec.jfrog.io/artifactory/repo
 // gluon does not seem necessary
