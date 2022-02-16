@@ -1,0 +1,10 @@
+{
+  "catalogs": {},
+  "aliases": {
+    "jfxcentral": {
+      "script-ref": "main.java",
+      "properties": {}
+    }
+  },
+  "templates": {}
+}

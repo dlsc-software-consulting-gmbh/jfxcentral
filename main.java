@@ -14,7 +14,7 @@
 //DEPS org.openjfx:javafx-fxml:18-ea+9:${os.detected.jfxname}
 
 // actual jar we want to run
-//DEPS com.github.maxandersen:jfxcentral:jbang-SNAPSHOT
+//DEPS com.github.dlemmermann:jfxcentral:-SNAPSHOT
 
 import com.dlsc.jfxcentral.JFXCentralApp;
 
