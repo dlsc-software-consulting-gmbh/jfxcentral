@@ -1,4 +1,5 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
+//JAVA 11+
 //REPOS jitpack,mavencentral
 //REPOS sandec=https://sandec.jfrog.io/artifactory/repo
 // gluon does not seem necessary
@@ -14,7 +15,7 @@
 //DEPS org.openjfx:javafx-fxml:18-ea+9:${os.detected.jfxname}
 
 // actual jar we want to run
-//DEPS com.github.maxandersen:jfxcentral:jbang-SNAPSHOT
+//DEPS com.github.dlemmermann:jfxcentral:-SNAPSHOT
 
 import com.dlsc.jfxcentral.JFXCentralApp;
 
