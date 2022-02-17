@@ -28,7 +28,7 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
 
 //        createTitleBox();
         SectionPane readMeBox = createReadMeBox(null,
-                tip -> DataRepository.getInstance().getBaseUrl() + "tips/" + tip.getId(),
+                tip -> DataRepository.getInstance().getRepositoryDirectoryURL() + "tips/" + tip.getId(),
                 tip -> DataRepository.getInstance().tipDescriptionProperty(getSelectedItem()));
         readMeBox.titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
         readMeBox.subtitleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
@@ -54,7 +54,7 @@ public class TipsDetailView extends ModelObjectDetailView<Tip> {
         selectedItemProperty().addListener(it -> {
             Tip tip = getSelectedItem();
             if (tip != null) {
-                summaryMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "tools/" + tip.getId());
+                summaryMarkdownView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "tools/" + tip.getId());
                 summaryMarkdownView.setMdString(tip.getDescription());
             }
         });

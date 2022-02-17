@@ -70,7 +70,7 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
             if (app != null) {
                 sectionPane.setTitle(app.getName());
                 sectionPane.setSubtitle(app.getSummary());
-                markdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "realworld/" + app.getId());
+                markdownView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "realworld/" + app.getId());
                 markdownView.mdStringProperty().bind(DataRepository.getInstance().realWorldAppDescriptionProperty(getSelectedItem()));
             } else {
                 sectionPane.setTitle("");

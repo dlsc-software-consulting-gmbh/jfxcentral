@@ -2,6 +2,7 @@
 Name=JFXCentral
 Comment=An application covering the JavaFX ecosystem
 Terminal=false
+Icon=duke.png
 Type=Application
 Categories=DEPLOY_BUNDLE_CATEGORY
 DESKTOP_MIMES

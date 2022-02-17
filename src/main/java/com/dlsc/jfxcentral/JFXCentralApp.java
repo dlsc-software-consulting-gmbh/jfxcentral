@@ -42,15 +42,11 @@ import java.util.function.Consumer;
 
 public class JFXCentralApp extends Application {
 
-    public static final String REPOSITORY = System.getProperty("jfxcentral.repo", System.getProperty("user.home") + "/" + ".jfxcentralrepo");
-
     private static boolean repositoryInitialized;
     private WebApp app;
 
     @Override
     public void start(Stage stage) throws IOException, GitAPIException {
-        DataRepository.BASE_URL = getRepoDirectory().toURI().toURL().toExternalForm() + "/";
-
         app = new WebApp(stage);
 
         Scene scene;
@@ -322,7 +318,7 @@ public class JFXCentralApp extends Application {
 
     public static void updateRepository(ProgressMonitor monitor) throws GitAPIException, IOException {
         System.out.println("updating repository, monitor = " + monitor);
-        File repoDirectory = getRepoDirectory();
+        File repoDirectory = DataRepository.getInstance().getRepositoryDirectory();
         if (!repoDirectory.exists()) {
             Git.cloneRepository()
                     .setURI("https://github.com/dlemmermann/jfxcentral-data.git")
@@ -331,7 +327,7 @@ public class JFXCentralApp extends Application {
                     .setProgressMonitor(monitor)
                     .call();
         } else {
-            repoDirectory = new File(REPOSITORY + "/.git");
+            repoDirectory = new File(DataRepository.getInstance().getRepositoryDirectory(), "/.git");
             Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
             git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
         }
@@ -344,10 +340,6 @@ public class JFXCentralApp extends Application {
         DataRepository.getInstance();
 
         repositoryInitialized = true;
-    }
-
-    private static File getRepoDirectory() {
-        return new File(REPOSITORY);
     }
 
     private void showHomeOrLoadingView(WebApp app, Stage stage) {

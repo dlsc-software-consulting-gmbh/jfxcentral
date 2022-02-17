@@ -38,7 +38,7 @@ public class LibrariesDetailView extends ModelObjectDetailView<Library> {
         createEnsembleBox();
         createScreenshotsBox();
         createCoordinatesBox();
-        createReadMeBox(library -> DataRepository.BASE_URL + "libraries/" + library.getId(), library -> DataRepository.getInstance().libraryReadMeProperty(library));
+        createReadMeBox(library -> DataRepository.getInstance().getRepositoryDirectoryURL() + "libraries/" + library.getId(), library -> DataRepository.getInstance().libraryReadMeProperty(library));
         createStandardBoxes();
     }
 

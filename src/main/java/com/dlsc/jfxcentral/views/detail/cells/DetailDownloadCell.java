@@ -71,7 +71,7 @@ public class DetailDownloadCell extends DetailCell<Download> {
         if (StringUtils.isNotBlank(downloadFile.getUrl())) {
             Util.browse(this, downloadFile.getUrl(), false);
         } else {
-            Util.browse(this, DataRepository.getInstance().getBaseUrl() + "downloads/" + getItem().getId() + "/" + downloadFile.getFileName(), false);
+            Util.browse(this, DataRepository.getInstance().getRepositoryDirectoryURL() + "downloads/" + getItem().getId() + "/" + downloadFile.getFileName(), false);
         }
     }
 

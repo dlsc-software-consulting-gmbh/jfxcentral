@@ -3,7 +3,6 @@ package com.dlsc.jfxcentral.views.page;
 import com.dlsc.jfxcentral.JFXCentralApp;
 import com.dlsc.jfxcentral.NavigationView;
 import com.dlsc.jfxcentral.data.DataRepository;
-import com.dlsc.jfxcentral.data.DataRepository.Source;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.views.ModelObjectSearchResultCell;
 import com.dlsc.jfxcentral.views.RootPane;
@@ -16,7 +15,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
@@ -24,7 +22,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.util.StringConverter;
 import org.scenicview.ScenicView;
 
 import java.util.ArrayList;
@@ -75,39 +72,10 @@ public class HeaderPane extends HBox {
         StackPane stackPane = new StackPane(title2, title1);
         HBox.setHgrow(stackPane, Priority.ALWAYS);
 
-        ComboBox<Source> sourceComboBox = new ComboBox<>();
-        sourceComboBox.getItems().addAll(Source.values());
-        sourceComboBox.valueProperty().bindBidirectional(DataRepository.getInstance().sourceProperty());
-        sourceComboBox.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Source source) {
-                if (source == null) {
-                    return "";
-                }
-
-                switch (source) {
-                    case LIVE:
-                        return "Live Data";
-                    case STAGING:
-                        return "Staging Data";
-                }
-
-                return "";
-            }
-
-            @Override
-            public Source fromString(String string) {
-                return null;
-            }
-        });
-
         ImageView imageView = new ImageView(JFXCentralApp.class.getResource("duke.png").toExternalForm());
         imageView.setFitHeight(48);
         imageView.setPreserveRatio(true);
         StackPane.setAlignment(imageView, Pos.TOP_LEFT);
-
-        sourceComboBox.setVisible(Boolean.getBoolean("show.source.box"));
-        sourceComboBox.setManaged(Boolean.getBoolean("show.source.box"));
 
         ToggleButton dark = new ToggleButton("Dark Mode");
         dark.selectedProperty().addListener(it -> updateDark(getScene(), dark.isSelected()));
@@ -125,9 +93,9 @@ public class HeaderPane extends HBox {
             scenicView.setVisible(Boolean.getBoolean("show.scenicview.button"));
             scenicView.setManaged(Boolean.getBoolean("show.scenicview.button"));
 
-            getChildren().addAll(stackPane, sourceComboBox, dark, scenicView, searchField, navigationView);
+            getChildren().addAll(stackPane, dark, scenicView, searchField, navigationView);
         } else {
-            getChildren().addAll(stackPane, sourceComboBox, dark, searchField);
+            getChildren().addAll(stackPane, dark, searchField);
         }
     }
 

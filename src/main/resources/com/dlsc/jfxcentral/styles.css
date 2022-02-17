@@ -79,6 +79,8 @@
     -white-button-background-color-pressed: -fx-accent;
 }
 
+/* double style classes, due to style class name change in GemsFX */
+.filter-view .search-field,
 .filter-view .search-text-field {
     -fx-background-color: -fx-accent;
     -fx-background-radius: 3px;
@@ -89,7 +91,8 @@
     -fx-min-width: 200px;
 }
 
-.filter-view .search-text-field .ikonli-font-icon,
+/* double style classes, due to style class name change in GemsFX */
+.filter-view .search-field .ikonli-font-icon,
 .filter-view .search-text-field .ikonli-font-icon {
     -fx-icon-color: white !important;
 }

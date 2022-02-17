@@ -39,7 +39,7 @@ public class BooksDetailView extends ModelObjectDetailView<Book> {
         dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(rootPane.getLocale());
 
         createTitleBox();
-        createReadMeBox(book -> DataRepository.BASE_URL + "books/" + book.getId(), book -> DataRepository.getInstance().bookTextProperty(book));
+        createReadMeBox(book -> DataRepository.getInstance().getRepositoryDirectoryURL() + "books/" + book.getId(), book -> DataRepository.getInstance().bookTextProperty(book));
         createStandardBoxes();
     }
 

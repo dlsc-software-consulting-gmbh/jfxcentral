@@ -71,7 +71,7 @@ public class ToolsDetailView extends ModelObjectDetailView<Tool> {
             Tool tool = getSelectedItem();
             if (tool != null) {
                 iconView.imageProperty().bind(ImageManager.getInstance().toolImageProperty(tool));
-                descriptionMarkdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "tools/" + tool.getId());
+                descriptionMarkdownView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "tools/" + tool.getId());
                 descriptionMarkdownView.setMdString(tool.getDescription());
 
                 buttonBox.getChildren().clear();
@@ -113,7 +113,7 @@ public class ToolsDetailView extends ModelObjectDetailView<Tool> {
         selectedItemProperty().addListener(it -> {
             Tool tool = getSelectedItem();
             if (tool != null) {
-                markdownView.setBaseURL(DataRepository.getInstance().getBaseUrl() + "tools/" + tool.getId());
+                markdownView.setBaseURL(DataRepository.getInstance().getRepositoryDirectoryURL() + "tools/" + tool.getId());
                 markdownView.mdStringProperty().bind(DataRepository.getInstance().toolDescriptionProperty(getSelectedItem()));
             }
         });
