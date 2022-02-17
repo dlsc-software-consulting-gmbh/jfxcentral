@@ -113,7 +113,7 @@ public class JFXCentralApp extends Application {
             showHomeOrLoadingView(app, stage);
         }
 
-        watchForAppearanceChanged(scene);
+        // watchForAppearanceChanged(scene);
     }
 
     private void updateDark(Scene scene, boolean darkMode) {
@@ -377,7 +377,7 @@ public class JFXCentralApp extends Application {
             try {
                 WatchService watchService = FileSystems.getDefault().newWatchService();
                 try {
-                    path.register(watchService, new WatchEvent.Kind[]{ StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE}, SensitivityWatchEventModifier.HIGH);
+                    path.register(watchService, new WatchEvent.Kind[]{StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE}, SensitivityWatchEventModifier.HIGH);
                     WatchKey key;
                     while ((key = watchService.take()) != null) {
                         for (WatchEvent<?> event : key.pollEvents()) {
