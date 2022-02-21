@@ -61,7 +61,7 @@
             <dependency>
                 <groupId>com.github.dlemmermann</groupId>
                 <artifactId>jfxcentral-data</artifactId>
-                <version>live-0ae9a244b4-1</version>
+                <version>live-1b7d8e63ac-1</version>
             </dependency>
 
             <dependency>
