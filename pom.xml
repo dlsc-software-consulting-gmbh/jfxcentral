@@ -35,7 +35,7 @@
         <jpro.version>2021.2.4-SNAPSHOT</jpro.version>
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <ikonli.version>12.3.0</ikonli.version>
-        <jreleaser.version>1.0.0-M2</jreleaser.version>
+        <jreleaser.version>1.0.0-M3</jreleaser.version>
     </properties>
 
     <dependencyManagement>
@@ -1227,7 +1227,7 @@
                                     </mainJar>
                                     <jars>
                                         <jar>
-                                            <pattern>${project.build.directory}/libs/*.jar</pattern>
+                                            <pattern>target/libs/*.jar</pattern>
                                         </jar>
                                     </jars>
                                 </jfxcentral-jlink>
