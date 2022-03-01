@@ -2153,7 +2153,7 @@
 
 .omnibox .search-result-list-view .cell {
     -fx-background-color: white;
-    -fx-padding: 5px 10px 5px 5px;
+    -fx-padding: 10px;
     -fx-spacing: 5;
 }
 
@@ -2379,6 +2379,7 @@
  * IkonliBrowser
  */
 .ikonli-browser .header {
+    -fx-background-color: white;
     -fx-padding: 20px;
     -fx-spacing: 10px;
 }
@@ -2431,6 +2432,7 @@
 
 .ikonli-browser .list-view .list-cell {
     -fx-padding: 5px;
+    -fx-background-color: white;
     -fx-background-insets: 0px !important;
     -fx-border-insets: 0px !important;
     -fx-border-width: 0px !important;

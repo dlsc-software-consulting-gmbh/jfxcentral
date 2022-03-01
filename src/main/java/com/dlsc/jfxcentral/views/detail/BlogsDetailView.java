@@ -108,7 +108,9 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
         sortedPosts.setComparator(Comparator.comparing(Post::getDate).reversed());
 
         AdvancedListView<Post> listView = new AdvancedListView<>();
-        listView.setPlaceholder(new Label("Loading posts ..."));
+        Label placeholder = new Label("Loading posts ...");
+        placeholder.getStyleClass().add("placeholder");
+        listView.setPlaceholder(placeholder);
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
@@ -160,7 +162,7 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
         });
 
         Label nameLabel = new Label();
-        nameLabel.getStyleClass().addAll("header1", "name-label");
+        nameLabel.getStyleClass().addAll("header1", "title-label");
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         nameLabel.textProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getName() : "", selectedItemProperty()));
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
@@ -168,7 +170,7 @@ public class BlogsDetailView extends ModelObjectDetailView<Blog> {
         Label descriptionLabel = new Label();
         descriptionLabel.setWrapText(true);
         descriptionLabel.setMinHeight(Region.USE_PREF_SIZE);
-        descriptionLabel.getStyleClass().add("description-label");
+        descriptionLabel.getStyleClass().add("subtitle-label");
         descriptionLabel.textProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ? getSelectedItem().getSummary() : "", selectedItemProperty()));
         HBox.setHgrow(descriptionLabel, Priority.ALWAYS);
 

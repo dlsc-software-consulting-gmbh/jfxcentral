@@ -6,6 +6,7 @@ import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.pull.PullRequest;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.panels.SectionPaneWithFilterView;
+import com.dlsc.jfxcentral.util.Detector;
 import com.dlsc.jfxcentral.util.EmptySelectionModel;
 import com.dlsc.jfxcentral.util.FilterUtil;
 import com.dlsc.jfxcentral.util.Util;
@@ -22,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -103,7 +105,14 @@ public class OpenJFXDetailView extends DetailView {
                 htmlView.setPrefWidth(300);
                 htmlView.setMinWidth(300);
                 htmlView.setMaxWidth(300);
-                htmlView.setContent("<a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
+
+                sceneProperty().addListener(it -> {
+                    Scene scene = getScene();
+                    if (scene != null) {
+                        WebAPI.getWebAPI(scene).darkMode().addListener(it2 -> htmlView.setContent(getTwitterContent()));
+                        htmlView.setContent(getTwitterContent());
+                    }
+                });
 
                 node = htmlView;
 
@@ -112,8 +121,12 @@ public class OpenJFXDetailView extends DetailView {
                 webView.setPrefWidth(300);
                 webView.setMinWidth(300);
                 webView.setMaxWidth(300);
+                webView.getEngine().loadContent(getTwitterContent());
                 VBox.setVgrow(webView, Priority.ALWAYS);
-                webView.getEngine().loadContent("<a class=\"twitter-timeline\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>");
+                JFXCentralApp.darkModeProperty().addListener(it -> {
+                    webView.getEngine().loadContent("");
+                    webView.getEngine().loadContent(getTwitterContent());
+                });
                 node = webView;
             }
 
@@ -123,6 +136,19 @@ public class OpenJFXDetailView extends DetailView {
 
             setContent(hBox);
         }
+    }
+
+    private String getTwitterContent() {
+        if (WebAPI.isBrowser()) {
+            if (WebAPI.getWebAPI(getScene()).isDarkMode()) {
+                return "<a class=\"twitter-timeline\" data-theme=\"dark\" data-chrome=\"transparent noscrollbar\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
+            }
+        } else if (Detector.isDarkMode()) {
+            // runs on desktop, use the detector
+            return "<a class=\"twitter-timeline\" data-theme=\"dark\" data-chrome=\"transparent noscrollbar\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
+        }
+
+        return "<a class=\"twitter-timeline\" data-chrome=\"transparent noscrollbar\" href=\"https://twitter.com/jfxcentral?ref_src=twsrc%5Etfw\">Tweets by JFX-Central</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
     }
 
     private void updateFilters() {

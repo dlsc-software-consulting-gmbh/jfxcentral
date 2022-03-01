@@ -8,7 +8,7 @@
     -fx-focus-color: -blue;
     -fx-faint-focus-color: rgba(68, 131, 160, .2);
 
-    -fx-text-fill: rgb(177, 177, 177);
+    -fx-text-fill: rgb(197, 197, 197);
 
     -light-grey: #838A93;
     -light-blue: #555C62;
@@ -48,16 +48,95 @@
 
 }
 
+.filter-view .search-field,
+.filter-view .search-text-field {
+    -fx-text-fill: rgba(0, 0, 0, .9);
+    -fx-prompt-text-fill: rgba(0, 0, 0, .5);
+}
+
+.filter-view .search-field .ikonli-font-icon,
+.filter-view .search-text-field .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .9) !important;
+}
+
+.filter-view .chip-view .label {
+    -fx-text-fill: rgba(0, 0, 0, .9);
+}
+
+.filter-view .chip-view .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .9);
+}
+
+.advanced-list-view .placeholder {
+    -fx-text-fill: rgb(197, 197, 197);
+}
+
+.radio-button {
+    -fx-text-fill: rgb(177, 177, 177);
+}
+
+.thumbnail-scroll-pane .thumbnail-box {
+    -fx-background-color: -light-blue;
+}
+
+.pretty-scroll-pane .scroll-to-top-button .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .7);
+}
+
+.detail-recent-item-cell .hbox .date-label {
+    -fx-text-fill: -fx-accent;
+}
+
+.author-label {
+    -fx-text-fill: -fx-accent;
+}
+
+.navigation-view .button .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .8);
+}
+
+.home-detail-view .social-pane .icon-wrapper .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .7);
+}
+
+.detail-recent-item-cell .hbox .icon-wrapper .ikonli-font-icon {
+    -fx-icon-color: rgba(0, 0, 0, .7);
+}
+
+.custom-stage .title-bar > .button .ikonli-font-icon,
+.custom-stage .title-bar > .toggle-button .ikonli-font-icon {
+    -fx-icon-color: -fx-accent;
+}
+
+.custom-stage .title-bar > .button:hover .ikonli-font-icon,
+.custom-stage .title-bar > .toggle-button:hover .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.custom-stage .title-bar > .button:pressed .ikonli-font-icon,
+.custom-stage .title-bar > .toggle-button:pressed .ikonli-font-icon {
+    -fx-icon-color: -fx-accent;
+}
+
+.detail-pull-request-cell .summary-label {
+    -fx-text-fill: white;
+}
+
+.detail-post-cell .age-label {
+    -fx-text-fill: rgb(197, 197, 197);
+}
+
+
 .top-menu {
     -fx-background-color: derive(rgb(60, 63, 65), +10%);
 }
 
 .top-menu .toggle-button {
-    -fx-text-fill: rgb(197, 197, 197);
+    -fx-text-fill: rgb(217, 217, 217);
 }
 
 .top-menu .toggle-button .ikonli-font-icon {
-    -fx-icon-color: rgb(177, 177, 177) !important;
+    -fx-icon-color: rgb(217, 217, 217) !important;
 }
 
 .top-menu .toggle-button:selected {
@@ -109,13 +188,13 @@
 .omnibox-text-field {
     -fx-background-color: -fx-accent;
     -fx-text-fill: rgba(0, 0, 0, .8);
-    -fx-prompt-text-fill:  rgba(0, 0, 0, .5);
+    -fx-prompt-text-fill: rgba(0, 0, 0, .5);
 }
 
 .omnibox-text-field:focused {
     -fx-background-insets: 0px;
-    -fx-background-color: white;
-    -fx-prompt-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-prompt-text-fill: -fx-accent; /* makes the prompt disappear */
 }
 
 .omnibox-text-field .right-pane {
@@ -139,8 +218,9 @@
 }
 
 .omnibox {
-    -fx-background-color: white;
     -fx-border-color: -fx-accent;
+    -fx-background-color: red !important;
+    -fx-background-insets: 0px;
     -fx-border-width: 1px;
     -fx-effect: -drop-shadow-1;
 }
@@ -158,7 +238,14 @@
     -fx-background-color: lightgray;
 }
 
-.omnibox .search-result-list-view {
+.omnibox .search-result-list-view,
+.omnibox .search-result-list-view:focused,
+.omnibox .search-result-list-view .list-view ,
+.omnibox .search-result-list-view:focused .list-view {
+    -fx-border-width: 0px !important;
+    -fx-background-insets: 0px !important;
+    -fx-background-color: derive(rgb(60, 63, 65), +10%) !important;
+    -fx-padding: 0px !important;
 }
 
 .omnibox .search-result-list-view:focused {
@@ -168,12 +255,13 @@
 }
 
 .omnibox .search-result-list-view .cell {
-    -fx-background-color: white;
-    -fx-padding: 5px 10px 5px 5px;
+    -fx-background-color: derive(rgb(60, 63, 65), +10%);
+    -fx-padding: 10px;
     -fx-spacing: 5;
 }
 
 .omnibox .search-result-list-view .cell .label {
+    -fx-text-fill: rgb(197, 197, 197) !important;
     -fx-text-alignment: left;
     -fx-alignment: top-left;
 }
@@ -204,7 +292,7 @@
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .icon-wrapper .ikonli-font-icon {
     -fx-icon-size: 24px;
-    -fx-icon-color: white;
+    -fx-icon-color: rgba(0, 0, 0, .7);
 }
 
 .omnibox .search-result-list-view .search-result-list-cell .hbox .title-label {

@@ -5,13 +5,17 @@
     -mdfx-link-color: -orange;
     -mdfx-border-color-1: #888;
 
-    -mdfx-font-color: rgb(177, 177, 177);
+    -mdfx-font-color: rgb(197, 197, 197);
     -mdfx-bg-color-1: #ccc;
     -mdfx-bg-color-2: #ddd;
     -mdfx-bg-color-3: #eee;
 
     -mdfx-bq-color-border: -fx-accent; /* the blockquote's border color */
     -mdfx-bq-color-background: derive(-fx-accent, +90%); /* the blockquote's background color */
+}
+
+.list-cell:selected {
+    -mdfx-font-color: rgb(60, 60, 60);
 }
 
 .clickable-image {
@@ -168,11 +172,11 @@
 }
 
 .markdown-table-even {
-    -fx-background-color: white;
+    -fx-background-color: rgba(0, 0, 0, .1) !important;
 }
 
 .markdown-table-odd {
-    -fx-background-color: rgba(0, 0, 0, .05);
+    -fx-background-color: rgba(0, 0, 0, .2) !important;
 }
 
 .markdown-table-cell-top {

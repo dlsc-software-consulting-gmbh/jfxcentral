@@ -10,7 +10,6 @@ import java.io.File;
 
 public class FileUploadStackPane extends StackPane {
 
-
     public FileUploader fileHandler;
 
     public FileUploadStackPane(Node... children) {

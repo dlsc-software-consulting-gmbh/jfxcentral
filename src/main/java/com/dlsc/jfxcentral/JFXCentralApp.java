@@ -18,6 +18,8 @@ import com.sun.nio.file.SensitivityWatchEventModifier;
 import fr.brouillard.oss.cssfx.CSSFX;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -113,7 +115,10 @@ public class JFXCentralApp extends Application {
             showHomeOrLoadingView(app, stage);
         }
 
-        // watchForAppearanceChanged(scene);
+        if (!WebAPI.isBrowser()) {
+            darkModeProperty().addListener(it -> Platform.runLater(() -> updateDark(scene, isDarkMode())));
+            watchForAppearanceChanged(scene);
+        }
     }
 
     private void updateDark(Scene scene, boolean darkMode) {
@@ -383,7 +388,7 @@ public class JFXCentralApp extends Application {
                         for (WatchEvent<?> event : key.pollEvents()) {
                             final Path changed = (Path) event.context();
                             if (changed.endsWith(".GlobalPreferences.plist")) {
-                                Platform.runLater(() -> updateDark(scene, Detector.isDarkMode()));
+                                setDarkMode(Detector.isDarkMode());
                                 //setAccentColor(Detector.getMacOSAccentColor());
                             }
                         }
@@ -398,6 +403,20 @@ public class JFXCentralApp extends Application {
         });
         thread.setDaemon(true);
         thread.start();
+    }
+
+    private static final BooleanProperty darkMode = new SimpleBooleanProperty();
+
+    public static boolean isDarkMode() {
+        return darkMode.get();
+    }
+
+    public static BooleanProperty darkModeProperty() {
+        return darkMode;
+    }
+
+    public static void setDarkMode(boolean dark) {
+        darkMode.set(dark);
     }
 
     public static void main(String args[]) {
