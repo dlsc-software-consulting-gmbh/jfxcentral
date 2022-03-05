@@ -20,6 +20,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -78,12 +79,19 @@ public class JFXCentralApp extends Application {
 
         if (WebAPI.isBrowser()) {
             WebAPI webAPI = WebAPI.getWebAPI(stage);
-            webAPI.darkMode().addListener(it -> {
-                System.out.println("listener invoked");
+
+            boolean mobile = false;
+            if (webAPI != null) {
+                Rectangle2D browserSize = webAPI.getBrowserSize();
+                mobile = browserSize.getWidth() < 800;
+            }
+
+            if (!mobile) {
+                webAPI.darkMode().addListener(it -> {
+                    updateDark(scene, webAPI.isDarkMode());
+                });
                 updateDark(scene, webAPI.isDarkMode());
-            });
-            System.out.println("web api dark: " + webAPI.isDarkMode());
-            updateDark(scene, webAPI.isDarkMode());
+            }
         } else {
             updateDark(scene, Detector.isDarkMode());
         }
