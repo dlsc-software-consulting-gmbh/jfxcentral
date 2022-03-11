@@ -1248,7 +1248,7 @@
                                         <packageName>JFXCentral</packageName>
                                         <types>dmg,pkg</types>
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
-                                        <packageSigningPrefix>com.dlsc.jfxcentral</packageSigningPrefix>
+                                        <packageSigningPrefix>com.dlsc</packageSigningPrefix>
                                         <signingKeyUsername>${signing.key.user.name}</signingKeyUsername>
                                         <signingKeychain>path/to/keychain</signingKeychain>
                                         <sign>false</sign>
