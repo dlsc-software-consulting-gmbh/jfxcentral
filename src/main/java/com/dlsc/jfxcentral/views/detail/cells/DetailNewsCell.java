@@ -3,8 +3,6 @@ package com.dlsc.jfxcentral.views.detail.cells;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.ImageManager;
 import com.dlsc.jfxcentral.data.model.News;
-import com.dlsc.jfxcentral.util.PageUtil;
-import com.dlsc.jfxcentral.util.Util;
 import com.dlsc.jfxcentral.views.RootPane;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -57,7 +55,6 @@ public class DetailNewsCell extends DetailCell<News> {
 
         if (!empty && news != null) {
             responsiveBox.setTitle(news.getName());
-            Util.setLink(responsiveBox.getTitleLabel(), PageUtil.getLink(news), news.getName());
             responsiveBox.setSubtitle(news.getSubtitle());
             responsiveBox.imageProperty().bind(ImageManager.getInstance().newsBannerImageProperty(news));
             responsiveBox.descriptionProperty().bind(DataRepository.getInstance().newsTextProperty(news));
