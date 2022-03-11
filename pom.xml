@@ -1250,7 +1250,7 @@
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
                                         <packageSigningPrefix>com.dlsc</packageSigningPrefix>
                                         <signingKeyUsername>${signing.key.user.name}</signingKeyUsername>
-                                        <sign>true</sign>
+                                        <sign>false</sign>
                                         <icon>src/main/logo/macosx/duke.icns</icon>
                                     </osx>
                                     <linux>
