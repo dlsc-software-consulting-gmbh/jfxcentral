@@ -1249,7 +1249,7 @@
                                         <types>dmg,pkg</types>
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
                                         <packageSigningPrefix>com.dlsc</packageSigningPrefix>
-                                        <signingKeyUserName>${signing.key.user.name}</signingKeyUserName>
+                                        <signingKeyUsername>${signing.key.user.name}</signingKeyUsername>
                                         <sign>true</sign>
                                         <icon>src/main/logo/macosx/duke.icns</icon>
                                     </osx>
