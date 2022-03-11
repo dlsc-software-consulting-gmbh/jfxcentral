@@ -36,6 +36,7 @@
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <ikonli.version>12.3.0</ikonli.version>
         <jreleaser.version>1.0.0-M3</jreleaser.version>
+        <signing.key.user.name>random.user.name</signing.key.user.name>
     </properties>
 
     <dependencyManagement>
@@ -1247,6 +1248,9 @@
                                         <packageName>JFXCentral</packageName>
                                         <types>dmg,pkg</types>
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
+                                        <packageSigningPrefix>com.dlsc</packageSigningPrefix>
+                                        <signingKeyUserName>${signing.key.user.name}</signingKeyUserName>
+                                        <sign>true</sign>
                                         <icon>src/main/logo/macosx/duke.icns</icon>
                                     </osx>
                                     <linux>

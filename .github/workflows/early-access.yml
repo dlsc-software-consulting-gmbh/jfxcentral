@@ -76,7 +76,18 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: JReleaser assemble
-        run: ./mvnw --no-transfer-progress -Passemble package -DskipTests
+        run: ./mvnw --no-transfer-progress -Passemble package -DskipTests -Dsigning.key.user.name=${{secrets.SIGNING_USER_NAME}}
+
+      - name: Notarize Release Build
+        if: ${{ runner.os == 'macOS' }}
+        uses: erwin1/xcode-notarize@main
+        with:
+          product-path: target/jreleaser/assemble/jfxcentral/jpackage/jfxcentral-1.0.0.dmg
+          appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
+          appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
+          primary-bundle-id: com.dlsc.jfxcentral
+          asc-provider: com.dlsc
+          verbose: true
 
       - name: JReleaser assemble output
         if: always()
