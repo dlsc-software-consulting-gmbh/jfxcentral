@@ -86,7 +86,7 @@ jobs:
           appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
           appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
           primary-bundle-id: com.dlsc.jfxcentral
-          asc-provider: DirkLemmermannZ9RC524LG4
+          asc-provider: dlemmermann@mac.com
           verbose: true
 
       - name: JReleaser assemble output
