@@ -36,7 +36,7 @@
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <ikonli.version>12.3.0</ikonli.version>
         <jreleaser.version>1.0.0-M3</jreleaser.version>
-        <signing.key.user.name>Dirk Lemmermann (Z9RC524LG4)</signing.key.user.name>
+        <signingKeyUserName>Dirk Lemmermann (Z9RC524LG4)</signingKeyUserName>
     </properties>
 
     <dependencyManagement>
@@ -1249,7 +1249,7 @@
                                         <types>dmg,pkg</types>
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
                                         <packageSigningPrefix>com.dlsc</packageSigningPrefix>
-                                        <signingKeyUsername>${signing.key.user.name}</signingKeyUsername>
+                                        <signingKeyUsername>${signingKeyUserName}</signingKeyUsername>
                                         <signingKeychain>path/to/keychain</signingKeychain>
                                         <sign>false</sign>
                                         <icon>src/main/logo/macosx/duke.icns</icon>

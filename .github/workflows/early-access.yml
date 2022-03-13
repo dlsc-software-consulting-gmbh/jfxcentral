@@ -76,7 +76,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: JReleaser assemble
-        run: ./mvnw --no-transfer-progress -Passemble package -DskipTests -Dsigning.key.user.name=${{secrets.SIGNING_USER_NAME}}
+        run: ./mvnw --no-transfer-progress -Passemble package -DskipTests -DsigningKeyUserName=${{secrets.SIGNING_USER_NAME}}
 
       - name: Notarize Release Build
         if: ${{ runner.os == 'macOS' }}
