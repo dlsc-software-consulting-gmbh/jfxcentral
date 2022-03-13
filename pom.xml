@@ -36,7 +36,7 @@
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <ikonli.version>12.3.0</ikonli.version>
         <jreleaser.version>1.0.0-M3</jreleaser.version>
-        <signingKeyUserName>Dirk Lemmermann (Z9RC524LG4)</signingKeyUserName>
+        <signingKeyUserName>"Dirk Lemmermann (Z9RC524LG4)"</signingKeyUserName>
     </properties>
 
     <dependencyManagement>
