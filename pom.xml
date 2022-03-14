@@ -36,7 +36,6 @@
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <ikonli.version>12.3.0</ikonli.version>
         <jreleaser.version>1.0.0-M3</jreleaser.version>
-        <signingKeyUserName>"Dirk Lemmermann (Z9RC524LG4)"</signingKeyUserName>
     </properties>
 
     <dependencyManagement>
@@ -1176,7 +1175,9 @@
                                 <changelog>
                                     <formatted>ALWAYS</formatted>
                                     <contributors>
-                                        <format>- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}</format>
+                                        <format>- {{contributorName}}{{#contributorUsernameAsLink}}
+                                            ({{.}}){{/contributorUsernameAsLink}}
+                                        </format>
                                     </contributors>
                                     <hide>
                                         <contributors>GitHub</contributors>
@@ -1196,8 +1197,12 @@
                                         <ignoreMissingDeps>true</ignoreMissingDeps>
                                         <useWildcardInPath>false</useWildcardInPath>
                                         <targets>
-                                            <target>${project.build.directory}/classes/com/dlsc/jfxcentral/JFXCentralAppLauncher.class</target>
-                                            <target>${project.build.directory}/classes/com/dlsc/jfxcentral/JFXCentralApp.class</target>
+                                            <target>
+                                                ${project.build.directory}/classes/com/dlsc/jfxcentral/JFXCentralAppLauncher.class
+                                            </target>
+                                            <target>
+                                                ${project.build.directory}/classes/com/dlsc/jfxcentral/JFXCentralApp.class
+                                            </target>
                                         </targets>
                                     </jdeps>
                                     <additionalModuleNames>
@@ -1224,7 +1229,8 @@
                                         </targetJdk>
                                     </targetJdks>
                                     <mainJar>
-                                        <path>${project.build.directory}/${project.artifactId}-${project.version}.jar</path>
+                                        <path>${project.build.directory}/${project.artifactId}-${project.version}.jar
+                                        </path>
                                     </mainJar>
                                     <jars>
                                         <jar>
@@ -1246,12 +1252,9 @@
                                     </launcher>
                                     <osx>
                                         <packageName>JFXCentral</packageName>
-                                        <types>dmg,pkg</types>
+                                        <types>pkg</types>
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
                                         <packageSigningPrefix>com.dlsc</packageSigningPrefix>
-                                        <signingKeyUsername>${signingKeyUserName}</signingKeyUsername>
-                                        <signingKeychain>app/assets/mac/developerID_application.cer</signingKeychain>
-                                        <sign>true</sign>
                                         <icon>src/main/logo/macosx/duke.icns</icon>
                                     </osx>
                                     <linux>
@@ -1293,7 +1296,8 @@
                                         <platform>linux-x86_64</platform>
                                     </artifact>
                                     <artifact>
-                                        <path>{{artifactsDir}}/{{distributionName}}-${client.version}-1.x86_64.rpm</path>
+                                        <path>{{artifactsDir}}/{{distributionName}}-${client.version}-1.x86_64.rpm
+                                        </path>
                                         <platform>linux-x86_64</platform>
                                     </artifact>
                                 </artifacts>

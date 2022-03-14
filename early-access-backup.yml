@@ -75,8 +75,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - uses: Apple-Actions/import-codesign-certs@v1
+        if: ${{ runner.os == 'macOS' }}
+        with:
+          p12-file-base64: ${{ secrets.CERTIFICATES_FILE_BASE64 }}
+          p12-password: ${{ secrets.CERTIFICATES_PASSWORD }}
+
       - name: JReleaser assemble
-        run: ./mvnw --no-transfer-progress -Passemble package -DskipTests
+        run: ./mvnw --no-transfer-progress -Passemble package -DskipTests -DsigningKeyUserName=${{secrets.SIGNING_USER_NAME}}
+
+      - name: Notarize Release Build
+        if: ${{ runner.os == 'macOS' }}
+        uses: erwin1/xcode-notarize@main
+        with:
+          product-path: target/jreleaser/assemble/jfxcentral/jpackage/jfxcentral-1.0.0.dmg
+          appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
+          appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
+          primary-bundle-id: com.dlsc.jfxcentral
+          verbose: true
 
       - name: JReleaser assemble output
         if: always()
@@ -93,6 +109,7 @@ jobs:
         with:
           name: artifacts
           path: |
+            target/jreleaser/assemble/jfxcentral/jpackage/*.dmg
             target/jreleaser/assemble/jfxcentral/jpackage/*.pkg
             target/jreleaser/assemble/jfxcentral/jpackage/*.msi
             target/jreleaser/assemble/jfxcentral/jpackage/*.deb
