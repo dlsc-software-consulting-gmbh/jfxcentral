@@ -1250,8 +1250,8 @@
                                         <packageIdentifier>com.dlsc.jfxcentral</packageIdentifier>
                                         <packageSigningPrefix>com.dlsc</packageSigningPrefix>
                                         <signingKeyUsername>${signingKeyUserName}</signingKeyUsername>
-                                        <signingKeychain>path/to/keychain</signingKeychain>
-                                        <sign>false</sign>
+                                        <signingKeychain>app/assets/mac/developerID_application.cer</signingKeychain>
+                                        <sign>true</sign>
                                         <icon>src/main/logo/macosx/duke.icns</icon>
                                     </osx>
                                     <linux>
