@@ -16,8 +16,8 @@ public class MobileBlogsPage extends MobilePage<Blog> {
         super(rootPane, View.BLOGS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Blog - " + getSelectedItem().getName() :
-                "Blogs", selectedItemProperty()));
+                "Blog - " + getSelectedItem().getName() + " - for JavaFX developers" :
+                "Blogs for JavaFX developers", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Latest JavaFX posts from the blog '" + getSelectedItem().getName() + "'" :

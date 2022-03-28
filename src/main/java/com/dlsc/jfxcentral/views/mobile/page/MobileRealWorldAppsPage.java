@@ -16,8 +16,8 @@ public class MobileRealWorldAppsPage extends MobilePage<RealWorldApp> {
         super(rootPane, View.REAL_WORLD);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Real World Application - " + getSelectedItem().getName() :
-                "Real World Applications", selectedItemProperty()));
+                "Real World Application - " + getSelectedItem().getName() + " - written in JavaFX" :
+                "Real World Applications written in JavaFX", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Summary information on JavaFX real world application '" + getSelectedItem().getName() + "' developed by " + getSelectedItem().getCompany() + ". Summry: " + getSelectedItem().getSummary() :

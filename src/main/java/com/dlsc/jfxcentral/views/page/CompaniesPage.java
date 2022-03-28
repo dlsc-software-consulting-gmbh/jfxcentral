@@ -13,8 +13,8 @@ public class CompaniesPage extends Page<Company> {
         super(rootPane, View.COMPANIES);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Company - " + getSelectedItem().getName() :
-                "Companies", selectedItemProperty()));
+                "Company - " + getSelectedItem().getName() + " - working in the JavaFX space" :
+                "Companies working in the JavaFX space", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Information about the company '" + getSelectedItem().getName() + "'" :

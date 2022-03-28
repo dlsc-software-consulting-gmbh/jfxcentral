@@ -14,8 +14,8 @@ public class MobileTutorialsPage extends MobilePage<Tutorial> {
         super(rootPane, View.TUTORIALS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Tutorial - " + getSelectedItem().getId() :
-                "Tutorials", selectedItemProperty()));
+                "Tutorial - " + getSelectedItem().getId() + " - for JavaFX" :
+                "Tutorials for JavaFX", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Detailed information on the JavaFX tutorial '" + getSelectedItem().getName() + "'" :

@@ -11,7 +11,7 @@ public class DownloadsPage extends Page<Download> {
     public DownloadsPage(RootPane rootPane) {
         super(rootPane, View.DOWNLOADS);
 
-        setTitle("Downloads");
+        setTitle("Downloads - tools and apps written in or for JavaFX");
         setDescription("Various downloads related to JavaFX. Presentations, applications, documentation.");
     }
 

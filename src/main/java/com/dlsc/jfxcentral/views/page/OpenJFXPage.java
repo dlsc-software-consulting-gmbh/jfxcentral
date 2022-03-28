@@ -10,7 +10,7 @@ public class OpenJFXPage extends Page {
     public OpenJFXPage(RootPane rootPane) {
         super(rootPane, View.OPENJFX);
 
-        setTitle("OpenJFX");
+        setTitle("OpenJFX - Open Source JavaFX Project");
         setDescription("Information about the open source project where JavaFX gets developed.");
     }
 

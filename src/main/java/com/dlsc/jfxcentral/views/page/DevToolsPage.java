@@ -15,8 +15,8 @@ public class DevToolsPage extends Page<DeveloperTool> {
         super(rootPane, View.DEVELOPMENT);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Developer Tool - " + getSelectedItem().getName() :
-                "Developer Tools", selectedItemProperty()));
+                "Developer Tool - " + getSelectedItem().getName() + " - a tool for JavaFX developers" :
+                "Developer Tools for JavaFX developers", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "A developer tool for JavaFX titled '" + getSelectedItem().getName() + "'" :

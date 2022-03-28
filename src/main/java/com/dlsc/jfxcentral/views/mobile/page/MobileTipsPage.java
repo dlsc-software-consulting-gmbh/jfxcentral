@@ -16,8 +16,8 @@ public class MobileTipsPage extends MobilePage<Tip> {
         super(rootPane, View.TIPS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Tip - " + getSelectedItem().getName() :
-                "Tips & Tricks", selectedItemProperty()));
+                "Tip - " + getSelectedItem().getName() + " - for JavaFX":
+                "Tips & Tricks for JavaFX", selectedItemProperty()));
 
         setDescription("Tips & Tricks for JavaFX developers");
     }

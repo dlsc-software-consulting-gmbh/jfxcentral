@@ -10,7 +10,7 @@ public class MobileOpenJFXPage extends MobilePage {
 
     public MobileOpenJFXPage(RootPane rootPane) {
         super(rootPane, View.OPENJFX);
-        setTitle("OpenJFX");
+        setTitle("OpenJFX - the Open Source Project for JavaFX");
         setDescription("Information about the open source project where JavaFX gets developed.");
     }
 

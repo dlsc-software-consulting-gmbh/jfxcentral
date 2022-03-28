@@ -13,8 +13,8 @@ public class VideosPage extends Page<Video> {
         super(rootPane, View.VIDEOS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Video - " + getSelectedItem().getId() :
-                "Videos", selectedItemProperty()));
+                "Video - " + getSelectedItem().getId() + " - a video covering JavaFX topics" :
+                "Videos for JavaFX developers", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Video covering JavaFX technology. Summary: '" + getSelectedItem().getDescription() + "'" :

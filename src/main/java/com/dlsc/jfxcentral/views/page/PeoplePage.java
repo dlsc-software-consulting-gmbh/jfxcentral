@@ -15,8 +15,8 @@ public class PeoplePage extends Page<Person> {
         super(rootPane, View.PEOPLE);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Person - " + getSelectedItem().getName() :
-                "Person", selectedItemProperty()));
+                "Person - " + getSelectedItem().getName() + " - working in the JavaFX space" :
+                "People working in the JavaFX space", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Detailed information on '" + getSelectedItem().getName() + "'. Summary" + getSelectedItem().getDescription() :

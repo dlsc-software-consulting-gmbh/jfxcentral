@@ -17,8 +17,8 @@ public class MobileVideosPage extends MobilePage<Video> {
         getDetailScrollPane().setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Video - " + getSelectedItem().getId() :
-                "Videos", selectedItemProperty()));
+                "Video - " + getSelectedItem().getId() + " - for JavaFX":
+                "Videos for JavaFX developers", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Video covering JavaFX technology. Summary: '" + getSelectedItem().getDescription() + "'" :

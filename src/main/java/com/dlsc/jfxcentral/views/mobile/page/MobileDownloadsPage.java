@@ -12,7 +12,7 @@ public class MobileDownloadsPage extends MobilePage<Download> {
     public MobileDownloadsPage(RootPane rootPane) {
         super(rootPane, View.DOWNLOADS);
 
-        setTitle("Downloads");
+        setTitle("Downloads for JavaFX");
         setDescription("Various downloads related to JavaFX. Presentations, applications, documentation.");
     }
     

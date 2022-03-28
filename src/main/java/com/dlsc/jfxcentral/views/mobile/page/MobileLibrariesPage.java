@@ -16,8 +16,8 @@ public class MobileLibrariesPage extends MobilePage<Library> {
         super(rootPane, View.LIBRARIES);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Library - " + getSelectedItem().getName() :
-                "Libraries", selectedItemProperty()));
+                "Library - " + getSelectedItem().getName() + " - for JavaFX applications":
+                "Libraries for JavaFX applications", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Information about the library '" + getSelectedItem().getName() + "'" :

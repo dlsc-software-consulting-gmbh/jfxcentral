@@ -15,8 +15,8 @@ public class ToolsPage extends Page<Tool> {
         super(rootPane, View.TOOLS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Tool - " + getSelectedItem().getName() :
-                "Tools", selectedItemProperty()));
+                "Tool - " + getSelectedItem().getName() + " - for JavaFX developers":
+                "Tools for JavaFX developers", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "Detailed information on the JavaFX tool '" + getSelectedItem().getName() + "'" :

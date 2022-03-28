@@ -15,8 +15,8 @@ public class TipsPage extends Page<Tip> {
         super(rootPane, View.TIPS);
 
         titleProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
-                "Tip - " + getSelectedItem().getName() :
-                "Tips", selectedItemProperty()));
+                "Tip - " + getSelectedItem().getName() + " - for JavaFX developers" :
+                "Tips for JavaFX developers", selectedItemProperty()));
 
         descriptionProperty().bind(Bindings.createStringBinding(() -> getSelectedItem() != null ?
                 "A tip for JavaFX titled '" + getSelectedItem().getName() + "'" :

@@ -12,7 +12,7 @@ public class MobileHomePage extends MobilePage<News> {
     public MobileHomePage(RootPane rootPane) {
         super(rootPane, View.HOME);
 
-        setTitle("JFX-Central Home");
+        setTitle("JFX-Central Home - a JavaFX community website");
         setDescription("Homepage of JFX-Central, the one-stop destination for all things related to JavaFX.");
     }
 
