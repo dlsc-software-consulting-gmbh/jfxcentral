@@ -3,3 +3,5 @@ RUNNING_PID
 /target
 scenicView.properties
 /.idea/
+/jdeploy
+/jdeploy-bundle
