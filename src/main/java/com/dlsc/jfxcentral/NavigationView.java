@@ -107,7 +107,7 @@ public class NavigationView extends HBox {
         back.setOnContextMenuRequested(evt -> showMenu(back, Util.getSessionManager(this).getHistoryBackward()));
         forward.setOnContextMenuRequested(evt -> showMenu(forward, Util.getSessionManager(this).getHistoryForwards()));
 
-        if (WebAPI.isBrowser()) {
+        if (true) { //WebAPI.isBrowser()) {
             getChildren().setAll(back, forward);
         } else {
             getChildren().setAll(refreshButton, back, forward);

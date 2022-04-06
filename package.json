@@ -1,0 +1,25 @@
+{
+    "bin": {"jfx": "jdeploy-bundle/jdeploy.js"},
+    "author": "Dirk Lemmermann",
+    "description": "Your one-stop destination for anything JavaFX: people, libraries, real world examples, tools, documentation, videos, books, tutorials, tips and tricks, downloads.",
+    "main": "index.js",
+    "preferGlobal": true,
+    "repository": "",
+    "version": "1.0.14",
+    "jdeploy": {
+        "jdk": false,
+        "javaVersion": "17",
+        "jar": "target/jfxcentral-1.0.jar",
+        "javafx": true,
+        "title": "JFXCentral "
+    },
+    "dependencies": {
+        "njre": "^0.2.0",
+        "shelljs": "^0.8.4"
+    },
+    "license": "Apache-2.0",
+    "name": "jfxcentral",
+    "files": ["jdeploy-bundle"],
+    "scripts": {"test": "echo \"Error: no test specified\" && exit 1"},
+    "homepage": "https://www.jfx-central.com"
+}

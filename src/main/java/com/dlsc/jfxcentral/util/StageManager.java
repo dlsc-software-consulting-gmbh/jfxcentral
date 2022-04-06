@@ -1,5 +1,6 @@
 package com.dlsc.jfxcentral.util;
 
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -55,6 +56,7 @@ public class StageManager {
         stage.yProperty().addListener(stageListener);
         stage.widthProperty().addListener(stageListener);
         stage.heightProperty().addListener(stageListener);
+        stage.showingProperty().addListener(stageListener);
     }
 
     private void saveStage() throws SecurityException {
@@ -63,6 +65,7 @@ public class StageManager {
         preferences.putDouble("y", stage.getY());
         preferences.putDouble("width", stage.getWidth());
         preferences.putDouble("height", stage.getHeight());
+        preferences.putBoolean("hidden", stage.isShowing());
     }
 
     private void restoreStage() throws SecurityException {
@@ -72,6 +75,7 @@ public class StageManager {
         double y = preferences.getDouble("y", -1);
         double w = preferences.getDouble("width", stage.getWidth());
         double h = preferences.getDouble("height", stage.getHeight());
+        boolean hidden = preferences.getBoolean("hidden", false);
 
         Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 
@@ -84,9 +88,41 @@ public class StageManager {
 
         stage.setWidth(Math.max(minWidth, Math.min(w, bounds.getWidth())));
         stage.setHeight(Math.max(minHeight, Math.min(h, bounds.getHeight())));
+
+        if (hidden) {
+            stage.hide();
+        }
+
+        Platform.runLater(() -> {
+            if (isWindowIsOutOfBounds()) {
+                System.out.println(">>>>>> out of bounds, moving stage to primary screen");
+                moveToPrimaryScreen();
+            }
+        });
     }
 
     public Preferences getPreferences() throws SecurityException {
         return preferences;
+    }
+
+    private boolean isWindowIsOutOfBounds() {
+        for (Screen screen : Screen.getScreens()) {
+            Rectangle2D bounds = screen.getVisualBounds();
+            if (stage.getX() + stage.getWidth() - minWidth >= bounds.getMinX() &&
+                    stage.getX() + minWidth <= bounds.getMaxX() &&
+                    bounds.getMinY() <= stage.getY() && // We want the title bar to always be visible.
+                    stage.getY() + minWidth <= bounds.getMaxY()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void moveToPrimaryScreen() {
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+        stage.setX(bounds.getMinX() + 50);
+        stage.setY(bounds.getMinY() + 50);
+        stage.setWidth(minWidth);
+        stage.setHeight(minHeight);
     }
 }

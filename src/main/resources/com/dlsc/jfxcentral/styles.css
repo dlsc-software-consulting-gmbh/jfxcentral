@@ -1868,6 +1868,32 @@
     -fx-icon-size: 18px;
 }
 
+.home-detail-view .notification-box {
+    -fx-background-radius: 4px;
+    -fx-alignment: center-left;
+    -fx-spacing: 20px;
+    -fx-background-color: -red;
+    -fx-padding: 2px 2px 2px 20px;
+}
+
+.home-detail-view .notification-box .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Inter Bold";
+}
+
+.home-detail-view .notification-box .button {
+    -fx-background-radius: 0px 3px 3px 0px;
+    -fx-background-color: rgba(255, 255, 255, .75);
+    -fx-background-insets: 0px;
+    -fx-text-fill: -red;
+    -fx-padding: 20px;
+}
+
+.home-detail-view .notification-box .ikonli-font-icon {
+    -fx-icon-color: -red;
+    -fx-icon-size: 24px;
+}
+
 /* ----------------------------------------------------------------------------
  * DetailRecentItemList
  */

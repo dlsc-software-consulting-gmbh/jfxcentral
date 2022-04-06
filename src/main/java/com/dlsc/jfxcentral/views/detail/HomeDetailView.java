@@ -25,6 +25,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebView;
@@ -98,7 +100,28 @@ public class HomeDetailView extends DetailViewWithListView<News> {
 
             HBox hBox = new HBox(10, content, webviewSectionPane);
 
-            setContent(hBox);
+            Label notificationLabel = new Label("You can now also enjoy JFX-Central and all of its content as an auto-updating desktop application. Available on Mac, Windows, and Linux.");
+            notificationLabel.setWrapText(true);
+            notificationLabel.setMaxWidth(Double.MAX_VALUE);
+            HBox.setHgrow(notificationLabel, Priority.ALWAYS);
+
+            Button downloadButton = new Button("DOWNLOAD NOW!");
+            downloadButton.setMaxHeight(Double.MAX_VALUE);
+            downloadButton.getStyleClass().add("download-button");
+            downloadButton.setMinWidth(Region.USE_PREF_SIZE);
+            downloadButton.setGraphic(new FontIcon(Material.FILE_DOWNLOAD));
+
+            Util.setLink(downloadButton, "https://www.jdeploy.com/~jfxcentral", "Download JFXCentral");
+
+            HBox notificationBox = new HBox(notificationLabel, downloadButton);
+            notificationBox.setAlignment(Pos.CENTER_LEFT);
+            notificationBox.getStyleClass().add("notification-box");
+            notificationBox.setVisible(WebAPI.isBrowser());
+            notificationBox.setManaged(WebAPI.isBrowser());
+
+            VBox vBox = new VBox(notificationBox, hBox);
+
+            setContent(vBox);
         }
     }
 

@@ -5,7 +5,7 @@
 
     <groupId>com.dlsc.jfxcentral</groupId>
     <artifactId>jfxcentral</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>JFXCentral</name>
 
@@ -61,7 +61,7 @@
             <dependency>
                 <groupId>com.github.dlemmermann</groupId>
                 <artifactId>jfxcentral-data</artifactId>
-                <version>live-1b7d8e63ac-1</version>
+                <version>live-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -1132,7 +1132,7 @@
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
@@ -1145,6 +1145,21 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs/</classpathPrefix>
+                            <mainClass>
+                                ${main.class}
+                            </mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
 
             <plugin>

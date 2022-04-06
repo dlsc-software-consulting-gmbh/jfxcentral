@@ -66,6 +66,8 @@ public class IntroView extends StackPane {
         animationView.setOnMouseClicked(evt -> {
             if (animationView.isReady()) {
                 callback.run();
+            } else {
+                System.out.println("animation view is not ready, ignoring click");
             }
         });
     }

@@ -56,7 +56,7 @@ public class JFXCentralApp extends Application {
 
         Parent root = app;
         if (!WebAPI.isBrowser()) {
-            root = new IntroView(() -> {
+             root = new IntroView(() -> {
                 if (repositoryInitialized) {
                     showHomeOrLoadingView(app, stage);
                 }
@@ -347,10 +347,10 @@ public class JFXCentralApp extends Application {
 
         Git.shutdown();
 
-        monitor.endTask();
-
         // trigger the data loading inside the data repository if needed
-        DataRepository.getInstance();
+        DataRepository.getInstance().loadData();
+
+        monitor.endTask();
 
         repositoryInitialized = true;
     }
