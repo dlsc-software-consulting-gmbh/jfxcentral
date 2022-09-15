@@ -7,7 +7,6 @@ import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.views.MarkdownView;
 import com.dlsc.jfxcentral.views.RootPane;
 import com.dlsc.jfxcentral.views.View;
-import com.jpro.webapi.WebAPI;
 import javafx.beans.binding.Bindings;
 import javafx.scene.image.ImageView;
 
@@ -18,9 +17,9 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
 
         getStyleClass().add("real-world-detail-view");
 
-        if (WebAPI.isBrowser()) {
-            createTitleBox();
-        }
+//        if (WebAPI.isBrowser()) {
+//            createTitleBox();
+//        }
         createReadMeSection();
         createStandardBoxes();
     }
