@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dlsc.jfxcentral</groupId>
-    <artifactId>jfxcentral</artifactId>
+    <artifactId>client</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>JFXCentral</name>
@@ -24,7 +24,7 @@
         <jdk.full.version>${jdk.version}.0.1</jdk.full.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>18</javafx.version>
+        <javafx.version>19</javafx.version>
         <attach.version>4.0.11</attach.version>
         <client.version>1.0.0</client.version>
         <client.name>JFXCentral</client.name>
@@ -170,7 +170,7 @@
             <dependency>
                 <groupId>com.dlsc.gemsfx</groupId>
                 <artifactId>gemsfx</artifactId>
-                <version>1.43.0</version>
+                <version>1.47.0</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.openjfx</groupId>
