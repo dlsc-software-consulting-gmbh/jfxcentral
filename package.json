@@ -5,11 +5,11 @@
     "main": "index.js",
     "preferGlobal": true,
     "repository": "",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "jdeploy": {
         "jdk": false,
         "javaVersion": "17",
-        "jar": "target/jfxcentral-1.0.jar",
+        "jar": "target/client-1.0.jar",
         "javafx": true,
         "title": "JFXCentral "
     },
