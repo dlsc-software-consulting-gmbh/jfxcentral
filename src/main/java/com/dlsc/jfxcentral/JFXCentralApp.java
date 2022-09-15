@@ -1,11 +1,11 @@
 package com.dlsc.jfxcentral;
 
+import com.dlsc.gemsfx.util.StageManager;
 import com.dlsc.jfxcentral.data.DataRepository;
 import com.dlsc.jfxcentral.data.model.ModelObject;
 import com.dlsc.jfxcentral.panels.SectionPane;
 import com.dlsc.jfxcentral.util.Detector;
 import com.dlsc.jfxcentral.util.PageUtil;
-import com.dlsc.jfxcentral.util.StageManager;
 import com.dlsc.jfxcentral.views.IntroView;
 import com.dlsc.jfxcentral.views.ikonli.IkonliBrowser;
 import com.dlsc.showcase.CssShowcaseView;
@@ -98,12 +98,11 @@ public class JFXCentralApp extends Application {
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setOnCloseRequest(evt -> System.exit(0));
-        stage.centerOnScreen();
         stage.setTitle("JFX-Central");
         stage.setScene(scene);
-        stage.setWidth(1200);
-        stage.setHeight(800);
-        scene.fillProperty().addListener(it -> System.out.println("scene fill: " + scene.getFill()));
+        stage.setWidth(CustomStage.MIN_STAGE_WIDTH);
+        stage.setHeight(CustomStage.MIN_STAGE_HEIGHT);
+        stage.getIcons().add(new javafx.scene.image.Image(JFXCentralApp.class.getResource("duke.png").toExternalForm()));
 
         if (!WebAPI.isBrowser()) {
             StageManager.install(stage, "main-window", CustomStage.MIN_STAGE_WIDTH, CustomStage.MIN_STAGE_HEIGHT);
@@ -254,7 +253,7 @@ public class JFXCentralApp extends Application {
             showcaseStage.setWidth(1000);
             showcaseStage.setHeight(800);
 
-            StageManager.install(showcaseStage, "showcasefx");
+            StageManager.install(showcaseStage, "showcasefx", CustomStage.MIN_STAGE_WIDTH, CustomStage.MIN_STAGE_HEIGHT);
         }
 
         showcaseStage.setIconified(false);
@@ -283,7 +282,7 @@ public class JFXCentralApp extends Application {
             ikonliStage.setWidth(900);
             ikonliStage.setHeight(700);
 
-            StageManager.install(ikonliStage, "ikonli-browser");
+            StageManager.install(ikonliStage, "ikonli-browser", CustomStage.MIN_STAGE_WIDTH, CustomStage.MIN_STAGE_HEIGHT);
         }
 
         ikonliStage.setIconified(false);
