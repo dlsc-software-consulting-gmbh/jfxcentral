@@ -47,7 +47,6 @@ public class MarkdownView extends com.sandec.mdfx.MarkdownView {
 
     @Override
     public void setLink(Node node, String link, String description) {
-        super.setLink(node, link, description);
         Util.setLink(node, link, description);
     }
 
