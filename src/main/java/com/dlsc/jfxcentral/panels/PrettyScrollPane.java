@@ -18,6 +18,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import one.jpro.jproutils.htmlscrollpane.HTMLScrollPaneSkin;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.Set;
@@ -56,6 +57,9 @@ public class PrettyScrollPane extends ScrollPane {
     private final BooleanProperty scrollToTopButtonNeeded = new SimpleBooleanProperty();
 
     private void init() {
+        if(Boolean.getBoolean("htmlscrollpane")) {
+            setSkin(new HTMLScrollPaneSkin(this));
+        }
         skinProperty().addListener(it -> {
             // first bind, then add new scrollbars, otherwise the new bars will be found
             bindScrollBars();

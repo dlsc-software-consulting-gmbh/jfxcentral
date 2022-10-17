@@ -14,6 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import one.jpro.jproutils.htmlscrollpane.HTMLScrollPaneSkin;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class AdvancedScrollPane extends ScrollPane {
@@ -27,8 +28,9 @@ public class AdvancedScrollPane extends ScrollPane {
     }
 
     public AdvancedScrollPane(Node content) {
-        super(content);
+        super();
         init();
+        setContent(content);
     }
 
     private final BooleanProperty showScrollToTopButton = new SimpleBooleanProperty(this, "showScrollToTopButton", false);
@@ -48,6 +50,10 @@ public class AdvancedScrollPane extends ScrollPane {
     private final BooleanProperty scrollToTopButtonNeeded = new SimpleBooleanProperty();
 
     private void init() {
+        if(Boolean.getBoolean("htmlscrollpane")) {
+            setSkin(new HTMLScrollPaneSkin(this));
+        }
+
         skinProperty().addListener(it -> getChildren().addAll(shadow, scrollToTopButton));
 
         scrollToTopButton.setGraphic(new FontIcon());

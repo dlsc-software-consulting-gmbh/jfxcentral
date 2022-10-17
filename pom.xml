@@ -32,7 +32,7 @@
         <javafx.plugin.version>0.0.5</javafx.plugin.version>
         <main.class>com.dlsc.jfxcentral.JFXCentralApp</main.class>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2022.1.4</jpro.version>
+        <jpro.version>2022.1.6-SNAPSHOT</jpro.version>
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <jreleaser.version>1.0.0-M3</jreleaser.version>
     </properties>
@@ -66,7 +66,8 @@
             <dependency>
                 <groupId>com.sandec.jpro</groupId>
                 <artifactId>jpro-web-core</artifactId>
-                <version>0.9.7</version>
+                <!-- Important for user text issue! -->
+                <version>0.9.8-SNAPSHOT</version>
                 <scope>compile</scope>
                 <exclusions>
                     <exclusion>
@@ -109,7 +110,7 @@
             <dependency>
                 <groupId>com.sandec</groupId>
                 <artifactId>mdfx</artifactId>
-                <version>0.2.6</version>
+                <version>0.2.5</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.openjfx</groupId>
@@ -1037,6 +1038,12 @@
             <artifactId>ikonli-zondicons-pack</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>one.jpro.jproutils</groupId>
+            <artifactId>htmlscrollpane</artifactId>
+            <version>0.2.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
@@ -1447,6 +1454,7 @@
                                 <JVMArg>-Dno.feeds=false</JVMArg>
                                 <JVMArg>-Dshow.source.box=false</JVMArg>
                                 <JVMArg>-Djpro=true</JVMArg>
+                                <JVMArg>-Dhtmlscrollpane=true</JVMArg>
                             </JVMArgs>
                             <openURLOnStartup>false</openURLOnStartup>
                             <openingPath>/</openingPath>
