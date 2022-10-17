@@ -17,9 +17,9 @@ public class RealWorldAppsDetailView extends ModelObjectDetailView<RealWorldApp>
 
         getStyleClass().add("real-world-detail-view");
 
-        if (rootPane.isMobile()) {
-            createTitleBox();
-        }
+//        if (rootPane.isMobile()) {
+//            createTitleBox();
+//        }
         createReadMeSection();
         createStandardBoxes();
     }
