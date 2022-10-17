@@ -307,7 +307,7 @@ public class HomeDetailView extends DetailViewWithListView<News> {
         AdvancedListView<LinksOfTheWeek> listView = new AdvancedListView<>();
         listView.getListView().setSelectionModel(new EmptySelectionModel<>());
         listView.setPaging(true);
-        listView.setVisibleRowCount(3);
+        listView.setVisibleRowCount(1);
         listView.setCellFactory(view -> new DetailLinksOfTheWeekCell(getRootPane()));
         Bindings.bindContent(listView.getItems(), sortedList);
 
