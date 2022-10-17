@@ -35,6 +35,7 @@ open module jfxcentral {
     requires jpro.web.core;
     requires de.sandec.jmemorybuddy;
     requires com.dlsc.showcasefx;
+    requires jpro.utils.htmlscrollpane;
 
     exports com.dlsc.jfxcentral;
 
