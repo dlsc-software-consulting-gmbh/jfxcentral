@@ -131,7 +131,7 @@ jobs:
         with:
           name: artifacts
           retention-days: 10
-          path: target/jfxcentral-jpro.zip
+          path: target/client-jpro.zip
 
   early-access:
     needs: [precheck, build, web]
