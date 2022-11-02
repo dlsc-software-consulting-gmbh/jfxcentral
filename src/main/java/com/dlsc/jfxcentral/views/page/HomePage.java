@@ -11,7 +11,7 @@ public class HomePage extends Page {
         super(rootPane, View.HOME);
 
         setTitle("JFX-Central Home - JavaFX Community Website");
-        setDescription("Homepage of JFX-Central, the one-stop destination for all things related to JavaFX.");
+        setDescription("JFX-Central, the one-stop destination for all things related to JavaFX.");
     }
 
     @Override

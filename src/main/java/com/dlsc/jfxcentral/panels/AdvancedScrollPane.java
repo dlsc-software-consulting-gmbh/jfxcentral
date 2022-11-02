@@ -51,7 +51,7 @@ public class AdvancedScrollPane extends ScrollPane {
 
     private void init() {
         if(Boolean.getBoolean("htmlscrollpane")) {
-            setSkin(new HTMLScrollPaneSkin(this));
+            setSkin(new HTMLScrollPaneSkin(this, "fxContextMenu=\"false\" userSelect=\"true\""));
         }
 
         skinProperty().addListener(it -> getChildren().addAll(shadow, scrollToTopButton));
