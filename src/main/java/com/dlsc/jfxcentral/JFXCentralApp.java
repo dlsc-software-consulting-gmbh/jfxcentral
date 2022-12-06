@@ -329,22 +329,25 @@ public class JFXCentralApp extends Application {
     }
 
     public static void updateRepository(ProgressMonitor monitor) throws GitAPIException, IOException {
-        System.out.println("updating repository, monitor = " + monitor);
-        File repoDirectory = DataRepository.getInstance().getRepositoryDirectory();
-        if (!repoDirectory.exists()) {
-            Git.cloneRepository()
-                    .setURI("https://github.com/dlemmermann/jfxcentral-data.git")
-                    .setBranch("live")
-                    .setDirectory(repoDirectory)
-                    .setProgressMonitor(monitor)
-                    .call();
-        } else {
-            repoDirectory = new File(DataRepository.getInstance().getRepositoryDirectory(), "/.git");
-            Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
-            git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
-        }
 
-        Git.shutdown();
+        if(System.getProperty("jfxcentral.repo") == null) {
+            System.out.println("updating repository, monitor = " + monitor);
+            File repoDirectory = DataRepository.getInstance().getRepositoryDirectory();
+            if (!repoDirectory.exists()) {
+                Git.cloneRepository()
+                        .setURI("https://github.com/dlemmermann/jfxcentral-data.git") //
+                        .setBranch("live")
+                        .setDirectory(repoDirectory)
+                        .setProgressMonitor(monitor)
+                        .call();
+            } else {
+                repoDirectory = new File(DataRepository.getInstance().getRepositoryDirectory(), "/.git");
+                Git git = new Git(new FileRepositoryBuilder().create(repoDirectory));
+                git.pull().setContentMergeStrategy(ContentMergeStrategy.THEIRS).call();
+            }
+
+            Git.shutdown();
+        }
 
         // trigger the data loading inside the data repository if needed
         DataRepository.getInstance().loadData();
