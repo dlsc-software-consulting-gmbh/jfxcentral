@@ -32,7 +32,7 @@
         <javafx.plugin.version>0.0.5</javafx.plugin.version>
         <main.class>com.dlsc.jfxcentral.JFXCentralApp</main.class>
         <ikonli.version>12.3.1</ikonli.version>
-        <jpro.version>2022.1.6</jpro.version>
+        <jpro.version>2023.1.0</jpro.version>
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
         <jreleaser.version>1.0.0-M3</jreleaser.version>
     </properties>
@@ -1432,7 +1432,7 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.sandec.jpro</groupId>
+                        <groupId>one.jpro</groupId>
                         <artifactId>jpro-maven-plugin</artifactId>
                         <version>${jpro.version}</version>
                         <configuration>
