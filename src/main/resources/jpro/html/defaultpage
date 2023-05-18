@@ -111,7 +111,7 @@
 <body style="background-color:#4483A0">
 
 <div>
-    <jpro-app loader="none" nativescrolling="true" href="/app/default" fxContextMenu="false" setThemeColor="true" fullscreen="true" snapshot="auto" userSelect="true" fxContextMenu="false"/>
+    <jpro-app loader="none" nativescrolling="true" href="/app/default" setThemeColor="true" fullscreen="true" snapshot="auto" userSelect="true" fxContextMenu="false"/>
 </div>
 
 </body>
